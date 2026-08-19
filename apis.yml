@@ -26,18 +26,345 @@ tags:
 - Automation
 - Policy
 - Enterprise
-apis: []
+apis:
+- aid: cisco-catalyst-sdwan:administration-and-settings
+  name: Cisco Catalyst SD-WAN Manager API — Administration and Settings
+  description: 'Administration and platform settings operations on Cisco Catalyst SD-WAN Manager: user and group
+    administration, role assignment, authentication events (server-sent), and the configuration settings that govern
+    the controller itself.'
+  humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
+  baseURL: https://{sdwan-manager-host}:8443/dataservice
+  tags:
+  - Administration
+  - Settings
+  - RBAC
+  - User Management
+  - SD-WAN
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-catalyst-sdwan-administration-and-settings-openapi.json
+  - type: Documentation
+    url: https://developer.cisco.com/docs/sdwan/administration-and-setting/
+  - type: APIReference
+    url: https://developer.cisco.com/docs/sdwan/administration-and-setting/
+  - type: Overlay
+    url: overlays/cisco-catalyst-sdwan-administration-and-settings-overlay.yaml
+  x-operations: 59
+  x-paths: 34
+  x-version: 26.1.0+2026-01-06
+- aid: cisco-catalyst-sdwan:ux-1-0-configuration
+  name: Cisco Catalyst SD-WAN Manager API — UX 1.0 Configuration
+  description: 'The UX 1.0 (classic) configuration surface: device templates, feature templates, template attach/detach
+    and the full policy builder — data, control, application-aware routing, security, voice and every policy list
+    type.'
+  humanURL: https://developer.cisco.com/docs/sdwan/ux-1-0-configuration/
+  baseURL: https://{sdwan-manager-host}:8443/dataservice
+  tags:
+  - Configuration
+  - Templates
+  - Policy
+  - Provisioning
+  - SD-WAN
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-catalyst-sdwan-ux-1-0-configuration-openapi.json
+  - type: Documentation
+    url: https://developer.cisco.com/docs/sdwan/ux-1-0-configuration/
+  - type: APIReference
+    url: https://developer.cisco.com/docs/sdwan/ux-1-0-configuration/
+  - type: Overlay
+    url: overlays/cisco-catalyst-sdwan-ux-1-0-configuration-overlay.yaml
+  x-operations: 862
+  x-paths: 562
+  x-version: 26.1.0+2026-01-06
+- aid: cisco-catalyst-sdwan:ux-2-0-configuration
+  name: Cisco Catalyst SD-WAN Manager API — UX 2.0 Configuration
+  description: 'The UX 2.0 configuration surface: configuration groups, policy groups and topology groups, the group-based
+    provisioning model that replaces device templates.'
+  humanURL: https://developer.cisco.com/docs/sdwan/ux-2-0-configuration/
+  baseURL: https://{sdwan-manager-host}:8443/dataservice
+  tags:
+  - Configuration
+  - Configuration Groups
+  - Policy Groups
+  - Provisioning
+  - SD-WAN
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-catalyst-sdwan-ux-2-0-configuration-openapi.json
+  - type: Documentation
+    url: https://developer.cisco.com/docs/sdwan/ux-2-0-configuration/
+  - type: APIReference
+    url: https://developer.cisco.com/docs/sdwan/ux-2-0-configuration/
+  - type: Overlay
+    url: overlays/cisco-catalyst-sdwan-ux-2-0-configuration-overlay.yaml
+  x-operations: 39
+  x-paths: 20
+  x-version: 26.1.0+2026-01-06
+- aid: cisco-catalyst-sdwan:feature-profiles-sd-wan-system
+  name: Cisco Catalyst SD-WAN Manager API — Feature Profiles - SD-WAN System
+  description: 'UX 2.0 system feature profiles for the SD-WAN solution: AAA, BFD, logging, NTP, OMP, security, SNMP,
+    global and basic system parcels.'
+  humanURL: https://developer.cisco.com/docs/sdwan/feature-profiles-sd-wan-system/
+  baseURL: https://{sdwan-manager-host}:8443/dataservice
+  tags:
+  - Feature Profiles
+  - System
+  - Configuration
+  - UX 2.0
+  - SD-WAN
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-catalyst-sdwan-feature-profiles-sd-wan-system-openapi.json
+  - type: Documentation
+    url: https://developer.cisco.com/docs/sdwan/feature-profiles-sd-wan-system/
+  - type: APIReference
+    url: https://developer.cisco.com/docs/sdwan/feature-profiles-sd-wan-system/
+  - type: Overlay
+    url: overlays/cisco-catalyst-sdwan-feature-profiles-sd-wan-system-overlay.yaml
+  x-operations: 73
+  x-paths: 35
+  x-version: 26.1.0+2026-01-06
+- aid: cisco-catalyst-sdwan:feature-profiles-sd-wan-transport
+  name: Cisco Catalyst SD-WAN Manager API — Feature Profiles - SD-WAN Transport
+  description: 'UX 2.0 transport feature profiles for the SD-WAN solution: WAN VPN and its interfaces (ethernet,
+    cellular, GRE, IPsec, T1/E1, DSL), routing, trackers, management VPN and cellular controllers.'
+  humanURL: https://developer.cisco.com/docs/sdwan/feature-profiles-sd-wan-transport/
+  baseURL: https://{sdwan-manager-host}:8443/dataservice
+  tags:
+  - Feature Profiles
+  - Transport
+  - WAN
+  - Configuration
+  - UX 2.0
+  - SD-WAN
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-catalyst-sdwan-feature-profiles-sd-wan-transport-openapi.json
+  - type: Documentation
+    url: https://developer.cisco.com/docs/sdwan/feature-profiles-sd-wan-transport/
+  - type: APIReference
+    url: https://developer.cisco.com/docs/sdwan/feature-profiles-sd-wan-transport/
+  - type: Overlay
+    url: overlays/cisco-catalyst-sdwan-feature-profiles-sd-wan-transport-overlay.yaml
+  x-operations: 224
+  x-paths: 108
+  x-version: 26.1.0+2026-01-06
+- aid: cisco-catalyst-sdwan:feature-profiles-sd-wan-service
+  name: Cisco Catalyst SD-WAN Manager API — Feature Profiles - SD-WAN Service
+  description: 'UX 2.0 service (VPN-side) feature profiles for the SD-WAN solution: LAN VPN and interfaces, DHCP
+    server, routing (BGP/OSPF/multicast), switchport, wireless LAN, trackers, AppQoE and voice/security service
+    parcels.'
+  humanURL: https://developer.cisco.com/docs/sdwan/feature-profiles-sd-wan-service/
+  baseURL: https://{sdwan-manager-host}:8443/dataservice
+  tags:
+  - Feature Profiles
+  - Service VPN
+  - LAN
+  - Configuration
+  - UX 2.0
+  - SD-WAN
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-catalyst-sdwan-feature-profiles-sd-wan-service-openapi.json
+  - type: Documentation
+    url: https://developer.cisco.com/docs/sdwan/feature-profiles-sd-wan-service/
+  - type: APIReference
+    url: https://developer.cisco.com/docs/sdwan/feature-profiles-sd-wan-service/
+  - type: Overlay
+    url: overlays/cisco-catalyst-sdwan-feature-profiles-sd-wan-service-overlay.yaml
+  x-operations: 160
+  x-paths: 76
+  x-version: 26.1.0+2026-01-06
+- aid: cisco-catalyst-sdwan:feature-profiles-others
+  name: Cisco Catalyst SD-WAN Manager API — Feature Profiles - Others
+  description: 'The remaining UX 2.0 SD-WAN feature profiles: application priority, DNS security, embedded security,
+    other profiles, policy objects, service-insertion, SIG security and SSE.'
+  humanURL: https://developer.cisco.com/docs/sdwan/feature-profiles-others/
+  baseURL: https://{sdwan-manager-host}:8443/dataservice
+  tags:
+  - Feature Profiles
+  - Security
+  - Application Priority
+  - DNS Security
+  - UX 2.0
+  - SD-WAN
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-catalyst-sdwan-feature-profiles-others-openapi.json
+  - type: Documentation
+    url: https://developer.cisco.com/docs/sdwan/feature-profiles-others/
+  - type: APIReference
+    url: https://developer.cisco.com/docs/sdwan/feature-profiles-others/
+  - type: Overlay
+    url: overlays/cisco-catalyst-sdwan-feature-profiles-others-overlay.yaml
+  x-operations: 113
+  x-paths: 52
+  x-version: 26.1.0+2026-01-06
+- aid: cisco-catalyst-sdwan:feature-profiles-sd-routing
+  name: Cisco Catalyst SD-WAN Manager API — Feature Profiles - SD-Routing
+  description: 'UX 2.0 feature profiles for the SD-Routing solution: system, transport and service profiles for
+    routers managed by SD-WAN Manager without the SD-WAN overlay.'
+  humanURL: https://developer.cisco.com/docs/sdwan/feature-profiles-sd-routing/
+  baseURL: https://{sdwan-manager-host}:8443/dataservice
+  tags:
+  - Feature Profiles
+  - SD-Routing
+  - Routing
+  - Configuration
+  - UX 2.0
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-catalyst-sdwan-feature-profiles-sd-routing-openapi.json
+  - type: Documentation
+    url: https://developer.cisco.com/docs/sdwan/feature-profiles-sd-routing/
+  - type: APIReference
+    url: https://developer.cisco.com/docs/sdwan/feature-profiles-sd-routing/
+  - type: Overlay
+    url: overlays/cisco-catalyst-sdwan-feature-profiles-sd-routing-overlay.yaml
+  x-operations: 429
+  x-paths: 175
+  x-version: 26.1.0+2026-01-06
+- aid: cisco-catalyst-sdwan:feature-profiles-mobility-and-nfv
+  name: Cisco Catalyst SD-WAN Manager API — Feature Profiles - Mobility and NFV
+  description: 'UX 2.0 feature profiles for Cisco Catalyst mobility (cellular gateway) and NFVirtual deployments:
+    network, compute, cluster and networks parcels.'
+  humanURL: https://developer.cisco.com/docs/sdwan/feature-profiles-mobility-and-nfv/
+  baseURL: https://{sdwan-manager-host}:8443/dataservice
+  tags:
+  - Feature Profiles
+  - Mobility
+  - NFV
+  - Cellular Gateway
+  - UX 2.0
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-catalyst-sdwan-feature-profiles-mobility-and-nfv-openapi.json
+  - type: Documentation
+    url: https://developer.cisco.com/docs/sdwan/feature-profiles-mobility-and-nfv/
+  - type: APIReference
+    url: https://developer.cisco.com/docs/sdwan/feature-profiles-mobility-and-nfv/
+  - type: Overlay
+    url: overlays/cisco-catalyst-sdwan-feature-profiles-mobility-and-nfv-overlay.yaml
+  x-operations: 137
+  x-paths: 64
+  x-version: 26.1.0+2026-01-06
+- aid: cisco-catalyst-sdwan:monitoring-and-troubleshooting
+  name: Cisco Catalyst SD-WAN Manager API — Monitoring and Troubleshooting
+  description: 'The monitoring, real-time monitoring and troubleshooting surface of Cisco Catalyst SD-WAN Manager:
+    device health and statistics, BFD, BGP, OMP, control connections, application-aware routing, cflowd, DPI, alarms,
+    events, notification rules and the network-wide path insight troubleshooting tools.'
+  humanURL: https://developer.cisco.com/docs/sdwan/monitoring-and-troubleshooting/
+  baseURL: https://{sdwan-manager-host}:8443/dataservice
+  tags:
+  - Monitoring
+  - Troubleshooting
+  - Telemetry
+  - Alarms
+  - Network Observability
+  - SD-WAN
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json
+  - type: Documentation
+    url: https://developer.cisco.com/docs/sdwan/monitoring-and-troubleshooting/
+  - type: APIReference
+    url: https://developer.cisco.com/docs/sdwan/monitoring-and-troubleshooting/
+  - type: Overlay
+    url: overlays/cisco-catalyst-sdwan-monitoring-and-troubleshooting-overlay.yaml
+  x-operations: 1068
+  x-paths: 917
+  x-version: 26.1.0+2026-01-06
+- aid: cisco-catalyst-sdwan:sd-wan-services
+  name: Cisco Catalyst SD-WAN Manager API — SD-WAN Services
+  description: 'Cloud and interconnect services operated through Cisco Catalyst SD-WAN Manager: multicloud gateways
+    and accounts, Multicloud Interconnect connectivity, entitlement and resource audit, service chaining and the
+    data collection agent.'
+  humanURL: https://developer.cisco.com/docs/sdwan/sd-wan-services/
+  baseURL: https://{sdwan-manager-host}:8443/dataservice
+  tags:
+  - Multicloud
+  - Interconnect
+  - Cloud OnRamp
+  - Service Chaining
+  - SD-WAN
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-catalyst-sdwan-sd-wan-services-openapi.json
+  - type: Documentation
+    url: https://developer.cisco.com/docs/sdwan/sd-wan-services/
+  - type: APIReference
+    url: https://developer.cisco.com/docs/sdwan/sd-wan-services/
+  - type: Overlay
+    url: overlays/cisco-catalyst-sdwan-sd-wan-services-overlay.yaml
+  x-operations: 180
+  x-paths: 134
+  x-version: 26.1.0+2026-01-06
+- aid: cisco-catalyst-sdwan:partner-integrations
+  name: Cisco Catalyst SD-WAN Manager API — Partner Integrations
+  description: 'Partner and third-party integration operations: Cisco Catalyst Center (DNAC) SDA, ACI policy builder,
+    Cisco ISE servers, Umbrella, Webex cloud service, Cisco software licensing and TAC case tooling exposed through
+    SD-WAN Manager.'
+  humanURL: https://developer.cisco.com/docs/sdwan/partner-integrations/
+  baseURL: https://{sdwan-manager-host}:8443/dataservice
+  tags:
+  - Integrations
+  - Partner
+  - Catalyst Center
+  - ISE
+  - Umbrella
+  - SD-WAN
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-catalyst-sdwan-partner-integrations-openapi.json
+  - type: Documentation
+    url: https://developer.cisco.com/docs/sdwan/partner-integrations/
+  - type: APIReference
+    url: https://developer.cisco.com/docs/sdwan/partner-integrations/
+  - type: Overlay
+    url: overlays/cisco-catalyst-sdwan-partner-integrations-overlay.yaml
+  x-operations: 76
+  x-paths: 62
+  x-version: 26.1.0+2026-01-06
+- aid: cisco-catalyst-sdwan:others
+  name: Cisco Catalyst SD-WAN Manager API — Others
+  description: 'The remainder of the SD-WAN Manager surface: device inventory and certificates, software and image
+    management, disaster recovery, multitenancy and tenant management, cluster management, smart licensing, MSLA,
+    SD-AVC, colocation, audit log, scheduled reports, secure device onboarding and platform utilities.'
+  humanURL: https://developer.cisco.com/docs/sdwan/others/
+  baseURL: https://{sdwan-manager-host}:8443/dataservice
+  tags:
+  - Device Inventory
+  - Certificates
+  - Software Management
+  - Multitenancy
+  - Licensing
+  - SD-WAN
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-catalyst-sdwan-others-openapi.json
+  - type: Documentation
+    url: https://developer.cisco.com/docs/sdwan/others/
+  - type: APIReference
+    url: https://developer.cisco.com/docs/sdwan/others/
+  - type: Overlay
+    url: overlays/cisco-catalyst-sdwan-others-overlay.yaml
+  x-operations: 718
+  x-paths: 602
+  x-version: 26.1.0+2026-01-06
 common:
+- type: ParentCompany
+  url: https://apis.io/providers/cisco/
+  name: Cisco
+  x-relationship: acquisition
+  x-generated-by: cisco-family:2026-08-19
+  x-acquired: 2017
 - type: Portal
   url: https://developer.cisco.com/docs/sdwan/
 - type: Documentation
   url: https://developer.cisco.com/docs/sdwan/
 - type: APIReference
   url: https://developer.cisco.com/docs/sdwan/
-- type: ParentCompany
-  url: https://apis.io/providers/cisco/
-  name: Cisco
-  x-acquired: 2017
 - type: Terraform
   url: https://github.com/CiscoDevNet/terraform-provider-sdwan
 - type: MCPServer
