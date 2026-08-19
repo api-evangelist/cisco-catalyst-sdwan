@@ -1,0 +1,52 @@
+aid: cisco-catalyst-sdwan
+name: Cisco Catalyst SD-WAN
+description: 'Cisco Catalyst SD-WAN, built on the Viptela platform Cisco acquired in 2017, is Cisco''s wide-area
+  network overlay: centralized policy, application-aware routing, and secure transport across MPLS, broadband and
+  LTE. The SD-WAN Manager (formerly vManage) exposes a large REST API documented on Cisco DevNet, with a Terraform
+  provider, Ansible content and a community MCP server built against it. The contract is served by each customer''s
+  own SD-WAN Manager instance, so there is no central anonymously fetchable specification.'
+url: https://raw.githubusercontent.com/api-evangelist/cisco-catalyst-sdwan/refs/heads/main/apis.yml
+type: Index
+access: 3rd-Party
+position: Consumer
+x-type: company
+x-source: cisco-family-buildout:2026-08-19
+x-parent: cisco
+x-relationship: acquisition
+x-contract-status: on-prem
+x-contract-note: The contract is served by each customer's own on-premises controller, so there is no central anonymously
+  fetchable specification. API Evangelist has not authored a substitute.
+specificationVersion: '0.23'
+created: '2026-08-19'
+modified: '2026-08-19'
+tags:
+- SD-WAN
+- Networking
+- WAN
+- Automation
+- Policy
+- Enterprise
+apis: []
+common:
+- type: Portal
+  url: https://developer.cisco.com/docs/sdwan/
+- type: Documentation
+  url: https://developer.cisco.com/docs/sdwan/
+- type: APIReference
+  url: https://developer.cisco.com/docs/sdwan/
+- type: ParentCompany
+  url: https://apis.io/providers/cisco/
+  name: Cisco
+  x-acquired: 2017
+- type: Terraform
+  url: https://github.com/CiscoDevNet/terraform-provider-sdwan
+- type: MCPServer
+  url: https://github.com/CiscoDevNet/catalyst-sdwan-mcp-community
+- type: Portal
+  url: https://developer.cisco.com/
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+- FN: APIs.json
+  email: info@apis.io
+x-acquired: 2017
