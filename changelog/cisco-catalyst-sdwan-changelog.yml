@@ -1,0 +1,285 @@
+generated: '2026-08-19'
+method: searched
+source: https://developer.cisco.com/docs/sdwan/api-changelog/
+docs: https://developer.cisco.com/docs/sdwan/api-changelog/
+scheme: per-release diff, published as a 13-part API Changelog (one part per API reference section) documenting
+  every added, deprecated, deleted and changed operation between two releases
+current_version: 26.1.0+2026-01-06
+note: Cisco does not publish a rolling dated changelog; it publishes a release-to-release operation diff.
+  The current edition documents 20.18 -> 26.1. Sections and counts below are derived by parsing that published
+  diff — nothing is inferred.
+entries:
+- version: '26.1'
+  date: '2026-01-06'
+  previous_version: '20.18'
+  breaking: true
+  breaking_note: 32 operations were DELETED and 76 deprecated across the surface; deletion of a previously
+    published operation is a breaking change by Cisco's own versioning policy.
+  totals:
+    added: 69
+    deprecated: 76
+    deleted: 32
+    changed: 1612
+  sections:
+  - section: Administration and Setting
+    docs: https://developer.cisco.com/docs/sdwan/api-changelog/
+    added: 0
+    deprecated: 2
+    deleted: 0
+    changed: 39
+    added_operations: []
+    deprecated_operations:
+    - PUT /admin/user/lockUser/{userName}
+    - POST /settings/configuration/analytics/dca
+    deleted_operations: []
+  - section: Monitoring and Troubleshooting
+    docs: https://developer.cisco.com/docs/sdwan/api-changelog/
+    added: 34
+    deprecated: 48
+    deleted: 4
+    changed: 234
+    added_operations:
+    - GET /advisories/insecure-config/devices
+    - GET /advisories/insecure-config/devices/{deviceIP}
+    - GET /advisories/insecure-config/summary
+    - GET /device/cellular/ursp/routes
+    - GET /device/cellular/ursp/rules
+    - GET /device/dns/defense/device-registration
+    - GET /device/dns/defense/info
+    - GET /device/featuresupport
+    - GET /device/insecure-config
+    - GET /device/wireless/status
+    - GET /statistics/download/{processType}/file/{token}/{fileName}
+    - GET /statistics/ppl/ctg
+    - POST /statistics/ppl/ctg
+    - GET /statistics/ppl/ctg/aggregation
+    - POST /statistics/ppl/ctg/aggregation
+    - GET /statistics/ppl/ctg/csv
+    - GET /statistics/ppl/ctg/doccount
+    - POST /statistics/ppl/ctg/doccount
+    - GET /statistics/ppl/ctg/fields
+    - GET /statistics/ppl/ctg/page
+    - POST /statistics/ppl/ctg/page
+    - GET /statistics/ppl/ctg/query/fields
+    - GET /statistics/ppl/reordering
+    - POST /statistics/ppl/reordering
+    - GET /statistics/ppl/reordering/aggregation
+    deprecated_operations:
+    - GET /accesstoken/{regionBaseUri}/{clientId}
+    - GET /refreshtoken/{regionBaseUri}/{clientId}
+    - GET /statistics/bfd
+    - POST /statistics/bfd
+    - GET /statistics/bfd/aggregation
+    - POST /statistics/bfd/aggregation
+    - GET /statistics/bfd/csv
+    - GET /statistics/bfd/doccount
+    - POST /statistics/bfd/doccount
+    - GET /statistics/bfd/fields
+    - GET /statistics/bfd/page
+    - POST /statistics/bfd/page
+    - GET /statistics/bfd/query/fields
+    - GET /statistics/cflowd
+    - POST /statistics/cflowd
+    - GET /statistics/cflowd/aggregation
+    - POST /statistics/cflowd/aggregation
+    - GET /statistics/cflowd/csv
+    - GET /statistics/cflowd/doccount
+    - POST /statistics/cflowd/doccount
+    - GET /statistics/cflowd/fields
+    - GET /statistics/cflowd/page
+    - POST /statistics/cflowd/page
+    - GET /statistics/cflowd/query/fields
+    - GET /statistics/device
+    deleted_operations:
+    - GET /statistics/cflowd/applications
+    - GET /statistics/cflowd/applications/summary
+    - GET /statistics/cflowd/device/applications
+    - POST /device/tier/{tierName}
+  - section: SD-WAN Services
+    docs: https://developer.cisco.com/docs/sdwan/api-changelog/
+    added: 0
+    deprecated: 6
+    deleted: 0
+    changed: 50
+    added_operations: []
+    deprecated_operations:
+    - POST /dca/settings/configuration/{type}/dca
+    - POST /dca/template/device/config/attachedconfig
+    - POST /dca/template/policy/definition/approute
+    - POST /dca/template/policy/list/vpn
+    - POST /dca/template/policy/vedge
+    - POST /dca/template/policy/vsmart
+    deleted_operations: []
+  - section: Partner Integrations
+    docs: https://developer.cisco.com/docs/sdwan/api-changelog/
+    added: 2
+    deprecated: 0
+    deleted: 13
+    changed: 28
+    added_operations:
+    - GET /v1/cloudonramp/saas/appSettingsStatus
+    - PUT /v1/cloudonramp/saas/appSettingsStatus
+    deprecated_operations: []
+    deleted_operations:
+    - GET /ise/GetAllConnectionInfo
+    - GET /ise/GetIseProxyDebugInfo
+    - POST /ise/GetTenantConnectionInfo
+    - GET /ise/TestBulkDownload
+    - GET /ise/TestIseWebsocketConnection
+    - POST /ise/TestLargeData
+    - POST /ise/TestLargeDataOnvAnalytics
+    - GET /ise/TestNamespaceSwitching
+    - GET /ise/TestSgtIP
+    - GET /ise/TestUserGroup
+    - GET /ise/TestUserIp
+    - POST /ise/TestVAnalyticsControlMsg
+    - GET /ise/websocketstatus
+  - section: UX 1.0 Configuration
+    docs: https://developer.cisco.com/docs/sdwan/api-changelog/
+    added: 0
+    deprecated: 2
+    deleted: 0
+    changed: 14
+    added_operations: []
+    deprecated_operations:
+    - POST /template/policy/list/webex
+    - POST /template/policy/list/webex/update
+    deleted_operations: []
+  - section: UX 2.0 Configuration
+    docs: https://developer.cisco.com/docs/sdwan/api-changelog/
+    added: 0
+    deprecated: 0
+    deleted: 0
+    changed: 21
+    added_operations: []
+    deprecated_operations: []
+    deleted_operations: []
+  - section: Feature Profiles - SD-WAN System
+    docs: https://developer.cisco.com/docs/sdwan/api-changelog/
+    added: 0
+    deprecated: 0
+    deleted: 0
+    changed: 60
+    added_operations: []
+    deprecated_operations: []
+    deleted_operations: []
+  - section: Feature Profiles - SD-WAN Transport
+    docs: https://developer.cisco.com/docs/sdwan/api-changelog/
+    added: 9
+    deprecated: 0
+    deleted: 9
+    changed: 206
+    added_operations:
+    - POST /v1/feature-profile/sdwan/transport/{transportId}/wan/vpn/{vpnParcelId}/interface/cellular/{cellularId}/ipv6-tracker
+    - POST /v1/feature-profile/sdwan/transport/{transportId}/wan/vpn/{vpnParcelId}/interface/cellular/{cellularId}/ipv6-trackergroup
+    - POST /v1/feature-profile/sdwan/transport/{transportId}/wan/vpn/{vpnParcelId}/interface/cellular/{cellularId}/tracker
+    - POST /v1/feature-profile/sdwan/transport/{transportId}/wan/vpn/{vpnParcelId}/interface/cellular/{cellularId}/trackergroup
+    - POST /v1/feature-profile/sdwan/transport/{transportId}/wan/vpn/{vpnParcelId}/interface/ethernet/{ethernetId}/ipv6-tracker
+    - POST /v1/feature-profile/sdwan/transport/{transportId}/wan/vpn/{vpnParcelId}/interface/ethernet/{ethernetId}/ipv6-trackergroup
+    - POST /v1/feature-profile/sdwan/transport/{transportId}/wan/vpn/{vpnParcelId}/interface/ethernet/{ethernetId}/tracker
+    - POST /v1/feature-profile/sdwan/transport/{transportId}/wan/vpn/{vpnParcelId}/interface/ethernet/{ethernetId}/trackergroup
+    - POST /v1/feature-profile/sdwan/transport/{transportId}/wan/vpn/{vpnParcelId}/interface/ipsec/{ipsecId}/tracker
+    deprecated_operations: []
+    deleted_operations:
+    - POST /v1/feature-profile/sdwan/transport/{transportId}/wan/vpn/{vpnId}/interface/cellular/{cellularId}/ipv6-tracker
+    - POST /v1/feature-profile/sdwan/transport/{transportId}/wan/vpn/{vpnId}/interface/cellular/{cellularId}/ipv6-trackergroup
+    - POST /v1/feature-profile/sdwan/transport/{transportId}/wan/vpn/{vpnId}/interface/cellular/{cellularId}/tracker
+    - POST /v1/feature-profile/sdwan/transport/{transportId}/wan/vpn/{vpnId}/interface/cellular/{cellularId}/trackergroup
+    - POST /v1/feature-profile/sdwan/transport/{transportId}/wan/vpn/{vpnId}/interface/ethernet/{ethernetId}/ipv6-tracker
+    - POST /v1/feature-profile/sdwan/transport/{transportId}/wan/vpn/{vpnId}/interface/ethernet/{ethernetId}/ipv6-trackergroup
+    - POST /v1/feature-profile/sdwan/transport/{transportId}/wan/vpn/{vpnId}/interface/ethernet/{ethernetId}/tracker
+    - POST /v1/feature-profile/sdwan/transport/{transportId}/wan/vpn/{vpnId}/interface/ethernet/{ethernetId}/trackergroup
+    - POST /v1/feature-profile/sdwan/transport/{transportId}/wan/vpn/{vpnId}/interface/ipsec/{ipsecId}/tracker
+  - section: Feature Profiles - SD-WAN Service
+    docs: https://developer.cisco.com/docs/sdwan/api-changelog/
+    added: 5
+    deprecated: 0
+    deleted: 5
+    changed: 149
+    added_operations:
+    - POST /v1/feature-profile/sdwan/service/{serviceId}/lan/vpn/{vpnParcelId}/interface/ethernet/{ethernetId}/dhcp-server
+    - POST /v1/feature-profile/sdwan/service/{serviceId}/lan/vpn/{vpnParcelId}/interface/ethernet/{ethernetId}/tracker
+    - POST /v1/feature-profile/sdwan/service/{serviceId}/lan/vpn/{vpnParcelId}/interface/ethernet/{ethernetId}/trackergroup
+    - POST /v1/feature-profile/sdwan/service/{serviceId}/lan/vpn/{vpnParcelId}/interface/ipsec/{ipsecId}/dhcp-server
+    - POST /v1/feature-profile/sdwan/service/{serviceId}/lan/vpn/{vpnParcelId}/interface/svi/{sviId}/dhcp-server
+    deprecated_operations: []
+    deleted_operations:
+    - POST /v1/feature-profile/sdwan/service/{serviceId}/lan/vpn/{vpnId}/interface/ethernet/{ethernetId}/dhcp-server
+    - POST /v1/feature-profile/sdwan/service/{serviceId}/lan/vpn/{vpnId}/interface/ethernet/{ethernetId}/tracker
+    - POST /v1/feature-profile/sdwan/service/{serviceId}/lan/vpn/{vpnId}/interface/ethernet/{ethernetId}/trackergroup
+    - POST /v1/feature-profile/sdwan/service/{serviceId}/lan/vpn/{vpnId}/interface/ipsec/{ipsecId}/dhcp-server
+    - POST /v1/feature-profile/sdwan/service/{serviceId}/lan/vpn/{vpnId}/interface/svi/{sviId}/dhcp-server
+  - section: Feature Profiles - Mobility and NFV
+    docs: https://developer.cisco.com/docs/sdwan/api-changelog/
+    added: 0
+    deprecated: 0
+    deleted: 0
+    changed: 126
+    added_operations: []
+    deprecated_operations: []
+    deleted_operations: []
+  - section: Feature Profiles - SD-Routing
+    docs: https://developer.cisco.com/docs/sdwan/api-changelog/
+    added: 0
+    deprecated: 0
+    deleted: 0
+    changed: 393
+    added_operations: []
+    deprecated_operations: []
+    deleted_operations: []
+  - section: Feature Profiles - Others
+    docs: https://developer.cisco.com/docs/sdwan/api-changelog/
+    added: 2
+    deprecated: 0
+    deleted: 0
+    changed: 76
+    added_operations:
+    - GET /v1/feature-profile/sdwan/policy-object/{policyObjectId}/unified/{securityProfileParcelType}/{securityProfileParcelId}/referenced-by
+    - GET /v1/feature-profile/sdwan/policy-object/{policyObjectId}/{policyObjectListType}/{listObjectId}/referenced-by
+    deprecated_operations: []
+    deleted_operations: []
+  - section: Others
+    docs: https://developer.cisco.com/docs/sdwan/api-changelog/
+    added: 17
+    deprecated: 18
+    deleted: 1
+    changed: 216
+    added_operations:
+    - POST /device/action/software/package/{imageType}
+    - GET /device/ppl/dashlet
+    - GET /device/ppl/detailList
+    - GET /device/ppl/segmentDetail
+    - GET /idpcertificate
+    - GET /idpcertificate/CSR
+    - PUT /idpcertificate/CSR
+    - POST /idpcertificate/CSR
+    - POST /idpcertificate/renew
+    - POST /idpcertificate/signed
+    - POST /sdavc/saas/publish-tenants
+    - GET /setting/configuration/webserver/certificate-signing-request
+    - POST /setting/configuration/webserver/certificate-signing-request/async
+    - POST /setting/configuration/webserver/certificate/async
+    - GET /tenant/capacity
+    - PUT /tenant/{tenantId}/vsmarts
+    - DELETE /tenant/{tenantId}
+    deprecated_operations:
+    - GET /clusterManagement/isready
+    - POST /msla/licenses/sync
+    - GET /msla/template
+    - GET /sdavc/cloudconnector
+    - PUT /sdavc/cloudconnector
+    - POST /sdavc/cloudconnector
+    - GET /sdavc/cloudconnector/status
+    - POST /sdavc/test
+    - GET /tenant/vsmart/capacity
+    - PUT /tenant/{tenantId}/vsmart
+    - GET /v1/smart-licensing/association
+    - DELETE /v1/smart-licensing/template/{templateId}
+    - GET /device/action/security/devices/{policyType}
+    - GET /device/action/test/ioxconfig/{deviceIP}
+    - GET /hsec/fetchaccounts
+    - PUT /setting/configuration/webserver/certificate
+    - POST /setting/configuration/webserver/certificate
+    - POST /v1/smart-licensing/template
+    deleted_operations:
+    - POST /device/action/software/package/{fileName}

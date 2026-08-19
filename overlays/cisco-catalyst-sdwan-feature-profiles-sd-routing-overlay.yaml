@@ -1,0 +1,92 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Cisco Catalyst SD-WAN Manager API — Feature Profiles - SD-Routing
+  version: 1.0.0
+extends: openapi/cisco-catalyst-sdwan-feature-profiles-sd-routing-openapi.json
+x-generated: '2026-08-19'
+x-method: generated
+x-source: https://developer.cisco.com/docs/sdwan/ (authentication, endpoints, rate-limit and versioning pages)
+x-note: The published document declares a relative server ("/dataservice") and NO securitySchemes, so a client cannot
+  learn from the contract alone where to send a request or how to authenticate. These actions add what the DevNet
+  prose documents. Nothing is invented; every value below is sourced from a Cisco documentation page.
+actions:
+- target: $.servers
+  description: Name the real host. SD-WAN Manager is customer-operated, so the host is a variable, not a constant.
+  update:
+  - url: https://{sdwan-manager-host}:{port}/dataservice
+    description: The customer's own Cisco Catalyst SD-WAN Manager (formerly vManage) instance.
+    variables:
+      sdwan-manager-host:
+        default: sdwan-manager.example.com
+        description: Hostname or IP of the SD-WAN Manager controller.
+      port:
+        default: '8443'
+        description: HTTPS port. 8443 in the Cisco examples; 443 in the published MCP servers.
+- target: $.components
+  description: Add the securitySchemes the docs define but the specification omits.
+  update:
+    securitySchemes:
+      jwtBearer:
+        type: http
+        scheme: bearer
+        bearerFormat: JWT
+        description: Access token from POST /jwt/login (SD-WAN Manager 20.18.1+). RFC 7519. See https://developer.cisco.com/docs/sdwan/authentication/
+      xsrfToken:
+        type: apiKey
+        in: header
+        name: X-XSRF-TOKEN
+        description: Cross-site request forgery token, required for most POST/PUT/DELETE operations. Delivered in
+          the "csrf" claim of the JWT login response, or from GET /client/token under session auth.
+      jsessionid:
+        type: apiKey
+        in: cookie
+        name: JSESSIONID
+        description: Legacy session cookie from POST /j_security_check. Retained for backward compatibility.
+- target: $.info
+  description: Record the operational semantics the contract does not carry.
+  update:
+    x-apievangelist-source: https://developer.cisco.com/docs/sdwan/feature-profiles-sd-routing/
+    x-apievangelist-harvest:
+      date: '2026-08-19'
+      operations: 429
+      paths: 175
+      method: assembled verbatim from the per-operation OpenAPI 3.1.0 fragments Cisco serves on the DevNet pubhub
+        CDN
+    x-api-version-header:
+      name: Accept
+      format: application/vnd.cisco.2.0+json
+      default: v1.0
+    x-rate-limits:
+      general: 100 requests/second
+      bulk: 48 requests/minute
+      bulk_statistics_concurrency: 2
+      concurrent_sessions: 250
+      status_on_exhaustion: 429
+      response_headers: null
+      docs: https://developer.cisco.com/docs/sdwan/browsing-returned-results-sorting-results-filtering-results-and-rate-limits/
+    x-pagination:
+      configuration_database:
+      - offset
+      - limit
+      statistics_database:
+      - scrollId
+      - count
+      consistency: snapshot at invocation; no cross-invocation consistency guarantee
+    x-idempotency:
+      supported: false
+      note: no idempotency key or replay semantics are documented
+    x-authorization:
+      model: rbac
+      extension: x-roles-required
+      artifact: scopes/cisco-catalyst-sdwan-scopes.yml
+    x-deprecation-policy:
+      maintained_for: two major releases after deprecation, then sunset
+      docs: https://developer.cisco.com/docs/sdwan/versioning-and-deprecation/
+      sunset_header: false
+- target: $.security
+  description: 'Apply the schemes globally: bearer JWT plus the XSRF header.'
+  update:
+  - jwtBearer: []
+    xsrfToken: []
+  - jsessionid: []
+    xsrfToken: []

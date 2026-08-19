@@ -1,0 +1,37 @@
+generated: '2026-08-19'
+method: generated
+source: openapi/*.json + https://developer.cisco.com/docs/sdwan/
+note: >-
+  Four packaged Agent Skills generated from the harvested contract, plus one skill Cisco itself
+  publishes, saved verbatim. Every operationId named in the generated skills was grepped out of the
+  13 harvested specifications; none is invented. Where a documented endpoint is NOT in the contract
+  (the three login endpoints), the skill says so rather than fabricating an operationId.
+skills:
+  - name: cisco-catalyst-sdwan-fabric-inventory
+    file: cisco-catalyst-sdwan-fabric-inventory.md
+    method: generated
+    summary: Authenticate and take a full read-only inventory of one SD-WAN fabric.
+    operations: 7
+  - name: cisco-catalyst-sdwan-tunnel-troubleshooting
+    file: cisco-catalyst-sdwan-tunnel-troubleshooting.md
+    method: generated
+    summary: Diagnose a degraded site-to-site tunnel from control plane through BFD, TLOC, interface, OMP and SLA.
+    operations: 12
+  - name: cisco-catalyst-sdwan-config-group-deploy
+    file: cisco-catalyst-sdwan-config-group-deploy.md
+    method: generated
+    summary: Provision devices with the UX 2.0 configuration-group model and deploy.
+    operations: 17
+    writes: true
+  - name: cisco-catalyst-sdwan-alarm-webhooks
+    file: cisco-catalyst-sdwan-alarm-webhooks.md
+    method: generated
+    summary: Register an outbound alarm webhook so the controller pushes instead of you polling.
+    operations: 6
+    writes: true
+  - name: cisco-catalyst-sdwan-provider-get-sdwan-devices
+    file: cisco-catalyst-sdwan-provider-get-sdwan-devices.md
+    method: searched
+    source: https://github.com/CiscoDevNet/catalyst-sdwan-mcp-community/blob/main/skills/get_sdwan_devices.md
+    summary: Cisco's own published skill, saved verbatim — retrieve all devices from SD-WAN Manager.
+    verbatim: true

@@ -1,0 +1,86 @@
+generated: '2026-08-19'
+method: searched
+source: https://developer.cisco.com/docs/sdwan/authentication/
+docs: https://developer.cisco.com/docs/sdwan/authentication/
+note: The 13 harvested OpenAPI documents declare NO components.securitySchemes and no operation-level
+  security[] — the authentication model lives only in the DevNet prose docs, not in the machine-readable
+  contract. The login endpoints (POST /jwt/login, POST /j_security_check, GET /dataservice/client/token)
+  are not present in any of the 4,138 harvested operations. This profile is searched from the docs.
+summary:
+  types:
+  - http
+  - apiKey
+  api_key_in:
+  - header
+  - cookie
+  oauth2_flows: []
+  spec_declares_security: false
+  documented_only: true
+schemes:
+- name: jwtBearer
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  since: SD-WAN Manager 20.18.1
+  login:
+    method: POST
+    path: /jwt/login
+    content_type: application/json
+    body_fields:
+    - username
+    - password
+    - duration
+    default_duration_seconds: 1800
+    max_duration_seconds: 604800
+  response_claims:
+  - token
+  - refresh
+  - sub
+  - iss
+  - aud
+  - userGroup
+  - tenant
+  - duration
+  - exp
+  - csrf
+  - isAPIKey
+  - tenantId
+  refresh:
+    path: /jwt/refresh
+    note: refresh token returned alongside the access token
+  standard: RFC 7519
+  source: https://developer.cisco.com/docs/sdwan/authentication/#jwt-based-authentication
+- name: xsrfToken
+  type: apiKey
+  in: header
+  parameter: X-XSRF-TOKEN
+  note: Cross-site request forgery token required for most POST/PUT/DELETE operations. With JWT it arrives
+    in the "csrf" claim of the login response; with session auth it is fetched from GET /dataservice/client/token.
+  source: https://developer.cisco.com/docs/sdwan/authentication/
+- name: jsessionid
+  type: apiKey
+  in: cookie
+  parameter: JSESSIONID
+  legacy: true
+  login:
+    method: POST
+    path: /j_security_check
+    content_type: application/x-www-form-urlencoded
+    body_fields:
+    - j_username
+    - j_password
+  note: Session-based authentication retained for backward compatibility.
+  source: https://developer.cisco.com/docs/sdwan/authentication/#session-based-authentication
+api_keys:
+  supported: true
+  note: A JWT access token issued with isAPIKey=true is a long-lived API key.
+authorization:
+  model: rbac
+  artifact: scopes/cisco-catalyst-sdwan-scopes.yml
+  note: Every operation carries an x-roles-required extension naming the SD-WAN Manager role(s) needed.
+multitenancy:
+  supported: true
+  note: JWT carries tenant/tenantId; some APIs are provider-view only.
+transport:
+  https_required: true
+  default_port: 8443

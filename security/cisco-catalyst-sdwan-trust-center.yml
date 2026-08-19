@@ -1,0 +1,22 @@
+generated: '2026-08-19'
+method: probed
+source: https://trustportal.cisco.com/c/r/ctp/trust-portal.html
+trust_center:
+  name: Cisco Trust Portal
+  url: https://trustportal.cisco.com/c/r/ctp/trust-portal.html
+  status: 200
+  scope: Cisco corporate, covering Catalyst SD-WAN among all Cisco offers
+certifications: []
+certifications_note: None readable. The Trust Portal returns a 2.8 KB JavaScript shell — the certification
+  catalogue is fetched client-side, so no SOC 2 / ISO 27001 / PCI / HIPAA / FedRAMP claim could be observed.
+  cisco.com/c/en/us/about/trust-center.html returned HTTP 403 to this run. No Compliance pointer is emitted,
+  because asserting a certification we could not read would be a fabrication.
+evidence:
+- url: https://trustportal.cisco.com/c/r/ctp/trust-portal.html
+  status: 200
+- url: https://trustportal.cisco.com/
+  status: 200
+- url: https://www.cisco.com/c/en/us/about/trust-center.html
+  status: 403
+- url: https://www.cisco.com/c/en/us/about/trust-center/compliance.html
+  status: 403

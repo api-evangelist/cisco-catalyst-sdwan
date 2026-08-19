@@ -1,0 +1,48 @@
+generated: '2026-08-19'
+method: searched
+source: https://developer.cisco.com/docs/sdwan/browsing-returned-results-sorting-results-filtering-results-and-rate-limits/
+docs: https://developer.cisco.com/docs/sdwan/browsing-returned-results-sorting-results-filtering-results-and-rate-limits/
+limit_count: 4
+limits:
+- name: General API
+  scope: per-controller
+  window: 1 second
+  limit: 100
+  unit: requests
+  since: '20.6'
+  note: All APIs other than the bulk statistics API.
+  source: https://developer.cisco.com/docs/sdwan/browsing-returned-results-sorting-results-filtering-results-and-rate-limits/
+- name: Bulk API
+  scope: per-controller
+  window: 1 minute
+  limit: 48
+  unit: requests
+  since: '20.6'
+  note: Applies to the bulk data APIs.
+  source: https://developer.cisco.com/docs/sdwan/browsing-returned-results-sorting-results-filtering-results-and-rate-limits/
+- name: Bulk statistics concurrency
+  scope: per-endpoint
+  endpoint: /dataservice/data/device/statistics/
+  window: concurrent
+  limit: 2
+  unit: concurrent requests
+  source: https://developer.cisco.com/docs/sdwan/browsing-returned-results-sorting-results-filtering-results-and-rate-limits/
+- name: Concurrent sessions
+  scope: per-controller
+  window: concurrent
+  limit: 250
+  unit: sessions
+  source: https://developer.cisco.com/docs/sdwan/browsing-returned-results-sorting-results-filtering-results-and-rate-limits/
+response:
+  status_on_exhaustion: 429
+  status_message: Too many requests
+  headers: []
+  headers_note: No RateLimit-*/X-RateLimit-*/Retry-After response headers are documented and none appear
+    in any of the 4,138 harvested operations. 429 is listed in the documented HTTP status table but is
+    not declared on a single operation in the OpenAPI, so an agent gets no runtime rate-limit signal —
+    only the static numbers above.
+  source: https://developer.cisco.com/docs/sdwan/errors-and-troubleshooting/
+guidance:
+- text: Real-time monitoring APIs are CPU intensive and are documented for troubleshooting only, not continuous
+    polling.
+  source: https://developer.cisco.com/docs/sdwan/browsing-returned-results-sorting-results-filtering-results-and-rate-limits/

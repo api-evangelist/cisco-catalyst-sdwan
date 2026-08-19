@@ -1,0 +1,51 @@
+generated: '2026-08-19'
+method: probed
+source: live probes 2026-08-19
+result: no document found
+note: Every /.well-known/* path probed returned 404 on developer.cisco.com and 403 on www.cisco.com (Cisco
+  edge bot protection denied this run). NO WellKnown or SecurityTxt pointer is emitted, because nothing
+  was observed. The parent Cisco profile (all/cisco/) did capture a PGP-signed RFC 9116 security.txt from
+  www.cisco.com on 2026-06-20; that is Cisco corporate, not a Catalyst SD-WAN surface, and it was not
+  reachable from this run. There is also no per-customer SD-WAN Manager host to probe — the API host is
+  the customer's own controller.
+hosts:
+- host: https://developer.cisco.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /openapi.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+- host: https://www.cisco.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 403
+    note: Access Denied — edge bot protection, not an absence
+  - path: /.well-known/csaf/provider-metadata.json
+    status: 403
+    note: Access Denied
+  - path: /.well-known/openid-configuration
+    status: 403
+  - path: /.well-known/oauth-authorization-server
+    status: 403
+  - path: /.well-known/api-catalog
+    status: 403
+  - path: /.well-known/ai-plugin.json
+    status: 403
+  - path: /.well-known/agent-card.json
+    status: 403
+  - path: /.well-known/agent.json
+    status: 403

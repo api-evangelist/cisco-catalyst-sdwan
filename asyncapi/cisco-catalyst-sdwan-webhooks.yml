@@ -1,0 +1,82 @@
+generated: '2026-08-19'
+method: derived
+source: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json + openapi/cisco-catalyst-sdwan-administration-and-settings-openapi.json
+asyncapi_published: false
+asyncapi_note: 'Cisco publishes no AsyncAPI document for Catalyst SD-WAN. There is still a real event
+  surface, captured here as a webhook catalog: outbound alarm webhooks configured through the REST API,
+  plus one server-sent-events stream.'
+webhooks:
+  style: provider-configured outbound HTTP callback, registered through the API
+  registration:
+    create:
+      method: POST
+      path: /notifications/rule
+      operationId: createNotificationRule
+      roles: Settings-write
+    update:
+      method: PUT
+      path: /notifications/rule
+      operationId: updateNotificationRule
+    list:
+      method: GET
+      path: /notifications/rules
+      operationId: getNotificationRule
+    delete:
+      method: DELETE
+      path: /notifications/rules
+      operationId: deleteNotificationRule
+  configuration_fields:
+  - notificationRuleName
+  - alarmName
+  - severity
+  - webHookEnabled
+  - webhookUrl
+  - webhookUsername
+  - webhookPassword
+  - emailThreshold
+  - accountDetailsArray
+  - devicesAttached
+  - sourceVpn
+  - vpn
+  - vpnIpSubnet
+  auth_to_receiver: HTTP basic (webhookUsername / webhookPassword) set on the rule
+  severities:
+  - Critical
+  - Major
+  - Medium
+  - Minor
+  event_selector: alarmName — one rule per alarm type (e.g. BFD_Node_Up); the alarm catalog is enumerated
+    by the /alarms/* operations
+  delivery_semantics:
+    retries: undocumented
+    signing: none — no HMAC signature header is documented
+    ordering: undocumented
+    replay: undocumented
+  gaps:
+  - no signature/verification mechanism
+  - no delivery retry or dead-letter policy published
+  - no schema for the delivered alarm payload in the contract
+streams:
+- name: authentication events
+  method: GET
+  path: /admin/events/{sseSessionId}
+  operationId: listenAuthEvents
+  protocol: server-sent events
+  media_type: text/event-stream
+  spec: openapi/cisco-catalyst-sdwan-administration-and-settings-openapi.json
+  note: The only text/event-stream response in all 4,138 operations.
+polling_alternatives:
+- name: alarms
+  paths:
+  - /alarms
+  - /alarms/aggregation
+  - /alarms/count
+  - /alarms/doccount
+  - /alarms/severity/summary
+  note: 37 alarm operations; the normal integration pattern is polling or query, not push.
+- name: events
+  paths:
+  - /event
+  - /event/aggregation
+  - /event/severity/summary
+  note: 25 event operations.

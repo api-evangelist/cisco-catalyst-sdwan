@@ -1,0 +1,324 @@
+generated: '2026-08-19'
+method: derived
+source: openapi/*.json (2,841 paths / 4,138 operations)
+note: Derived from path structure and identifier parameters. The published specs inline every schema and
+  declare NO components.schemas, so there are no $ref edges to walk — the entity graph is reconstructed
+  from the resource hierarchy in the paths and from the {…Id} parameters that link them.
+identifier_convention:
+  style: UUID path parameters named <entity>Id
+  top_identifiers:
+  - parameter: transportId
+    occurrences: 407
+  - parameter: id
+    occurrences: 350
+  - parameter: serviceId
+    occurrences: 266
+  - parameter: vpnId
+    occurrences: 183
+  - parameter: vrfId
+    occurrences: 148
+  - parameter: systemId
+    occurrences: 138
+  - parameter: ethernetId
+    occurrences: 64
+  - parameter: profileId
+    occurrences: 55
+  - parameter: ospfv3Id
+    occurrences: 54
+  - parameter: cliId
+    occurrences: 39
+  - parameter: cellularControllerId
+    occurrences: 36
+  - parameter: cellularId
+    occurrences: 33
+  - parameter: bgpId
+    occurrences: 30
+  - parameter: trackerId
+    occurrences: 30
+  - parameter: uuid
+    occurrences: 29
+  - parameter: networksId
+    occurrences: 28
+  - parameter: otherId
+    occurrences: 28
+  - parameter: ospfId
+    occurrences: 27
+  - parameter: sessionId
+    occurrences: 27
+  - parameter: ipsecId
+    occurrences: 25
+  - parameter: type
+    occurrences: 24
+  - parameter: securityId
+    occurrences: 23
+  - parameter: policyId
+    occurrences: 22
+  - parameter: dhcpServerId
+    occurrences: 18
+  - parameter: nmsId
+    occurrences: 18
+  - parameter: templateId
+    occurrences: 18
+  - parameter: securityProfileParcelId
+    occurrences: 16
+  - parameter: sseSpaId
+    occurrences: 16
+  - parameter: trackergroupId
+    occurrences: 15
+  - parameter: deviceId
+    occurrences: 15
+top_level_namespaces:
+- namespace: /v1
+  paths: 600
+- namespace: /device
+  paths: 585
+- namespace: /template
+  paths: 558
+- namespace: /statistics
+  paths: 307
+- namespace: /multicloud
+  paths: 150
+- namespace: /certificate
+  paths: 54
+- namespace: /stream
+  paths: 50
+- namespace: /sdavc
+  paths: 43
+- namespace: /system
+  paths: 33
+- namespace: /disasterrecovery
+  paths: 30
+- namespace: /alarms
+  paths: 29
+- namespace: /dca
+  paths: 24
+- namespace: /admin
+  paths: 23
+- namespace: /clusterManagement
+  paths: 20
+- namespace: /networkdesign
+  paths: 19
+- namespace: /sslproxy
+  paths: 18
+- namespace: /partner
+  paths: 18
+- namespace: /util
+  paths: 16
+- namespace: /event
+  paths: 14
+- namespace: /app-registry
+  paths: 14
+- namespace: /cloudservices
+  paths: 12
+- namespace: /msla
+  paths: 12
+- namespace: /tenant
+  paths: 12
+- namespace: /settings
+  paths: 11
+- namespace: /signature-set
+  paths: 11
+- namespace: /mdp
+  paths: 10
+- namespace: /ise
+  paths: 9
+- namespace: /data
+  paths: 8
+- namespace: /auditlog
+  paths: 8
+- namespace: /fedramp
+  paths: 7
+entities:
+- name: Device
+  id: deviceId / uuid / system-ip
+  paths: /device/*
+  note: WAN edge routers and controllers (vManage, vSmart, vBond) in the fabric.
+  relationships:
+  - to: DeviceTemplate
+    type: belongs_to
+    via: templateId
+  - to: ConfigGroup
+    type: belongs_to
+    via: configGroupId
+  - to: Certificate
+    type: has_one
+    via: uuid
+- name: DeviceTemplate
+  id: masterTemplateId / templateId
+  paths: /template/device/*
+  relationships:
+  - to: FeatureTemplate
+    type: has_many
+    via: templateId
+  - to: Device
+    type: has_many
+    via: uuid
+- name: FeatureTemplate
+  id: templateId
+  paths: /template/feature/*
+- name: ConfigGroup
+  id: configGroupId
+  paths: /v1/config-group/*
+  note: UX 2.0 replacement for device templates.
+  relationships:
+  - to: FeatureProfile
+    type: has_many
+    via: profileId
+  - to: Device
+    type: has_many
+    via: deviceId
+- name: FeatureProfile
+  id: systemId / transportId / serviceId / policyObjectId / profileId
+  paths: /v1/feature-profile/{solution}/{profile-type}/*
+  note: 'UX 2.0 configuration container. Solutions: sdwan, sd-routing, mobility, nfvirtual.'
+  relationships:
+  - to: Parcel
+    type: has_many
+    via: <parcel>Id
+  - to: ConfigGroup
+    type: belongs_to
+    via: configGroupId
+- name: Parcel
+  id: <parcel>Id
+  paths: /v1/feature-profile/.../{parcelType}/{parcelId}
+  note: The leaf configuration object inside a feature profile (aaa, bgp, lan/vpn, interface/ethernet,
+    tracker, …). Each type publishes a /schema endpoint.
+  relationships:
+  - to: Parcel
+    type: has_many
+    via: nested parcel id
+    note: parcels nest — vpn -> interface -> tracker
+- name: PolicyGroup
+  id: policyGroupId
+  paths: /v1/policy-group/*
+- name: TopologyGroup
+  id: topologyGroupId
+  paths: /v1/topology-group/*
+- name: PolicyList
+  id: id / listId
+  paths: /template/policy/list/*
+  note: ~60 typed list builders.
+- name: PolicyDefinition
+  id: id
+  paths: /template/policy/definition/*
+- name: PolicyAssembly
+  id: id
+  paths: /template/policy/assembly/*
+  relationships:
+  - to: PolicyDefinition
+    type: has_many
+    via: id
+- name: Alarm
+  id: alarmUUID
+  paths: /alarms/*
+  relationships:
+  - to: NotificationRule
+    type: has_many
+    via: alarmName
+  - to: Device
+    type: belongs_to
+    via: system-ip
+- name: NotificationRule
+  id: ruleId
+  paths: /notifications/*
+  note: Binds an alarm + severity to an email list and/or a webhook URL.
+- name: Event
+  id: eventId
+  paths: /event/*
+- name: Certificate
+  id: uuid
+  paths: /certificate/*
+- name: Tenant
+  id: tenantId
+  paths: /tenant/*
+  note: Multitenant deployments; provider vs tenant view.
+- name: User
+  id: userName
+  paths: /admin/user/*
+  relationships:
+  - to: UserGroup
+    type: belongs_to
+    via: group
+- name: UserGroup
+  id: groupName
+  paths: /admin/usergroup/*
+  note: Carries the RBAC permissions the x-roles-required extension names.
+- name: CloudGateway
+  id: cloudGatewayName
+  paths: /multicloud/*
+- name: SoftwareImage
+  id: versionId
+  paths: /device/action/software/*
+feature_profile_parcel_families:
+- solution: sdwan
+  profile: transport
+  paths: 226
+- solution: sd-routing
+  profile: transport
+  paths: 201
+- solution: sdwan
+  profile: service
+  paths: 162
+- solution: sd-routing
+  profile: service
+  paths: 120
+- solution: sdwan
+  profile: system
+  paths: 75
+- solution: mobility
+  profile: global
+  paths: 58
+- solution: sd-routing
+  profile: system
+  paths: 50
+- solution: nfvirtual
+  profile: networks
+  paths: 34
+- solution: nfvirtual
+  profile: system
+  paths: 29
+- solution: sdwan
+  profile: other
+  paths: 26
+- solution: sd-routing
+  profile: cli
+  paths: 21
+- solution: sd-routing
+  profile: embedded-security
+  paths: 15
+- solution: sdwan
+  profile: policy-object
+  paths: 13
+- solution: sdwan
+  profile: cli
+  paths: 12
+- solution: sdwan
+  profile: sse-spa
+  paths: 11
+- solution: sd-routing
+  profile: sse-spa
+  paths: 11
+- solution: sdwan
+  profile: dns-security
+  paths: 10
+- solution: sdwan
+  profile: embedded-security
+  paths: 10
+- solution: sdwan
+  profile: sig-security
+  paths: 10
+- solution: sd-routing
+  profile: sse
+  paths: 10
+- solution: nfvirtual
+  profile: cli
+  paths: 9
+- solution: sdwan
+  profile: application-priority
+  paths: 9
+- solution: mobility
+  profile: cli
+  paths: 7
+- solution: sd-routing
+  profile: other
+  paths: 5

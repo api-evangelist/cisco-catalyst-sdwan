@@ -1,0 +1,92 @@
+generated: '2026-08-19'
+method: searched
+source: https://developer.cisco.com/docs/sdwan/
+auth:
+  style: bearer JWT (20.18.1+) or JSESSIONID session cookie, plus an X-XSRF-TOKEN header on writes
+  artifact: authentication/cisco-catalyst-sdwan-authentication.yml
+  docs: https://developer.cisco.com/docs/sdwan/authentication/
+base_path:
+  prefix: /dataservice
+  host: the customer's own SD-WAN Manager instance
+  default_port: 8443
+  namespaces:
+    /template: feature template, device template, device policy
+    /statistics: aggregated device state and statistics
+    /device: device action and real-time device state
+    /v1/feature-profile: UX 2.0 feature profiles
+  docs: https://developer.cisco.com/docs/sdwan/forming-the-api-urls-api-endpoints/
+versioning:
+  style: vendor Accept header, not a URL version segment
+  header: 'Accept: application/vnd.cisco.2.0+json'
+  default: v1.0
+  note: UX 2.0 resources additionally carry a /v1/ path segment.
+  docs: https://developer.cisco.com/docs/sdwan/forming-the-api-urls-api-endpoints/
+idempotency:
+  supported: false
+  note: No idempotency key, no Idempotency-Key header, no request-replay semantics are documented anywhere
+    in the SD-WAN Manager API docs, and no such parameter appears on any of the 4,138 harvested operations.
+    Retrying a failed POST against a configuration or device-action endpoint is not safe.
+pagination:
+  styles:
+  - data_source: configuration database
+    params:
+    - offset
+    - limit
+    example: GET /template/feature?offset=1&limit=10
+  - data_source: statistics database
+    params:
+    - scrollId
+    - count
+    example: GET /statistics/approute/page?scrollId=<id>&count=10
+  - data_source: device
+    params: []
+    note: the device determines pagination behaviour
+  consistency: Pagination is a snapshot at invocation time; Cisco documents NO guarantee of data consistency
+    between invocations.
+  docs: https://developer.cisco.com/docs/sdwan/browsing-returned-results-sorting-results-filtering-results-and-rate-limits/
+filtering_sorting:
+  supported: partial
+  note: Sorting and filtering are available only on device state and statistics APIs.
+  docs: https://developer.cisco.com/docs/sdwan/browsing-returned-results-sorting-results-filtering-results-and-rate-limits/
+query_language:
+  style: JSON query object posted to bulk/statistics endpoints
+  docs: https://developer.cisco.com/docs/sdwan/query-format/
+metadata:
+  supported: false
+field_expansion:
+  supported: false
+request_id_tracing:
+  supported: false
+  note: No request-id / correlation-id response header is documented.
+content:
+  default_encoding: UTF-8
+  compression: gzip NOT enabled by default
+  primary_media_type: application/json
+  other_media_types:
+  - text/csv
+  - application/octet-stream
+  - text/event-stream
+  - application/pdf
+  - application/gzip
+  docs: https://developer.cisco.com/docs/sdwan/content-compression-and-encoding/
+errors:
+  envelope: undocumented
+  artifact: errors/cisco-catalyst-sdwan-problem-types.yml
+  docs: https://developer.cisco.com/docs/sdwan/errors-and-troubleshooting/
+rate_limit_signalling:
+  headers: []
+  status: 429
+  note: limits are published as static numbers; no runtime headers
+  artifact: rate-limits/cisco-catalyst-sdwan-rate-limits.yml
+authorization:
+  model: rbac via x-roles-required on every operation
+  artifact: scopes/cisco-catalyst-sdwan-scopes.yml
+multitenancy:
+  views:
+  - provider
+  - provider-and-tenant
+  - tenant
+  note: Some operations are provider-view only and this is enforced at invocation.
+  docs: https://developer.cisco.com/docs/sdwan/forming-the-api-urls-api-endpoints/
+lifecycle:
+  artifact: lifecycle/cisco-catalyst-sdwan-lifecycle.yml

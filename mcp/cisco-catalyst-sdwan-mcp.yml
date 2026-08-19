@@ -1,0 +1,250 @@
+generated: '2026-08-19'
+method: searched
+source: https://github.com/CiscoDevNet/catalyst-sdwan-mcp-community
+status: published
+deployment:
+  mode: local-stdio
+  endpoint: null
+  install: git clone https://github.com/CiscoDevNet/catalyst-sdwan-mcp-community && npm install && npm
+    run build && node build/index.js
+  package: https://github.com/CiscoDevNet/catalyst-sdwan-mcp-community
+  auth: api-key
+  auth_note: No auth at the MCP transport (stdio). The server itself needs VMANAGE_HOST, VMANAGE_USERNAME
+    and VMANAGE_PASSWORD in the environment and exchanges them for a JWT access token plus XSRF token
+    against the customer's own SD-WAN Manager.
+  verified: searched
+  note: 'There is NO hosted/remote MCP endpoint for Catalyst SD-WAN and there cannot be a shared one:
+    every SD-WAN Manager is a customer-operated controller, so an MCP server must run next to it. Both
+    published servers are stdio, container-run, build-from-source. Neither is on npm or PyPI.'
+servers:
+- name: catalyst-sdwan-mcp
+  repo: https://github.com/CiscoDevNet/catalyst-sdwan-mcp-community
+  org: CiscoDevNet
+  official: false
+  labelled: community
+  license: MIT
+  runtime: Node.js 18+
+  transport: stdio
+  package_name: catalyst-sdwan-mcp
+  package_version: 1.0.0
+  npm: false
+  container: Dockerfile + docker-compose published in the repository
+  tool_count: 45
+  tool_count_readme: 39
+  tool_count_note: The README advertises 39 tools; the switch in src/server.ts implements 45.
+  auth_modes:
+  - JWT (VMANAGE_USE_JWT=true, default; requires vManage 20.18.1+)
+  - session JSESSIONID fallback
+  env:
+  - VMANAGE_HOST
+  - VMANAGE_USERNAME
+  - VMANAGE_PASSWORD
+  - VMANAGE_PORT (default 443)
+  - VMANAGE_USE_JWT
+  ships_skills: true
+  skills_note: Ships one Agent Skill (skills/get_sdwan_devices.md) and one MCP resource (resources/cisco_sdwan_api.md).
+  last_push: '2026-03-23'
+- name: sdwan-mcp (wan-automation-examples)
+  repo: https://github.com/CiscoDevNet/wan-automation-examples/tree/main/catalystwan/mcp-sdwan
+  org: CiscoDevNet
+  official: false
+  license: Apache-2.0
+  runtime: Python (uv), Podman container
+  transport: stdio
+  tool_count: 6
+  tools:
+  - get_device_list
+  - get_device_status
+  - get_device_details
+  - list_software_versions
+  - get_approute_stats
+  - list_config_groups_and_profiles
+  auth_modes:
+  - vManage username/password via Podman secrets -> env
+  clients_documented:
+  - Claude Desktop
+  - Gemini CLI
+  last_push: '2026-08-13'
+tools:
+- name: list_devices
+  description: List all devices in the SD-WAN fabric (vEdges, vSmarts, vBonds, vManage). Returns hostname,
+    system-ip, device-type, status, site-id, version.
+  source_operation: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json#listAllDevices
+  server: catalyst-sdwan-mcp
+- name: get_device_details
+  description: Get detailed information for a specific device by device ID or system IP.
+  source_operation: null
+  server: catalyst-sdwan-mcp
+- name: list_reachable_devices
+  description: List devices that are currently reachable in the SD-WAN fabric.
+  source_operation: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json#listReachableDevices
+  server: catalyst-sdwan-mcp
+- name: list_controllers
+  description: List vManage, vSmart, and vBond controllers in the fabric.
+  source_operation: null
+  server: catalyst-sdwan-mcp
+- name: get_control_connections
+  description: Get control plane connection status for a device. Shows connections to vSmart/vBond.
+  source_operation: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json#createRealTimeConnectionList_RealTimeMonitoringDeviceControl_2703
+  server: catalyst-sdwan-mcp
+- name: get_control_summary
+  description: Get control plane summary (device count) for a device.
+  source_operation: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json#createConnectionsSummary
+  server: catalyst-sdwan-mcp
+- name: get_control_statistics
+  description: Get control plane DTLS connection statistics for a device.
+  source_operation: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json#getConnectionStatistics
+  server: catalyst-sdwan-mcp
+- name: get_omp_peers
+  description: Get OMP (Overlay Management Protocol) peers for a device.
+  source_operation: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json#createOMPSessionList
+  server: catalyst-sdwan-mcp
+- name: get_omp_routes
+  description: Get OMP routes advertised/received by a device.
+  source_operation: null
+  server: catalyst-sdwan-mcp
+- name: get_omp_summary
+  description: Get OMP summary for a device.
+  source_operation: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json#createOMPSummary
+  server: catalyst-sdwan-mcp
+- name: get_bfd_sessions
+  description: Get BFD (Bidirectional Forwarding Detection) sessions for a device.
+  source_operation: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json#createBFDSessions
+  server: catalyst-sdwan-mcp
+- name: get_bfd_summary
+  description: Get BFD session summary for a device.
+  source_operation: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json#createBFDSummary
+  server: catalyst-sdwan-mcp
+- name: get_bfd_tloc
+  description: Get BFD session summary per TLOC for a device.
+  source_operation: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json#createTLOCSummary
+  server: catalyst-sdwan-mcp
+- name: get_device_interfaces
+  description: Get interface status and configuration for a device.
+  source_operation: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json#getDeviceInterface
+  server: catalyst-sdwan-mcp
+- name: get_system_status
+  description: Get system status (CPU, memory, uptime) for a device.
+  source_operation: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json#createDeviceSystemStatusList
+  server: catalyst-sdwan-mcp
+- name: get_device_arp
+  description: Get ARP table (IPv4 to MAC mappings) for a device.
+  source_operation: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json#getARPInterface
+  server: catalyst-sdwan-mcp
+- name: get_app_route_statistics
+  description: Get application-aware routing statistics (tunnel stats) for a device.
+  source_operation: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json#createAppRouteStatisticsList
+  server: catalyst-sdwan-mcp
+- name: get_app_route_sla_class
+  description: Get SLA class information for application-aware routing on a device.
+  source_operation: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json#createAppRouteSlaClassList
+  server: catalyst-sdwan-mcp
+- name: get_bgp_neighbors
+  description: Get BGP neighbors for a device.
+  source_operation: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json#createBGPNeighborsList
+  server: catalyst-sdwan-mcp
+- name: get_bgp_routes
+  description: Get BGP routes for a device.
+  source_operation: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json#createBGPRoutesList
+  server: catalyst-sdwan-mcp
+- name: get_bgp_summary
+  description: Get BGP summary for a device.
+  source_operation: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json#createBGPSummary
+  server: catalyst-sdwan-mcp
+- name: get_cflowd_flows
+  description: Get cflowd flow information for a device.
+  source_operation: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json#createCflowCollectorList
+  server: catalyst-sdwan-mcp
+- name: get_cflowd_statistics
+  description: Get cflowd packet statistics for a device.
+  source_operation: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json#createCflowdStatistics
+  server: catalyst-sdwan-mcp
+- name: get_app_log_flows
+  description: Get packet flow logging information for a device.
+  source_operation: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json#getAppLogFlows
+  server: catalyst-sdwan-mcp
+- name: get_app_log_flow_count
+  description: Get count of packet flows being logged for a device.
+  source_operation: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json#getAppLogFlowCount
+  server: catalyst-sdwan-mcp
+- name: get_sdwan_stats
+  description: Get SD-WAN statistics (ACL drops, data policy, device metrics) for a device.
+  source_operation: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json#getSDWanStats
+  server: catalyst-sdwan-mcp
+- name: list_device_templates
+  description: List all device templates (master templates) in vManage.
+  source_operation: openapi/cisco-catalyst-sdwan-ux-1-0-configuration-openapi.json#generateMasterTemplateList
+  server: catalyst-sdwan-mcp
+- name: list_feature_templates
+  description: List all feature templates in vManage.
+  source_operation: openapi/cisco-catalyst-sdwan-ux-1-0-configuration-openapi.json#generateFeatureTemplateList
+  server: catalyst-sdwan-mcp
+- name: get_attached_devices
+  description: Get devices attached to a specific device template.
+  source_operation: null
+  server: catalyst-sdwan-mcp
+- name: get_template_definition
+  description: Get the definition/configuration of a device or feature template.
+  source_operation: null
+  server: catalyst-sdwan-mcp
+- name: list_policy_lists
+  description: List policy lists (app, aspath, color, community, data-prefix, etc.).
+  source_operation: null
+  server: catalyst-sdwan-mcp
+- name: list_policy_definitions
+  description: List policy definitions (ACL, app-route, data, control, etc.).
+  source_operation: null
+  server: catalyst-sdwan-mcp
+- name: list_policies
+  description: List configured policies (security, vedge, vsmart, voice assemblies).
+  source_operation: null
+  server: catalyst-sdwan-mcp
+- name: get_cloudx_status
+  description: Get CloudExpress (Cloud OnRamp) status - sites per application.
+  source_operation: openapi/cisco-catalyst-sdwan-ux-1-0-configuration-openapi.json#getCloudXStatus
+  server: catalyst-sdwan-mcp
+- name: get_cloudx_gateway_list
+  description: Get CloudExpress gateway list.
+  source_operation: openapi/cisco-catalyst-sdwan-ux-1-0-configuration-openapi.json#getGatewayList
+  server: catalyst-sdwan-mcp
+- name: get_cloudx_client_list
+  description: Get CloudExpress client/site list.
+  source_operation: openapi/cisco-catalyst-sdwan-ux-1-0-configuration-openapi.json#getSiteList
+  server: catalyst-sdwan-mcp
+- name: get_cloudx_apps
+  description: Get CloudExpress apps and VPNs configuration.
+  source_operation: openapi/cisco-catalyst-sdwan-ux-1-0-configuration-openapi.json#getApps
+  server: catalyst-sdwan-mcp
+- name: list_alarms
+  description: List active alarms from vManage.
+  source_operation: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json#getRawAlarmData
+  server: catalyst-sdwan-mcp
+- name: get_certificate_summary
+  description: Get certificate validity summary for devices.
+  source_operation: openapi/cisco-catalyst-sdwan-others-openapi.json#getCertificateStats
+  server: catalyst-sdwan-mcp
+- name: list_vedge_inventory
+  description: List vEdge device inventory with sync status.
+  source_operation: null
+  server: catalyst-sdwan-mcp
+- name: get_cluster_status
+  description: Get vManage cluster status (if clustered).
+  source_operation: null
+  server: catalyst-sdwan-mcp
+- name: list_custom_apps
+  description: List custom application definitions.
+  source_operation: openapi/cisco-catalyst-sdwan-ux-1-0-configuration-openapi.json#getCustomApps
+  server: catalyst-sdwan-mcp
+- name: get_device_vpn
+  description: Get VPN configuration for a device.
+  source_operation: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json#getVPNInstances
+  server: catalyst-sdwan-mcp
+- name: get_device_tloc
+  description: Get TLOC (Transport Locator) information for a device.
+  source_operation: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json#getDeviceTlocStatus
+  server: catalyst-sdwan-mcp
+- name: get_bridge_table
+  description: Get bridge forwarding table for a device.
+  source_operation: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json#getBridgeInterfaceTable
+  server: catalyst-sdwan-mcp
+crosswalk: mcp/cisco-catalyst-sdwan-tool-crosswalk.yml

@@ -1,0 +1,366 @@
+generated: '2026-08-19'
+method: derived
+source: https://github.com/CiscoDevNet/catalyst-sdwan-mcp-community/blob/main/src/server.ts + openapi/*.json
+note: Each MCP tool is bound to the OpenAPI operation it actually calls, read from the server source,
+  not guessed from the name. The tool's real input contract is that operation's parameters. Ten tools
+  call vManage paths that appear in NO published specification — recorded as mcp_only rather than papered
+  over.
+surfaces:
+  openapi:
+    files: 13
+    operations: 4138
+    note: 'harvested from developer.cisco.com/docs/sdwan (DevNet pubhub), OpenAPI 3.1.0, gated: false'
+  graphql: null
+  mcp:
+    server: https://github.com/CiscoDevNet/catalyst-sdwan-mcp-community
+    transport: stdio
+    tools: 45
+    gated: true
+    gated_note: 'tools/list cannot be called anonymously: the server is stdio-only and requires a customer
+      SD-WAN Manager plus credentials. Tool names, descriptions and backing endpoints were read from src/server.ts,
+      not from a live tools/list.'
+crosswalk:
+- tool: list_devices
+  category: device
+  rest:
+  - listAllDevices
+  binding: rest
+  confidence: high
+  spec: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json
+- tool: get_device_details
+  category: device
+  rest:
+  - listAllDevices
+  binding: rest
+  confidence: medium
+  spec: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json
+  note: 'The tool has no endpoint of its own: it GETs /dataservice/device (listAllDevices) and filters
+    client-side by uuid or system-ip.'
+- tool: list_reachable_devices
+  category: device
+  rest:
+  - listReachableDevices
+  binding: rest
+  confidence: high
+  spec: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json
+- tool: get_control_connections
+  category: realtime
+  rest:
+  - createRealTimeConnectionList_RealTimeMonitoringDeviceControl_2703
+  binding: rest
+  confidence: high
+  spec: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json
+- tool: get_control_summary
+  category: realtime
+  rest:
+  - createConnectionsSummary
+  binding: rest
+  confidence: high
+  spec: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json
+- tool: get_control_statistics
+  category: realtime
+  rest:
+  - getConnectionStatistics
+  binding: rest
+  confidence: high
+  spec: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json
+- tool: get_omp_peers
+  category: realtime
+  rest:
+  - createOMPSessionList
+  binding: rest
+  confidence: high
+  spec: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json
+- tool: get_omp_summary
+  category: realtime
+  rest:
+  - createOMPSummary
+  binding: rest
+  confidence: high
+  spec: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json
+- tool: get_bfd_sessions
+  category: realtime
+  rest:
+  - createBFDSessions
+  binding: rest
+  confidence: high
+  spec: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json
+- tool: get_bfd_summary
+  category: realtime
+  rest:
+  - createBFDSummary
+  binding: rest
+  confidence: high
+  spec: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json
+- tool: get_bfd_tloc
+  category: realtime
+  rest:
+  - createTLOCSummary
+  binding: rest
+  confidence: high
+  spec: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json
+- tool: get_device_interfaces
+  category: realtime
+  rest:
+  - getDeviceInterface
+  binding: rest
+  confidence: high
+  spec: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json
+- tool: get_system_status
+  category: realtime
+  rest:
+  - createDeviceSystemStatusList
+  binding: rest
+  confidence: high
+  spec: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json
+- tool: get_device_arp
+  category: realtime
+  rest:
+  - getARPInterface
+  binding: rest
+  confidence: high
+  spec: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json
+- tool: get_app_route_statistics
+  category: realtime
+  rest:
+  - createAppRouteStatisticsList
+  binding: rest
+  confidence: high
+  spec: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json
+- tool: get_app_route_sla_class
+  category: realtime
+  rest:
+  - createAppRouteSlaClassList
+  binding: rest
+  confidence: high
+  spec: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json
+- tool: get_bgp_neighbors
+  category: realtime
+  rest:
+  - createBGPNeighborsList
+  binding: rest
+  confidence: high
+  spec: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json
+- tool: get_bgp_routes
+  category: realtime
+  rest:
+  - createBGPRoutesList
+  binding: rest
+  confidence: high
+  spec: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json
+- tool: get_bgp_summary
+  category: realtime
+  rest:
+  - createBGPSummary
+  binding: rest
+  confidence: high
+  spec: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json
+- tool: get_cflowd_flows
+  category: realtime
+  rest:
+  - createCflowCollectorList
+  binding: rest
+  confidence: high
+  spec: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json
+- tool: get_cflowd_statistics
+  category: realtime
+  rest:
+  - createCflowdStatistics
+  binding: rest
+  confidence: high
+  spec: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json
+- tool: get_app_log_flows
+  category: realtime
+  rest:
+  - getAppLogFlows
+  binding: rest
+  confidence: high
+  spec: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json
+- tool: get_app_log_flow_count
+  category: realtime
+  rest:
+  - getAppLogFlowCount
+  binding: rest
+  confidence: high
+  spec: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json
+- tool: get_sdwan_stats
+  category: realtime
+  rest:
+  - getSDWanStats
+  binding: rest
+  confidence: high
+  spec: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json
+- tool: list_device_templates
+  category: template
+  rest:
+  - generateMasterTemplateList
+  binding: rest
+  confidence: high
+  spec: openapi/cisco-catalyst-sdwan-ux-1-0-configuration-openapi.json
+- tool: list_feature_templates
+  category: template
+  rest:
+  - generateFeatureTemplateList
+  binding: rest
+  confidence: high
+  spec: openapi/cisco-catalyst-sdwan-ux-1-0-configuration-openapi.json
+- tool: get_attached_devices
+  category: template
+  rest:
+  - getAttachedDeviceList
+  binding: rest
+  confidence: high
+  spec: openapi/cisco-catalyst-sdwan-ux-1-0-configuration-openapi.json
+  note: Spec path is /template/device/config/attached/{masterTemplateId}; the tool names the same parameter
+    template_id.
+- tool: get_template_definition
+  category: template
+  rest:
+  - getMasterTemplateDefinition
+  - getGeneralTemplate
+  binding: rest
+  confidence: high
+  spec: openapi/cisco-catalyst-sdwan-ux-1-0-configuration-openapi.json
+  note: 'Fans out on template_type: device -> /template/device/object/{templateId}, otherwise /template/feature/object/{templateId}.'
+- tool: list_policy_lists
+  category: policy
+  rest:
+  - getAllPolicyLists
+  binding: rest
+  confidence: medium
+  spec: openapi/cisco-catalyst-sdwan-ux-1-0-configuration-openapi.json
+  note: Unqualified call maps to GET /template/policy/list (getAllPolicyLists). With list_type it targets
+    /template/policy/list/{type}, which the spec documents as ~60 separate typed operations rather than
+    one templated path.
+- tool: get_cloudx_status
+  category: cloudx
+  rest:
+  - getCloudXStatus
+  binding: rest
+  confidence: high
+  spec: openapi/cisco-catalyst-sdwan-ux-1-0-configuration-openapi.json
+- tool: get_cloudx_gateway_list
+  category: cloudx
+  rest:
+  - getGatewayList
+  binding: rest
+  confidence: high
+  spec: openapi/cisco-catalyst-sdwan-ux-1-0-configuration-openapi.json
+- tool: get_cloudx_client_list
+  category: cloudx
+  rest:
+  - getSiteList
+  binding: rest
+  confidence: high
+  spec: openapi/cisco-catalyst-sdwan-ux-1-0-configuration-openapi.json
+- tool: get_cloudx_apps
+  category: cloudx
+  rest:
+  - getApps
+  binding: rest
+  confidence: high
+  spec: openapi/cisco-catalyst-sdwan-ux-1-0-configuration-openapi.json
+- tool: list_alarms
+  category: administration
+  rest:
+  - getRawAlarmData
+  binding: rest
+  confidence: high
+  spec: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json
+- tool: get_certificate_summary
+  category: administration
+  rest:
+  - getCertificateStats
+  binding: rest
+  confidence: high
+  spec: openapi/cisco-catalyst-sdwan-others-openapi.json
+- tool: list_custom_apps
+  category: policy
+  rest:
+  - getCustomApps
+  binding: rest
+  confidence: high
+  spec: openapi/cisco-catalyst-sdwan-ux-1-0-configuration-openapi.json
+- tool: get_device_vpn
+  category: realtime
+  rest:
+  - getVPNInstances
+  binding: rest
+  confidence: high
+  spec: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json
+- tool: get_device_tloc
+  category: realtime
+  rest:
+  - getDeviceTlocStatus
+  binding: rest
+  confidence: high
+  spec: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json
+- tool: get_bridge_table
+  category: realtime
+  rest:
+  - getBridgeInterfaceTable
+  binding: rest
+  confidence: high
+  spec: openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json
+mcp_only:
+- tool: list_controllers
+  category: device
+  reason: GET /system/device/controllers is not documented; the spec only carries /system/device/controllers/vedge/status
+    (getControllerVEdgeSyncStatus_ConfigurationDeviceInventory_3903).
+- tool: get_omp_routes
+  category: realtime
+  reason: GET /device/omp/routes is not documented; the spec carries /device/omp/routes/advertised (createAdvertisedRoutesList)
+    and /device/omp/routes/received (createReceivedRoutesList).
+- tool: list_policy_definitions
+  category: policy
+  reason: GET /template/policy/definition is NOT a documented path. The spec documents only typed definition
+    endpoints (/template/policy/definition/acl, /aclv6, /approute, ...). The unqualified form the tool
+    defaults to is undocumented.
+- tool: list_policies
+  category: policy
+  reason: GET /template/policy is not a documented path in any of the 13 published specs.
+- tool: list_vedge_inventory
+  category: administration
+  reason: GET /device/vedgeinventory is not documented; the spec carries /device/vedgeinventory/detail
+    (getVedgeInventory) and /summary (getVedgeInventorySummary).
+- tool: get_cluster_status
+  category: administration
+  reason: GET /clusterManagement/clusterStatus is not documented; the nearest published operation is /clusterManagement/health/status
+    (healthStatusInfo).
+rest_only:
+  note: 4,138 published operations, 35 of which have a tool. Everything else is REST-only — the entire
+    UX 2.0 feature-profile configuration surface (1,136 operations), all write operations, device actions,
+    software management, certificates, multitenancy, licensing and the whole policy builder. Both published
+    MCP servers are read-only.
+  capability_groups:
+  - group: UX 2.0 feature profiles (system/transport/service/others/SD-Routing/mobility)
+    operations: 1136
+    tools: 0
+  - group: UX 1.0 templates and policy builder
+    operations: 862
+    tools: 6
+  - group: Monitoring, real-time monitoring and troubleshooting
+    operations: 1068
+    tools: 26
+  - group: Device inventory, certificates, software, multitenancy, licensing (Others)
+    operations: 718
+    tools: 3
+  - group: Multicloud and interconnect services
+    operations: 180
+    tools: 0
+  - group: Partner integrations
+    operations: 76
+    tools: 0
+  - group: Administration and settings
+    operations: 59
+    tools: 0
+  - group: UX 2.0 configuration groups
+    operations: 39
+    tools: 0
+coverage:
+  tools_named: 45
+  tools_bound: 39
+  mcp_only: 6
+  rest_operations_total: 4138
+  rest_operations_with_a_tool: 40
+  rest_coverage_percent: 0.97

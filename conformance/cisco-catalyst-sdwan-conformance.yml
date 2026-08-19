@@ -1,0 +1,60 @@
+generated: '2026-08-19'
+method: derived
+source: openapi/*.json + https://developer.cisco.com/docs/sdwan/
+standards:
+- id: openapi-3.1
+  conforms: true
+  evidence: 'all 13 published documents declare openapi: 3.1.0'
+- id: rfc7519-jwt
+  conforms: true
+  evidence: https://developer.cisco.com/docs/sdwan/authentication/ — POST /jwt/login issues an RFC 7519
+    JWT with sub/iss/aud/exp claims
+- id: oauth2
+  conforms: false
+  evidence: no oauth2 securityScheme in any spec; no OAuth documented
+- id: oidc
+  conforms: false
+  evidence: no openIdConnect scheme; /.well-known/openid-configuration 404 on developer.cisco.com
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: no application/problem+json response anywhere in 4,138 operations
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: deprecation is published in the spec and changelog; no Sunset/Deprecation headers documented
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: developer.cisco.com/.well-known/security.txt returned 404; www.cisco.com returned 403 to this
+    run (a security.txt is served there per the parent Cisco profile, but it was not observable from this
+    run)
+- id: rfc8615-well-known
+  conforms: false
+  evidence: every /.well-known/* path probed on developer.cisco.com returned 404
+- id: idempotency
+  conforms: false
+  evidence: no idempotency key or replay semantics documented
+- id: pagination
+  conforms: true
+  evidence: offset/limit on configuration data and scrollId/count on statistics data are documented
+- id: json-api
+  conforms: false
+  evidence: 'proprietary JSON envelope ({"data": [...]}), not JSON:API'
+- id: odata
+  conforms: false
+  evidence: no OData conventions
+- id: asyncapi
+  conforms: false
+  evidence: no AsyncAPI published; the event surface is an SSE endpoint plus outbound alarm webhooks configured
+    through the REST API
+- id: mcp
+  conforms: true
+  evidence: two MCP servers published in the CiscoDevNet GitHub organization (see mcp/cisco-catalyst-sdwan-mcp.yml);
+    both stdio-only, neither hosted
+- id: a2a
+  conforms: false
+  evidence: no agent card at /.well-known/agent-card.json or /.well-known/agent.json on any probed host
+compliance_program:
+  published_here: false
+  note: Cisco publishes a corporate trust centre and certification portfolio, but cisco.com returned HTTP
+    403 to every probe in this run, so no certification could be read first-hand for this profile and
+    no Compliance pointer is asserted. The verifiable security artefact for this run is the PSIRT security
+    vulnerability policy at sec.cloudapps.cisco.com (HTTP 200).

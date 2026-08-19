@@ -1,0 +1,59 @@
+generated: '2026-08-19'
+method: searched
+source: https://github.com/CiscoDevNet/sastre
+name: Sastre
+binaries:
+- sdwan
+- sastre
+description: 'Sastre is Cisco''s SD-WAN automation toolset: a first-party CLI in the CiscoDevNet GitHub
+  organization that backs up, restores, migrates, transforms and reports on SD-WAN Manager configuration,
+  and runs real-time/state/statistics show commands across many devices at once. It doubles as an SDK.'
+official: true
+license: MIT
+version: '1.28'
+published: '2026-06-05'
+repo: https://github.com/CiscoDevNet/sastre
+docs: https://github.com/CiscoDevNet/sastre/wiki
+codeexchange: https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/sastre
+install:
+- method: pip
+  command: pip install --upgrade cisco-sdwan
+- method: container
+  command: docker/podman image published from the repository
+- method: source
+  command: git clone https://github.com/CiscoDevNet/sastre
+invocation: sdwan <base parameters> <task> <task-specific parameters>
+commands:
+- task: backup
+  summary: Save SD-WAN Manager configuration items to a local backup.
+- task: restore
+  summary: Restore configuration items from a local backup to SD-WAN Manager.
+- task: delete
+  summary: Delete configuration items on SD-WAN Manager.
+- task: migrate
+  summary: Migrate configuration items between SD-WAN Manager releases (18.4/19.2/19.3 -> 20.1).
+- task: encrypt
+  summary: Encrypt values using target SD-WAN Manager keys (CRYPT_CLUSTER).
+- task: transform
+  summary: Modify configuration items — copy, rename, crypt-update.
+- task: attach
+  summary: Attach WAN Edges/vSmarts to templates.
+- task: detach
+  summary: Detach WAN Edges/vSmarts from templates.
+- task: certificate
+  summary: Restore or set device certificate validity status.
+- task: list
+  summary: List configuration items or device certificate information.
+- task: show-template
+  summary: Show device template details from SD-WAN Manager or a backup.
+- task: report
+  summary: Generate a customizable report from multiple commands; diff two reports.
+- task: show
+  summary: Run real-time, state and statistics commands across devices; query alarms and events.
+related:
+- name: Sastre-Ansible
+  url: https://github.com/CiscoDevNet/sastre-ansible
+  note: Ansible collection exposing Sastre commands as tasks and lookup plugins.
+support: sastre-support@cisco.com
+release_support_note: Sastre 1.27 officially supports up to SD-WAN Manager 20.15; newer releases generally
+  work but lack new-feature coverage.

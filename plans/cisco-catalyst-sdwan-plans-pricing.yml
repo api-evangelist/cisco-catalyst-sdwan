@@ -1,0 +1,23 @@
+generated: '2026-08-19'
+method: searched
+source: https://developer.cisco.com/docs/sdwan/
+plan_count: 0
+note: Cisco publishes no plan or price list for Catalyst SD-WAN. The product is sold through Cisco subscription
+  tiers (Essentials / Advantage / Premier) and DNA/Networking subscriptions quoted by a Cisco sales team
+  or partner; the API itself is not separately metered or priced, and is included with the SD-WAN Manager
+  controller a customer already licenses. There is no self-serve signup and no public price. cisco.com
+  product/pricing pages returned HTTP 403 to this run (edge bot protection), so no tier detail could be
+  read first-hand; nothing is asserted here that was not observed.
+access_model:
+  pricing: enterprise
+  onboarding: sales-gate
+  trial: false
+  public_pricing: false
+  free_sandbox: true
+  sandbox: https://devnetsandbox.cisco.com/
+plans: []
+evidence:
+- url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  status: 403
+- url: https://developer.cisco.com/docs/sdwan/
+  status: 200

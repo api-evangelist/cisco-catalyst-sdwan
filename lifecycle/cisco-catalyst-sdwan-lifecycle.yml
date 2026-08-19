@@ -1,0 +1,224 @@
+generated: '2026-08-19'
+method: searched
+source: https://developer.cisco.com/docs/sdwan/versioning-and-deprecation/
+versioning:
+  scheme: feature-based, version in the URL path for versioned resources; a vendor Accept header selects
+    the API version for the rest
+  current: 26.1.0+2026-01-06
+  default_accept_version: v1.0
+  accept_header: application/vnd.cisco.2.0+json
+  path_prefix: /dataservice
+  release_cadence: two extended maintenance releases a year from 26.1.1 (first in H1 2026)
+  policy: the path version is only bumped on backward-incompatible changes
+  docs: https://developer.cisco.com/docs/sdwan/versioning-and-deprecation/
+deprecation:
+  policy_url: https://developer.cisco.com/docs/sdwan/versioning-and-deprecation/
+  policy: deprecated APIs are maintained and documented for two major releases, then enter sunset; sunsetting
+    is a breaking change
+  sunset_header: false
+  sunset_header_note: 'No RFC 8594 Sunset or Deprecation response headers are documented, and none appear
+    in the harvested specs — deprecation is signalled in the spec (deprecated: true) and in the changelog
+    only.'
+  changelog: https://developer.cisco.com/docs/sdwan/api-changelog/
+sla:
+  url: null
+  note: No public API SLA. SD-WAN Manager is customer-operated (on-premises or customer-hosted cloud),
+    so availability is the customer's or the hosting agreement's, not a published Cisco API SLA.
+status_page: null
+status_page_note: No status page applies. Every SD-WAN Manager instance is operated by the customer, so
+  there is no shared multi-tenant endpoint whose availability Cisco could publish. status.cisco.com returned
+  HTTP 403 to this run and is not an SD-WAN API status page in any case.
+support:
+  url: https://developer.cisco.com/docs/sdwan/developer-support/
+  community: https://community.cisco.com/t5/networking-knowledge-base/cisco-sd-wan-tools-and-resources/ta-p/4862067
+  tac: https://mycase.cloudapps.cisco.com/case
+deprecated_operations_count: 240
+deprecated_operations_by_spec:
+  cisco-catalyst-sdwan-administration-and-settings-openapi.json:
+    count: 12
+    operations:
+    - GET /settings/configuration/cloudx (getCloudxConfiguration)
+    - GET /settings/configuration/microsoftTelemetry (getMicrosoftTelemetryConfiguration)
+    - GET /settings/configuration/wani (getWaniConfiguration)
+    - POST /admin/user/password/validate (validatePassword_AdministrationUserGroup_2904)
+    - POST /settings/configuration/analytics/dca (createAnalyticsDataFile)
+    - POST /settings/configuration/cloudx (newCloudxConfiguration)
+    - POST /settings/configuration/microsoftTelemetry (newMicrosoftTelemetryConfiguration)
+    - POST /settings/configuration/wani (newWaniConfiguration)
+    - PUT /admin/user/lockUser/{userName} (lockUser)
+    - PUT /settings/configuration/cloudx (editCloudxConfiguration)
+    - PUT /settings/configuration/microsoftTelemetry (editMicrosoftTelemetryConfiguration)
+    - PUT /settings/configuration/wani (editWaniConfiguration)
+  cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json:
+    count: 50
+    operations:
+    - GET /accesstoken/{regionBaseUri}/{clientId} (getSecureXAccessToken)
+    - GET /device/config/html (getDeviceRunningConfigHTML)
+    - GET /device/dpi/qosmos/applications (getQosmosApplicationList)
+    - GET /refreshtoken/{regionBaseUri}/{clientId} (getSecureXRefreshToken)
+    - GET /statistics/bfd (getStatDataRawData_MonitoringBfd_1503)
+    - GET /statistics/bfd/aggregation (getAggregationDataByQuery_MonitoringBfd_2703)
+    - GET /statistics/bfd/csv (getStatDataRawDataAsCSV_MonitoringBfd_1903)
+    - GET /statistics/bfd/doccount (getCount_MonitoringBfd_2403)
+    - GET /statistics/bfd/fields (getStatDataFields_MonitoringBfd_2203)
+    - GET /statistics/bfd/page (getStatsPaginationRawData_MonitoringBfd_2003)
+    - GET /statistics/bfd/query/fields (getStatQueryFields_MonitoringBfd_2803)
+    - GET /statistics/cflowd (getStatDataRawData_MonitoringCflowd_1803)
+    - GET /statistics/cflowd/aggregation (getAggregationDataByQuery_MonitoringCflowd_3003)
+    - GET /statistics/cflowd/csv (getStatDataRawDataAsCSV_MonitoringCflowd_2203)
+    - GET /statistics/cflowd/doccount (getCount_MonitoringCflowd_2703)
+    - GET /statistics/cflowd/fields (getStatDataFields_MonitoringCflowd_2503)
+    - GET /statistics/cflowd/page (getStatsPaginationRawData_MonitoringCflowd_2303)
+    - GET /statistics/cflowd/query/fields (getStatQueryFields_MonitoringCflowd_3103)
+    - GET /statistics/device (getStatDataRawData_MonitoringDeviceStatistics_1803)
+    - GET /statistics/device/aggregation (getAggregationDataByQuery_MonitoringDeviceStatistics_3003)
+    - GET /statistics/device/csv (getStatDataRawDataAsCSV_MonitoringDeviceStatistics_2203)
+    - GET /statistics/device/doccount (getCount_MonitoringDeviceStatistics_2703)
+    - GET /statistics/device/fields (getStatDataFields_MonitoringDeviceStatistics_2503)
+    - GET /statistics/device/page (getStatsPaginationRawData_MonitoringDeviceStatistics_2303)
+    - GET /statistics/device/query/fields (getStatQueryFields_MonitoringDeviceStatistics_3103)
+    - GET /statistics/system/stats (getStatDataRawData_MonitoringSystemStatusStats_2403)
+    - GET /statistics/system/stats/aggregation (getAggregationDataByQuery_MonitoringSystemStatusStats_3603)
+    - GET /statistics/system/stats/csv (getStatDataRawDataAsCSV_MonitoringSystemStatusStats_2803)
+    - GET /statistics/system/stats/doccount (getCount_MonitoringSystemStatusStats_3303)
+    - GET /statistics/system/stats/fields (getStatDataFields_MonitoringSystemStatusStats_3103)
+    - GET /statistics/system/stats/page (getStatsPaginationRawData_MonitoringSystemStatusStats_2903)
+    - GET /statistics/system/stats/query/fields (getStatQueryFields_MonitoringSystemStatusStats_3703)
+    - POST /device_authorization/{regionBaseUri}/{clientId} (deviceAuthorization)
+    - POST /statistics/bfd (getStatsRawData_MonitoringBfd_1504)
+    - POST /statistics/bfd/aggregation (getPostAggregationDataByQuery_MonitoringBfd_2704)
+    - POST /statistics/bfd/doccount (getCountPost_MonitoringBfd_2404)
+    - POST /statistics/bfd/page (getPostStatsPaginationRawData_MonitoringBfd_2004)
+    - POST /statistics/cflowd (getStatsRawData_MonitoringCflowd_1804)
+    - POST /statistics/cflowd/aggregation (getPostAggregationDataByQuery_MonitoringCflowd_3004)
+    - POST /statistics/cflowd/doccount (getCountPost_MonitoringCflowd_2704)
+  cisco-catalyst-sdwan-others-openapi.json:
+    count: 77
+    operations:
+    - DELETE /device/action/firmware/{versionId} (deleteFirmwareImage)
+    - DELETE /networkdesign/circuit/{id} (deleteCircuit)
+    - DELETE /v1/smart-licensing/template/{templateId} (deleteTemplate)
+    - GET /clusterManagement/isready (isClusterReady)
+    - GET /colocation/monitor/device/vnf (getvnfByDeviceId)
+    - GET /colocation/monitor/vnf/alarms (getVNFEventsCountDetail)
+    - GET /colocation/monitor/vnf/alarms/count (getVNFAlarmCount)
+    - GET /colocation/monitor/vnf/events (getVNFEventsDetail)
+    - GET /colocation/monitor/vnf/interface (getVNFInterfaceDetail)
+    - GET /device/action/firmware (getFirmwareImages)
+    - GET /device/action/firmware/devices (getDevicesFWUpgrade)
+    - GET /device/action/firmware/{versionId} (getFirmwareImageDetails)
+    - GET /device/action/security/devices/{policyType} (generateSecurityDevicesList)
+    - GET /device/action/status/clean (cleanStatus)
+    - GET /device/action/test/ioxconfig/{deviceIP} (testIoxConfig)
+    - GET /hsec/fetchaccounts (fetchSAVAAccounts)
+    - GET /msla/template (getAllTemplate)
+    - GET /msla/va/License (getSubscriptions_Msla_1603)
+    - GET /networkdesign (getNetworkDesign)
+    - GET /networkdesign/circuit (getCircuits)
+    - GET /networkdesign/global/parameters (getGlobalParameters)
+    - GET /networkdesign/global/template/{templateId} (getGlobalTemplate)
+    - GET /networkdesign/mytest/{name} (runMyTest)
+    - GET /networkdesign/profile/feature (getDeviceProfileFeatureTemplateList)
+    - GET /networkdesign/profile/status (getDeviceProfileConfigStatus)
+    - GET /networkdesign/profile/status/{profileId} (getDeviceProfileConfigStatusByProfileId)
+    - GET /networkdesign/profile/task/count (getDeviceProfileTaskCount)
+    - GET /networkdesign/profile/task/status (getDeviceProfileTaskStatus)
+    - GET /networkdesign/profile/task/status/{profileId} (getDeviceProfileTaskStatusByProfileId)
+    - GET /networkdesign/profile/template (generateProfileTemplateList)
+    - GET /networkdesign/profile/template/{templateId} (getDeviceProfileTemplate)
+    - GET /networkdesign/serviceProfileConfig/{profileId} (getServiceProfileConfig)
+    - GET /sdavc/cloudconnector (getCloudConnector)
+    - GET /sdavc/cloudconnector/status (getCloudConnectorStatus)
+    - GET /smartLicensing/getUserSettings (getuserSettings)
+    - GET /system/device/type/{deviceCategory} (getCloudDockDataBasedOnDeviceType)
+    - GET /system/device/type/{deviceCategory}/defaultConfig (getCloudDockDefaultConfigBasedOnDeviceType)
+    - GET /tenant/vsmart/capacity (getvSmartTenantHostingCapacity)
+    - GET /util/olapdb/migration/rangefrom (getStatsMigrationRangeConfig)
+    - GET /util/olapdb/migration/settings (getStatsMigrationSettings)
+  cisco-catalyst-sdwan-partner-integrations-openapi.json:
+    count: 2
+    operations:
+    - GET /opentaccase/authcode (oauthAccess)
+    - GET /opentaccase/getClientID (getClientID)
+  cisco-catalyst-sdwan-sd-wan-services-openapi.json:
+    count: 63
+    operations:
+    - DELETE /multicloud/accounts/edge/{accountId} (deleteEdgeAccount)
+    - DELETE /multicloud/connectivity/edge/{connectionName} (deleteEdgeConnectivity)
+    - DELETE /multicloud/connectivitygateway (cleanUpAllConnectivityGatewaysInLocalDB)
+    - DELETE /multicloud/connectivitygateway/{cloudProvider}/{connectivityGatewayName} (deleteConnectivityGateway)
+    - DELETE /multicloud/devicelink/edge/{deviceLinkName} (deleteDeviceLink)
+    - DELETE /multicloud/gateway/edge/{edgeGatewayName} (deleteIcgw)
+    - DELETE /multicloud/locations/edge/{edgeType} (deleteAllEdgeLocationInfo)
+    - DELETE /multicloud/vwan/{cloudProvider}/{vWanName} (deleteVirtualWan)
+    - GET /multicloud/accounts/edge (getEdgeAccounts)
+    - GET /multicloud/accounts/edge/{accountId} (getEdgeAccountDetails)
+    - GET /multicloud/billingaccounts/edge/{edgeType}/{edgeAccountId} (getEdgeBillingAccounts)
+    - GET /multicloud/cloudRoutersAndAttachments (getCloudRoutersAndAttachments)
+    - GET /multicloud/connected-sites/edge/{edgeType} (getCloudConnectedSites_ConfigurationMultiCloud_4303)
+    - GET /multicloud/connectivity/edge (getEdgeConnectivityDetails)
+    - GET /multicloud/connectivity/edge/{connectionName} (getEdgeConnectivityDetailByName)
+    - GET /multicloud/connectivitygateway (getConnectivityGateways)
+    - GET /multicloud/connectivitygatewaycreationoptions (getConnectivityGatewayCreationOptions)
+    - GET /multicloud/dashboard/edge (getDashboardEdgeInfo)
+    - GET /multicloud/devicelink/edge (getDeviceLinks)
+    - GET /multicloud/devicelink/edge/portspeed/{edgeType} (getDlPortSpeed)
+    - GET /multicloud/devices/edge/{edgeType} (getCloudDevices_ConfigurationMultiCloud_3503)
+    - GET /multicloud/edge/{edgeType}/device (getEdgeWanDevices)
+    - GET /multicloud/gateway/edge (getIcgws)
+    - GET /multicloud/gateway/edge/setting/{edgeGatewayName} (getIcgwCustomSettingDetails)
+    - GET /multicloud/gateway/edge/types (getIcgwTypes)
+    - GET /multicloud/gateway/edge/{edgeGatewayName} (getIcgwDetails)
+    - GET /multicloud/gateways/edge/{edgeType} (getEdgeGateways)
+    - GET /multicloud/imagename/edge (getSupportedEdgeImageNames)
+    - GET /multicloud/instancesize/edge (getSupportedEdgeInstanceSize)
+    - GET /multicloud/license/edge (getLicenses)
+    - GET /multicloud/locations/edge/{edgeType} (getEdgeLocationsInfo)
+    - GET /multicloud/loopbackCGWColor/edge (getSupportedLoopbackCgwColors)
+    - GET /multicloud/loopbacktransportcolor/edge (getSupportedLoopbackTransportColors)
+    - GET /multicloud/map/tags/edge (getEdgeMappingTags)
+    - GET /multicloud/partnerports/edge (getPartnerPorts)
+    - GET /multicloud/portSpeed/edge/{edgeType}/{edgeAccountId}/{connectivityType} (getPortSpeed)
+    - GET /multicloud/settings/edge/global (getEdgeGlobalSettings)
+    - GET /multicloud/types/edge (getEdgeTypes)
+    - GET /multicloud/vhubs (getVHubs)
+    - GET /multicloud/vwans (getVWans)
+  cisco-catalyst-sdwan-ux-1-0-configuration-openapi.json:
+    count: 36
+    operations:
+    - DELETE /template/cor/accountid/{accountid} (removeTransitVPC)
+    - DELETE /template/cor/deleteDevicepair (removeDeviceId)
+    - DELETE /template/cor/map (unmapVPCs)
+    - GET /template/cor (getCORStatus)
+    - GET /template/cor/ami (getAmiList)
+    - GET /template/cor/cloud (getCloudList)
+    - GET /template/cor/cloud/account (getCloudAccounts)
+    - GET /template/cor/cloud/host/accountdetails (getCloudHostVpcAccountDetails)
+    - GET /template/cor/cloud/mappedhostaccounts (getCloudMappedHostAccounts)
+    - GET /template/cor/device (getCloudOnRampDevices)
+    - GET /template/cor/devicepair/hostvpc (getHostVPCs)
+    - GET /template/cor/externalId (getExternalId)
+    - GET /template/cor/getTransitDevicePairAndHostList (getTransitDevicePairAndHostList)
+    - GET /template/cor/getTransitVpnList (getTransitVpcVpnList)
+    - GET /template/cor/hostvpc (getCloudHostVPCs)
+    - GET /template/cor/map (getMappedVPCs)
+    - GET /template/cor/pem (getPemKeyList)
+    - GET /template/cor/transitvpc (getTransitVPCs)
+    - GET /template/cor/transitvpc/size (getTransitVPCSupportedSize)
+    - POST /template/cloudx/addcloudx/{type} (addCloudxType)
+    - POST /template/cor (createAndMap)
+    - POST /template/cor/acquireResourcePool (acquireResourcePool)
+    - POST /template/cor/cloud/authenticate (authenticateCloudOnRampCredAndAdd)
+    - POST /template/cor/createResourcePool (createResourcePool)
+    - POST /template/cor/devicepair (addDevicePair)
+    - POST /template/cor/map (mapVPCs)
+    - POST /template/cor/scale/down (scaleDown)
+    - POST /template/cor/scale/up (scaleUp)
+    - POST /template/cor/transitvpc (addTransitVPC)
+    - POST /template/device/config/detach (detachDeviceTemplate)
+    - POST /template/device/config/verify (validateTemplate)
+    - POST /template/policy/list/webex (createWebexPrefixLists_ConfigurationPolicyListBuilder_2704)
+    - POST /template/policy/list/webex/update (createWebexPrefixLists_ConfigurationPolicyListBuilder_3404)
+    - PUT /template/cor/cloud/authenticate (authenticateCredAndUpdate)
+    - PUT /template/cor/transitvpc (updateTransitVPC)
+    - PUT /template/cor/transitvpc/autoscale-properties (updateTransitVpcAutoscaleProperties)

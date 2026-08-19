@@ -1,0 +1,1227 @@
+generated: '2026-08-19'
+method: derived
+source: openapi/*.json (x-roles-required on every operation)
+model: rbac
+note: 'Cisco Catalyst SD-WAN Manager does NOT use OAuth 2.0, so there is no OAuth scope surface. It ships
+  a role-based authorization model instead: every one of the 4,138 harvested operations carries an x-roles-required
+  extension naming the SD-WAN Manager user-group permission(s) required, in "<Area>-read" / "<Area>-write"
+  form (UX 2.0 feature-profile operations use "Feature Profile > <Area> > <Parcel>-read|write"). Recorded
+  here because it is the authorization surface an agent must reason about; NOT wired as type: OAuthScopes,
+  because it is not OAuth.'
+counts:
+  operations_with_roles: 3019
+  distinct_role_expressions: 515
+  distinct_atomic_permissions: 544
+permissions:
+- role: Policy Configuration-write
+  operations: 619
+- role: Template Deploy-write
+  operations: 393
+- role: Template Deploy-read
+  operations: 369
+- role: Policy Configuration-read
+  operations: 331
+- role: Policy Deploy-read
+  operations: 318
+- role: Policy Deploy-write
+  operations: 316
+- role: System-read
+  operations: 235
+- role: System-write
+  operations: 222
+- role: Device Monitoring-read
+  operations: 221
+- role: default
+  operations: 162
+- role: Policy-read
+  operations: 111
+- role: Routing-read
+  operations: 106
+- role: Routing-write
+  operations: 106
+- role: Policy-write
+  operations: 104
+- role: dca
+  operations: 63
+- role: Device Monitoring-write
+  operations: 60
+- role: Security-read
+  operations: 57
+- role: Security-write
+  operations: 53
+- role: Cloud OnRamp-read
+  operations: 52
+- role: Template Configuration-read
+  operations: 43
+- role: Cloud OnRamp-write
+  operations: 40
+- role: Template Configuration-write
+  operations: 37
+- role: admin
+  operations: 36
+- role: Software Upgrade-write
+  operations: 35
+- role: Software Upgrade > Controller-write
+  operations: 33
+- role: Software Upgrade > Edge-write
+  operations: 33
+- role: Alarms-read
+  operations: 32
+- role: Certificates-write
+  operations: 29
+- role: Interface-read
+  operations: 27
+- role: Interface-write
+  operations: 27
+- role: Tools-read
+  operations: 27
+- role: Disaster Recovery-write
+  operations: 23
+- role: RBAC VPN-read
+  operations: 22
+- role: Feature Profile > Service > Lan/Vpn-write
+  operations: 21
+- role: Software Upgrade > Controller-read
+  operations: 20
+- role: Software Upgrade > Edge-read
+  operations: 20
+- role: Software Upgrade-read
+  operations: 20
+- role: Tools-write
+  operations: 20
+- role: Settings-write
+  operations: 19
+- role: Device Inventory-write
+  operations: 18
+- role: Feature Profile > SD-Routing Service > VRF-write
+  operations: 18
+- role: Integration Management-write
+  operations: 18
+- role: Topology Policy-write
+  operations: 18
+- role: RBAC VPN-write
+  operations: 17
+- role: Tenant Management-write
+  operations: 17
+- role: Feature Profile > SD-Routing Transport > Global VRF-write
+  operations: 16
+- role: Feature Profile > Transport > Wan/Vpn-write
+  operations: 16
+- role: Device Inventory-read
+  operations: 15
+- role: Feature Profile > SD-Routing Transport > VRF-write
+  operations: 15
+- role: Feature Profile > Service > Lan/Vpn-read
+  operations: 15
+- role: Feature Profile > Transport > Wan/Vpn/Interface/Cellular-write
+  operations: 15
+- role: Manage Users-write
+  operations: 15
+- role: Feature Profile > Transport > Wan/Vpn/Interface/Ethernet-write
+  operations: 14
+- role: Settings-read
+  operations: 14
+- role: Feature Profile > SD-Routing Service > VRF-read
+  operations: 12
+- role: Feature Profile > SD-Routing Transport > Cellular Controller-write
+  operations: 12
+- role: Feature Profile > SSE > Secure Private Access-write
+  operations: 12
+- role: Feature Profile > Service > Lan/Vpn/Interface/Ethernet-write
+  operations: 12
+- role: Feature Profile > Transport > Cellular Controller-write
+  operations: 12
+- role: Certificates-read
+  operations: 11
+- role: Feature Profile > Transport > Wan/Vpn-read
+  operations: 11
+- role: Feature Profile > Transport > Wan/Vpn/Interface/Cellular-read
+  operations: 11
+- role: Feature Profile > Transport > Wan/Vpn/Interface/Ethernet-read
+  operations: 11
+- role: Tenant Management-read
+  operations: 11
+- role: ACL Policy-write
+  operations: 10
+- role: AppRoute Policy-write
+  operations: 10
+- role: Device Inventory > Edge-write
+  operations: 10
+- role: Feature Profile > SD-Routing Transport > Global VRF-read
+  operations: 10
+- role: Feature Profile > SD-Routing Transport > VRF-read
+  operations: 10
+- role: Feature Profile > SSE > Secure Private Access-read
+  operations: 10
+- role: Feature Profile > System > Ignition-write
+  operations: 10
+- role: QoSMap Policy-write
+  operations: 10
+- role: CXP-write
+  operations: 9
+- role: Device Reboot-write
+  operations: 9
+- role: Feature Profile > SD-Routing Transport > Global VRF > Interface/Cellular-write
+  operations: 9
+- role: Feature Profile > Service > Lan/Vpn/Interface/Ethernet-read
+  operations: 9
+- role: Feature Profile > Transport > Cellular Controller-read
+  operations: 9
+- role: Integration Management-read
+  operations: 9
+- role: CXP-read
+  operations: 8
+- role: Config Group-read
+  operations: 8
+- role: Device Reboot-read
+  operations: 8
+- role: Disaster Recovery-read
+  operations: 8
+- role: Events-read
+  operations: 8
+- role: Feature Profile > SD-Routing Transport > Cellular Controller-read
+  operations: 8
+- role: Policy Group-read
+  operations: 8
+- role: Security Policy Configuration-read
+  operations: 8
+- role: Security Policy Configuration-write
+  operations: 8
+- role: Traffic Data Policy-write
+  operations: 8
+- role: ''
+  operations: 7
+- role: Cortex-write
+  operations: 7
+- role: Feature Profile > Service > Lan/Vpn/Interface/Svi-write
+  operations: 7
+- role: Manage Users-read
+  operations: 7
+- role: Secure Device Onboarding-read
+  operations: 7
+- role: vmanage-http-stream
+  operations: 7
+- role: Control Component Settings-write
+  operations: 6
+- role: Device Access Policy-write
+  operations: 6
+- role: Device Inventory > Controller-read
+  operations: 6
+- role: Device Inventory > Edge-read
+  operations: 6
+- role: Energy Management-read
+  operations: 6
+- role: Feature Profile > Embedded Security > NgFirewall-write
+  operations: 6
+- role: Feature Profile > Embedded Security > Policy-write
+  operations: 6
+- role: Feature Profile > Nfvirtual System-write
+  operations: 6
+- role: Feature Profile > SD-Routing Service > VRF > Interface/Ethernet-write
+  operations: 6
+- role: Feature Profile > SD-Routing Transport > Global VRF > Interface/Cellular-read
+  operations: 6
+- role: Feature Profile > Service > Lan/Vpn/Interface/Ipsec-write
+  operations: 6
+- role: Feature Profile > Transport > Cellular Profile-write
+  operations: 6
+- role: Feature Profile > Transport > Wan/Vpn/Interface/Gre-write
+  operations: 6
+- role: Feature Profile > Transport > Wan/Vpn/Interface/Ipsec-write
+  operations: 6
+- role: Topology Policy-read
+  operations: 6
+- role: AppRoute Policy-read
+  operations: 5
+- role: Application Monitoring-read
+  operations: 5
+- role: Application Monitoring-write
+  operations: 5
+- role: CFlowD Policy-write
+  operations: 5
+- role: Feature Profile > Nfvirtual System-read
+  operations: 5
+- role: Feature Profile > Service > Lan/Vpn/Interface/Ipsec-read
+  operations: 5
+- role: Feature Profile > Transport > Cellular Profile-read
+  operations: 5
+- role: Feature Profile > Transport > Wan/Vpn/Interface/Gre-read
+  operations: 5
+- role: Feature Profile > Transport > Wan/Vpn/Interface/Ipsec-read
+  operations: 5
+- role: Rewrite Policy-write
+  operations: 5
+- role: Route Policy-write
+  operations: 5
+- role: Tenant Status-write
+  operations: 5
+- role: Traffic Data Policy-read
+  operations: 5
+- role: VPN Membership Policy-write
+  operations: 5
+- role: ACL Policy-read
+  operations: 4
+- role: Config Group-write
+  operations: 4
+- role: Device Access Policy-readDevice Access Policy-write
+  operations: 4
+- role: Feature Profile > CLI Add On-read
+  operations: 4
+- role: Feature Profile > Embedded Security > NgFirewall-read
+  operations: 4
+- role: Feature Profile > Embedded Security > Policy-read
+  operations: 4
+- role: Feature Profile > Policy Object > App List-read
+  operations: 4
+- role: Feature Profile > Policy Object > App Probe-read
+  operations: 4
+- role: Feature Profile > Policy Object > As Path-read
+  operations: 4
+- role: Feature Profile > Policy Object > Class-read
+  operations: 4
+- role: Feature Profile > Policy Object > Color List-read
+  operations: 4
+- role: Feature Profile > Policy Object > Community-read
+  operations: 4
+- role: Feature Profile > Policy Object > Data Ipv6-read
+  operations: 4
+- role: Feature Profile > Policy Object > Data Prefix-read
+  operations: 4
+- role: Feature Profile > Policy Object > Ext Community-read
+  operations: 4
+- role: Feature Profile > Policy Object > Ipv6 Prefix-read
+  operations: 4
+- role: Feature Profile > Policy Object > Mirror-read
+  operations: 4
+- role: Feature Profile > Policy Object > Object Group-read
+  operations: 4
+- role: Feature Profile > Policy Object > Policer-read
+  operations: 4
+- role: Feature Profile > Policy Object > Preferred Color Group-read
+  operations: 4
+- role: Feature Profile > Policy Object > Prefix-read
+  operations: 4
+- role: Feature Profile > Policy Object > SLA Class-read
+  operations: 4
+- role: Feature Profile > Policy Object > Security Data IP Prefix-read
+  operations: 4
+- role: Feature Profile > Policy Object > Security Data IPv6 Prefix-read
+  operations: 4
+- role: Feature Profile > Policy Object > Security FQDN Prefix-read
+  operations: 4
+- role: Feature Profile > Policy Object > Security Geo Location-read
+  operations: 4
+- role: Feature Profile > Policy Object > Security IPS Signature Set-read
+  operations: 4
+- role: Feature Profile > Policy Object > Security IPS Signature-read
+  operations: 4
+- role: Feature Profile > Policy Object > Security Identity-read
+  operations: 4
+- role: Feature Profile > Policy Object > Security Local App-read
+  operations: 4
+- role: Feature Profile > Policy Object > Security Local Domain-read
+  operations: 4
+- role: Feature Profile > Policy Object > Security Object Group-read
+  operations: 4
+- role: Feature Profile > Policy Object > Security Port-read
+  operations: 4
+- role: Feature Profile > Policy Object > Security Protocol Name-read
+  operations: 4
+- role: Feature Profile > Policy Object > Security Rule Set-read
+  operations: 4
+- role: Feature Profile > Policy Object > Security Scalable Group Tag-read
+  operations: 4
+- role: Feature Profile > Policy Object > Security URL List-read
+  operations: 4
+- role: Feature Profile > Policy Object > Security Zone-read
+  operations: 4
+- role: Feature Profile > Policy Object > Standard Community-read
+  operations: 4
+- role: Feature Profile > Policy Object > TLOC-read
+  operations: 4
+- role: Feature Profile > Policy Object > VPN Group-read
+  operations: 4
+- role: Feature Profile > SD-Routing Service > VRF > Interface/Ethernet-read
+  operations: 4
+- role: Feature Profile > Service > Lan/Vpn/Interface/Svi-read
+  operations: 4
+- role: Feature Profile > System > Ignition-read
+  operations: 4
+- role: FedRamp-read
+  operations: 4
+- role: Policy Group-write
+  operations: 4
+- role: QoSMap Policy-read
+  operations: 4
+- role: Secure Device Onboarding-write
+  operations: 4
+- role: Config Group > Device-write
+  operations: 3
+- role: Control Component Settings-read
+  operations: 3
+- role: Device Reboot > Edge-write
+  operations: 3
+- role: Feature Profile > CLI Add On > Config-read
+  operations: 3
+- role: Feature Profile > CLI Add On > Config-write
+  operations: 3
+- role: Feature Profile > CLI Add On-write
+  operations: 3
+- role: Feature Profile > Dns Security > Dns Policy-write
+  operations: 3
+- role: Feature Profile > Dns Security-write
+  operations: 3
+- role: Feature Profile > Embedded Security-write
+  operations: 3
+- role: Feature Profile > Nfvirtual CLI Add On > Cli-write
+  operations: 3
+- role: Feature Profile > Nfvirtual CLI Add On-write
+  operations: 3
+- role: Feature Profile > Nfvirtual Networks > Lan-write
+  operations: 3
+- role: Feature Profile > Nfvirtual Networks > Ovsnetwork-write
+  operations: 3
+- role: Feature Profile > Nfvirtual Networks > Routes-write
+  operations: 3
+- role: Feature Profile > Nfvirtual Networks > Switch-write
+  operations: 3
+- role: Feature Profile > Nfvirtual Networks > Vnf attributes > Vnf-write
+  operations: 3
+- role: Feature Profile > Nfvirtual Networks > Vnf attributes-write
+  operations: 3
+- role: Feature Profile > Nfvirtual Networks > Wan-write
+  operations: 3
+- role: Feature Profile > Nfvirtual System > Aaa-write
+  operations: 3
+- role: Feature Profile > Nfvirtual System > Banner-write
+  operations: 3
+- role: Feature Profile > Nfvirtual System > Logging-write
+  operations: 3
+- role: Feature Profile > Nfvirtual System > Ntp-write
+  operations: 3
+- role: Feature Profile > Nfvirtual System > Snmp-write
+  operations: 3
+- role: Feature Profile > Nfvirtual System > System Settings-write
+  operations: 3
+- role: Feature Profile > Other > Cyber Vision-write
+  operations: 3
+- role: Feature Profile > Other > Thousandeyes-read
+  operations: 3
+- role: Feature Profile > Other > Thousandeyes-write
+  operations: 3
+- role: Feature Profile > Other > TrustSec-write
+  operations: 3
+- role: Feature Profile > Other > UCSE-write
+  operations: 3
+- role: Feature Profile > Other-write
+  operations: 3
+- role: Feature Profile > Policy Object > Advanced Inspection Profile > Advanced Malware Protection-read
+  operations: 3
+- role: Feature Profile > Policy Object > Advanced Inspection Profile > Advanced Malware Protection-write
+  operations: 3
+- role: Feature Profile > Policy Object > Advanced Inspection Profile > Intrusion Prevention-read
+  operations: 3
+- role: Feature Profile > Policy Object > Advanced Inspection Profile > Intrusion Prevention-write
+  operations: 3
+- role: Feature Profile > Policy Object > Advanced Inspection Profile > SSL Decryption Profile-read
+  operations: 3
+- role: Feature Profile > Policy Object > Advanced Inspection Profile > SSL Decryption Profile-write
+  operations: 3
+- role: Feature Profile > Policy Object > Advanced Inspection Profile > SSL Decryption-read
+  operations: 3
+- role: Feature Profile > Policy Object > Advanced Inspection Profile > SSL Decryption-write
+  operations: 3
+- role: Feature Profile > Policy Object > Advanced Inspection Profile > Url Filtering-read
+  operations: 3
+- role: Feature Profile > Policy Object > Advanced Inspection Profile > Url Filtering-write
+  operations: 3
+- role: Feature Profile > Policy Object > Advanced Inspection Profile-read
+  operations: 3
+- role: Feature Profile > Policy Object > Advanced Inspection Profile-write
+  operations: 3
+- role: Feature Profile > Policy Object > App List-write
+  operations: 3
+- role: Feature Profile > Policy Object > App Probe-write
+  operations: 3
+- role: Feature Profile > Policy Object > As Path-write
+  operations: 3
+- role: Feature Profile > Policy Object > Class-write
+  operations: 3
+- role: Feature Profile > Policy Object > Color List-write
+  operations: 3
+- role: Feature Profile > Policy Object > Community-write
+  operations: 3
+- role: Feature Profile > Policy Object > Data Ipv6-write
+  operations: 3
+- role: Feature Profile > Policy Object > Data Prefix-write
+  operations: 3
+- role: Feature Profile > Policy Object > Ext Community-write
+  operations: 3
+- role: Feature Profile > Policy Object > Ipv6 Prefix-write
+  operations: 3
+- role: Feature Profile > Policy Object > Mirror-write
+  operations: 3
+- role: Feature Profile > Policy Object > Object Group-write
+  operations: 3
+- role: Feature Profile > Policy Object > Policer-write
+  operations: 3
+- role: Feature Profile > Policy Object > Preferred Color Group-write
+  operations: 3
+- role: Feature Profile > Policy Object > Prefix-write
+  operations: 3
+- role: Feature Profile > Policy Object > SLA Class-write
+  operations: 3
+- role: Feature Profile > Policy Object > Security Data IP Prefix-write
+  operations: 3
+- role: Feature Profile > Policy Object > Security Data IPv6 Prefix-write
+  operations: 3
+- role: Feature Profile > Policy Object > Security FQDN Prefix-write
+  operations: 3
+- role: Feature Profile > Policy Object > Security Geo Location-write
+  operations: 3
+- role: Feature Profile > Policy Object > Security IPS Signature Set-write
+  operations: 3
+- role: Feature Profile > Policy Object > Security IPS Signature-write
+  operations: 3
+- role: Feature Profile > Policy Object > Security Identity-write
+  operations: 3
+- role: Feature Profile > Policy Object > Security Local App-write
+  operations: 3
+- role: Feature Profile > Policy Object > Security Local Domain-write
+  operations: 3
+- role: Feature Profile > Policy Object > Security Object Group-write
+  operations: 3
+- role: Feature Profile > Policy Object > Security Port-write
+  operations: 3
+- role: Feature Profile > Policy Object > Security Protocol Name-write
+  operations: 3
+- role: Feature Profile > Policy Object > Security Rule Set-write
+  operations: 3
+- role: Feature Profile > Policy Object > Security Scalable Group Tag-write
+  operations: 3
+- role: Feature Profile > Policy Object > Security URL List-write
+  operations: 3
+- role: Feature Profile > Policy Object > Security Zone-write
+  operations: 3
+- role: Feature Profile > Policy Object > Standard Community-write
+  operations: 3
+- role: Feature Profile > Policy Object > TLOC-write
+  operations: 3
+- role: Feature Profile > Policy Object > VPN Group-write
+  operations: 3
+- role: Feature Profile > SD-Routing CLI Add On > Config-write
+  operations: 3
+- role: Feature Profile > SD-Routing CLI Add On > Full Config-write
+  operations: 3
+- role: Feature Profile > SD-Routing CLI Add On > Ios Config-write
+  operations: 3
+- role: Feature Profile > SD-Routing CLI Add On-read
+  operations: 3
+- role: Feature Profile > SD-Routing CLI Add On-write
+  operations: 3
+- role: Feature Profile > SD-Routing Other > Cyber Vision-write
+  operations: 3
+- role: Feature Profile > SD-Routing Service > ACL-write
+  operations: 3
+- role: Feature Profile > SD-Routing Service > DHCP Server-write
+  operations: 3
+- role: Feature Profile > SD-Routing Service > IPSec Profile-write
+  operations: 3
+- role: Feature Profile > SD-Routing Service > OSPF-write
+  operations: 3
+- role: Feature Profile > SD-Routing Service > OSPFv3 IPv4-write
+  operations: 3
+- role: Feature Profile > SD-Routing Service > OSPFv3 IPv6-write
+  operations: 3
+- role: Feature Profile > SD-Routing Service > Object Tracker Group-write
+  operations: 3
+- role: Feature Profile > SD-Routing Service > Object Tracker-write
+  operations: 3
+- role: Feature Profile > SD-Routing Service > Route Policy-write
+  operations: 3
+- role: Feature Profile > SD-Routing Service > VRF > BGP-write
+  operations: 3
+- role: Feature Profile > SD-Routing Service > VRF > DMVPN Tunnel-write
+  operations: 3
+- role: Feature Profile > SD-Routing Service > VRF > EIGRP-write
+  operations: 3
+- role: Feature Profile > SD-Routing Service > VRF > Interface/IPSec-write
+  operations: 3
+- role: Feature Profile > SD-Routing Service-write
+  operations: 3
+- role: Feature Profile > SD-Routing System > AAA-write
+  operations: 3
+- role: Feature Profile > SD-Routing System > Banner-write
+  operations: 3
+- role: Feature Profile > SD-Routing System > Certificate-write
+  operations: 3
+- role: Feature Profile > SD-Routing System > Flexible Port Speed-write
+  operations: 3
+- role: Feature Profile > SD-Routing System > Global Settings-write
+  operations: 3
+- role: Feature Profile > SD-Routing System > Logging-write
+  operations: 3
+- role: Feature Profile > SD-Routing System > NTP-write
+  operations: 3
+- role: Feature Profile > SD-Routing System > SNMP-write
+  operations: 3
+- role: Feature Profile > SD-Routing System-write
+  operations: 3
+- role: Feature Profile > SD-Routing Transport > ACL-write
+  operations: 3
+- role: Feature Profile > SD-Routing Transport > Cellular Band Select-write
+  operations: 3
+- role: Feature Profile > SD-Routing Transport > GPS-write
+  operations: 3
+- role: Feature Profile > SD-Routing Transport > Global VRF > BGP-write
+  operations: 3
+- role: Feature Profile > SD-Routing Transport > Global VRF > Interface/Ethernet-write
+  operations: 3
+- role: Feature Profile > SD-Routing Transport > Global VRF > Interface/IPSec-write
+  operations: 3
+- role: Feature Profile > SD-Routing Transport > Management VRF > Interface/Ethernet-write
+  operations: 3
+- role: Feature Profile > SD-Routing Transport > Management VRF-write
+  operations: 3
+- role: Feature Profile > SD-Routing Transport > OSPF-write
+  operations: 3
+- role: Feature Profile > SD-Routing Transport > OSPFv3 IPv4-write
+  operations: 3
+- role: Feature Profile > SD-Routing Transport > OSPFv3 IPv6-write
+  operations: 3
+- role: Feature Profile > SD-Routing Transport > Object Tracker Group-write
+  operations: 3
+- role: Feature Profile > SD-Routing Transport > Object Tracker-write
+  operations: 3
+- role: Feature Profile > SD-Routing Transport > Route Policy-write
+  operations: 3
+- role: Feature Profile > SD-Routing Transport > Tracker Group-write
+  operations: 3
+- role: Feature Profile > SD-Routing Transport > Tracker-write
+  operations: 3
+- role: Feature Profile > SD-Routing Transport > VRF > BGP-write
+  operations: 3
+- role: Feature Profile > SD-Routing Transport > VRF > Interface/Ethernet-write
+  operations: 3
+- role: Feature Profile > SD-Routing Transport > VRF > Interface/IPSec-write
+  operations: 3
+- role: Feature Profile > SD-Routing Transport-write
+  operations: 3
+- role: Feature Profile > SSE > Cisco SSE-write
+  operations: 3
+- role: Feature Profile > SSE-write
+  operations: 3
+- role: Feature Profile > Service > Appqoe-write
+  operations: 3
+- role: Feature Profile > Service > Dhcp-read
+  operations: 3
+- role: Feature Profile > Service > Dhcp-write
+  operations: 3
+- role: Feature Profile > Service > Lan/Vpn/Interface/Gre-write
+  operations: 3
+- role: Feature Profile > Service > Lan/Vpn/RawSocket-write
+  operations: 3
+- role: Feature Profile > Service > MultiCloudConnection-write
+  operations: 3
+- role: Feature Profile > Service > Routing/Bgp-read
+  operations: 3
+- role: Feature Profile > Service > Routing/Bgp-write
+  operations: 3
+- role: Feature Profile > Service > Routing/Eigrp-write
+  operations: 3
+- role: Feature Profile > Service > Routing/Multicast-read
+  operations: 3
+- role: Feature Profile > Service > Routing/Multicast-write
+  operations: 3
+- role: Feature Profile > Service > Routing/Ospf-write
+  operations: 3
+- role: Feature Profile > Service > Routing/Ospfv3 IPv4-write
+  operations: 3
+- role: Feature Profile > Service > Routing/Ospfv3 IPv6-write
+  operations: 3
+- role: Feature Profile > Service > Switchport-read
+  operations: 3
+- role: Feature Profile > Service > Switchport-write
+  operations: 3
+- role: Feature Profile > Service > Tracker Group-read
+  operations: 3
+- role: Feature Profile > Service > Tracker Group-write
+  operations: 3
+- role: Feature Profile > Service > Tracker-read
+  operations: 3
+- role: Feature Profile > Service > Tracker-write
+  operations: 3
+- role: Feature Profile > Service > VRF > RawSocket-write
+  operations: 3
+- role: Feature Profile > Service > Wirelesslan-read
+  operations: 3
+- role: Feature Profile > Service > Wirelesslan-write
+  operations: 3
+- role: Feature Profile > Service-write
+  operations: 3
+- role: Feature Profile > Sig Security > Sig Policy-write
+  operations: 3
+- role: Feature Profile > Sig Security-write
+  operations: 3
+- role: Feature Profile > System > Aaa-read
+  operations: 3
+- role: Feature Profile > System > Aaa-write
+  operations: 3
+- role: Feature Profile > System > Banner-read
+  operations: 3
+- role: Feature Profile > System > Banner-write
+  operations: 3
+- role: Feature Profile > System > Basic-read
+  operations: 3
+- role: Feature Profile > System > Basic-write
+  operations: 3
+- role: Feature Profile > System > Bfd-read
+  operations: 3
+- role: Feature Profile > System > Bfd-write
+  operations: 3
+- role: Feature Profile > System > Global-read
+  operations: 3
+- role: Feature Profile > System > Global-write
+  operations: 3
+- role: Feature Profile > System > Logging-read
+  operations: 3
+- role: Feature Profile > System > Logging-write
+  operations: 3
+- role: Feature Profile > System > Mrf-read
+  operations: 3
+- role: Feature Profile > System > Mrf-write
+  operations: 3
+- role: Feature Profile > System > Ntp-read
+  operations: 3
+- role: Feature Profile > System > Ntp-write
+  operations: 3
+- role: Feature Profile > System > Omp-read
+  operations: 3
+- role: Feature Profile > System > Omp-write
+  operations: 3
+- role: Feature Profile > System > Security-write
+  operations: 3
+- role: Feature Profile > System > Snmp-read
+  operations: 3
+- role: Feature Profile > System > Snmp-write
+  operations: 3
+- role: Feature Profile > System-write
+  operations: 3
+- role: Feature Profile > Teleworker > AaaServers-write
+  operations: 3
+- role: Feature Profile > Teleworker > Basic-read
+  operations: 3
+- role: Feature Profile > Teleworker > Basic-write
+  operations: 3
+- role: Feature Profile > Teleworker > Cellular-write
+  operations: 3
+- role: Feature Profile > Teleworker > Ethernet-write
+  operations: 3
+- role: Feature Profile > Teleworker > Logging-write
+  operations: 3
+- role: Feature Profile > Teleworker > NetworkProtocol-write
+  operations: 3
+- role: Feature Profile > Teleworker > Qos-write
+  operations: 3
+- role: Feature Profile > Teleworker > SecurityPolicy-write
+  operations: 3
+- role: Feature Profile > Teleworker > Vpn-write
+  operations: 3
+- role: Feature Profile > Teleworker > Wifi-write
+  operations: 3
+- role: Feature Profile > Teleworker > eSimCellular-write
+  operations: 3
+- role: Feature Profile > Teleworker CLI Add On > Config-write
+  operations: 3
+- role: Feature Profile > Transport > Cellular Band Select-write
+  operations: 3
+- role: Feature Profile > Transport > Global VRF > RawSocket-write
+  operations: 3
+- role: Feature Profile > Transport > Gps-write
+  operations: 3
+- role: Feature Profile > Transport > Ipv6 Tracker Group-read
+  operations: 3
+- role: Feature Profile > Transport > Ipv6 Tracker Group-write
+  operations: 3
+- role: Feature Profile > Transport > Ipv6 Tracker-read
+  operations: 3
+- role: Feature Profile > Transport > Ipv6 Tracker-write
+  operations: 3
+- role: Feature Profile > Transport > Management/Vpn-read
+  operations: 3
+- role: Feature Profile > Transport > Management/Vpn-write
+  operations: 3
+- role: Feature Profile > Transport > Management/Vpn/Interface/Ethernet-read
+  operations: 3
+- role: Feature Profile > Transport > Management/Vpn/Interface/Ethernet-write
+  operations: 3
+- role: Feature Profile > Transport > MultiCloudConnection-write
+  operations: 3
+- role: Feature Profile > Transport > Routing/Bgp-read
+  operations: 3
+- role: Feature Profile > Transport > Routing/Bgp-write
+  operations: 3
+- role: Feature Profile > Transport > Routing/Ospf-write
+  operations: 3
+- role: Feature Profile > Transport > Routing/Ospfv3 IPv4-write
+  operations: 3
+- role: Feature Profile > Transport > Routing/Ospfv3 IPv6-write
+  operations: 3
+- role: Feature Profile > Transport > T1E1 Controller-read
+  operations: 3
+- role: Feature Profile > Transport > T1E1 Controller-write
+  operations: 3
+- role: Feature Profile > Transport > Tracker Group-read
+  operations: 3
+- role: Feature Profile > Transport > Tracker Group-write
+  operations: 3
+- role: Feature Profile > Transport > Tracker-read
+  operations: 3
+- role: Feature Profile > Transport > Tracker-write
+  operations: 3
+- role: Feature Profile > Transport > Wan/Vpn/Interface/Serial-read
+  operations: 3
+- role: Feature Profile > Transport > Wan/Vpn/Interface/Serial-write
+  operations: 3
+- role: Feature Profile > Transport > Wan/Vpn/RawSocket-write
+  operations: 3
+- role: Feature Profile > Transport > eSimCellular Controller-write
+  operations: 3
+- role: Feature Profile > Transport > eSimCellular Profile-write
+  operations: 3
+- role: Feature Profile > Transport-write
+  operations: 3
+- role: FedRamp-write
+  operations: 3
+- role: Policy Configuration-writeAppRoute Policy-write
+  operations: 3
+- role: Policy Group > Device-write
+  operations: 3
+- role: Tenant Status-read
+  operations: 3
+- role: Topology Group-write
+  operations: 3
+- role: CFlowD Policy-read
+  operations: 2
+- role: Device Reboot > Controller-read
+  operations: 2
+- role: Device Reboot > Edge-read
+  operations: 2
+- role: Feature Profile > Application Priority > Traffic Policy-write
+  operations: 2
+- role: Feature Profile > Dns Security > Dns Policy-read
+  operations: 2
+- role: Feature Profile > Dns Security-read
+  operations: 2
+- role: Feature Profile > Embedded Security-read
+  operations: 2
+- role: Feature Profile > Nfvirtual CLI Add On-read
+  operations: 2
+- role: Feature Profile > Other > Cyber Vision-read
+  operations: 2
+- role: Feature Profile > Other > TrustSec-read
+  operations: 2
+- role: Feature Profile > Other > UCSE-read
+  operations: 2
+- role: Feature Profile > Other-read
+  operations: 2
+- role: Feature Profile > SD-Routing CLI Add On > Config-read
+  operations: 2
+- role: Feature Profile > SD-Routing CLI Add On > Full Config-read
+  operations: 2
+- role: Feature Profile > SD-Routing CLI Add On > Ios Config-read
+  operations: 2
+- role: Feature Profile > SD-Routing Other > Cyber Vision-read
+  operations: 2
+- role: Feature Profile > SD-Routing Service > ACL-read
+  operations: 2
+- role: Feature Profile > SD-Routing Service > DHCP Server-read
+  operations: 2
+- role: Feature Profile > SD-Routing Service > IPSec Profile-read
+  operations: 2
+- role: Feature Profile > SD-Routing Service > OSPF-read
+  operations: 2
+- role: Feature Profile > SD-Routing Service > OSPFv3 IPv4-read
+  operations: 2
+- role: Feature Profile > SD-Routing Service > OSPFv3 IPv6-read
+  operations: 2
+- role: Feature Profile > SD-Routing Service > Object Tracker Group-read
+  operations: 2
+- role: Feature Profile > SD-Routing Service > Object Tracker-read
+  operations: 2
+- role: Feature Profile > SD-Routing Service > Route Policy-read
+  operations: 2
+- role: Feature Profile > SD-Routing Service > VRF > BGP-read
+  operations: 2
+- role: Feature Profile > SD-Routing Service > VRF > DMVPN Tunnel-read
+  operations: 2
+- role: Feature Profile > SD-Routing Service > VRF > EIGRP-read
+  operations: 2
+- role: Feature Profile > SD-Routing Service > VRF > Interface/IPSec-read
+  operations: 2
+- role: Feature Profile > SD-Routing Service-read
+  operations: 2
+- role: Feature Profile > SD-Routing System > AAA-read
+  operations: 2
+- role: Feature Profile > SD-Routing System > Banner-read
+  operations: 2
+- role: Feature Profile > SD-Routing System > Certificate-read
+  operations: 2
+- role: Feature Profile > SD-Routing System > Flexible Port Speed-read
+  operations: 2
+- role: Feature Profile > SD-Routing System > Global Settings-read
+  operations: 2
+- role: Feature Profile > SD-Routing System > Logging-read
+  operations: 2
+- role: Feature Profile > SD-Routing System > NTP-read
+  operations: 2
+- role: Feature Profile > SD-Routing System > SNMP-read
+  operations: 2
+- role: Feature Profile > SD-Routing System-read
+  operations: 2
+- role: Feature Profile > SD-Routing Transport > ACL-read
+  operations: 2
+- role: Feature Profile > SD-Routing Transport > Cellular Band Select-read
+  operations: 2
+- role: Feature Profile > SD-Routing Transport > GPS-read
+  operations: 2
+- role: Feature Profile > SD-Routing Transport > Global VRF > BGP-read
+  operations: 2
+- role: Feature Profile > SD-Routing Transport > Global VRF > Interface/Ethernet-read
+  operations: 2
+- role: Feature Profile > SD-Routing Transport > Global VRF > Interface/IPSec-read
+  operations: 2
+- role: Feature Profile > SD-Routing Transport > Management VRF > Interface/Ethernet-read
+  operations: 2
+- role: Feature Profile > SD-Routing Transport > Management VRF-read
+  operations: 2
+- role: Feature Profile > SD-Routing Transport > OSPF-read
+  operations: 2
+- role: Feature Profile > SD-Routing Transport > OSPFv3 IPv4-read
+  operations: 2
+- role: Feature Profile > SD-Routing Transport > OSPFv3 IPv6-read
+  operations: 2
+- role: Feature Profile > SD-Routing Transport > Object Tracker Group-read
+  operations: 2
+- role: Feature Profile > SD-Routing Transport > Object Tracker-read
+  operations: 2
+- role: Feature Profile > SD-Routing Transport > Route Policy-read
+  operations: 2
+- role: Feature Profile > SD-Routing Transport > Tracker Group-read
+  operations: 2
+- role: Feature Profile > SD-Routing Transport > Tracker-read
+  operations: 2
+- role: Feature Profile > SD-Routing Transport > VRF > BGP-read
+  operations: 2
+- role: Feature Profile > SD-Routing Transport > VRF > Interface/Ethernet-read
+  operations: 2
+- role: Feature Profile > SD-Routing Transport > VRF > Interface/IPSec-read
+  operations: 2
+- role: Feature Profile > SD-Routing Transport-read
+  operations: 2
+- role: Feature Profile > SSE > Cisco SSE-read
+  operations: 2
+- role: Feature Profile > SSE-read
+  operations: 2
+- role: Feature Profile > Service > Appqoe-read
+  operations: 2
+- role: Feature Profile > Service > Lan/Vpn/Interface/Gre-read
+  operations: 2
+- role: Feature Profile > Service > Lan/Vpn/RawSocket-read
+  operations: 2
+- role: Feature Profile > Service > MultiCloudConnection-read
+  operations: 2
+- role: Feature Profile > Service > Routing/Eigrp-read
+  operations: 2
+- role: Feature Profile > Service > Routing/Ospf-read
+  operations: 2
+- role: Feature Profile > Service > Routing/Ospfv3 IPv4-read
+  operations: 2
+- role: Feature Profile > Service > Routing/Ospfv3 IPv6-read
+  operations: 2
+- role: Feature Profile > Service > VRF > RawSocket-read
+  operations: 2
+- role: Feature Profile > Service-read
+  operations: 2
+- role: Feature Profile > Sig Security > Sig Policy-read
+  operations: 2
+- role: Feature Profile > Sig Security-read
+  operations: 2
+- role: Feature Profile > System > Security-read
+  operations: 2
+- role: Feature Profile > System-read
+  operations: 2
+- role: Feature Profile > Teleworker > AaaServers-read
+  operations: 2
+- role: Feature Profile > Teleworker > Cellular-read
+  operations: 2
+- role: Feature Profile > Teleworker > Ethernet-read
+  operations: 2
+- role: Feature Profile > Teleworker > Logging-read
+  operations: 2
+- role: Feature Profile > Teleworker > NetworkProtocol-read
+  operations: 2
+- role: Feature Profile > Teleworker > Qos-read
+  operations: 2
+- role: Feature Profile > Teleworker > SecurityPolicy-read
+  operations: 2
+- role: Feature Profile > Teleworker > Vpn-read
+  operations: 2
+- role: Feature Profile > Teleworker > Wifi-read
+  operations: 2
+- role: Feature Profile > Teleworker > eSimCellular-read
+  operations: 2
+- role: Feature Profile > Teleworker CLI Add On > Config-read
+  operations: 2
+- role: Feature Profile > Teleworker CLI Add On-read
+  operations: 2
+- role: Feature Profile > Teleworker-read
+  operations: 2
+- role: Feature Profile > Transport > Cellular Band Select-read
+  operations: 2
+- role: Feature Profile > Transport > Global VRF > RawSocket-read
+  operations: 2
+- role: Feature Profile > Transport > Gps-read
+  operations: 2
+- role: Feature Profile > Transport > MultiCloudConnection-read
+  operations: 2
+- role: Feature Profile > Transport > Routing/Ospf-read
+  operations: 2
+- role: Feature Profile > Transport > Routing/Ospfv3 IPv4-read
+  operations: 2
+- role: Feature Profile > Transport > Routing/Ospfv3 IPv6-read
+  operations: 2
+- role: Feature Profile > Transport > Wan/Vpn/RawSocket-read
+  operations: 2
+- role: Feature Profile > Transport > eSimCellular Controller-read
+  operations: 2
+- role: Feature Profile > Transport > eSimCellular Profile-read
+  operations: 2
+- role: Feature Profile > Transport-read
+  operations: 2
+- role: Lawful Interception-read
+  operations: 2
+- role: Lawful Interception-write
+  operations: 2
+- role: License Management-read
+  operations: 2
+- role: License Management-write
+  operations: 2
+- role: Network Settings > CVC-read
+  operations: 2
+- role: Network Settings > CVC-write
+  operations: 2
+- role: Policy Deploy-writeAppRoute Policy-read
+  operations: 2
+- role: Rewrite Policy-read
+  operations: 2
+- role: Route Policy-read
+  operations: 2
+- role: Topology Group-read
+  operations: 2
+- role: VPN Membership Policy-read
+  operations: 2
+- role: viptela-reserved-cloud
+  operations: 2
+- role: Alarms-write
+  operations: 1
+- role: Cellular Profile Reset-write
+  operations: 1
+- role: Config Group > Device > Deploy-read
+  operations: 1
+- role: Config Group > Device > Deploy-write
+  operations: 1
+- role: Config Group > Device-read
+  operations: 1
+- role: Cortex-read
+  operations: 1
+- role: DNAC SDA-read
+  operations: 1
+- role: DNAC SDA-write
+  operations: 1
+- role: Device Reboot > Controller-write
+  operations: 1
+- role: Feature Profile > Application Priority > Cloud Probe-read
+  operations: 1
+- role: Feature Profile > Application Priority > Cloud Probe-write
+  operations: 1
+- role: Feature Profile > Application Priority > Traffic Policy-read
+  operations: 1
+- role: Feature Profile > Nfvirtual CLI Add On > Cli-read
+  operations: 1
+- role: Feature Profile > Nfvirtual Networks > Lan-read
+  operations: 1
+- role: Feature Profile > Nfvirtual Networks > Ovsnetwork-read
+  operations: 1
+- role: Feature Profile > Nfvirtual Networks > Routes-read
+  operations: 1
+- role: Feature Profile > Nfvirtual Networks > Switch-read
+  operations: 1
+- role: Feature Profile > Nfvirtual Networks > Vnf attributes > Vnf-read
+  operations: 1
+- role: Feature Profile > Nfvirtual Networks > Vnf attributes-read
+  operations: 1
+- role: Feature Profile > Nfvirtual Networks > Wan-read
+  operations: 1
+- role: Feature Profile > Nfvirtual System > Aaa-read
+  operations: 1
+- role: Feature Profile > Nfvirtual System > Banner-read
+  operations: 1
+- role: Feature Profile > Nfvirtual System > Logging-read
+  operations: 1
+- role: Feature Profile > Nfvirtual System > Ntp-read
+  operations: 1
+- role: Feature Profile > Nfvirtual System > Snmp-read
+  operations: 1
+- role: Feature Profile > Nfvirtual System > System Settings-read
+  operations: 1
+- role: Feature Profile > Service > Lan/Vpn/Interface/Svi
+  operations: 1
+- role: Feature Profile-read
+  operations: 1
+- role: Manage LI-read
+  operations: 1
+- role: Policy
+  operations: 1
+- role: Policy Group > Device > Deploy-read
+  operations: 1
+- role: Policy Group > Device > Deploy-write
+  operations: 1
+- role: Policy Group > Device-read
+  operations: 1
+- role: System360 Diagnostic-read
+  operations: 1
+- role: System360 Diagnostic-write
+  operations: 1
+- role: Topology Group > Device > Activate-read
+  operations: 1
+- role: Topology Group > Device > Activate-write
+  operations: 1
+- role: vAnalytics-readvAnalytics-write
+  operations: 1
+- role: vAnalytics-readvAnalytics-writedca
+  operations: 1
+role_expressions:
+- expression: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy
+    Deploy-read,Policy Deploy-write
+  operations: 273
+- expression: Policy Configuration-write
+  operations: 245
+- expression: Device Monitoring-read
+  operations: 138
+- expression: default
+  operations: 130
+- expression: System-read,System-write
+  operations: 68
+- expression: Routing-read,Routing-write
+  operations: 60
+- expression: Policy-read,Policy-write,System-read,System-write
+  operations: 55
+- expression: Device Monitoring-read,Device Monitoring-write
+  operations: 35
+- expression: Cloud OnRamp-read
+  operations: 33
+- expression: Alarms-read
+  operations: 32
+- expression: default,dca
+  operations: 30
+- expression: Routing-read,Routing-write,System-read,System-write
+  operations: 29
+- expression: admin
+  operations: 27
+- expression: Interface-read,Interface-write
+  operations: 27
+- expression: Policy-read,Policy-write
+  operations: 25
+- expression: Tools-read
+  operations: 25
+- expression: Feature Profile > Service > Lan/Vpn-write
+  operations: 21
+- expression: System-read,System-write,Security-read,Security-write
+  operations: 20
+- expression: Feature Profile > SD-Routing Service > VRF-write
+  operations: 18
+- expression: Certificates-write
+  operations: 18
+- expression: Template Deploy-write
+  operations: 17
+- expression: Feature Profile > SD-Routing Transport > Global VRF-write
+  operations: 16
+- expression: Feature Profile > Transport > Wan/Vpn-write
+  operations: 16
+- expression: Feature Profile > SD-Routing Transport > VRF-write
+  operations: 15
+- expression: Feature Profile > Service > Lan/Vpn-read
+  operations: 15
+- expression: Feature Profile > Transport > Wan/Vpn/Interface/Cellular-write
+  operations: 15
+- expression: Disaster Recovery-write
+  operations: 15
+- expression: Feature Profile > Transport > Wan/Vpn/Interface/Ethernet-write
+  operations: 14
+- expression: Settings-write
+  operations: 14
+- expression: Security-read,Security-write
+  operations: 13
+- expression: System-read,System-write,Routing-read,Routing-write,Policy-read,Policy-write
+  operations: 13
+- expression: Template Configuration-read,Template Configuration-write,Template Deploy-read,Template Deploy-write
+  operations: 13
+- expression: Cloud OnRamp-write
+  operations: 13
+- expression: Feature Profile > SD-Routing Transport > Cellular Controller-write
+  operations: 12
+- expression: Feature Profile > SSE > Secure Private Access-write
+  operations: 12
+- expression: Feature Profile > SD-Routing Service > VRF-read
+  operations: 12
+- expression: Feature Profile > Service > Lan/Vpn/Interface/Ethernet-write
+  operations: 12
+- expression: Feature Profile > Transport > Cellular Controller-write
+  operations: 12
+- expression: Tenant Management-write
+  operations: 12
+- expression: Feature Profile > Transport > Wan/Vpn/Interface/Cellular-read
+  operations: 11
+- expression: Feature Profile > Transport > Wan/Vpn/Interface/Ethernet-read
+  operations: 11
+- expression: Feature Profile > Transport > Wan/Vpn-read
+  operations: 11
+- expression: Software Upgrade-write,Software Upgrade > Edge-write,Software Upgrade > Controller-write
+  operations: 11
+- expression: Certificates-read,Certificates-write
+  operations: 11
+- expression: Manage Users-write
+  operations: 10
+- expression: Feature Profile > SSE > Secure Private Access-read
+  operations: 10
+- expression: Feature Profile > SD-Routing Transport > Global VRF-read
+  operations: 10
+- expression: Feature Profile > SD-Routing Transport > VRF-read
+  operations: 10
+- expression: Device Monitoring-read,RBAC VPN-read,RBAC VPN-write
+  operations: 10
+- expression: Feature Profile > SD-Routing Transport > Global VRF > Interface/Cellular-write
+  operations: 9
+- expression: Feature Profile > Service > Lan/Vpn/Interface/Ethernet-read
+  operations: 9
+- expression: Feature Profile > Transport > Cellular Controller-read
+  operations: 9
+- expression: Topology Policy-write,Policy Configuration-write
+  operations: 9
+- expression: Feature Profile > SD-Routing Transport > Cellular Controller-read
+  operations: 8
+- expression: Tools-write,dca
+  operations: 8
+- expression: Tools-write
+  operations: 8
+- expression: Events-read
+  operations: 8
+- expression: Template Configuration-read,Template Deploy-read,Template Deploy-write,Cloud OnRamp-read,Cloud
+    OnRamp-write
+  operations: 8
+- expression: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy
+    Deploy-read,Policy Deploy-write,Security Policy Configuration-read,Security Policy Configuration-write
+  operations: 8
+- expression: Policy-read,System-read
+  operations: 7

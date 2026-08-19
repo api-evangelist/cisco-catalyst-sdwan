@@ -1,0 +1,118 @@
+generated: '2026-08-19'
+method: searched
+source: 'registry metadata: pypi.org/pypi/*/json, registry.terraform.io/v1/providers, galaxy.ansible.com/api/v3;
+  plus https://developer.cisco.com/docs/sdwan/terraform-provider-and-module/ and https://developer.cisco.com/docs/sdwan/ansible-collections/'
+note: 'Cisco ships no npm, Maven, NuGet, RubyGems, Packagist or crates.io client for Catalyst SD-WAN.
+  The first-party surface is Python (SDK + CLI), a Terraform provider and three Ansible collections. NOTE
+  the decay signal: the Ansible collections and the previous SDK home (cisco-open/cisco-catalyst-wan-sdk,
+  ARCHIVED 2024-11-21) have not shipped since November 2024, while the API they wrap has shipped 20.18
+  -> 26.1 with 32 deleted and 76 deprecated operations since.'
+packages:
+- language: python
+  registry: pypi
+  name: catalystwan
+  version: 0.41.6
+  published: '2026-07-31'
+  url: https://pypi.org/project/catalystwan/
+  install: pip install catalystwan
+  official: true
+  repo: https://github.com/cisco-en-programmability/catalystwan-sdk
+  license: Apache-2.0
+  note: Cisco Catalyst WAN SDK for Python. Current. Supersedes the archived cisco-open/cisco-catalyst-wan-sdk
+    repository.
+- language: python
+  registry: pypi
+  name: cisco-sdwan
+  version: '1.28'
+  published: '2026-06-05'
+  url: https://pypi.org/project/cisco-sdwan/
+  install: pip install --upgrade cisco-sdwan
+  official: true
+  repo: https://github.com/CiscoDevNet/sastre
+  license: MIT
+  note: Sastre — the Cisco SD-WAN automation toolset. Installs the `sdwan`/`sastre` CLI and doubles as
+    an SDK. See cli/cisco-catalyst-sdwan-cli.yml.
+- language: hcl
+  registry: terraform
+  name: CiscoDevNet/sdwan
+  version: 0.11.4
+  published: '2026-07-28'
+  url: https://registry.terraform.io/providers/CiscoDevNet/sdwan/latest
+  install: terraform { required_providers { sdwan = { source = "CiscoDevNet/sdwan" } } }
+  official: true
+  tier: partner
+  downloads: 172690
+  repo: https://github.com/CiscoDevNet/terraform-provider-sdwan
+  license: MPL-2.0
+- language: hcl
+  registry: terraform
+  name: netascode/nac-sdwan/sdwan
+  version: null
+  published: null
+  url: https://registry.terraform.io/modules/netascode/nac-sdwan/sdwan/latest
+  official: false
+  repo: https://github.com/netascode/terraform-sdwan-nac-sdwan
+  note: Network-as-Code module referenced from the Cisco docs but published by netascode, not Cisco. Registry
+    version not read in this run.
+- language: yaml
+  registry: ansible-galaxy
+  name: cisco.sdwan
+  version: 0.3.5
+  published: '2024-11-29'
+  url: https://galaxy.ansible.com/ui/repo/published/cisco/sdwan
+  install: ansible-galaxy collection install cisco.sdwan
+  official: true
+  repo: https://github.com/cisco-en-programmability/ansible-collection-sdwan
+  license: GPL-3.0
+  note: Last release 2024-11-29 — predates SD-WAN Manager 20.18 and 26.1.
+- language: yaml
+  registry: ansible-galaxy
+  name: cisco.catalystwan
+  version: 0.3.2
+  published: '2024-11-29'
+  url: https://galaxy.ansible.com/ui/repo/published/cisco/catalystwan
+  install: ansible-galaxy collection install cisco.catalystwan
+  official: true
+  repo: https://github.com/cisco-en-programmability/ansible-collection-catalystwan
+  license: GPL-3.0
+  note: Wraps the catalystwan SDK. Last release 2024-11-29.
+- language: yaml
+  registry: ansible-galaxy
+  name: cisco.sdwan_deployment
+  version: 0.3.3
+  published: '2024-11-28'
+  url: https://galaxy.ansible.com/ui/repo/published/cisco/sdwan_deployment/
+  install: ansible-galaxy collection install cisco.sdwan_deployment
+  official: true
+  repo: https://github.com/cisco-en-programmability/ansible-collection-sdwan-deployment
+  license: GPL-3.0
+  note: Last release 2024-11-28.
+- language: typescript
+  registry: null
+  name: catalyst-sdwan-mcp
+  version: 1.0.0
+  published: null
+  url: https://github.com/CiscoDevNet/catalyst-sdwan-mcp-community
+  install: git clone + npm run build
+  official: false
+  license: MIT
+  note: MCP server, source-only. NOT published to npm (registry.npmjs.org/catalyst-sdwan-mcp and /@cisco/catalyst-sdwan-mcp
+    both 404), so there is no registry metadata endpoint and no publish date to read — version 1.0.0 is
+    read from package.json in the repository. Consumers must clone and build.
+not_published:
+- registry: npm
+  checked:
+  - catalyst-sdwan-mcp
+  - '@cisco/catalyst-sdwan-mcp'
+  status: 404
+- registry: pypi
+  checked:
+  - vmanage-client
+  - sastre
+  status: 404
+  note: vmanage-client was the pre-rename name of catalystwan; it is gone from PyPI.
+archived:
+- repo: https://github.com/cisco-open/cisco-catalyst-wan-sdk
+  archived: true
+  last_push: '2024-11-21'
+  note: The former home of the Python SDK. Archived; development moved to cisco-en-programmability/catalystwan-sdk.

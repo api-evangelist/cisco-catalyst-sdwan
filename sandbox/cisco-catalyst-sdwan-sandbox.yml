@@ -1,0 +1,48 @@
+generated: '2026-08-19'
+method: searched
+source: https://developer.cisco.com/docs/sdwan/developer-support/
+sandboxes:
+- name: Cisco Catalyst SD-WAN reservable sandbox
+  type: reservable lab
+  url: https://devnetsandbox.cisco.com/RM/Diagram/Index/ed2c839d-621e-4c55-b176-db2457baf4c8?diagramType=Topology
+  status: 200
+  note: A real, reservable SD-WAN Manager fabric on Cisco DevNet Sandbox. Free with a Cisco account; you
+    reserve a slot and receive a live SD-WAN Manager with controllers and edge devices to call. This is
+    the only way to exercise the API without owning a controller.
+  requires_account: true
+  cost: free
+- name: Cisco DevNet Sandbox catalog
+  type: catalog
+  url: https://devnetsandbox.cisco.com/
+  status: 200
+test_credentials:
+  published: false
+  note: Credentials are issued per reservation and are not published, so there are no static test values
+    to record. No test-mode key prefix, no magic identifiers, no test clocks — the API is a controller
+    API with a single live mode.
+test_vs_live:
+  modes: 1
+  note: SD-WAN Manager has no test/live mode split. Every call hits the real controller.
+api_client_collection:
+  tool: Bruno
+  url: https://github.com/CiscoDevNet/wan-automation-examples/tree/main/catalystwan/bruno
+  docs: https://developer.cisco.com/docs/sdwan/bruno-collection/
+  environments:
+  - demo
+  - sandbox
+  note: The published API client collection is Bruno (.bru files), not Postman. Secret variables ship
+    with no values; you supply vmanage + apikey. Run Authentication/01-get-auth-token first — it exchanges
+    the API key for an XSRF token.
+  coverage:
+  - API-key authentication and device inventory
+  - UX 2.0 system/transport/service/CLI feature profiles
+  - Configuration Group creation, association, variables and deployment
+  - real-time, simple, aggregate and bulk monitoring APIs
+  - cleanup of created objects
+learning:
+- name: SD-WAN Programmability learning track
+  url: https://developer.cisco.com/learning/tracks/sd-wan_programmability/
+  status: 200
+- name: Catalyst SD-WAN API Learning Hub
+  url: https://jbarozet.github.io/catalyst-sdwan-api-hub/
+  note: community hub referenced by the Cisco Bruno collection README

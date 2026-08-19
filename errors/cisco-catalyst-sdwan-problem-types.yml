@@ -1,0 +1,65 @@
+generated: '2026-08-19'
+method: searched
+source: https://developer.cisco.com/docs/sdwan/errors-and-troubleshooting/
+docs: https://developer.cisco.com/docs/sdwan/errors-and-troubleshooting/
+format: proprietary-json
+format_note: Not RFC 9457. No operation in the 4,138 harvested returns application/problem+json. Error
+  responses are documented only by HTTP status code and a one-line description; the 4xx/5xx responses
+  in the specs carry a description and no schema at all, so an agent cannot parse a machine-readable error
+  body from the contract.
+envelope:
+  documented: false
+  note: Some administrative endpoints (POST /j_security_check, POST /logout) signal success or failure
+    in the response BODY rather than the status code — a documented trap for clients that only check the
+    status line.
+  source: https://developer.cisco.com/docs/sdwan/errors-and-troubleshooting/
+problems:
+- status: 200
+  title: OK
+  meaning: Success
+  operations_declaring: 4115
+- status: 201
+  title: Created
+  meaning: New resource created
+  operations_declaring: 2
+- status: 202
+  title: Accepted
+  meaning: Request accepted for asynchronous processing
+  operations_declaring: 4
+- status: 400
+  title: Bad request
+  meaning: Request was invalid.
+  operations_declaring: 4103
+- status: 401
+  title: Unauthorized
+  meaning: Authentication missing or incorrect
+  operations_declaring: 0
+  note: Documented in the status table but declared on ZERO operations in the OpenAPI.
+- status: 403
+  title: Forbidden
+  meaning: Request was understood but not allowed.
+  operations_declaring: 4089
+  note: Returned when the caller lacks the operation's x-roles-required permission.
+- status: 404
+  title: Not found
+  meaning: Resource not found
+  operations_declaring: 10
+  note: Documented globally but declared on only 10 of 4,138 operations.
+- status: 429
+  title: Too many requests
+  meaning: Request exceed rate limit.
+  operations_declaring: 0
+  note: Documented in the status table but declared on ZERO operations, and no Retry-After header is documented.
+- status: 500
+  title: Internal server error
+  meaning: Problem with the server
+  operations_declaring: 4078
+- status: 503
+  title: Service Unavailable
+  meaning: Server is unable to complete request.
+  operations_declaring: 0
+  note: Documented in the status table but declared on ZERO operations.
+gaps:
+- 401, 429 and 503 are documented prose-only and appear on no operation
+- no error body schema anywhere in the contract
+- no error code registry beyond the HTTP status table

@@ -1,0 +1,78 @@
+# Cisco Catalyst SD-WAN Manager API
+
+> Cisco Catalyst SD-WAN (the Viptela platform Cisco acquired in 2017) is Cisco's wide-area network
+> overlay. Its controller — SD-WAN Manager, formerly vManage — exposes a REST API of 4,138 published
+> operations across 2,841 paths, documented on Cisco DevNet as thirteen OpenAPI 3.1.0 documents at
+> release 26.1.0. The API is served by each customer's own controller at
+> https://<sdwan-manager-host>:8443/dataservice — there is no shared Cisco host — but the
+> SPECIFICATION is public and anonymously fetchable. Authentication is a JWT bearer token from
+> POST /jwt/login (20.18.1+) or a legacy JSESSIONID session, in both cases plus an X-XSRF-TOKEN
+> header on writes. Authorization is role-based: every operation declares the SD-WAN Manager
+> permission it needs.
+
+This file is maintained by API Evangelist (https://apievangelist.com), an independent third-party
+profile. It is not published by Cisco.
+
+## Start here
+
+- [Cisco Catalyst SD-WAN Manager API docs](https://developer.cisco.com/docs/sdwan/): the DevNet documentation set
+- [Getting started](https://developer.cisco.com/docs/sdwan/getting-started/)
+- [Authentication](https://developer.cisco.com/docs/sdwan/authentication/): JWT and session-based
+- [Forming the API URL](https://developer.cisco.com/docs/sdwan/forming-the-api-urls-api-endpoints/): /dataservice prefix and the vendor Accept version header
+- [Versioning and deprecation](https://developer.cisco.com/docs/sdwan/versioning-and-deprecation/)
+- [API changelog](https://developer.cisco.com/docs/sdwan/api-changelog/): 20.18 to 26.1 operation diff
+- [Rate limits and pagination](https://developer.cisco.com/docs/sdwan/browsing-returned-results-sorting-results-filtering-results-and-rate-limits/)
+- [Errors and troubleshooting](https://developer.cisco.com/docs/sdwan/errors-and-troubleshooting/)
+- [Developer support](https://developer.cisco.com/docs/sdwan/developer-support/)
+
+## Specifications (OpenAPI 3.1.0, harvested verbatim)
+
+- [Administration and Settings](https://raw.githubusercontent.com/api-evangelist/cisco-catalyst-sdwan/refs/heads/main/openapi/cisco-catalyst-sdwan-administration-and-settings-openapi.json): 59 operations
+- [UX 1.0 Configuration](https://raw.githubusercontent.com/api-evangelist/cisco-catalyst-sdwan/refs/heads/main/openapi/cisco-catalyst-sdwan-ux-1-0-configuration-openapi.json): 862 operations — device/feature templates and the policy builder
+- [UX 2.0 Configuration](https://raw.githubusercontent.com/api-evangelist/cisco-catalyst-sdwan/refs/heads/main/openapi/cisco-catalyst-sdwan-ux-2-0-configuration-openapi.json): 39 operations — configuration, policy and topology groups
+- [Feature Profiles - SD-WAN System](https://raw.githubusercontent.com/api-evangelist/cisco-catalyst-sdwan/refs/heads/main/openapi/cisco-catalyst-sdwan-feature-profiles-sd-wan-system-openapi.json): 73 operations
+- [Feature Profiles - SD-WAN Transport](https://raw.githubusercontent.com/api-evangelist/cisco-catalyst-sdwan/refs/heads/main/openapi/cisco-catalyst-sdwan-feature-profiles-sd-wan-transport-openapi.json): 224 operations
+- [Feature Profiles - SD-WAN Service](https://raw.githubusercontent.com/api-evangelist/cisco-catalyst-sdwan/refs/heads/main/openapi/cisco-catalyst-sdwan-feature-profiles-sd-wan-service-openapi.json): 160 operations
+- [Feature Profiles - Others](https://raw.githubusercontent.com/api-evangelist/cisco-catalyst-sdwan/refs/heads/main/openapi/cisco-catalyst-sdwan-feature-profiles-others-openapi.json): 113 operations
+- [Feature Profiles - SD-Routing](https://raw.githubusercontent.com/api-evangelist/cisco-catalyst-sdwan/refs/heads/main/openapi/cisco-catalyst-sdwan-feature-profiles-sd-routing-openapi.json): 429 operations
+- [Feature Profiles - Mobility and NFV](https://raw.githubusercontent.com/api-evangelist/cisco-catalyst-sdwan/refs/heads/main/openapi/cisco-catalyst-sdwan-feature-profiles-mobility-and-nfv-openapi.json): 137 operations
+- [Monitoring and Troubleshooting](https://raw.githubusercontent.com/api-evangelist/cisco-catalyst-sdwan/refs/heads/main/openapi/cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json): 1,068 operations
+- [SD-WAN Services](https://raw.githubusercontent.com/api-evangelist/cisco-catalyst-sdwan/refs/heads/main/openapi/cisco-catalyst-sdwan-sd-wan-services-openapi.json): 180 operations — multicloud and interconnect
+- [Partner Integrations](https://raw.githubusercontent.com/api-evangelist/cisco-catalyst-sdwan/refs/heads/main/openapi/cisco-catalyst-sdwan-partner-integrations-openapi.json): 76 operations
+- [Others](https://raw.githubusercontent.com/api-evangelist/cisco-catalyst-sdwan/refs/heads/main/openapi/cisco-catalyst-sdwan-others-openapi.json): 718 operations — inventory, certificates, software, multitenancy, licensing
+
+## Agent surface
+
+- [MCP servers](https://raw.githubusercontent.com/api-evangelist/cisco-catalyst-sdwan/refs/heads/main/mcp/cisco-catalyst-sdwan-mcp.yml): two published in the CiscoDevNet GitHub org, both stdio-only, neither hosted and neither on a package registry
+- [Tool crosswalk](https://raw.githubusercontent.com/api-evangelist/cisco-catalyst-sdwan/refs/heads/main/mcp/cisco-catalyst-sdwan-tool-crosswalk.yml): each MCP tool bound to the operation it actually calls; ten tools call undocumented endpoints
+- [Agent skills](https://raw.githubusercontent.com/api-evangelist/cisco-catalyst-sdwan/refs/heads/main/skills/_index.yml): four generated flows plus one Cisco publishes
+- No A2A agent card is served on any Cisco host.
+
+## Semantics
+
+- [Authentication profile](https://raw.githubusercontent.com/api-evangelist/cisco-catalyst-sdwan/refs/heads/main/authentication/cisco-catalyst-sdwan-authentication.yml)
+- [RBAC permissions](https://raw.githubusercontent.com/api-evangelist/cisco-catalyst-sdwan/refs/heads/main/scopes/cisco-catalyst-sdwan-scopes.yml): 515 distinct role expressions across 4,138 operations
+- [Conventions](https://raw.githubusercontent.com/api-evangelist/cisco-catalyst-sdwan/refs/heads/main/conventions/cisco-catalyst-sdwan-conventions.yml): versioning header, pagination, media types, no idempotency
+- [Rate limits](https://raw.githubusercontent.com/api-evangelist/cisco-catalyst-sdwan/refs/heads/main/rate-limits/cisco-catalyst-sdwan-rate-limits.yml): 100 req/s general, 48 req/min bulk, 250 concurrent sessions
+- [Error catalog](https://raw.githubusercontent.com/api-evangelist/cisco-catalyst-sdwan/refs/heads/main/errors/cisco-catalyst-sdwan-problem-types.yml)
+- [Lifecycle](https://raw.githubusercontent.com/api-evangelist/cisco-catalyst-sdwan/refs/heads/main/lifecycle/cisco-catalyst-sdwan-lifecycle.yml): 240 deprecated operations
+- [Changelog](https://raw.githubusercontent.com/api-evangelist/cisco-catalyst-sdwan/refs/heads/main/changelog/cisco-catalyst-sdwan-changelog.yml)
+- [Webhooks and events](https://raw.githubusercontent.com/api-evangelist/cisco-catalyst-sdwan/refs/heads/main/asyncapi/cisco-catalyst-sdwan-webhooks.yml)
+- [Data model](https://raw.githubusercontent.com/api-evangelist/cisco-catalyst-sdwan/refs/heads/main/data-model/cisco-catalyst-sdwan-data-model.yml)
+- [Conformance](https://raw.githubusercontent.com/api-evangelist/cisco-catalyst-sdwan/refs/heads/main/conformance/cisco-catalyst-sdwan-conformance.yml)
+
+## Tooling
+
+- [Packages and SDKs](https://raw.githubusercontent.com/api-evangelist/cisco-catalyst-sdwan/refs/heads/main/packages/cisco-catalyst-sdwan-packages.yml): catalystwan (PyPI), cisco-sdwan (PyPI), CiscoDevNet/sdwan (Terraform), three Ansible collections
+- [CLI — Sastre](https://raw.githubusercontent.com/api-evangelist/cisco-catalyst-sdwan/refs/heads/main/cli/cisco-catalyst-sdwan-cli.yml)
+- [Sandbox](https://raw.githubusercontent.com/api-evangelist/cisco-catalyst-sdwan/refs/heads/main/sandbox/cisco-catalyst-sdwan-sandbox.yml): a reservable DevNet fabric and a Bruno collection
+- [Terraform provider](https://registry.terraform.io/providers/CiscoDevNet/sdwan/latest)
+- [CiscoDevNet on GitHub](https://github.com/CiscoDevNet)
+
+## Caveats an agent should carry
+
+- No idempotency keys exist. Retrying a write can duplicate it.
+- 429 is documented but declared on no operation, and no rate-limit or Retry-After headers are returned.
+- Error responses carry no schema — a status code and one line of prose, nothing parseable.
+- Real-time monitoring endpoints reach the device on every call and are documented for troubleshooting only.
+- Pagination is a snapshot; two calls in the same loop can disagree.

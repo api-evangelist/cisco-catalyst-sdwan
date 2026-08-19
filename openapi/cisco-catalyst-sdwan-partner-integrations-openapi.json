@@ -1,0 +1,4782 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Partner Integrations",
+    "description": "Includes API operations for partner integrations, such as Webex, Identity Services Engine (ISE), Secure Access, and more",
+    "contact": {
+      "email": "vmanage@cisco.com"
+    },
+    "license": {
+      "name": "Commercial License",
+      "url": "https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html"
+    },
+    "version": "26.1.0+2026-01-06",
+    "x-provenance": {
+      "method": "harvested",
+      "authored_by": "Cisco Catalyst SD-WAN",
+      "harvested_by": "API Evangelist",
+      "harvested_on": "2026-08-19",
+      "first_party": true,
+      "provider_published": true,
+      "source_host": "pubhub.devnetcloud.com",
+      "note": "4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host."
+    },
+    "x-evidence": [
+      {
+        "type": "source",
+        "url": "https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/"
+      },
+      {
+        "type": "source",
+        "url": "https://developer.cisco.com/docs/sdwan/"
+      }
+    ]
+  },
+  "servers": [
+    {
+      "url": "/dataservice"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Cisco Software"
+    },
+    {
+      "name": "Configuration - Cloud On Ramp SaaS"
+    },
+    {
+      "name": "Configuration - Ise Server"
+    },
+    {
+      "name": "Deployment Mode"
+    },
+    {
+      "name": "Partner - ACI Policy Builder"
+    },
+    {
+      "name": "Partner - DNAC SDA API"
+    },
+    {
+      "name": "Partner - Registration"
+    },
+    {
+      "name": "Partner - WCM Configs"
+    },
+    {
+      "name": "System - Cloud Service Webex"
+    },
+    {
+      "name": "Tools - TAC Cases"
+    },
+    {
+      "name": "Umbrella"
+    }
+  ],
+  "paths": {
+    "/fedramp/dnssec/actions": {
+      "get": {
+        "tags": [
+          "Deployment Mode"
+        ],
+        "description": "Request DNS-Sec actions",
+        "operationId": "requesDNSSecActions",
+        "parameters": [
+          {
+            "name": "action",
+            "in": "query",
+            "description": "DNS-Sec action",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "DNS-Sec action status": {
+                    "description": "DNS-Sec action status",
+                    "value": {}
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Settings-read,FedRamp-read"
+      }
+    },
+    "/fedramp/dnssec/config": {
+      "post": {
+        "tags": [
+          "Deployment Mode"
+        ],
+        "description": "Configure DNS-Sec",
+        "operationId": "configureDNSSec",
+        "requestBody": {
+          "description": "DNS sec config request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "examples": {
+                "DNS sec config request": {
+                  "description": "DNS sec config request",
+                  "value": {}
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Settings-write,FedRamp-write"
+      }
+    },
+    "/fedramp/dnssec/status": {
+      "get": {
+        "tags": [
+          "Deployment Mode"
+        ],
+        "description": "Get DNS-Sec status",
+        "operationId": "getDNSSecStatus",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "DNS-Sec status": {
+                    "description": "DNS-Sec status",
+                    "value": {}
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Settings-read,FedRamp-read"
+      }
+    },
+    "/fedramp/status": {
+      "post": {
+        "tags": [
+          "Deployment Mode"
+        ],
+        "description": "Set network deployment mode",
+        "operationId": "configFedrampMode",
+        "requestBody": {
+          "description": "Network deployment mode",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "examples": {
+                "Network deployment mode": {
+                  "description": "Network deployment mode",
+                  "value": {
+                    "deploymentMode": [
+                      {
+                        "FRMod": "FedRAMP Moderate"
+                      },
+                      {
+                        "DODIL5": "DOD-IL5"
+                      },
+                      {
+                        "PCIDSS": "PCI-DSS"
+                      },
+                      {
+                        "SOC2": "SOC2"
+                      },
+                      {
+                        "SOC3": "SOC3"
+                      },
+                      {
+                        "C5": "C5"
+                      },
+                      {
+                        "ENS": "ENS"
+                      },
+                      {
+                        "ISO27001": "ISO 27001"
+                      },
+                      {
+                        "ISO27017": "ISO 27017"
+                      },
+                      {
+                        "ISO27018": "ISO 27018"
+                      },
+                      {
+                        "ISO27701": "ISO 27701"
+                      },
+                      {
+                        "Tx-RAMP": "Tx-RAMP"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Settings-write,FedRamp-write"
+      }
+    },
+    "/fedramp/wazuh/actions": {
+      "get": {
+        "tags": [
+          "Deployment Mode"
+        ],
+        "description": "Wazuh agent action",
+        "operationId": "requestWazuhActions",
+        "parameters": [
+          {
+            "name": "action",
+            "in": "query",
+            "description": "Wazhuh Action",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "examples": {
+                  "Wazhug agent action status": {
+                    "description": "Wazhug agent action status",
+                    "value": []
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Settings-read,FedRamp-read"
+      }
+    },
+    "/fedramp/wazuh/config": {
+      "post": {
+        "tags": [
+          "Deployment Mode"
+        ],
+        "description": "Configure Wazuh agent",
+        "operationId": "configureWazuhClient",
+        "requestBody": {
+          "description": "Wazhuh configuration",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "examples": {
+                "Wazhuh configuration request": {
+                  "description": "Wazhuh configuration request",
+                  "value": {}
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Settings-write,FedRamp-write"
+      }
+    },
+    "/fedramp/wazuh/status": {
+      "get": {
+        "tags": [
+          "Deployment Mode"
+        ],
+        "description": "Get Wazuh agent status",
+        "operationId": "getWazuhAgentStatus",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "examples": {
+                  "Wazhug agent status": {
+                    "description": "Wazhug agent status",
+                    "value": []
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Settings-read,FedRamp-read"
+      }
+    },
+    "/ise/connect": {
+      "get": {
+        "tags": [
+          "Configuration - Ise Server"
+        ],
+        "description": "Check if the configured ISE server is reachable",
+        "operationId": "connect_ConfigurationIseServer_1203",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "VersionInfo": {
+                      "type": "object",
+                      "properties": {
+                        "currentServerVersion": {
+                          "type": "string",
+                          "example": "1.2"
+                        },
+                        "link": {
+                          "type": "object",
+                          "properties": {
+                            "href": {
+                              "type": "string",
+                              "example": "https://172.27.216.141:9060/ers/config/adminuser/versioninfo"
+                            },
+                            "rel": {
+                              "type": "string",
+                              "example": "self"
+                            },
+                            "type": {
+                              "type": "string",
+                              "example": "application/json"
+                            }
+                          },
+                          "$$ref": "#/components/schemas/LinkObject"
+                        },
+                        "supportedVersions": {
+                          "type": "string",
+                          "example": "1.0,1.1,1.2"
+                        }
+                      },
+                      "$$ref": "#/components/schemas/VersionInformation"
+                    }
+                  },
+                  "description": "Response from ISE ERS version info api",
+                  "$$ref": "#/components/schemas/ConnectResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/ise/credentials": {
+      "put": {
+        "tags": [
+          "Configuration - Ise Server"
+        ],
+        "description": "update Ise server credentials",
+        "operationId": "updateIseServerCredentials",
+        "requestBody": {
+          "description": "Ise Server with possibly new values for properties",
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "destinationVpn",
+                  "iseServerIP",
+                  "password",
+                  "sgt",
+                  "userAndUserGroup",
+                  "userName",
+                  "vpn",
+                  "vpnIpSubnet"
+                ],
+                "type": "object",
+                "properties": {
+                  "activeDirectoryDomain": {
+                    "type": "string",
+                    "example": "SDWAN-IDENTITY.CISCO.COM"
+                  },
+                  "destinationVpn": {
+                    "type": "string",
+                    "example": "0"
+                  },
+                  "iseCertName": {
+                    "type": "string",
+                    "example": "iseCertificate"
+                  },
+                  "iseRootCert": {
+                    "type": "string"
+                  },
+                  "iseServerIP": {
+                    "type": "string",
+                    "example": "172.27.216.141"
+                  },
+                  "joinPoint": {
+                    "type": "string",
+                    "example": "SDWAN-IDENTITY"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "testPassword"
+                  },
+                  "pxGridCertName": {
+                    "type": "string",
+                    "example": "pxGridCertificate"
+                  },
+                  "pxGridRootCert": {
+                    "type": "string"
+                  },
+                  "sgt": {
+                    "type": "string",
+                    "example": "false"
+                  },
+                  "userAndUserGroup": {
+                    "type": "string",
+                    "example": "true"
+                  },
+                  "userName": {
+                    "type": "string",
+                    "example": "admin"
+                  },
+                  "vpn": {
+                    "type": "string",
+                    "example": "0"
+                  },
+                  "vpnIpSubnet": {
+                    "type": "string",
+                    "example": "192.168.1.0/24"
+                  }
+                },
+                "$$ref": "#/components/schemas/IseServer"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Configuration - Ise Server"
+        ],
+        "description": "Add Ise server credentials",
+        "operationId": "addIseServerCredentials",
+        "requestBody": {
+          "description": "Ise Server",
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "destinationVpn",
+                  "iseServerIP",
+                  "password",
+                  "sgt",
+                  "userAndUserGroup",
+                  "userName",
+                  "vpn",
+                  "vpnIpSubnet"
+                ],
+                "type": "object",
+                "properties": {
+                  "activeDirectoryDomain": {
+                    "type": "string",
+                    "example": "SDWAN-IDENTITY.CISCO.COM"
+                  },
+                  "destinationVpn": {
+                    "type": "string",
+                    "example": "0"
+                  },
+                  "iseCertName": {
+                    "type": "string",
+                    "example": "iseCertificate"
+                  },
+                  "iseRootCert": {
+                    "type": "string"
+                  },
+                  "iseServerIP": {
+                    "type": "string",
+                    "example": "172.27.216.141"
+                  },
+                  "joinPoint": {
+                    "type": "string",
+                    "example": "SDWAN-IDENTITY"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "testPassword"
+                  },
+                  "pxGridCertName": {
+                    "type": "string",
+                    "example": "pxGridCertificate"
+                  },
+                  "pxGridRootCert": {
+                    "type": "string"
+                  },
+                  "sgt": {
+                    "type": "string",
+                    "example": "false"
+                  },
+                  "userAndUserGroup": {
+                    "type": "string",
+                    "example": "true"
+                  },
+                  "userName": {
+                    "type": "string",
+                    "example": "admin"
+                  },
+                  "vpn": {
+                    "type": "string",
+                    "example": "0"
+                  },
+                  "vpnIpSubnet": {
+                    "type": "string",
+                    "example": "192.168.1.0/24"
+                  }
+                },
+                "$$ref": "#/components/schemas/IseServer"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Configuration - Ise Server"
+        ],
+        "description": "Get Ise server credentials",
+        "operationId": "getIseServerCredentials",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "destinationVpn",
+                    "iseServerIP",
+                    "password",
+                    "sgt",
+                    "userAndUserGroup",
+                    "userName",
+                    "vpn",
+                    "vpnIpSubnet"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "activeDirectoryDomain": {
+                      "type": "string",
+                      "example": "SDWAN-IDENTITY.CISCO.COM"
+                    },
+                    "destinationVpn": {
+                      "type": "string",
+                      "example": "0"
+                    },
+                    "iseCertName": {
+                      "type": "string",
+                      "example": "iseCertificate"
+                    },
+                    "iseRootCert": {
+                      "type": "string"
+                    },
+                    "iseServerIP": {
+                      "type": "string",
+                      "example": "172.27.216.141"
+                    },
+                    "joinPoint": {
+                      "type": "string",
+                      "example": "SDWAN-IDENTITY"
+                    },
+                    "password": {
+                      "type": "string",
+                      "example": "testPassword"
+                    },
+                    "pxGridCertName": {
+                      "type": "string",
+                      "example": "pxGridCertificate"
+                    },
+                    "pxGridRootCert": {
+                      "type": "string"
+                    },
+                    "sgt": {
+                      "type": "string",
+                      "example": "false"
+                    },
+                    "userAndUserGroup": {
+                      "type": "string",
+                      "example": "true"
+                    },
+                    "userName": {
+                      "type": "string",
+                      "example": "admin"
+                    },
+                    "vpn": {
+                      "type": "string",
+                      "example": "0"
+                    },
+                    "vpnIpSubnet": {
+                      "type": "string",
+                      "example": "192.168.1.0/24"
+                    }
+                  },
+                  "$$ref": "#/components/schemas/IseServer"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/ise/credentials/iseandpxgrid": {
+      "delete": {
+        "tags": [
+          "Configuration - Ise Server"
+        ],
+        "description": "Delete PxGrid and Ise information on vManage. Also Deletes PxGrid Client on ISE",
+        "operationId": "deleteIseAndPxGridAccount",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/ise/credentials/pxgrid": {
+      "get": {
+        "tags": [
+          "Configuration - Ise Server"
+        ],
+        "description": "Get PxGrid account",
+        "operationId": "getPxGridAccount",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "pxGridPassword",
+                    "pxGridServerIp",
+                    "pxGridUserName",
+                    "status"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "AccessSecret": {
+                      "type": "string",
+                      "example": "aB8rj1m1lp"
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": "pxgrid infor"
+                    },
+                    "deviceType": {
+                      "type": "string",
+                      "example": "vsmart"
+                    },
+                    "nodeName": {
+                      "type": "string",
+                      "example": "~ise-admin-ise-1"
+                    },
+                    "pxGridHostName": {
+                      "type": "string",
+                      "example": "ISE-1.rtpaaa.net"
+                    },
+                    "pxGridPassword": {
+                      "type": "string",
+                      "example": "NJkl00jklkJk"
+                    },
+                    "pxGridServerIp": {
+                      "type": "string",
+                      "example": "172.27.16.141"
+                    },
+                    "pxGridUserName": {
+                      "type": "string",
+                      "example": "testName"
+                    },
+                    "restBaseURL": {
+                      "type": "string",
+                      "example": "https://ISE-1.rtpaaa.net:8910/pxgrid/ise/config/trustsec"
+                    },
+                    "status": {
+                      "type": "string",
+                      "example": "created"
+                    }
+                  },
+                  "description": "pxgrid information for making pxgrid api calls",
+                  "$$ref": "#/components/schemas/PxGridInfo"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Configuration - Ise Server"
+        ],
+        "description": "Delete PxGrid account information",
+        "operationId": "deletePxGrid",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/ise/credentials/pxgrid/cert": {
+      "get": {
+        "tags": [
+          "Configuration - Ise Server"
+        ],
+        "description": "Retrieves Pxgrid Certificate",
+        "operationId": "getPxgridCert",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {
+                  "Cert": {
+                    "description": "Cert",
+                    "value": "-----BEGIN CERTIFICATE-----\nMIIF7zCCA9egAwIBAgIQZiToABE+v71LjsuIg3EjqTANBgkqhkiG9w0BAQ0FADCB\niTELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExETAPBgNVBAcTCFNh\nbiBKb3v/3QMfoLFz004vv7vBf4VcpQQ8Bc\nTATYW0iy5jt+YNgvZj2HjYiOhwpMalGqlhBJMgljgNmupReAccQyw01hbPIG9vBK\nxWMSk/AFVb1Ctv7Q3MUV/1mZyTM14TUZbtDd1/lxIHBR7LKhMJqcjOOcNBFlkdXO\n6BaP2RPL6dw2x92ddnRtzpAPfx2c1R51rELPpenX0SNLoS0=\n-----END CERTIFICATE-----"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/ise/credentials/vsmart/sync": {
+      "post": {
+        "tags": [
+          "Configuration - Ise Server"
+        ],
+        "description": "Send pxGrid and ISE server configuration to vSmarts",
+        "operationId": "syncVsmart",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "push_file_template_configuration-9101ae23-c48b-4c33-af3a-4444e4a63b02"
+                    }
+                  },
+                  "description": "Response for a vsmart sync with the task id for the push from vManage to vSmarts",
+                  "$$ref": "#/components/schemas/VsmartSyncResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/ise/pxgrid/activate": {
+      "post": {
+        "tags": [
+          "Configuration - Ise Server"
+        ],
+        "description": "Activate pxGrid account",
+        "operationId": "accountActivate",
+        "requestBody": {
+          "description": "description for pxgrid node",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "type": "string",
+                    "example": "This is a description"
+                  },
+                  "pxGridPassword": {
+                    "type": "string",
+                    "example": "vjvR4vnzoLSAFPn9"
+                  },
+                  "pxGridUserName": {
+                    "type": "string",
+                    "example": "vIPtela_Inc_Regression_testUser123"
+                  }
+                },
+                "description": "Body for PxGrid node activate on ISE",
+                "$$ref": "#/components/schemas/ActivateBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "accountState": {
+                      "type": "string",
+                      "example": "PENDING"
+                    },
+                    "version": {
+                      "type": "string",
+                      "example": "2.0.3.24"
+                    }
+                  },
+                  "description": "Response from PxGrid node activation on ISE, account PENDING on activated ENABLED after approve",
+                  "$$ref": "#/components/schemas/ActivateResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/ise/pxgrid/approve": {
+      "put": {
+        "tags": [
+          "Configuration - Ise Server"
+        ],
+        "description": "Approve pxGrid account",
+        "operationId": "approve",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/ise/pxgrid/create": {
+      "post": {
+        "tags": [
+          "Configuration - Ise Server"
+        ],
+        "description": "Create pxGrid account",
+        "operationId": "accountCreate",
+        "requestBody": {
+          "description": "name for pxgrid node",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nodeName": {
+                    "type": "string",
+                    "example": "testUser123"
+                  }
+                },
+                "description": "Body for PxGrid node create on ISE",
+                "$$ref": "#/components/schemas/CreateBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "nodeName": {
+                      "type": "string",
+                      "example": "vIPtela_Inc_Regression_testUser123"
+                    },
+                    "password": {
+                      "type": "string",
+                      "example": "vjvR4vnzoLSAFPn9"
+                    },
+                    "userName": {
+                      "type": "string",
+                      "example": "vIPtela_Inc_Regression_testUser123"
+                    }
+                  },
+                  "description": "Response from PxGrid node creation on ISE",
+                  "$$ref": "#/components/schemas/CreateResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/opentaccase/authcode": {
+      "get": {
+        "tags": [
+          "Tools - TAC Cases"
+        ],
+        "description": "Gets Access Token for SSO Logjn",
+        "operationId": "oauthAccess",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "redirect",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "isRefreshNeeded",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "Access Token": {
+                    "description": "Access Token",
+                    "value": {
+                      "access_token": "emQHZjOpma4gfco2c14BShVrdAqQ",
+                      "refresh_token": "6cGDKZhHbYRR1ySrVpeKVmtIBSJifPopC8k5NeXVRW",
+                      "id_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjJNc1VCbzE3...",
+                      "token_type": "Bearer",
+                      "expires_in": 3599
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "deprecated": true,
+        "x-roles-required": "Tools-write"
+      }
+    },
+    "/opentaccase/getClientID": {
+      "get": {
+        "tags": [
+          "Tools - TAC Cases"
+        ],
+        "description": "Gets vManage Client ID",
+        "operationId": "getClientID",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "Access Token": {
+                    "description": "Access Token",
+                    "value": {
+                      "client_id": "xxxxxxxxx"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "deprecated": true,
+        "x-roles-required": "Tools-write"
+      }
+    },
+    "/partner": {
+      "get": {
+        "tags": [
+          "Partner - Registration"
+        ],
+        "description": "Get all NMS partners",
+        "operationId": "getPartners",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string",
+                        "example": "dnac-test"
+                      },
+                      "devicesAttached": {
+                        "type": "integer",
+                        "format": "int32",
+                        "example": 0
+                      },
+                      "id": {
+                        "type": "string",
+                        "example": "f54a0f0e-734b-4c31-a539-9dc5e0fd67a5"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "DNAC-test"
+                      },
+                      "owner": {
+                        "type": "string",
+                        "example": "admin"
+                      },
+                      "partnerId": {
+                        "type": "string",
+                        "example": "dnac-test"
+                      },
+                      "registrationDate": {
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1632900123277
+                      },
+                      "type": {
+                        "type": "string",
+                        "example": "dnac",
+                        "enum": [
+                          "aci",
+                          "dnac",
+                          "wcm",
+                          "mdp"
+                        ]
+                      }
+                    },
+                    "$$ref": "#/components/schemas/PartnerRes"
+                  }
+                },
+                "examples": {
+                  "Partners": {
+                    "description": "Partners",
+                    "value": [
+                      {
+                        "name": "DNAC-test",
+                        "partnerId": "dnac-test",
+                        "type": "dnac",
+                        "id": "f54a0f0e-734b-4c31-a539-9dc5e0fd67a5",
+                        "description": "dnac-test",
+                        "owner": "admin",
+                        "registrationDate": 1632900123277,
+                        "devicesAttached": 0
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Integration Management-read,Integration Management-write"
+      }
+    },
+    "/partner/aci/policy": {
+      "get": {
+        "tags": [
+          "Partner - ACI Policy Builder"
+        ],
+        "description": "Get ACI definitions",
+        "operationId": "getACIDefinitions",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "ACI policy": {
+                    "description": "ACI policy",
+                    "value": {}
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Template Deploy-read,Template Deploy-write,Policy Configuration-read,Policy Configuration-write,Policy Deploy-read,Policy Deploy-write,AppRoute Policy-read,AppRoute Policy-write,Traffic Data Policy-read,Traffic Data Policy-write"
+      }
+    },
+    "/partner/aci/policy/dscpmapping/{partnerId}": {
+      "post": {
+        "tags": [
+          "Partner - ACI Policy Builder"
+        ],
+        "description": "Create an ACI definition entry",
+        "operationId": "createDscpMappings",
+        "parameters": [
+          {
+            "name": "partnerId",
+            "in": "path",
+            "description": "Partner Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "ACI definition",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "examples": {
+                "ACI definition": {
+                  "description": "ACI definition",
+                  "value": {}
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "Action Id": {
+                    "description": "Action Id",
+                    "value": {}
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Policy Configuration-write,AppRoute Policy-write,Traffic Data Policy-write"
+      },
+      "delete": {
+        "tags": [
+          "Partner - ACI Policy Builder"
+        ],
+        "description": "Delete DSCP mapping",
+        "operationId": "deleteDscpMappings",
+        "parameters": [
+          {
+            "name": "partnerId",
+            "in": "path",
+            "description": "Partner Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "Action Id": {
+                    "description": "Action Id",
+                    "value": {}
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Policy Configuration-write,AppRoute Policy-write,Traffic Data Policy-write"
+      },
+      "get": {
+        "tags": [
+          "Partner - ACI Policy Builder"
+        ],
+        "description": "Get DSCP policy",
+        "operationId": "getDscpMappings",
+        "parameters": [
+          {
+            "name": "partnerId",
+            "in": "path",
+            "description": "Partner Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "DSCP policy": {
+                    "description": "DSCP policy",
+                    "value": {}
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Template Deploy-read,Template Deploy-write,Policy Configuration-read,Policy Configuration-write,Policy Deploy-read,Policy Deploy-writeAppRoute Policy-read,AppRoute Policy-write,Traffic Data Policy-read,Traffic Data Policy-write"
+      }
+    },
+    "/partner/aci/policy/events/{partnerId}": {
+      "get": {
+        "tags": [
+          "Partner - ACI Policy Builder"
+        ],
+        "description": "Get ACI events",
+        "operationId": "getEvents_PartnerAciPolicyBuilder_3803",
+        "parameters": [
+          {
+            "name": "partnerId",
+            "in": "path",
+            "description": "Partner Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "starttime",
+            "in": "query",
+            "description": "Start time",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "endtime",
+            "in": "query",
+            "description": "End time",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "examples": {
+                  "ACI events": {
+                    "description": "ACI events",
+                    "value": []
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Policy Configuration-read,Policy Configuration-write,AppRoute Policy-read,AppRoute Policy-write,Traffic Data Policy-read,Traffic Data Policy-write"
+      }
+    },
+    "/partner/aci/policy/prefixmapping/{partnerId}": {
+      "get": {
+        "tags": [
+          "Partner - ACI Policy Builder"
+        ],
+        "description": "Get prefix mapping",
+        "operationId": "getDataPrefixMappings",
+        "parameters": [
+          {
+            "name": "partnerId",
+            "in": "path",
+            "description": "Partner Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "Prefix mapping": {
+                    "description": "Prefix mapping",
+                    "value": {}
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Template Deploy-read,Template Deploy-write,Policy Configuration-read,Policy Configuration-write,Policy Deploy-read,Policy Deploy-writeAppRoute Policy-read,AppRoute Policy-write,Traffic Data Policy-read,Traffic Data Policy-write"
+      },
+      "post": {
+        "tags": [
+          "Partner - ACI Policy Builder"
+        ],
+        "description": "Create data prefix mapping",
+        "operationId": "setDataPrefixMappings",
+        "parameters": [
+          {
+            "name": "partnerId",
+            "in": "path",
+            "description": "Partner Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Prefix definition",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "examples": {
+                "Prefix definition": {
+                  "description": "Prefix definition",
+                  "value": {}
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "Action Id": {
+                    "description": "Action Id",
+                    "value": {}
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Policy Configuration-write,AppRoute Policy-write,Traffic Data Policy-write"
+      }
+    },
+    "/partner/aci/policy/sequences": {
+      "get": {
+        "tags": [
+          "Partner - ACI Policy Builder"
+        ],
+        "description": "Get data prefix sequence",
+        "operationId": "getDataPrefixSequences",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "examples": {
+                  "Data prefix sequence": {
+                    "description": "Data prefix sequence",
+                    "value": []
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Policy Configuration-read,Policy Configuration-write,AppRoute Policy-read,AppRoute Policy-write,Traffic Data Policy-read,Traffic Data Policy-write"
+      }
+    },
+    "/partner/dnac/sda/config/{partnerId}": {
+      "post": {
+        "tags": [
+          "Partner - DNAC SDA API"
+        ],
+        "description": "Create SDA enabled device",
+        "operationId": "createSDAConfig",
+        "parameters": [
+          {
+            "name": "partnerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Device SDA configuration",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "deviceConfig": {
+                          "type": "string",
+                          "example": "PHJwYyBtZXNzYWdlLWlkPSIxMDEiIHhtbG5zPSJ1cm46aWV0ZjpwYXJhbXM6eG1sOm5zOm5ldGNvbmY6YmFzZToxLjAiPg0KPGVkaXQtY29uZmlnPg0KPHRhcmdldD4NCjxjYW5kaWRhdGUvPg0KPC90YXJnZXQ+DQo8Y29uZmlnPjxuYXRpdmUgeG1sbnM9Imh0dHA6Ly9jaXNjby5jb20vbnMveWFuZy9DaXNjby1JT1MtWEUtbmF0aXZlIj4KICAgIDxzbm1wLXNlcnZlcj4KCQkJICAgICAgICAgIDxjb21tdW5pdHkgeG1sbnM9Imh0dHA6Ly9jaXNjby5jb20vbnMveWFuZy9DaXNjby1JT1MtWEUtc25tcCI+CiAgICAgICAgICAgIDxuYW1lPnByaXZhdGU8L25hbWU+CiAgICAgICAgICAgIDxSVy8+CiAgICAgICAgICA8L2NvbW11bml0eT4KICAgICAgICAgIDxjb21tdW5pdHktY29uZmlnIHhtbG5zPSJodHRwOi8vY2lzY28uY29tL25zL3lhbmcvQ2lzY28tSU9TLVhFLXNubXAiPgogICAgICAgICAgICA8bmFtZT5wcml2YXRlPC9uYW1lPgoJCQk8cGVybWlzc2lvbj5ydzwvcGVybWlzc2lvbj4KICAgICAgICAgIDwvY29tbXVuaXR5LWNvbmZpZz4KICAgICAgICAJCSAgICAgICAgICA8Y29tbXVuaXR5IHhtbG5zPSJodHRwOi8vY2lzY28uY29tL25zL3lhbmcvQ2lzY28tSU9TLVhFLXNubXAiPgogICAgICAgICAgICA8bmFtZT5wdWJsaWM8L25hbWU+CiAgICAgICAgICAgIDxSTy8+CiAgICAgICAgICA8L2NvbW11bml0eT4KICAgICAgICAgIDxjb21tdW5pdHktY29uZmlnIHhtbG5zPSJodHRwOi8vY2lzY28uY29tL25zL3lhbmcvQ2lzY28tSU9TLVhFLXNubXAiPgogICAgICAgICAgICA8bmFtZT5wdWJsaWM8L25hbWU+CiAgICAgICAgICAgIDxwZXJtaXNzaW9uPnJvPC9wZXJtaXNzaW9uPgogICAgICAgICAgPC9jb21tdW5pdHktY29uZmlnPgoJCQkJPC9zbm1wLXNlcnZlcj4KCTwvbmF0aXZlPjwvY29uZmlnPg0KPC9lZGl0LWNvbmZpZz4NCjwvcnBjPg=="
+                        },
+                        "deviceId": {
+                          "type": "string",
+                          "example": "C8K-cfb84064-12e9-4f7c-b9d9-bf78ce4dfb5f"
+                        }
+                      },
+                      "$$ref": "#/components/schemas/DeviceConfig"
+                    }
+                  },
+                  "header": {
+                    "type": "object",
+                    "properties": {
+                      "generatedOn": {
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1649645769219
+                      }
+                    },
+                    "$$ref": "#/components/schemas/VpnListResHeader"
+                  }
+                },
+                "$$ref": "#/components/schemas/SdaConfigRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "push_template_configuration-640b1326-b96e-11ec-8422-0242ac120002"
+                    }
+                  },
+                  "$$ref": "#/components/schemas/SdaDeviceConfigRes"
+                },
+                "examples": {
+                  "Device template push Id": {
+                    "description": "Device template push Id",
+                    "value": {
+                      "id": "push_template_configuration-640b1326-b96e-11ec-8422-0242ac120002"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Policy Configuration-write,Integration Management-write"
+      }
+    },
+    "/partner/dnac/sda/device/{partnerId}": {
+      "get": {
+        "tags": [
+          "Partner - DNAC SDA API"
+        ],
+        "description": "Get SDA enabled devices",
+        "operationId": "getSDAEnabledDevices",
+        "parameters": [
+          {
+            "name": "partnerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "chassis-serial-number": {
+                            "type": "string",
+                            "example": "SSI130300YK"
+                          },
+                          "configuredAaaUser": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "device-model": {
+                            "type": "string",
+                            "example": "C8000v"
+                          },
+                          "device-os": {
+                            "type": "string",
+                            "example": "next"
+                          },
+                          "device-type": {
+                            "type": "string",
+                            "example": "vedge"
+                          },
+                          "deviceId": {
+                            "type": "string",
+                            "example": "C8K-cfb84064-12e9-4f7c-b9d9-bf78ce4dfb5f"
+                          },
+                          "devicesAttached": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": 0
+                          },
+                          "discoveredDeviceInterfaces": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "host-name": {
+                            "type": "string",
+                            "example": "vm5"
+                          },
+                          "loopback": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "interfaceIP": {
+                                  "type": "string",
+                                  "example": "127.0.0.1"
+                                },
+                                "interfaceName": {
+                                  "type": "string",
+                                  "example": "Loopback0"
+                                }
+                              },
+                              "$$ref": "#/components/schemas/Loopback"
+                            }
+                          },
+                          "personality": {
+                            "type": "string",
+                            "example": "vedge"
+                          },
+                          "platform": {
+                            "type": "string",
+                            "example": "x86_64"
+                          },
+                          "reachability": {
+                            "type": "string",
+                            "example": "reachable",
+                            "enum": [
+                              "reachable",
+                              "unreachable"
+                            ]
+                          },
+                          "registrationDate": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 1590186370340
+                          },
+                          "serialNumber": {
+                            "type": "string",
+                            "example": "12345712"
+                          },
+                          "site-id": {
+                            "type": "string",
+                            "example": "500"
+                          },
+                          "state": {
+                            "type": "string",
+                            "example": "green"
+                          },
+                          "status": {
+                            "type": "string",
+                            "example": "normal",
+                            "enum": [
+                              "error",
+                              "warning",
+                              "normal",
+                              "new"
+                            ]
+                          },
+                          "system-ip": {
+                            "type": "string",
+                            "example": "172.16.255.15"
+                          },
+                          "templateStatus": {
+                            "type": "string",
+                            "example": "Success"
+                          },
+                          "uuid": {
+                            "type": "string",
+                            "example": "C8K-cfb84064-12e9-4f7c-b9d9-bf78ce4dfb5f"
+                          },
+                          "validity": {
+                            "type": "string",
+                            "example": "valid",
+                            "enum": [
+                              "invalid",
+                              "staging",
+                              "valid",
+                              "prestaging"
+                            ]
+                          },
+                          "version": {
+                            "type": "string",
+                            "example": "17.06.01.0.1422"
+                          },
+                          "wanInterfaces": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "$$ref": "#/components/schemas/Device"
+                      }
+                    },
+                    "header": {
+                      "type": "object",
+                      "properties": {
+                        "generatedOn": {
+                          "type": "integer",
+                          "format": "int64",
+                          "example": 1649645769219
+                        }
+                      },
+                      "$$ref": "#/components/schemas/VpnListResHeader"
+                    }
+                  },
+                  "$$ref": "#/components/schemas/SdaDevicesRes"
+                },
+                "examples": {
+                  "Devices list": {
+                    "description": "Devices list",
+                    "value": {
+                      "header": {
+                        "generatedOn": 1649645769219
+                      },
+                      "data": [
+                        {
+                          "uuid": "C8K-cfb84064-12e9-4f7c-b9d9-bf78ce4dfb5f",
+                          "deviceId": "C8K-cfb84064-12e9-4f7c-b9d9-bf78ce4dfb5f",
+                          "reachability": "reachable",
+                          "status": "normal",
+                          "personality": "vedge",
+                          "device-type": "normal",
+                          "device-model": "C8000v",
+                          "version": "17.06.01.0.1422",
+                          "site-id": "500",
+                          "platform": "x86_64",
+                          "device-os": "next",
+                          "state": "green",
+                          "chassis-serial-number": "SSI130300YK",
+                          "host-name": "vm5",
+                          "system-ip": "172.16.255.15",
+                          "serialNumber": "12345712",
+                          "templateStatus": "Success",
+                          "validity": "valid",
+                          "configuredAaaUser": [
+                            "admin"
+                          ],
+                          "wanInterfaces": [
+                            "GigabitEthernet1"
+                          ],
+                          "discoveredDeviceInterfaces": [
+                            "GigabitEthernet8",
+                            "GigabitEthernet1",
+                            "GigabitEthernet2"
+                          ],
+                          "registrationDate": 1632900123277,
+                          "devicesAttached": 0,
+                          "loopback": []
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Template Deploy-read,Template Deploy-write,Policy Configuration-read,Policy Configuration-write,Policy Deploy-read,Policy Deploy-write,Integration Management-read,Integration Management-write"
+      }
+    },
+    "/partner/dnac/sda/device/{partnerId}/{uuid}": {
+      "get": {
+        "tags": [
+          "Partner - DNAC SDA API"
+        ],
+        "description": "Get SDA enabled devices detail",
+        "operationId": "getDeviceDetails",
+        "parameters": [
+          {
+            "name": "partnerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "chassis-serial-number": {
+                            "type": "string",
+                            "example": "SSI130300YK"
+                          },
+                          "configuredAaaUser": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "device-model": {
+                            "type": "string",
+                            "example": "C8000v"
+                          },
+                          "device-os": {
+                            "type": "string",
+                            "example": "next"
+                          },
+                          "device-type": {
+                            "type": "string",
+                            "example": "vedge"
+                          },
+                          "deviceId": {
+                            "type": "string",
+                            "example": "C8K-cfb84064-12e9-4f7c-b9d9-bf78ce4dfb5f"
+                          },
+                          "devicesAttached": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": 0
+                          },
+                          "discoveredDeviceInterfaces": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "host-name": {
+                            "type": "string",
+                            "example": "vm5"
+                          },
+                          "loopback": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "interfaceIP": {
+                                  "type": "string",
+                                  "example": "127.0.0.1"
+                                },
+                                "interfaceName": {
+                                  "type": "string",
+                                  "example": "Loopback0"
+                                }
+                              },
+                              "$$ref": "#/components/schemas/Loopback"
+                            }
+                          },
+                          "personality": {
+                            "type": "string",
+                            "example": "vedge"
+                          },
+                          "platform": {
+                            "type": "string",
+                            "example": "x86_64"
+                          },
+                          "reachability": {
+                            "type": "string",
+                            "example": "reachable",
+                            "enum": [
+                              "reachable",
+                              "unreachable"
+                            ]
+                          },
+                          "registrationDate": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 1590186370340
+                          },
+                          "serialNumber": {
+                            "type": "string",
+                            "example": "12345712"
+                          },
+                          "site-id": {
+                            "type": "string",
+                            "example": "500"
+                          },
+                          "state": {
+                            "type": "string",
+                            "example": "green"
+                          },
+                          "status": {
+                            "type": "string",
+                            "example": "normal",
+                            "enum": [
+                              "error",
+                              "warning",
+                              "normal",
+                              "new"
+                            ]
+                          },
+                          "system-ip": {
+                            "type": "string",
+                            "example": "172.16.255.15"
+                          },
+                          "templateStatus": {
+                            "type": "string",
+                            "example": "Success"
+                          },
+                          "uuid": {
+                            "type": "string",
+                            "example": "C8K-cfb84064-12e9-4f7c-b9d9-bf78ce4dfb5f"
+                          },
+                          "validity": {
+                            "type": "string",
+                            "example": "valid",
+                            "enum": [
+                              "invalid",
+                              "staging",
+                              "valid",
+                              "prestaging"
+                            ]
+                          },
+                          "version": {
+                            "type": "string",
+                            "example": "17.06.01.0.1422"
+                          },
+                          "wanInterfaces": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "$$ref": "#/components/schemas/Device"
+                      }
+                    },
+                    "header": {
+                      "type": "object",
+                      "properties": {
+                        "generatedOn": {
+                          "type": "integer",
+                          "format": "int64",
+                          "example": 1649645769219
+                        }
+                      },
+                      "$$ref": "#/components/schemas/VpnListResHeader"
+                    }
+                  },
+                  "$$ref": "#/components/schemas/SdaDevicesRes"
+                },
+                "examples": {
+                  "Device detail list": {
+                    "description": "Device detail list",
+                    "value": {
+                      "header": {
+                        "generatedOn": 1649645769219
+                      },
+                      "data": [
+                        {
+                          "uuid": "C8K-cfb84064-12e9-4f7c-b9d9-bf78ce4dfb5f",
+                          "deviceId": "C8K-cfb84064-12e9-4f7c-b9d9-bf78ce4dfb5f",
+                          "reachability": "reachable",
+                          "status": "normal",
+                          "personality": "vedge",
+                          "device-type": "normal",
+                          "device-model": "C8000v",
+                          "version": "17.06.01.0.1422",
+                          "site-id": "500",
+                          "platform": "x86_64",
+                          "device-os": "next",
+                          "state": "green",
+                          "chassis-serial-number": "SSI130300YK",
+                          "host-name": "vm5",
+                          "system-ip": "172.16.255.15",
+                          "serialNumber": "12345712",
+                          "templateStatus": "Success",
+                          "validity": "valid",
+                          "configuredAaaUser": [
+                            "admin"
+                          ],
+                          "wanInterfaces": [
+                            "GigabitEthernet1"
+                          ],
+                          "discoveredDeviceInterfaces": [
+                            "GigabitEthernet8",
+                            "GigabitEthernet1",
+                            "GigabitEthernet2"
+                          ],
+                          "registrationDate": 1632900123277,
+                          "devicesAttached": 0,
+                          "loopback": []
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Template Deploy-read,Template Deploy-write,Policy Configuration-read,Policy Configuration-write,Policy Deploy-read,Policy Deploy-write,Integration Management-read,Integration Management-write"
+      }
+    },
+    "/partner/dnac/sda/netconfconfig/{partnerId}": {
+      "post": {
+        "tags": [
+          "Partner - DNAC SDA API"
+        ],
+        "description": "Create SDA enabled device from Netconf",
+        "operationId": "createSDAConfigFromNetconf",
+        "parameters": [
+          {
+            "name": "partnerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Device SDA configuration",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "deviceConfig": {
+                          "type": "string",
+                          "example": "PHJwYyBtZXNzYWdlLWlkPSIxMDEiIHhtbG5zPSJ1cm46aWV0ZjpwYXJhbXM6eG1sOm5zOm5ldGNvbmY6YmFzZToxLjAiPg0KPGVkaXQtY29uZmlnPg0KPHRhcmdldD4NCjxjYW5kaWRhdGUvPg0KPC90YXJnZXQ+DQo8Y29uZmlnPjxuYXRpdmUgeG1sbnM9Imh0dHA6Ly9jaXNjby5jb20vbnMveWFuZy9DaXNjby1JT1MtWEUtbmF0aXZlIj4KICAgIDxzbm1wLXNlcnZlcj4KCQkJICAgICAgICAgIDxjb21tdW5pdHkgeG1sbnM9Imh0dHA6Ly9jaXNjby5jb20vbnMveWFuZy9DaXNjby1JT1MtWEUtc25tcCI+CiAgICAgICAgICAgIDxuYW1lPnByaXZhdGU8L25hbWU+CiAgICAgICAgICAgIDxSVy8+CiAgICAgICAgICA8L2NvbW11bml0eT4KICAgICAgICAgIDxjb21tdW5pdHktY29uZmlnIHhtbG5zPSJodHRwOi8vY2lzY28uY29tL25zL3lhbmcvQ2lzY28tSU9TLVhFLXNubXAiPgogICAgICAgICAgICA8bmFtZT5wcml2YXRlPC9uYW1lPgoJCQk8cGVybWlzc2lvbj5ydzwvcGVybWlzc2lvbj4KICAgICAgICAgIDwvY29tbXVuaXR5LWNvbmZpZz4KICAgICAgICAJCSAgICAgICAgICA8Y29tbXVuaXR5IHhtbG5zPSJodHRwOi8vY2lzY28uY29tL25zL3lhbmcvQ2lzY28tSU9TLVhFLXNubXAiPgogICAgICAgICAgICA8bmFtZT5wdWJsaWM8L25hbWU+CiAgICAgICAgICAgIDxSTy8+CiAgICAgICAgICA8L2NvbW11bml0eT4KICAgICAgICAgIDxjb21tdW5pdHktY29uZmlnIHhtbG5zPSJodHRwOi8vY2lzY28uY29tL25zL3lhbmcvQ2lzY28tSU9TLVhFLXNubXAiPgogICAgICAgICAgICA8bmFtZT5wdWJsaWM8L25hbWU+CiAgICAgICAgICAgIDxwZXJtaXNzaW9uPnJvPC9wZXJtaXNzaW9uPgogICAgICAgICAgPC9jb21tdW5pdHktY29uZmlnPgoJCQkJPC9zbm1wLXNlcnZlcj4KCTwvbmF0aXZlPjwvY29uZmlnPg0KPC9lZGl0LWNvbmZpZz4NCjwvcnBjPg=="
+                        },
+                        "deviceId": {
+                          "type": "string",
+                          "example": "C8K-cfb84064-12e9-4f7c-b9d9-bf78ce4dfb5f"
+                        }
+                      },
+                      "$$ref": "#/components/schemas/DeviceConfig"
+                    }
+                  },
+                  "header": {
+                    "type": "object",
+                    "properties": {
+                      "generatedOn": {
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1649645769219
+                      }
+                    },
+                    "$$ref": "#/components/schemas/VpnListResHeader"
+                  }
+                },
+                "$$ref": "#/components/schemas/SdaConfigRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "push_template_configuration-640b1326-b96e-11ec-8422-0242ac120002"
+                    }
+                  },
+                  "$$ref": "#/components/schemas/SdaDeviceConfigRes"
+                },
+                "examples": {
+                  "Device template push Id": {
+                    "description": "Device template push Id",
+                    "value": {
+                      "id": "push_template_configuration-640b1326-b96e-11ec-8422-0242ac120002"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Policy Configuration-write,Integration Management-write"
+      }
+    },
+    "/partner/dnac/sda/site/{partnerId}": {
+      "get": {
+        "tags": [
+          "Partner - DNAC SDA API"
+        ],
+        "description": "Get SDA Sites for Partner",
+        "operationId": "getSitesForPartner",
+        "parameters": [
+          {
+            "name": "partnerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "partnerId": {
+                            "type": "string",
+                            "example": "dnac-test"
+                          },
+                          "sites": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "$$ref": "#/components/schemas/PartnerSite"
+                      }
+                    },
+                    "header": {
+                      "type": "object",
+                      "properties": {
+                        "generatedOn": {
+                          "type": "integer",
+                          "format": "int64",
+                          "example": 1649645769219
+                        }
+                      },
+                      "$$ref": "#/components/schemas/VpnListResHeader"
+                    }
+                  },
+                  "$$ref": "#/components/schemas/SdaSitesRes"
+                },
+                "examples": {
+                  "Sites": {
+                    "description": "Sites",
+                    "value": {
+                      "header": {
+                        "generatedOn": 1649645769219
+                      },
+                      "data": [
+                        {
+                          "partnerId": "dnac-test",
+                          "sites": [
+                            "400"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Template Deploy-read,Template Deploy-write,Policy Configuration-read,Policy Configuration-write,Policy Deploy-read,Policy Deploy-write,Integration Management-read,Integration Management-write"
+      }
+    },
+    "/partner/dnac/sda/vpn": {
+      "get": {
+        "tags": [
+          "Partner - DNAC SDA API"
+        ],
+        "description": "Get Overlay VPN list",
+        "operationId": "getOverlayVPNList",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "vpnId": {
+                            "type": "string",
+                            "example": "33"
+                          },
+                          "vpnType": {
+                            "type": "string",
+                            "example": "configuredVPN"
+                          }
+                        },
+                        "$$ref": "#/components/schemas/Vpn"
+                      }
+                    },
+                    "header": {
+                      "type": "object",
+                      "properties": {
+                        "generatedOn": {
+                          "type": "integer",
+                          "format": "int64",
+                          "example": 1649645769219
+                        }
+                      },
+                      "$$ref": "#/components/schemas/VpnListResHeader"
+                    }
+                  },
+                  "$$ref": "#/components/schemas/VpnListRes"
+                },
+                "examples": {
+                  "VPN list": {
+                    "description": "VPN list",
+                    "value": {
+                      "header": {
+                        "generatedOn": 1649645769219
+                      },
+                      "data": [
+                        {
+                          "vpnId": "33",
+                          "vpnType": "configuredVPN"
+                        },
+                        {
+                          "vpnId": "0",
+                          "vpnType": "vmanageVPN"
+                        },
+                        {
+                          "vpnId": "512",
+                          "vpnType": "vmanageVPN"
+                        },
+                        {
+                          "vpnId": "65528",
+                          "vpnType": "vmanageVPN"
+                        },
+                        {
+                          "vpnId": "Mgmt-intf",
+                          "vpnType": "vmanageVPN"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "DNAC SDA-read,DNAC SDA-write,Integration Management-read,Integration Management-write"
+      }
+    },
+    "/partner/vpn": {
+      "get": {
+        "tags": [
+          "Partner - Registration"
+        ],
+        "description": "Get all VPNs",
+        "operationId": "getVPNList",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "vpnId": {
+                            "type": "string",
+                            "example": "33"
+                          },
+                          "vpnType": {
+                            "type": "string",
+                            "example": "configuredVPN"
+                          }
+                        },
+                        "$$ref": "#/components/schemas/Vpn"
+                      }
+                    },
+                    "header": {
+                      "type": "object",
+                      "properties": {
+                        "generatedOn": {
+                          "type": "integer",
+                          "format": "int64",
+                          "example": 1649645769219
+                        }
+                      },
+                      "$$ref": "#/components/schemas/VpnListResHeader"
+                    }
+                  },
+                  "$$ref": "#/components/schemas/VpnListRes"
+                },
+                "examples": {
+                  "VPN list": {
+                    "description": "VPN list",
+                    "value": {
+                      "header": {
+                        "generatedOn": 1649645769219
+                      },
+                      "data": [
+                        {
+                          "vpnId": "1",
+                          "vpnType": "configuredVPN"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Integration Management-read,Integration Management-write"
+      }
+    },
+    "/partner/wcm/netconf/{nmsId}": {
+      "post": {
+        "tags": [
+          "Partner - WCM Configs"
+        ],
+        "description": "Push device configs",
+        "operationId": "pushNetconfConfigs",
+        "parameters": [
+          {
+            "name": "nmsId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Netconf configuration",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "deviceConfig": {
+                          "type": "string",
+                          "example": "ICA8bmF0aXZlIHhtbG5zPSJodHRwOi8vY2lzY28uY29tL25zL3lhbmcvQ2lzY28tSU9TLVhFLW5hdGl2ZSI+CiAgICAgICAgICAgICAgICA8c2VydmljZS1pbnNlcnRpb24+CiAgICAgICAgICAgICAgICAgICAgPGFwcG5hdi1jb250cm9sbGVyLWdyb3VwIHhtbG5zPSJodHRwOi8vY2lzY28uY29tL25zL3lhbmcvQ2lzY28tSU9TLVhFLXNlcnZpY2UtaW5zZXJ0aW9uIj4KICAgICAgICAgICAgICAgICAgICAgICAgPGdyb3VwLW5hbWU+QVBQUU9FLUFDRzwvZ3JvdXAtbmFtZT4KICAgICAgICAgICAgICAgICAgICAgICAgPGFwcHFvZS8+CiAgICAgICAgICAgICAgICAgICAgICAgIDxhcHBuYXYtY29udHJvbGxlcnM+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YWRkcmVzcz4xOTIuMTY4LjAuMjwvYWRkcmVzcz4KICAgICAgICAgICAgICAgICAgICAgICAgPC9hcHBuYXYtY29udHJvbGxlcnM+CiAgICAgICAgICAgICAgICAgICAgPC9hcHBuYXYtY29udHJvbGxlci1ncm91cD4KICAgICAgICAgICAgICA8L3NlcnZpY2UtaW5zZXJ0aW9uPgogIDwvbmF0aXZlPg=="
+                        },
+                        "deviceId": {
+                          "type": "string",
+                          "example": "C8K-8f8cc50c-b05b-4a60-956b-5bdd8e79e5c0"
+                        }
+                      },
+                      "$$ref": "#/components/schemas/NetconfConfig"
+                    }
+                  },
+                  "header": {
+                    "type": "object",
+                    "properties": {
+                      "generateOn": {
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1649645769219
+                      }
+                    },
+                    "$$ref": "#/components/schemas/NetconfConfigHeader"
+                  }
+                },
+                "$$ref": "#/components/schemas/WcmNetconfConfigRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "push_template_configuration-40649f49-787a-4481-9b55-c13eabbde7f2"
+                    }
+                  },
+                  "$$ref": "#/components/schemas/WcmNetconfConfigRes"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Policy Configuration-write,Integration Management-write"
+      }
+    },
+    "/partner/{partnerType}": {
+      "post": {
+        "tags": [
+          "Partner - Registration"
+        ],
+        "description": "Register NMS partner",
+        "operationId": "registerPartner",
+        "parameters": [
+          {
+            "name": "partnerType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Partner",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "type": "string",
+                    "example": "dnac-test"
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "DNAC-test"
+                  },
+                  "partnerId": {
+                    "type": "string",
+                    "example": "dnac-test"
+                  }
+                },
+                "$$ref": "#/components/schemas/RegisterPartnerRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "f54a0f0e-734b-4c31-a539-9dc5e0fd67a5"
+                    }
+                  },
+                  "$$ref": "#/components/schemas/RegisterPartnerRes"
+                },
+                "examples": {
+                  "Partner Id": {
+                    "description": "Partner Id",
+                    "value": {
+                      "id": "f54a0f0e-734b-4c31-a539-9dc5e0fd67a5"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Integration Management-write"
+      },
+      "get": {
+        "tags": [
+          "Partner - Registration"
+        ],
+        "description": "Get NMS partners by partner type",
+        "operationId": "getPartnersByPartnerType",
+        "parameters": [
+          {
+            "name": "partnerType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "properties": {
+                    "empty": {
+                      "type": "boolean"
+                    }
+                  },
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string",
+                        "example": "dnac-test"
+                      },
+                      "devicesAttached": {
+                        "type": "integer",
+                        "format": "int32",
+                        "example": 0
+                      },
+                      "id": {
+                        "type": "string",
+                        "example": "f54a0f0e-734b-4c31-a539-9dc5e0fd67a5"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "DNAC-test"
+                      },
+                      "owner": {
+                        "type": "string",
+                        "example": "admin"
+                      },
+                      "partnerId": {
+                        "type": "string",
+                        "example": "dnac-test"
+                      },
+                      "registrationDate": {
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1632900123277
+                      },
+                      "type": {
+                        "type": "string",
+                        "example": "dnac",
+                        "enum": [
+                          "aci",
+                          "dnac",
+                          "wcm",
+                          "mdp"
+                        ]
+                      }
+                    },
+                    "$$ref": "#/components/schemas/PartnerRes"
+                  },
+                  "$$ref": "#/components/schemas/PartnerListRes"
+                },
+                "examples": {
+                  "Partners": {
+                    "description": "Partners",
+                    "value": [
+                      {
+                        "name": "DNAC-test",
+                        "partnerId": "dnac-test",
+                        "type": "dnac",
+                        "id": "f54a0f0e-734b-4c31-a539-9dc5e0fd67a5",
+                        "description": "dnac-test",
+                        "owner": "admin",
+                        "registrationDate": 1632900123277,
+                        "devicesAttached": 0
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Integration Management-read,Integration Management-write"
+      }
+    },
+    "/partner/{partnerType}/map/{nmsId}": {
+      "post": {
+        "tags": [
+          "Partner - Registration"
+        ],
+        "description": "Map devices for the partner",
+        "operationId": "mapDevices",
+        "parameters": [
+          {
+            "name": "partnerType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "nmsId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "List of devices",
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "devices"
+                ],
+                "type": "object",
+                "properties": {
+                  "devices": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "$$ref": "#/components/schemas/MapDevicesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    }
+                  },
+                  "$$ref": "#/components/schemas/StatusResponse"
+                },
+                "examples": {
+                  "Status": {
+                    "description": "Status",
+                    "value": {
+                      "status": "success"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Integration Management-write"
+      },
+      "get": {
+        "tags": [
+          "Partner - Registration"
+        ],
+        "description": "List mapped devices for the partner",
+        "operationId": "getPartnerDevices",
+        "parameters": [
+          {
+            "name": "partnerType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "nmsId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "devices": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "chassis-serial-number": {
+                            "type": "string",
+                            "example": "SSI130300YK"
+                          },
+                          "configuredAaaUser": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "device-model": {
+                            "type": "string",
+                            "example": "C8000v"
+                          },
+                          "device-os": {
+                            "type": "string",
+                            "example": "next"
+                          },
+                          "device-type": {
+                            "type": "string",
+                            "example": "vedge"
+                          },
+                          "deviceId": {
+                            "type": "string",
+                            "example": "C8K-cfb84064-12e9-4f7c-b9d9-bf78ce4dfb5f"
+                          },
+                          "devicesAttached": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": 0
+                          },
+                          "discoveredDeviceInterfaces": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "host-name": {
+                            "type": "string",
+                            "example": "vm5"
+                          },
+                          "loopback": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "interfaceIP": {
+                                  "type": "string",
+                                  "example": "127.0.0.1"
+                                },
+                                "interfaceName": {
+                                  "type": "string",
+                                  "example": "Loopback0"
+                                }
+                              },
+                              "$$ref": "#/components/schemas/Loopback"
+                            }
+                          },
+                          "personality": {
+                            "type": "string",
+                            "example": "vedge"
+                          },
+                          "platform": {
+                            "type": "string",
+                            "example": "x86_64"
+                          },
+                          "reachability": {
+                            "type": "string",
+                            "example": "reachable",
+                            "enum": [
+                              "reachable",
+                              "unreachable"
+                            ]
+                          },
+                          "registrationDate": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 1590186370340
+                          },
+                          "serialNumber": {
+                            "type": "string",
+                            "example": "12345712"
+                          },
+                          "site-id": {
+                            "type": "string",
+                            "example": "500"
+                          },
+                          "state": {
+                            "type": "string",
+                            "example": "green"
+                          },
+                          "status": {
+                            "type": "string",
+                            "example": "normal",
+                            "enum": [
+                              "error",
+                              "warning",
+                              "normal",
+                              "new"
+                            ]
+                          },
+                          "system-ip": {
+                            "type": "string",
+                            "example": "172.16.255.15"
+                          },
+                          "templateStatus": {
+                            "type": "string",
+                            "example": "Success"
+                          },
+                          "uuid": {
+                            "type": "string",
+                            "example": "C8K-cfb84064-12e9-4f7c-b9d9-bf78ce4dfb5f"
+                          },
+                          "validity": {
+                            "type": "string",
+                            "example": "valid",
+                            "enum": [
+                              "invalid",
+                              "staging",
+                              "valid",
+                              "prestaging"
+                            ]
+                          },
+                          "version": {
+                            "type": "string",
+                            "example": "17.06.01.0.1422"
+                          },
+                          "wanInterfaces": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "$$ref": "#/components/schemas/PartnerDevice"
+                      }
+                    }
+                  },
+                  "$$ref": "#/components/schemas/PartnerDevicesRes"
+                },
+                "examples": {
+                  "Devices": {
+                    "description": "Devices",
+                    "value": {
+                      "devices": [
+                        {
+                          "uuid": "C8K-cfb84064-12e9-4f7c-b9d9-bf78ce4dfb5f",
+                          "deviceId": "C8K-cfb84064-12e9-4f7c-b9d9-bf78ce4dfb5f",
+                          "reachability": "reachable",
+                          "status": "normal",
+                          "personality": "vedge",
+                          "device-type": "normal",
+                          "device-model": "C8000v",
+                          "version": "17.06.01.0.1422",
+                          "site-id": "500",
+                          "platform": "x86_64",
+                          "device-os": "next",
+                          "state": "green",
+                          "chassis-serial-number": "SSI130300YK",
+                          "host-name": "vm5",
+                          "system-ip": "172.16.255.15",
+                          "serialNumber": "12345712",
+                          "templateStatus": "Success",
+                          "validity": "valid",
+                          "configuredAaaUser": [
+                            "admin"
+                          ],
+                          "wanInterfaces": [
+                            "GigabitEthernet1"
+                          ],
+                          "discoveredDeviceInterfaces": [
+                            "GigabitEthernet8",
+                            "GigabitEthernet1",
+                            "GigabitEthernet2"
+                          ],
+                          "registrationDate": 1632900123277,
+                          "devicesAttached": 0,
+                          "loopback": []
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Integration Management-read,Integration Management-write,Policy Configuration-write"
+      },
+      "delete": {
+        "tags": [
+          "Partner - Registration"
+        ],
+        "description": "Unmap all devices for the partner",
+        "operationId": "unmapDevices",
+        "parameters": [
+          {
+            "name": "partnerType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "nmsId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    }
+                  },
+                  "$$ref": "#/components/schemas/StatusResponse"
+                },
+                "examples": {
+                  "Status": {
+                    "description": "Status",
+                    "value": {
+                      "status": "success"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Integration Management-write"
+      }
+    },
+    "/partner/{partnerType}/unmap/{nmsId}": {
+      "post": {
+        "tags": [
+          "Partner - Registration"
+        ],
+        "description": "Unmap a set of devices for the partner",
+        "operationId": "deleteDeviceMapping",
+        "parameters": [
+          {
+            "name": "partnerType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "nmsId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "List of devices",
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "devices"
+                ],
+                "type": "object",
+                "properties": {
+                  "devices": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "$$ref": "#/components/schemas/MapDevicesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    }
+                  },
+                  "$$ref": "#/components/schemas/StatusResponse"
+                },
+                "examples": {
+                  "Status": {
+                    "description": "Status",
+                    "value": {
+                      "status": "success"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Integration Management-write"
+      }
+    },
+    "/partner/{partnerType}/{nmsId}": {
+      "delete": {
+        "tags": [
+          "Partner - Registration"
+        ],
+        "description": "Delete NMS partner",
+        "operationId": "deletePartner",
+        "parameters": [
+          {
+            "name": "partnerType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "nmsId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    }
+                  },
+                  "$$ref": "#/components/schemas/StatusResponse"
+                },
+                "examples": {
+                  "Status": {
+                    "description": "Status",
+                    "value": {
+                      "status": "success"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Integration Management-write"
+      },
+      "get": {
+        "tags": [
+          "Partner - Registration"
+        ],
+        "description": "Get NMS partners by partner type and Id",
+        "operationId": "getPartner",
+        "parameters": [
+          {
+            "name": "partnerType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "nmsId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "description": {
+                      "type": "string",
+                      "example": "dnac-test"
+                    },
+                    "devicesAttached": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 0
+                    },
+                    "id": {
+                      "type": "string",
+                      "example": "f54a0f0e-734b-4c31-a539-9dc5e0fd67a5"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "DNAC-test"
+                    },
+                    "owner": {
+                      "type": "string",
+                      "example": "admin"
+                    },
+                    "partnerId": {
+                      "type": "string",
+                      "example": "dnac-test"
+                    },
+                    "registrationDate": {
+                      "type": "integer",
+                      "format": "int64",
+                      "example": 1632900123277
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "dnac",
+                      "enum": [
+                        "aci",
+                        "dnac",
+                        "wcm",
+                        "mdp"
+                      ]
+                    }
+                  },
+                  "$$ref": "#/components/schemas/PartnerRes"
+                },
+                "examples": {
+                  "Partner": {
+                    "description": "Partner",
+                    "value": {
+                      "name": "DNAC-test",
+                      "partnerId": "dnac-test",
+                      "type": "dnac",
+                      "id": "f54a0f0e-734b-4c31-a539-9dc5e0fd67a5",
+                      "description": "dnac-test",
+                      "owner": "admin",
+                      "registrationDate": 1632900123277,
+                      "devicesAttached": 0
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Integration Management-read,Integration Management-write"
+      },
+      "put": {
+        "tags": [
+          "Partner - Registration"
+        ],
+        "description": "Update NMS partner details",
+        "operationId": "updatePartner",
+        "parameters": [
+          {
+            "name": "partnerType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "nmsId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Partner",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "type": "string",
+                    "example": "dnac-test-new"
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "DNAC-test-new"
+                  }
+                },
+                "$$ref": "#/components/schemas/UpdatePartnerRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Integration Management-write"
+      }
+    },
+    "/serverlongpoll/event/poll/{partnerId}": {
+      "get": {
+        "tags": [
+          "Partner - Registration"
+        ],
+        "description": "Retrieve registration change information",
+        "operationId": "getDataChangeInfo",
+        "parameters": [
+          {
+            "name": "partnerId",
+            "in": "path",
+            "description": "Partner Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "event_id",
+            "in": "query",
+            "description": "Continuation token of ongoing event-polling session",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "eventNames",
+            "in": "query",
+            "description": "Names of type of events to filter on",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "eventName": {
+                    "type": "string"
+                  }
+                },
+                "description": "This is valid eventName",
+                "$$ref": "#/components/schemas/EventName"
+              }
+            }
+          },
+          {
+            "name": "wait_time",
+            "in": "query",
+            "description": "Maximum polling wait time in seconds",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "default"
+      }
+    },
+    "/umbrella/getkeys": {
+      "get": {
+        "tags": [
+          "Umbrella"
+        ],
+        "description": "Get keys from Umbrella",
+        "operationId": "getAllKeysFromUmbrella",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "default"
+      }
+    },
+    "/umbrella/getkeys/management": {
+      "get": {
+        "tags": [
+          "Umbrella"
+        ],
+        "description": "Get management keys from Umbrella",
+        "operationId": "getManagementKeysFromUmbrella",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "default"
+      }
+    },
+    "/umbrella/getkeys/networkdevices": {
+      "get": {
+        "tags": [
+          "Umbrella"
+        ],
+        "description": "Get network devices keys from Umbrella",
+        "operationId": "getNetworkKeysFromUmbrella",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "default"
+      }
+    },
+    "/umbrella/getkeys/reporting": {
+      "get": {
+        "tags": [
+          "Umbrella"
+        ],
+        "description": "Get reporting keys from Umbrella",
+        "operationId": "getReportingKeysFromUmbrella",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "default"
+      }
+    },
+    "/umbrella/syncnow": {
+      "get": {
+        "tags": [
+          "Umbrella"
+        ],
+        "description": "Get metadata from db and send to Umbrella",
+        "operationId": "sendMetaDataToUmbrella",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/v1/cisco-software/eula": {
+      "get": {
+        "tags": [
+          "Cisco Software"
+        ],
+        "description": "Get User's EULA status from cisco",
+        "operationId": "fetchEulaStatus",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "eula_accepted": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "eula_form": {
+                      "type": "string",
+                      "example": "https://software-test.cisco.com/download/eula"
+                    }
+                  },
+                  "$$ref": "#/components/schemas/EulaResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/v1/cisco-software/imagemetadata": {
+      "post": {
+        "tags": [
+          "Cisco Software"
+        ],
+        "description": "Get image metadata from cisco",
+        "operationId": "getImageMetadataFromCCO",
+        "parameters": [
+          {
+            "name": "imageType",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/v1/cisco-software/user": {
+      "get": {
+        "tags": [
+          "Cisco Software"
+        ],
+        "description": "Get user",
+        "operationId": "getCiscoSoftwareUser",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "user": {
+                      "type": "string",
+                      "example": "srikann@cisco.com"
+                    }
+                  },
+                  "$$ref": "#/components/schemas/GetUser"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/v1/cloudonramp/saas": {
+      "get": {
+        "tags": [
+          "Configuration - Cloud On Ramp SaaS"
+        ],
+        "description": "Get Cloud On Ramp For Saas apps status",
+        "operationId": "getCloudOnRampSaasStatus",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Cloud OnRamp-read"
+      }
+    },
+    "/v1/cloudonramp/saas/appSettingsStatus": {
+      "get": {
+        "tags": [
+          "Configuration - Cloud On Ramp SaaS"
+        ],
+        "description": "Get Cloud On Ramp Settings for apps, contains traffic steering",
+        "operationId": "getCorSaasAppSettingsStatus",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Cloud OnRamp-read"
+      },
+      "put": {
+        "tags": [
+          "Configuration - Cloud On Ramp SaaS"
+        ],
+        "description": "Put Cloud On Ramp Settings for apps, contains traffic steering",
+        "operationId": "putCorSaasAppSettingsStatus",
+        "requestBody": {
+          "content": {
+            "*/*": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "valueType": {
+                      "type": "string",
+                      "enum": [
+                        "ARRAY",
+                        "OBJECT",
+                        "STRING",
+                        "NUMBER",
+                        "TRUE",
+                        "FALSE",
+                        "NULL"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Cloud OnRamp-read"
+      }
+    },
+    "/v1/cloudonramp/saas/cloud_tunnels": {
+      "get": {
+        "tags": [
+          "Configuration - Cloud On Ramp SaaS"
+        ],
+        "description": "Get Secure Internet Gateway Tunnel List",
+        "operationId": "getCloudTunnelList",
+        "parameters": [
+          {
+            "name": "deviceIp",
+            "in": "query",
+            "description": "DeviceIp/SystemIp",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Cloud OnRamp-read"
+      }
+    },
+    "/v1/cloudonramp/saas/configuration": {
+      "get": {
+        "tags": [
+          "Configuration - Cloud On Ramp SaaS"
+        ],
+        "description": "Get Policy Groups that are deployed with Cloud on Ramp for Saas intent",
+        "operationId": "getPolicyGroupsWithCorSaasApps",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Cloud OnRamp-read"
+      }
+    },
+    "/v1/cloudonramp/saas/devices": {
+      "get": {
+        "tags": [
+          "Configuration - Cloud On Ramp SaaS"
+        ],
+        "description": "Get site, apps and device role information for cloud on ramp devices",
+        "operationId": "getCorSitesPerDevice",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Cloud OnRamp-read"
+      }
+    },
+    "/v1/cloudonramp/saas/inactivesites": {
+      "get": {
+        "tags": [
+          "Configuration - Cloud On Ramp SaaS"
+        ],
+        "description": "Get inactive sites",
+        "operationId": "getInactiveCorSaasSites",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Cloud OnRamp-read"
+      }
+    },
+    "/v1/cloudonramp/saas/legacydevicelist": {
+      "get": {
+        "tags": [
+          "Configuration - Cloud On Ramp SaaS"
+        ],
+        "description": "Get Legacy Devices List",
+        "operationId": "getLegacyDeviceList",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Cloud OnRamp-read"
+      }
+    },
+    "/v1/cloudonramp/saas/status": {
+      "get": {
+        "tags": [
+          "Configuration - Cloud On Ramp SaaS"
+        ],
+        "description": "Get Cloud On Ramp App details per device",
+        "operationId": "getCorSaasStatusPerDevice",
+        "parameters": [
+          {
+            "name": "deviceIp",
+            "in": "query",
+            "description": "DeviceIp/SystemIp",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Cloud OnRamp-read"
+      }
+    },
+    "/v1/cloudonramp/saas/webexsyncstatus": {
+      "get": {
+        "tags": [
+          "Configuration - Cloud On Ramp SaaS"
+        ],
+        "description": "Get Webex's sync Status for devices with COR Saas enabled via config group or device template",
+        "operationId": "getWebexSyncStatus",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "x-roles-required": "Cloud OnRamp-read"
+      }
+    },
+    "/v1/device-authorize/authentication": {
+      "get": {
+        "tags": [
+          "Cisco Software"
+        ],
+        "description": "Get authorization url",
+        "operationId": "getAuthUrl",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "device_code": {
+                      "type": "string",
+                      "example": "da92fb0d-d641-4ad4-93aa-9605e769dc7f"
+                    },
+                    "verification_uri_complete": {
+                      "type": "string",
+                      "example": "https://id.cisco.com/activate?user_code=GHSJDRMP"
+                    }
+                  },
+                  "$$ref": "#/components/schemas/AuthorizeResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/v1/device-authorize/token/{deviceCode}": {
+      "post": {
+        "tags": [
+          "Cisco Software"
+        ],
+        "description": "Get access token from idp",
+        "operationId": "getAuthToken",
+        "parameters": [
+          {
+            "name": "deviceCode",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/v1/device-authorize/validtoken": {
+      "get": {
+        "tags": [
+          "Cisco Software"
+        ],
+        "description": "Get user token validity",
+        "operationId": "getTokenValidity",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isValid": {
+                      "type": "boolean",
+                      "example": true
+                    }
+                  },
+                  "$$ref": "#/components/schemas/TokenValidity"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/webex/accesscode": {
+      "get": {
+        "tags": [
+          "System - Cloud Service Webex"
+        ],
+        "description": "Webex Access Code Details",
+        "operationId": "webexAccessCode",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "example": "ZDI3MGEyYzQtNmFlNS00NDNhLWFlNzAtZGVjNjE0MGU1OGZmZWNmZDEwN2ItYTU"
+                    }
+                  },
+                  "$$ref": "#/components/schemas/AccessCodeResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/webex/datacenter": {
+      "post": {
+        "tags": [
+          "System - Cloud Service Webex"
+        ],
+        "description": "TEMP-Insert webex data center details manually for test setup",
+        "operationId": "getWebexDataCenters",
+        "requestBody": {
+          "description": "Webex Data Center",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "ETag": {
+                    "type": "string",
+                    "example": "vmanagemockwebexetag"
+                  },
+                  "config": {
+                    "type": "object",
+                    "properties": {
+                      "items": {
+                        "type": "array",
+                        "properties": {
+                          "empty": {
+                            "type": "boolean"
+                          }
+                        },
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "prefixes": {
+                              "type": "object",
+                              "properties": {
+                                "owned": {
+                                  "type": "array",
+                                  "description": "Owned data list",
+                                  "example": [
+                                    "23.89.48.0/20",
+                                    "64.68.96.0/24",
+                                    "64.68.103.0/24"
+                                  ],
+                                  "items": {
+                                    "type": "string",
+                                    "description": "Owned data",
+                                    "example": "23.89.48.0/20"
+                                  }
+                                },
+                                "provider_allocated": {
+                                  "type": "array",
+                                  "description": "Provider allocated list",
+                                  "example": [
+                                    "23.89.48.0/20",
+                                    "64.68.96.0/24",
+                                    "64.68.103.0/24"
+                                  ],
+                                  "items": {
+                                    "type": "string",
+                                    "description": "Provider allocated",
+                                    "example": "23.89.48.0/20"
+                                  }
+                                },
+                                "provider_reserved": {
+                                  "type": "array",
+                                  "description": "Provider reserved list",
+                                  "example": [
+                                    "23.89.48.0/20",
+                                    "64.68.96.0/24",
+                                    "64.68.103.0/24"
+                                  ],
+                                  "items": {
+                                    "type": "string",
+                                    "description": "provider reserved",
+                                    "example": "23.89.48.0/20"
+                                  }
+                                }
+                              },
+                              "$$ref": "#/components/schemas/Prefixinfo"
+                            },
+                            "region": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "integer",
+                                  "format": "int64",
+                                  "example": 1
+                                },
+                                "name": {
+                                  "type": "string",
+                                  "example": "us-west-1"
+                                },
+                                "responder_fqdn": {
+                                  "type": "string",
+                                  "example": "pinger.us-west-1.infnet.webex.com"
+                                }
+                              },
+                              "$$ref": "#/components/schemas/Regioninfo"
+                            }
+                          },
+                          "$$ref": "#/components/schemas/RegionPrefixinfo"
+                        }
+                      },
+                      "revision": {
+                        "type": "string",
+                        "example": "20201120.ace4cb0"
+                      },
+                      "version": {
+                        "type": "string",
+                        "example": "1.0.0"
+                      }
+                    },
+                    "$$ref": "#/components/schemas/Configinfo"
+                  }
+                },
+                "$$ref": "#/components/schemas/WebexDataCenter"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "System - Cloud Service Webex"
+        ],
+        "description": "Delete webex data center data in DB",
+        "operationId": "deleteWebexDataCenters",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/webex/datacenter/sync": {
+      "post": {
+        "tags": [
+          "System - Cloud Service Webex"
+        ],
+        "description": "TEMP-Update webex data center data in DB with data from Webex API",
+        "operationId": "updateWebexDataCenters",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/webex/datacenter/syncstatus": {
+      "get": {
+        "tags": [
+          "System - Cloud Service Webex"
+        ],
+        "description": "Get webex data center sync status from DB",
+        "operationId": "getWebexDataCentersSyncStatus",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "Last Synced": {
+                      "type": "string",
+                      "example": "04 Dec 2020 19:23:54 UTC"
+                    },
+                    "webexSyncNeeded": {
+                      "type": "boolean",
+                      "example": true
+                    }
+                  },
+                  "$$ref": "#/components/schemas/SyncStatusResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "System - Cloud Service Webex"
+        ],
+        "description": "Set webex data center sync needed            to false",
+        "operationId": "setWebexDataCentersSyncStatus",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/webex/redirect": {
+      "get": {
+        "tags": [
+          "System - Cloud Service Webex"
+        ],
+        "description": "Redirect Info",
+        "operationId": "redirectWebexDataCenters",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "query",
+            "description": "code",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Redirect success! Please close this window"
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "ok"
+                    }
+                  },
+                  "$$ref": "#/components/schemas/RedirectCodeResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}
