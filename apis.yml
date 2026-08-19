@@ -2,9 +2,14 @@ aid: cisco-catalyst-sdwan
 name: Cisco Catalyst SD-WAN
 description: 'Cisco Catalyst SD-WAN, built on the Viptela platform Cisco acquired in 2017, is Cisco''s wide-area
   network overlay: centralized policy, application-aware routing, and secure transport across MPLS, broadband and
-  LTE. The SD-WAN Manager (formerly vManage) exposes a large REST API documented on Cisco DevNet, with a Terraform
-  provider, Ansible content and a community MCP server built against it. The contract is served by each customer''s
-  own SD-WAN Manager instance, so there is no central anonymously fetchable specification.'
+  LTE. Its controller — SD-WAN Manager, formerly vManage — exposes a REST API of 4,138 published operations across
+  2,841 paths, documented on Cisco DevNet as thirteen OpenAPI 3.1.0 documents at release 26.1.0. The controller
+  is customer-operated, so the base URL is each customer''s own instance at https://<sdwan-manager-host>:8443/dataservice
+  — but the specification itself is public and anonymously fetchable from the DevNet documentation CDN, and is harvested
+  verbatim here. Authentication is a JWT bearer token (20.18.1+) or a legacy JSESSIONID session, plus an X-XSRF-TOKEN
+  header on writes; authorization is role-based, with every operation declaring the SD-WAN Manager permission it
+  needs. The ecosystem includes a Terraform provider, three Ansible collections, the catalystwan Python SDK, the
+  Sastre CLI and two community MCP servers published in the CiscoDevNet GitHub organization.'
 url: https://raw.githubusercontent.com/api-evangelist/cisco-catalyst-sdwan/refs/heads/main/apis.yml
 type: Index
 access: 3rd-Party
@@ -13,9 +18,10 @@ x-type: company
 x-source: cisco-family-buildout:2026-08-19
 x-parent: cisco
 x-relationship: acquisition
-x-contract-status: on-prem
-x-contract-note: The contract is served by each customer's own on-premises controller, so there is no central anonymously
-  fetchable specification. API Evangelist has not authored a substitute.
+x-contract-status: real
+x-contract-note: Cisco publishes the full contract on the DevNet CDN as self-contained per-operation OpenAPI 3.1.0
+  fragments — 4,138 operations across 2,841 paths, consolidated here into 13 documents. Ownership verified from
+  info.contact vmanage@cisco.com and the Cisco license URL rather than the fetch host.
 specificationVersion: '0.23'
 created: '2026-08-19'
 modified: '2026-08-19'
@@ -26,6 +32,10 @@ tags:
 - Automation
 - Policy
 - Enterprise
+- Network Management
+- Infrastructure as Code
+- Observability
+- Cisco
 apis:
 - aid: cisco-catalyst-sdwan:administration-and-settings
   name: Cisco Catalyst SD-WAN Manager API — Administration and Settings
@@ -353,6 +363,8 @@ apis:
   x-paths: 602
   x-version: 26.1.0+2026-01-06
 common:
+- type: DomainSecurity
+  url: security/cisco-catalyst-sdwan-domain-security.yml
 - type: ParentCompany
   url: https://apis.io/providers/cisco/
   name: Cisco
@@ -371,9 +383,88 @@ common:
   url: https://github.com/CiscoDevNet/catalyst-sdwan-mcp-community
 - type: Portal
   url: https://developer.cisco.com/
+- type: DeveloperPortal
+  url: https://developer.cisco.com/docs/sdwan/
+- type: GettingStarted
+  url: https://developer.cisco.com/docs/sdwan/getting-started/
+- type: Support
+  url: https://developer.cisco.com/docs/sdwan/developer-support/
+- type: Blog
+  url: https://blogs.cisco.com/tag/sd-wan
+- type: GitHubOrganization
+  url: https://github.com/CiscoDevNet
+- type: SignUp
+  url: https://id.cisco.com/signin/register
+- type: TermsOfService
+  url: https://www.cisco.com/c/en/us/about/legal/cloud-and-software.html
+- type: PrivacyPolicy
+  url: https://www.cisco.com/c/en/us/about/legal/privacy-full.html
+- type: Community
+  url: https://community.cisco.com/t5/networking-knowledge-base/cisco-sd-wan-tools-and-resources/ta-p/4862067
+- type: Training
+  url: https://developer.cisco.com/learning/tracks/sd-wan_programmability/
+- type: Authentication
+  url: authentication/cisco-catalyst-sdwan-authentication.yml
+- type: Conventions
+  url: conventions/cisco-catalyst-sdwan-conventions.yml
+- type: RateLimits
+  url: rate-limits/cisco-catalyst-sdwan-rate-limits.yml
+- type: Plans
+  url: plans/cisco-catalyst-sdwan-plans-pricing.yml
+- type: Lifecycle
+  url: lifecycle/cisco-catalyst-sdwan-lifecycle.yml
+- type: Deprecation
+  url: https://developer.cisco.com/docs/sdwan/versioning-and-deprecation/
+- type: ChangeLog
+  url: changelog/cisco-catalyst-sdwan-changelog.yml
+- type: ErrorCatalog
+  url: errors/cisco-catalyst-sdwan-problem-types.yml
+- type: Conformance
+  url: conformance/cisco-catalyst-sdwan-conformance.yml
+- type: DataModel
+  url: data-model/cisco-catalyst-sdwan-data-model.yml
+- type: Packages
+  url: packages/cisco-catalyst-sdwan-packages.yml
+- type: SDKs
+  url: packages/cisco-catalyst-sdwan-packages.yml
+- type: CLI
+  url: cli/cisco-catalyst-sdwan-cli.yml
+- type: Sandbox
+  url: sandbox/cisco-catalyst-sdwan-sandbox.yml
+- type: Sandbox
+  url: https://devnetsandbox.cisco.com/RM/Diagram/Index/ed2c839d-621e-4c55-b176-db2457baf4c8?diagramType=Topology
+  name: Cisco Catalyst SD-WAN reservable DevNet sandbox
+- type: MCPServer
+  url: mcp/cisco-catalyst-sdwan-mcp.yml
+- type: ToolCrosswalk
+  url: mcp/cisco-catalyst-sdwan-tool-crosswalk.yml
+- type: Webhooks
+  url: asyncapi/cisco-catalyst-sdwan-webhooks.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/cisco-catalyst-sdwan-llms.txt
+- type: Security
+  url: https://sec.cloudapps.cisco.com/security/center/resources/security_vulnerability_policy.html
+- type: VulnerabilityDisclosure
+  url: security/cisco-catalyst-sdwan-vulnerability-disclosure.yml
+- type: TrustCenter
+  url: security/cisco-catalyst-sdwan-trust-center.yml
+- type: Terraform
+  url: https://registry.terraform.io/providers/CiscoDevNet/sdwan/latest
+- type: Ansible
+  url: https://galaxy.ansible.com/ui/repo/published/cisco/catalystwan
+- type: SourceCode
+  url: https://github.com/CiscoDevNet/sastre
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 x-acquired: 2017
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/cisco.png
+x-enrichment:
+  date: '2026-08-19'
+  status: enriched
+  artifacts_added: 53
+  pass: local-v1
