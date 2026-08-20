@@ -293,6 +293,12 @@ apis:
   humanURL: https://developer.cisco.com/docs/sdwan/sd-wan-services/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
   tags:
+  - Multi-Cloud
+  - Interconnect
+  - Cloud OnRamp
+  - Service Chaining
+  - SD-WAN
+  tags_raw:
   - Multicloud
   - Interconnect
   - Cloud OnRamp
@@ -318,6 +324,13 @@ apis:
   humanURL: https://developer.cisco.com/docs/sdwan/partner-integrations/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
   tags:
+  - Integration
+  - Partner
+  - Catalyst Center
+  - ISE
+  - Umbrella
+  - SD-WAN
+  tags_raw:
   - Integrations
   - Partner
   - Catalyst Center
@@ -344,6 +357,13 @@ apis:
   humanURL: https://developer.cisco.com/docs/sdwan/others/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
   tags:
+  - Device Inventory
+  - Certificates
+  - Software Management
+  - Multi-Tenancy
+  - Licensing
+  - SD-WAN
+  tags_raw:
   - Device Inventory
   - Certificates
   - Software Management
