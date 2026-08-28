@@ -13,6 +13,19 @@ description: 'Cisco Catalyst SD-WAN, built on the Viptela platform Cisco acquire
 url: https://raw.githubusercontent.com/api-evangelist/cisco-catalyst-sdwan/refs/heads/main/apis.yml
 type: Index
 access: 3rd-Party
+deliveryModel:
+  model: unknown
+  open_source: unknown
+  commercial: true
+  callable_host: false
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  - pricing
+  - repository-unlicensed
+  generated: '2026-08-28'
+  method: derived
 position: Consumer
 x-type: company
 x-source: cisco-family-buildout:2026-08-19
