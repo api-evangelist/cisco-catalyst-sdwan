@@ -3,7 +3,7 @@ provider: Cisco Catalyst SD-WAN
 generated_by: planning/capability-mapping/scripts/classify_capabilities.py
 model: claude-opus-5
 frame:
-- Software & Technology
+- Telecommunications
 min_confidence: 0.7
 capability_model:
   source: https://github.com/vincentmakes/turbo-ea-capabilities
@@ -11,1806 +11,1357 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 191
+edge_count: 137
 edges:
-- tag: Administration - User and Group
-  spec_file: cisco-catalyst-sdwan-administration-user-and-group-api-openapi.yml
-  capability_id: BC-620.20
-  capability_id_l1: BC-620
-  capability_name: Identity & Access Management
+- tag: Configuration - Feature Profile (SD-Routing)
+  spec_file: cisco-catalyst-sdwan-configuration-feature-profile-sd-routing-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
   confidence: 0.85
-  evidence: GET/POST/PUT/DELETE /admin/aaa, /admin/radius, /admin/tacacs; doc description 'User, group
-    and tenant management'
-  reason: Operations configure AAA, RADIUS and TACACS and manage users and groups on the SD-WAN controller
-    — authentication/authorisation administration, i.e. Identity & Access Management. Grounded in both
-    the operation paths and the spec description.
+  evidence: '"Feature profiles associated with UX 2.0 configuration ... Feature Profiles in SD-Routing
+    Solution"; "CreateSdroutingCliFeatureProfile", "EditSdroutingCLIAddOnFeature"'
+  reason: Operations create, edit and delete configuration feature profiles and CLI add-on configuration
+    applied to routing network elements — network element configuration standards and controlled deployment,
+    i.e. Network Configuration Management.
+- tag: Configuration - Feature Profile (SDWAN)
+  spec_file: cisco-catalyst-sdwan-configuration-feature-profile-sdwan-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.85
+  evidence: '"createPolicyApplicationProfileParcel", "CreateTrafficPolicyProfileParcelForapplication_priority",
+    "CreateCellularControllerAndCellularBandSelectAssociationForTransportSdrouting"'
+  reason: CRUD over SD-WAN transport/service/system feature profiles (QoS, traffic policy, cellular controller)
+    that define and push configuration to network elements — Network Configuration Management.
+- tag: Configuration - General Template
+  spec_file: cisco-catalyst-sdwan-configuration-general-template-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.85
+  evidence: '"Device templates and feature templates"; "createFeatureTemplate", "getDeviceTemplatesAttachedToFeature"'
+  reason: Feature/device template lifecycle for SD-WAN device configuration is definition and enforcement
+    of network element configuration standards.
+- tag: Configuration - Device Inventory
+  spec_file: cisco-catalyst-sdwan-configuration-device-inventory-api-openapi.yml
+  capability_id: BC-2600.40
+  capability_id_l1: BC-2600
+  capability_name: Network Inventory Management
+  confidence: 0.8
+  evidence: POST /system/device createDevice; POST /system/device/claimDevices claimDevices; PUT /system/device/decommission/{uuid}
+    decommissionVedgeCloud; POST /system/device/lifecycle/management/{uuid} setLifeCycle
+  reason: Operations register, claim, decommission and manage the lifecycle state of network devices in
+    the controller's device record — an authoritative inventory of network resources.
+- tag: Configuration - Device Template
+  spec_file: cisco-catalyst-sdwan-configuration-device-template-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.8
+  evidence: POST /template/device/config/attachment attachDeviceTemplate; POST /template/device/config/detach
+    detachDeviceTemplate; POST /template/device/config/config getDeviceConfigurationPreview
+  reason: Device configuration templates are attached/detached to network devices with configuration preview
+    — definition and controlled deployment of network element configuration standards, per the spec description
+    'Device templates and feature templates'.
+- tag: Configuration - Policy Mesh Definition Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-mesh-definition-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.8
+  evidence: '"Configuration of UX 1.0 device and policy"; POST /template/policy/definition/mesh createPolicyDefinition'
+  reason: Operations create/edit/preview/delete SD-WAN mesh topology policy definitions on the network
+    controller — definition and controlled deployment of network element configuration, i.e. Network Configuration
+    Management.
+- tag: Configuration - Policy Mirror List Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-mirror-list-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.8
+  evidence: POST /template/policy/list/mirror createPolicyList; "Managing original SD-WAN device configurations
+    and policy configurations"
+  reason: CRUD over SD-WAN policy lists (mirror/session targets) used in device configuration templates
+    — network element configuration management, not a business capability.
+- tag: Configuration - Policy Modem Passthrough List Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-modem-passthrough-list-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.8
+  evidence: POST /template/policy/list/modempassthrough createPolicyList; "Device templates and feature
+    templates"
+  reason: Manages modem-passthrough policy lists within SD-WAN device configuration templates — network
+    configuration management.
+- tag: Configuration - Policy PRI ISDN Port Definition Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-pri-isdn-port-definition-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.8
+  evidence: POST /template/policy/definition/priisdnport createPolicyDefinition
+  reason: Defines PRI/ISDN port policy definitions applied to network devices via templates — configuration
+    of network elements.
+- tag: Configuration - Policy Policer Class List Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-policer-class-list-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.8
+  evidence: GET /template/policy/list/policer getPolicyLists; "Managing original SD-WAN device configurations
+    and policy configurations"
+  reason: Policer (traffic-rate limiting) policy list CRUD as part of device/policy configuration templates
+    — network configuration management.
+- tag: Configuration - Policy Port List Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-port-list-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.8
+  evidence: POST /template/policy/list/port createPolicyList
+  reason: Port policy lists used in SD-WAN policy/device configuration; a technical network configuration
+    object, not a business port/product concept.
+- tag: Configuration - Policy Prefix List Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-prefix-list-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.8
+  evidence: POST /template/policy/list/prefix createPolicyList; "policy configurations Device templates
+    and feature templates"
+  reason: IP prefix list CRUD for routing/policy configuration of network elements — Network Configuration
+    Management.
+- tag: Configuration - Policy Prefix for All Types of Lists Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-prefix-for-all-types-of-lists-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.8
+  evidence: GET /template/policy/list/ipprefixall getListsForAllPrefixes
+  reason: Aggregated IP prefix list management for SD-WAN policy configuration — network element configuration
+    definition.
+- tag: Configuration - Policy Protocol Name List Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-protocol-name-list-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.8
+  evidence: POST /template/policy/list/protocolname createPolicyList
+  reason: Protocol-name policy list CRUD within SD-WAN device/policy configuration templates — network
+    configuration management.
+- tag: Configuration - Policy Rewrite Rule Definition Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-rewrite-rule-definition-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.8
+  evidence: POST /template/policy/definition/rewriterule createPolicyDefinition; "Device templates and
+    feature templates"
+  reason: Packet-marking rewrite rule policy definitions applied to network elements — Network Configuration
+    Management.
+- tag: Configuration - Template Configuration
+  spec_file: cisco-catalyst-sdwan-configuration-template-configuration-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.8
+  evidence: PUT /template/config/attach/{deviceId}  uploadConfig; GET /template/config/running/{deviceId}  getRunningConfig;
+    GET /template/config/diff/{deviceId}  getDeviceDiff
+  reason: Attaching configuration to devices, retrieving running configuration and diffs, and switching
+    device config mode — squarely network element configuration management.
+- tag: Configuration - Configuration Group
+  spec_file: cisco-catalyst-sdwan-configuration-configuration-group-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.78
+  evidence: POST /v1/config-group  CreateConfigGroup; POST /v1/config-group/{configGroupId}/device/deploy  deployConfigGroup;
+    POST /v1/config-group/{configGroupId}/device/associate
+  reason: Defines reusable configuration groups, associates them with network devices and deploys them
+    — squarely definition and controlled deployment of network element configuration. Some overlap with
+    network change management for the deploy step.
+- tag: Configuration - Policy Geo Location List Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-geo-location-list-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.78
+  evidence: POST /template/policy/list/geolocation  createPolicyList_ConfigurationPolicyGeoLocationListBuilder;
+    "Configuration of UX 1.0 device and policy ... Device templates and feature templates"
+  reason: CRUD over SD-WAN policy list objects used in network device/policy templates — this is definition
+    and controlled deployment of network element configuration, i.e. Network Configuration Management.
+    Not a business-domain geolocation capability.
+- tag: Configuration - Policy Hub and Spoke Definition Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-hub-and-spoke-definition-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.78
+  evidence: POST /template/policy/definition/hubandspoke  createPolicyDefinition; "Managing original SD-WAN
+    device configurations and policy configurations"
+  reason: Creates/edits hub-and-spoke topology policy definitions in the SD-WAN controller's configuration
+    templates — network configuration definition and deployment.
+- tag: Configuration - Policy IPv6 Access Definition Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-ipv6-access-definition-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.78
+  evidence: POST /template/policy/definition/aclv6  createPolicyDefinition_ConfigurationPolicyIpv6AccessDefinitionBuilder
+  reason: IPv6 access-list policy definitions authored and deployed via SD-WAN configuration templates
+    — network element configuration management.
+- tag: Configuration - Policy IPv6 Prefix List Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-ipv6-prefix-list-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.78
+  evidence: POST /template/policy/list/ipv6prefix  createPolicyList_ConfigurationPolicyIpv6PrefixListBuilder
+  reason: IPv6 prefix lists maintained as policy configuration objects within device/feature templates
+    — network element configuration definition and deployment.
+- tag: Configuration - Policy VPN List Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-vpn-list-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.78
+  evidence: POST /template/policy/list/vpn createPolicyList_ConfigurationPolicyVpnListBuilder
+  reason: Manages VPN policy lists used in SD-WAN overlay policy configuration — enforcement/definition
+    of network element configuration standards, i.e. Network Configuration Management.
+- tag: Configuration - Policy VPN Membership Group Definition Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-vpn-membership-group-definition-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.78
+  evidence: POST /template/policy/definition/vpnmembershipgroup createPolicyDefinition; "Managing original
+    SD-WAN device configurations and policy configurations"
+  reason: Creates, edits and previews VPN membership policy definitions applied to the SD-WAN overlay
+    — network configuration definition and controlled deployment.
+- tag: Configuration - Policy VPN-Qos Map Definition Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-vpn-qos-map-definition-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.78
+  evidence: GET /template/policy/definition/vpnqosmap getDefinitions_ConfigurationPolicyVpnQosMapDefinitionBuilder
+  reason: QoS-map policy definitions for VPNs are network element configuration artefacts authored and
+    deployed through the controller, matching Network Configuration Management.
+- tag: Configuration - Policy vEdge Route Definition Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-vedge-route-definition-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.78
+  evidence: POST /template/policy/definition/vedgeroute createPolicyDefinition_ConfigurationPolicyVedgeRouteDefinitionBuilder
+  reason: Route policy definitions for vEdge routers are authored, edited in bulk and deleted through
+    this surface — network element configuration definition and deployment.
+- tag: Monitoring - Device Statistics
+  spec_file: cisco-catalyst-sdwan-monitoring-device-statistics-api-openapi.yml
+  capability_id: BC-2600.30
+  capability_id_l1: BC-2600
+  capability_name: Network Performance Management
+  confidence: 0.78
+  evidence: GET /statistics/device getStatDataRawData_MonitoringDeviceStatistics; GET /statistics/device/aggregation
+    getAggregationDataByQuery
+  reason: Raw, aggregated, paginated and CSV export of device performance statistics — textbook network
+    performance counter/KPI capture and analysis.
 - tag: Multicloud Interconnect - Cloud Resource Management
   spec_file: cisco-catalyst-sdwan-multicloud-interconnect-cloud-resource-management-api-openapi.yml
   capability_id: BC-600.50
   capability_id_l1: BC-600
   capability_name: IT Infrastructure Management
-  confidence: 0.85
-  evidence: '"Get AWS Transit Gateways."; "Create an Azure Virtual Wan."; "Create a Cloud Connectivity
-    Gateway."'
-  reason: Creates and deletes cloud network resources (transit gateways, virtual WANs, connectivity gateways)
-    — cloud/network infrastructure management.
-- tag: Tenant Management
-  spec_file: cisco-catalyst-sdwan-tenant-management-api-openapi.yml
-  capability_id: BC-4230.10
-  capability_id_l1: BC-4230
-  capability_name: Tenant Provisioning & Lifecycle
-  confidence: 0.85
-  evidence: POST /tenant  createTenant; DELETE /tenant/{tenantId}  deleteTenantAsync; GET /tenant/capacity  getTenantHostingCapacity
-  reason: Create, update, delete and capacity/placement of tenants on the multi-tenant SD-WAN Manager
-    fleet — Tenant Provisioning & Lifecycle.
-- tag: Monitoring - Device Health
-  spec_file: cisco-catalyst-sdwan-monitoring-device-health-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.82
-  evidence: GET /statistics/devicehealth/overview/{type} getDeviceHealthOverview "Device health overview
-    data"
-  reason: Health telemetry for managed network devices is IT operations monitoring; no business capability
-    is realised.
-- tag: Monitoring - Health
-  spec_file: cisco-catalyst-sdwan-monitoring-health-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.82
-  evidence: GET /health/devices getDevicesHealth; GET /health/devices/overview getDevicesHealthOverview
-  reason: Device fleet health monitoring exposed by the network controller — clearly IT operations monitoring.
-- tag: Configuration - Cloud On Ramp
-  spec_file: cisco-catalyst-sdwan-configuration-cloud-on-ramp-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.8
-  evidence: DELETE /template/cor/accountid/{accountid} removeTransitVPC; POST /template/cor/cloud/authenticate
-    authenticateCloudOnRampCredAndAdd; GET /template/cor/cloud/account getCloudAccounts
-  reason: Provisioning of transit VPCs, cloud accounts and resource pools to extend the SD-WAN fabric
-    into public cloud — cloud/network infrastructure management.
-- tag: Monitoring - Alarms Details
-  spec_file: cisco-catalyst-sdwan-monitoring-alarms-details-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.8
-  evidence: 'POST /alarms/clear clearStaleAlarm; GET /alarms/count getNonViewedActiveAlarmsCount; POST
-    /alarms/disabled disableEnableAlarm; description: ''Managing alarms and events'''
-  reason: Network alarm and event management — querying, counting, clearing and suppressing infrastructure
-    alarms. This is IT operations monitoring, not financial-crime or risk alerting.
-- tag: Monitoring - Device Details
-  spec_file: cisco-catalyst-sdwan-monitoring-device-details-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.8
-  evidence: GET /device/hardwarehealth/detail getHardwareHealthDetails; GET /device/config getDeviceRunningConfig;
-    "Real-time monitoring ... Retrieving device state"
-  reason: Operations retrieve network device state, running config, counters and hardware health from
-    the SD-WAN controller — day-to-day IT operations monitoring of network infrastructure, not any business-domain
+  confidence: 0.78
+  evidence: POST .../vwans  createAzVirtualWan  Create an Azure Virtual Wan; POST .../cloud-connectivity-gateways  addCloudConnectivityGateway  Create
+    a Cloud Connectivity Gateway
+  reason: Creates and deletes cloud network resources — Azure Virtual WANs/hubs, AWS transit gateways,
+    connectivity gateways. Clearly provisioning of cloud network infrastructure, a cross-industry IT infrastructure
     capability.
-- tag: Monitoring - Device Statistics
-  spec_file: cisco-catalyst-sdwan-monitoring-device-statistics-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.8
-  evidence: GET /statistics/device getStatDataRawData; "Accessing statistics APIs and statistics bulk
-    APIs"
-  reason: Bulk retrieval and aggregation of network device statistics — infrastructure monitoring within
-    IT operations management.
-- tag: Monitoring - Tunnel Health
-  spec_file: cisco-catalyst-sdwan-monitoring-tunnel-health-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.8
-  evidence: GET /statistics/tunnelhealth/history  Tunnel health history data; GET /statistics/tunnelhealth/overview/{type}  Tunnel
-    health overview data
-  reason: SD-WAN overlay tunnel health statistics and overviews — network performance monitoring, i.e.
-    IT operations monitoring of infrastructure.
-- tag: MultiCloud - CloudGateway
-  spec_file: cisco-catalyst-sdwan-multicloud-cloudgateway-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.8
-  evidence: POST /multicloud/cloudgateway createCgw; GET /multicloud/cloudgateway/availabilityZones getAvailabilityZones;
-    getAzureResourceGroups
-  reason: Provisions and configures cloud gateways, Azure NVAs, resource groups and AWS transit gateway
-    attachments — squarely compute/network/cloud infrastructure management.
 - tag: Multicloud Interconnect - Connectivity
   spec_file: cisco-catalyst-sdwan-multicloud-interconnect-connectivity-api-openapi.yml
   capability_id: BC-600.50
   capability_id_l1: BC-600
   capability_name: IT Infrastructure Management
-  confidence: 0.8
-  evidence: '"Create an Interconnect OnRamp gateway connection."; "Add an Interconnect Device-Link to
-    vManage."'
-  reason: Provisions and updates interconnect connections and device links between sites and cloud — network
-    infrastructure provisioning.
+  confidence: 0.78
+  evidence: POST /multicloud/interconnect/connectivity/cloud-onramp-gateway-connections  createInterconnectOnRampGatewayConnection  Create
+    an Interconnect OnRamp gateway connection; POST .../device-links  addInterconnectDeviceLink
+  reason: Creates, updates and deletes interconnect gateway connections and device links — establishment
+    of network connectivity between sites and clouds, i.e. IT network infrastructure management.
 - tag: Multicloud Interconnect - Gateways
   spec_file: cisco-catalyst-sdwan-multicloud-interconnect-gateways-api-openapi.yml
   capability_id: BC-600.50
   capability_id_l1: BC-600
   capability_name: IT Infrastructure Management
-  confidence: 0.8
-  evidence: POST /multicloud/interconnect/gateways createInterconnectGateway 'Create Interconnect gateway';
-    'Get Interconnect gateway instance sizes'
-  reason: Operations create, size, configure and delete cloud interconnect gateway instances — provisioning
-    and stewardship of network/cloud infrastructure, i.e. IT Infrastructure Management. No business-domain
-    reading fits.
-- tag: Real-Time Monitoring - Interface
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-interface-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.8
-  evidence: GET /device/interface/error_stats  getDeviceInterfaceErrorStats; GET /device/interface/port_stats  getDeviceInterfacePortStats
-  reason: Network interface statistics and counters retrieved live from devices — network operations monitoring
-    within IT management.
-- tag: Real-Time Monitoring - OMP
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-omp-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.8
-  evidence: GET /device/omp/peers  createOMPSessionList; GET /device/omp/routes/advertised  createAdvertisedRoutesList
-  reason: Overlay Management Protocol peer sessions and route tables read from SD-WAN devices — network
-    operations monitoring.
-- tag: Real-Time Monitoring - OSPF
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-ospf-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.8
-  evidence: GET /device/ospf/neighbor  createOSPFNeighbors; GET /device/ospf/routes  createOSPFRoutesList
-  reason: OSPF routing protocol state and neighbour tables retrieved live from devices — network/IT operations
-    monitoring.
-- tag: Real-Time Monitoring - PIM
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-pim-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.8
-  evidence: GET /device/pim/interface createPIMInterfaceList; GET /device/pim/statistics — "Real-time
-    monitoring ... Retrieving device state"
-  reason: Read-only retrieval of multicast (PIM) interface, neighbor and statistics state from network
-    devices — day-to-day IT operations monitoring of network infrastructure, not any business-domain capability.
-- tag: Real-Time Monitoring - PPPoE
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-pppoe-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.8
-  evidence: GET /device/pppoe/session; GET /device/pppoe/statistic — "Real-time monitoring ... Retrieving
-    device state"
-  reason: PPPoE session and statistics retrieval from WAN edge devices is network operations monitoring
-    under IT Operations Management.
-- tag: Real-Time Monitoring - QFP
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-qfp-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.8
-  evidence: GET /device/qfp/cpustat cpustat; GET /device/qfp/memstat; GET /device/qfp/qfpdrop
-  reason: CPU, memory and drop statistics from the router's forwarding processor — device performance
-    monitoring within IT Operations Management.
-- tag: Real-Time Monitoring - QoS
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-qos-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.8
-  evidence: GET /device/qos/session/details getPerTunnelQosDetailedInfo; GET /device/qos/session/summary
-  reason: Per-tunnel QoS session monitoring on SD-WAN devices — network operations monitoring, no business-domain
-    meaning.
-- tag: Real-Time Monitoring - Reboot History
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-reboot-history-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.8
-  evidence: GET /device/reboothistory createRebootHistoryList; GET /device/reboothistory/details
-  reason: Retrieves device reboot history for troubleshooting — operational monitoring of IT infrastructure
-    under IT Operations Management.
-- tag: Real-Time Monitoring - SDWAN Statistics
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-sdwan-statistics-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.8
-  evidence: GET /device/sdwan-global-drop-statistics getSDWanGlobalDropStatistics; GET /device/sdwan-stats
-  reason: SD-WAN forwarding and drop statistics retrieval — network performance monitoring within IT operations.
-- tag: Real-Time Monitoring - SFP
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-sfp-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.8
-  evidence: GET /device/sfp/diagnostic getDiagnostic; GET /device/sfp/diagnosticMeasurementAlarm
-  reason: Optical transceiver (SFP) diagnostics and measurement alarms from network hardware — infrastructure
-    monitoring/troubleshooting under IT Operations Management.
-- tag: Real-Time Monitoring - Tunnel
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-tunnel-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.8
-  evidence: GET /device/tunnel/ipsec_statistics  createIpsecStatisticsList; GET /device/tunnel/statistics
-  reason: Tunnel statistics (BFD, IPsec, GRE keepalives) retrieval for network overlay devices — infrastructure/network
-    operations monitoring.
-- tag: Real-Time Monitoring - VDSL Service
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-vdsl-service-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.8
-  evidence: GET /device/vdslService/lineSpecificStats  getLineSpecificStats
-  reason: VDSL line/CPE/CO statistics retrieval from WAN transport interfaces — network infrastructure
-    operations monitoring.
-- tag: Configuration - Template Configuration
-  spec_file: cisco-catalyst-sdwan-configuration-template-configuration-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
   confidence: 0.78
-  evidence: PUT /template/config/attach/{deviceId}  uploadConfig; GET /template/config/running/{deviceId}  getRunningConfig;
-    GET /template/config/diff/{deviceId}  getDeviceDiff
-  reason: Attaching configuration to devices, retrieving running configuration and config diffs is configuration
-    management of WAN network devices — compute/network/cloud infrastructure management. Not an industry-specific
-    capability; this vendor is a network controller.
-- tag: Monitoring - Application Aware Routing
-  spec_file: cisco-catalyst-sdwan-monitoring-application-aware-routing-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.78
-  evidence: GET /statistics/approute getStatDataRawData; "Real-time monitoring Accessing statistics APIs
-    ... Retrieving device state Managing alarms and events"
-  reason: Operations retrieve and aggregate application-aware-routing tunnel statistics from network devices
-    — day-to-day network operations monitoring, i.e. Cross-Industry IT Operations Management, not any
-    industry business capability.
-- tag: Monitoring - BFD
-  spec_file: cisco-catalyst-sdwan-monitoring-bfd-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.78
-  evidence: GET /statistics/bfd getStatDataRawData_MonitoringBfd; "Real-time monitoring Accessing statistics
-    APIs and statistics bulk APIs"
-  reason: BFD session statistics retrieval/aggregation is network infrastructure monitoring — IT Operations
-    Management (monitoring).
-- tag: Monitoring - Bridge
-  spec_file: cisco-catalyst-sdwan-monitoring-bridge-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.78
-  evidence: GET /statistics/bridgeinterface getStatDataRawData_MonitoringBridge; POST /statistics/bridgemac
-  reason: Bridge interface and MAC table statistics from network devices — network monitoring under IT
-    Operations Management.
-- tag: Monitoring - Device Statistics Details
-  spec_file: cisco-catalyst-sdwan-monitoring-device-statistics-details-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.78
-  evidence: GET /data/device/statistics/alarm/active getActiveAlarms; GET /data/device/statistics/{state_data_type}
-    generateDeviceStatisticsData
-  reason: Device statistics and active network alarms retrieval; these are infrastructure monitoring operations,
-    and the 'alarm' here is a device alarm not a business alert.
-- tag: Monitoring - Device Statistics Details V2
-  spec_file: cisco-catalyst-sdwan-monitoring-device-statistics-details-v2-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.78
-  evidence: GET /v2/data/device/statistics/interfacestatistics generateDeviceInterfaceStatisticsData
-  reason: Network interface statistics retrieval — IT operations monitoring of network infrastructure.
-- tag: Monitoring - Interface Statistics
-  spec_file: cisco-catalyst-sdwan-monitoring-interface-statistics-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.78
-  evidence: GET /statistics/interface/ccapacity/distribution getBandwidthDistribution
-  reason: Interface and bandwidth statistics for network links — infrastructure monitoring within IT operations
-    management.
-- tag: Monitoring - Performance Monitor
-  spec_file: cisco-catalyst-sdwan-monitoring-performance-monitor-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.78
-  evidence: getApplicationSitesHealth 'all sites one application health data'; 'single application site
-    health detail within time-range'
-  reason: Application and site performance/health monitoring across the WAN estate — infrastructure operations
-    monitoring, not a business-domain capability.
-- tag: Monitoring - System Status Stats
-  spec_file: cisco-catalyst-sdwan-monitoring-system-status-stats-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.78
-  evidence: GET /statistics/system/stats  getStatDataRawData_MonitoringSystemStatusStats
-  reason: Queries device system status statistics (raw, aggregated, CSV) from network devices — infrastructure
-    monitoring under IT Operations Management.
-- tag: Real-Time Monitoring - Appqoe
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-appqoe-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.78
-  evidence: '"Real-time monitoring Accessing statistics APIs and statistics bulk APIs Retrieving device
-    state"; GET /device/appqoe/appqoe-services-status getAppqoeServicesStatus'
-  reason: Read-only retrieval of AppQoE service status, statistics and flow state from SD-WAN network
-    devices — day-to-day IT operations monitoring of network infrastructure, not a business-domain capability.
-- tag: Real-Time Monitoring - BFD
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-bfd-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.78
-  evidence: GET /device/bfd/sessions createBFDSessions; GET /device/bfd/state/device getDeviceBFDStateSummary
-  reason: BFD session/link state and summary retrieval from network devices is network operations monitoring,
-    mapped to IT Operations Management.
-- tag: Real-Time Monitoring - System
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-system-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.78
-  evidence: GET /device/system/status  createDeviceSystemStatusList; GET /device/csp/system/processlist
-  reason: Device system status, process lists, clock and statistics retrieval — classic infrastructure
-    monitoring/IT operations telemetry.
-- tag: Real-Time Monitoring - Transport
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-transport-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.78
-  evidence: '"Real-time monitoring ... Retrieving device state Managing alarms and events"; GET /device/transport/connection'
-  reason: Read-only retrieval of network device transport connection state on an SD-WAN controller — day-to-day
-    IT/network operations monitoring, not a business-domain capability.
-- tag: Tenant Backup Restore
-  spec_file: cisco-catalyst-sdwan-tenant-backup-restore-api-openapi.yml
-  capability_id: BC-4230.60
-  capability_id_l1: BC-4230
-  capability_name: Tenant Backup & Export Management
-  confidence: 0.78
-  evidence: GET /tenantbackup/export  exportTenantBackup; POST /tenantbackup/import  importTenantBackup;
-    DELETE /tenantbackup/delete  deleteTenantBackup
-  reason: Per-tenant export, import, delete and download of backup files in a multi-tenant controller
-    — matches Tenant Backup & Export Management directly.
-- tag: Troubleshooting Tools - Diagnostics
-  spec_file: cisco-catalyst-sdwan-troubleshooting-tools-diagnostics-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.78
-  evidence: '"Real-time monitoring Accessing statistics APIs and statistics bulk APIs Retrieving device
-    state Managing alarms and events"; GET /statistics/speedtest, POST /stream/device/capture getSessionInfoCapture'
-  reason: Operations retrieve device statistics, speed-test data and packet captures for network diagnostics
-    — day-to-day IT/network operations monitoring, not a business-domain capability.
-- tag: Cluster Management
-  spec_file: cisco-catalyst-sdwan-cluster-management-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
+  evidence: POST /multicloud/interconnect/gateways  createInterconnectGateway  Create Interconnect gateway;
+    POST /multicloud/interconnect/gateways/push-config  pushInterconnectGatewayConfig  Push Interconnect
+    gateway configuration
+  reason: Full lifecycle of interconnect gateway network elements including configuration push and instance
+    sizing — provisioning and configuration of network infrastructure for the enterprise WAN.
+- tag: Administration - User and Group
+  spec_file: cisco-catalyst-sdwan-administration-user-and-group-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
   confidence: 0.75
-  evidence: POST /clusterManagement/configure configureVmanage; GET /clusterManagement/health/status healthStatusInfo;
-    GET /clusterManagement/nodeProperties
-  reason: Operations configure and monitor the vManage controller cluster nodes and their health — management
-    of compute/controller infrastructure, i.e. IT Infrastructure Management.
-- tag: Configuration - Azure Connect
-  spec_file: cisco-catalyst-sdwan-configuration-azure-connect-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
+  evidence: '"User, group and tenant management"; GET/POST/PUT/DELETE /admin/aaa getAaaConfig, /admin/radius
+    getRadiusConfig, /admin/tacacs getTacacsConfig, listenAuthEvents'
+  reason: Operations configure AAA, RADIUS and TACACS authentication and manage users/groups for the SD-WAN
+    controller — administrative identity and access management, a Cross-Industry security capability,
+    not a telecom subscriber capability (these are operator staff accounts, not subscribers).
+- tag: Configuration - Device Config History
+  spec_file: cisco-catalyst-sdwan-configuration-device-config-history-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
   confidence: 0.75
-  evidence: POST /template/cortex/cloud/authenticate authenticateAzureConnectCredAndAdd; POST /template/cortex/sync
-    syncWanResourceGroups
-  reason: Configures connectivity between the WAN overlay and Azure cloud resource groups — cloud/network
-    infrastructure management.
-- tag: Configuration - Circuits
-  spec_file: cisco-catalyst-sdwan-configuration-circuits-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
+  evidence: GET /device/history/config getLastThousandConfigList; GET /device/history/config/diff/list
+    getConfigDiff; GET /device/history/config/{config_id} getDeviceConfig
+  reason: Operations retrieve historical device configurations and configuration diffs for network elements
+    — configuration record-keeping and change traceability of network element configs, i.e. network configuration
+    management. Title 'Others' is uninformative; operations decide.
+- tag: Configuration - Network Design Templates
+  spec_file: cisco-catalyst-sdwan-configuration-network-design-templates-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
   confidence: 0.75
-  evidence: GET /networkdesign/circuit getCircuits; POST /networkdesign/circuit createCircuit
-  reason: Definition of WAN transport circuits in the network design model — core network infrastructure
-    configuration.
-- tag: Configuration - Device Inventory
-  spec_file: cisco-catalyst-sdwan-configuration-device-inventory-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.75
-  evidence: POST /system/device createDevice; POST /system/device/claimDevices claimDevices; PUT /system/device/decommission/{uuid}
-    decommissionVedgeCloud
-  reason: Onboarding, bootstrapping, claiming, lifecycle and decommissioning of network devices in the
-    controller inventory — network infrastructure asset management, not supply-chain Inventory Management
-    (BC-530), which concerns saleable stock.
-- tag: Configuration - Feature Profile (Mobility)
-  spec_file: cisco-catalyst-sdwan-configuration-feature-profile-mobility-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.75
-  evidence: CreateConfigFeatureForMobility; CreateQosFeatureForGlobal; 'Feature Profiles in Mobility and
-    NFV Solutions ... Network Function Virtualization (NFV) configurations'
-  reason: CRUD over device feature-configuration profiles (QoS, CLI, global) for SD-WAN network elements
-    — network infrastructure configuration management, not a business-domain capability.
-- tag: Configuration - Feature Profile (NFVirtual)
-  spec_file: cisco-catalyst-sdwan-configuration-feature-profile-nfvirtual-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.75
-  evidence: CreateNfvirtualNetworksFeatureProfile; GetAllNfvirtualOvsNetworksFeatureProfileByProfileId
-  reason: Configuration of virtualised network function profiles and OVS networks on network devices —
-    compute/network infrastructure configuration.
-- tag: Configuration - Feature Profile (SD-Routing)
-  spec_file: cisco-catalyst-sdwan-configuration-feature-profile-sd-routing-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.75
-  evidence: '''Feature Profiles in SD-Routing Solution Supporting software-defined routing features and
-    autonomous router management'''
-  reason: Large surface of create/edit/delete operations on router feature profiles — software-defined
-    routing configuration, i.e. IT network infrastructure management.
-- tag: Configuration - Feature Profile (SDWAN)
-  spec_file: cisco-catalyst-sdwan-configuration-feature-profile-sdwan-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.75
-  evidence: CreateTrafficPolicyProfileParcelForapplication_priority; createPolicyApplicationProfileParcel;
-    GetCellularControllerAssociatedCellularBandSelectForTransportSdrouting
-  reason: Configuration of SD-WAN transport, QoS and traffic-policy feature profiles on network devices
-    — network infrastructure configuration management.
-- tag: Configuration - General Template
-  spec_file: cisco-catalyst-sdwan-configuration-general-template-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.75
-  evidence: createFeatureTemplate; getDeviceTemplatesAttachedToFeature; 'Device templates and feature
-    templates'
-  reason: Device and feature template lifecycle for SD-WAN device configuration — IT network infrastructure
-    configuration, not product or business templating.
-- tag: Configuration - Multi Cloud
-  spec_file: cisco-catalyst-sdwan-configuration-multi-cloud-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.75
-  evidence: getCloudRoutersAndAttachments; createEdgeConnectivity; 'managing SD-WAN services such as Cloud
-    OnRamp for SaaS and MultiCloud'
-  reason: Manages cloud provider accounts, cloud routers and edge connectivity for the WAN — cloud/network
-    infrastructure management. The 'billingaccounts' path is cloud-account metadata, not the vendor's
-    own billing.
+  evidence: '"getGlobalTemplate", "editDeviceProfileTemplate", "getDeviceProfileFeatureTemplateList"'
+  reason: Global and device-profile configuration templates for network devices — Network Configuration
+    Management.
 - tag: Configuration - Policy ASPath List Builder
   spec_file: cisco-catalyst-sdwan-configuration-policy-aspath-list-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
   confidence: 0.75
-  evidence: GET /template/policy/list/aspath  getPolicyLists_ConfigurationPolicyAspathListBuilder
-  reason: BGP AS-path lists used in WAN routing policy — network infrastructure configuration on Cisco's
-    SD-WAN controller, mapping to IT Infrastructure Management (network). No business-domain capability
-    is realised.
+  evidence: '"POST /template/policy/list/aspath  createPolicyList", "editPolicyList"'
+  reason: CRUD over BGP AS-path policy lists used in routing policy configuration for network elements
+    — Network Configuration Management.
+- tag: Configuration - Policy App Probe Class List Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-app-probe-class-list-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.75
+  evidence: POST /template/policy/list/appprobe createPolicyList_ConfigurationPolicyAppProbeClassListBuilder;
+    "Managing original SD-WAN device configurations and policy configurations"
+  reason: CRUD on SD-WAN policy lists (app-probe classes) used to configure network elements — network
+    element configuration definition and controlled deployment, i.e. Network Configuration Management.
 - tag: Configuration - Policy AppRoute Definition Builder
   spec_file: cisco-catalyst-sdwan-configuration-policy-approute-definition-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
   confidence: 0.75
-  evidence: POST /template/policy/definition/approute  createPolicyDefinition_ConfigurationPolicyApprouteDefinitionBuilder
-  reason: Application-aware routing policy definitions for the SD-WAN fabric — network transport configuration,
-    i.e. IT Infrastructure Management.
+  evidence: POST /template/policy/definition/approute createPolicyDefinition_ConfigurationPolicyApprouteDefinitionBuilder
+  reason: Creates/edits application-aware routing policy definitions pushed to SD-WAN devices — network
+    element/overlay configuration management.
+- tag: Configuration - Policy Application List Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-application-list-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.75
+  evidence: POST /template/policy/list/app createPolicyList_ConfigurationPolicyApplicationListBuilder;
+    "policy configurations Device templates and feature templates"
+  reason: Manages application policy lists within the SD-WAN controller's configuration surface — network
+    configuration definition, not a business application catalogue.
+- tag: Configuration - Policy Color List Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-color-list-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.75
+  evidence: POST /template/policy/list/color createPolicyList_ConfigurationPolicyColorListBuilder
+  reason: '''Color'' is the SD-WAN transport-locator attribute; these operations maintain transport colour
+    policy lists used in device configuration — Network Configuration Management.'
+- tag: Configuration - Policy Community List Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-community-list-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.75
+  evidence: POST /template/policy/list/community createPolicyList_ConfigurationPolicyCommunityListBuilder
+  reason: BGP community policy lists for routing configuration on SD-WAN devices — network element configuration,
+    not a user community feature.
+- tag: Configuration - Policy Control Definition Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-control-definition-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.75
+  evidence: POST /template/policy/definition/control createPolicyDefinition_ConfigurationPolicyControlDefinitionBuilder
+  reason: Control-plane policy definition CRUD for the SD-WAN overlay — definition and deployment of network
+    configuration.
 - tag: Configuration - Policy Data Definition Builder
   spec_file: cisco-catalyst-sdwan-configuration-policy-data-definition-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
   confidence: 0.75
-  evidence: POST /template/policy/definition/data createPolicyDefinition — "Managing original SD-WAN device
-    configurations and policy configurations"
-  reason: CRUD over SD-WAN centralized data policy definitions on the vManage controller — network configuration
-    management, mapped to IT Infrastructure Management.
+  evidence: POST /template/policy/definition/data createPolicyDefinition_ConfigurationPolicyDataDefinitionBuilder
+  reason: Data-plane policy definition CRUD deployed to SD-WAN network elements — Network Configuration
+    Management, not data governance despite the word 'data'.
 - tag: Configuration - Policy Data IPV6 Prefix List Builder
   spec_file: cisco-catalyst-sdwan-configuration-policy-data-ipv6-prefix-list-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
   confidence: 0.75
   evidence: POST /template/policy/list/dataipv6prefix createPolicyList_ConfigurationPolicyDataIpv6PrefixListBuilder
-  reason: Manages IPv6 prefix lists used in SD-WAN network policy — pure network infrastructure configuration.
+  reason: Maintains IPv6 prefix lists used in data policy applied to network devices — network element
+    configuration definition.
 - tag: Configuration - Policy Data Prefix All Types Of Lists Builder
   spec_file: cisco-catalyst-sdwan-configuration-policy-data-prefix-all-types-of-lists-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
   confidence: 0.75
-  evidence: GET /template/policy/list/dataprefixall getListsForAllDataPrefixes
-  reason: Prefix list objects for SD-WAN policy; network/IP configuration, so IT Infrastructure Management
-    is the honest mapping.
+  evidence: '"Configuration of UX 1.0 device and policy"; POST /template/policy/list/dataprefixall createPolicyList,
+    PUT .../{id} editPolicyList'
+  reason: CRUD over data-prefix policy lists used in the SD-WAN controller's device/policy configuration
+    — definition and controlled deployment of network element configuration, i.e. Network Configuration
+    Management. No business capability beyond network config is implied.
 - tag: Configuration - Policy Data Prefix List Builder
   spec_file: cisco-catalyst-sdwan-configuration-policy-data-prefix-list-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
   confidence: 0.75
-  evidence: POST /template/policy/list/dataprefix createPolicyList_ConfigurationPolicyDataPrefixListBuilder
-  reason: IP data prefix list management for network policy on the SD-WAN controller — network infrastructure
-    configuration.
+  evidence: GET /template/policy/list/dataprefix getPolicyLists; "Managing original SD-WAN device configurations
+    and policy configurations"
+  reason: Manages IP data-prefix lists that are building blocks of SD-WAN routing/forwarding policy on
+    network elements — network configuration management, not a commercial capability.
 - tag: Configuration - Policy Data Prefix and FQDN All Types Of Lists Builder
   spec_file: cisco-catalyst-sdwan-configuration-policy-data-prefix-and-fqdn-all-types-of-lists-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
   confidence: 0.75
-  evidence: GET /template/policy/list/dataprefixfqdn getAllDataPrefixAndFQDNLists
-  reason: Prefix/FQDN list objects referenced by SD-WAN policy — network infrastructure configuration,
-    no business-domain capability.
+  evidence: GET /template/policy/list/dataprefixfqdn getAllDataPrefixAndFQDNLists; "device configurations
+    and policy configurations"
+  reason: Prefix/FQDN match lists for network policy definitions on SD-WAN devices; this is configuration
+    standard definition and deployment for network elements.
+- tag: Configuration - Policy Expanded Community List Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-expanded-community-list-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.75
+  evidence: GET /template/policy/list/expandedcommunity getPolicyLists; POST .../expandedcommunity createPolicyList
+  reason: BGP expanded-community lists used in routing policy configuration for SD-WAN devices — network
+    element configuration management.
+- tag: Configuration - Policy Extended Community List Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-extended-community-list-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.75
+  evidence: POST /template/policy/list/extcommunity createPolicyList; "device configurations and policy
+    configurations"
+  reason: BGP extended-community match lists for routing policy on network elements; configuration definition
+    and controlled change, not a business-facing capability.
 - tag: Configuration - Policy Forwarding Class List Builder
   spec_file: cisco-catalyst-sdwan-configuration-policy-forwarding-class-list-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
   confidence: 0.75
-  evidence: GET /template/policy/list/class getPolicyLists_ConfigurationPolicyForwardingClassListBuilder;
-    "Configuration of UX 1.0 device and policy"
-  reason: Forwarding-class (QoS) policy lists for the WAN overlay — network infrastructure configuration.
-- tag: Configuration - Policy Hub and Spoke Definition Builder
-  spec_file: cisco-catalyst-sdwan-configuration-policy-hub-and-spoke-definition-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
+  evidence: GET /template/policy/list/class getPolicyLists; POST /template/policy/list/class createPolicyList
+  reason: Forwarding/QoS class lists feeding SD-WAN policy configuration on network elements — configuration
+    definition and deployment (network configuration management).
+- tag: Configuration - Policy IPv6 Device Access Definition Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-ipv6-device-access-definition-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
   confidence: 0.75
-  evidence: POST /template/policy/definition/hubandspoke createPolicyDefinition_ConfigurationPolicyHubSpokeDefinitionBuilder
-  reason: Defines hub-and-spoke WAN topology policy definitions — network topology/infrastructure configuration.
-- tag: Configuration - Policy IPv6 Prefix List Builder
-  spec_file: cisco-catalyst-sdwan-configuration-policy-ipv6-prefix-list-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
+  evidence: POST /template/policy/definition/deviceaccesspolicyv6  createPolicyDefinition_ConfigurationPolicyIpv6DeviceAccessDefinitionBuilder
+  reason: Device-access policy definitions for IPv6 managed as SD-WAN configuration artefacts (create/edit/preview/delete)
+    — network configuration management, not enterprise IAM.
+- tag: Configuration - Policy Local Domain Name List Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-local-domain-name-list-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
   confidence: 0.75
-  evidence: POST /template/policy/list/ipv6prefix createPolicyList_ConfigurationPolicyIpv6PrefixListBuilder
-  reason: IPv6 prefix lists used in routing/network policy — clearly network infrastructure configuration.
+  evidence: POST /template/policy/list/localdomain  createPolicyList_ConfigurationPolicyLocalDomainNameListBuilder
+  reason: Local-domain name lists managed as policy configuration objects for SD-WAN device templates
+    — network configuration management.
 - tag: Configuration - Policy Qos Map Definition Builder
   spec_file: cisco-catalyst-sdwan-configuration-policy-qos-map-definition-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
   confidence: 0.75
-  evidence: POST /template/policy/definition/qosmap createPolicyDefinition — "Managing original SD-WAN
+  evidence: POST /template/policy/definition/qosmap createPolicyDefinition; "Managing original SD-WAN
     device configurations and policy configurations"
-  reason: CRUD over QoS map policy definitions on SD-WAN network devices; this is network infrastructure
-    configuration, not any business-domain policy management.
-- tag: Configuration - Policy Rewrite Rule Definition Builder
-  spec_file: cisco-catalyst-sdwan-configuration-policy-rewrite-rule-definition-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
+  reason: QoS map policy definitions configured and pushed to network devices; primarily configuration
+    definition (could also be read as optimisation), so mapped to Network Configuration Management.
+- tag: Configuration - Policy Region List Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-region-list-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
   confidence: 0.75
-  evidence: POST /template/policy/definition/rewriterule createPolicyDefinition — "device configurations
+  evidence: POST /template/policy/list/region createPolicyList
+  reason: SD-WAN fabric region policy lists used in device/policy configuration — a network configuration
+    construct, not geographic/market segmentation.
+- tag: Configuration - Policy URL WhiteList Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-url-whitelist-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.75
+  evidence: POST /template/policy/list/urlwhitelist createPolicyList; "Managing original SD-WAN device
+    configurations and policy configurations"
+  reason: Operations create, edit, preview and delete URL-whitelist policy lists on the SD-WAN controller
+    — i.e. definition and controlled deployment of network element policy configuration, matching Network
+    Configuration Management. Security-flavoured content, but the surface is configuration authoring rather
+    than security monitoring/response.
+- tag: Configuration - Policy Umbrella Data List Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-umbrella-data-list-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.75
+  evidence: GET/POST /template/policy/list/umbrelladata getPolicyLists / createPolicyList; "device configurations
     and policy configurations"
-  reason: Rewrite-rule (DSCP/CoS marking) policy definitions for network devices — IT network infrastructure
-    configuration.
-- tag: Configuration - Policy TLOC List Builder
-  spec_file: cisco-catalyst-sdwan-configuration-policy-tloc-list-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
+  reason: CRUD plus preview over a policy list object used in SD-WAN network policy configuration; this
+    is network element configuration definition, not a business-domain capability.
+- tag: Configuration - Policy Zone List Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-zone-list-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
   confidence: 0.75
-  evidence: POST /template/policy/list/tloc createPolicyList_ConfigurationPolicyTlocListBuilder
-  reason: TLOC (transport locator) lists are SD-WAN transport/routing constructs; purely network infrastructure
-    configuration.
+  evidence: POST /template/policy/list/zone createPolicyList_ConfigurationPolicyZoneListBuilder
+  reason: CRUD and preview of zone policy lists consumed by SD-WAN device policy configuration — network
+    element configuration definition.
+- tag: Configuration - Security Template Policy
+  spec_file: cisco-catalyst-sdwan-configuration-security-template-policy-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.75
+  evidence: POST /template/policy/security  createSecurityTemplate; GET /template/policy/security/devices  getSecurityPolicyDeviceList;
+    GET /template/policy/security/{deviceModel}  getSecurityTemplatesForDevice
+  reason: Creation, editing and device-attachment of security policy templates for network elements —
+    definition and enforcement of network element configuration standards.
 - tag: Configuration - Template Master
   spec_file: cisco-catalyst-sdwan-configuration-template-master-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
   confidence: 0.75
-  evidence: POST /template/device/feature  createMasterTemplate; DELETE /template/device/{templateId}  deleteMasterTemplate;
-    GET /template/device/syncstatus  getOutOfSyncTemplates
-  reason: CRUD plus migration and sync-status over device configuration templates used to provision WAN
-    edge devices — standardised configuration of network infrastructure, mapping to IT Infrastructure
-    Management.
-- tag: IPS Signature - Custom Rule
-  spec_file: cisco-catalyst-sdwan-ips-signature-custom-rule-api-openapi.yml
-  capability_id: BC-620.30
-  capability_id_l1: BC-620
-  capability_name: Threat Detection & Response Management
+  evidence: POST /template/device/feature createMasterTemplate; GET /template/device/syncstatus getOutOfSyncTemplates;
+    PUT /template/device/{templateId} editMasterTemplate
+  reason: CRUD plus out-of-sync detection over device configuration templates for network elements — definition
+    and enforcement of network element configuration standards. Residual ambiguity only over whether to
+    frame it as telecom network configuration or generic IT infrastructure.
+- tag: Monitoring - Alarms Details
+  spec_file: cisco-catalyst-sdwan-monitoring-alarms-details-api-openapi.yml
+  capability_id: BC-2600.10
+  capability_id_l1: BC-2600
+  capability_name: Network Fault Management
   confidence: 0.75
-  evidence: POST /signature-set/{signatureSetId}/custom-rule createCustomSignature — create custom signature
-  reason: Creation and update of custom intrusion-prevention signatures within a signature set — authoring
-    of detection content for the security stack, which sits under threat detection and response.
-- tag: IPS Signature - Rule
-  spec_file: cisco-catalyst-sdwan-ips-signature-rule-api-openapi.yml
-  capability_id: BC-620.30
-  capability_id_l1: BC-620
-  capability_name: Threat Detection & Response Management
+  evidence: POST /alarms/clear clearStaleAlarm; GET /alarms/count getNonViewedActiveAlarmsCount; POST
+    /alarms/dump dumpCorrelationEngineData
+  reason: Network alarm retrieval, counting, clearing, disabling and correlation-engine data for network
+    elements — this is network fault detection and correlation, not financial-crime alerting.
+- tag: Monitoring - Bridge
+  spec_file: cisco-catalyst-sdwan-monitoring-bridge-api-openapi.yml
+  capability_id: BC-2600.30
+  capability_id_l1: BC-2600
+  capability_name: Network Performance Management
   confidence: 0.75
-  evidence: GET /signature-set/{signatureSetId}/base/rule getAllBaseRules — Fetch all Base Rules; PUT
-    /signature-set/{signatureSetId}/rule/action editRuleAction — edit action of a rule
-  reason: Listing base and overridden IPS signature rules and editing rule actions (e.g. alert/drop) is
-    tuning of intrusion-prevention detection policy, a threat detection and response activity rather than
-    network configuration.
-- tag: Monitoring - ART
-  spec_file: cisco-catalyst-sdwan-monitoring-art-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
+  evidence: GET /statistics/bridgeinterface getStatDataRawData_MonitoringBridge; "Real-time monitoring
+    Accessing statistics APIs and statistics bulk APIs"
+  reason: Operations retrieve and aggregate performance counters/statistics for bridge interfaces on network
+    elements — continuous capture and analysis of network performance data, i.e. Network Performance Management.
+    Confidence tempered because the vendor is an enterprise WAN overlay controller rather than a carrier
+    OSS.
+- tag: Monitoring - Performance Monitor
+  spec_file: cisco-catalyst-sdwan-monitoring-performance-monitor-api-openapi.yml
+  capability_id: BC-2600.30
+  capability_id_l1: BC-2600
+  capability_name: Network Performance Management
   confidence: 0.75
-  evidence: 'openapi description: ''Includes API operations for the following: Real-time monitoring Accessing
-    statistics APIs and statistics bulk APIs''; GET /statistics/art getStatDataRawData; GET /statistics/art/aggregation'
-  reason: Retrieval and aggregation of application-response-time statistics from the network — operational
-    monitoring telemetry for IT operations. Cross-industry IT Operations Management is the honest fit;
-    this is not product usage telemetry of a SaaS product.
-- tag: Monitoring - App Hosting
-  spec_file: cisco-catalyst-sdwan-monitoring-app-hosting-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
+  evidence: GET /statistics/perfmon/applications/sites/health  getApplicationsSitesHealth  "all sites
+    all applications health data"
+  reason: Application-and-site performance/health monitoring across the WAN overlay — explicit performance
+    monitoring of network-delivered application experience.
+- tag: Monitoring - QoS
+  spec_file: cisco-catalyst-sdwan-monitoring-qos-api-openapi.yml
+  capability_id: BC-2600.30
+  capability_id_l1: BC-2600
+  capability_name: Network Performance Management
   confidence: 0.75
-  evidence: 'GET /statistics/apphosting getStatDataRawData; GET /statistics/apphosting/aggregation; description:
-    ''Real-time monitoring Accessing statistics APIs'''
-  reason: Statistics retrieval, aggregation, paging and CSV export for application-hosting on network
-    devices — operational monitoring telemetry, i.e. IT Operations Management.
-- tag: Monitoring - Cellular-EIOLTE
-  spec_file: cisco-catalyst-sdwan-monitoring-cellular-eiolte-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
+  evidence: GET /statistics/qos getStatDataRawData_MonitoringQos; POST /statistics/qos/app-agg/aggregation
+  reason: QoS statistics and per-application aggregation are network performance KPIs captured from devices
+    — Network Performance Management.
+- tag: Monitoring - Tunnel Health
+  spec_file: cisco-catalyst-sdwan-monitoring-tunnel-health-api-openapi.yml
+  capability_id: BC-2600.30
+  capability_id_l1: BC-2600
+  capability_name: Network Performance Management
   confidence: 0.75
-  evidence: GET /statistics/eiolte getStatDataRawData_MonitoringCellularEiolte; POST /statistics/eiolte/cellularAggregation
-  reason: Cellular/LTE transport interface statistics for WAN links — network monitoring within IT operations;
-    not a telecom-industry business capability for the buyer.
-- tag: Monitoring - Cflowd
-  spec_file: cisco-catalyst-sdwan-monitoring-cflowd-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
+  evidence: GET /statistics/tunnelhealth/history 'Tunnel health history data'; GET /statistics/tunnelhealth/overview/{type}
+    'Tunnel health overview data'
+  reason: Health and performance statistics for SD-WAN overlay tunnels (app-route) — detection and analysis
+    of transport-path degradation, i.e. network performance management.
+- tag: Policy - Policy Group
+  spec_file: cisco-catalyst-sdwan-policy-policy-group-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
   confidence: 0.75
-  evidence: GET /device/cflowd/flows createCflowCollectorList; GET /device/cflowd/fnf/monitor-stats getFnFMonitorStats
-  reason: Flow collector, flow-monitor and export statistics endpoints — network flow monitoring, IT Operations
-    Management.
-- tag: Monitoring - DPI
-  spec_file: cisco-catalyst-sdwan-monitoring-dpi-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
+  evidence: POST /v1/policy-group CreatePolicyGroup; PUT /v1/policy-group/{policyGroupId}/device/associate
+    UpdatePolicyGroupAssociation; POST /v1/policy-group/{policyGroupId}/device/deploy deployPolicyGroup
+  reason: Operations create, edit, associate to devices and deploy configuration policy groups on network
+    elements — definition and controlled deployment of network element configuration, i.e. network configuration
+    management. Not a business-domain 'policy' (governance) despite the noun.
+- tag: Real-Time Monitoring - Cellular
+  spec_file: cisco-catalyst-sdwan-real-time-monitoring-cellular-api-openapi.yml
+  capability_id: BC-2600
+  capability_id_l1: BC-2600
+  capability_name: Telecom Network Operations Management
   confidence: 0.75
-  evidence: GET /statistics/dpi getDPIStatsRawData; GET /statistics/dpi/device/applications getDPIDeviceAppAggregationData
-  reason: Deep-packet-inspection traffic statistics and per-application flow counts on network devices
-    — network traffic monitoring under IT Operations Management.
-- tag: Monitoring - Events
-  spec_file: cisco-catalyst-sdwan-monitoring-events-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
+  evidence: GET /device/cellular/modem createModemList; GET /device/cellular/radio; GET /device/cellular/status
+    getCellularStatusList
+  reason: Real-time monitoring of cellular modem, radio, session and connection state on WAN edge devices
+    — day-to-day operation of network elements. Sub-capability ambiguous between performance monitoring
+    and inventory/state, so L1 only.
+- tag: Real-Time Monitoring - Hardware
+  spec_file: cisco-catalyst-sdwan-real-time-monitoring-hardware-api-openapi.yml
+  capability_id: BC-2600
+  capability_id_l1: BC-2600
+  capability_name: Telecom Network Operations Management
   confidence: 0.75
-  evidence: POST /event postEvents; GET /event/listeners getListenersInfo; "Managing alarms and events"
-  reason: Network event stream query and listener management on the SD-WAN controller — operational event
-    monitoring, not business event or incident-ticket management.
-- tag: Monitoring - Flowlog
-  spec_file: cisco-catalyst-sdwan-monitoring-flowlog-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
+  evidence: GET /device/hardware/alarms createAlarmList; GET /device/hardware/inventory createInventoryList;
+    GET /device/hardware/threshold createTempThresholdList
+  reason: Hardware alarms, environment, errors and inventory of network elements — spans fault management
+    and inventory, so mapped at the network operations L1 rather than a single L2.
+- tag: Real-Time Monitoring - Interface
+  spec_file: cisco-catalyst-sdwan-real-time-monitoring-interface-api-openapi.yml
+  capability_id: BC-2600.30
+  capability_id_l1: BC-2600
+  capability_name: Network Performance Management
   confidence: 0.75
-  evidence: GET /statistics/flowlog getFlowlogFields; GET /statistics/flowlog/aggregation
-  reason: Network flow-log statistics query and aggregation — traffic monitoring under IT operations management.
-- tag: Monitoring - Network Availability
-  spec_file: cisco-catalyst-sdwan-monitoring-network-availability-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
+  evidence: GET /device/interface/error_stats getDeviceInterfaceErrorStats; GET /device/interface/qosStats
+    getDeviceInterfaceQosStats; GET /device/interface/port_stats
+  reason: Continuous capture of interface counters, error, QoS and queue statistics from network elements
+    — network performance monitoring of the WAN.
+- tag: Real-Time Monitoring - OMP
+  spec_file: cisco-catalyst-sdwan-real-time-monitoring-omp-api-openapi.yml
+  capability_id: BC-2600
+  capability_id_l1: BC-2600
+  capability_name: Telecom Network Operations Management
   confidence: 0.75
-  evidence: POST /statistics/nwa/aggregation getPostAggregationDataByQuery_MonitoringNetworkAvailability
-  reason: Network availability statistics aggregation from the SD-WAN controller — network monitoring
-    under IT operations management.
-- tag: Monitoring - SiteHealth Monitor
-  spec_file: cisco-catalyst-sdwan-monitoring-sitehealth-monitor-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
+  evidence: GET /device/omp/peers createOMPSessionList; GET /device/omp/routes/advertised createAdvertisedRoutesList
+  reason: Retrieval of overlay management protocol peer sessions, advertised/received routes and services
+    from live SD-WAN elements — operational monitoring of the IP overlay network.
+- tag: Real-Time Monitoring - OSPF
+  spec_file: cisco-catalyst-sdwan-real-time-monitoring-ospf-api-openapi.yml
+  capability_id: BC-2600
+  capability_id_l1: BC-2600
+  capability_name: Telecom Network Operations Management
   confidence: 0.75
-  evidence: GET /statistics/sitehealth/common  getSiteHealth  sitehealth data — "Real-time monitoring
-    Accessing statistics APIs"
-  reason: Operations retrieve and aggregate network site health statistics from the SD-WAN controller
-    — day-to-day IT operations monitoring of network infrastructure, not a business-domain health concept.
-- tag: Multitenant APIs - Provider
-  spec_file: cisco-catalyst-sdwan-multitenant-apis-provider-api-openapi.yml
+  evidence: GET /device/ospf/neighbor createOSPFNeighbors; GET /device/ospf/routes createOSPFRoutesList
+  reason: Live OSPF database, neighbour, interface and route state from network devices — routing-protocol
+    operational monitoring within network operations. L2 not asserted as it spans fault and performance
+    views.
+- tag: Real-Time Monitoring - VDSL Service
+  spec_file: cisco-catalyst-sdwan-real-time-monitoring-vdsl-service-api-openapi.yml
+  capability_id: BC-2600.30
+  capability_id_l1: BC-2600
+  capability_name: Network Performance Management
+  confidence: 0.75
+  evidence: GET /device/vdslService/lineSpecificStats  getLineSpecificStats; GET /device/vdslService/lineBondingStats
+  reason: Operations return VDSL line, CO/CPE and bonding statistics — capture of access-line performance
+    counters, which is network performance monitoring of fixed access.
+- tag: Tenant Management
+  spec_file: cisco-catalyst-sdwan-tenant-management-api-openapi.yml
   capability_id: BC-4230.10
   capability_id_l1: BC-4230
   capability_name: Tenant Provisioning & Lifecycle
   confidence: 0.75
   evidence: POST /tenant createTenant; DELETE /tenant/{tenantId} deleteTenantAsync; GET /tenant/capacity
     getTenantHostingCapacity
-  reason: Provider-side creation, bulk creation, relocation across vSmart controllers and deletion of
-    tenants in the multi-tenant SD-WAN Manager — tenant provisioning and lifecycle in a multi-tenant service.
-- tag: Real-Time Monitoring - BGP
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-bgp-api-openapi.yml
-  capability_id: BC-600.40
+  reason: Create, update, delete and list tenants plus tenant hosting capacity and vSmart placement —
+    this is tenant provisioning and lifecycle in a multi-tenant control plane, not a business-domain capability.
+- tag: Monitoring - Underlay Alarms
+  spec_file: cisco-catalyst-sdwan-monitoring-underlay-alarms-api-openapi.yml
+  capability_id: BC-2600.10
+  capability_id_l1: BC-2600
+  capability_name: Network Fault Management
+  confidence: 0.74
+  evidence: 'GET /device/underlay/alarms/{type} getUnderlayAlarmsOverview; description: ''Managing alarms
+    and events'''
+  reason: Retrieval of alarms raised on the underlay transport network — fault detection/overview across
+    network elements, which is network fault management.
+- tag: Configuration - Control Component Setting
+  spec_file: cisco-catalyst-sdwan-configuration-control-component-setting-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.72
+  evidence: POST /v1/control-component/devices/settings/deploy  deployControlComponentSettingsToDevice;
+    POST /v1/control-component/devices/{deviceId}/settings  createControlComponentDeviceSpecificSettings
+  reason: Creates device-specific and common network settings for SD-WAN control components and deploys
+    them to the devices — network element configuration management.
+- tag: Configuration - Policy DialPeer Definition Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-dialpeer-definition-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.72
+  evidence: POST /template/policy/definition/dialpeer createPolicyDefinition; POST /template/policy/definition/srstphoneprofile
+  reason: Configures voice dial-peer and SRST phone-profile policy definitions on SD-WAN routers — configuration
+    of network/voice-gateway elements, i.e. network configuration management rather than a service or
+    product capability.
+- tag: Configuration - Policy FXO Port Definition Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-fxo-port-definition-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.72
+  evidence: POST /template/policy/definition/fxoport createPolicyDefinition; PUT /template/policy/definition/fxoport/bulk
+    savePolicyDefinitionInBulk
+  reason: Configures FXO analog voice port definitions on SD-WAN routers — network element (voice interface)
+    configuration management.
+- tag: Configuration - Policy FXS Port Definition Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-fxs-port-definition-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.72
+  evidence: POST /template/policy/definition/fxsport createPolicyDefinition; "Configuration of UX 1.0
+    device and policy"
+  reason: FXS analog voice port configuration definitions applied to network devices; network configuration
+    management.
+- tag: Configuration - Policy FXSDID Port Definition Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-fxsdid-port-definition-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.72
+  evidence: POST /template/policy/definition/fxsdidport createPolicyDefinition; PUT /template/policy/definition/fxsdidport/{id}
+    editPolicyDefinition
+  reason: FXS-DID voice port configuration definitions for SD-WAN routers — element configuration standards
+    and deployment, not numbering or subscriber management.
+- tag: Configuration - Policy List Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-list-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.72
+  evidence: GET /template/policy/list  getAllPolicyLists; POST /template/policy/list/webex  createWebexPrefixLists
+  reason: Retrieval of all policy lists and creation of Webex prefix lists used in SD-WAN policy templates
+    — configuration of network policy objects.
+- tag: Configuration - Policy Media Profile List Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-media-profile-list-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.72
+  evidence: POST /template/policy/list/mediaprofile  createPolicyList_ConfigurationPolicyMediaProfileListBuilder
+  reason: Media-profile policy lists created/edited/deleted within SD-WAN policy configuration templates
+    — configuration of network element policy, not media/content product management.
+- tag: Configuration - Policy TLOC List Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-tloc-list-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.72
+  evidence: POST /template/policy/list/tloc createPolicyList_ConfigurationPolicyTlocListBuilder; "Managing
+    original SD-WAN device configurations and policy configurations"
+  reason: TLOC (transport locator) lists are SD-WAN transport policy configuration objects; the operations
+    are pure create/read/edit/delete of configuration, i.e. Network Configuration Management.
+- tag: Configuration - Preferred Color Group List Builder
+  spec_file: cisco-catalyst-sdwan-configuration-preferred-color-group-list-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.72
+  evidence: POST /template/policy/list/preferredcolorgroup createPolicyList_ConfigurationPreferredColorGroupListBuilder
+  reason: Preferred colour groups are transport-preference policy lists used in SD-WAN application-aware
+    routing configuration; the operations are policy-list CRUD, i.e. network configuration definition.
+- tag: Monitoring - Cellular-EIOLTE
+  spec_file: cisco-catalyst-sdwan-monitoring-cellular-eiolte-api-openapi.yml
+  capability_id: BC-2600.30
+  capability_id_l1: BC-2600
+  capability_name: Network Performance Management
+  confidence: 0.72
+  evidence: GET /statistics/eiolte ... POST /statistics/eiolte/cellularAggregation cellularAggregation
+  reason: Statistics query, aggregation and pagination endpoints for LTE cellular interface counters on
+    managed devices — capture and analysis of network performance KPIs. Not subscriber or spectrum management;
+    purely telemetry retrieval.
+- tag: Monitoring - Cflowd
+  spec_file: cisco-catalyst-sdwan-monitoring-cflowd-api-openapi.yml
+  capability_id: BC-2600.30
+  capability_id_l1: BC-2600
+  capability_name: Network Performance Management
+  confidence: 0.72
+  evidence: GET /device/cflowd/flows createCflowCollectorList; GET /device/cflowd/fnf/monitor-stats getFnFMonitorStats
+  reason: Flow-monitor, collector and export statistics for Flexible NetFlow on network devices — traffic
+    and performance telemetry collection and analysis, mapping to Network Performance Management.
+- tag: Monitoring - DPI
+  spec_file: cisco-catalyst-sdwan-monitoring-dpi-api-openapi.yml
+  capability_id: BC-2600.30
+  capability_id_l1: BC-2600
+  capability_name: Network Performance Management
+  confidence: 0.72
+  evidence: GET /statistics/dpi/applications getAggAppFlows; GET /statistics/dpi/device/applications getDPIDeviceAppAggregationData
+  reason: Deep-packet-inspection application flow statistics and aggregations per device — application-aware
+    traffic and performance analysis on the network, i.e. network performance monitoring.
+- tag: Monitoring - Device Health
+  spec_file: cisco-catalyst-sdwan-monitoring-device-health-api-openapi.yml
+  capability_id: BC-2600.30
+  capability_id_l1: BC-2600
+  capability_name: Network Performance Management
+  confidence: 0.72
+  evidence: GET /statistics/devicehealth/history getDeviceHealthHistory "Device health history data"
+  reason: Health history and overview metrics for network devices — continuous performance/health KPI
+    capture and analysis across the network estate.
+- tag: Monitoring - Device Statistics Details V2
+  spec_file: cisco-catalyst-sdwan-monitoring-device-statistics-details-v2-api-openapi.yml
+  capability_id: BC-2600.30
+  capability_id_l1: BC-2600
+  capability_name: Network Performance Management
+  confidence: 0.72
+  evidence: GET /v2/data/device/statistics/interfacestatistics  generateDeviceInterfaceStatisticsData
+  reason: Retrieval of device interface performance counters from network elements — squarely capture
+    and analysis of network performance data rather than any business-domain capability.
+- tag: Monitoring - Interface Statistics
+  spec_file: cisco-catalyst-sdwan-monitoring-interface-statistics-api-openapi.yml
+  capability_id: BC-2600.30
+  capability_id_l1: BC-2600
+  capability_name: Network Performance Management
+  confidence: 0.72
+  evidence: GET /statistics/interface  getStatDataRawData_MonitoringInterfaceStatistics; GET /statistics/interface/ccapacity/distribution  getBandwidthDistribution
+  reason: Interface counters and bandwidth distribution across network interfaces — continuous capture
+    and analysis of network performance KPIs.
+- tag: Monitoring - Qfp
+  spec_file: cisco-catalyst-sdwan-monitoring-qfp-api-openapi.yml
+  capability_id: BC-2600.30
+  capability_id_l1: BC-2600
+  capability_name: Network Performance Management
+  confidence: 0.72
+  evidence: GET /statistics/qfp getStatDataRawData_MonitoringQfp; "Accessing statistics APIs and statistics
+    bulk APIs"
+  reason: Operations retrieve and aggregate forwarding-engine (QFP) statistics from network devices —
+    capture and analysis of network performance counters, i.e. Network Performance Management. Not a business-domain
+    capability; the vendor is a WAN network controller.
+- tag: Monitoring - Qfp Drop Statistics
+  spec_file: cisco-catalyst-sdwan-monitoring-qfp-drop-statistics-api-openapi.yml
+  capability_id: BC-2600.30
+  capability_id_l1: BC-2600
+  capability_name: Network Performance Management
+  confidence: 0.72
+  evidence: GET /statistics/qfpdrop/overview/droptype/{typename} getQfpDropOverviewByDropType
+  reason: Packet-drop counters per drop type on network elements are performance/degradation indicators,
+    so this is network performance monitoring rather than any business process.
+- tag: Monitoring - System Status Stats
+  spec_file: cisco-catalyst-sdwan-monitoring-system-status-stats-api-openapi.yml
+  capability_id: BC-2600.30
+  capability_id_l1: BC-2600
+  capability_name: Network Performance Management
+  confidence: 0.72
+  evidence: GET /statistics/system/stats getStatDataRawData; GET /statistics/system/stats/aggregation
+    getAggregationDataByQuery
+  reason: Raw, paginated and aggregated retrieval of system statistics from managed network elements —
+    capture and analysis of network performance counters/KPIs.
+- tag: MultiCloud - CloudGateway
+  spec_file: cisco-catalyst-sdwan-multicloud-cloudgateway-api-openapi.yml
+  capability_id: BC-600.50
   capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.75
-  evidence: GET /device/bgp/neighbors createBGPNeighborsList; GET /device/bgp/routes createBGPRoutesList
-  reason: Retrieval of BGP neighbour and route state from devices — routing monitoring within IT/network
-    operations.
-- tag: Real-Time Monitoring - Cellular
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-cellular-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.75
-  evidence: GET /device/cellular/connection createCellularConnectionList; GET /device/cellular/status
-    getCellularStatusList
-  reason: Cellular modem/radio/connection state retrieval from WAN edge devices — monitoring of network
-    transport, IT operations.
+  capability_name: IT Infrastructure Management
+  confidence: 0.72
+  evidence: POST /multicloud/cloudgateway  createCgw; GET /multicloud/cloudgateway/tgw/RouteTables  getAwsTgwRouteTables;
+    GET /multicloud/cloudgateway/resourceGroups  getAzureResourceGroups
+  reason: Operations create and inspect cloud gateways, AWS transit-gateway route tables and Azure resource
+    groups — provisioning of cloud/network infrastructure for an enterprise WAN overlay. This is IT infrastructure
+    (network/cloud) management, not carrier-grade telecom network operations, so the cross-industry IT
+    capability is the honest fit.
+- tag: Multitenant APIs - Provider
+  spec_file: cisco-catalyst-sdwan-multitenant-apis-provider-api-openapi.yml
+  capability_id: BC-4230.10
+  capability_id_l1: BC-4230
+  capability_name: Tenant Provisioning & Lifecycle
+  confidence: 0.72
+  evidence: POST /tenant  createTenant ... GET /tenant/capacity  getTenantHostingCapacity ... PUT /tenant/vsmart  relocateAllTenantsFromVsmart
+  reason: Provider-side create/update/delete of tenants, tenant hosting capacity and relocation of tenants
+    across vSmart controllers — this is multi-tenant tenant provisioning and lifecycle on a shared control
+    plane. Not the telco's own network domain, so the SaaS tenant-management capability is the honest
+    fit.
+- tag: Real-Time Monitoring - Bridge
+  spec_file: cisco-catalyst-sdwan-real-time-monitoring-bridge-api-openapi.yml
+  capability_id: BC-2600
+  capability_id_l1: BC-2600
+  capability_name: Telecom Network Operations Management
+  confidence: 0.72
+  evidence: 'GET /device/bridge/interface getBridgeInterfaceList; GET /device/bridge/mac; description:
+    "Real-time monitoring ... Retrieving device state"'
+  reason: Read-only retrieval of bridge interface/MAC table state from live network elements — operational
+    monitoring of IP network devices, i.e. network operations management. No single sub-capability is
+    clearly named (state retrieval sits between inventory and performance), so only the L1 is asserted.
 - tag: Real-Time Monitoring - Device System Stats
   spec_file: cisco-catalyst-sdwan-real-time-monitoring-device-system-stats-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.75
-  evidence: GET /statistics/system/cpu createDeviceSystemCPUStat; GET /statistics/system/memory createDeviceSystemMemoryStat
-  reason: CPU/memory and aggregated system statistics for managed network devices — infrastructure monitoring
-    and telemetry query, squarely IT operations management.
-- tag: Real-Time Monitoring - EIGRP
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-eigrp-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.75
-  evidence: GET /device/eigrp/interface, GET /device/eigrp/route, GET /device/eigrp/topology under "Real-time
-    monitoring"
-  reason: Reads EIGRP routing protocol interface/route/topology state from devices — network operations
-    monitoring within IT Operations Management.
-- tag: Real-Time Monitoring - IGMP
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-igmp-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.75
-  evidence: GET /device/igmp/groups, GET /device/igmp/statistics, GET /device/igmp/summary
-  reason: Multicast protocol state and statistics retrieval from devices — network operations monitoring.
-- tag: Real-Time Monitoring - IP
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-ip-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.75
-  evidence: GET /device/ip/routetable createRouteTableList, GET /device/ip/nat/translation createNatTranslationList
-  reason: Routing tables, FIB and NAT translation state from network devices — IT operations/network monitoring.
-- tag: Real-Time Monitoring - Lacp
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-lacp-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.75
-  evidence: GET /device/lacp/info  getLacpInterfaceList; GET /device/lacp/members  getLacpMembers
-  reason: Link-aggregation state read from network devices; pure network operations monitoring, no business
-    capability beyond IT operations.
-- tag: Real-Time Monitoring - Multicast
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-multicast-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.75
-  evidence: GET /device/multicast/rpf  createRpfList; GET /device/multicast/topology  createTopologyList
-  reason: Multicast routing state retrieval from network devices — network/IT operations monitoring.
-- tag: Real-Time Monitoring - NTP
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-ntp-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.75
-  evidence: GET /device/ntp/associations  createAssociationsList; GET /device/ntp/status  createNTPStatusList
-  reason: Time-sync and virtual application state read from network devices; infrastructure monitoring
-    under IT operations.
-- tag: Real-Time Monitoring - Orchestrator
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-orchestrator-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.75
-  evidence: GET /device/orchestrator/connections  createConnectionListFromDevice; GET /device/orchestrator/statistics  getStatistics
-  reason: Control-plane connection and statistics state from the SD-WAN orchestrator component; network
-    operations monitoring, not business process orchestration.
-- tag: Real-Time Monitoring - Policy
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-policy-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.75
-  evidence: GET /device/policy/accesslistcounters createPolicyAccessListCounters; GET /device/policy/filtermemoryusage
-  reason: Despite the business-sounding word 'Policy', operations read device ACL counters, policy filters
-    and binding tables — real-time network device state monitoring, i.e. IT operations, not corporate
-    policy management.
-- tag: Real-Time Monitoring - SIG
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-sig-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.75
-  evidence: GET /device/sig/getSigTunnelList, GET /device/sig/tunnelDashboard — "Real-time monitoring
-    ... Retrieving device state"
-  reason: Read-only retrieval of secure-internet-gateway tunnel state and dashboards from network devices
-    — day-to-day IT operations monitoring of network infrastructure, not a security-programme capability.
-- tag: Real-Time Monitoring - WLAN
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-wlan-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.75
-  evidence: GET /device/wlan/clients  getWLANClients; GET /device/wlan/radios
-  reason: Retrieves WLAN client, interface and radio state from network devices — wireless network operations
-    monitoring.
-- tag: Troubleshooting Tools - Network Wide Path Insight
-  spec_file: cisco-catalyst-sdwan-troubleshooting-tools-network-wide-path-insight-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.75
-  evidence: POST /stream/device/nwpi/trace/start traceStart; GET /stream/device/nwpi/traceHistory getTraceHistory
-  reason: Path-insight trace tasks on network devices are network troubleshooting/monitoring activity
-    under IT operations management.
+  capability_id: BC-2600.30
+  capability_id_l1: BC-2600
+  capability_name: Network Performance Management
+  confidence: 0.72
+  evidence: GET /statistics/system/cpu createDeviceSystemCPUStat; GET /statistics/system/memory createDeviceSystemMemoryStat;
+    GET /statistics/system/aggregation
+  reason: Bulk and aggregated system performance statistics (CPU, memory) from network devices — continuous
+    capture and analysis of network element performance counters.
 - tag: Configuration - Disaster Recovery
   spec_file: cisco-catalyst-sdwan-configuration-disaster-recovery-api-openapi.yml
   capability_id: BC-160.20
   capability_id_l1: BC-160
   capability_name: Disaster Recovery Management
-  confidence: 0.72
-  evidence: POST /disasterrecovery/activate; GET /disasterrecovery/dbrestorestatus getConfigDBRestoreStatus;
+  confidence: 0.7
+  evidence: POST /disasterrecovery/activate activate; GET /disasterrecovery/dbrestorestatus getConfigDBRestoreStatus;
     POST /disasterrecovery/deleteRemoteDataCenter deleteDC
-  reason: Operations register and activate disaster-recovery pairing between local and remote data centres,
-    report DR status and config-DB restore — IT disaster recovery management. Homograph risk is low; the
-    surface is genuinely DR orchestration.
-- tag: Configuration - Policy Custom Application Builder
-  spec_file: cisco-catalyst-sdwan-configuration-policy-custom-application-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.72
-  evidence: POST /template/policy/customapp createCustomApplication — "Managing original SD-WAN device
-    configurations and policy configurations"
-  reason: Defines custom application definitions used by SD-WAN application-aware routing policy; this
-    is network infrastructure/overlay configuration, i.e. IT Infrastructure Management, not any business-domain
-    capability.
-- tag: Configuration - Policy Expanded Community List Builder
-  spec_file: cisco-catalyst-sdwan-configuration-policy-expanded-community-list-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.72
-  evidence: POST /template/policy/list/expandedcommunity createPolicyList_ConfigurationPolicyExpEdCommunityListBuilder
-  reason: BGP expanded community list objects for routing policy — network infrastructure configuration;
-    'community' here is a BGP attribute, not a stakeholder community.
-- tag: Configuration - Policy Extended Community List Builder
-  spec_file: cisco-catalyst-sdwan-configuration-policy-extended-community-list-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.72
-  evidence: POST /template/policy/list/extcommunity createPolicyList_ConfigurationPolicyExtendedCommunityListBuilder
-  reason: BGP extended community lists used in SD-WAN routing policy — network infrastructure configuration.
-- tag: Configuration - Policy Mesh Definition Builder
-  spec_file: cisco-catalyst-sdwan-configuration-policy-mesh-definition-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.72
-  evidence: POST /template/policy/definition/mesh createPolicyDefinition_ConfigurationPolicyMeshDefinitionBuilder
-  reason: Defines mesh topology policy for the SD-WAN overlay — network topology/infrastructure configuration.
-- tag: Configuration - Policy Prefix List Builder
-  spec_file: cisco-catalyst-sdwan-configuration-policy-prefix-list-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.72
-  evidence: POST /template/policy/list/prefix createPolicyList_ConfigurationPolicyPrefixListBuilder
-  reason: IP prefix lists for routing/policy matching in the SD-WAN overlay — network infrastructure configuration.
-- tag: Configuration - Policy Prefix for All Types of Lists Builder
-  spec_file: cisco-catalyst-sdwan-configuration-policy-prefix-for-all-types-of-lists-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.72
-  evidence: GET /template/policy/list/ipprefixall getListsForAllPrefixes
-  reason: Aggregated IP prefix list management for SD-WAN policy — routing/network configuration, IT Infrastructure
-    Management.
-- tag: Configuration - Policy Region List Builder
-  spec_file: cisco-catalyst-sdwan-configuration-policy-region-list-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.72
-  evidence: POST /template/policy/list/region createPolicyList — "Managing original SD-WAN device configurations
-    and policy configurations"
-  reason: Manages region reference lists used in SD-WAN network policy; network/overlay infrastructure
-    configuration rather than a business capability.
-- tag: Configuration - Policy Site List Builder
-  spec_file: cisco-catalyst-sdwan-configuration-policy-site-list-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.72
-  evidence: POST /template/policy/list/site/defaultsite createDefaultSiteList
-  reason: Site-ID lists used to scope SD-WAN network policy; network infrastructure configuration, not
-    real-estate or facilities sites.
-- tag: Configuration - Policy vEdge Route Definition Builder
-  spec_file: cisco-catalyst-sdwan-configuration-policy-vedge-route-definition-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.72
-  evidence: POST /template/policy/definition/vedgeroute createPolicyDefinition — "Managing original SD-WAN
-    device configurations and policy configurations"
-  reason: CRUD over SD-WAN route policy definitions on network devices; this is network infrastructure
-    configuration, i.e. IT Infrastructure Management. 'Policy' here is a routing construct, not a corporate
-    policy (BC-130.20).
-- tag: Configuration - Software Actions
-  spec_file: cisco-catalyst-sdwan-configuration-software-actions-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.72
-  evidence: GET /device/action/software  findSoftwareImages; GET /device/action/software/platformfamily  findSupportedPlatformFamily;
-    POST /device/action/remote-server  addRemoteServer
-  reason: Operations manage the catalogue of software images and image repositories used to upgrade network
-    devices — lifecycle management of network infrastructure elements, i.e. IT Infrastructure Management.
-    Confidence held below high because operation summaries are empty and only paths/operationIds ground
-    the reading.
-- tag: Configuration - vEdge Template Policy
-  spec_file: cisco-catalyst-sdwan-configuration-vedge-template-policy-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.72
-  evidence: POST /template/policy/vedge  createVEdgeTemplate; GET /template/policy/vedge/devices/{policyId}  getDeviceListByPolicy
-  reason: Create/edit/delete of localised policy templates for vEdge routers and their device bindings
-    — configuration and policy management of WAN network infrastructure.
-- tag: Configuration - vSmart Template Policy
-  spec_file: cisco-catalyst-sdwan-configuration-vsmart-template-policy-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.72
-  evidence: POST /template/policy/vsmart/activate/{policyId}  activatePolicy; GET /template/policy/vsmart/connectivity/status  checkVSmartConnectivityStatus
-  reason: Central (vSmart controller) policy templates with activate/deactivate and connectivity checks
-    — centralised network policy configuration for the SD-WAN overlay, i.e. network infrastructure management.
-- tag: Monitoring - Cedge Cflowd
-  spec_file: cisco-catalyst-sdwan-monitoring-cedge-cflowd-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.72
-  evidence: GET /device/cedgecflowd/app-fwd-cflowd-flows createAppFwdCflowdFlowsList
-  reason: Retrieval of NetFlow/Cflowd flow records from edge routers is network traffic monitoring — IT
-    Operations Management.
-- tag: Monitoring - CloudExpress
-  spec_file: cisco-catalyst-sdwan-monitoring-cloudexpress-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.72
-  evidence: GET /statistics/cloudx getStatDataRawData_MonitoringCloudexpress
-  reason: Cloud OnRamp (CloudExpress) application/path statistics retrieval — monitoring of network service
-    performance, IT Operations Management.
-- tag: Monitoring - Endpoint Tracker Status
-  spec_file: cisco-catalyst-sdwan-monitoring-endpoint-tracker-status-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.72
-  evidence: GET /statistics/endpointTracker getStatDataRawData_MonitoringEndpointTrackerStatus
-  reason: Statistics for SD-WAN endpoint trackers (reachability probes) — network monitoring data access
-    under IT operations; generic statistics surface so confidence moderate.
-- tag: Monitoring - Temperature Statistics
-  spec_file: cisco-catalyst-sdwan-monitoring-temperature-statistics-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.72
-  evidence: GET /statistics/temperature/overview  getTemperatureOverview
-  reason: Hardware temperature telemetry of network devices, not building HVAC/facilities; monitoring
-    of IT device health belongs to IT Operations Management.
-- tag: Monitoring - VNF Interface Statistics
-  spec_file: cisco-catalyst-sdwan-monitoring-vnf-interface-statistics-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.72
-  evidence: GET /statistics/vnfstatistics  getStatDataRawData_MonitoringVnfInterfaceStatistics
-  reason: Interface statistics for virtual network functions on SD-WAN devices — monitoring of IT network
-    infrastructure performance.
-- tag: Monitoring - Wlan Client Info
-  spec_file: cisco-catalyst-sdwan-monitoring-wlan-client-info-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.72
-  evidence: '"Real-time monitoring Accessing statistics APIs and statistics bulk APIs Retrieving device
-    state"; GET /statistics/wlanclientinfo getStatDataRawData'
-  reason: Operations retrieve and aggregate WLAN client statistics from network devices — day-to-day IT
-    operations monitoring of network infrastructure, not a business-domain capability.
-- tag: MultiCloud - BranchConnect
-  spec_file: cisco-catalyst-sdwan-multicloud-branchconnect-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.72
-  evidence: POST /multicloud/cloudgateway/{cloudGatewayName}/site attachSites; GET /multicloud/interfacecolor
-    getWanInterfaceColors
-  reason: Attaches/detaches branch sites to cloud gateways and manages WAN interface transport attributes
-    — network/cloud infrastructure management.
-- tag: Real-Time Monitoring - Bridge
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-bridge-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.72
-  evidence: GET /device/bridge/interface getBridgeInterfaceList; GET /device/bridge/mac getBridgeInterfaceMac
-  reason: Bridge interface and MAC table state retrieval from network devices; network operations monitoring,
-    no business capability beyond IT operations.
-- tag: Real-Time Monitoring - Dual Static Route Tracker Service
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-dual-static-route-tracker-service-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.72
-  evidence: '"Real-time monitoring ... Retrieving device state Managing alarms and events"; GET /device/dualStaticRouteTracker
-    getDualStaticRouteTrackerInfo'
-  reason: Retrieves live route-tracker state from network devices — day-to-day IT operations monitoring
-    of network infrastructure, not a line-of-business capability.
-- tag: Real-Time Monitoring - Hardware
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-hardware-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.72
-  evidence: GET /device/hardware/alarms createAlarmList, GET /device/hardware/environment, GET /device/hardware/inventory,
-    GET /device/hardware/threshold
-  reason: Hardware health, environment, alarms and inventory of network devices — infrastructure monitoring
-    under IT Operations Management (alarms here are device faults, not business alerts).
-- tag: Real-Time Monitoring - IPv4 FIB
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-ipv4-fib-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.72
-  evidence: GET /device/ip/v4fib createIPv4FibList under "Real-time monitoring"
-  reason: Forwarding information base retrieval from devices — network state monitoring in IT operations.
-- tag: Real-Time Monitoring - IPv6 FIB
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-ipv6-fib-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.72
-  evidence: GET /device/ip/v6fib createIPv6FibList under "Real-time monitoring"
-  reason: IPv6 forwarding table state retrieval — network operations monitoring.
-- tag: Real-Time Monitoring - Tools
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-tools-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.72
-  evidence: GET /device/tools/netstat, GET /device/tools/nslookup, GET /device/tools/realtimeinfo
-  reason: On-device diagnostic troubleshooting utilities (netstat, nslookup, socket stats) — operational
-    network troubleshooting under IT operations management.
-- tag: Real-Time Monitoring - Voice
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-voice-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.72
-  evidence: GET /device/voice/voiceCalls  getVoiceCalls; GET /device/voicet1e1controllerinfo/totalstats
-  reason: Monitors voice/VoIP call, DSP and T1/E1 ISDN controller state on branch routers — telephony
-    infrastructure operations monitoring, not contact-centre business operations.
-- tag: Real-Time Monitoring - Wireless
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-wireless-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.72
-  evidence: '"Includes API operations for the following: Real-time monitoring ... Retrieving device state";
-    GET /device/wireless/radio getWirelessRadios'
-  reason: Read-only real-time monitoring of wireless client/radio/SSID state on network devices — day-to-day
-    IT/network operations monitoring, not a wireless business capability.
-- tag: Tenant Migration
-  spec_file: cisco-catalyst-sdwan-tenant-migration-api-openapi.yml
-  capability_id: BC-4230.10
-  capability_id_l1: BC-4230
-  capability_name: Tenant Provisioning & Lifecycle
-  confidence: 0.72
-  evidence: POST /tenantmigration/export  exportTenantData; POST /tenantmigration/import/{migrationKey}  importTenantData;
-    POST /tenantmigration/networkMigration  migrateNetwork
-  reason: Export/import and network migration of a tenant between controller deployments; Tenant Provisioning
-    & Lifecycle explicitly covers 'migration of tenants'. Some overlap with tenant export capability,
-    hence moderate confidence.
-- tag: Troubleshooting Tools - Device Connectivity
-  spec_file: cisco-catalyst-sdwan-troubleshooting-tools-device-connectivity-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.72
-  evidence: POST /device/tools/admintech  createAdminTech; POST /device/tools/factoryreset  factoryReset;
-    POST /device/tools/nping/{deviceIP}  npingDevice
-  reason: Diagnostic and remediation tooling on network devices (support-bundle collection, ping/traceroute,
-    factory reset) — IT operations/monitoring of running infrastructure.
-- tag: Configuration - Cloud On Ramp SaaS
-  spec_file: cisco-catalyst-sdwan-configuration-cloud-on-ramp-saas-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
+  reason: Operations register and activate disaster-recovery between local and remote data centres for
+    the management cluster, including config-DB restore status — IT/operational disaster recovery rather
+    than a network-domain capability.
+- tag: Configuration - Feature Profile (Mobility)
+  spec_file: cisco-catalyst-sdwan-configuration-feature-profile-mobility-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
   confidence: 0.7
-  evidence: GET /v1/cloudonramp/saas/cloud_tunnels getCloudTunnelList; GET /v1/cloudonramp/saas/status
-    getCorSaasStatusPerDevice
-  reason: Configures and reports on cloud tunnels and per-device SaaS optimisation paths — network path/infrastructure
-    management for SaaS traffic, not a commercial SaaS capability despite the tag wording.
-- tag: Configuration - Configuration Group
-  spec_file: cisco-catalyst-sdwan-configuration-configuration-group-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
+  evidence: GET /v1/feature-profile/mobility/global GetMobilityGlobalFeatureProfile; POST /v1/feature-profile/mobility/global/{globalId}/qos
+    CreateQosFeatureForGlobal
+  reason: CRUD over UX 2.0 feature profiles and parcels (CLI, global, QoS) that define device configuration
+    for mobility deployments — definition and deployment of network element configuration.
+- tag: Configuration - Feature Profile (NFVirtual)
+  spec_file: cisco-catalyst-sdwan-configuration-feature-profile-nfvirtual-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
   confidence: 0.7
-  evidence: POST /v1/config-group CreateConfigGroup; POST /v1/config-group/{configGroupId}/device/deploy
-    deployConfigGroup
-  reason: Creation of device configuration groups and deployment of them to network devices — configuration
-    management of network infrastructure. Not a business capability; IT Infrastructure Management is the
-    honest fit.
-- tag: Configuration - Control Component Setting
-  spec_file: cisco-catalyst-sdwan-configuration-control-component-setting-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
+  evidence: POST /v1/feature-profile/nfvirtual/networks CreateNfvirtualNetworksFeatureProfile; GET /v1/feature-profile/nfvirtual/networks/ovsnetwork/{networkId}
+    GetAllNfvirtualOvsNetworksFeatureProfileByProfileId
+  reason: Creates and edits NFV feature profiles and network/OVS parcels that constitute device and virtual-network
+    configuration ('Network Function Virtualization (NFV) configurations'), i.e. network configuration
+    management.
+- tag: Configuration - Multidomain Policy
+  spec_file: cisco-catalyst-sdwan-configuration-multidomain-policy-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
   confidence: 0.7
-  evidence: POST /v1/control-component/devices/{deviceId}/settings createControlComponentDeviceSpecificSettings;
-    POST /v1/control-component/network-settings
-  reason: Operations create, read and deploy device-specific and common network settings for SD-WAN control
-    components — configuration of network infrastructure elements, i.e. IT Infrastructure Management (network).
-    No business capability beyond IT infrastructure applies.
-- tag: Configuration - Device Firmware Update
-  spec_file: cisco-catalyst-sdwan-configuration-device-firmware-update-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.7
-  evidence: POST /device/action/firmware-upgrade remoteFirmwareImageUpgrade; POST /device/action/firmware/install
-    installFirmwareImage
-  reason: Firmware image management and upgrade of network devices is lifecycle maintenance of network
-    infrastructure. Not vulnerability management — no scanning or remediation semantics present.
-- tag: Configuration - Device SSL Proxy Certificate Management
-  spec_file: cisco-catalyst-sdwan-configuration-device-ssl-proxy-certificate-management-api-openapi.yml
-  capability_id: BC-620
-  capability_id_l1: BC-620
-  capability_name: Cybersecurity Management
-  confidence: 0.7
-  evidence: POST /sslproxy/generate/csr/sslproxy generateSslProxyCSR; POST /sslproxy/renew renewCertificate;
-    POST /sslproxy/revoke revokeCertificate
-  reason: CSR generation, certificate upload, renewal and revocation for SSL proxy on network edges is
-    cryptographic/machine-identity security control management. L1 Cybersecurity is clear; the L2 split
-    between Identity & Access and Security Architecture is not determined by the evidence.
-- tag: Configuration - Device Software Update
-  spec_file: cisco-catalyst-sdwan-configuration-device-software-update-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.7
-  evidence: POST /device/action/software/package installPkg; POST /device/action/software/package/utdsignature/{type}/mode/manual
-    upload Utd image
-  reason: Software package and signature image upload, install and metadata management for network devices
-    — software maintenance of network infrastructure elements.
-- tag: Configuration - Device Template
-  spec_file: cisco-catalyst-sdwan-configuration-device-template-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.7
-  evidence: POST /template/device/config/attachment attachDeviceTemplate; POST /template/device/config/detach
-    detachDeviceTemplate; POST /template/device/config/config getDeviceConfigurationPreview
-  reason: Attaching, previewing and detaching device configuration templates on SD-WAN devices is standardised
-    configuration management of network infrastructure. Not software product engineering — these are network
-    device configs, not product artefacts.
+  evidence: '"attachDevices", "detachDevices", "addInternalPolicy", "getMdpConfig"'
+  reason: Attaching/detaching devices and pushing multidomain policy configuration to them is configuration
+    management of network elements.
 - tag: Configuration - Network Design
   spec_file: cisco-catalyst-sdwan-configuration-network-design-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
   confidence: 0.7
-  evidence: createNetworkDesign; pushNetworkDesign; getDeviceProfileConfigStatus
-  reason: Creating, editing and pushing network designs and device profiles to devices — operational network
-    infrastructure configuration rather than enterprise architecture.
-- tag: Configuration - Network Design Templates
-  spec_file: cisco-catalyst-sdwan-configuration-network-design-templates-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
+  evidence: '"createNetworkDesign", "pushNetworkDesign", "getDeviceProfileConfigStatus"'
+  reason: Creating and pushing a network design with device profile templates and tracking config push
+    status is controlled deployment of network element configuration, not long-range network planning.
+- tag: Configuration - Policy Cflowd Definition Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-cflowd-definition-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
   confidence: 0.7
-  evidence: editGlobalTemplate; getDeviceProfileFeatureTemplateList; editDeviceProfileTemplate
-  reason: Global and device-profile configuration templates used to provision network devices — IT network
-    infrastructure configuration management.
-- tag: Configuration - Policy Color List Builder
-  spec_file: cisco-catalyst-sdwan-configuration-policy-color-list-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
+  evidence: POST /template/policy/definition/cflowd createPolicyDefinition_ConfigurationPolicyCflowdDefinitionBuilder
+  reason: Configures Cflowd (flow export) policy definitions on network devices; the operations are policy
+    configuration CRUD, so Network Configuration Management rather than performance monitoring itself.
+- tag: Configuration - Policy Custom Application Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-custom-application-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
   confidence: 0.7
-  evidence: GET /template/policy/list/color  getPolicyLists_ConfigurationPolicyColorListBuilder
-  reason: '''Color'' here is the SD-WAN TLOC transport identifier used in policy lists — a network transport
-    construct, so IT Infrastructure Management; not brand or design colour.'
-- tag: Configuration - Policy Community List Builder
-  spec_file: cisco-catalyst-sdwan-configuration-policy-community-list-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.7
-  evidence: POST /template/policy/list/community  createPolicyList_ConfigurationPolicyCommunityListBuilder
-  reason: '''Community'' is a BGP community list used in routing policy, not a stakeholder community —
-    network infrastructure configuration.'
-- tag: Configuration - Policy Control Definition Builder
-  spec_file: cisco-catalyst-sdwan-configuration-policy-control-definition-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.7
-  evidence: POST /template/policy/definition/control  createPolicyDefinition_ConfigurationPolicyControlDefinitionBuilder
-  reason: SD-WAN 'control policy' definitions govern overlay topology and route advertisement; 'Control'
-    here is a routing-plane policy, not an internal control — mapped to network infrastructure configuration.
-- tag: Configuration - Policy Device Access Definition Builder
-  spec_file: cisco-catalyst-sdwan-configuration-policy-device-access-definition-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.7
-  evidence: POST /template/policy/definition/deviceaccesspolicy createPolicyDefinition_ConfigurationPolicyDeviceAccessDefinitionBuilder
-  reason: Device-access (SNMP/SSH control-plane ACL) policy definitions for SD-WAN routers; network device
-    configuration rather than enterprise IAM, so IT Infrastructure Management.
-- tag: Configuration - Policy DialPeer Definition Builder
-  spec_file: cisco-catalyst-sdwan-configuration-policy-dialpeer-definition-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.7
-  evidence: POST /template/policy/definition/dialpeer createPolicyDefinition_ConfigurationPolicyDialpeerDefinitionBuilder,
-    POST /template/policy/definition/srstphoneprofile
-  reason: Voice dial-peer and SRST phone profile configuration on SD-WAN routers — telephony infrastructure
-    configuration under IT Infrastructure Management.
-- tag: Configuration - Policy FXO Port Definition Builder
-  spec_file: cisco-catalyst-sdwan-configuration-policy-fxo-port-definition-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.7
-  evidence: POST /template/policy/definition/fxoport createPolicyDefinition_ConfigurationPolicyFxoPortDefinitionBuilder
-  reason: FXO analog voice port definitions on SD-WAN devices — telephony/network device configuration,
-    mapped to IT Infrastructure Management.
-- tag: Configuration - Policy FXS Port Definition Builder
-  spec_file: cisco-catalyst-sdwan-configuration-policy-fxs-port-definition-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.7
-  evidence: POST /template/policy/definition/fxsport createPolicyDefinition_ConfigurationPolicyFxsPortDefinitionBuilder
-  reason: FXS analog voice port definitions on SD-WAN devices — network/telephony device configuration
-    under IT Infrastructure Management.
-- tag: Configuration - Policy FXSDID Port Definition Builder
-  spec_file: cisco-catalyst-sdwan-configuration-policy-fxsdid-port-definition-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.7
-  evidence: POST /template/policy/definition/fxsdidport createPolicyDefinition; "Managing original SD-WAN
-    device configurations and policy configurations Device templates and feature templates"
-  reason: Operations create/edit policy definitions for voice FXS DID ports on SD-WAN network devices
-    — network infrastructure configuration, not a business-domain capability.
+  evidence: POST /template/policy/customapp createCustomApplication; POST /template/policy/clouddiscoveredapp
+    MapTrafficProfiles
+  reason: Defines custom application classifications and maps traffic profiles for SD-WAN policy — network
+    traffic configuration, not software product management.
 - tag: Configuration - Policy Fax Protocol List Builder
   spec_file: cisco-catalyst-sdwan-configuration-policy-fax-protocol-list-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
   confidence: 0.7
   evidence: POST /template/policy/list/faxprotocol createPolicyList; "Managing original SD-WAN device
     configurations and policy configurations"
-  reason: CRUD over fax-protocol policy lists used in SD-WAN device/policy configuration; this is network
-    infrastructure configuration management.
-- tag: Configuration - Policy Geo Location List Builder
-  spec_file: cisco-catalyst-sdwan-configuration-policy-geo-location-list-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
+  reason: Fax protocol (T.38 etc.) policy lists used in voice configuration on network devices — network
+    element configuration management.
+- tag: Configuration - Policy IPS Signature List Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-ips-signature-list-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
   confidence: 0.7
-  evidence: GET /template/policy/list/geolocation/entries getGeoLocationLists; "Managing original SD-WAN
-    device configurations and policy configurations"
-  reason: Geo-location policy lists used as match criteria in network policy; infrastructure/network configuration
-    rather than any business capability.
-- tag: Configuration - Policy Local Domain Name List Builder
-  spec_file: cisco-catalyst-sdwan-configuration-policy-local-domain-name-list-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
+  evidence: POST /template/policy/list/ipssignature  createPolicyList_ConfigurationPolicyIpsSignatureListBuilder
+  reason: Manages IPS signature lists as reusable policy-configuration objects in device templates. The
+    surface is configuration authoring rather than live security monitoring/response, so Network Configuration
+    Management is the honest fit; some ambiguity with network security operations.
+- tag: Configuration - Policy Identity List Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-identity-list-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
   confidence: 0.7
-  evidence: POST /template/policy/list/localdomain createPolicyList_ConfigurationPolicyLocalDomainNameListBuilder
-  reason: Manages reusable local-domain-name lists used in SD-WAN network policy — WAN/network configuration
-    objects on the controller, i.e. IT infrastructure management.
-- tag: Configuration - Policy Media Profile List Builder
-  spec_file: cisco-catalyst-sdwan-configuration-policy-media-profile-list-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
+  evidence: POST /template/policy/list/identity  createPolicyList_ConfigurationPolicyIdentityListBuilder
+  reason: Despite the word 'Identity', operations are generic policy-list CRUD (create/edit/preview/delete)
+    inside SD-WAN policy configuration templates — network configuration management, not identity & access
+    management of enterprise users.
+- tag: Configuration - Policy Local Domain Definition Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-local-domain-definition-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
   confidence: 0.7
-  evidence: createPolicyList_ConfigurationPolicyMediaProfileListBuilder /template/policy/list/mediaprofile
-  reason: Media (voice/codec) profile lists for SD-WAN device policy; pure network device configuration,
-    mapped to IT Infrastructure Management.
-- tag: Configuration - Policy Mirror List Builder
-  spec_file: cisco-catalyst-sdwan-configuration-policy-mirror-list-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.7
-  evidence: POST /template/policy/list/mirror createPolicyList_ConfigurationPolicyMirrorListBuilder
-  reason: Traffic-mirroring lists used in SD-WAN policy; network device configuration object, IT Infrastructure
-    Management.
-- tag: Configuration - Policy Modem Passthrough List Builder
-  spec_file: cisco-catalyst-sdwan-configuration-policy-modem-passthrough-list-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.7
-  evidence: POST /template/policy/list/modempassthrough createPolicyList_ConfigurationPolicyModemPassthroughListBuilder
-  reason: Modem passthrough lists for SD-WAN device policy — WAN network element configuration.
-- tag: Configuration - Policy PRI ISDN Port Definition Builder
-  spec_file: cisco-catalyst-sdwan-configuration-policy-pri-isdn-port-definition-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.7
-  evidence: POST /template/policy/definition/priisdnport createPolicyDefinition_ConfigurationPolicyPriIsdnPortDefinitionBuilder
-  reason: PRI/ISDN port policy definitions on routers — telecom port configuration of network infrastructure.
-- tag: Configuration - Policy Policer Class List Builder
-  spec_file: cisco-catalyst-sdwan-configuration-policy-policer-class-list-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.7
-  evidence: POST /template/policy/list/policer createPolicyList_ConfigurationPolicyPolicerClassListBuilder
-  reason: Policer (QoS rate-limiting) class lists for SD-WAN policy — network traffic configuration, IT
-    Infrastructure Management.
-- tag: Configuration - Policy Port List Builder
-  spec_file: cisco-catalyst-sdwan-configuration-policy-port-list-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.7
-  evidence: POST /template/policy/list/port createPolicyList_ConfigurationPolicyPortListBuilder
-  reason: TCP/UDP port lists used as SD-WAN policy match objects; network configuration artefact, not
-    a business capability.
-- tag: Configuration - Policy Protocol Name List Builder
-  spec_file: cisco-catalyst-sdwan-configuration-policy-protocol-name-list-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.7
-  evidence: POST /template/policy/list/protocolname createPolicyList_ConfigurationPolicyProtocolNameListBuilder
-  reason: Protocol-name lists used as match criteria in SD-WAN network policy; network device configuration
-    object.
+  evidence: POST /template/policy/definition/dnssecurity  createPolicyDefinition_ConfigurationPolicyLocalDomainDefinitionBuilder
+  reason: DNS-security policy definitions created, edited, previewed and deleted as SD-WAN configuration
+    artefacts — network element configuration definition and controlled deployment.
 - tag: Configuration - Policy SLA Class List Builder
   spec_file: cisco-catalyst-sdwan-configuration-policy-sla-class-list-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
   confidence: 0.7
-  evidence: POST /template/policy/list/sla createPolicyList_ConfigurationPolicySlaClassListBuilder
-  reason: SLA-class lists here are network path-quality thresholds used by application-aware routing policy,
-    i.e. network configuration — not customer-facing service-level commitments.
+  evidence: 'POST /template/policy/list/sla createPolicyList_ConfigurationPolicySlaClassListBuilder; description:
+    "Managing original SD-WAN device configurations and policy configurations"'
+  reason: CRUD over SLA-class policy lists used in SD-WAN application-aware routing policy — these are
+    network element/overlay policy configuration artefacts, so Network Configuration Management is the
+    closest fit. Not customer SLA management (BC-2630.10), since no customer-facing SLA monitoring or
+    breach handling is exposed.
 - tag: Configuration - Policy Scalable Group Tag List Builder
   spec_file: cisco-catalyst-sdwan-configuration-policy-scalable-group-tag-list-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
   confidence: 0.7
-  evidence: POST /template/policy/list/scalablegrouptag createPolicyList
-  reason: Scalable Group Tag (TrustSec SGT) lists for SD-WAN policy; network segmentation configuration
-    handled as infrastructure config. Could arguably be security, but the surface is generic policy-list
-    CRUD.
-- tag: Configuration - Policy VPN List Builder
-  spec_file: cisco-catalyst-sdwan-configuration-policy-vpn-list-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
+  evidence: POST /template/policy/list/scalablegrouptag createPolicyList_ConfigurationPolicyScalableGroupTagListBuilder;
+    "Managing original SD-WAN device configurations and policy configurations"
+  reason: Create/edit/delete of scalable-group-tag policy lists in the SD-WAN controller — definition
+    of network policy configuration objects, i.e. network configuration management.
+- tag: Configuration - Policy Site List Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-site-list-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
   confidence: 0.7
-  evidence: POST /template/policy/list/vpn createPolicyList_ConfigurationPolicyVpnListBuilder — "Managing
-    original SD-WAN device configurations and policy configurations"
-  reason: VPN (segment) policy lists are network overlay configuration objects; this is network/IT infrastructure
-    management.
-- tag: Configuration - Policy VPN Membership Group Definition Builder
-  spec_file: cisco-catalyst-sdwan-configuration-policy-vpn-membership-group-definition-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
+  evidence: POST /template/policy/list/site createPolicyList_ConfigurationPolicySiteListBuilder; POST
+    /template/policy/list/site/defaultsite createDefaultSiteList
+  reason: Manages site-ID policy lists referenced by SD-WAN centralized policy — network policy configuration
+    objects, mapped to Network Configuration Management. 'Site' here is an SD-WAN site identifier grouping,
+    not a physical network site planning process.
+- tag: Configuration - Policy Zone Based Firewall Definition Builder
+  spec_file: cisco-catalyst-sdwan-configuration-policy-zone-based-firewall-definition-builder-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
   confidence: 0.7
-  evidence: POST /template/policy/definition/vpnmembershipgroup createPolicyDefinition_ConfigurationPolicyVpnMembershipGroupDefinitionBuilder
-  reason: Defines which sites belong to which VPN segments in the WAN overlay — network infrastructure
-    configuration, not a business capability.
-- tag: Configuration - Policy VPN-Qos Map Definition Builder
-  spec_file: cisco-catalyst-sdwan-configuration-policy-vpn-qos-map-definition-builder-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
+  evidence: POST /template/policy/definition/zonebasedfw createPolicyDefinition_ConfigurationPolicyZoneBasedFirewallDefinitionBuilder
+  reason: Authoring and lifecycle of zone-based firewall policy definitions on network devices. Configuration
+    definition is the operation set, so Network Configuration Management fits better than security monitoring/response.
+- tag: Configuration - Quick Connect
+  spec_file: cisco-catalyst-sdwan-configuration-quick-connect-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
   confidence: 0.7
-  evidence: POST /template/policy/definition/vpnqosmap createPolicyDefinition_ConfigurationPolicyVpnQosMapDefinitionBuilder
-  reason: VPN-to-QoS mapping policy definitions configure traffic quality of service across the network
-    overlay — network infrastructure management.
+  evidence: POST /template/config/quickConnect/submitDevices  submitDay0Config; "Managing original SD-WAN
+    device configurations and policy configurations Device templates and feature templates"
+  reason: Single operation submits day-0 configuration to SD-WAN devices via the controller — controlled
+    deployment of network element configuration, i.e. Network Configuration Management. Thin surface (one
+    op) so confidence is moderate.
+- tag: Configuration - Rule Set Definition
+  spec_file: cisco-catalyst-sdwan-configuration-rule-set-definition-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.7
+  evidence: POST /template/policy/definition/ruleset  createPolicyDefinition; PUT /template/policy/definition/ruleset/bulk  savePolicyDefinitionInBulk
+  reason: CRUD over SD-WAN policy rule-set definitions pushed to network elements — definition and controlled
+    deployment of network configuration/policy. Some ambiguity with security operations, but these are
+    configuration authoring endpoints.
+- tag: Configuration - Voice Template Policy
+  spec_file: cisco-catalyst-sdwan-configuration-voice-template-policy-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.7
+  evidence: POST /template/policy/voice createVoiceTemplate; GET /template/policy/voice/{deviceModel}
+    getVoiceTemplatesForDevice
+  reason: Despite the 'Voice' noun this is template-based policy configuration pushed to network device
+    models, not voice service or subscriber management — network element configuration management.
+- tag: Configuration - vEdge Template Policy
+  spec_file: cisco-catalyst-sdwan-configuration-vedge-template-policy-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.7
+  evidence: POST /template/policy/vedge createVEdgeTemplate; GET /template/policy/vedge/devices getVEdgePolicyDeviceList
+  reason: Lifecycle of localised policy templates bound to vEdge network elements; this is configuration
+    definition and deployment to network devices.
+- tag: Configuration - vSmart Template Policy
+  spec_file: cisco-catalyst-sdwan-configuration-vsmart-template-policy-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
+  confidence: 0.7
+  evidence: POST /template/policy/vsmart/activate/{policyId} activatePolicy; PUT /template/policy/vsmart/{policyId}
+    editVSmartTemplate
+  reason: Create/edit/activate/deactivate of centralised control-plane policy templates on the vSmart
+    controller — controlled deployment of network element configuration.
+- tag: IPS Signature - Custom Rule
+  spec_file: cisco-catalyst-sdwan-ips-signature-custom-rule-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.7
+  evidence: POST /signature-set/{signatureSetId}/custom-rule  createCustomSignature  create custom signature
+  reason: Creating and updating custom IPS signatures is authoring of intrusion-detection content — threat
+    detection and response tooling for the enterprise WAN edge. Cross-industry cybersecurity is the honest
+    home rather than telecom-network-specific security operations.
+- tag: IPS Signature - Rule
+  spec_file: cisco-catalyst-sdwan-ips-signature-rule-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.7
+  evidence: GET /signature-set/{signatureSetId}/base/rule  getAllBaseRules  Fetch all Base Rules; PUT
+    /signature-set/{signatureSetId}/rule/action  editRuleAction  edit action of a rule
+  reason: Managing base and overridden IPS signature rules and their actions is configuration of intrusion
+    prevention detection logic — threat detection and response. Ambiguity remains between detection management
+    and security architecture, hence 0.7.
 - tag: IPS Signature - Rule Group
   spec_file: cisco-catalyst-sdwan-ips-signature-rule-group-api-openapi.yml
   capability_id: BC-620.30
   capability_id_l1: BC-620
   capability_name: Threat Detection & Response Management
   confidence: 0.7
-  evidence: POST /signature-set/rule-group createRuleGroup 'create custom rule group'; GET /signature-set/{signatureSetId}/{type}/rule-group
-    'Fetch IPS profile rule group data.'
-  reason: Operations manage intrusion-prevention-system signature sets and rule groups with security levels
-    — configuration of threat detection controls on the SD-WAN fabric. Maps to Cybersecurity Management
-    / Threat Detection & Response rather than any product or network-ops capability; moderate confidence
-    because the surface is control configuration rather than detection/response workflow.
-- tag: Manual Onboard Device
-  spec_file: cisco-catalyst-sdwan-manual-onboard-device-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
+  evidence: PUT /signature-set/{signatureSetId}/rule-group/security-level  editRuleGroupSeclevel  Edit
+    rule group security level; GET /signature-set/{signatureSetId}/{type}/rule-group  Fetch IPS profile
+    rule group data
+  reason: Grouping IPS signatures and setting rule-group security levels configures intrusion-prevention
+    detection posture, mapping to threat detection and response management.
+- tag: Monitoring - Application Aware Routing
+  spec_file: cisco-catalyst-sdwan-monitoring-application-aware-routing-api-openapi.yml
+  capability_id: BC-2600.30
+  capability_id_l1: BC-2600
+  capability_name: Network Performance Management
   confidence: 0.7
-  evidence: POST /onboard/details addDevices 'Add Manual Onboard Device details'; POST /onboard/devices
-    manualOnboardDevices 'Manual Onboard added Device details'
-  reason: Adding, listing and deleting network devices being onboarded into the SD-WAN fabric — lifecycle
-    management of network infrastructure assets, i.e. IT Infrastructure Management. Not HR onboarding
-    despite the word.
-- tag: Monitoring - Alarms Notification
-  spec_file: cisco-catalyst-sdwan-monitoring-alarms-notification-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
+  evidence: GET /statistics/approute/device/tunnel/summary getStatsAppRouteDeviceTunnelSummary
+  reason: Application-aware routing statistics including per-device tunnel performance summaries and aggregations
+    — continuous capture/analysis of transport path performance KPIs.
+- tag: Monitoring - SiteHealth Monitor
+  spec_file: cisco-catalyst-sdwan-monitoring-sitehealth-monitor-api-openapi.yml
+  capability_id: BC-2600.30
+  capability_id_l1: BC-2600
+  capability_name: Network Performance Management
   confidence: 0.7
-  evidence: POST /notifications/rule createNotificationRule; GET /notifications/rules getNotificationRule
-  reason: CRUD of notification rules governing which network alarms trigger alerts to operators — configuration
-    of IT operations monitoring/alerting. Not marketing or customer communications.
-- tag: Monitoring - Device Configuration Security Advisories
-  spec_file: cisco-catalyst-sdwan-monitoring-device-configuration-security-advisories-api-openapi.yml
-  capability_id: BC-620.40
-  capability_id_l1: BC-620
-  capability_name: Vulnerability Management
+  evidence: GET /statistics/sitehealth/common getSiteHealth "sitehealth data"
+  reason: Site-level health statistics and aggregations across the WAN overlay — performance/health KPI
+    capture for network operations.
+- tag: Monitoring - VNF Interface Statistics
+  spec_file: cisco-catalyst-sdwan-monitoring-vnf-interface-statistics-api-openapi.yml
+  capability_id: BC-2600.30
+  capability_id_l1: BC-2600
+  capability_name: Network Performance Management
   confidence: 0.7
-  evidence: GET /advisories/insecure-config/devices getDeviceAdvisories — "Get device advisories"; "Get
-    insecure configuration for a device"
-  reason: Surfaces security advisories and insecure configuration findings per device — vulnerability
-    identification/remediation input, i.e. Vulnerability Management; only two ops so moderate confidence.
-- tag: Monitoring - Underlay Alarms
-  spec_file: cisco-catalyst-sdwan-monitoring-underlay-alarms-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.7
-  evidence: GET /device/underlay/alarms/{type}  getUnderlayAlarmsOverview — "Managing alarms and events"
-  reason: Retrieves network underlay alarm overviews from the controller — infrastructure alarm monitoring
-    in IT Operations, not financial-crime or business alerting.
-- tag: Multicloud Interconnect - General
-  spec_file: cisco-catalyst-sdwan-multicloud-interconnect-general-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.7
-  evidence: '''Get supported Multicloud Interconnect providers''; ''Update Multicloud Interconnect topology'''
-  reason: Provider discovery, SSH keys and network topology configuration for cloud interconnects — network/cloud
-    infrastructure management.
-- tag: Multicloud Interconnect - Monitoring
-  spec_file: cisco-catalyst-sdwan-multicloud-interconnect-monitoring-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.7
-  evidence: '''Retrieve Interconnect devices for monitoring''; ''Get Interconnect gateways for monitoring'''
-  reason: Read-only monitoring views and dashboard widgets over interconnect devices — day-to-day IT operations
-    monitoring, not business observability of a SaaS product.
-- tag: Overview - Cellular
-  spec_file: cisco-catalyst-sdwan-overview-cellular-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.7
-  evidence: GET /device/cellular/health cellularHealthDashlet; GET /device/cellular/dataUsage dataUsage
-  reason: Dashboard dashlets reporting cellular device counts, health and data usage across the WAN estate
-    — IT operations monitoring of network devices.
-- tag: Policy - Policy Group
-  spec_file: cisco-catalyst-sdwan-policy-policy-group-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
-  confidence: 0.7
-  evidence: POST /v1/policy-group CreatePolicyGroup; POST /v1/policy-group/{policyGroupId}/device/deploy
-    deployPolicyGroup; PUT /v1/policy-group/{policyGroupId}/device/associate UpdatePolicyGroupAssociation
-  reason: Creates, edits and deploys network policy groups and associates them with devices in the SD-WAN
-    fabric. 'Policy' here is routing/network policy configuration, not corporate policy management (BC-130.20
-    would be a homograph error); it is network infrastructure configuration.
-- tag: Real Time Monitoring - Raw Socket
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-raw-socket-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.7
-  evidence: GET /device/rawsocket/tcp-statistics getTcpStatistics 'Get TCP statistics'; GET /device/rawsocket/udp-session
-    'Get UDP session'
-  reason: Read-only retrieval of live TCP/UDP session and statistics state from network devices — network
-    operations monitoring, which falls under day-to-day IT Operations Management.
-- tag: Real-Time Monitoring - App Hosting
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-app-hosting-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.7
-  evidence: GET /device/app-hosting/utilization getAppHostingUtilization; GET /device/app-hosting/processes
-    getAppHostingProcesses
-  reason: Retrieves runtime utilisation, processes and network interfaces of applications hosted on network
-    devices — operational monitoring of infrastructure, i.e. IT Operations Management.
-- tag: Real-Time Monitoring - App Logs
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-app-logs-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.7
-  evidence: GET /device/app/log/flows getAppLogFlows; GET /device/app/log/flow-count getAppLogFlowCount
-  reason: Retrieves application flow logs and counts from network devices under the 'Real-time monitoring'
-    document — network operations monitoring within IT Operations Management.
+  evidence: GET /statistics/vnfstatistics getStatDataRawData_MonitoringVnfInterfaceStatistics; GET /statistics/vnfstatistics/aggregation
+  reason: Interface counters for virtual network functions, queried raw and aggregated — capture and analysis
+    of network element performance data.
 - tag: Real-Time Monitoring - Application-Aware Route
   spec_file: cisco-catalyst-sdwan-real-time-monitoring-application-aware-route-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
+  capability_id: BC-2600.30
+  capability_id_l1: BC-2600
+  capability_name: Network Performance Management
   confidence: 0.7
   evidence: GET /device/app-route/sla-class createAppRouteSlaClassList; GET /device/app-route/statistics
     createAppRouteStatisticsList
-  reason: Retrieves application-aware routing SLA classes and route statistics from devices — live network
-    performance monitoring, part of day-to-day IT operations. Not a customer-facing SLA/service-credit
-    capability despite the 'SLA' term.
-- tag: Real-Time Monitoring - CFM
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-cfm-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
+  reason: Retrieves application-aware routing SLA classes and path statistics from devices — capture of
+    network path KPIs to detect degradation. Network-level SLA telemetry, not customer service-level agreement
+    administration.
+- tag: Real-Time Monitoring - BFD
+  spec_file: cisco-catalyst-sdwan-real-time-monitoring-bfd-api-openapi.yml
+  capability_id: BC-2600
+  capability_id_l1: BC-2600
+  capability_name: Telecom Network Operations Management
   confidence: 0.7
-  evidence: GET /device/cfm/mp/local/mep getMpLocalMep; "Real-time monitoring ... Retrieving device state"
-  reason: Ethernet CFM maintenance-point state retrieval — network fault monitoring, i.e. IT operations
-    monitoring.
+  evidence: GET /device/bfd/sessions createBFDSessions; GET /device/bfd/status getDeviceBFDStatus; GET
+    /device/bfd/history createBFDHistoryList
+  reason: Bidirectional Forwarding Detection session, link and site state retrieval — liveness/fault detection
+    telemetry across the overlay. Sits between fault detection and performance monitoring, so only L1
+    asserted.
+- tag: 'Real-Time Monitoring - Cellular AON Ipsec Interface '
+  spec_file: cisco-catalyst-sdwan-real-time-monitoring-cellular-aon-ipsec-interface-api-openapi.yml
+  capability_id: BC-2600
+  capability_id_l1: BC-2600
+  capability_name: Telecom Network Operations Management
+  confidence: 0.7
+  evidence: GET /device/cellularEiolte/ipsec/interface/counters getAONIpsecInterfaceCountersInfo
+  reason: Retrieval of IPsec interface counters and session state on cellular WAN interfaces is live network
+    element monitoring; maps to telecom/IP network operations at L1 without a clearly named sub-capability.
 - tag: Real-Time Monitoring - Cellular EIOLTE Connection Service
   spec_file: cisco-catalyst-sdwan-real-time-monitoring-cellular-eiolte-connection-service-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
+  capability_id: BC-2600
+  capability_id_l1: BC-2600
+  capability_name: Telecom Network Operations Management
   confidence: 0.7
   evidence: GET /device/cellularEiolte/connections getEiolteConnectionInfo; GET /device/cellularEiolte/radio
     getEiolteRadioInfo
-  reason: Retrieval of cellular connection and radio state from devices — network operations monitoring.
-- tag: Real-Time Monitoring - CloudExpress
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-cloudexpress-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.7
-  evidence: GET /device/cloudx/applications createApplicationsList; GET /device/cloudx/gatewayexits createGatewayExitsList
-  reason: CloudExpress application/gateway-exit and load-balance state retrieval for cloud-application
-    routing — network operations monitoring, not application portfolio management.
-- tag: Real-Time Monitoring - Crash Log
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-crash-log-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.7
-  evidence: GET /device/crashlog getDeviceCrashLogs; GET /device/crashlog/log getDeviceCrashInformation
-  reason: Collection of device crash logs for troubleshooting is IT operations monitoring/diagnostics
-    of network infrastructure. Not product observability of a SaaS service the vendor runs, so cross-industry
-    IT ops is the honest mapping.
-- tag: Real-Time Monitoring - DPI
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-dpi-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.7
-  evidence: GET /device/dpi/flows createDPIFlowsList; GET /device/dpi/summary createDPISummaryRealTime
-  reason: Deep packet inspection application and flow statistics from network devices — network traffic
-    monitoring within IT operations. No business capability beyond IT.
+  reason: Reads live LTE connection and radio state from network devices — network operations monitoring.
+    L1 only as the evidence does not distinguish fault vs performance.
 - tag: Real-Time Monitoring - Device Control
   spec_file: cisco-catalyst-sdwan-real-time-monitoring-device-control-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
+  capability_id: BC-2600
+  capability_id_l1: BC-2600
+  capability_name: Telecom Network Operations Management
   confidence: 0.7
   evidence: GET /device/control/connections; GET /device/control/statistics getConnectionStatistics; GET
     /device/control/status getLocalDeviceStatus
-  reason: Retrieves control-plane connection lists, link state and statistics for SD-WAN devices — network
-    monitoring under IT operations management.
-- tag: Real-Time Monitoring - Endpoint Tracker Group Service
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-endpoint-tracker-group-service-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
+  reason: Monitoring of SD-WAN control-plane connections, links, region connections and device status
+    — live operational visibility of network elements. Straddles fault and performance monitoring, so
+    L1 only.
+- tag: Real-Time Monitoring - IP
+  spec_file: cisco-catalyst-sdwan-real-time-monitoring-ip-api-openapi.yml
+  capability_id: BC-2600
+  capability_id_l1: BC-2600
+  capability_name: Telecom Network Operations Management
   confidence: 0.7
-  evidence: GET /device/endpointTrackerGroup getEndpointTrackerGroupInfo; "Retrieving device state"
-  reason: Device endpoint-tracker state retrieval is network monitoring/IT operations; no business-domain
-    reading fits.
-- tag: Real-Time Monitoring - Endpoint Tracker Service
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-endpoint-tracker-service-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
+  evidence: GET /device/ip/routetable createRouteTableList; GET /device/ip/nat/interfacestatistics createNatInterfaceStatisticsList
+  reason: Real-time retrieval of IP forwarding, routing-table and NAT state/statistics from network devices
+    — day-to-day IP network operations monitoring; mixed state and statistics so L1 only.
+- tag: Real-Time Monitoring - Lacp
+  spec_file: cisco-catalyst-sdwan-real-time-monitoring-lacp-api-openapi.yml
+  capability_id: BC-2600
+  capability_id_l1: BC-2600
+  capability_name: Telecom Network Operations Management
   confidence: 0.7
-  evidence: GET /device/endpointTracker getEndpointTrackerInfo; "Real-time monitoring"
-  reason: Retrieval of live endpoint tracker status on SD-WAN devices — IT operations monitoring.
-- tag: Real-Time Monitoring - IPv6 Neighbours
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-ipv6-neighbours-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
+  evidence: GET /device/lacp/info getLacpInterfaceList; GET /device/lacp/members — "Real-time monitoring
+    ... Retrieving device state"
+  reason: Read-only retrieval of link-aggregation (LACP) interface and member state from network devices
+    — day-to-day IP network operations monitoring. L1 network operations is safe; ambiguous between fault
+    and performance sub-capabilities, so no L2 asserted.
+- tag: Real-Time Monitoring - Multicast
+  spec_file: cisco-catalyst-sdwan-real-time-monitoring-multicast-api-openapi.yml
+  capability_id: BC-2600
+  capability_id_l1: BC-2600
+  capability_name: Telecom Network Operations Management
   confidence: 0.7
-  evidence: GET /device/ndv6 getIpv6Interface; "Retrieving device state"
-  reason: IPv6 neighbour discovery/interface state from devices — network monitoring under IT Operations
-    Management.
-- tag: Real-Time Monitoring - Ignition Status
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-ignition-status-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
+  evidence: GET /device/multicast/rpf createRpfList; GET /device/multicast/topology createTopologyList
+  reason: Retrieves live multicast replicator, RPF and topology state from network elements — IP network
+    operational monitoring. L1 only, as the surface spans fault/performance/inventory readings without
+    naming one.
+- tag: Real-Time Monitoring - NTP
+  spec_file: cisco-catalyst-sdwan-real-time-monitoring-ntp-api-openapi.yml
+  capability_id: BC-2600
+  capability_id_l1: BC-2600
+  capability_name: Telecom Network Operations Management
   confidence: 0.7
-  evidence: 'GET /device/ignition/status  getIgnitionStatus; doc: "Real-time monitoring ... Retrieving
-    device state"'
-  reason: Single read operation returning live device state from network devices via the SD-WAN controller
-    — day-to-day IT operations monitoring, not a business-domain capability.
-- tag: Real-Time Monitoring - NetworkHub Resources
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-networkhub-resources-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
+  evidence: GET /device/ntp/status createNTPStatusList; GET /device/ntp/peer createPeerList
+  reason: Live NTP association/peer/status state plus virtual application state from network devices —
+    operational monitoring of network elements. L1 only.
+- tag: Real-Time Monitoring - Orchestrator
+  spec_file: cisco-catalyst-sdwan-real-time-monitoring-orchestrator-api-openapi.yml
+  capability_id: BC-2600
+  capability_id_l1: BC-2600
+  capability_name: Telecom Network Operations Management
   confidence: 0.7
-  evidence: GET /device/csp/resources/cpu-info/cpus  getCPUInfo; GET /device/csp/resources/cpu-info/vnfs  getVNFInfo
-  reason: CPU allocation and VNF resource state on network hardware — infrastructure monitoring within
-    IT operations management.
-- tag: Real-Time Monitoring - Policer
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-policer-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
+  evidence: GET /device/orchestrator/connections createConnectionListFromDevice; GET /device/orchestrator/connectionshistory;
+    GET /device/orchestrator/statistics getStatistics
+  reason: Monitoring of controller-to-device control connections, history and statistics in the SD-WAN
+    fabric — operational monitoring of the network. L1 only given mixed fault/performance nature.
+- tag: Real-Time Monitoring - PIM
+  spec_file: cisco-catalyst-sdwan-real-time-monitoring-pim-api-openapi.yml
+  capability_id: BC-2600
+  capability_id_l1: BC-2600
+  capability_name: Telecom Network Operations Management
   confidence: 0.7
-  evidence: GET /device/policer getPolicedInterface — "Real-time monitoring ... Retrieving device state"
-  reason: Retrieves traffic policer state on device interfaces — network operations monitoring; single
-    thin operation so moderate confidence.
-- tag: Real-Time Monitoring - Power Consumption
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-power-consumption-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
+  evidence: GET /device/pim/neighbor createPIMNeighborList; GET /device/pim/statistics createPIMStatisticsList
+  reason: Live PIM interface, neighbour, RP-mapping and statistics state from network elements — IP network
+    operational monitoring.
+- tag: Real-Time Monitoring - SDWAN Statistics
+  spec_file: cisco-catalyst-sdwan-real-time-monitoring-sdwan-statistics-api-openapi.yml
+  capability_id: BC-2600.30
+  capability_id_l1: BC-2600
+  capability_name: Network Performance Management
   confidence: 0.7
-  evidence: GET /device/powerconsumption getPowerConsumption — "Real-time monitoring ... Retrieving device
-    state"
-  reason: Reads hardware power consumption telemetry from network devices; this is infrastructure monitoring
-    under IT operations, not sustainability/carbon reporting.
-- tag: Real-Time Monitoring - SSE
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-sse-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
+  evidence: GET /device/sdwan-global-drop-statistics  getSDWanGlobalDropStatistics; GET /device/sdwan-stats  getSDWanStats
+  reason: Global drop and SD-WAN statistics retrieval from network devices — direct capture of network
+    performance counters.
+- tag: Real-Time Monitoring - System
+  spec_file: cisco-catalyst-sdwan-real-time-monitoring-system-api-openapi.yml
+  capability_id: BC-2600.30
+  capability_id_l1: BC-2600
+  capability_name: Network Performance Management
   confidence: 0.7
-  evidence: GET /device/sse/tunnels  getSSETunnel; "Real-time monitoring ... Retrieving device state"
-  reason: Single read operation retrieving SSE tunnel state from devices; fits IT operations monitoring.
-    Thin surface hence moderate confidence.
-- tag: Real-Time Monitoring - Show On Demand Local
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-show-on-demand-local-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
+  evidence: GET /device/system/statistics createDeviceSystemStatsList; GET /device/system/status createDeviceSystemStatusList
+  reason: Nine operations returning device system status, statistics, process lists and clock from live
+    network elements — continuous capture of network element performance and health data.
+- tag: Real-Time Monitoring - Tunnel
+  spec_file: cisco-catalyst-sdwan-real-time-monitoring-tunnel-api-openapi.yml
+  capability_id: BC-2600.30
+  capability_id_l1: BC-2600
+  capability_name: Network Performance Management
   confidence: 0.7
-  evidence: GET /device/ondemand/local  getOnDemandLocal; "Real-time monitoring"
-  reason: On-demand retrieval of local device monitoring state — IT operations monitoring of network devices.
-- tag: Real-Time Monitoring - Show On Demand Remote
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-show-on-demand-remote-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
+  evidence: GET /device/tunnel/bfd_statistics createBfdStatisticsList; GET /device/tunnel/ipsec_statistics
+    createIpsecStatisticsList
+  reason: Tunnel-level BFD, IPsec, FEC and packet-duplication statistics from live WAN overlay devices
+    — clearly capture and analysis of network performance counters.
+- tag: Real-Time Monitoring - Voice
+  spec_file: cisco-catalyst-sdwan-real-time-monitoring-voice-api-openapi.yml
+  capability_id: BC-2600.30
+  capability_id_l1: BC-2600
+  capability_name: Network Performance Management
   confidence: 0.7
-  evidence: GET /device/ondemand/remote  getOnDemandRemote; "Real-time monitoring"
-  reason: On-demand retrieval of remote device monitoring state — IT operations monitoring.
-- tag: Real-Time Monitoring - Sslproxy
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-sslproxy-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
+  evidence: GET /device/voice/voiceCalls  getVoiceCalls; GET /device/voicet1e1controllerinfo/current15minstats
+  reason: Returns active voice/VoIP call state, DSP farm status, ISDN status and 15-minute T1/E1 controller
+    counters — classic real-time performance counter capture for voice transport on network elements.
+- tag: Tenant Backup Restore
+  spec_file: cisco-catalyst-sdwan-tenant-backup-restore-api-openapi.yml
+  capability_id: BC-4230.60
+  capability_id_l1: BC-4230
+  capability_name: Tenant Backup & Export Management
   confidence: 0.7
-  evidence: GET /device/sslproxy/statistics  getSslProxyStatistics; GET /device/sslproxy/status
-  reason: Statistics and status readout for the SSL proxy feature on devices — network operations monitoring.
-- tag: Real-Time Monitoring - Static Route Tracker Service
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-static-route-tracker-service-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
+  evidence: GET /tenantbackup/export exportTenantBackup; POST /tenantbackup/import importTenantBackup;
+    GET /tenantbackup/list listTenantBackup
+  reason: Per-tenant backup export, import, download and deletion on the multi-tenant SD-WAN Manager maps
+    to Tenant Backup & Export Management. Confidence moderated because the vendor is a network controller
+    rather than a classic SaaS, but the operations are explicitly tenant-scoped backup/export.
+- tag: Topology - Topology Group
+  spec_file: cisco-catalyst-sdwan-topology-topology-group-api-openapi.yml
+  capability_id: BC-2600.20
+  capability_id_l1: BC-2600
+  capability_name: Network Configuration Management
   confidence: 0.7
-  evidence: GET /device/staticRouteTracker  getStaticRouteTrackerInfo
-  reason: Retrieves static route tracker state from devices; routing state monitoring belongs to IT operations
-    monitoring of network infrastructure.
-- tag: Real-Time Monitoring - TCP Optimization
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-tcp-optimization-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
+  evidence: POST /v1/topology-group/{topologyGroupId}/device/deploy deployTopologyGroup; getTopologyGroupDeviceConfigurationPreview
+  reason: CRUD over topology groups plus preview and deployment of the resulting configuration to devices
+    is controlled definition and rollout of network element configuration. Could alternatively be read
+    as generic IT infrastructure config, hence 0.7.
+- tag: Wani Recommendations
+  spec_file: cisco-catalyst-sdwan-wani-recommendations-api-openapi.yml
+  capability_id: BC-2600.80
+  capability_id_l1: BC-2600
+  capability_name: Network Optimisation Management
   confidence: 0.7
-  evidence: GET /device/tcpopt/activeflows  getActiveTCPFlows; GET /device/tcpopt/summary
-  reason: Flow-level monitoring of TCP optimization on network devices — IT operations monitoring.
-- tag: Real-Time Monitoring - Tcpproxy
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-tcpproxy-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.7
-  evidence: GET /device/tcpproxy/statistics  getTcpProxyStatistics; GET /device/tcpproxy/status
-  reason: Statistics and status of the TCP proxy feature on devices — network operations monitoring.
-- tag: Real-Time Monitoring - Ucse
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-ucse-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.7
-  evidence: GET /device/ucse/stats  createUcseStats
-  reason: Single statistics read for the UCS-E compute module in a router — device/infrastructure operations
-    monitoring.
-- tag: Real-Time Monitoring - VM
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-vm-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.7
-  evidence: GET /device/vm/oper/state  getVbranchVMLifecycle; GET /device/vm/state  getVMLifeCycleState
-  reason: Reads virtual-machine lifecycle/operational state hosted on branch network devices — IT infrastructure/operations
-    monitoring.
-- tag: Real-Time Monitoring - VPN
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-vpn-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.7
-  evidence: GET /device/vpn  getVPNInstances
-  reason: Retrieves VPN instances configured on network devices — network operations monitoring of device
-    state.
-- tag: Real-Time Monitoring - VRRP
-  spec_file: cisco-catalyst-sdwan-real-time-monitoring-vrrp-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.7
-  evidence: GET /device/vrrp  getVRRPInterface
-  reason: Retrieves VRRP interface redundancy state from network devices — network/IT operations monitoring.
-- tag: Troubleshooting Tools - UMTS
-  spec_file: cisco-catalyst-sdwan-troubleshooting-tools-umts-api-openapi.yml
-  capability_id: BC-600.40
-  capability_id_l1: BC-600
-  capability_name: IT Operations Management
-  confidence: 0.7
-  evidence: GET /stream/device/umts/statistics/{deviceUUID}/{eventType} getUMTSData "get UMTS Data"; "start/stop/disable/status/download
-    session"
-  reason: Device monitoring/troubleshooting session and statistics retrieval on network devices — IT operations
-    monitoring; no business capability beyond infrastructure ops.
+  evidence: POST /policy/wani/recommendation/process  applyWaniRecommendation  Apply recommendation to
+    a centralized policy
+  reason: WAN Insights recommendations are applied to centralized SD-WAN policy to tune traffic paths
+    — network optimisation of the WAN overlay, though it is a vendor-specific analytics feature.
 - tag: Workflows - Controllers Upgrade
   spec_file: cisco-catalyst-sdwan-workflows-controllers-upgrade-api-openapi.yml
-  capability_id: BC-600.50
-  capability_id_l1: BC-600
-  capability_name: IT Infrastructure Management
+  capability_id: BC-2600.50
+  capability_id_l1: BC-2600
+  capability_name: Network Change & Release Management
   confidence: 0.7
-  evidence: POST /v1/controllers-upgrade "Trigger controllers upgrade."; GET /v1/controllers-upgrade/version-compliance-info
-    "Get version compliance across tenants."
-  reason: Software upgrade orchestration for network controllers is infrastructure lifecycle/maintenance
-    work within IT management.
+  evidence: POST /v1/controllers-upgrade  triggerControllersUpgrade  Trigger controllers upgrade.
+  reason: Trigger, schedule, cancel and track software upgrades of SD-WAN controllers — planned change/release
+    execution with rollback on live network control elements. Could also read as generic IT operations,
+    hence moderate confidence.
