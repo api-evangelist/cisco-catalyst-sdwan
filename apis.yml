@@ -24591,6 +24591,9 @@ apis:
   - type: APIReference
     url: https://developer.cisco.com/docs/sdwan/others/
 common:
+- type: CapabilityMap
+  url: capabilities/cisco-catalyst-sdwan-capability-edges.yml
+  name: Cisco Catalyst SD-WAN Business Capability Map
 - type: Overlay
   url: overlays/cisco-catalyst-sdwan-administration-and-settings-overlay.yaml
 - type: Overlay
