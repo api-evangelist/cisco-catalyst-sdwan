@@ -1907,7 +1907,8 @@ apis:
     for configuration - device ssl proxy certificate management.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Device SSL Proxy Certificate Management
   properties:
   - type: OpenAPI
@@ -2997,7 +2998,8 @@ apis:
     for configuration - policy access list definition builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy Access List Definition Builder
   properties:
   - type: OpenAPI
@@ -3128,7 +3130,8 @@ apis:
     for configuration - policy app probe class list builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy App Probe Class List Builder
   properties:
   - type: OpenAPI
@@ -3913,7 +3916,8 @@ apis:
     for configuration - policy data ipv6 prefix list builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy Data IPV6 Prefix List Builder
   properties:
   - type: OpenAPI
@@ -3979,7 +3983,8 @@ apis:
     5 operation(s) for configuration - policy data prefix all types of lists builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy Data Prefix All Types Of Lists Builder
   properties:
   - type: OpenAPI
@@ -4046,7 +4051,8 @@ apis:
     SD-WAN — 5 operation(s) for configuration - policy data prefix and fqdn all types of lists builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy Data Prefix and FQDN All Types Of Lists Builder
   properties:
   - type: OpenAPI
@@ -4112,7 +4118,8 @@ apis:
     for configuration - policy data prefix list builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy Data Prefix List Builder
   properties:
   - type: OpenAPI
@@ -4178,7 +4185,8 @@ apis:
     for configuration - policy device access definition builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy Device Access Definition Builder
   properties:
   - type: OpenAPI
@@ -4310,7 +4318,8 @@ apis:
     for configuration - policy expanded community list builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy Expanded Community List Builder
   properties:
   - type: OpenAPI
@@ -4376,7 +4385,8 @@ apis:
     for configuration - policy extended community list builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy Extended Community List Builder
   properties:
   - type: OpenAPI
@@ -4442,7 +4452,8 @@ apis:
     for configuration - policy fax protocol list builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy Fax Protocol List Builder
   properties:
   - type: OpenAPI
@@ -4508,7 +4519,8 @@ apis:
     for configuration - policy forwarding class list builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy Forwarding Class List Builder
   properties:
   - type: OpenAPI
@@ -4574,7 +4586,8 @@ apis:
     for configuration - policy fxo port definition builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy FXO Port Definition Builder
   properties:
   - type: OpenAPI
@@ -4640,7 +4653,8 @@ apis:
     for configuration - policy fxs port definition builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy FXS Port Definition Builder
   properties:
   - type: OpenAPI
@@ -4706,7 +4720,8 @@ apis:
     for configuration - policy fxsdid port definition builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy FXSDID Port Definition Builder
   properties:
   - type: OpenAPI
@@ -4772,7 +4787,8 @@ apis:
     for configuration - policy geo location list builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy Geo Location List Builder
   properties:
   - type: OpenAPI
@@ -4838,7 +4854,8 @@ apis:
     for configuration - policy hub and spoke definition builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy Hub and Spoke Definition Builder
   properties:
   - type: OpenAPI
@@ -4968,7 +4985,8 @@ apis:
     — 6 operation(s) for configuration - policy intrusion prevention definition builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy Intrusion Prevention Definition Builder
   properties:
   - type: OpenAPI
@@ -5034,7 +5052,8 @@ apis:
     for configuration - policy ips signature list builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy IPS Signature List Builder
   properties:
   - type: OpenAPI
@@ -5100,7 +5119,8 @@ apis:
     for configuration - policy ipv6 access definition builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy IPv6 Access Definition Builder
   properties:
   - type: OpenAPI
@@ -5166,7 +5186,8 @@ apis:
     6 operation(s) for configuration - policy ipv6 device access definition builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy IPv6 Device Access Definition Builder
   properties:
   - type: OpenAPI
@@ -5232,7 +5253,8 @@ apis:
     for configuration - policy ipv6 prefix list builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy IPv6 Prefix List Builder
   properties:
   - type: OpenAPI
@@ -5362,7 +5384,8 @@ apis:
     for configuration - policy local domain definition builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy Local Domain Definition Builder
   properties:
   - type: OpenAPI
@@ -5428,7 +5451,8 @@ apis:
     for configuration - policy local domain name list builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy Local Domain Name List Builder
   properties:
   - type: OpenAPI
@@ -5494,7 +5518,8 @@ apis:
     for configuration - policy media profile list builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy Media Profile List Builder
   properties:
   - type: OpenAPI
@@ -5690,7 +5715,8 @@ apis:
     for configuration - policy modem passthrough list builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy Modem Passthrough List Builder
   properties:
   - type: OpenAPI
@@ -5756,7 +5782,8 @@ apis:
     for configuration - policy policer class list builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy Policer Class List Builder
   properties:
   - type: OpenAPI
@@ -5886,7 +5913,8 @@ apis:
     5 operation(s) for configuration - policy prefix for all types of lists builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy Prefix for All Types of Lists Builder
   properties:
   - type: OpenAPI
@@ -6016,7 +6044,8 @@ apis:
     for configuration - policy pri isdn port definition builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy PRI ISDN Port Definition Builder
   properties:
   - type: OpenAPI
@@ -6082,7 +6111,8 @@ apis:
     for configuration - policy protocol name list builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy Protocol Name List Builder
   properties:
   - type: OpenAPI
@@ -6148,7 +6178,8 @@ apis:
     for configuration - policy qos map definition builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy Qos Map Definition Builder
   properties:
   - type: OpenAPI
@@ -6278,7 +6309,8 @@ apis:
     for configuration - policy rewrite rule definition builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy Rewrite Rule Definition Builder
   properties:
   - type: OpenAPI
@@ -6344,7 +6376,8 @@ apis:
     for configuration - policy scalable group tag list builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy Scalable Group Tag List Builder
   properties:
   - type: OpenAPI
@@ -6538,7 +6571,8 @@ apis:
     for configuration - policy sla class list builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy SLA Class List Builder
   properties:
   - type: OpenAPI
@@ -6603,7 +6637,8 @@ apis:
     for configuration - policy supervisory disc list builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy Supervisory Disc List Builder
   properties:
   - type: OpenAPI
@@ -6669,7 +6704,8 @@ apis:
     for configuration - policy threat grid api key list.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy Threat Grid Api Key List
   properties:
   - type: OpenAPI
@@ -6931,7 +6967,8 @@ apis:
     for configuration - policy trunk group list builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy Trunk Group List Builder
   properties:
   - type: OpenAPI
@@ -6997,7 +7034,8 @@ apis:
     for configuration - policy umbrella data list builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy Umbrella Data List Builder
   properties:
   - type: OpenAPI
@@ -7127,7 +7165,8 @@ apis:
     for configuration - policy url filtering definition builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy URL Filtering Definition Builder
   properties:
   - type: OpenAPI
@@ -7321,7 +7360,8 @@ apis:
     for configuration - policy vedge route definition builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy vEdge Route Definition Builder
   properties:
   - type: OpenAPI
@@ -7515,7 +7555,8 @@ apis:
     — 6 operation(s) for configuration - policy vpn membership group definition builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy VPN Membership Group Definition Builder
   properties:
   - type: OpenAPI
@@ -7581,7 +7622,8 @@ apis:
     for configuration - policy vpn-qos map definition builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy VPN-Qos Map Definition Builder
   properties:
   - type: OpenAPI
@@ -7711,7 +7753,8 @@ apis:
     6 operation(s) for configuration - policy zone based firewall definition builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Policy Zone Based Firewall Definition Builder
   properties:
   - type: OpenAPI
@@ -7841,7 +7884,8 @@ apis:
     for configuration - preferred color group list builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - Preferred Color Group List Builder
   properties:
   - type: OpenAPI
@@ -8484,7 +8528,8 @@ apis:
     for configuration - ssl decryption policy definition builder.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - SSL Decryption Policy Definition Builder
   properties:
   - type: OpenAPI
@@ -8550,7 +8595,8 @@ apis:
     for configuration - ssl decryption utd profile definition.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Configuration - SSL Decryption UTD Profile Definition
   properties:
   - type: OpenAPI
@@ -9186,6 +9232,8 @@ apis:
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
   tags:
+  - Developers
+  tags_raw:
   - developers
   properties:
   - type: OpenAPI
@@ -9379,7 +9427,8 @@ apis:
     generation status.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - File based RealTime Data Collection - Device notification - File generation status
   properties:
   - type: OpenAPI
@@ -9445,7 +9494,8 @@ apis:
     1 operation(s) for file based realtime data collection - download generated file.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - File based RealTime Data Collection - Download Generated File
   properties:
   - type: OpenAPI
@@ -9514,7 +9564,8 @@ apis:
     for a request uuid.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - File based RealTime Data Collection - Get Data Collection status for a Request UUID
   properties:
   - type: OpenAPI
@@ -9583,7 +9634,8 @@ apis:
     for device uuid.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - File based RealTime Data Collection - Get Data Collection status for Device UUID
   properties:
   - type: OpenAPI
@@ -9652,7 +9704,8 @@ apis:
     list for a device uuid.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - File based RealTime Data Collection - Get Supported Commands List for a Device UUID
   properties:
   - type: OpenAPI
@@ -9718,7 +9771,8 @@ apis:
     — 1 operation(s) for file based realtime data collection - initiate file generation.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - File based RealTime Data Collection - Initiate File Generation
   properties:
   - type: OpenAPI
@@ -12959,7 +13013,8 @@ apis:
     for monitoring - security unified logging connection events.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Monitoring - Security Unified Logging Connection Events
   properties:
   - type: OpenAPI
@@ -14875,7 +14930,8 @@ apis:
     for multicloud interconnect - service sw package types.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Multicloud Interconnect - Service Sw package types
   properties:
   - type: OpenAPI
@@ -16404,7 +16460,8 @@ apis:
     for real-time monitoring - cellular aon ipsec interface .
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - 'Real-Time Monitoring - Cellular AON Ipsec Interface '
   properties:
   - type: OpenAPI
@@ -16534,7 +16591,8 @@ apis:
     for real-time monitoring - cellular eiolte connection service.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Real-Time Monitoring - Cellular EIOLTE Connection Service
   properties:
   - type: OpenAPI
@@ -16600,7 +16658,8 @@ apis:
     for real-time monitoring - cellular eiolte hardware service .
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - 'Real-Time Monitoring - Cellular EIOLTE Hardware Service '
   properties:
   - type: OpenAPI
@@ -16666,7 +16725,8 @@ apis:
     for real-time monitoring - cellular eiolte network service.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Real-Time Monitoring - Cellular EIOLTE Network Service
   properties:
   - type: OpenAPI
@@ -16732,7 +16792,8 @@ apis:
     for real-time monitoring - cellular eiolte sim service.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Real-Time Monitoring - Cellular EIOLTE Sim Service
   properties:
   - type: OpenAPI
@@ -17694,7 +17755,8 @@ apis:
     for real-time monitoring - dual static route tracker service.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Real-Time Monitoring - Dual Static Route Tracker Service
   properties:
   - type: OpenAPI
@@ -17824,7 +17886,8 @@ apis:
     for real-time monitoring - endpoint tracker group service.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Real-Time Monitoring - Endpoint Tracker Group Service
   properties:
   - type: OpenAPI
@@ -20197,7 +20260,8 @@ apis:
     real-time monitoring - show on demand local.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Real-Time Monitoring - Show On Demand Local
   properties:
   - type: OpenAPI
@@ -20261,7 +20325,8 @@ apis:
     real-time monitoring - show on demand remote.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Real-Time Monitoring - Show On Demand Remote
   properties:
   - type: OpenAPI
@@ -20582,7 +20647,8 @@ apis:
     for real-time monitoring - static route tracker service.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Real-Time Monitoring - Static Route Tracker Service
   properties:
   - type: OpenAPI
@@ -22114,7 +22180,8 @@ apis:
     address based app rules.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - SD AVC IP Address based App Rules
   properties:
   - type: OpenAPI
@@ -23964,7 +24031,8 @@ apis:
     for troubleshooting tools - network wide path insight.
   humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
+  tags: []
+  tags_raw:
   - Troubleshooting Tools - Network Wide Path Insight
   properties:
   - type: OpenAPI
