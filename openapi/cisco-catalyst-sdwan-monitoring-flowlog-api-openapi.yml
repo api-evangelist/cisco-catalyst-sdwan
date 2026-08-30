@@ -1,0 +1,950 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Monitoring - Flowlog API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Monitoring - Flowlog
+paths:
+  /statistics/flowlog:
+    get:
+      tags:
+      - Monitoring - Flowlog
+      description: Get stats raw data
+      operationId: getStatDataRawData_MonitoringFlowlog_1903
+      parameters:
+      - name: query
+        in: query
+        description: Query string
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '24'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+      - name: page
+        in: query
+        description: page number
+        schema:
+          minimum: 1
+          type: integer
+          format: int64
+      - name: pageSize
+        in: query
+        description: page size
+        schema:
+          minimum: 1
+          type: integer
+          format: int64
+      - name: sortBy
+        in: query
+        description: sort by(emp:entry_time)
+        schema:
+          pattern: ^[a-zA-Z-_]+$
+          type: string
+      - name: sortOrder
+        in: query
+        description: sort order(emp:asc、ASC、Asc、desc、Desc、DESC)
+        schema:
+          type: string
+      - name: site-id
+        in: query
+        schema:
+          pattern: ^[0-9]+$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Search result:
+                  description: Search result
+                  value:
+                    data:
+                    - entry_time: 1715135940274
+                      statcycletime: 1715135940274
+                      vpn_id: 4294967295
+                      src_ip: 192.168.1.10
+                      dest_ip: 10.0.0.1
+                      src_port: 443
+                      dest_port: 80
+                      dscp: 0
+                      ip_proto: 6
+                      ingress_intf: eth0
+                      egress_intf: eth1
+                      direction: inbound
+                      policy_name: default_rule
+                      action: allow
+                      start_time: 1654041600
+                      total_pkts: 100
+                      total_bytes: 1024
+                      flow_active: 'yes'
+                      vdevice_name: 172.16.254.1
+                      vmanage_system_ip: 10.0.0.1
+                      host_name: server1
+                      device_model: modelX
+                      stats_data_id: uuid1234
+                      tenant: feb962f1-a182-4516-997e-4beb9c31515c
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: default
+    post:
+      tags:
+      - Monitoring - Flowlog
+      description: Get stats raw data
+      operationId: getStatDataRawDataPost
+      parameters:
+      - name: page
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+      - name: sortBy
+        in: query
+        schema:
+          pattern: ^[a-zA-Z-_]+$
+          type: string
+      - name: sortOrder
+        in: query
+        schema:
+          type: string
+          enum:
+          - asc
+          - ASC
+          - Asc
+          - desc
+          - DESC
+          - Desc
+      requestBody:
+        description: Stats query string
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Stats query string:
+                description: Stats query string
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '24'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Search result:
+                  description: Search result
+                  value:
+                    data:
+                    - entry_time: 1715135940274
+                      statcycletime: 1715135940274
+                      vpn_id: 4294967295
+                      src_ip: 192.168.1.10
+                      dest_ip: 10.0.0.1
+                      src_port: 443
+                      dest_port: 80
+                      dscp: 0
+                      ip_proto: 6
+                      ingress_intf: eth0
+                      egress_intf: eth1
+                      direction: inbound
+                      policy_name: default_rule
+                      action: allow
+                      start_time: 1654041600
+                      total_pkts: 100
+                      total_bytes: 1024
+                      flow_active: 'yes'
+                      vdevice_name: 172.16.254.1
+                      vmanage_system_ip: 10.0.0.1
+                      host_name: server1
+                      device_model: modelX
+                      stats_data_id: uuid1234
+                      tenant: feb962f1-a182-4516-997e-4beb9c31515c
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: default
+  /statistics/flowlog/aggregation:
+    get:
+      tags:
+      - Monitoring - Flowlog
+      description: Get aggregated data based on input query and filters. The data can be filtered on time and other unique parameters based upon necessity and intended usage
+      operationId: getAggregationDataByQuery_MonitoringFlowlog_3103
+      parameters:
+      - name: query
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      count:
+                        type: integer
+                        format: int64
+                        example: 6
+                      entry_time:
+                        type: integer
+                        format: int64
+                        example: 1653575400000
+                    $$ref: '#/components/schemas/FlowlogAggreation'
+                  entryTimeList:
+                    type: array
+                    items:
+                      type: integer
+                      format: int64
+                  header:
+                    type: object
+                    properties:
+                      columns:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            dataType:
+                              type: string
+                              example: date
+                            isDisplay:
+                              type: boolean
+                              example: true
+                            property:
+                              type: string
+                              example: entry_time
+                            title:
+                              type: string
+                              example: Entry_time
+                          $$ref: '#/components/schemas/FlowlogAggregationResponseHeaderColumns'
+                      fields:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            dataType:
+                              type: string
+                              example: date
+                            property:
+                              type: string
+                              example: entry_time
+                          $$ref: '#/components/schemas/FlowlogAggregationResponseHeaderFields'
+                      generatedOn:
+                        type: integer
+                        format: int64
+                        example: 1664160118911
+                    $$ref: '#/components/schemas/FlowlogAggregationResponseHeader'
+                $$ref: '#/components/schemas/FlowlogAggregationResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: default
+    post:
+      tags:
+      - Monitoring - Flowlog
+      description: Get aggregated data based on input query and filters. The data can be filtered on time and other unique parameters based upon necessity and intended usage
+      operationId: getPostAggregationDataByQuery_MonitoringFlowlog_3104
+      requestBody:
+        description: Stats query string
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Stats query string:
+                description: Stats query string
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '24'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+                  aggregation:
+                    histogram:
+                      property: entry_time
+                      type: minute
+                      interval: 30
+                      order: asc
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      count:
+                        type: integer
+                        format: int64
+                        example: 6
+                      entry_time:
+                        type: integer
+                        format: int64
+                        example: 1653575400000
+                    $$ref: '#/components/schemas/FlowlogAggreation'
+                  entryTimeList:
+                    type: array
+                    items:
+                      type: integer
+                      format: int64
+                  header:
+                    type: object
+                    properties:
+                      columns:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            dataType:
+                              type: string
+                              example: date
+                            isDisplay:
+                              type: boolean
+                              example: true
+                            property:
+                              type: string
+                              example: entry_time
+                            title:
+                              type: string
+                              example: Entry_time
+                          $$ref: '#/components/schemas/FlowlogAggregationResponseHeaderColumns'
+                      fields:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            dataType:
+                              type: string
+                              example: date
+                            property:
+                              type: string
+                              example: entry_time
+                          $$ref: '#/components/schemas/FlowlogAggregationResponseHeaderFields'
+                      generatedOn:
+                        type: integer
+                        format: int64
+                        example: 1664160118911
+                    $$ref: '#/components/schemas/FlowlogAggregationResponseHeader'
+                $$ref: '#/components/schemas/FlowlogAggregationResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: default,dca
+  /statistics/flowlog/csv:
+    get:
+      tags:
+      - Monitoring - Flowlog
+      description: Get raw data with optional query as CSV
+      operationId: getStatDataRawDataAsCSV_MonitoringFlowlog_2303
+      parameters:
+      - name: query
+        in: query
+        description: Query string
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '24'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+      responses:
+        '200':
+          description: Success
+          content:
+            text/csv:
+              schema:
+                type: string
+              examples:
+                Search result in csv format:
+                  description: Search result in csv format
+                  value: blob:https://<vmanageIP>/82c972bc-f9b3-4cce-bb70-1e1b033ef1cd
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: default
+  /statistics/flowlog/doccount:
+    post:
+      tags:
+      - Monitoring - Flowlog
+      description: Get response count of a query
+      operationId: getFlowlogCountPost
+      requestBody:
+        description: Query
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Query:
+                description: Query
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '24'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    format: int32
+                    example: 17193
+                $$ref: '#/components/schemas/CountResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    get:
+      tags:
+      - Monitoring - Flowlog
+      description: Get response count of a query
+      operationId: getFlowlogCount
+      parameters:
+      - name: query
+        in: query
+        description: Query
+        required: true
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '24'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    format: int32
+                    example: 17193
+                $$ref: '#/components/schemas/CountResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/flowlog/fields:
+    get:
+      tags:
+      - Monitoring - Flowlog
+      description: Get fields and type
+      operationId: getFlowlogFields
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                properties:
+                  empty:
+                    type: boolean
+                items:
+                  type: object
+                  properties:
+                    dataType:
+                      type: string
+                      example: date
+                    property:
+                      type: string
+                      example: entry_time
+                  $$ref: '#/components/schemas/GetStatDataFields'
+                $$ref: '#/components/schemas/GetStatDataFieldArray'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/flowlog/page:
+    post:
+      tags:
+      - Monitoring - Flowlog
+      description: Get stats pagination raw data
+      operationId: getStatsPaginationRawDataPost
+      parameters:
+      - name: scrollId
+        in: query
+        description: Scroll Id
+        schema:
+          type: string
+        example: DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAOIWZ1NQbXpvQ29Uc0stNzZ2UzlwTEREUQ==
+      - name: count
+        in: query
+        description: Result size
+        schema:
+          type: integer
+          format: int64
+        example: 10
+      requestBody:
+        description: Stats query string
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Stats query string:
+                description: Stats query string
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '24'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        action:
+                          type: string
+                          example: action
+                        dest_ip:
+                          type: string
+                          example: 10.74.49.77
+                        dest_port:
+                          type: integer
+                          format: int32
+                          example: 771
+                        device_model:
+                          type: string
+                          example: vedge-cloud
+                        direction:
+                          type: string
+                          example: service
+                        dscp:
+                          type: integer
+                          format: int32
+                          example: 7
+                        egress_intf:
+                          type: string
+                          example: cpu
+                        entry_time:
+                          type: integer
+                          format: int64
+                          example: 1664150431860
+                        flow_active:
+                          type: string
+                          example: active
+                        host_name:
+                          type: string
+                          example: vm1
+                        ingress_intf:
+                          type: string
+                          example: GigabitEthernet5
+                        ip_proto:
+                          type: integer
+                          format: int32
+                          example: 7
+                        policy_name:
+                          type: string
+                          example: policy
+                        src_ip:
+                          type: string
+                          example: 10.124.10.249
+                        src_port:
+                          type: integer
+                          format: int32
+                          example: 0
+                        start_time:
+                          type: integer
+                          format: int64
+                          example: 1664150431860
+                        statcycletime:
+                          type: integer
+                          format: int64
+                          example: 1664150431860
+                        stats_data_id:
+                          type: string
+                          example: 4OBG_HEB_JLsavezVUfr
+                        tenant:
+                          type: string
+                          example: feb962f1-a182-4516-997e-4beb9c31515c
+                        total_bytes:
+                          type: integer
+                          format: int64
+                          example: 172060
+                        total_pkts:
+                          type: integer
+                          format: int64
+                          example: 172060
+                        vdevice_name:
+                          type: string
+                          example: 10.124.10.249
+                        vmanage_system_ip:
+                          type: string
+                          example: 10.124.10.249
+                        vpn_id:
+                          type: integer
+                          format: int32
+                          example: 512
+                      $$ref: '#/components/schemas/FlowlogDataObject'
+                  pageInfo:
+                    type: object
+                    properties:
+                      count:
+                        type: integer
+                        format: int32
+                        example: 100
+                      endTime:
+                        type: string
+                        example: '1664148997536'
+                      hasMoreData:
+                        type: string
+                        example: 'true'
+                      scrollId:
+                        type: string
+                        example: DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAf4WcUlydS1uYzlTdXFhR05GTlBpTFJ4QQ
+                      startTime:
+                        type: string
+                        example: '1664159158463'
+                      totalCount:
+                        type: integer
+                        format: int32
+                        example: 39802
+                    $$ref: '#/components/schemas/FlowlogPaginationResponsePageInfo'
+                $$ref: '#/components/schemas/FlowlogPaginationResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+    get:
+      tags:
+      - Monitoring - Flowlog
+      description: Get stats pagination raw data
+      operationId: getStatsPaginationRawData_MonitoringFlowlog_2403
+      parameters:
+      - name: query
+        in: query
+        description: Query string
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '24'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+      - name: scrollId
+        in: query
+        description: Scroll Id
+        schema:
+          type: string
+        example: DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAOIWZ1NQbXpvQ29Uc0stNzZ2UzlwTEREUQ==
+      - name: count
+        in: query
+        description: Result size
+        schema:
+          type: integer
+          format: int64
+        example: 10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        action:
+                          type: string
+                          example: action
+                        dest_ip:
+                          type: string
+                          example: 10.74.49.77
+                        dest_port:
+                          type: integer
+                          format: int32
+                          example: 771
+                        device_model:
+                          type: string
+                          example: vedge-cloud
+                        direction:
+                          type: string
+                          example: service
+                        dscp:
+                          type: integer
+                          format: int32
+                          example: 7
+                        egress_intf:
+                          type: string
+                          example: cpu
+                        entry_time:
+                          type: integer
+                          format: int64
+                          example: 1664150431860
+                        flow_active:
+                          type: string
+                          example: active
+                        host_name:
+                          type: string
+                          example: vm1
+                        ingress_intf:
+                          type: string
+                          example: GigabitEthernet5
+                        ip_proto:
+                          type: integer
+                          format: int32
+                          example: 7
+                        policy_name:
+                          type: string
+                          example: policy
+                        src_ip:
+                          type: string
+                          example: 10.124.10.249
+                        src_port:
+                          type: integer
+                          format: int32
+                          example: 0
+                        start_time:
+                          type: integer
+                          format: int64
+                          example: 1664150431860
+                        statcycletime:
+                          type: integer
+                          format: int64
+                          example: 1664150431860
+                        stats_data_id:
+                          type: string
+                          example: 4OBG_HEB_JLsavezVUfr
+                        tenant:
+                          type: string
+                          example: feb962f1-a182-4516-997e-4beb9c31515c
+                        total_bytes:
+                          type: integer
+                          format: int64
+                          example: 172060
+                        total_pkts:
+                          type: integer
+                          format: int64
+                          example: 172060
+                        vdevice_name:
+                          type: string
+                          example: 10.124.10.249
+                        vmanage_system_ip:
+                          type: string
+                          example: 10.124.10.249
+                        vpn_id:
+                          type: integer
+                          format: int32
+                          example: 512
+                      $$ref: '#/components/schemas/FlowlogDataObject'
+                  pageInfo:
+                    type: object
+                    properties:
+                      count:
+                        type: integer
+                        format: int32
+                        example: 100
+                      endTime:
+                        type: string
+                        example: '1664148997536'
+                      hasMoreData:
+                        type: string
+                        example: 'true'
+                      scrollId:
+                        type: string
+                        example: DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAf4WcUlydS1uYzlTdXFhR05GTlBpTFJ4QQ
+                      startTime:
+                        type: string
+                        example: '1664159158463'
+                      totalCount:
+                        type: integer
+                        format: int32
+                        example: 39802
+                    $$ref: '#/components/schemas/FlowlogPaginationResponsePageInfo'
+                $$ref: '#/components/schemas/FlowlogPaginationResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /statistics/flowlog/query/fields:
+    get:
+      tags:
+      - Monitoring - Flowlog
+      description: Get query fields
+      operationId: getFlowlogQueryFields
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Query result count:
+                  description: Query result count
+                  value:
+                    data:
+                    - property: entry_time
+                      name: Event Time
+                      isRequired: true
+                      dataType: date
+                      fieldData:
+                        type: dateList
+                      options:
+                      - key: last_1_hour
+                        value: Last 1 hour
+                        number: '1'
+                        enableDateFields: false
+                      - key: last_3_hours
+                        value: Last 3 hours
+                        number: '3'
+                        enableDateFields: false
+                      - key: last_6_hours
+                        value: Last 6 hours
+                        number: '6'
+                        enableDateFields: false
+                      - key: last_12_hours
+                        value: Last 12 hours
+                        number: '12'
+                        enableDateFields: false
+                      - key: last_24_hours
+                        value: Last 24 hours
+                        number: '24'
+                        enableDateFields: false
+                        isSelected: true
+                      - key: last_168_hours
+                        value: Last 7 days
+                        number: '168'
+                        enableDateFields: false
+                      - key: custom
+                        value: Custom
+                        enableDateFields: true
+                    - property: vdevice_name
+                      name: Device name
+                      isRequired: true
+                      multiSelect: false
+                      dataType: string
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

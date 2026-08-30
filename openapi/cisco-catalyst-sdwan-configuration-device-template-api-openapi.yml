@@ -1,0 +1,811 @@
+openapi: 3.2.0
+info:
+  title: UX 1.0 Configuration Configuration - Device Template API
+  description: "Configuration of UX 1.0 device and policy.\nIncludes API operations for the following:\n  Managing original SD-WAN device configurations and policy configurations\n  Device templates and feature templates"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Configuration - Device Template
+paths:
+  /template/device/config/attachBootStrap:
+    post:
+      tags:
+      - Configuration - Device Template
+      description: 'Attach feature device template<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: pushMasterTemplate_ConfigurationDeviceTemplate_3904
+      requestBody:
+        description: Device template
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Device template:
+                description: Device template
+                value:
+                  deviceTemplateList:
+                  - templateId: 41f6a440-c5cc-4cc6-9ca1-af18e332a781
+                    device:
+                    - csv-status: complete
+                      csv-deviceId: 5e5f45e7-3062-44b2-b6f6-40c682149e05
+                      csv-deviceIP: 172.16.255.11
+                      csv-host-name: vm1
+                      //system/host-name: vm1
+                      //system/system-ip: 172.16.255.11
+                      //system/site-id: '100'
+                      csv-templateId: 41f6a440-c5cc-4cc6-9ca1-af18e332a781
+                      selected: 'true'
+                    isEdited: false
+                    isMasterEdited: false
+                    isDraftDisabled: false
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: '"{"id":"push_feature_template_configuration-01232017T154359940"}"'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Deploy-write
+  /template/device/config/attachcli:
+    post:
+      tags:
+      - Configuration - Device Template
+      description: 'Attach CLI device template<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: pushCLITemplate
+      requestBody:
+        description: Device template
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Device template:
+                description: Device template
+                value: "{\n  \"deviceTemplateList\":[\n  {\n    \"templateId\":\"41f6a440-c5cc-4cc6-9ca1-af18e332a781\",       \n    \"device\":[ \n    {\n      \"csv-status\":\"complete\",\n      \"csv-deviceId\":\"5e5f45e7-3062-44b2-b6f6-40c682149e05\",\n      \"csv-deviceIP\":\"172.16.255.11\",\n      \"csv-host-name\":\"vm1\",\n      \"//system/host-name\":\"vm1\",\n      \"//system/system-ip\":\"172.16.255.11\",\n      \"//system/site-id\":\"100\",\n      \"csv-templateId\":\"41f6a440-c5cc-4cc6-9ca1-af18e332a781\",\n      \"selected\":\"true\"\n      \"pseudoCommitTimer\":11\n    }\n    ],\n    \"isEdited\":false, \n    \"isMasterEdited\":false, \n    \"isDraftDisabled\":false \n  }\n  ]\n}"
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value:
+                    id: push_file_template_configuration-d13a002a-0475-43bf-85db-ef9224112a52
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Deploy-write
+  /template/device/config/attachcloudx:
+    put:
+      tags:
+      - Configuration - Device Template
+      description: 'Edit already enabled gateways, clients, dias<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: editCloudxConfig
+      requestBody:
+        description: CloudX config
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              CloudX config:
+                description: CloudX config
+                value:
+                  isEdited: true
+                  siteList:
+                  - 100
+                  - 400
+                  siteType: dia
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                Tenant Id:
+                  description: Tenant Id
+                  value:
+                    id: push_file_template_configuration-01242017T020647984
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Deploy-write
+    post:
+      tags:
+      - Configuration - Device Template
+      description: Enable gateways, clients, dias
+      operationId: pushCloudxConfig
+      requestBody:
+        description: CloudX config
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              CloudX config:
+                description: CloudX config
+                value:
+                  isEdited: false
+                  siteList:
+                  - 100
+                  siteType: dia
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                Tenant Id:
+                  description: Tenant Id
+                  value:
+                    id: push_file_template_configuration-01242017T020647984
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Deploy-write
+  /template/device/config/attached/{masterTemplateId}:
+    get:
+      tags:
+      - Configuration - Device Template
+      description: 'Get attached device list by master template Id<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: getAttachedDeviceList
+      parameters:
+      - name: masterTemplateId
+        in: path
+        description: Template Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Device list:
+                  description: Device list
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Deploy-read,Template Configuration-read
+  /template/device/config/attachedconfig:
+    get:
+      tags:
+      - Configuration - Device Template
+      description: 'Get attached config to device<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: getAttachedConfigToDevice
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device Model ID
+        required: true
+        schema:
+          type: string
+      - name: policyId
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                CLI config:
+                  description: CLI config
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Deploy-read,Device Inventory-read
+  /template/device/config/attachfeature:
+    post:
+      tags:
+      - Configuration - Device Template
+      description: 'Attach feature device template<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: pushMasterTemplate_ConfigurationDeviceTemplate_3704
+      requestBody:
+        description: Device template
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Device template:
+                description: Device template
+                value:
+                  deviceTemplateList:
+                  - templateId: 41f6a440-c5cc-4cc6-9ca1-af18e332a781
+                    device:
+                    - csv-status: complete
+                      csv-deviceId: 5e5f45e7-3062-44b2-b6f6-40c682149e05
+                      csv-deviceIP: 172.16.255.11
+                      csv-host-name: vm1
+                      //system/host-name: vm1
+                      //system/system-ip: 172.16.255.11
+                      //system/site-id: '100'
+                      csv-templateId: 41f6a440-c5cc-4cc6-9ca1-af18e332a781
+                      selected: 'true'
+                    isEdited: false
+                    isMasterEdited: false
+                    isDraftDisabled: false
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value:
+                    id: push_feature_template_configuration-4794e7ed-8912-477b-86ec-07b87621ade4
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Deploy-write
+  /template/device/config/attachment:
+    post:
+      tags:
+      - Configuration - Device Template
+      description: 'Attach device template<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: attachDeviceTemplate
+      requestBody:
+        description: Device template
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Device template:
+                description: Device template
+                value:
+                  deviceTemplateList:
+                  - templateId: 41f6a440-c5cc-4cc6-9ca1-af18e332a781
+                    device:
+                    - csv-status: complete
+                      csv-deviceId: C8K-8f8cc50c-b05b-4a60-956b-5bdd8e79e5c0
+                      csv-deviceIP: 172.16.255.15
+                      csv-host-name: vm5
+                      //system/host-name: vm5
+                      //system/system-ip: 172.16.255.15
+                      //system/site-id: '100'
+                      csv-templateId: 41f6a440-c5cc-4cc6-9ca1-af18e332a781
+                      selected: 'true'
+                    isEdited: false
+                    isMasterEdited: false
+                    isDraftDisabled: false
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value:
+                    id: push_template_configuration-3140b324-7a4b-465d-92cc-847a6c01c340
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Deploy-write
+  /template/device/config/available/{masterTemplateId}:
+    get:
+      tags:
+      - Configuration - Device Template
+      description: 'Get possible device list by master template Id<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: getDeviceListByMasterTemplateId
+      parameters:
+      - name: masterTemplateId
+        in: path
+        description: Template Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Device list:
+                  description: Device list
+                  value:
+                    data:
+                    - deviceIP: 172.16.255.16
+                      device-groups:
+                      - No groups
+                      uuid: C8K-5783e055-2703-440e-91f0-41f4af941603
+                      site-id: '600'
+                      host-name: vm6
+                      local-system-ip: 172.16.255.16
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Deploy-read
+  /template/device/config/config:
+    post:
+      tags:
+      - Configuration - Device Template
+      description: 'Get device configuration<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: getDeviceConfigurationPreview
+      requestBody:
+        description: Device template
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Device template:
+                description: Device template
+                value:
+                  templateId: 45d94bf1-30fb-4b00-8bde-2a62c8af97b5
+                  device:
+                    csv-status: complete
+                    csv-deviceId: a1d010e6-bd61-4fbd-8980-96f02db4d0b9
+                    csv-deviceIP: 172.16.255.21
+                    csv-host-name: vm11
+                    csv-templateId: 45d94bf1-30fb-4b00-8bde-2a62c8af97b5
+                  isEdited: false
+                  isMasterEdited: false
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                Device config:
+                  description: Device config
+                  value: "system\nhost-name         vm11\ngps-location latitude 35.0\ngps-location longitude -78.0\nsystem-ip         172.16.255.21\nsite-id           100\norganization-name \"vIPtela Inc Regression\"\nclock timezone America/Los_Angeles\nvbond 10.0.12.26\naaa\n  auth-order local radius tacacs\n  usergroup basic\n    task system read write\n    task interface read write\n  !"
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Deploy-read,Template Deploy-write
+  /template/device/config/detach:
+    post:
+      tags:
+      - Configuration - Device Template
+      description: 'Detach device template<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: detachDeviceTemplate
+      requestBody:
+        description: Device template
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Device template:
+                description: Device template
+                value: {}
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Template Deploy-write
+  /template/device/config/detachcloudx:
+    post:
+      tags:
+      - Configuration - Device Template
+      description: 'Disable enabled gateways, clients, dias<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: detachSites_ConfigurationDeviceTemplate_3604
+      requestBody:
+        description: CloudX config
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              CloudX config:
+                description: CloudX config
+                value:
+                  siteList:
+                  - 100
+                  siteType: none
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                Tenant Id:
+                  description: Tenant Id
+                  value:
+                    id: push_file_template_configuration-01242017T020647984
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Deploy-write
+  /template/device/config/duplicateip:
+    post:
+      tags:
+      - Configuration - Device Template
+      description: 'Detects duplicate system IP from a list of devices<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: getDevicesWithDuplicateIP
+      requestBody:
+        description: Device list
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Device list:
+                description: Device list
+                value:
+                  device:
+                  - csv-deviceIP: 10.1.0.1
+                    csv-deviceId: ebdc8bd9-17e5-4eb3-a5e0-f438403a83de
+                    csv-host-name: DC1-VEDGE1
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Device list:
+                  description: Device list
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Configuration-read,Template Deploy-read,Template Deploy-write
+  /template/device/config/duplicatelocationname:
+    post:
+      tags:
+      - Configuration - Device Template
+      description: 'Detects duplicate system IP from a list of devices<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: getDevicesWithDuplicateLocationName
+      requestBody:
+        description: Device list
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Device list:
+                description: Device list
+                value:
+                  locations:
+                  - locationName: Milpitas, CA
+                    csv-deviceId: ebdc8bd9-17e5-4eb3-a5e0-f438403a83de
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Device list:
+                  description: Device list
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Configuration-read,Template Deploy-read,Template Deploy-write
+  /template/device/config/exportcsv:
+    post:
+      tags:
+      - Configuration - Device Template
+      description: 'Export the device template to CSV format for given template id<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: createInputWithoutDevice
+      requestBody:
+        description: Device template
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Device template:
+                description: Device template
+                value:
+                  templateId: e1f3de23-1ded-49d8-85b1-1e6ab668775f
+                  isEdited: false
+                  isMasterEdited: false
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device input:
+                  description: Device input
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Deploy-write
+  /template/device/config/input:
+    post:
+      tags:
+      - Configuration - Device Template
+      description: 'Create device input<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: createDeviceInput
+      requestBody:
+        description: Template device input
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Template device input:
+                description: Template device input
+                value:
+                  templateId: 6c7d22bc-73d5-4877-9402-26c75a22bd08
+                  deviceIds:
+                  - ebdc8bd9-17e5-4eb3-a5e0-f438403a83de
+                  isEdited: false
+                  isMasterEdited: false
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device input:
+                  description: Device input
+                  value:
+                    data:
+                    - csv-status: in_complete
+                      csv-deviceId: a1d010e6-bd61-4fbd-8980-96f02db4d0b9
+                      csv-deviceIP: 172.16.255.21
+                      csv-host-name: vm11
+                      //system/host-name: vm11
+                      //system/system-ip: 172.16.255.21
+                      //system/site-id: '11'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Deploy-write
+  /template/device/config/process/input/file:
+    post:
+      tags:
+      - Configuration - Device Template
+      description: 'Process input comma separated file<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: processInputCommaSepFile
+      requestBody:
+        description: Device template
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+            examples:
+              Device template:
+                description: Device template
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                Device config:
+                  description: Device config
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Deploy-write
+  /template/device/config/quickconnectvariable:
+    post:
+      tags:
+      - Configuration - Device Template
+      description: Get connection variables to be configured
+      operationId: getQuickConnectVariables
+      requestBody:
+        description: Device List
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Device List:
+                description: Device List
+                value: []
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Variable list:
+                  description: Variable list
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Deploy-write
+  /template/device/config/vbond:
+    get:
+      tags:
+      - Configuration - Device Template
+      description: 'Check if vBond is configured<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: checkVbond
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Is vBond configured:
+                  description: Is vBond configured
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Deploy-read,Template Configuration-read
+  /template/device/config/verify:
+    post:
+      tags:
+      - Configuration - Device Template
+      description: 'Validate full template"
+
+        <br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: validateTemplate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties:
+                type: object
+                properties:
+                  valueType:
+                    type: string
+                    enum:
+                    - ARRAY
+                    - OBJECT
+                    - STRING
+                    - NUMBER
+                    - 'TRUE'
+                    - 'FALSE'
+                    - 'NULL'
+        required: true
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+      deprecated: true
+      x-roles-required: Template Deploy-write

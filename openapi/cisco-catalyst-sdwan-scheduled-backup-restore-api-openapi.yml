@@ -1,0 +1,810 @@
+openapi: 3.2.0
+info:
+  title: Others Scheduled Backup Restore API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Scheduled Backup Restore
+paths:
+  /backup/backupinfo:
+    delete:
+      tags:
+      - Scheduled Backup Restore
+      summary: Deletes a local database operation
+      description: Delete all or a specific backup file stored in vManage
+      operationId: deleteSchduledBackup
+      parameters:
+      - name: taskId
+        in: query
+        schema:
+          pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+          type: string
+      - name: backupInfoId
+        in: query
+        schema:
+          pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - details
+                    - message
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        description: Error code associated with the error event
+                      details:
+                        type: string
+                        description: Error message details
+                      message:
+                        type: string
+                        description: Error message title
+                    description: error message
+                    $$ref: '#/components/schemas/Model400ErrorError'
+                $$ref: '#/components/schemas/Model400Error'
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /backup/backupinfo/{localBackupInfoId}:
+    get:
+      tags:
+      - Scheduled Backup Restore
+      summary: Get a localBackupInfo record by localBackupInfoId
+      description: Get details of database backup task for given localBackupInfo object
+      operationId: getLocalBackupInfo
+      parameters:
+      - name: localBackupInfoId
+        in: path
+        required: true
+        schema:
+          pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  backupState:
+                    pattern: ^(SCHEDULED|IN_PROGRESS|CONFIG_DB_BACKUP_SUCCESS|CONFIG_DB_BACKUP_FAILED|STATS_DB_EXPORT_SUCCESS|STATS_DB_EXPORT_FAILED|CONFIG_DB_CONSISTENCY_CHECK_FAILED|LEADER_SUCCESS|ALL_SUCCESS|FAILURE|DELETED)$
+                    type: string
+                    description: Current stage of database backup workflow. This could be [SCHEDULED/IN_PROGRESS/CONFIG_DB_BACKUP_SUCCESS/CONFIG_DB_BACKUP_FAILED/STATS_DB_EXPORT_SUCCESS/STATS_DB_EXPORT_FAILED/CONFIG_DB_CONSISTENCY_CHECK_FAILED/LEADER_SUCCESS/ALL_SUCCESS/FAILURE/DELETED]
+                    example: IN_PROGRESS
+                  backupType:
+                    pattern: ^(SCHEDULED|ON_DEMAND)$
+                    type: string
+                    description: Type of backup. This could be [SCHEDULED/ON_DEMAND]
+                    example: ON_DEMAND
+                  createTime:
+                    type: integer
+                    description: Epoch timestamp
+                    format: int64
+                    example: 1650994911131
+                  destination:
+                    type: object
+                    properties:
+                      backupDest:
+                        pattern: ^(LOCAL|S3|SFTP|AZURE)$
+                        type: string
+                        description: Storage type. This could be [LOCAL/S3/SFTP/AZURE]
+                        example: LOCAL
+                      backupDir:
+                        pattern: ^(?:\/|\w:)?(?:[\\\/][\w\-\s]+)*(?:[\\\/])?$
+                        type: string
+                        description: 'Location where the database backup file on a storage type. '
+                        example: /opt/data/backup/scheduledbackup/
+                      backupStorageInGB:
+                        minimum: 1
+                        type: integer
+                        description: Size of the database backup allowed to the stored at a backup destination
+                        format: int32
+                        example: 10
+                      backupTTLInDays:
+                        minimum: 1
+                        type: integer
+                        description: Time to live for a database backup copy in the backup destination in days
+                        format: int32
+                        example: 30
+                      numOfReplica:
+                        minimum: 1
+                        type: integer
+                        description: Number of replicas of the database backup file
+                        format: int32
+                        example: 2
+                      vmVersion:
+                        pattern: ^\d+(\.\d+)*$
+                        type: string
+                        description: vManage software version against which the database backup was taken
+                        example: '20.9'
+                    $$ref: '#/components/schemas/LocalDestination'
+                  downloadURL:
+                    pattern: ^\/dataservice\/tenantbackup\/download\/\d+\/backup_\d+_\d{6}-\d{6}\.tar\.gz$
+                    type: string
+                    description: Destination to download database backup from
+                    example: /dataservice/tenantbackup/download/1570057020772/backup_1570057020772_100919-181838.tar.gz
+                  followerIpAddressList:
+                    maxItems: 2147483647
+                    minItems: 1
+                    type: array
+                    description: List of vManage servers IP address who are running in follower mode
+                    example:
+                    - 10.0.105.38
+                    - 10.0.105.39
+                    items:
+                      type: string
+                      description: List of vManage servers IP address who are running in follower mode
+                      example:
+                      - 10.0.105.38
+                      - 10.0.105.39
+                  localBackupInfoId:
+                    pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+                    type: string
+                    description: A unique UUID per database back up request
+                    example: f8c3de3d-1fea-4d7c-a8b0-29f63c4c3454
+                  scheduleId:
+                    pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+                    type: string
+                    description: A unique UUID for scheduled database backup task
+                    example: 9b08dce2-d33f-11ec-9d64-0242ac120002
+                  srcIpAddress:
+                    pattern: ^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+                    type: string
+                    description: IP address of the source vmanage server for database backup
+                    example: 10.0.105.32
+                  taskId:
+                    pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+                    type: string
+                    description: Unique task Id for a given database backup task
+                    example: f81ee476-d33f-11ec-9d64-0242ac120002
+                  taskName:
+                    pattern: ^[a-zA-Z0-9 _\-\\\/]+$
+                    type: string
+                    description: Task name in human readable format
+                    example: Schedule backup on 6/1/2022
+                description: List of all local backup info objects in the system
+                $$ref: '#/components/schemas/LocalBackupInfo'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - details
+                    - message
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        description: Error code associated with the error event
+                      details:
+                        type: string
+                        description: Error message details
+                      message:
+                        type: string
+                        description: Error message title
+                    description: error message
+                    $$ref: '#/components/schemas/Model400ErrorError'
+                $$ref: '#/components/schemas/Model400Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - details
+                    - message
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        description: Error code associated with the error event
+                      details:
+                        type: string
+                        description: Error message details
+                      message:
+                        type: string
+                        description: Error message title
+                    description: error message
+                    $$ref: '#/components/schemas/Model400ErrorError'
+                $$ref: '#/components/schemas/Model400Error'
+        '500':
+          description: Internal Server Error
+  /backup/download/{path}:
+    get:
+      tags:
+      - Scheduled Backup Restore
+      summary: Download the database backup file
+      description: Download a Backup File that is already stored in vManage
+      operationId: downloadBackupFile
+      parameters:
+      - name: path
+        in: path
+        required: true
+        schema:
+          pattern: ^(ond|sched)_([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})_\d{6}-\d{6}\.tar\.gz$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /backup/export:
+    post:
+      tags:
+      - Scheduled Backup Restore
+      summary: Issues database backup request
+      description: Trigger a backup of configuration database and statstics database and store it in vManage
+      operationId: exportBackup
+      requestBody:
+        description: backup request information
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                backupState:
+                  pattern: ^(SCHEDULED|IN_PROGRESS|CONFIG_DB_BACKUP_SUCCESS|CONFIG_DB_BACKUP_FAILED|STATS_DB_EXPORT_SUCCESS|STATS_DB_EXPORT_FAILED|CONFIG_DB_CONSISTENCY_CHECK_FAILED|LEADER_SUCCESS|ALL_SUCCESS|FAILURE|DELETED)$
+                  type: string
+                  description: Current stage of database backup workflow. This could be [SCHEDULED/IN_PROGRESS/CONFIG_DB_BACKUP_SUCCESS/CONFIG_DB_BACKUP_FAILED/STATS_DB_EXPORT_SUCCESS/STATS_DB_EXPORT_FAILED/CONFIG_DB_CONSISTENCY_CHECK_FAILED/LEADER_SUCCESS/ALL_SUCCESS/FAILURE/DELETED]
+                  example: IN_PROGRESS
+                backupType:
+                  pattern: ^(SCHEDULED|ON_DEMAND)$
+                  type: string
+                  description: Type of backup. This could be [SCHEDULED/ON_DEMAND]
+                  example: ON_DEMAND
+                createTime:
+                  type: integer
+                  description: Epoch timestamp
+                  format: int64
+                  example: 1650994911131
+                destination:
+                  type: object
+                  properties:
+                    backupDest:
+                      pattern: ^(LOCAL|S3|SFTP|AZURE)$
+                      type: string
+                      description: Storage type. This could be [LOCAL/S3/SFTP/AZURE]
+                      example: LOCAL
+                    backupDir:
+                      pattern: ^(?:\/|\w:)?(?:[\\\/][\w\-\s]+)*(?:[\\\/])?$
+                      type: string
+                      description: 'Location where the database backup file on a storage type. '
+                      example: /opt/data/backup/scheduledbackup/
+                    backupStorageInGB:
+                      minimum: 1
+                      type: integer
+                      description: Size of the database backup allowed to the stored at a backup destination
+                      format: int32
+                      example: 10
+                    backupTTLInDays:
+                      minimum: 1
+                      type: integer
+                      description: Time to live for a database backup copy in the backup destination in days
+                      format: int32
+                      example: 30
+                    numOfReplica:
+                      minimum: 1
+                      type: integer
+                      description: Number of replicas of the database backup file
+                      format: int32
+                      example: 2
+                    vmVersion:
+                      pattern: ^\d+(\.\d+)*$
+                      type: string
+                      description: vManage software version against which the database backup was taken
+                      example: '20.9'
+                  $$ref: '#/components/schemas/LocalDestination'
+                downloadURL:
+                  pattern: ^\/dataservice\/tenantbackup\/download\/\d+\/backup_\d+_\d{6}-\d{6}\.tar\.gz$
+                  type: string
+                  description: Destination to download database backup from
+                  example: /dataservice/tenantbackup/download/1570057020772/backup_1570057020772_100919-181838.tar.gz
+                followerIpAddressList:
+                  maxItems: 2147483647
+                  minItems: 1
+                  type: array
+                  description: List of vManage servers IP address who are running in follower mode
+                  example:
+                  - 10.0.105.38
+                  - 10.0.105.39
+                  items:
+                    type: string
+                    description: List of vManage servers IP address who are running in follower mode
+                    example:
+                    - 10.0.105.38
+                    - 10.0.105.39
+                localBackupInfoId:
+                  pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+                  type: string
+                  description: A unique UUID per database back up request
+                  example: f8c3de3d-1fea-4d7c-a8b0-29f63c4c3454
+                scheduleId:
+                  pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+                  type: string
+                  description: A unique UUID for scheduled database backup task
+                  example: 9b08dce2-d33f-11ec-9d64-0242ac120002
+                srcIpAddress:
+                  pattern: ^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+                  type: string
+                  description: IP address of the source vmanage server for database backup
+                  example: 10.0.105.32
+                taskId:
+                  pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+                  type: string
+                  description: Unique task Id for a given database backup task
+                  example: f81ee476-d33f-11ec-9d64-0242ac120002
+                taskName:
+                  pattern: ^[a-zA-Z0-9 _\-\\\/]+$
+                  type: string
+                  description: Task name in human readable format
+                  example: Schedule backup on 6/1/2022
+              description: List of all local backup info objects in the system
+              $$ref: '#/components/schemas/LocalBackupInfo'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    description: data list
+                    example:
+                    - MEGAPORT
+                    - EQUINIX
+                    - ATT
+                    items:
+                      type: string
+                      description: data
+                      example: MEGAPORT
+                $$ref: '#/components/schemas/InlineResponse200'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - details
+                    - message
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        description: Error code associated with the error event
+                      details:
+                        type: string
+                        description: Error message details
+                      message:
+                        type: string
+                        description: Error message title
+                    description: error message
+                    $$ref: '#/components/schemas/Model400ErrorError'
+                $$ref: '#/components/schemas/Model400Error'
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /backup/list:
+    get:
+      tags:
+      - Scheduled Backup Restore
+      summary: Get list of all database backup requests
+      description: List all backup files of a tenant stored in vManage
+      operationId: listBackup
+      parameters:
+      - name: size
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  backupList:
+                    type: array
+                    description: List of all local backup info objects in the system
+                    items:
+                      type: object
+                      properties:
+                        backupState:
+                          pattern: ^(SCHEDULED|IN_PROGRESS|CONFIG_DB_BACKUP_SUCCESS|CONFIG_DB_BACKUP_FAILED|STATS_DB_EXPORT_SUCCESS|STATS_DB_EXPORT_FAILED|CONFIG_DB_CONSISTENCY_CHECK_FAILED|LEADER_SUCCESS|ALL_SUCCESS|FAILURE|DELETED)$
+                          type: string
+                          description: Current stage of database backup workflow. This could be [SCHEDULED/IN_PROGRESS/CONFIG_DB_BACKUP_SUCCESS/CONFIG_DB_BACKUP_FAILED/STATS_DB_EXPORT_SUCCESS/STATS_DB_EXPORT_FAILED/CONFIG_DB_CONSISTENCY_CHECK_FAILED/LEADER_SUCCESS/ALL_SUCCESS/FAILURE/DELETED]
+                          example: IN_PROGRESS
+                        backupType:
+                          pattern: ^(SCHEDULED|ON_DEMAND)$
+                          type: string
+                          description: Type of backup. This could be [SCHEDULED/ON_DEMAND]
+                          example: ON_DEMAND
+                        createTime:
+                          type: integer
+                          description: Epoch timestamp
+                          format: int64
+                          example: 1650994911131
+                        destination:
+                          type: object
+                          properties:
+                            backupDest:
+                              pattern: ^(LOCAL|S3|SFTP|AZURE)$
+                              type: string
+                              description: Storage type. This could be [LOCAL/S3/SFTP/AZURE]
+                              example: LOCAL
+                            backupDir:
+                              pattern: ^(?:\/|\w:)?(?:[\\\/][\w\-\s]+)*(?:[\\\/])?$
+                              type: string
+                              description: 'Location where the database backup file on a storage type. '
+                              example: /opt/data/backup/scheduledbackup/
+                            backupStorageInGB:
+                              minimum: 1
+                              type: integer
+                              description: Size of the database backup allowed to the stored at a backup destination
+                              format: int32
+                              example: 10
+                            backupTTLInDays:
+                              minimum: 1
+                              type: integer
+                              description: Time to live for a database backup copy in the backup destination in days
+                              format: int32
+                              example: 30
+                            numOfReplica:
+                              minimum: 1
+                              type: integer
+                              description: Number of replicas of the database backup file
+                              format: int32
+                              example: 2
+                            vmVersion:
+                              pattern: ^\d+(\.\d+)*$
+                              type: string
+                              description: vManage software version against which the database backup was taken
+                              example: '20.9'
+                          $$ref: '#/components/schemas/LocalDestination'
+                        downloadURL:
+                          pattern: ^\/dataservice\/tenantbackup\/download\/\d+\/backup_\d+_\d{6}-\d{6}\.tar\.gz$
+                          type: string
+                          description: Destination to download database backup from
+                          example: /dataservice/tenantbackup/download/1570057020772/backup_1570057020772_100919-181838.tar.gz
+                        followerIpAddressList:
+                          maxItems: 2147483647
+                          minItems: 1
+                          type: array
+                          description: List of vManage servers IP address who are running in follower mode
+                          example:
+                          - 10.0.105.38
+                          - 10.0.105.39
+                          items:
+                            type: string
+                            description: List of vManage servers IP address who are running in follower mode
+                            example:
+                            - 10.0.105.38
+                            - 10.0.105.39
+                        localBackupInfoId:
+                          pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+                          type: string
+                          description: A unique UUID per database back up request
+                          example: f8c3de3d-1fea-4d7c-a8b0-29f63c4c3454
+                        scheduleId:
+                          pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+                          type: string
+                          description: A unique UUID for scheduled database backup task
+                          example: 9b08dce2-d33f-11ec-9d64-0242ac120002
+                        srcIpAddress:
+                          pattern: ^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+                          type: string
+                          description: IP address of the source vmanage server for database backup
+                          example: 10.0.105.32
+                        taskId:
+                          pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+                          type: string
+                          description: Unique task Id for a given database backup task
+                          example: f81ee476-d33f-11ec-9d64-0242ac120002
+                        taskName:
+                          pattern: ^[a-zA-Z0-9 _\-\\\/]+$
+                          type: string
+                          description: Task name in human readable format
+                          example: Schedule backup on 6/1/2022
+                      description: List of all local backup info objects in the system
+                      $$ref: '#/components/schemas/LocalBackupInfo'
+                $$ref: '#/components/schemas/LocalBackupListResult'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - details
+                    - message
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        description: Error code associated with the error event
+                      details:
+                        type: string
+                        description: Error message details
+                      message:
+                        type: string
+                        description: Error message title
+                    description: error message
+                    $$ref: '#/components/schemas/Model400ErrorError'
+                $$ref: '#/components/schemas/Model400Error'
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /restore/import:
+    post:
+      tags:
+      - Scheduled Backup Restore
+      description: Submit a previously backed up file and import the data and apply it to the configuraion database
+      operationId: importScheduledBackup
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task status:
+                  description: Task status
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /restore/remoteimport:
+    post:
+      tags:
+      - Scheduled Backup Restore
+      description: Remote import backup from a remote URL and import the data and apply it to the configuraion database
+      operationId: remoteImportBackup
+      requestBody:
+        description: ImportBackupInfo Payload
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              ImportBackupInfo Payload:
+                description: ImportBackupInfo Payload
+                value:
+                  importName: import 20.15 vmanage release
+                  srcHost: 10.0.105.32
+                  description: optional description here
+                  backupSrcUrl: https://10.0.105.32:8443/scheduled/backupdata/ondemand_f34d0b2f-a079-40ce-b2f5-192d068bd136_070220-234236.tar.gz
+                  user: admin
+                  password: password
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task status:
+                  description: Task status
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /schedule/create:
+    post:
+      tags:
+      - Scheduled Backup Restore
+      description: create  backup scheduler config-db and statstics database with startDateTime and persist to config-db
+      operationId: scheduleBackup
+      requestBody:
+        description: schedule request information
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Stats setting:
+                description: Stats setting
+                value:
+                  scheduleName: testScheduleName
+                  destination:
+                    backupDest: local
+                    vmVersion: '20.15'
+                    backupDir: /backup
+                    backupTTLInDays: 20
+                    backupStorageInGB: 30
+                    numOfReplica: 1
+                  status: ACTIVE
+                  startDateTime: 1709032922321
+                  endDateTime: 1709464622321
+                  backupDurationInHour: 5
+                  backup_storage: 300
+                  retryCount: 3
+                  numOfReplica: 2
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task status:
+                  description: Task status
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /schedule/list:
+    get:
+      tags:
+      - Scheduled Backup Restore
+      description: Get a schedule record for backup by scheduler id
+      operationId: listSchedules
+      parameters:
+      - name: limit
+        in: query
+        description: size
+        schema:
+          minimum: 1
+          type: integer
+          format: int64
+          default: 100
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                'Get backup schedule ':
+                  description: 'Get backup schedule '
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /schedule/{schedulerId}:
+    get:
+      tags:
+      - Scheduled Backup Restore
+      description: Get a schedule record for backup by scheduler id
+      operationId: getScheduleRecordForBackup
+      parameters:
+      - name: schedulerId
+        in: path
+        description: scheduler id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                'Get backup schedule ':
+                  description: 'Get backup schedule '
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+      - Scheduled Backup Restore
+      description: Delete a schedule record for backup in vManage by scheduler id
+      operationId: deleteSchedule
+      parameters:
+      - name: schedulerId
+        in: path
+        description: scheduler id
+        required: true
+        schema:
+          pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                'Delete backup scheduler job ':
+                  description: 'Delete backup scheduler job '
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

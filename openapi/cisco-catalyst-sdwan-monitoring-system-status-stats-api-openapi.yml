@@ -1,0 +1,823 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Monitoring - System Status Stats API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Monitoring - System Status Stats
+paths:
+  /statistics/system/stats:
+    get:
+      tags:
+      - Monitoring - System Status Stats
+      description: Get stats raw data
+      operationId: getStatDataRawData_MonitoringSystemStatusStats_2403
+      parameters:
+      - name: query
+        in: query
+        description: Query string
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '24'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+          aggregation:
+            metrics:
+            - property: latency
+              type: avg
+      - name: page
+        in: query
+        description: page number
+        schema:
+          minimum: 1
+          type: integer
+          format: int64
+      - name: pageSize
+        in: query
+        description: page size
+        schema:
+          minimum: 1
+          type: integer
+          format: int64
+      - name: sortBy
+        in: query
+        description: sort by(emp:entry_time)
+        schema:
+          pattern: ^[a-zA-Z-_]+$
+          type: string
+      - name: sortOrder
+        in: query
+        description: sort order(emp:asc、ASC、Asc、desc、Desc、DESC)
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Search result:
+                  description: Search result
+                  value:
+                    data:
+                    - remote_color: 3g
+                      fec_re: 0
+                      vqoe_score: 10
+                      device_model: vedge-cloud
+                      latency: 1
+                      tx_octets: 0
+                      dst_ip: 10.0.101.2
+                      local_color: lte
+                      src_ip: 10.1.14.14
+                      sla_class_names: None
+                      loss: 0
+                      total: 600
+                      tx_pkts: 0
+                      fec_tx: 0
+                      rx_octets: 0
+                      statcycletime: 1589075400056
+                      state: Up
+                      local_system_ip: 172.16.255.14
+                      tenant: default
+                      entry_time: 1589073792008
+                      loss_percentage: 0
+                      rx_pkts: 0
+                      vmanage_system_ip: 172.16.255.14
+                      fec_rx: 0
+                      src_port: 12380
+                      jitter: 1
+                      remote_system_ip: 172.16.255.11
+                      vdevice_name: 172.16.255.14
+                      proto: IPSEC
+                      vip_idx: 190
+                      dst_port: 12366
+                      name: 172.16.255.14:lte-172.16.255.11:3g
+                      sla_class_list: '0'
+                      tunnel_color: 3g:lte
+                      host_name: vm4
+                      id: 4OBG_HEB_JLsavezVUfr
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: default
+    post:
+      tags:
+      - Monitoring - System Status Stats
+      description: Get stats raw data
+      operationId: getStatsRawData_MonitoringSystemStatusStats_2404
+      parameters:
+      - name: page
+        in: query
+        description: page number
+        schema:
+          minimum: 1
+          type: integer
+          format: int64
+      - name: pageSize
+        in: query
+        description: page size
+        schema:
+          minimum: 1
+          type: integer
+          format: int64
+      - name: sortBy
+        in: query
+        description: sort by
+        schema:
+          pattern: ^[a-zA-Z-_]+$
+          type: string
+      - name: sortOrder
+        in: query
+        description: sort order
+        schema:
+          type: string
+      requestBody:
+        description: Stats query string
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Stats query string:
+                description: Stats query string
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '24'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+                  aggregation:
+                    field:
+                    - property: name
+                      sequence: 1
+                    - property: proto
+                      sequence: 2
+                    histogram:
+                      property: entry_time
+                      type: minute
+                      interval: 30
+                      order: asc
+                    metrics:
+                    - property: latency
+                      type: avg
+                    - property: loss
+                      type: avg
+                    - property: loss_percentage
+                      type: avg
+                    - property: vqoe_score
+                      type: avg
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Search result:
+                  description: Search result
+                  value:
+                    data:
+                    - remote_color: lte
+                      fec_re: 0
+                      vqoe_score: 10
+                      device_model: vedge-cloud
+                      latency: 1
+                      tx_octets: 0
+                      dst_ip: 10.0.106.1
+                      local_color: lte
+                      src_ip: 10.1.15.15
+                      sla_class_names: test_sla_class
+                      loss: 0
+                      total: 600
+                      tx_pkts: 0
+                      fec_tx: 0
+                      rx_octets: 0
+                      statcycletime: 1589075400052
+                      state: Up
+                      local_system_ip: 172.16.255.15
+                      tenant: default
+                      entry_time: 1589073783045
+                      loss_percentage: 0
+                      rx_pkts: 0
+                      vmanage_system_ip: 172.16.255.15
+                      fec_rx: 0
+                      src_port: 12366
+                      jitter: 1
+                      remote_system_ip: 172.16.255.16
+                      vdevice_name: 172.16.255.15
+                      proto: IPSEC
+                      vip_idx: 351
+                      dst_port: 12386
+                      name: 172.16.255.15:lte-172.16.255.16:lte
+                      sla_class_list: 0,1
+                      tunnel_color: lte:lte
+                      host_name: vm5
+                      id: IuBG_HEB_JLsavezVkiZ
+                    pageInfo:
+                      startTime: '1589073783045'
+                      endTime: '1589072535795'
+                      count: 15
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: default
+  /statistics/system/stats/aggregation:
+    post:
+      tags:
+      - Monitoring - System Status Stats
+      description: Get aggregated data based on input query and filters. The data can be filtered on time and other unique parameters based upon necessity and intended usage
+      operationId: getPostAggregationDataByQuery_MonitoringSystemStatusStats_3604
+      requestBody:
+        description: Stats query string
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              query string: {}
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                query string: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: default,dca
+    get:
+      tags:
+      - Monitoring - System Status Stats
+      description: Get aggregated data based on input query and filters. The data can be filtered on time and other unique parameters based upon necessity and intended usage
+      operationId: getAggregationDataByQuery_MonitoringSystemStatusStats_3603
+      parameters:
+      - name: query
+        in: query
+        description: Query filter
+        schema:
+          type: string
+        examples:
+          query string: {}
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                query string: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: default
+  /statistics/system/stats/csv:
+    get:
+      tags:
+      - Monitoring - System Status Stats
+      description: Get raw data with optional query as CSV
+      operationId: getStatDataRawDataAsCSV_MonitoringSystemStatusStats_2803
+      parameters:
+      - name: query
+        in: query
+        description: Query string
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '24'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+      responses:
+        '200':
+          description: Success
+          content:
+            text/csv:
+              schema:
+                type: string
+              examples:
+                Search result in csv format:
+                  description: Search result in csv format
+                  value: blob:https://<vmanageIP>/82c972bc-f9b3-4cce-bb70-1e1b033ef1cd
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: default
+  /statistics/system/stats/doccount:
+    get:
+      tags:
+      - Monitoring - System Status Stats
+      description: Get response count of a query
+      operationId: getCount_MonitoringSystemStatusStats_3303
+      parameters:
+      - name: query
+        in: query
+        description: Query
+        required: true
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '24'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Query result count:
+                  description: Query result count
+                  value:
+                    count: 17193
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+    post:
+      tags:
+      - Monitoring - System Status Stats
+      description: Get response count of a query
+      operationId: getCountPost_MonitoringSystemStatusStats_3304
+      requestBody:
+        description: Query
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Query:
+                description: Query
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '24'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Query result count:
+                  description: Query result count
+                  value:
+                    count: 9642
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /statistics/system/stats/fields:
+    get:
+      tags:
+      - Monitoring - System Status Stats
+      description: Get fields and type
+      operationId: getStatDataFields_MonitoringSystemStatusStats_3103
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+              - dataType: string
+                property: mac
+              - dataType: string
+                property: vap
+              - dataType: number
+                property: rssi
+              - dataType: string
+                property: mode
+              - dataType: number
+                property: bandwidth
+              - dataType: string
+                property: data_security
+              - dataType: number
+                property: rx_rate
+              - dataType: string
+                property: assoc_time
+              - dataType: date
+                property: entry_time
+              - dataType: date
+                property: statcycletime
+              - dataType: string
+                property: ssid
+              - dataType: number
+                property: vip_idx
+              - dataType: date
+                property: vip_time
+              - dataType: string
+                property: vdevice_name
+              - dataType: string
+                property: host_name
+              - dataType: string
+                property: device_model
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /statistics/system/stats/page:
+    get:
+      tags:
+      - Monitoring - System Status Stats
+      description: Get stats raw data
+      operationId: getStatsPaginationRawData_MonitoringSystemStatusStats_2903
+      parameters:
+      - name: query
+        in: query
+        description: Query string
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '24'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+      - name: scrollId
+        in: query
+        description: ES scroll Id
+        schema:
+          type: string
+        example: DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAOIWZ1NQbXpvQ29Uc0stNzZ2UzlwTEREUQ==
+      - name: count
+        in: query
+        description: Result size
+        schema:
+          type: integer
+          format: int64
+        example: 10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Search result:
+                  description: Search result
+                  value:
+                    data:
+                    - mem_used: 19407626240
+                      disk_avail: 9305948160
+                      device_model: vmanage
+                      mem_cached: 6740430848
+                      mem_util: 0.59
+                      min1_avg: 0.92
+                      disk_used: 5789007872
+                      statcycletime: 1647394800045
+                      tenant: 57501bad-32a7-4f52-8f54-8547dcd7403e
+                      entry_time: 1647393870251
+                      runningp: 0
+                      cpu_user: 8.63
+                      cpu_idle_new: 88.14
+                      vip_time: 1647393870252
+                      min15_avg: 1.08
+                      totalp: 2427
+                      cpu_idle: 88.14
+                      mem_buffers: 892911616
+                      cpu_system: 3.23
+                      vmanage_system_ip: 169.254.10.2
+                      min5_avg: 1.07
+                      cpu_min1_avg: 0.115
+                      mem_free: 5716930560
+                      vdevice_name: 172.16.255.201
+                      vip_idx: 82
+                      cpu_min15_avg: 0.135
+                      system_ip: 172.16.255.201
+                      cpu_user_new: 8.63
+                      cpu_system_new: 3.23
+                      host_name: vm201
+                      cpu_min5_avg: 0.13375
+                      id: 4YphkH8BPIGvVbrdtzXi
+                    - mem_used: 19534016512
+                      disk_avail: 9304268800
+                      device_model: vmanage
+                      mem_cached: 6747897856
+                      mem_util: 0.6
+                      min1_avg: 1.14
+                      disk_used: 5790687232
+                      statcycletime: 1647394800046
+                      tenant: 57501bad-32a7-4f52-8f54-8547dcd7403e
+                      entry_time: 1647394110479
+                      runningp: 0
+                      cpu_user: 5.53
+                      cpu_idle_new: 91.49
+                      vip_time: 1647394110479
+                      min15_avg: 1.1
+                      totalp: 2323
+                      cpu_idle: 91.49
+                      mem_buffers: 902213632
+                      cpu_system: 2.97
+                      vmanage_system_ip: 169.254.10.2
+                      min5_avg: 1.14
+                      cpu_min1_avg: 0.1425
+                      mem_free: 5573771264
+                      vdevice_name: 172.16.255.201
+                      vip_idx: 86
+                      cpu_min15_avg: 0.1375
+                      system_ip: 172.16.255.201
+                      cpu_user_new: 5.53
+                      cpu_system_new: 2.97
+                      host_name: vm201
+                      cpu_min5_avg: 0.1425
+                      id: 5YphkH8BPIGvVbrdtzXi
+                    pageInfo:
+                      startTime: '1647394800045'
+                      endTime: '1647394800047'
+                      scrollId: DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAf4WcUlydS1uYzlTdXFhR05GTlBpTFJ4QQ==
+                      hasMoreData: true
+                      count: 2
+                      totalCount: 11140
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Device Monitoring-read
+    post:
+      tags:
+      - Monitoring - System Status Stats
+      description: Get stats raw data
+      operationId: getPostStatsPaginationRawData_MonitoringSystemStatusStats_2904
+      parameters:
+      - name: scrollId
+        in: query
+        description: ES scroll Id
+        schema:
+          type: string
+        example: DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAOIWZ1NQbXpvQ29Uc0stNzZ2UzlwTEREUQ==
+      - name: count
+        in: query
+        description: Result size
+        schema:
+          type: integer
+          format: int64
+        example: 10
+      requestBody:
+        description: Stats query string
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Stats query string:
+                description: Stats query string
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '24'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Search result:
+                  description: Search result
+                  value:
+                    data:
+                    - mem_used: 19407626240
+                      disk_avail: 9305948160
+                      device_model: vmanage
+                      mem_cached: 6740430848
+                      mem_util: 0.59
+                      min1_avg: 0.92
+                      disk_used: 5789007872
+                      statcycletime: 1647394800045
+                      tenant: 57501bad-32a7-4f52-8f54-8547dcd7403e
+                      entry_time: 1647393870251
+                      runningp: 0
+                      cpu_user: 8.63
+                      cpu_idle_new: 88.14
+                      vip_time: 1647393870252
+                      min15_avg: 1.08
+                      totalp: 2427
+                      cpu_idle: 88.14
+                      mem_buffers: 892911616
+                      cpu_system: 3.23
+                      vmanage_system_ip: 169.254.10.2
+                      min5_avg: 1.07
+                      cpu_min1_avg: 0.115
+                      mem_free: 5716930560
+                      vdevice_name: 172.16.255.201
+                      vip_idx: 82
+                      cpu_min15_avg: 0.135
+                      system_ip: 172.16.255.201
+                      cpu_user_new: 8.63
+                      cpu_system_new: 3.23
+                      host_name: vm201
+                      cpu_min5_avg: 0.13375
+                      id: 4YphkH8BPIGvVbrdtzXi
+                    - mem_used: 19534016512
+                      disk_avail: 9304268800
+                      device_model: vmanage
+                      mem_cached: 6747897856
+                      mem_util: 0.6
+                      min1_avg: 1.14
+                      disk_used: 5790687232
+                      statcycletime: 1647394800046
+                      tenant: 57501bad-32a7-4f52-8f54-8547dcd7403e
+                      entry_time: 1647394110479
+                      runningp: 0
+                      cpu_user: 5.53
+                      cpu_idle_new: 91.49
+                      vip_time: 1647394110479
+                      min15_avg: 1.1
+                      totalp: 2323
+                      cpu_idle: 91.49
+                      mem_buffers: 902213632
+                      cpu_system: 2.97
+                      vmanage_system_ip: 169.254.10.2
+                      min5_avg: 1.14
+                      cpu_min1_avg: 0.1425
+                      mem_free: 5573771264
+                      vdevice_name: 172.16.255.201
+                      vip_idx: 86
+                      cpu_min15_avg: 0.1375
+                      system_ip: 172.16.255.201
+                      cpu_user_new: 5.53
+                      cpu_system_new: 2.97
+                      host_name: vm201
+                      cpu_min5_avg: 0.1425
+                      id: 5YphkH8BPIGvVbrdtzXi
+                    pageInfo:
+                      startTime: '1647394800045'
+                      endTime: '1647394800047'
+                      scrollId: DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAf4WcUlydS1uYzlTdXFhR05GTlBpTFJ4QQ==
+                      hasMoreData: true
+                      count: 2
+                      totalCount: 11140
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Device Monitoring-read
+  /statistics/system/stats/query/fields:
+    get:
+      tags:
+      - Monitoring - System Status Stats
+      description: Get query fields
+      operationId: getStatQueryFields_MonitoringSystemStatusStats_3703
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Query result count:
+                  description: Query result count
+                  value:
+                    data:
+                    - property: entry_time
+                      name: Event Time
+                      isRequired: true
+                      dataType: date
+                      fieldData:
+                        type: dateList
+                      options:
+                      - key: last_1_hour
+                        value: Last 1 hour
+                        number: '1'
+                        enableDateFields: false
+                      - key: last_3_hours
+                        value: Last 3 hours
+                        number: '3'
+                        enableDateFields: false
+                      - key: last_6_hours
+                        value: Last 6 hours
+                        number: '6'
+                        enableDateFields: false
+                      - key: last_12_hours
+                        value: Last 12 hours
+                        number: '12'
+                        enableDateFields: false
+                      - key: last_24_hours
+                        value: Last 24 hours
+                        number: '24'
+                        enableDateFields: false
+                        isSelected: true
+                      - key: last_168_hours
+                        value: Last 7 days
+                        number: '168'
+                        enableDateFields: false
+                      - key: custom
+                        value: Custom
+                        enableDateFields: true
+                    - property: vdevice_name
+                      name: Device name
+                      isRequired: true
+                      multiSelect: false
+                      dataType: string
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true

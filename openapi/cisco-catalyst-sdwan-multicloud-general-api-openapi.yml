@@ -1,0 +1,1328 @@
+openapi: 3.2.0
+info:
+  title: Others MultiCloud - General API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: MultiCloud - General
+paths:
+  /multicloud/audit:
+    post:
+      tags:
+      - MultiCloud - General
+      description: Call an audit
+      operationId: audit
+      requestBody:
+        description: Audit
+        content:
+          application/json:
+            schema:
+              required:
+              - cloudType
+              type: object
+              properties:
+                cloudType:
+                  pattern: ^[a-zA-Z_]+$
+                  type: string
+                issuesToSync:
+                  maxItems: 2147483647
+                  minItems: 1
+                  type: array
+                  items:
+                    required:
+                    - name
+                    - region
+                    - reportType
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      region:
+                        pattern: ^[a-zA-Z0-9_./\-]+$
+                        type: string
+                      reportType:
+                        type: string
+                    $$ref: '#/components/schemas/AuditFixIssuesToSync'
+                region:
+                  pattern: ^[a-zA-Z0-9_./\-]+$
+                  type: string
+              $$ref: '#/components/schemas/AuditFix'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: 6c723f65-9106-4f43-9d2b-a033a39353b3
+                description: Task id for polling status
+                $$ref: '#/components/schemas/Taskid'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    get:
+      tags:
+      - MultiCloud - General
+      description: Call an audit with dry run
+      operationId: auditDryRun
+      parameters:
+      - name: cloudType
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - AWS
+          - AWS_GOVCLOUD
+          - AZURE
+          - AZURE_GOVCLOUD
+          - GCP
+      - name: cloudRegion
+        in: query
+        schema:
+          pattern: ^[a-zA-Z0-9_./\-]+$
+          type: string
+      - name: refresh
+        in: query
+        schema:
+          pattern: ^(true|false)$
+          type: string
+          default: 'true'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                In Sync:
+                  description: In Sync
+                  value:
+                    auditStatus: IN_SYNC
+                    canFix: true
+                    auditReport: []
+                Out Of Sync:
+                  description: Out Of Sync
+                  value:
+                    auditStatus: OUT_OF_SYNC
+                    canFix: true
+                    auditReport:
+                    - status: IN_SYNC
+                      reportType: GCR
+                      region: us-west1
+                      name: S2C_GCR
+                      details: []
+                    - status: IN_SYNC
+                      reportType: GCR
+                      region: us-west1
+                      name: S2S_GCR
+                      details: []
+                    - status: IN_SYNC
+                      reportType: CGW_ROUTER
+                      region: global
+                      details: []
+                    - status: IN_SYNC
+                      reportType: HOSTVPC
+                      region: global
+                      details: []
+                    - status: IN_SYNC
+                      reportType: NCC_HUB
+                      region: global
+                      name: s2c-hub
+                      details: []
+                    - status: OUT_OF_SYNC_DRY_RUN
+                      reportType: NCC_HUB
+                      region: global
+                      name: s2s-hub
+                      details:
+                      - Spoke s2s-spoke in region us-west1 is missing.
+                    - status: IN_SYNC
+                      reportType: MAPPING
+                      details: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/connected-sites/{cloudType}:
+    get:
+      tags:
+      - MultiCloud - General
+      description: Get sites with connectivity to the cloud by cloud type
+      operationId: getCloudConnectedSites_MulticloudGeneral_3903
+      parameters:
+      - name: cloudType
+        in: path
+        required: true
+        schema:
+          pattern: ^[a-zA-Z_]+$
+          type: string
+      - name: cloudGatewayName
+        in: query
+        schema:
+          pattern: ^[\w.-]{1,128}$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  bfdSessions:
+                    type: integer
+                    format: int32
+                  bfdSessionsUp:
+                    type: integer
+                    format: int32
+                  device-model:
+                    type: string
+                  device-type:
+                    type: string
+                  host-name:
+                    type: string
+                  lastUpdated:
+                    type: number
+                  local-system-ip:
+                    type: string
+                  reachability:
+                    type: string
+                  site-id:
+                    type: string
+                  status:
+                    type: string
+                  statusBfd:
+                    type: string
+                  system-ip:
+                    type: string
+                  uuid:
+                    type: string
+                  version:
+                    type: string
+                $$ref: '#/components/schemas/ConnectedSitesResponse'
+              examples:
+                Connected Device list:
+                  description: Connected Device list
+                  value:
+                  - uuid: C8K-CA0D4066-0011-5A4E-D2F9-0F5E77BE2091
+                    host-name: gcp2
+                    system-ip: 6.6.2.2
+                    local-system-ip: 6.6.2.2
+                    site-id: '5'
+                    device-model: vedge-C8000V
+                    device-type: vedge
+                    reachability: reachable
+                    lastupdated: 1655169353069
+                    version: 17.06.02.0.2786
+                    bfdSessionsUp: 2
+                    bfdSessions: 4
+                    status: normal
+                    statusBfd: warning
+                  - uuid: C8K-A24CE0EB-D7D4-6920-0129-F7BAB204252C
+                    host-name: gcp1
+                    system-ip: 6.6.1.1
+                    local-system-ip: 6.6.1.1
+                    site-id: '5'
+                    device-model: vedge-C8000V
+                    device-type: vedge
+                    reachability: reachable
+                    lastupdated: 1655166680400
+                    version: 17.06.02.0.2786
+                    bfdSessionsUp: 2
+                    bfdSessions: 4
+                    status: normal
+                    statusBfd: warning
+                  - uuid: C8K-D4821270-27FF-A1B0-B902-12A321E3A550
+                    host-name: az1
+                    system-ip: 5.1.5.5
+                    local-system-ip: 5.1.5.5
+                    site-id: '5'
+                    device-model: vedge-C8000V
+                    device-type: vedge
+                    reachability: reachable
+                    lastupdated: 1655170239795
+                    version: 17.06.01a.0.298
+                    bfdSessionsUp: 2
+                    bfdSessions: 4
+                    status: normal
+                    statusBfd: warning
+                  - uuid: C8K-2F69B355-2B3D-2801-EB48-F44789422299
+                    host-name: az2
+                    system-ip: 5.6.6.6
+                    local-system-ip: 5.6.6.6
+                    site-id: '6'
+                    device-model: vedge-C8000V
+                    device-type: vedge
+                    reachability: reachable
+                    lastupdated: 1655170234517
+                    version: 17.06.01a.0.298
+                    bfdSessionsUp: 2
+                    bfdSessions: 4
+                    status: normal
+                    statusBfd: warning
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/corenetworkpolicy:
+    get:
+      tags:
+      - MultiCloud - General
+      description: Get AWS Cloudwan core network policy
+      operationId: getCwanCoreNetworkPolicy
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  changeSetState:
+                    type: string
+                    example: EXECUTION_SUCCEEDED
+                  coreNetworkId:
+                    type: string
+                    example: core-network-0008d82310d17b86b
+                  createdAt:
+                    type: string
+                    example: Dec.16, 2022 04:16 UTC
+                  description:
+                    type: string
+                    example: Core Network Policy
+                  policyAlias:
+                    type: string
+                    example: LIVE, LATEST
+                  policyData:
+                    type: string
+                    example: StringifiedJsonPolicyData
+                  policyVersionId:
+                    type: number
+                    example: 19
+                $$ref: '#/components/schemas/CoreNetworkPolicyResponse'
+              examples:
+                Core Network Policy Response:
+                  description: Core Network Policy Response
+                  value: "{\n\"coreNetworkId\": \"core-network-0008d82310d17b86b\",\n\"policyVersionId\": 19, \n\"policyAlias\": \"LIVE, LATEST\",\n\"description\": \"Core Network Policy\",\n\"createdAt\": \"Dec.16, 2022 04:16 UTC\",\n\"changeSetState\": \"EXECUTION_SUCCEEDED\",\n\"policyData\": { \"version\": \"2021.12\" }\" \n}"
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/device:
+    get:
+      tags:
+      - MultiCloud - General
+      description: Get available WAN edge devices
+      operationId: getWanDevices
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  configuredHostName:
+                    type: string
+                    example: aws-test2
+                  configuredSystemIp:
+                    type: string
+                    example: 9.1.1.2
+                  deviceModel:
+                    type: string
+                    example: vedge-C8000V
+                  isPaygUuid:
+                    type: boolean
+                    example: false
+                  uuid:
+                    type: string
+                    example: C8K-4B68E23F-B24F-EDE8-05DD-B36EAA14C9C1
+                $$ref: '#/components/schemas/WanEdgeDevicesResponse'
+              examples:
+                List of available WAN devices:
+                  description: List of available WAN devices
+                  value:
+                  - configuredHostname: aws-test2
+                    deviceModel: vedge-C8000V
+                    uuid: C8K-4B68E23F-B24F-EDE8-05DD-B36EAA14C9C1
+                    configuredSystemIP: 9.1.1.3
+                    isPaygUuid: false
+                  - configuredHostname: aws-test
+                    deviceModel: vedge-C8000V
+                    uuid: C8K-1FCEF03D-1091-497B-3BA1-7FD24C4CE957
+                    configuredSystemIP: 9.1.1.2
+                    isPaygUuid: false
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/devices/{cloudType}:
+    get:
+      tags:
+      - MultiCloud - General
+      description: Get cloud devices by cloud type
+      operationId: getCloudDevices_MulticloudGeneral_3103
+      parameters:
+      - name: cloudType
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - AWS
+          - AWS_GOVCLOUD
+          - AZURE
+          - AZURE_GOVCLOUD
+          - GCP
+      - name: cloudGatewayName
+        in: query
+        schema:
+          pattern: ^[\w.-]{1,128}$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cloudGatewayName:
+                    type: string
+                  configStatusMessage:
+                    type: string
+                  configuredSystemIP:
+                    type: string
+                  device-model:
+                    type: string
+                  device-type:
+                    type: string
+                  host-name:
+                    type: string
+                  lastUpdated:
+                    type: number
+                  local-system-ip:
+                    type: string
+                  reachability:
+                    type: string
+                  site-id:
+                    type: string
+                  status:
+                    type: string
+                  system-ip:
+                    type: string
+                  uptime-date:
+                    type: number
+                  uuid:
+                    type: string
+                  version:
+                    type: string
+                $$ref: '#/components/schemas/DeviceInfoExtendedResponse'
+              examples:
+                Device list for cloudType:
+                  description: Device list for cloudType
+                  value:
+                  - cloudGatewayName: az-test
+                    uuid: C8K-2F69B355-2B3D-2801-EB48-F44789422299
+                    host-name: az2
+                    system-ip: 5.6.6.6
+                    local-system-ip: 5.6.6.6
+                    site-id: '6'
+                    configuredSystemIP: 5.6.6.6
+                    device-model: vedge-C8000V
+                    device-type: vedge
+                    configStatusMessage: Out of Sync
+                    reachability: reachable
+                    version: 17.06.01a.0.298
+                    lastupdated: 1655168711688
+                    uptime-date: 1655165580000
+                    status: normal
+                  - cloudGatewayName: az-test
+                    uuid: C8K-D4821270-27FF-A1B0-B902-12A321E3A550
+                    host-name: az1
+                    system-ip: 5.1.5.5
+                    local-system-ip: 5.1.5.5
+                    site-id: '5'
+                    configuredSystemIP: 5.1.5.5
+                    device-model: vedge-C8000V
+                    device-type: vedge
+                    configStatusMessage: In Sync
+                    reachability: reachable
+                    version: 17.06.01a.0.298
+                    lastupdated: 1655168712505
+                    uptime-date: 1655164800000
+                    status: normal
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/regions:
+    get:
+      tags:
+      - MultiCloud - General
+      description: Obtain all supported Cloud Service Provider (CSP) types
+      operationId: getCloudRegions
+      parameters:
+      - name: cloudType
+        in: query
+        schema:
+          type: string
+          enum:
+          - AWS
+          - AWS_GOVCLOUD
+          - AZURE
+          - AZURE_GOVCLOUD
+          - GCP
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    cloudType:
+                      type: string
+                    regionList:
+                      type: string
+                  $$ref: '#/components/schemas/GetRegions'
+              examples:
+                GCP Regions:
+                  description: GCP Regions
+                  value:
+                  - cloudType: GCP
+                    regionList:
+                      value:
+                      - asia-east1
+                      - asia-east2
+                      - asia-northeast1
+                      - asia-northeast2
+                      - asia-northeast3
+                      - asia-south1
+                      - asia-south2
+                      - asia-southeast1
+                      - asia-southeast2
+                      - australia-southeast1
+                      - australia-southeast2
+                      - europe-central2
+                      - europe-north1
+                      - europe-southwest1
+                      - europe-west1
+                      - europe-west2
+                      - europe-west3
+                      - europe-west4
+                      - europe-west6
+                      - europe-west8
+                      - europe-west9
+                      - northamerica-northeast1
+                      - northamerica-northeast2
+                      - southamerica-east1
+                      - southamerica-west1
+                      - us-central1
+                      - us-east1
+                      - us-east4
+                      - us-east5
+                      - us-west1
+                      - us-west2
+                      - us-west3
+                      - us-west4
+                Aws Regions:
+                  description: Aws Regions
+                  value:
+                  - cloudType: AWS
+                    regionList:
+                      value:
+                      - af-south-1
+                      - eu-north-1
+                      - ap-south-1
+                      - eu-west-3
+                      - eu-west-2
+                      - eu-south-1
+                      - eu-west-1
+                      - ap-northeast-3
+                      - ap-northeast-2
+                      - me-south-1
+                      - ap-northeast-1
+                      - sa-east-1
+                      - ca-central-1
+                      - ap-east-1
+                      - ap-southeast-1
+                      - ap-southeast-2
+                      - eu-central-1
+                      - ap-southeast-3
+                      - us-east-1
+                      - us-east-2
+                      - us-west-1
+                      - us-west-2
+                Aws GovCloud Regions:
+                  description: Aws GovCloud Regions
+                  value:
+                  - cloudType: AWS_GOVCLOUD
+                    regionList:
+                      value:
+                      - us-gov-west-1
+                      - us-gov-east-1
+                Azure Regions:
+                  description: Azure Regions
+                  value:
+                  - cloudType: AZURE
+                    regionList:
+                      value:
+                      - eastus
+                      - eastus2
+                      - southcentralus
+                      - westus2
+                      - westus3
+                      - australiaeast
+                      - southeastasia
+                      - northeurope
+                      - swedencentral
+                      - uksouth
+                      - westeurope
+                      - centralus
+                      - southafricanorth
+                      - centralindia
+                      - eastasia
+                      - japaneast
+                      - koreacentral
+                      - canadacentral
+                      - francecentral
+                      - germanywestcentral
+                      - norwayeast
+                      - switzerlandnorth
+                      - brazilsouth
+                      - eastus2euap
+                      - centralusstage
+                      - eastusstage
+                      - eastus2stage
+                      - northcentralusstage
+                      - southcentralusstage
+                      - westusstage
+                      - westus2stage
+                      - asia
+                      - asiapacific
+                      - australia
+                      - brazil
+                      - canada
+                      - europe
+                      - france
+                      - germany
+                      - global
+                      - india
+                      - japan
+                      - korea
+                      - norway
+                      - southafrica
+                      - switzerland
+                      - uae
+                      - uk
+                      - unitedstates
+                      - unitedstateseuap
+                      - eastasiastage
+                      - southeastasiastage
+                      - northcentralus
+                      - westus
+                      - jioindiawest
+                      - uaenorth
+                      - centraluseuap
+                      - westcentralus
+                      - southafricawest
+                      - australiacentral
+                      - australiacentral2
+                      - australiasoutheast
+                      - japanwest
+                      - jioindiacentral
+                      - koreasouth
+                      - southindia
+                      - westindia
+                      - canadaeast
+                      - francesouth
+                      - germanynorth
+                      - norwaywest
+                      - switzerlandwest
+                      - ukwest
+                      - uaecentral
+                      - brazilsoutheast
+                Azure GovCloud Regions:
+                  description: Azure GovCloud Regions
+                  value:
+                  - cloudType: AZURE_GOVCLOUD
+                    regionList:
+                      value:
+                      - usgovvirginia
+                      - global
+                      - usgovarizona
+                      - usdodcentral
+                      - usdodeast
+                      - usgoviowa
+                      - usgovtexas
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/sshkeys:
+    get:
+      tags:
+      - MultiCloud - General
+      description: Get ssh keyList for cloud type
+      operationId: getSshKeyList
+      parameters:
+      - name: cloudType
+        in: query
+        required: true
+        schema:
+          pattern: ^[a-zA-Z_]+$
+          type: string
+      - name: accountId
+        in: query
+        required: true
+        schema:
+          pattern: ^\d+$
+          type: string
+      - name: cloudRegion
+        in: query
+        required: true
+        schema:
+          pattern: ^[a-zA-Z0-9_./\-]+$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    sshKeyName:
+                      type: string
+                  $$ref: '#/components/schemas/SshKeyList'
+              examples:
+                sshKeyList:
+                  description: sshKeyList
+                  value:
+                  - sshKeyName: pp-newkp-oregon
+                  - sshKeyName: pp-newkp-oregon-2
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/statistics/interface/aggregation:
+    post:
+      tags:
+      - MultiCloud - General
+      description: Get aggregated data based on input query and filter. The data can be filtered on time and other unique parameters based upon necessity and intended usage
+      operationId: getPostAggregationDataByQuery_MulticloudGeneral_4404
+      requestBody:
+        description: Stats query string
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Stats Query String:
+                description: Stats Query String
+                value:
+                  query:
+                    field: latency
+                    type: long
+                    value:
+                    - '1'
+                    operator: greater
+                  fields:
+                  - latency
+                  aggregation:
+                    metrics:
+                    - property: latency
+                      type: avg
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  edgeBillingAccountInfoList:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        edgeBillingAccountId:
+                          type: string
+                          description: Interconnect billing account Id
+                          example: '12345'
+                        edgeBillingAccountName:
+                          type: string
+                          description: Interconnect billing account name
+                          example: Cisco IC
+                      description: Interconnect billing account Information
+                      $$ref: '#/components/schemas/InterconnectBillingAccountInfo'
+                $$ref: '#/components/schemas/InlineResponse2001'
+              examples:
+                Aggregated Search Result:
+                  description: Aggregated Search Result
+                  value:
+                    data:
+                    - latency: 0.6404125644631974
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/telemetry:
+    post:
+      tags:
+      - MultiCloud - General
+      description: Reports telemetry data
+      operationId: telemetry
+      requestBody:
+        description: telemetry
+        content:
+          application/json:
+            schema:
+              required:
+              - cloudType
+              type: object
+              properties:
+                cgwList:
+                  maxItems: 2147483647
+                  minItems: 1
+                  type: array
+                  items:
+                    type: string
+                cloudType:
+                  pattern: '[aA][zZ][uU][rR][eE]$'
+                  type: string
+                  example: AZURE
+              $$ref: '#/components/schemas/TelemetryRequests'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: 6c723f65-9106-4f43-9d2b-a033a39353b3
+                description: Task id for polling status
+                $$ref: '#/components/schemas/Taskid'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/types:
+    get:
+      tags:
+      - MultiCloud - General
+      description: Obtain all supported Cloud Service Provider (CSP) types
+      operationId: getCloudTypes
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                List of CloudTypes:
+                  description: List of CloudTypes
+                  value:
+                  - AWS
+                  - AWS_GOVCLOUD
+                  - GCP
+                  - AZURE
+                  - AZURE_GOVCLOUD
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/widget:
+    get:
+      tags:
+      - MultiCloud - General
+      description: Get All cloud widgets
+      operationId: getAllCloudWidgets
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                properties:
+                  empty:
+                    type: boolean
+                items:
+                  type: object
+                  properties:
+                    cgwDeviceSiteIds:
+                      type: array
+                      items:
+                        type: string
+                    cgwDeviceStatus:
+                      type: object
+                      properties:
+                        count:
+                          type: number
+                        name:
+                          type: string
+                        statusList:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              count:
+                                type: number
+                              message:
+                                type: string
+                              name:
+                                type: string
+                              status:
+                                type: string
+                            $$ref: '#/components/schemas/WidgetStatusStatusList'
+                        unreachableCount:
+                          type: number
+                      $$ref: '#/components/schemas/AllOfcloudWidgetCgwDeviceStatus'
+                    cgwSitesStatus:
+                      type: object
+                      properties:
+                        count:
+                          type: number
+                        name:
+                          type: string
+                        statusList:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              count:
+                                type: number
+                              message:
+                                type: string
+                              name:
+                                type: string
+                              status:
+                                type: string
+                            $$ref: '#/components/schemas/WidgetStatusStatusList'
+                      $$ref: '#/components/schemas/WidgetStatus'
+                    cgwStatus:
+                      type: object
+                      properties:
+                        count:
+                          type: number
+                        name:
+                          type: string
+                        statusList:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              count:
+                                type: number
+                              message:
+                                type: string
+                              name:
+                                type: string
+                              status:
+                                type: string
+                            $$ref: '#/components/schemas/WidgetStatusStatusList'
+                      $$ref: '#/components/schemas/WidgetStatus'
+                    cloudGatewaySolution:
+                      type: string
+                    cloudType:
+                      type: string
+                    numAccounts:
+                      type: number
+                    numTags:
+                      type: number
+                    numTunnels:
+                      type: number
+                    numVpcs:
+                      type: number
+                    numVpns:
+                      type: number
+                  $$ref: '#/components/schemas/CloudWidget'
+                $$ref: '#/components/schemas/Widgets'
+              examples:
+                Widgets:
+                  description: Widgets
+                  value:
+                    cloudType: AWS
+                    cgwStatus:
+                      name: Cloud Gateway
+                      count: 0
+                      statusList:
+                      - name: Cloud Gateway
+                        count: 0
+                        status: normal
+                        message: Cloud Gateways
+                      - name: Cloud Gateway
+                        count: 0
+                        status: warning
+                        message: Cloud Gateways with warning
+                      - name: Cloud Gateway
+                        count: 0
+                        status: error
+                        message: Cloud Gateways with error
+                    cgwDeviceStatus:
+                      name: Cloud Gateway Device
+                      count: 0
+                      unreachableCount: 0
+                      statusList:
+                      - name: Cloud Gateway Device
+                        count: 0
+                        status: normal
+                        message: Cloud Gateway devices
+                      - name: Cloud Gateway Device
+                        count: 0
+                        status: error
+                        message: Cloud Gateway devices with errors
+                    cgwSitesStatus:
+                      name: Cloud Gateway Sites
+                      count: 0
+                      statusList:
+                      - name: Cloud Gateway Sites
+                        count: 0
+                        status: error
+                        message: Cloud Gateway Sites with error
+                      - name: Cloud Gateway Sites
+                        count: 0
+                        status: warning
+                        message: Cloud Gateway Sites with warning
+                      - name: Cloud Gateway Sites
+                        count: 0
+                        status: normal
+                        message: Cloud Gateway Sites
+                    cloudGatewaySolution: tgw_tvpc
+                    numAccounts: 0
+                    numVpns: 0
+                    numTags: 0
+                    numVpcs: 0
+                    numTunnels: 0
+                    cgwDeviceSiteIds: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/widget/{cloudType}:
+    get:
+      tags:
+      - MultiCloud - General
+      description: Get cloud widget by cloud type
+      operationId: getCloudWidget
+      parameters:
+      - name: cloudType
+        in: path
+        required: true
+        schema:
+          pattern: ^[a-zA-Z_]+$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cgwDeviceSiteIds:
+                    type: array
+                    items:
+                      type: string
+                  cgwDeviceStatus:
+                    type: object
+                    properties:
+                      count:
+                        type: number
+                      name:
+                        type: string
+                      statusList:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            count:
+                              type: number
+                            message:
+                              type: string
+                            name:
+                              type: string
+                            status:
+                              type: string
+                          $$ref: '#/components/schemas/WidgetStatusStatusList'
+                      unreachableCount:
+                        type: number
+                    $$ref: '#/components/schemas/AllOfcloudWidgetCgwDeviceStatus'
+                  cgwSitesStatus:
+                    type: object
+                    properties:
+                      count:
+                        type: number
+                      name:
+                        type: string
+                      statusList:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            count:
+                              type: number
+                            message:
+                              type: string
+                            name:
+                              type: string
+                            status:
+                              type: string
+                          $$ref: '#/components/schemas/WidgetStatusStatusList'
+                    $$ref: '#/components/schemas/WidgetStatus'
+                  cgwStatus:
+                    type: object
+                    properties:
+                      count:
+                        type: number
+                      name:
+                        type: string
+                      statusList:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            count:
+                              type: number
+                            message:
+                              type: string
+                            name:
+                              type: string
+                            status:
+                              type: string
+                          $$ref: '#/components/schemas/WidgetStatusStatusList'
+                    $$ref: '#/components/schemas/WidgetStatus'
+                  cloudGatewaySolution:
+                    type: string
+                  cloudType:
+                    type: string
+                  numAccounts:
+                    type: number
+                  numTags:
+                    type: number
+                  numTunnels:
+                    type: number
+                  numVpcs:
+                    type: number
+                  numVpns:
+                    type: number
+                $$ref: '#/components/schemas/CloudWidget'
+              examples:
+                Widget:
+                  description: Widget
+                  value:
+                    cloudType: AWS
+                    cgwStatus:
+                      name: Cloud Gateway
+                      count: 0
+                      statusList:
+                      - name: Cloud Gateway
+                        count: 0
+                        status: normal
+                        message: Cloud Gateways
+                      - name: Cloud Gateway
+                        count: 0
+                        status: warning
+                        message: Cloud Gateways with warning
+                      - name: Cloud Gateway
+                        count: 0
+                        status: error
+                        message: Cloud Gateways with error
+                    cgwDeviceStatus:
+                      name: Cloud Gateway Device
+                      count: 0
+                      unreachableCount: 0
+                      statusList:
+                      - name: Cloud Gateway Device
+                        count: 0
+                        status: normal
+                        message: Cloud Gateway devices
+                      - name: Cloud Gateway Device
+                        count: 0
+                        status: error
+                        message: Cloud Gateway devices with errors
+                    cgwSitesStatus:
+                      name: Cloud Gateway Sites
+                      count: 0
+                      statusList:
+                      - name: Cloud Gateway Sites
+                        count: 0
+                        status: error
+                        message: Cloud Gateway Sites with error
+                      - name: Cloud Gateway Sites
+                        count: 0
+                        status: warning
+                        message: Cloud Gateway Sites with warning
+                      - name: Cloud Gateway Sites
+                        count: 0
+                        status: normal
+                        message: Cloud Gateway Sites
+                    cloudGatewaySolution: tgw_tvpc
+                    numAccounts: 0
+                    numVpns: 0
+                    numTags: 0
+                    numVpcs: 0
+                    numTunnels: 0
+                    cgwDeviceSiteIds: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/{cloudType}/config-group/{config-group-id}/topology:
+    get:
+      tags:
+      - MultiCloud - General
+      summary: Get Multicloud topology.
+      description: API to retrieve current Multicloud MultiCloud topology for the Config Group.
+      operationId: getMultiCloudConfigGroupTopology
+      parameters:
+      - name: cloudType
+        in: path
+        required: true
+        schema:
+          pattern: ^[a-zA-Z_]+$
+          type: string
+      - name: config-group-id
+        in: path
+        required: true
+        schema:
+          pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+          type: string
+      responses:
+        '200':
+          description: MultiCloud Config-Group Topology Response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    description: data list
+                    example:
+                    - MEGAPORT
+                    - EQUINIX
+                    - ATT
+                    items:
+                      type: string
+                      description: data
+                      example: MEGAPORT
+                $$ref: '#/components/schemas/InlineResponse200'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    put:
+      tags:
+      - MultiCloud - General
+      summary: Update Multicloud topology for the Config Group.
+      description: API to update current MultiCloud topology for the Config Group.
+      operationId: updateMultiCloudConfigGroupTopology
+      parameters:
+      - name: cloudType
+        in: path
+        required: true
+        schema:
+          pattern: ^[a-zA-Z_]+$
+          type: string
+      - name: config-group-id
+        in: path
+        required: true
+        schema:
+          pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+          type: string
+      responses:
+        '200':
+          description: MultiCloud Config-Group Topology Response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    description: data list
+                    example:
+                    - MEGAPORT
+                    - EQUINIX
+                    - ATT
+                    items:
+                      type: string
+                      description: data
+                      example: MEGAPORT
+                $$ref: '#/components/schemas/InlineResponse200'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

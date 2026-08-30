@@ -1,0 +1,106 @@
+openapi: 3.2.0
+info:
+  title: Others Jobs - Batch API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Jobs - Batch
+paths:
+  /jobs/batch:
+    post:
+      tags:
+      - Jobs - Batch
+      description: Batch processing multiple REST API calls
+      operationId: batchExecute
+      requestBody:
+        description: Payload for executing multiple APIs
+        content:
+          application/json:
+            schema:
+              required:
+              - data
+              type: object
+              properties:
+                auditLog:
+                  type: string
+                  description: AuditLog feature
+                data:
+                  type: array
+                  description: payload for a REST API
+                  items:
+                    type: object
+                    properties:
+                      description:
+                        type: string
+                        description: API description
+                      method:
+                        type: string
+                        description: HTTP Method
+                        enum:
+                        - POST
+                        - PUT
+                        - GET
+                        - DELETE
+                      payload:
+                        type: object
+                        description: JSON Payload for a REST API call
+                      uri:
+                        type: string
+                        example: /dataservice/settings/configuration/proxyHttpServer
+                    description: payload for a REST API
+                    $$ref: '#/components/schemas/BatchFlowData'
+                description:
+                  type: string
+                  description: Workflow description
+                jobkey:
+                  type: string
+                  description: Job Key
+                name:
+                  type: string
+                  description: Workflow name
+              description: Input to multiple REST API calls
+              $$ref: '#/components/schemas/BatchFlow'
+            examples:
+              Batched API calls:
+                description: Batched API calls
+                value: "{\n \"data\": [\n     {\n         \"uri\": \"/dataservice/settings/configuration/proxyHttpServer\",\n         \"method\": \"POST\",\n         \"payload\": {\n             \"proxy\": true,\n             \"proxyIp\": \"64.102.255.47\",\n             \"proxyPort\": \"80\",\n             \"NoProxyList\": \"169.254.8.1|::1|localhost|127.0.0.1\"\n         }\n     },\n     {\n         \"uri\": \"/dataservice/settings/configuration/proxyHttpServer\",\n         \"method\": \"PUT\",\n         \"payload\": {\n             \"proxy\": true,\n             \"proxyIp\": \"64.102.255.47\",\n             \"proxyPort\": \"80\",\n             \"NoProxyList\": \"169.254.6.1|::1|localhost|127.0.0.1\"\n         }\n     }\n ],\n}"
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                Batch API Response:
+                  description: Batch API Response
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

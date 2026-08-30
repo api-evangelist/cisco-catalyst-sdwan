@@ -1,0 +1,237 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - BGP API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - BGP
+paths:
+  /device/bgp/neighbors:
+    get:
+      tags:
+      - Real-Time Monitoring - BGP
+      description: Get BGP neighbors list (Real Time)
+      operationId: createBGPNeighborsList
+      parameters:
+      - name: vpn-id
+        in: query
+        description: VPN Id
+        schema:
+          type: string
+          enum:
+          - '0'
+          - '512'
+      - name: peer-addr
+        in: query
+        description: Peer address
+        schema:
+          type: string
+      - name: as
+        in: query
+        description: AS number
+        schema:
+          type: string
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                BGP neighbors list:
+                  description: BGP neighbors list
+                  value:
+                    data:
+                    - vdevice-name: 169.254.10.10
+                      afi: ipv4-unicast
+                      vpn-id: 10
+                      vdevice-host-name: vm3
+                      peer-addr: 20.20.20.20
+                      as: 200
+                      vdevice-dataKey: 169.254.10.10-10-20.20.20.20
+                      msg-rcvd: 0
+                      outQ: 0
+                      afi-id: 0
+                      lastupdated: 1642657118366
+                      msg-sent: 0
+                      state: active
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/bgp/routes:
+    get:
+      tags:
+      - Real-Time Monitoring - BGP
+      description: Get BGP routes list (Real Time)
+      operationId: createBGPRoutesList
+      parameters:
+      - name: vpn-id
+        in: query
+        description: VPN Id
+        schema:
+          type: string
+          enum:
+          - '0'
+          - '512'
+      - name: prefix
+        in: query
+        description: IP prefix
+        schema:
+          type: string
+      - name: nexthop
+        in: query
+        description: Next hop
+        schema:
+          type: string
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                BGP routes list:
+                  description: BGP routes list
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.15
+                      prefix: 10.20.24.0/24
+                      origin: origin-incomplete
+                      as-path: '10007'
+                      weight: '0'
+                      vpn-id: '1'
+                      vdevice-host-name: vm5
+                      nexthop: 10.20.24.17
+                      afi-safi: vpnv4-unicast
+                      path-id: '0'
+                      vdevice-dataKey: 172.16.255.15-1-vpnv4-unicast-10.20.24.0/24
+                      metric: '0'
+                      local-pref: '100'
+                      lastupdated: 1646989331657
+                      path-status: valid
+                    - vdevice-name: 172.16.255.15
+                      prefix: 10.20.24.0/24
+                      origin: origin-incomplete
+                      weight: '32768'
+                      vpn-id: '1'
+                      vdevice-host-name: vm5
+                      nexthop: 0.0.0.0
+                      afi-safi: vpnv4-unicast
+                      path-id: '0'
+                      vdevice-dataKey: 172.16.255.15-1-vpnv4-unicast-10.20.24.0/24
+                      metric: '0'
+                      local-pref: '100'
+                      lastupdated: 1646989331694
+                      path-status: bestpathvalid
+                    - vdevice-name: 172.16.255.15
+                      prefix: 172.16.255.117/32
+                      origin: origin-incomplete
+                      as-path: '10007'
+                      weight: '0'
+                      vpn-id: '1'
+                      vdevice-host-name: vm5
+                      nexthop: 10.20.24.17
+                      afi-safi: vpnv4-unicast
+                      path-id: '0'
+                      vdevice-dataKey: 172.16.255.15-1-vpnv4-unicast-172.16.255.117/32
+                      metric: '0'
+                      local-pref: '100'
+                      lastupdated: 1646989331735
+                      path-status: bestpathvalid
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/bgp/summary:
+    get:
+      tags:
+      - Real-Time Monitoring - BGP
+      description: Get BGP summary (Real Time)
+      operationId: createBGPSummary
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                BGP summary:
+                  description: BGP summary
+                  value:
+                    data:
+                    - local-site-of-origin: SoO:0:3
+                      vdevice-dataKey: 169.254.10.10-10
+                      bgp-router-identifier: 172.16.254.2
+                      peer-memory: '4816'
+                      vdevice-name: 169.254.10.10
+                      rib-memory: '0'
+                      lastupdated: 1642657523957
+                      total-peers: '1'
+                      vpn-id: 10
+                      vdevice-host-name: vm3
+                      rib-entries: '0'
+                      local-as: '100'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write

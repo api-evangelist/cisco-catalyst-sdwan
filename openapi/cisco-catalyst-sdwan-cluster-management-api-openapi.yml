@@ -1,0 +1,614 @@
+openapi: 3.2.0
+info:
+  title: Others Cluster Management API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Cluster Management
+paths:
+  /clusterManagement/clusterLocked:
+    get:
+      tags:
+      - Cluster Management
+      description: 'Check whether cluster is locked<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: checkIfClusterLocked
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Cluster lock:
+                  description: Cluster lock
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /clusterManagement/clusterworkflow/version:
+    get:
+      tags:
+      - Cluster Management
+      description: 'List vManages in the cluster<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: getClusterWorkflowVersion
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                clusterV2Enabled:
+                  description: clusterV2Enabled
+                  value: 'True'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /clusterManagement/configure:
+    post:
+      tags:
+      - Cluster Management
+      description: 'Configure vManage<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: configureVmanage
+      requestBody:
+        description: vManage server config
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              vManage server config:
+                description: vManage server config
+                value: {}
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /clusterManagement/connectedDevices/{vmanageIP}:
+    get:
+      tags:
+      - Cluster Management
+      description: 'Get connected device for vManage<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: getConnectedDevices
+      parameters:
+      - name: vmanageIP
+        in: path
+        description: vManage IP
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Devices:
+                  description: Devices
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /clusterManagement/health/details:
+    get:
+      tags:
+      - Cluster Management
+      description: 'Get cluster health check details<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: healthDetails
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Cluster health check detail:
+                  description: Cluster health check detail
+                  value: {}
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /clusterManagement/health/status:
+    get:
+      tags:
+      - Cluster Management
+      description: 'Get cluster health check details<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: healthStatusInfo
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Cluster health status info:
+                  description: Cluster health status info
+                  value: {}
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /clusterManagement/health/summary:
+    get:
+      tags:
+      - Cluster Management
+      description: 'Get cluster health check summary<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: healthSummary
+      parameters:
+      - name: isCached
+        in: query
+        description: Flag to enable cached result
+        schema:
+          type: boolean
+          default: false
+      - name: site-id
+        in: query
+        description: Optional site ID  to filter devices
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Cluster health check summary:
+                  description: Cluster health check summary
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /clusterManagement/host/health/status:
+    get:
+      tags:
+      - Cluster Management
+      description: 'Get vManage cluster health check details<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: hostHealthStatus
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                vManage cluster health status info:
+                  description: vManage cluster health status info
+                  value: {}
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /clusterManagement/iplist/{vmanageID}:
+    get:
+      tags:
+      - Cluster Management
+      description: 'Get configured IP addresses<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: getConfiguredIPList
+      parameters:
+      - name: vmanageID
+        in: path
+        description: vManage Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                vManage IP list:
+                  description: vManage IP list
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /clusterManagement/isready:
+    get:
+      tags:
+      - Cluster Management
+      description: 'Is cluster ready<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: isClusterReady
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Cluster state:
+                  description: Cluster state
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /clusterManagement/list:
+    get:
+      tags:
+      - Cluster Management
+      description: 'List vManages in the cluster<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: listVmanages
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                vManage server:
+                  description: vManage server
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /clusterManagement/nodeProperties:
+    get:
+      tags:
+      - Cluster Management
+      description: 'Get properties of vManage being added to  cluster<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: nodeProperties
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                vManage cluster properties:
+                  description: vManage cluster properties
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /clusterManagement/remove:
+    post:
+      tags:
+      - Cluster Management
+      description: 'Remove vManage from cluster<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: removeVmanage
+      requestBody:
+        description: vManage server info
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              vManage server info:
+                description: vManage server info
+                value: {}
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /clusterManagement/replicateAndRebalance:
+    put:
+      tags:
+      - Cluster Management
+      description: 'Initiate replication and rebalance of kafka topics<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: performReplicationAndRebalanceOfKafkaPartitions
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Kafka topics rebalance status:
+                  description: Kafka topics rebalance status
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /clusterManagement/setup:
+    put:
+      tags:
+      - Cluster Management
+      description: 'Update vManage cluster info<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: editVmanage
+      requestBody:
+        description: vManage cluster config
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              vManage cluster config:
+                description: vManage cluster config
+                value: "{\n   \"vmanageID\":\"0\",\n   \"deviceIP”:”10.0.1.38”,\n   \"username\":\"admin\",\n   \"password”:”password”,\n   \"persona\":\"COMPUTE_AND_DATA\",\n   \"services\":{\n      \"container-manager\":{\n         \"server\":false\n      }\n   }\n}"
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+      - Cluster Management
+      description: Add vManage to cluster
+      operationId: addVmanage
+      requestBody:
+        description: vManage cluster config
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              vManage cluster config:
+                description: vManage cluster config
+                value:
+                  deviceIP: 10.0.1.200
+                  username: admin
+                  password: password
+                  genCSR: false
+                  persona: COMPUTE_AND_DATA
+                  services:
+                    container-manager:
+                      server: false
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /clusterManagement/tenancy/mode:
+    get:
+      tags:
+      - Cluster Management
+      description: 'Get vManage tenancy mode<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: getTenancyMode
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                vManage tenancy mode:
+                  description: vManage tenancy mode
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+      - Cluster Management
+      description: Update vManage tenancy mode
+      operationId: setTenancyMode
+      requestBody:
+        description: Tenancy mode setting
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Tenancy mode:
+                description: Tenancy mode
+                value: {}
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /clusterManagement/tenantList:
+    get:
+      tags:
+      - Cluster Management
+      description: 'Get tenant list<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: getTenantsList
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Tenant:
+                  description: Tenant
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /clusterManagement/userCreds:
+    post:
+      tags:
+      - Cluster Management
+      description: 'Add or update user credentials for cluster operations<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: addOrUpdateUserCredentials
+      requestBody:
+        description: User credential
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              User credential:
+                description: User credential
+                value: {}
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /clusterManagement/vManage/details/{vmanageIP}:
+    get:
+      tags:
+      - Cluster Management
+      description: 'Get vManage detail<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: getVManageDetails
+      parameters:
+      - name: vmanageIP
+        in: path
+        description: vManage IP
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                vManage detail:
+                  description: vManage detail
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /clusterManagement/{tenantId}/connectedDevices/{vmanageIP}:
+    get:
+      tags:
+      - Cluster Management
+      description: 'Get connected device for vManage for a tenant<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: getConnectedDevicesPerTenant
+      parameters:
+      - name: tenantId
+        in: path
+        description: Tenant Id
+        required: true
+        schema:
+          type: string
+      - name: vmanageIP
+        in: path
+        description: vManage IP
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Devices:
+                  description: Devices
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

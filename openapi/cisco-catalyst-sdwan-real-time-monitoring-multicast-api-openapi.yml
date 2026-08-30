@@ -1,0 +1,227 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - Multicast API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - Multicast
+paths:
+  /device/multicast/replicator:
+    get:
+      tags:
+      - Real-Time Monitoring - Multicast
+      description: Get replicator list from device
+      operationId: createReplicatorList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Replicator list:
+                  description: Replicator list
+                  value:
+                    data:
+                    - vdevice-dataKey: 169.254.10.9
+                      vdevice-name: 169.254.10.9
+                      replicator-status: UP
+                      replicator-address: 172.16.254.1
+                      lastupdated: 1655109179818
+                      vpn-id: '10'
+                      vdevice-host-name: vm2
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/multicast/rpf:
+    get:
+      tags:
+      - Real-Time Monitoring - Multicast
+      description: Get RPF list from device
+      operationId: createRpfList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                RPF list:
+                  description: RPF list
+                  value:
+                    data:
+                    - vdevice-name: 172.16.254.1
+                      vdevice-host-name: vm2
+                      vpn-id: '1'
+                      rpf-address: 10.20.25.18
+                      rpf-status: resolved
+                      nexthop-count: '1'
+                      nbr-addr: '-'
+                      rpf-if-name: ge0/4
+                      rpf-tunnel: '-'
+                      vdevice-dataKey: 172.16.254.1
+                      lastupdated: 1644997246553
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/multicast/topology:
+    get:
+      tags:
+      - Real-Time Monitoring - Multicast
+      description: Get topology list from device
+      operationId: createTopologyList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Topology list:
+                  description: Topology list
+                  value:
+                    data:
+                    - vdevice-name: 172.16.254.1
+                      vdevice-host-name: vm2
+                      vpn-id: '1'
+                      group: 225.0.0.0
+                      source: 0.0.0.0
+                      join-type: (*,G)
+                      rp-address: 58.0.1.100
+                      replicator: 172.16.255.14
+                      upstream-neighbor: 172.16.255.14
+                      upstream-state: joined
+                      upstream-interface: 172.16.255.14
+                      up-time: 0:01:26:52
+                      up-time-date: 18 07 2022 16:26:52 A z
+                      expires: 0:00:00:31
+                      expires-date: 20 07 2022 16:26:52 A z
+                      oif-tunnel: '-'
+                      vdevice-dataKey: 172.16.254.1
+                      lastupdated: 1644997246553
+                    - vdevice-name: 172.16.254.1
+                      vdevice-host-name: vm2
+                      vpn-id: '1'
+                      group: 225.0.0.9
+                      source: 56.0.1.100
+                      join-type: (*,G)
+                      rp-address: '-'
+                      replicator: '-'
+                      upstream-neighbor: 56.0.1.100
+                      upstream-state: joined
+                      upstream-interface: ge0/0
+                      up-time: 0:16:26:52
+                      up-time-date: 18 07 2022 16:26:52 A z
+                      expires: 0:16:26:52
+                      expires-date: 20 07 2022 16:26:52 A z
+                      oif-tunnel: 172.16.255.14
+                      vdevice-dataKey: 172.16.254.1
+                      lastupdated: 1644997246553
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/multicast/tunnel:
+    get:
+      tags:
+      - Real-Time Monitoring - Multicast
+      description: Get PIM tunnel from device
+      operationId: createPimTunnelList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                PIM tunnel:
+                  description: PIM tunnel
+                  value:
+                    data:
+                    - tunnel-status: UP
+                      vdevice-dataKey: 169.254.10.10
+                      vdevice-name: 169.254.10.10
+                      replicator: 'no'
+                      lastupdated: 1643179140806
+                      vpn-id: '10'
+                      vdevice-host-name: vm3
+                      tunnel-address: 172.16.254.1
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write

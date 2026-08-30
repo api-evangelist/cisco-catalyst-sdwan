@@ -1,0 +1,180 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - Dns Defense API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - Dns Defense
+paths:
+  /device/dns/defense/device-registration:
+    get:
+      tags:
+      - Real-Time Monitoring - Dns Defense
+      description: Get Dns Defense Device Registration
+      operationId: getDnsDefenseDeviceRegistration
+      parameters:
+      - name: deviceId
+        in: query
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                required:
+                - data
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      required:
+                      - descr
+                      - device-id
+                      - lastupdated
+                      - ni-name
+                      - resp-code
+                      - tag
+                      - vdevice-dataKey
+                      - vdevice-host-name
+                      - vdevice-name
+                      type: object
+                      properties:
+                        descr:
+                          type: string
+                          example: Device Id received successfully
+                        device-id:
+                          type: string
+                          example: f338f11b041b85ce
+                        lastupdated:
+                          type: integer
+                          format: int64
+                          example: 1717400936511
+                        ni-name:
+                          type: string
+                          example: '222'
+                        resp-code:
+                          type: string
+                          example: dns-def-rc-201
+                        tag:
+                          type: string
+                          example: vpn222
+                        vdevice-dataKey:
+                          type: string
+                          example: 172.16.255.15-222-vpn222-f338f11b041b85ce-dns-def-rc-201
+                        vdevice-host-name:
+                          type: string
+                          example: vm5
+                        vdevice-name:
+                          type: string
+                          example: 172.16.255.15
+                      $$ref: '#/components/schemas/DeviceRegistrationItem'
+                $$ref: '#/components/schemas/DeviceRegistrationResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/dns/defense/info:
+    get:
+      tags:
+      - Real-Time Monitoring - Dns Defense
+      description: Get Dns Defense Info
+      operationId: getDnsDefenseInfo
+      parameters:
+      - name: deviceId
+        in: query
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                required:
+                - data
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      required:
+                      - dnscrypt
+                      - last-success
+                      - last-success-date
+                      - lastupdated
+                      - reg-done
+                      - reg-req
+                      - vdevice-dataKey
+                      - vdevice-host-name
+                      - vdevice-name
+                      type: object
+                      properties:
+                        dnscrypt:
+                          type: boolean
+                          example: true
+                        last-success:
+                          type: string
+                          example: '2025-10-29T04:11:40+00:00'
+                        last-success-date:
+                          type: integer
+                          format: int64
+                          example: 1761711100000
+                        lastupdated:
+                          type: integer
+                          format: int64
+                          example: 1762499456581
+                        reg-done:
+                          type: integer
+                          format: int32
+                          example: 10
+                        reg-req:
+                          type: integer
+                          format: int32
+                          example: 10
+                        vdevice-dataKey:
+                          type: string
+                          example: 172.16.255.15-10-10-True-2025-10-29T05:41:40+00:00
+                        vdevice-host-name:
+                          type: string
+                          example: vm5
+                        vdevice-name:
+                          type: string
+                          example: 172.16.255.15
+                      $$ref: '#/components/schemas/DnsDefenseInfoItem'
+                $$ref: '#/components/schemas/DnsDefenseInfoResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

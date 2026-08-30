@@ -1,0 +1,258 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - Tcpproxy API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - Tcpproxy
+paths:
+  /device/tcpproxy/statistics:
+    get:
+      tags:
+      - Real-Time Monitoring - Tcpproxy
+      description: Get tcp proxy statistics from device
+      operationId: getTcpProxyStatistics
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Tcp proxy statistics:
+                  description: Tcp proxy statistics
+                  value:
+                    data:
+                    - syn-purged-enq: '0'
+                      tot-fin-processed: '0'
+                      enable-rx-called: '0'
+                      tot-ev-tx-enable-process: '0'
+                      tot-send-fail: '0'
+                      tot-ssl-trig-rst-wkq-fail: '0'
+                      tcpp-aoim-sync-done: '0'
+                      tot-tcp-buf-sent: '0'
+                      tot-ssl-pause-called: '0'
+                      tot-ssl2svc-buf-enq: '0'
+                      tcp-flow-stats-del-fail: '0'
+                      enable-rx-queued: '0'
+                      tot-tcp-buf-rcvd: '0'
+                      tot-bytes-read-less-512: '0'
+                      tot-dre-resume-to-be-sent: '0'
+                      sync-fail-marked-cleanup: '0'
+                      sync-fail-entry-invalid: '0'
+                      tot-clean-server-data-q: '0'
+                      tot-ssl-resume-done: '0'
+                      ssl-init-failure: '0'
+                      tot-bytes-read-less-1024: '0'
+                      tot-tcp-buf-alloc: '0'
+                      pre-list-enq-failed: '0'
+                      tot-actual-pause-done: '0'
+                      tot-tcp-flow-clean-done: '0'
+                      tot-sc-reset-rcvd: '0'
+                      tot-rx-ssl-pause-process: '0'
+                      tot-async-event-send: '0'
+                      tot-bytes-read-less-4096: '0'
+                      vpath-cleanup-from-nmrx: '0'
+                      tcp-flow-entries-created: '0'
+                      tot-ssl-pause-done: '0'
+                      tot-tx-async-event-proc: '0'
+                      tcp-flow-stats-add-fail: '0'
+                      unif-logg-deq-no-space: '0'
+                      vdevice-name: 169.254.10.12
+                      tot-snort-resume-done: '0'
+                      tot-pause-count-buf: '0'
+                      tot-snort-reset-init: '0'
+                      tot-buf-128k-alloc-failed: '0'
+                      unified-logging-msg-recvd: '0'
+                      tot-bytes-read-less-2048: '0'
+                      wcapi-svc-flow-delete-f: '0'
+                      sync-flow-mismatch: '0'
+                      num-stack-cb-null-ctx: '0'
+                      tot-tcp-buf-128k-alloc: '0'
+                      tot-clean-flow-ign: '0'
+                      cur-rx-epoll-count: '0'
+                      cur-tx-epoll-count: '0'
+                      curr-val-tcp-flow-entries: '0'
+                      unified-logg-deq-succ: '0'
+                      tx-enq-failure-count: '0'
+                      tot-reset-processed: '0'
+                      vpath-cleanup-from-evlib: '0'
+                      tot-en-rx-sock-stk-cl-svr: '0'
+                      tot-rx-dre-pause-process: '0'
+                      unified-logg-data-too-long: '0'
+                      sync-fail-nat-entry-null: '0'
+                      tot-tcp-reset-rcvd: '0'
+                      current-conn-count: '0'
+                      tot-ssl-fin-rcvd: '0'
+                      tot-tcp-buf-16k-alloc: '0'
+                      tot-buf-16k-alloc-failed: '0'
+                      tot-ssl-server-init: '0'
+                      vdevice-host-name: vm5
+                      tot-sc-fin-rcvd: '0'
+                      sync-fail-entry-null: '0'
+                      tot-ssl-buf-free: '0'
+                      tot-buff-drop-sock-closed: '0'
+                      enable-rx-done: '0'
+                      tot-page-alloc-retry: '0'
+                      tot-resume-count-buf: '0'
+                      lastupdated: 1646012087379
+                      tx-enqueue-drops-close: '0'
+                      unified-logg-enq-succ: '0'
+                      proxy-cleanup-enq: '0'
+                      tot-ssl-reset-init: '0'
+                      tot-buff-drop-sock-not-av: '0'
+                      conn-failed: '0'
+                      tot-dre-resume-done: '0'
+                      tcpp-aoim-sync-error: '0'
+                      timer-expire-cleanup-enq: '0'
+                      tcp-flow-inv-entries: '0'
+                      other-cleanup-enq: '0'
+                      tot-page-alloc-failed: '0'
+                      tot-ssl2tcp-buf-enq: '0'
+                      tot-clean-add-wk-q-fail: '0'
+                      tot-dre-resume-msg-sent: '0'
+                      tot-uhi-munmap: '2768'
+                      pre-list-enq: '0'
+                      tot-fin-ign-fd-close: '0'
+                      tot-buf-32k-alloc-failed: '0'
+                      flow-drop-sn-gbl-health-y: '0'
+                      stack-cleanup-enq: '0'
+                      pre-remove-cleanup: '0'
+                      tot-en-rx-sock-stk-cl-clnt: '0'
+                      total-conns: '0'
+                      tot-ev-resume-process: '0'
+                      tot-svc2ssl-buf-enq: '0'
+                      tot-page-free: '0'
+                      conn-in-progress: '0'
+                      tot-dre-close-init: '0'
+                      clean-req-watcher-called: '1104871'
+                      tot-async-event-process: '0'
+                      tot-svc-reset-processed: '0'
+                      tot-page-alloc-fail-size: '0'
+                      flows-drop-wcapi-health-y: '0'
+                      tot-rx-snort-pause-proc: '0'
+                      pre-remove-err-timer: '0'
+                      tot-uhi-mmap: '88936'
+                      tot-page-alloc: '0'
+                      tot-cleanup-add-to-wk-q: '0'
+                      stack-cleanup-enq-failed: '0'
+                      pre-remove-accept: '0'
+                      tot-tcp2ssl-buf-enq: '0'
+                      tot-ssl-clean-addwkq-fail: '0'
+                      tot-ssl-buf-alloc: '0'
+                      tot-actual-resume-done: '0'
+                      tot-pause-count: '0'
+                      wcapi-svc-flow-create-f: '0'
+                      enable-rx-enq-failed: '0'
+                      flow-drop-sn-inst-health-y: '0'
+                      max-conns: '0'
+                      proxy-cleanup-enq-failed: '0'
+                      tot-ssl-reset-rcvd: '0'
+                      pre-rem-err-accept: '0'
+                      tot-ssl-reset-rcvd-sc: '0'
+                      wcapi-svc-flow-close-f: '0'
+                      other-cleanup-enq-failed: '0'
+                      tot-ssl-fin-rcvd-sc: '0'
+                      tot-tcp-buf-free: '0'
+                      tot-resume-count: '0'
+                      tot-tcp-fin-rcvd: '0'
+                      tot-tcp-buf-32k-alloc: '0'
+                      tot-clean-msg-rcvd: '0'
+                      tot-clean-client-data-q: '0'
+                      enable-rx-failed: '0'
+                      curr-tcp-flow-entries: '0'
+                      syn-purge-enq-failed: '0'
+                      tot-tx-async-event-send: '0'
+                      wcapi-svc-data-send-f: '0'
+                      tcp-flow-entries-deleted: '0'
+                      timer-ex-clean-enq-failed: '0'
+                      pre-clean-time-update: '0'
+                      vdevice-dataKey: 169.254.10.12
+                      tot-ssl-buf-alloc-failed: '0'
+                      tot-ssl-resume-called: '0'
+                      tcpp-aoim-sync-started: '0'
+                      tot-dre-pause-done: '0'
+                      tot-tcp-buf-alloc-failed: '0'
+                      tot-snort-pause-done: '0'
+                      sync-fail-entry-inuse: '0'
+                      syncache-add-done: '0'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/tcpproxy/status:
+    get:
+      tags:
+      - Real-Time Monitoring - Tcpproxy
+      description: Get tcp proxy status from device
+      operationId: getTcpProxyStatus
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Tcp proxy status:
+                  description: Tcp proxy status
+                  value:
+                    data:
+                    - vdevice-dataKey: 169.254.10.12
+                      vdevice-name: 169.254.10.12
+                      oper-state: running
+                      sng-name: SNG-APPQOE
+                      lastupdated: 1646011762240
+                      sng-addr: 192.168.2.2
+                      vdevice-host-name: vm5
+                      vpg-name: VirtualPortGroup2
+                      vpg-addr: 192.168.2.1
+                      vpg-netmask: 255.255.255.0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write

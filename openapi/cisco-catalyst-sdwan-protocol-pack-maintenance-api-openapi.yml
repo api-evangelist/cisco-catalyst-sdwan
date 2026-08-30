@@ -1,0 +1,857 @@
+openapi: 3.2.0
+info:
+  title: Others Protocol Pack Maintenance API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Protocol Pack Maintenance
+paths:
+  /sdavc/protocol-pack:
+    get:
+      tags:
+      - Protocol Pack Maintenance
+      description: Get all protocol packs details
+      operationId: getAllProtocolPacks
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Response:
+                  description: Response
+                  value:
+                  - file-name: pp-adv-cat8k-179.1a-46-64.0.0.pack
+                    version: 64.0.0
+                    device-version: 179.1a
+                    nbar-engine-version: '46'
+                    device-model: cat8k
+                    license-type: adv
+                    is-latest: false
+                    is-upload-confirmed-by-user: true
+                    numeric-version: 64
+                    uploaded-by-user-name: system-uploaded
+                    system-pack-type: base
+                    upload-source: system-uploaded
+                    last-updated-time: 1706824339984
+                    created-time: 1706293228793
+                    upload-confirmed-time: 1706293228847
+                  - file-name: pp-adv-cat8k-1712.1a-49-68.0.0.pack
+                    version: 68.0.0
+                    device-version: 1712.1a
+                    nbar-engine-version: '49'
+                    device-model: cat8k
+                    license-type: adv
+                    is-latest: true
+                    is-upload-confirmed-by-user: true
+                    numeric-version: 68
+                    uploaded-by-user-name: system-uploaded
+                    system-pack-type: default
+                    upload-source: system-uploaded
+                    last-updated-time: 1706824341120
+                    created-time: 1706293230093
+                    upload-confirmed-time: 1706293230158
+                  - file-name: pp-adv-cat8k-179.1a-46-68.0.0.pack
+                    version: 68.0.0
+                    device-version: 179.1a
+                    nbar-engine-version: '46'
+                    device-model: cat8k
+                    license-type: adv
+                    is-latest: true
+                    is-upload-confirmed-by-user: true
+                    numeric-version: 68
+                    uploaded-by-user-name: system-uploaded
+                    system-pack-type: default
+                    upload-source: system-uploaded
+                    last-updated-time: 1706824343168
+                    created-time: 1706293231384
+                    upload-confirmed-time: 1706293231430
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /sdavc/protocol-pack/base:
+    get:
+      tags:
+      - Protocol Pack Maintenance
+      description: Get all base protocol pack details
+      operationId: getBaseSystemPack
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Response:
+                  description: Response
+                  value:
+                  - file-name: pp-adv-cat8k-179.1a-46-64.0.0.pack
+                    version: 64.0.0
+                    device-version: 179.1a
+                    nbar-engine-version: '46'
+                    device-model: cat8k
+                    license-type: adv
+                    is-latest: false
+                    is-upload-confirmed-by-user: true
+                    numeric-version: 64
+                    uploaded-by-user-name: system-uploaded
+                    system-pack-type: base
+                    upload-source: system-uploaded
+                    last-updated-time: 1706824339984
+                    created-time: 1706293228793
+                    upload-confirmed-time: 1706293228847
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                500 - Internal Error:
+                  description: 500 - Internal Error
+                  value:
+                    error:
+                      message: <Short Message>
+                      code: PP0006
+                      details: <Detailed Message>
+  /sdavc/protocol-pack/default:
+    get:
+      tags:
+      - Protocol Pack Maintenance
+      description: Get all default protocol pack details
+      operationId: getDefaultSystemPack
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Response:
+                  description: Response
+                  value:
+                  - file-name: pp-adv-cat8k-1712.1a-49-68.0.0.pack
+                    version: 68.0.0
+                    device-version: 1712.1a
+                    nbar-engine-version: '49'
+                    device-model: cat8k
+                    license-type: adv
+                    is-latest: true
+                    is-upload-confirmed-by-user: true
+                    numeric-version: 68
+                    uploaded-by-user-name: system-uploaded
+                    system-pack-type: default
+                    upload-source: system-uploaded
+                    last-updated-time: 1706824341120
+                    created-time: 1706293230093
+                    upload-confirmed-time: 1706293230158
+                  - file-name: pp-adv-cat8k-179.1a-46-68.0.0.pack
+                    version: 68.0.0
+                    device-version: 179.1a
+                    nbar-engine-version: '46'
+                    device-model: cat8k
+                    license-type: adv
+                    is-latest: true
+                    is-upload-confirmed-by-user: true
+                    numeric-version: 68
+                    uploaded-by-user-name: system-uploaded
+                    system-pack-type: default
+                    upload-source: system-uploaded
+                    last-updated-time: 1706824343168
+                    created-time: 1706293231384
+                    upload-confirmed-time: 1706293231430
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                500 - Internal Error:
+                  description: 500 - Internal Error
+                  value:
+                    error:
+                      message: <Short Message>
+                      code: PP0006
+                      details: <Detailed Message>
+  /sdavc/protocol-pack/latest:
+    get:
+      tags:
+      - Protocol Pack Maintenance
+      description: Get current latest protocol pack details
+      operationId: getLatestSystemPack
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Response:
+                  description: Response
+                  value:
+                    file-name: pp-adv-cat8k-179.1a-46-68.0.0.pack
+                    version: 68.0.0
+                    device-version: 179.1a
+                    nbar-engine-version: '46'
+                    device-model: cat8k
+                    license-type: adv
+                    is-latest: true
+                    is-upload-confirmed-by-user: true
+                    numeric-version: 68
+                    uploaded-by-user-name: system-uploaded
+                    system-pack-type: default
+                    upload-source: system-uploaded
+                    last-updated-time: 1706824343168
+                    created-time: 1706293231384
+                    upload-confirmed-time: 1706293231430
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                500 - Internal Error:
+                  description: 500 - Internal Error
+                  value:
+                    error:
+                      message: <Short Message>
+                      code: PP0006
+                      details: <Detailed Message>
+  /sdavc/protocol-pack/maintenance/upgrade:
+    post:
+      tags:
+      - Protocol Pack Maintenance
+      description: Deploy protocol pack to devices
+      operationId: upgradeProtocolPack
+      requestBody:
+        description: Request Payload
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                autoUpgradeInCompatibleDevices:
+                  type: boolean
+                deviceSelectionType:
+                  type: string
+                  enum:
+                  - entire-network
+                  - selected-devices
+                devices:
+                  type: array
+                  items:
+                    type: string
+                executionType:
+                  type: string
+                  enum:
+                  - now
+                  - later
+                protocolPackType:
+                  type: string
+                  enum:
+                  - selected-protocol-pack
+                  - default-protocol-pack
+                  - built-in-protocol-pack
+                protocolPacks:
+                  type: array
+                  items:
+                    type: string
+                scheduleTime:
+                  type: integer
+                  format: int64
+              $$ref: '#/components/schemas/ProtocolPackUpgradeRequest'
+            examples:
+              Selected Devices, selective protocol pack, scheduled now:
+                description: Selected Devices, selective protocol pack, scheduled now
+                value:
+                  deviceSelectionType: selected-devices
+                  scheduleTime: 0
+                  devices:
+                  - 172.16.255.11
+                  executionType: now
+                  protocolPacks:
+                  - pp-adv-cat8k-1712.1a-49-68.0.0.pack
+                  protocolPackType: selected-protocol-pack
+              Selected Devices, default protocol pack, scheduled now:
+                description: Selected Devices, default protocol pack, scheduled now
+                value:
+                  deviceSelectionType: selected-devices
+                  scheduleTime: 0
+                  devices:
+                  - 172.16.255.11
+                  executionType: now
+                  protocolPacks: []
+                  protocolPackType: default-protocol-pack
+              Selected Devices, built-in protocol pack, scheduled now:
+                description: Selected Devices, built-in protocol pack, scheduled now
+                value:
+                  deviceSelectionType: selected-devices
+                  scheduleTime: 0
+                  devices:
+                  - 172.16.255.11
+                  executionType: now
+                  protocolPacks: []
+                  protocolPackType: built-in-protocol-pack
+              All Devices, selective protocol pack, scheduled now:
+                description: All Devices, selective protocol pack, scheduled now
+                value:
+                  deviceSelectionType: entire-network
+                  scheduleTime: 0
+                  devices: []
+                  executionType: now
+                  protocolPacks:
+                  - pp-adv-cat8k-1712.1a-49-68.0.0.pack
+                  protocolPackType: selected-protocol-pack
+              All Devices, default protocol pack, scheduled now:
+                description: All Devices, default protocol pack, scheduled now
+                value:
+                  deviceSelectionType: entire-network
+                  scheduleTime: 0
+                  devices: []
+                  executionType: now
+                  protocolPacks: []
+                  protocolPackType: default-protocol-pack
+              All Devices, selective protocol pack, scheduled now, with Auto Upgrade Flag Enabled:
+                description: All Devices, selective protocol pack, scheduled now, with Auto Upgrade Flag Enabled
+                value:
+                  deviceSelectionType: entire-network
+                  scheduleTime: 0
+                  devices: []
+                  executionType: now
+                  autoUpgradeInCompatibleDevices: true
+                  protocolPacks:
+                  - pp-adv-cat8k-1712.1a-49-68.0.0.pack
+                  protocolPackType: selected-protocol-pack
+              All Devices, selective protocol pack, scheduled now, with Auto Upgrade Flag Disabled:
+                description: All Devices, selective protocol pack, scheduled now, with Auto Upgrade Flag Disabled
+                value:
+                  deviceSelectionType: entire-network
+                  scheduleTime: 0
+                  devices: []
+                  executionType: now
+                  autoUpgradeInCompatibleDevices: false
+                  protocolPacks:
+                  - pp-adv-cat8k-1712.1a-49-68.0.0.pack
+                  protocolPackType: selected-protocol-pack
+              All Devices, built-in protocol pack, scheduled now:
+                description: All Devices, built-in protocol pack, scheduled now
+                value:
+                  deviceSelectionType: entire-network
+                  scheduleTime: 0
+                  devices: []
+                  executionType: now
+                  protocolPacks: []
+                  protocolPackType: built-in-protocol-pack
+              Scheduled Upgrade:
+                description: Scheduled Upgrade
+                value:
+                  deviceSelectionType: entire-network
+                  scheduleTime: 1706803770000
+                  devices: []
+                  executionType: later
+                  protocolPacks: []
+                  protocolPackType: default-protocol-pack
+        required: true
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Response:
+                  description: Response
+                  value:
+                    taskExtraKey: vIPtela Inc Regression
+                    deployScheduleTime: 0
+                    protocolPackName:
+                    - pp-adv-cat8k-1712.1a-49-68.0.0.pack
+                    protocolPackNameSelectionType: selected-protocol-pack
+                    uuid: 436201f9-c701-4556-8404-2adcde645d3f
+                    status: scheduled
+                    taskId: sdavc_deploy_protocol_pack_on_device-436201f9-c701-4556-8404-2adcde645d3f
+                    message: 'Deploy Protocol Pack on Device initiated for : vIPtela Inc Regression'
+                    segmentName: vIPtela Inc Regression
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                500 - Internal Error:
+                  description: 500 - Internal Error
+                  value:
+                    error:
+                      message: <Short Message>
+                      code: PP0001
+                      details: <Detailed Message>
+  /sdavc/protocol-pack/maintenance/upgrade/cancel:
+    post:
+      tags:
+      - Protocol Pack Maintenance
+      description: Cancel a Scheduled Deploy protocol pack job
+      operationId: cancelScheduledDeployJob
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Response:
+                  description: Response
+                  value:
+                    success: true
+                    message: Task cancelled successfully
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                500 - Internal Error:
+                  description: 500 - Internal Error
+                  value:
+                    error:
+                      message: <Short Message>
+                      code: PP0007
+                      details: <Detailed Message>
+  /sdavc/protocol-pack/maintenance/upgrade/status:
+    get:
+      tags:
+      - Protocol Pack Maintenance
+      description: Get active deploy job status
+      operationId: getDeployJobStatus_ProtocolPackMaintenance_4703
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Scheduled Response:
+                  description: Scheduled Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: scheduled
+                    message: Task scheduled
+                In Progress Response:
+                  description: In Progress Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: in_progress
+                    message: Task is in progress
+                Success Response:
+                  description: Success Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: success
+                    message: Success
+                Failure Response:
+                  description: Failure Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: failure
+                    message: Task Failed
+                Not Started Response:
+                  description: Not Started Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: not_started
+                    message: The task has not started yet
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                500 - Internal Error:
+                  description: 500 - Internal Error
+                  value:
+                    error:
+                      message: <Short Message>
+                      code: PP0008
+                      details: <Detailed Message>
+  /sdavc/protocol-pack/maintenance/upgrade/status/{uuid}:
+    get:
+      tags:
+      - Protocol Pack Maintenance
+      description: Get upgrade status for given Task UUID
+      operationId: getDeployJobStatus_ProtocolPackMaintenance_5403
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Scheduled Response:
+                  description: Scheduled Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: scheduled
+                    message: Task scheduled
+                In Progress Response:
+                  description: In Progress Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: in_progress
+                    message: Task is in progress
+                Success Response:
+                  description: Success Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: success
+                    message: Success
+                Failure Response:
+                  description: Failure Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: failure
+                    message: Task Failed
+                Not Started Response:
+                  description: Not Started Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: not_started
+                    message: The task has not started yet
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                500 - Internal Error:
+                  description: 500 - Internal Error
+                  value:
+                    error:
+                      message: <Short Message>
+                      code: PP0008
+                      details: <Detailed Message>
+  /sdavc/protocol-pack/maintenance/upload:
+    post:
+      tags:
+      - Protocol Pack Maintenance
+      description: Upload protocol pack to SDAVC
+      operationId: uploadProtocolPack
+      requestBody:
+        description: Protocol Pack File
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+              $$ref: '#/components/schemas/ProtocolPackUploadRequest'
+        required: true
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Success Response:
+                  description: Success Response
+                  value:
+                  - taskExtraKey: pp-adv-asr1k-176.1a-43-59.0.0.pack
+                    uuid: 5ace81e7-e002-449e-9449-677a2afa6a26
+                    status: scheduled
+                    taskId: sdavc_upload_protocol_pack_to_sdavc-5ace81e7-e002-449e-9449-677a2afa6a26
+                    message: 'Upload Protocol Pack to SDAVC initiated for : pp-adv-asr1k-176.1a-43-59.0.0.pack'
+                    protocolPackName: pp-adv-asr1k-176.1a-43-59.0.0.pack
+                    actualUploadedFileName: pp-adv-asr1k-176.1a-43-59.0.0.pack
+                    systemPackType: ''
+                    device-compliance-status: {}
+                    policy-compliance-status: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                500 - Internal Error:
+                  description: 500 - Internal Error
+                  value:
+                    error:
+                      message: <Short Message>
+                      code: PP0004
+                      details: <Detailed Message>
+  /sdavc/protocol-pack/maintenance/upload/cancel/{uuid}:
+    post:
+      tags:
+      - Protocol Pack Maintenance
+      description: Cancel or discard an uploaded protocol pack
+      operationId: cancelProtocolPackUpload
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Response:
+                  description: Response
+                  value:
+                    success: true
+                    message: Protocol pack upload cancelled successfully
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                500 - Internal Error:
+                  description: 500 - Internal Error
+                  value:
+                    error:
+                      message: <Short Message>
+                      code: PP0002
+                      details: <Detailed Message>
+  /sdavc/protocol-pack/maintenance/upload/confirm/{uuid}:
+    post:
+      tags:
+      - Protocol Pack Maintenance
+      description: Confirm uploaded protocol pack
+      operationId: confirmProtocolPackUpload
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Response:
+                  description: Response
+                  value:
+                    success: true
+                    message: Protocol pack confirmed successfully
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                500 - Internal Error:
+                  description: 500 - Internal Error
+                  value:
+                    error:
+                      message: <Short Message>
+                      code: PP0003
+                      details: <Detailed Message>
+  /sdavc/protocol-pack/maintenance/upload/status/{uuid}:
+    get:
+      tags:
+      - Protocol Pack Maintenance
+      description: Get protocol pack upload status
+      operationId: getProtocolPackUploadStatus
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Scheduled Response:
+                  description: Scheduled Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: scheduled
+                    message: Task scheduled
+                In Progress Response:
+                  description: In Progress Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: in_progress
+                    message: Task is in progress
+                Success Response:
+                  description: Success Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: success
+                    message: Success
+                Failure Response:
+                  description: Failure Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: failure
+                    message: Task Failed
+                Not Started Response:
+                  description: Not Started Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: not_started
+                    message: The task has not started yet
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                500 - Internal Error:
+                  description: 500 - Internal Error
+                  value:
+                    error:
+                      message: <Short Message>
+                      code: PP0005
+                      details: <Detailed Message>
+  /sdavc/protocol-pack/{protocolPackName}:
+    delete:
+      tags:
+      - Protocol Pack Maintenance
+      description: Delete Protocol Pack
+      operationId: deleteProtocolPack
+      parameters:
+      - name: protocolPackName
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Response:
+                  description: Response
+                  value:
+                    success: true
+                    message: Protocol pack deleted successfully
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              examples:
+                500 - Internal Error:
+                  description: 500 - Internal Error
+                  value:
+                    error:
+                      message: <Short Message>
+                      code: PP0002
+                      details: <Detailed Message>

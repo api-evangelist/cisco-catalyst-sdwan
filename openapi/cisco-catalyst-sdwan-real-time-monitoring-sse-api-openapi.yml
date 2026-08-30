@@ -1,0 +1,72 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - SSE API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - SSE
+paths:
+  /device/sse/tunnels:
+    get:
+      tags:
+      - Real-Time Monitoring - SSE
+      description: Get SSE  tunnels from device
+      operationId: getSSETunnel
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Sig SSE tunnels:
+                  description: Sig SSE tunnels
+                  value:
+                  - lastupdated: 1649242617635
+                    tunnel-if-name: Tunnel100512
+                    tunnel-id: '94075'
+                    tunnel-name: 128.107.85.118
+                    tunnel-state: active
+                    fsm-state: fsm-state
+                    http-resp-code: '200'
+                    vdevice-name: 172.16.255.15
+                    vdevice-host-name: vm5
+                    last-http-req: activate-req
+                    vdevice-dataKey: 172.16.255.15
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write,Security-read,Security-write

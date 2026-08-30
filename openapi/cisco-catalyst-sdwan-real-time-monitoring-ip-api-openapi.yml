@@ -1,0 +1,914 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - IP API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - IP
+paths:
+  /device/ip/fib:
+    get:
+      tags:
+      - Real-Time Monitoring - IP
+      description: Get FIB list from Manager, Controller, Validator and vEdge device (Real Time)
+      operationId: createFibList
+      parameters:
+      - name: vpn-id
+        in: query
+        description: VPN Id
+        schema:
+          type: string
+          enum:
+          - '0'
+          - '512'
+      - name: address-family
+        in: query
+        description: Address family
+        schema:
+          type: string
+          enum:
+          - IPv4
+          - IPv6
+      - name: prefix
+        in: query
+        description: IP prefix
+        schema:
+          type: string
+      - name: tloc
+        in: query
+        description: tloc IP
+        schema:
+          type: string
+      - name: color
+        in: query
+        description: tloc color
+        schema:
+          type: string
+          enum:
+          - default
+          - mpls
+          - metro-ethernet
+          - biz-internet
+          - public-internet
+          - lte
+          - 3g
+          - red
+          - green
+          - blue
+          - gold
+          - silver
+          - bronze
+          - custom1
+          - custom2
+          - custom3
+          - private1
+          - private2
+          - private3
+          - private4
+          - private5
+          - private6
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                FIB list:
+                  description: FIB list
+                  value:
+                    data:
+                    - nexthop-address: 10.0.5.13
+                      vdevice-dataKey: 172.16.255.21-0-0.0.0.0/0
+                      vdevice-name: 172.16.255.21
+                      prefix: 0.0.0.0/0
+                      lastupdated: 1649641392351
+                      out-ifname: ge0/1
+                      vpn-id: 0
+                      vdevice-host-name: vm11
+                      address-family: ipv4
+                    - vdevice-dataKey: 172.16.255.21-0-10.0.5.0/24
+                      vdevice-name: 172.16.255.21
+                      prefix: 10.0.5.0/24
+                      lastupdated: 1649641392351
+                      out-ifname: ge0/1
+                      vpn-id: 0
+                      vdevice-host-name: vm11
+                      address-family: ipv4
+                    - vdevice-dataKey: 172.16.255.21-0-10.0.5.21/32
+                      vdevice-name: 172.16.255.21
+                      prefix: 10.0.5.21/32
+                      lastupdated: 1649641392351
+                      out-ifname: ge0/1
+                      vpn-id: 0
+                      vdevice-host-name: vm11
+                      address-family: ipv4
+                    - vdevice-dataKey: 172.16.255.21-0-10.0.100.0/24
+                      vdevice-name: 172.16.255.21
+                      prefix: 10.0.100.0/24
+                      lastupdated: 1649641392351
+                      out-ifname: ge0/7
+                      vpn-id: 0
+                      vdevice-host-name: vm11
+                      address-family: ipv4
+                    - vdevice-dataKey: 172.16.255.21-0-10.0.100.21/32
+                      vdevice-name: 172.16.255.21
+                      prefix: 10.0.100.21/32
+                      lastupdated: 1649641392351
+                      out-ifname: ge0/7
+                      vpn-id: 0
+                      vdevice-host-name: vm11
+                      address-family: ipv4
+                    - vdevice-dataKey: 172.16.255.21-0-100.0.0.0/24
+                      vdevice-name: 172.16.255.21
+                      prefix: 100.0.0.0/24
+                      lastupdated: 1649641392351
+                      out-ifname: ge0/6
+                      vpn-id: 0
+                      vdevice-host-name: vm11
+                      address-family: ipv4
+                    - vdevice-dataKey: 172.16.255.21-0-100.0.0.11/32
+                      vdevice-name: 172.16.255.21
+                      prefix: 100.0.0.11/32
+                      lastupdated: 1649641392351
+                      out-ifname: ge0/6
+                      vpn-id: 0
+                      vdevice-host-name: vm11
+                      address-family: ipv4
+                    - nexthop-address: 100.0.0.1
+                      vdevice-dataKey: 172.16.255.21-0-100.2.0.0/24
+                      vdevice-name: 172.16.255.21
+                      prefix: 100.2.0.0/24
+                      lastupdated: 1649641392351
+                      out-ifname: ge0/6
+                      vpn-id: 0
+                      vdevice-host-name: vm11
+                      address-family: ipv4
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write,System-read,System-write
+  /device/ip/ipRoutes:
+    get:
+      tags:
+      - Real-Time Monitoring - IP
+      description: Get ietf routing list from device
+      operationId: createIetfRoutingList
+      parameters:
+      - name: routing-instance-name
+        in: query
+        description: VPN Id
+        schema:
+          type: string
+      - name: address-family
+        in: query
+        description: Address family
+        schema:
+          type: string
+      - name: outgoing-interface
+        in: query
+        description: Outgoing Interface
+        schema:
+          type: string
+      - name: source-protocol
+        in: query
+        description: Source Protocol
+        schema:
+          type: string
+      - name: next-hop-address
+        in: query
+        description: Next Hop Address
+        schema:
+          type: string
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                ietf routing list:
+                  description: ietf routing list
+                  value:
+                    data:
+                    - protocol-type: direct
+                      vdevice-name: 169.254.10.12
+                      route-destination-prefix: 0.0.0.0/0
+                      route-source-protocol: static
+                      next-hop-next-hop-address: 10.102.254.254
+                      routing-instance-name: default
+                      protocol-name: '0'
+                      route-route-preference: '1'
+                      vdevice-host-name: vm5
+                      rib-default-rib: 'false'
+                      rib-address-family: ipv4
+                      vdevice-dataKey: 169.254.10.12--
+                      router-id: 0.0.0.0
+                      route-metric: '0'
+                      lastupdated: 1645080304580
+                    - protocol-type: direct
+                      vdevice-name: 169.254.10.12
+                      route-destination-prefix: 10.101.0.0/16
+                      route-source-protocol: direct
+                      next-hop-next-hop-address: 0.0.0.0
+                      routing-instance-name: default
+                      protocol-name: '0'
+                      route-route-preference: '0'
+                      vdevice-host-name: vm5
+                      rib-default-rib: 'false'
+                      rib-address-family: ipv4
+                      vdevice-dataKey: 169.254.10.12--
+                      router-id: 0.0.0.0
+                      next-hop-outgoing-interface: GigabitEthernet3
+                      route-metric: '0'
+                      lastupdated: 1645080304580
+                    - protocol-type: direct
+                      vdevice-name: 169.254.10.12
+                      route-destination-prefix: 10.101.5.5/32
+                      route-source-protocol: direct
+                      next-hop-next-hop-address: 0.0.0.0
+                      routing-instance-name: default
+                      protocol-name: '0'
+                      route-route-preference: '0'
+                      vdevice-host-name: vm5
+                      rib-default-rib: 'false'
+                      rib-address-family: ipv4
+                      vdevice-dataKey: 169.254.10.12--
+                      router-id: 0.0.0.0
+                      next-hop-outgoing-interface: GigabitEthernet3
+                      route-metric: '0'
+                      lastupdated: 1645080304580
+                    - protocol-type: direct
+                      vdevice-name: 169.254.10.12
+                      route-destination-prefix: 10.102.0.0/16
+                      route-source-protocol: direct
+                      next-hop-next-hop-address: 0.0.0.0
+                      routing-instance-name: default
+                      protocol-name: '0'
+                      route-route-preference: '0'
+                      vdevice-host-name: vm5
+                      rib-default-rib: 'false'
+                      rib-address-family: ipv4
+                      vdevice-dataKey: 169.254.10.12--
+                      router-id: 0.0.0.0
+                      next-hop-outgoing-interface: GigabitEthernet5
+                      route-metric: '0'
+                      lastupdated: 1645080304580
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write,System-read,System-write
+  /device/ip/mfiboil:
+    get:
+      tags:
+      - Real-Time Monitoring - IP
+      description: Get IP MFIB OIL list from device (Real Time)
+      operationId: createIPMfibOilList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                IP MFIB OIL list:
+                  description: IP MFIB OIL list
+                  value:
+                    data:
+                    - vdevice-dataKey: 169.254.10.11-10-
+                      vdevice-name: 169.254.10.11
+                      lastupdated: 1654849997281
+                      source: 0.0.0.0
+                      vpn-id: 10
+                      vdevice-host-name: vm4
+                      group: 224.0.1.39
+                    - vdevice-dataKey: 169.254.10.11-10-
+                      vdevice-name: 169.254.10.11
+                      lastupdated: 1654849997281
+                      source: 0.0.0.0
+                      vpn-id: 10
+                      vdevice-host-name: vm4
+                      group: 224.0.1.40
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write,System-read,System-write
+  /device/ip/mfibstats:
+    get:
+      tags:
+      - Real-Time Monitoring - IP
+      description: Get IP MFIB statistics list from device (Real Time)
+      operationId: createIPMfibStatsList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                IP MFIB statistics list:
+                  description: IP MFIB statistics list
+                  value:
+                    data:
+                    - tx-octet-rate: 0
+                      tx-pkts: 0
+                      vdevice-name: 169.254.10.11
+                      rx-octet-rate: 0
+                      rx-packet-rate: 0
+                      source: 0.0.0.0
+                      rpf-failure: 0
+                      vpn-id: 10
+                      vdevice-host-name: vm4
+                      tx-packet-rate: 0
+                      tx-policy-drop: 0
+                      avg_replication: '0.00'
+                      vdevice-dataKey: 169.254.10.11-10-
+                      rx-policy-drop: 0
+                      tx-octets: 0
+                      rx-octets: 0
+                      tx-to-pim-pkts: 0
+                      lastupdated: 1654850155929
+                      tx-invalid-oil-failure: 0
+                      rx-pkts: '0'
+                      group: 224.0.1.39
+                    - tx-octet-rate: 0
+                      tx-pkts: 0
+                      vdevice-name: 169.254.10.11
+                      rx-octet-rate: 0
+                      rx-packet-rate: 0
+                      source: 0.0.0.0
+                      rpf-failure: 0
+                      vpn-id: 10
+                      vdevice-host-name: vm4
+                      tx-packet-rate: 0
+                      tx-policy-drop: 0
+                      avg_replication: '0.00'
+                      vdevice-dataKey: 169.254.10.11-10-
+                      rx-policy-drop: 0
+                      tx-octets: 0
+                      rx-octets: 0
+                      tx-to-pim-pkts: 0
+                      lastupdated: 1654850155929
+                      tx-invalid-oil-failure: 0
+                      rx-pkts: '0'
+                      group: 224.0.1.40
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write,System-read,System-write
+  /device/ip/mfibsummary:
+    get:
+      tags:
+      - Real-Time Monitoring - IP
+      description: Get IP MFIB summary list from device (Real Time)
+      operationId: createIPMfibSummaryList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                IP MFIB summary list:
+                  description: IP MFIB summary list
+                  value:
+                    data:
+                    - upstream-tunnel: 0.0.0.0
+                      vdevice-dataKey: 169.254.10.11-10-224.0.1.39
+                      vdevice-name: 169.254.10.11
+                      upstream-if: '---'
+                      lastupdated: 1654850209775
+                      source: 0.0.0.0
+                      vpn-id: 10
+                      num-tunnel-oils: '0'
+                      vdevice-host-name: vm4
+                      group: 224.0.1.39
+                      num-service-oils: '0'
+                    - upstream-tunnel: 0.0.0.0
+                      vdevice-dataKey: 169.254.10.11-10-224.0.1.40
+                      vdevice-name: 169.254.10.11
+                      upstream-if: '---'
+                      lastupdated: 1654850209775
+                      source: 0.0.0.0
+                      vpn-id: 10
+                      num-tunnel-oils: '0'
+                      vdevice-host-name: vm4
+                      group: 224.0.1.40
+                      num-service-oils: '0'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write,System-read,System-write
+  /device/ip/nat/filter:
+    get:
+      tags:
+      - Real-Time Monitoring - IP
+      description: Get NAT filter list from device
+      operationId: createNatFilterList
+      parameters:
+      - name: nat-vpn-id
+        in: query
+        description: NAT VPN Id
+        schema:
+          type: string
+      - name: nat-ifname
+        in: query
+        description: NAT interface name
+        schema:
+          type: string
+      - name: private-source-address
+        in: query
+        description: Private source address
+        schema:
+          type: string
+      - name: proto
+        in: query
+        description: Protocol
+        schema:
+          type: string
+          enum:
+          - icm
+          - tcp
+          - udp
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                NAT filter list:
+                  description: NAT filter list
+                  value:
+                    data:
+                    - vdevice-name: 172.16.254.1
+                      vdevice-host-name: vm2
+                      nat-vpn-id: '0'
+                      nat-ifname: ge0/0
+                      private-vpn-id: '0'
+                      proto: icmp
+                      private-source-address: 10.1.15.15
+                      private-dest-address: 10.1.14.14
+                      private-source-port: '4697'
+                      public-source-address: 10.1.15.15
+                      public-dest-address: 10.1.14.14
+                      public-source-port: '64931'
+                      public-dest-port: '64931'
+                      filter-state: established
+                      idle-timeout: 0:00:00:41
+                      idle-timeout-date: '-'
+                      outbound-packets: '1'
+                      outbound-octets: '98'
+                      inbound-packets: '1'
+                      inbound-octets: '98'
+                      lastupdated: 1657853484627
+                      vdevice-dataKey: 172.16.254.1-10-224.0.1.40
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write,System-read,System-write
+  /device/ip/nat/interface:
+    get:
+      tags:
+      - Real-Time Monitoring - IP
+      description: Get NAT interface list from device (Real Time)
+      operationId: createNatInterfaceList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                NAT interface list:
+                  description: NAT interface list
+                  value:
+                    data:
+                    - fib-filter-count: 0
+                      vdevice-name: 169.254.10.9
+                      lastupdated: 1654525771150
+                      vpn-id: 0
+                      vdevice-dataKey: 169.254.10.9-0
+                      mapping-type: endpoint-independent
+                      filter-count: 0
+                      vdevice-host-name: vm2
+                      ifname: ipsec10
+                      filter-type: address-port-restricted
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write,System-read,System-write
+  /device/ip/nat/interfacestatistics:
+    get:
+      tags:
+      - Real-Time Monitoring - IP
+      description: Get NAT interface statistics list from device
+      operationId: createNatInterfaceStatisticsList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                NAT interface statistics list:
+                  description: NAT interface statistics list
+                  value:
+                  - out2in-drops: 0
+                    in2out-drops: 0
+                    vdevice-dataKey: 172.16.255.15-0-0
+                    vdevice-host-name: vm5
+                    initialized: 9223372036854776000
+                    entry-timeouts: 0
+                    pool-stats-drop: '0'
+                    limit-entry-add-fail: '0'
+                    outsides: 0
+                    packets-punted: '0'
+                    lastupdated: 1645079319277
+                    mapping-stats-drop: '0'
+                    misses: 0
+                    interrupt-switched: 0
+                    frag-pak-count: '0'
+                    statics: 0
+                    flows: 0
+                    entries: '0'
+                    vdevice-name: 172.16.255.15
+                    hits: 0
+                    portlist-req-fail: '0'
+                    ipalias-add-fail: 0
+                    insides: 0
+                    statics-sorted: 0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write,System-read,System-write
+  /device/ip/nat/translation:
+    get:
+      tags:
+      - Real-Time Monitoring - IP
+      description: Get NAT translation list from device (Real Time)
+      operationId: createNatTranslationList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                NAT translation list:
+                  description: NAT translation list
+                  value:
+                    data:
+                    - inside-local-addr: 10.1.15.15
+                      outside-local-port: '50'
+                      vdevice-name: 172.16.255.15
+                      inside-global-port: '50'
+                      flags: '0'
+                      outside-global-port: '50'
+                      vdevice-host-name: vm5
+                      vrfid: '0'
+                      protocol: '1'
+                      outside-local-addr: 10.1.16.16
+                      vdevice-dataKey: 172.16.255.15-10.1.15.15-10.1.16.16-10.1.15.15-10.1.16.16-50
+                      outside-global-addr: 10.1.16.16
+                      inside-local-port: '50'
+                      lastupdated: 1651038839092
+                      application-type: '0'
+                      inside-global-addr: 10.1.15.15
+                    - inside-local-addr: 10.1.15.15
+                      outside-local-port: '51'
+                      vdevice-name: 172.16.255.15
+                      inside-global-port: '51'
+                      flags: '0'
+                      outside-global-port: '51'
+                      vdevice-host-name: vm5
+                      vrfid: '0'
+                      protocol: '1'
+                      outside-local-addr: 10.1.16.16
+                      vdevice-dataKey: 172.16.255.15-10.1.15.15-10.1.16.16-10.1.15.15-10.1.16.16-51
+                      outside-global-addr: 10.1.16.16
+                      inside-local-port: '51'
+                      lastupdated: 1651038839092
+                      application-type: '0'
+                      inside-global-addr: 10.1.15.15
+                    - inside-local-addr: 10.1.15.15
+                      outside-local-port: '49'
+                      vdevice-name: 172.16.255.15
+                      inside-global-port: '49'
+                      flags: '0'
+                      outside-global-port: '49'
+                      vdevice-host-name: vm5
+                      vrfid: '0'
+                      protocol: '1'
+                      outside-local-addr: 10.1.16.16
+                      vdevice-dataKey: 172.16.255.15-10.1.15.15-10.1.16.16-10.1.15.15-10.1.16.16-49
+                      outside-global-addr: 10.1.16.16
+                      inside-local-port: '49'
+                      lastupdated: 1651038839092
+                      application-type: '0'
+                      inside-global-addr: 10.1.15.15
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write,System-read,System-write
+  /device/ip/nat64/translation:
+    get:
+      tags:
+      - Real-Time Monitoring - IP
+      description: Get NAT64 interface list from device
+      operationId: createNat64TranslationList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                NAT64 interface list:
+                  description: NAT64 interface list
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.15
+                      vdevice-host-name: vm5
+                      vrf-name: '1'
+                      protocol: icmp
+                      orig-ipv6-src-addr: 2001:DB8:3001::9
+                      orig-ipv6-dst-addr: 2800:1503:2000:1:1::0a01:7102
+                      orig-src-port: 2654
+                      orig-dst-port: 2654
+                      translated-src-addr: 10.1.113.2
+                      translated-dst-addr: 50.50.50.50
+                      translated-src-port: '2654'
+                      translated-dst-port: '2654'
+                      lastupdated: 1660727547133
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write,System-read,System-write
+  /device/ip/routetable:
+    get:
+      tags:
+      - Real-Time Monitoring - IP
+      description: Get route table list from device (Real Time)
+      operationId: createRouteTableList
+      parameters:
+      - name: vpn-id
+        in: query
+        description: VPN Id
+        schema:
+          type: string
+          enum:
+          - '0'
+          - '512'
+      - name: address-family
+        in: query
+        description: Address family
+        schema:
+          type: string
+          enum:
+          - IPv4
+          - IPv6
+      - name: prefix
+        in: query
+        description: IP prefix
+        schema:
+          type: string
+      - name: protocol
+        in: query
+        description: IP protocol
+        schema:
+          type: string
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Route table list:
+                  description: Route table list
+                  value:
+                    data:
+                    - rstatus: F S
+                      protocol: static
+                      vdevice-dataKey: 169.254.10.10-0-0.0.0.0/0
+                      vdevice-name: 169.254.10.10
+                      prefix: 0.0.0.0/0
+                      lastupdated: 1643160579908
+                      nexthop-addr: 10.101.254.254
+                      vpn-id: 0
+                      nexthop-type: ipv4
+                      vdevice-host-name: vm3
+                      address-family: ipv4
+                      nexthop-ifname: ge0/1
+                    - color: default
+                      vdevice-name: 169.254.10.10
+                      prefix: 10.0.5.0/24
+                      ip: 172.16.254.4
+                      encap: ipsec
+                      vpn-id: 10
+                      nexthop-label: '1047'
+                      nexthop-type: ipv4-indirect
+                      vdevice-host-name: vm3
+                      rstatus: F S
+                      protocol: omp
+                      vdevice-dataKey: 169.254.10.10-10-10.0.5.0/24
+                      lastupdated: 1643160579908
+                      address-family: ipv4
+                    - rstatus: F S
+                      protocol: connected
+                      vdevice-dataKey: 169.254.10.10-512-fcff::/120
+                      vdevice-name: 169.254.10.10
+                      prefix: fcff::/120
+                      lastupdated: 1643160579908
+                      vpn-id: 512
+                      nexthop-type: ipv6
+                      vdevice-host-name: vm3
+                      address-family: ipv6
+                      nexthop-ifname: loop0.2
+                    - rstatus: F S
+                      protocol: connected
+                      vdevice-dataKey: 169.254.10.10-65528-192.168.0.0/24
+                      vdevice-name: 169.254.10.10
+                      prefix: 192.168.0.0/24
+                      lastupdated: 1643160579908
+                      vpn-id: 65528
+                      nexthop-type: ipv4
+                      vdevice-host-name: vm3
+                      address-family: ipv4
+                      nexthop-ifname: loopback65528
+                    - rstatus: F S
+                      protocol: connected
+                      vdevice-dataKey: 169.254.10.10-65530-192.168.0.0/24
+                      vdevice-name: 169.254.10.10
+                      prefix: 192.168.0.0/24
+                      lastupdated: 1643160579908
+                      vpn-id: 65530
+                      nexthop-type: ipv4
+                      vdevice-host-name: vm3
+                      address-family: ipv4
+                      nexthop-ifname: loopback65530
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write,System-read,System-write

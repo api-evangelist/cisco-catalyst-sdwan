@@ -1,0 +1,278 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - License Info API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - License Info
+paths:
+  /device/license/evaluation:
+    get:
+      tags:
+      - Real-Time Monitoring - License Info
+      description: Get license evaluation info from device
+      operationId: getLicenseEvalInfo
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                License evaluation info:
+                  description: License evaluation info
+                  value:
+                    data:
+                    - vdevice-dataKey: 169.254.10.14
+                      vdevice-name: 169.254.10.14
+                      lastupdated: 1646031617468
+                      eval-expired: 'false'
+                      eval-in-use: 'false'
+                      time-left: '0'
+                      vdevice-host-name: vm16
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write
+  /device/license/pak:
+    get:
+      tags:
+      - Real-Time Monitoring - License Info
+      description: Get license pak info from device
+      operationId: getLicensePAKInfo
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                License pak info:
+                  description: License pak info
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.15
+                      vdevice-host-name: vm5
+                      singleton_id: 10
+                      store: Primary License Storage
+                      storeindex: 0
+                      version: '1.0'
+                      feature_name: test_subscr
+                      type: Evaluation
+                      state: Active, Not in Use, EULA accepted
+                      count: Non-Counted
+                      priority: Low
+                      lastupdated: 660244459596
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write
+  /device/license/privacy:
+    get:
+      tags:
+      - Real-Time Monitoring - License Info
+      description: Get license privacy info from device
+      operationId: getLicensePrivacyInfo
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                License privacy info:
+                  description: License privacy info
+                  value:
+                    data:
+                    - {}
+                    - lastupdated: 1646030987293
+                      hostname: 'false'
+                      vdevice-dataKey: 169.254.10.14
+                      vdevice-name: 169.254.10.14
+                      version: 'false'
+                      vdevice-host-name: vm16
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write
+  /device/license/registration:
+    get:
+      tags:
+      - Real-Time Monitoring - License Info
+      description: Get license registration info from device
+      operationId: getLicenseRegInfo
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                License info:
+                  description: License info
+                  value:
+                    data:
+                    - vdevice-dataKey: 169.254.10.12
+                      vdevice-name: 169.254.10.12
+                      always-enabled: 'true'
+                      lastupdated: 1645754331129
+                      vdevice-host-name: vm5
+                      smart-enabled: 'false'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write
+  /device/license/udi:
+    get:
+      tags:
+      - Real-Time Monitoring - License Info
+      description: Get license UDI info from device
+      operationId: getLicenseUDIInfo
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                License UDI info:
+                  description: License UDI info
+                  value:
+                    data:
+                    - mac-address: 00:00:00:00:00:00
+                      vdevice-dataKey: 169.254.10.14
+                      vdevice-name: 169.254.10.14
+                      lastupdated: 1646030100474
+                      pid: CSR1000V
+                      sn: 9PBHZUBMD18
+                      vdevice-host-name: vm16
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write
+  /device/license/usage:
+    get:
+      tags:
+      - Real-Time Monitoring - License Info
+      description: Get license usage info from device
+      operationId: getLicenseUsageInfo
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                License usage info:
+                  description: License usage info
+                  value:
+                    data:
+                    - vdevice-name: 172.16.254.4
+                      vdevice-host-name: vm5
+                      entitlement-tag: WAN_License
+                      short-name: '-'
+                      license-name: WAN_License
+                      description: '-'
+                      count: '8'
+                      enforcement-mode: Blocking
+                      post-paid: 'false'
+                      subscription-id: 968BA1CF-C146-4ADF-A300-308DCF718EEE
+                      lastupdated: 1646031617468
+                      vdevice-dataKey: 172.16.254.4
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write

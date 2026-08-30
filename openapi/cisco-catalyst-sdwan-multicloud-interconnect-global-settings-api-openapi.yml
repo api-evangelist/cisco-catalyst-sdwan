@@ -1,0 +1,318 @@
+openapi: 3.2.0
+info:
+  title: SD-WAN Services Multicloud Interconnect - Global Settings API
+  description: Includes API operations for managing SD-WAN services such as Cloud OnRamp for SaaS and MultiCloud
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Multicloud Interconnect - Global Settings
+paths:
+  /multicloud/interconnect/colors/{tunnel-type}:
+    get:
+      tags:
+      - Multicloud Interconnect - Global Settings
+      summary: Get supported Colors for Interconnect tunnel type.
+      description: API to retrieve supported Colors for Interconnect tunnel type.
+      operationId: getInterconnectColors
+      parameters:
+      - name: tunnel-type
+        in: path
+        description: Interconnect Loopback Tunnel Type
+        required: true
+        schema:
+          type: string
+          enum:
+          - loopbackTransit
+          - loopbackCgw
+      responses:
+        '200':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  loopbackCgwColor:
+                    type: array
+                    description: Loopback cgw color list
+                    example:
+                    - gold
+                    - biz-internet
+                    - private1
+                    - private2
+                    items:
+                      type: string
+                      description: Loopback cgw color
+                      example: gold
+                  loopbackTunnelColor:
+                    type: array
+                    description: Loopback tunnel color list
+                    example:
+                    - gold
+                    - biz-internet
+                    - private1
+                    - private2
+                    items:
+                      type: string
+                      description: Loopback tunnel color
+                      example: gold
+                $$ref: '#/components/schemas/InlineResponse2002'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/interconnect/settings/global:
+    post:
+      tags:
+      - Multicloud Interconnect - Global Settings
+      summary: Add global settings for an Interconnect provider.
+      description: API to add global settings for an Interconnect provider.
+      operationId: addInterconnectGlobalSettings
+      requestBody:
+        description: Request Payload for Multicloud Interconnect Global Settings
+        content:
+          application/json:
+            schema:
+              required:
+              - bgpAsn
+              - edgeGatewaySolution
+              - edgeType
+              - instanceSize
+              - loopbackCgwColor
+              - loopbackTunnelColor
+              - softwareImageId
+              type: object
+              properties:
+                bgpAsn:
+                  pattern: \d+
+                  type: string
+                edgeGatewaySolution:
+                  type: string
+                edgeType:
+                  type: string
+                instanceSize:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+                invoiceReference:
+                  type: string
+                ipSubnetPool:
+                  type: string
+                loopbackCgwColor:
+                  type: string
+                loopbackTunnelColor:
+                  type: string
+                multicloudSystemSettings:
+                  type: object
+                  properties:
+                    enableMonitoring:
+                      type: boolean
+                      writeOnly: true
+                    useConfigurationGroup:
+                      pattern: ^(true|false)$
+                      type: string
+                      description: Enable or disable Configuration Group for Gateways
+                  $$ref: '#/components/schemas/MulticloudSystemSettings'
+                softwareImageId:
+                  maxLength: 255
+                  minLength: 1
+                  pattern: ^C8000v.*$
+                  type: string
+              $$ref: '#/components/schemas/InterconnectGlobalSettings'
+            examples:
+              Interconnect Global Settings:
+                description: Interconnect Global Settings
+                value:
+                  edgeType: MEGAPORT
+                  softwareImageId: C8000v 17.09.01a
+                  instanceSize: Small
+                  loopbackTunnelColor: private3
+                  loopbackCgwColor: private5
+                  bgpAsn: 65000
+                  multicloudSystemSettings:
+                    useConfigurationGroup: true
+        required: true
+      responses:
+        '200':
+          description: Accepted
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    get:
+      tags:
+      - Multicloud Interconnect - Global Settings
+      summary: Get Interconnect provider global settings.
+      description: API to retrieve global settings for an Interconnect provider type.
+      operationId: getInterconnectGlobalSettings
+      parameters:
+      - name: interconnect-type
+        in: query
+        description: Interconnect provider type
+        required: true
+        schema:
+          type: string
+          enum:
+          - MEGAPORT
+          - EQUINIX
+      responses:
+        '200':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                required:
+                - bgpAsn
+                - edgeGatewaySolution
+                - edgeType
+                - instanceSize
+                - loopbackCgwColor
+                - loopbackTunnelColor
+                - softwareImageId
+                type: object
+                properties:
+                  bgpAsn:
+                    pattern: \d+
+                    type: string
+                  edgeGatewaySolution:
+                    type: string
+                  edgeType:
+                    type: string
+                  instanceSize:
+                    maxLength: 255
+                    minLength: 1
+                    type: string
+                  invoiceReference:
+                    type: string
+                  ipSubnetPool:
+                    type: string
+                  loopbackCgwColor:
+                    type: string
+                  loopbackTunnelColor:
+                    type: string
+                  multicloudSystemSettings:
+                    type: object
+                    properties:
+                      enableMonitoring:
+                        type: boolean
+                        writeOnly: true
+                      useConfigurationGroup:
+                        pattern: ^(true|false)$
+                        type: string
+                        description: Enable or disable Configuration Group for Gateways
+                    $$ref: '#/components/schemas/MulticloudSystemSettings'
+                  softwareImageId:
+                    maxLength: 255
+                    minLength: 1
+                    pattern: ^C8000v.*$
+                    type: string
+                $$ref: '#/components/schemas/InterconnectGlobalSettings'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    put:
+      tags:
+      - Multicloud Interconnect - Global Settings
+      summary: Edit global settings for an Interconnect provider.
+      description: API to update global settings for an Interconnect provider.
+      operationId: updateInterconnectGlobalSettings
+      requestBody:
+        description: Request Payload for Multicloud Interconnect Global Settings
+        content:
+          application/json:
+            schema:
+              required:
+              - bgpAsn
+              - edgeGatewaySolution
+              - edgeType
+              - instanceSize
+              - loopbackCgwColor
+              - loopbackTunnelColor
+              - softwareImageId
+              type: object
+              properties:
+                bgpAsn:
+                  pattern: \d+
+                  type: string
+                edgeGatewaySolution:
+                  type: string
+                edgeType:
+                  type: string
+                instanceSize:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+                invoiceReference:
+                  type: string
+                ipSubnetPool:
+                  type: string
+                loopbackCgwColor:
+                  type: string
+                loopbackTunnelColor:
+                  type: string
+                multicloudSystemSettings:
+                  type: object
+                  properties:
+                    enableMonitoring:
+                      type: boolean
+                      writeOnly: true
+                    useConfigurationGroup:
+                      pattern: ^(true|false)$
+                      type: string
+                      description: Enable or disable Configuration Group for Gateways
+                  $$ref: '#/components/schemas/MulticloudSystemSettings'
+                softwareImageId:
+                  maxLength: 255
+                  minLength: 1
+                  pattern: ^C8000v.*$
+                  type: string
+              $$ref: '#/components/schemas/InterconnectGlobalSettings'
+            examples:
+              Interconnect Global Settings:
+                description: Interconnect Global Settings
+                value:
+                  edgeType: MEGAPORT
+                  softwareImageId: C8000v 17.09.01a
+                  instanceSize: Small
+                  loopbackTunnelColor: private3
+                  loopbackCgwColor: private5
+                  bgpAsn: 65000
+                  multicloudSystemSettings:
+                    useConfigurationGroup: true
+        required: true
+      responses:
+        '200':
+          description: Accepted
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

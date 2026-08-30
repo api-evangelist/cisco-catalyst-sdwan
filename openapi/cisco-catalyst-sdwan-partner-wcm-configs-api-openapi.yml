@@ -1,0 +1,90 @@
+openapi: 3.2.0
+info:
+  title: Partner Integrations Partner - WCM Configs API
+  description: Includes API operations for partner integrations, such as Webex, Identity Services Engine (ISE), Secure Access, and more
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Partner - WCM Configs
+paths:
+  /partner/wcm/netconf/{nmsId}:
+    post:
+      tags:
+      - Partner - WCM Configs
+      description: Push device configs
+      operationId: pushNetconfConfigs
+      parameters:
+      - name: nmsId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: Netconf configuration
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      deviceConfig:
+                        type: string
+                        example: ICA8bmF0aXZlIHhtbG5zPSJodHRwOi8vY2lzY28uY29tL25zL3lhbmcvQ2lzY28tSU9TLVhFLW5hdGl2ZSI+CiAgICAgICAgICAgICAgICA8c2VydmljZS1pbnNlcnRpb24+CiAgICAgICAgICAgICAgICAgICAgPGFwcG5hdi1jb250cm9sbGVyLWdyb3VwIHhtbG5zPSJodHRwOi8vY2lzY28uY29tL25zL3lhbmcvQ2lzY28tSU9TLVhFLXNlcnZpY2UtaW5zZXJ0aW9uIj4KICAgICAgICAgICAgICAgICAgICAgICAgPGdyb3VwLW5hbWU+QVBQUU9FLUFDRzwvZ3JvdXAtbmFtZT4KICAgICAgICAgICAgICAgICAgICAgICAgPGFwcHFvZS8+CiAgICAgICAgICAgICAgICAgICAgICAgIDxhcHBuYXYtY29udHJvbGxlcnM+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YWRkcmVzcz4xOTIuMTY4LjAuMjwvYWRkcmVzcz4KICAgICAgICAgICAgICAgICAgICAgICAgPC9hcHBuYXYtY29udHJvbGxlcnM+CiAgICAgICAgICAgICAgICAgICAgPC9hcHBuYXYtY29udHJvbGxlci1ncm91cD4KICAgICAgICAgICAgICA8L3NlcnZpY2UtaW5zZXJ0aW9uPgogIDwvbmF0aXZlPg==
+                      deviceId:
+                        type: string
+                        example: C8K-8f8cc50c-b05b-4a60-956b-5bdd8e79e5c0
+                    $$ref: '#/components/schemas/NetconfConfig'
+                header:
+                  type: object
+                  properties:
+                    generateOn:
+                      type: integer
+                      format: int64
+                      example: 1649645769219
+                  $$ref: '#/components/schemas/NetconfConfigHeader'
+              $$ref: '#/components/schemas/WcmNetconfConfigRequest'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: push_template_configuration-40649f49-787a-4481-9b55-c13eabbde7f2
+                $$ref: '#/components/schemas/WcmNetconfConfigRes'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy Configuration-write,Integration Management-write

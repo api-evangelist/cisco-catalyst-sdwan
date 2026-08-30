@@ -1,0 +1,1129 @@
+openapi: 3.2.0
+info:
+  title: Others MultiCloud - Accounts API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: MultiCloud - Accounts
+paths:
+  /multicloud/accounts:
+    get:
+      tags:
+      - MultiCloud - Accounts
+      description: Obtain all accounts for all clouds
+      operationId: getAllCloudAccounts
+      parameters:
+      - name: cloudType
+        in: query
+        description: Multicloud provider type
+        schema:
+          type: string
+      - name: cloudGatewayEnabled
+        in: query
+        description: Multicloud cloud gateway enabled
+        schema:
+          pattern: ^(true|false)$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    accountId:
+                      type: string
+                    accountName:
+                      type: string
+                    clientEmail:
+                      type: string
+                    cloudGatewayEnabled:
+                      type: boolean
+                    cloudType:
+                      type: string
+                    credType:
+                      type: string
+                    description:
+                      type: string
+                    gcpBillingId:
+                      type: string
+                    privateKeyId:
+                      type: string
+                    regionList:
+                      type: string
+                    serviceDiscoveryEnabled:
+                      type: boolean
+                  $$ref: '#/components/schemas/GetAccounts'
+              examples:
+                GCP Account Details:
+                  description: GCP Account Details
+                  value: "[\n  {\n  \"accountName\": \"pp-gcp\",\n  \"clientEmail\": \"pp@gcpClientEmail.com\",\n  \"regionList\": {\n    \"value\": [\n      \"asia-east1\",\n      \"asia-east2\",\n      \"asia-northeast1\",\n      \"asia-northeast2\",\n      \"asia-northeast3\",\n      \"asia-south1\",\n      \"asia-south2\",\n      \"asia-southeast1\",\n      \"asia-southeast2\",\n      \"australia-southeast1\",\n      \"australia-southeast2\",\n      \"europe-central2\",\n      \"europe-north1\",\n      \"europe-southwest1\",\n      \"europe-west1\",\n      \"europe-west2\",\n      \"europe-west3\",\n      \"europe-west4\",\n      \"europe-west6\",\n      \"europe-west8\",\n      \"europe-west9\",\n      \"northamerica-northeast1\",\n      \"northamerica-northeast2\",\n      \"southamerica-east1\",\n      \"southamerica-west1\",\n      \"us-central1\",\n      \"us-east1\",\n      \"us-east4\",\n      \"us-east5\",\n      \"us-west1\",\n      \"us-west2\",\n      \"us-west3\",\n      \"us-west4\"\n    ]\n  },\n  \"description\": \"pp-individual\",\n  \"serviceDiscoveryEnabled\": false,\n  \"accountId\": \"gcp-pp-nprd\",\n  \"gcpBillingId\": \"\",\n  \"cloudGatewayEnabled\": true,\n  \"credType\": \"GCP\",\n  \"cloudType\": \"GCP\",\n  \"privateKeyId\": \"123456\", \n  \"accountIdDescription\": \"Project Id\",\n  }\n]"
+                Aws Account Details:
+                  description: Aws Account Details
+                  value: "[\n{\n  \"accountName\": \"pp-aws\",\n  \"regionList\": {\n    \"value\": [\n      \"af-south-1\",\n      \"eu-north-1\",\n      \"ap-south-1\",\n      \"eu-west-3\",\n      \"eu-west-2\",\n      \"eu-south-1\",\n      \"eu-west-1\",\n      \"ap-northeast-3\",\n      \"ap-northeast-2\",\n      \"me-south-1\",\n      \"ap-northeast-1\",\n      \"sa-east-1\",\n      \"ca-central-1\",\n      \"ap-east-1\",\n      \"ap-southeast-1\",\n      \"ap-southeast-2\",\n      \"eu-central-1\",\n      \"ap-southeast-3\",\n      \"us-east-1\",\n      \"us-east-2\",\n      \"us-west-1\",\n      \"us-west-2\"\n    ]\n  },\n  \"description\": \"AWS account - pp-individual\",\n  \"serviceDiscoveryEnabled\": false,\n  \"accountId\": \"aws-pp-nprd\",\n  \"cloudGatewayEnabled\": true,\n  \"credType\": \"AWS_KEY\",\n  \"cloudType\": \"AWS\"\n  \"accountIdDescription\": \"\",\n  }\n]"
+                Aws GovCloud Account Details:
+                  description: Aws GovCloud Account Details
+                  value: "[\n{\n  \"accountName\": \"pp-awsGovCloud\",\n  \"regionList\": {\n    \"value\": [\n      \"us-gov-west-1\",\n      \"us-gov-east-1\"\n    ]\n  },\n  \"description\": \"AWS govCloud account - pp-individual\",\n  \"serviceDiscoveryEnabled\": false,\n  \"accountId\": \"awsGovCloud-pp-nprd-68636\",\n  \"cloudGatewayEnabled\": true,\n  \"credType\": \"AWS_KEY\",\n  \"cloudType\": \"AWS_GOVCLOUD\"\n  \"accountIdDescription\": \"\",\n  }\n]"
+                Azure Account Details:
+                  description: Azure Account Details
+                  value:
+                  - accountName: pp-azure
+                    regionList:
+                      value:
+                      - eastus
+                      - eastus2
+                      - southcentralus
+                      - westus2
+                      - westus3
+                      - australiaeast
+                      - southeastasia
+                      - northeurope
+                      - swedencentral
+                      - uksouth
+                      - westeurope
+                      - centralus
+                      - southafricanorth
+                      - centralindia
+                      - eastasia
+                      - japaneast
+                      - koreacentral
+                      - canadacentral
+                      - francecentral
+                      - germanywestcentral
+                      - norwayeast
+                      - switzerlandnorth
+                      - brazilsouth
+                      - eastus2euap
+                      - centralusstage
+                      - eastusstage
+                      - eastus2stage
+                      - northcentralusstage
+                      - southcentralusstage
+                      - westusstage
+                      - westus2stage
+                      - asia
+                      - asiapacific
+                      - australia
+                      - brazil
+                      - canada
+                      - europe
+                      - france
+                      - germany
+                      - global
+                      - india
+                      - japan
+                      - korea
+                      - norway
+                      - southafrica
+                      - switzerland
+                      - uae
+                      - uk
+                      - unitedstates
+                      - unitedstateseuap
+                      - eastasiastage
+                      - southeastasiastage
+                      - northcentralus
+                      - westus
+                      - jioindiawest
+                      - uaenorth
+                      - centraluseuap
+                      - westcentralus
+                      - southafricawest
+                      - australiacentral
+                      - australiacentral2
+                      - australiasoutheast
+                      - japanwest
+                      - jioindiacentral
+                      - koreasouth
+                      - southindia
+                      - westindia
+                      - canadaeast
+                      - francesouth
+                      - germanynorth
+                      - norwaywest
+                      - switzerlandwest
+                      - ukwest
+                      - uaecentral
+                      - brazilsoutheast
+                    description: Azure account - pp-individual
+                    serviceDiscoveryEnabled: false
+                    discoverAllVnetsInTenantEnabled: false
+                    accountId: azure-pp-nprd-68636
+                    accountIdDescription: Subscription Id
+                    gcpBillingId: ''
+                    cloudGatewayEnabled: true
+                    credType: AZURE
+                    cloudType: AZURE
+                Azure GovCloud Account Details:
+                  description: Azure GovCloud Account Details
+                  value:
+                  - accountName: pp-awsGovCloud
+                    regionList:
+                      value:
+                      - usgovvirginia
+                      - global
+                      - usgovarizona
+                      - usdodcentral
+                      - usdodeast
+                      - usgoviowa
+                      - usgovtexas
+                    description: Azure govCloud account - pp-individual
+                    serviceDiscoveryEnabled: false
+                    discoverAllVnetsInTenantEnabled: false
+                    accountIdDescription: Subscription Id
+                    cloudGatewayEnabled: true
+                    credType: AZURE_KEY
+                    cloudType: AZURE_GOVCLOUD
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+      - MultiCloud - Accounts
+      description: Add Cloud Account
+      operationId: validateAccountAdd
+      requestBody:
+        description: Payloads for updating Cloud Gateway based on CloudType
+        content:
+          application/json:
+            schema:
+              required:
+              - accountName
+              - azureCredentials
+              - cloudType
+              - gcpCredentials
+              type: object
+              properties:
+                accountId:
+                  type: string
+                accountName:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+                awsIamCredentials:
+                  required:
+                  - externalId
+                  - roleArn
+                  type: object
+                  properties:
+                    externalId:
+                      type: string
+                    roleArn:
+                      type: string
+                  $$ref: '#/components/schemas/AwsIamCredentials'
+                awsKeyCredentials:
+                  required:
+                  - apiKey
+                  - secretKey
+                  type: object
+                  properties:
+                    apiKey:
+                      type: string
+                    secretKey:
+                      type: string
+                  $$ref: '#/components/schemas/AwsKeyCredentials'
+                azureCredentials:
+                  required:
+                  - clientId
+                  - cloudTenantId
+                  - secretKey
+                  type: object
+                  properties:
+                    clientId:
+                      pattern: ^[a-zA-Z0-9\-]*$
+                      type: string
+                    cloudTenantId:
+                      pattern: ^[a-zA-Z0-9\-]*$
+                      type: string
+                    secretKey:
+                      type: string
+                    subscriptionId:
+                      pattern: ^[a-zA-Z0-9\-]*$
+                      type: string
+                  $$ref: '#/components/schemas/AzureCredentials'
+                cloudGatewayEnabled:
+                  pattern: ^(true|false)$
+                  type: string
+                cloudType:
+                  type: string
+                description:
+                  maxLength: 1024
+                  minLength: 0
+                  pattern: ^[a-zA-Z0-9_./\-\s]*$
+                  type: string
+                discoverAllVnetsInTenantEnabled:
+                  pattern: ^(true|false)$
+                  type: string
+                gcpBillingId:
+                  pattern: ^[a-zA-Z0-9_./\-\s]+$
+                  type: string
+                gcpCredentials:
+                  required:
+                  - auth_provider_x509_cert_url
+                  - auth_uri
+                  - client_email
+                  - client_id
+                  - client_x509_cert_url
+                  - private_key
+                  - private_key_id
+                  - project_id
+                  - token_uri
+                  - type
+                  type: object
+                  properties:
+                    auth_provider_x509_cert_url:
+                      type: string
+                    auth_uri:
+                      type: string
+                    client_email:
+                      type: string
+                    client_id:
+                      type: string
+                    client_x509_cert_url:
+                      type: string
+                    private_key:
+                      type: string
+                    private_key_id:
+                      type: string
+                    project_id:
+                      type: string
+                    token_uri:
+                      type: string
+                    type:
+                      type: string
+                  $$ref: '#/components/schemas/GcpCredentials'
+                kubernetesDiscoveryEnabled:
+                  pattern: ^(true|false)$
+                  type: string
+                serviceDiscoveryEnabled:
+                  pattern: ^(true|false)$
+                  type: string
+              $$ref: '#/components/schemas/PostAccounts'
+            examples:
+              GCP Add Account request:
+                description: GCP Add Account request
+                value:
+                - accountName: pp-gcp
+                  cloudGatewayEnabled: true
+                  cloudType: GCP
+                  description: pp-test
+                  gcpCredentials:
+                    value:
+                      auth_provider_x509_cert_url: https://www.googleapis.com/test
+                      auth_uri: https://accounts.google.com/test
+                      client_email: gcp-pp@gcp.com
+                      client_id: '1234'
+                      client_x509_cert_url: https://www.googleapis.com/test
+                      private_key: REDACTED_PRIVATE_KEY_EXAMPLE
+                      private_key_id: '45678'
+                      project_id: gcp-ppp-21471
+                      token_uri: https://oauth2.googleapis.com/test
+                      type: service_account
+                  serviceDiscoveryEnabled: false
+              AWS Iam/AWS Iam GovCloud Add Account request:
+                description: AWS Iam/AWS Iam GovCloud Add Account request
+                value:
+                - cloudType: AWS
+                  accountName: aws_acct_102
+                  description: aws_acct_102 desc
+                  awsIamCredentials:
+                    roleArn: arn101
+                    externalId: ext101
+              AWS key/AWS key GovCloud Add Account request:
+                description: AWS key/AWS key GovCloud Add Account request
+                value:
+                - cloudType: AWS
+                  accountName: aws_acct_102
+                  description: aws_acct_102 desc
+                  awsKeyCredentials:
+                    apiKey: key102
+                    secretKey: skey102
+                  cloudGatewayEnabled: 'true'
+              Azure/Azure GovCloud Add Account request:
+                description: Azure/Azure GovCloud Add Account request
+                value:
+                - cloudType: AZURE
+                  accountName: azure_acct_102
+                  description: azure_acct_102 desc
+                  azureCredentials:
+                    subscriptionId: sub103
+                    secretKey: skey103
+                    clientId: clientid103
+                    cloudTenantId: clienttenant103
+                  cloudGatewayEnabled: 'true'
+                  azO365Enabled: 'true'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accountId:
+                    type: string
+                  accountName:
+                    type: string
+                  cloudType:
+                    type: string
+                  regionList:
+                    type: string
+                $$ref: '#/components/schemas/PostAccountsResponse'
+              examples:
+                GCP Account Details:
+                  description: GCP Account Details
+                  value: "[\n  {\n  \"accountName\": \"pp-gcp\",\n  \"clientEmail\": \"pp@gcpClientEmail.com\",\n  \"regionList\": {\n    \"value\": [\n      \"asia-east1\",\n      \"asia-east2\",\n      \"asia-northeast1\",\n      \"asia-northeast2\",\n      \"asia-northeast3\",\n      \"asia-south1\",\n      \"asia-south2\",\n      \"asia-southeast1\",\n      \"asia-southeast2\",\n      \"australia-southeast1\",\n      \"australia-southeast2\",\n      \"europe-central2\",\n      \"europe-north1\",\n      \"europe-southwest1\",\n      \"europe-west1\",\n      \"europe-west2\",\n      \"europe-west3\",\n      \"europe-west4\",\n      \"europe-west6\",\n      \"europe-west8\",\n      \"europe-west9\",\n      \"northamerica-northeast1\",\n      \"northamerica-northeast2\",\n      \"southamerica-east1\",\n      \"southamerica-west1\",\n      \"us-central1\",\n      \"us-east1\",\n      \"us-east4\",\n      \"us-east5\",\n      \"us-west1\",\n      \"us-west2\",\n      \"us-west3\",\n      \"us-west4\"\n    ]\n  },\n  \"description\": \"pp-individual\",\n  \"serviceDiscoveryEnabled\": false,\n  \"accountId\": \"gcp-pp-nprd\",\n  \"gcpBillingId\": \"\",\n  \"cloudGatewayEnabled\": true,\n  \"credType\": \"GCP\",\n  \"cloudType\": \"GCP\",\n  \"privateKeyId\": \"123456\", \n  \"accountIdDescription\": \"Project Id\",\n  }\n]"
+                Aws Account Details:
+                  description: Aws Account Details
+                  value: "[\n{\n  \"accountName\": \"pp-aws\",\n  \"regionList\": {\n    \"value\": [\n      \"af-south-1\",\n      \"eu-north-1\",\n      \"ap-south-1\",\n      \"eu-west-3\",\n      \"eu-west-2\",\n      \"eu-south-1\",\n      \"eu-west-1\",\n      \"ap-northeast-3\",\n      \"ap-northeast-2\",\n      \"me-south-1\",\n      \"ap-northeast-1\",\n      \"sa-east-1\",\n      \"ca-central-1\",\n      \"ap-east-1\",\n      \"ap-southeast-1\",\n      \"ap-southeast-2\",\n      \"eu-central-1\",\n      \"ap-southeast-3\",\n      \"us-east-1\",\n      \"us-east-2\",\n      \"us-west-1\",\n      \"us-west-2\"\n    ]\n  },\n  \"description\": \"AWS account - pp-individual\",\n  \"serviceDiscoveryEnabled\": false,\n  \"accountId\": \"aws-pp-nprd\",\n  \"cloudGatewayEnabled\": true,\n  \"credType\": \"AWS_KEY\",\n  \"cloudType\": \"AWS\"\n  \"accountIdDescription\": \"\",\n  }\n]"
+                Aws GovCloud Account Details:
+                  description: Aws GovCloud Account Details
+                  value: "[\n{\n  \"accountName\": \"pp-awsGovCloud\",\n  \"regionList\": {\n    \"value\": [\n      \"us-gov-west-1\",\n      \"us-gov-east-1\"\n    ]\n  },\n  \"description\": \"AWS govCloud account - pp-individual\",\n  \"serviceDiscoveryEnabled\": false,\n  \"accountId\": \"awsGovCloud-pp-nprd-68636\",\n  \"cloudGatewayEnabled\": true,\n  \"credType\": \"AWS_KEY\",\n  \"cloudType\": \"AWS_GOVCLOUD\"\n  \"accountIdDescription\": \"\",\n  }\n]"
+                Azure Account Details:
+                  description: Azure Account Details
+                  value:
+                  - accountName: pp-azure
+                    regionList:
+                      value:
+                      - eastus
+                      - eastus2
+                      - southcentralus
+                      - westus2
+                      - westus3
+                      - australiaeast
+                      - southeastasia
+                      - northeurope
+                      - swedencentral
+                      - uksouth
+                      - westeurope
+                      - centralus
+                      - southafricanorth
+                      - centralindia
+                      - eastasia
+                      - japaneast
+                      - koreacentral
+                      - canadacentral
+                      - francecentral
+                      - germanywestcentral
+                      - norwayeast
+                      - switzerlandnorth
+                      - brazilsouth
+                      - eastus2euap
+                      - centralusstage
+                      - eastusstage
+                      - eastus2stage
+                      - northcentralusstage
+                      - southcentralusstage
+                      - westusstage
+                      - westus2stage
+                      - asia
+                      - asiapacific
+                      - australia
+                      - brazil
+                      - canada
+                      - europe
+                      - france
+                      - germany
+                      - global
+                      - india
+                      - japan
+                      - korea
+                      - norway
+                      - southafrica
+                      - switzerland
+                      - uae
+                      - uk
+                      - unitedstates
+                      - unitedstateseuap
+                      - eastasiastage
+                      - southeastasiastage
+                      - northcentralus
+                      - westus
+                      - jioindiawest
+                      - uaenorth
+                      - centraluseuap
+                      - westcentralus
+                      - southafricawest
+                      - australiacentral
+                      - australiacentral2
+                      - australiasoutheast
+                      - japanwest
+                      - jioindiacentral
+                      - koreasouth
+                      - southindia
+                      - westindia
+                      - canadaeast
+                      - francesouth
+                      - germanynorth
+                      - norwaywest
+                      - switzerlandwest
+                      - ukwest
+                      - uaecentral
+                      - brazilsoutheast
+                    description: Azure account - pp-individual
+                    serviceDiscoveryEnabled: false
+                    discoverAllVnetsInTenantEnabled: false
+                    accountId: azure-pp-nprd-68636
+                    accountIdDescription: Subscription Id
+                    gcpBillingId: ''
+                    cloudGatewayEnabled: true
+                    credType: AZURE
+                    cloudType: AZURE
+                Azure GovCloud Account Details:
+                  description: Azure GovCloud Account Details
+                  value:
+                  - accountName: pp-awsGovCloud
+                    regionList:
+                      value:
+                      - usgovvirginia
+                      - global
+                      - usgovarizona
+                      - usdodcentral
+                      - usdodeast
+                      - usgoviowa
+                      - usgovtexas
+                    description: Azure govCloud account - pp-individual
+                    serviceDiscoveryEnabled: false
+                    discoverAllVnetsInTenantEnabled: false
+                    accountIdDescription: Subscription Id
+                    cloudGatewayEnabled: true
+                    credType: AZURE_KEY
+                    cloudType: AZURE_GOVCLOUD
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/accounts/{accountId}:
+    delete:
+      tags:
+      - MultiCloud - Accounts
+      description: Obtain all accounts for all clouds
+      operationId: deleteAccount
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    get:
+      tags:
+      - MultiCloud - Accounts
+      description: Obtain all accounts for all clouds
+      operationId: getCloudAccountDetails
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accountId:
+                    type: string
+                  accountName:
+                    type: string
+                  clientEmail:
+                    type: string
+                  cloudGatewayEnabled:
+                    type: boolean
+                  cloudType:
+                    type: string
+                  credType:
+                    type: string
+                  description:
+                    type: string
+                  gcpBillingId:
+                    type: string
+                  privateKeyId:
+                    type: string
+                  regionList:
+                    type: string
+                  serviceDiscoveryEnabled:
+                    type: boolean
+                $$ref: '#/components/schemas/GetAccounts'
+              examples:
+                GCP Account Details:
+                  description: GCP Account Details
+                  value: "[\n  {\n  \"accountName\": \"pp-gcp\",\n  \"clientEmail\": \"pp@gcpClientEmail.com\",\n  \"regionList\": {\n    \"value\": [\n      \"asia-east1\",\n      \"asia-east2\",\n      \"asia-northeast1\",\n      \"asia-northeast2\",\n      \"asia-northeast3\",\n      \"asia-south1\",\n      \"asia-south2\",\n      \"asia-southeast1\",\n      \"asia-southeast2\",\n      \"australia-southeast1\",\n      \"australia-southeast2\",\n      \"europe-central2\",\n      \"europe-north1\",\n      \"europe-southwest1\",\n      \"europe-west1\",\n      \"europe-west2\",\n      \"europe-west3\",\n      \"europe-west4\",\n      \"europe-west6\",\n      \"europe-west8\",\n      \"europe-west9\",\n      \"northamerica-northeast1\",\n      \"northamerica-northeast2\",\n      \"southamerica-east1\",\n      \"southamerica-west1\",\n      \"us-central1\",\n      \"us-east1\",\n      \"us-east4\",\n      \"us-east5\",\n      \"us-west1\",\n      \"us-west2\",\n      \"us-west3\",\n      \"us-west4\"\n    ]\n  },\n  \"description\": \"pp-individual\",\n  \"serviceDiscoveryEnabled\": false,\n  \"accountId\": \"gcp-pp-nprd\",\n  \"gcpBillingId\": \"\",\n  \"cloudGatewayEnabled\": true,\n  \"credType\": \"GCP\",\n  \"cloudType\": \"GCP\",\n  \"privateKeyId\": \"123456\", \n  \"accountIdDescription\": \"Project Id\",\n  }\n]"
+                Aws Account Details:
+                  description: Aws Account Details
+                  value: "[\n{\n  \"accountName\": \"pp-aws\",\n  \"regionList\": {\n    \"value\": [\n      \"af-south-1\",\n      \"eu-north-1\",\n      \"ap-south-1\",\n      \"eu-west-3\",\n      \"eu-west-2\",\n      \"eu-south-1\",\n      \"eu-west-1\",\n      \"ap-northeast-3\",\n      \"ap-northeast-2\",\n      \"me-south-1\",\n      \"ap-northeast-1\",\n      \"sa-east-1\",\n      \"ca-central-1\",\n      \"ap-east-1\",\n      \"ap-southeast-1\",\n      \"ap-southeast-2\",\n      \"eu-central-1\",\n      \"ap-southeast-3\",\n      \"us-east-1\",\n      \"us-east-2\",\n      \"us-west-1\",\n      \"us-west-2\"\n    ]\n  },\n  \"description\": \"AWS account - pp-individual\",\n  \"serviceDiscoveryEnabled\": false,\n  \"accountId\": \"aws-pp-nprd\",\n  \"cloudGatewayEnabled\": true,\n  \"credType\": \"AWS_KEY\",\n  \"cloudType\": \"AWS\"\n  \"accountIdDescription\": \"\",\n  }\n]"
+                Aws GovCloud Account Details:
+                  description: Aws GovCloud Account Details
+                  value: "[\n{\n  \"accountName\": \"pp-awsGovCloud\",\n  \"regionList\": {\n    \"value\": [\n      \"us-gov-west-1\",\n      \"us-gov-east-1\"\n    ]\n  },\n  \"description\": \"AWS govCloud account - pp-individual\",\n  \"serviceDiscoveryEnabled\": false,\n  \"accountId\": \"awsGovCloud-pp-nprd-68636\",\n  \"cloudGatewayEnabled\": true,\n  \"credType\": \"AWS_KEY\",\n  \"cloudType\": \"AWS_GOVCLOUD\"\n  \"accountIdDescription\": \"\",\n  }\n]"
+                Azure Account Details:
+                  description: Azure Account Details
+                  value:
+                  - accountName: pp-azure
+                    regionList:
+                      value:
+                      - eastus
+                      - eastus2
+                      - southcentralus
+                      - westus2
+                      - westus3
+                      - australiaeast
+                      - southeastasia
+                      - northeurope
+                      - swedencentral
+                      - uksouth
+                      - westeurope
+                      - centralus
+                      - southafricanorth
+                      - centralindia
+                      - eastasia
+                      - japaneast
+                      - koreacentral
+                      - canadacentral
+                      - francecentral
+                      - germanywestcentral
+                      - norwayeast
+                      - switzerlandnorth
+                      - brazilsouth
+                      - eastus2euap
+                      - centralusstage
+                      - eastusstage
+                      - eastus2stage
+                      - northcentralusstage
+                      - southcentralusstage
+                      - westusstage
+                      - westus2stage
+                      - asia
+                      - asiapacific
+                      - australia
+                      - brazil
+                      - canada
+                      - europe
+                      - france
+                      - germany
+                      - global
+                      - india
+                      - japan
+                      - korea
+                      - norway
+                      - southafrica
+                      - switzerland
+                      - uae
+                      - uk
+                      - unitedstates
+                      - unitedstateseuap
+                      - eastasiastage
+                      - southeastasiastage
+                      - northcentralus
+                      - westus
+                      - jioindiawest
+                      - uaenorth
+                      - centraluseuap
+                      - westcentralus
+                      - southafricawest
+                      - australiacentral
+                      - australiacentral2
+                      - australiasoutheast
+                      - japanwest
+                      - jioindiacentral
+                      - koreasouth
+                      - southindia
+                      - westindia
+                      - canadaeast
+                      - francesouth
+                      - germanynorth
+                      - norwaywest
+                      - switzerlandwest
+                      - ukwest
+                      - uaecentral
+                      - brazilsoutheast
+                    description: Azure account - pp-individual
+                    serviceDiscoveryEnabled: false
+                    discoverAllVnetsInTenantEnabled: false
+                    accountId: azure-pp-nprd-68636
+                    accountIdDescription: Subscription Id
+                    gcpBillingId: ''
+                    cloudGatewayEnabled: true
+                    credType: AZURE
+                    cloudType: AZURE
+                Azure GovCloud Account Details:
+                  description: Azure GovCloud Account Details
+                  value:
+                  - accountName: pp-awsGovCloud
+                    regionList:
+                      value:
+                      - usgovvirginia
+                      - global
+                      - usgovarizona
+                      - usdodcentral
+                      - usdodeast
+                      - usgoviowa
+                      - usgovtexas
+                    description: Azure govCloud account - pp-individual
+                    serviceDiscoveryEnabled: false
+                    discoverAllVnetsInTenantEnabled: false
+                    accountIdDescription: Subscription Id
+                    cloudGatewayEnabled: true
+                    credType: AZURE_KEY
+                    cloudType: AZURE_GOVCLOUD
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    put:
+      tags:
+      - MultiCloud - Accounts
+      description: Obtain all accounts for all clouds
+      operationId: updateAccount
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Payloads for updating Cloud Gateway based on CloudType
+        content:
+          application/json:
+            schema:
+              required:
+              - accountId
+              - accountName
+              - cloudType
+              type: object
+              properties:
+                accountId:
+                  type: string
+                accountName:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+                cloudGatewayEnabled:
+                  pattern: ^(true|false)$
+                  type: string
+                cloudType:
+                  type: string
+                description:
+                  maxLength: 1024
+                  minLength: 0
+                  pattern: ^[a-zA-Z0-9_./\-\s]*$
+                  type: string
+                discoverAllVnetsInTenantEnabled:
+                  pattern: ^(true|false)$
+                  type: string
+                gcpBillingId:
+                  type: string
+                kubernetesDiscoveryEnabled:
+                  pattern: ^(true|false)$
+                  type: string
+                serviceDiscoveryEnabled:
+                  pattern: ^(true|false)$
+                  type: string
+              $$ref: '#/components/schemas/PutAccounts'
+            examples:
+              GCP Update Account request:
+                description: GCP Update Account request
+                value:
+                  accountName: priypat3-gcp-01
+                  description: priypat3-individual
+                  serviceDiscoveryEnabled: false
+                  accountId: gcp-priypat3gcp01-nprd-68636
+                  gcpBillingId: ''
+                  cloudGatewayEnabled: true
+                  cloudType: GCP
+              AWS/AWS GovCloud Update Account request:
+                description: AWS/AWS GovCloud Update Account request
+                value:
+                  accountId: 123aws
+                  accountName: pp-aws
+                  cloudGatewayEnabled: 'true'
+                  cloudType: AWS
+                  description: pp-aws
+              Azure/Azure GovCloud Update Account request:
+                description: Azure/Azure GovCloud Update Account request
+                value:
+                  accountId: 123abcc
+                  accountName: pp-azure
+                  cloudGatewayEnabled: 'true'
+                  cloudType: AZURE
+                  description: pp-azure
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/accounts/{accountId}/credentials:
+    put:
+      tags:
+      - MultiCloud - Accounts
+      description: Update Cloud Account Credentials
+      operationId: validateAccountUpdateCredentials
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Payloads for updating Cloud Gateway based on CloudType
+        content:
+          application/json:
+            schema:
+              required:
+              - accountName
+              - azureCredentials
+              - cloudType
+              - gcpCredentials
+              type: object
+              properties:
+                accountId:
+                  type: string
+                accountName:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+                awsIamCredentials:
+                  required:
+                  - externalId
+                  - roleArn
+                  type: object
+                  properties:
+                    externalId:
+                      type: string
+                    roleArn:
+                      type: string
+                  $$ref: '#/components/schemas/AwsIamCredentials'
+                awsKeyCredentials:
+                  required:
+                  - apiKey
+                  - secretKey
+                  type: object
+                  properties:
+                    apiKey:
+                      type: string
+                    secretKey:
+                      type: string
+                  $$ref: '#/components/schemas/AwsKeyCredentials'
+                azureCredentials:
+                  required:
+                  - clientId
+                  - cloudTenantId
+                  - secretKey
+                  type: object
+                  properties:
+                    clientId:
+                      pattern: ^[a-zA-Z0-9\-]*$
+                      type: string
+                    cloudTenantId:
+                      pattern: ^[a-zA-Z0-9\-]*$
+                      type: string
+                    secretKey:
+                      type: string
+                    subscriptionId:
+                      pattern: ^[a-zA-Z0-9\-]*$
+                      type: string
+                  $$ref: '#/components/schemas/AzureCredentials'
+                cloudGatewayEnabled:
+                  pattern: ^(true|false)$
+                  type: string
+                cloudType:
+                  type: string
+                description:
+                  maxLength: 1024
+                  minLength: 0
+                  pattern: ^[a-zA-Z0-9_./\-\s]*$
+                  type: string
+                discoverAllVnetsInTenantEnabled:
+                  pattern: ^(true|false)$
+                  type: string
+                gcpBillingId:
+                  pattern: ^[a-zA-Z0-9_./\-\s]+$
+                  type: string
+                gcpCredentials:
+                  required:
+                  - auth_provider_x509_cert_url
+                  - auth_uri
+                  - client_email
+                  - client_id
+                  - client_x509_cert_url
+                  - private_key
+                  - private_key_id
+                  - project_id
+                  - token_uri
+                  - type
+                  type: object
+                  properties:
+                    auth_provider_x509_cert_url:
+                      type: string
+                    auth_uri:
+                      type: string
+                    client_email:
+                      type: string
+                    client_id:
+                      type: string
+                    client_x509_cert_url:
+                      type: string
+                    private_key:
+                      type: string
+                    private_key_id:
+                      type: string
+                    project_id:
+                      type: string
+                    token_uri:
+                      type: string
+                    type:
+                      type: string
+                  $$ref: '#/components/schemas/GcpCredentials'
+                kubernetesDiscoveryEnabled:
+                  pattern: ^(true|false)$
+                  type: string
+                serviceDiscoveryEnabled:
+                  pattern: ^(true|false)$
+                  type: string
+              $$ref: '#/components/schemas/PostAccounts'
+            examples:
+              GCP Update Account request:
+                description: GCP Update Account request
+                value:
+                - accountName: pp-gcp
+                  cloudGatewayEnabled: true
+                  cloudType: GCP
+                  description: pp-test
+                  gcpCredentials:
+                    value:
+                      auth_provider_x509_cert_url: https://www.googleapis.com/test
+                      auth_uri: https://accounts.google.com/test
+                      client_email: gcp-pp@gcp.com
+                      client_id: '1234'
+                      client_x509_cert_url: https://www.googleapis.com/test
+                      private_key: REDACTED_PRIVATE_KEY_EXAMPLE
+                      private_key_id: '45678'
+                      project_id: gcp-ppp-21471
+                      token_uri: https://oauth2.googleapis.com/test
+                      type: service_account
+                  serviceDiscoveryEnabled: false
+              AWS Iam/AWS Iam GovCloud Update Account request:
+                description: AWS Iam/AWS Iam GovCloud Update Account request
+                value:
+                - cloudType: AWS
+                  accountName: aws_acct_102
+                  description: aws_acct_102 desc
+                  awsIamCredentials:
+                    roleArn: arn101
+                    externalId: ext101
+              AWS key/AWS key GovCloud Update Account request:
+                description: AWS key/AWS key GovCloud Update Account request
+                value:
+                - cloudType: AWS
+                  accountName: aws_acct_102
+                  description: aws_acct_102 desc
+                  awsKeyCredentials:
+                    apiKey: key102
+                    secretKey: skey102
+                  cloudGatewayEnabled: 'true'
+              Azure/Azure GovCloud Update Account request:
+                description: Azure/Azure GovCloud Update Account request
+                value:
+                - cloudType: AZURE
+                  accountName: azure_acct_102
+                  description: azure_acct_102 desc
+                  azureCredentials:
+                    subscriptionId: sub103
+                    secretKey: skey103
+                    clientId: clientid103
+                    cloudTenantId: clienttenant103
+                  cloudGatewayEnabled: 'true'
+                  azO365Enabled: 'true'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accountId:
+                    type: string
+                  accountName:
+                    type: string
+                  cloudType:
+                    type: string
+                  regionList:
+                    type: string
+                $$ref: '#/components/schemas/PostAccountsResponse'
+              examples:
+                GCP Account Details:
+                  description: GCP Account Details
+                  value: "[\n  {\n  \"accountName\": \"pp-gcp\",\n  \"clientEmail\": \"pp@gcpClientEmail.com\",\n  \"regionList\": {\n    \"value\": [\n      \"asia-east1\",\n      \"asia-east2\",\n      \"asia-northeast1\",\n      \"asia-northeast2\",\n      \"asia-northeast3\",\n      \"asia-south1\",\n      \"asia-south2\",\n      \"asia-southeast1\",\n      \"asia-southeast2\",\n      \"australia-southeast1\",\n      \"australia-southeast2\",\n      \"europe-central2\",\n      \"europe-north1\",\n      \"europe-southwest1\",\n      \"europe-west1\",\n      \"europe-west2\",\n      \"europe-west3\",\n      \"europe-west4\",\n      \"europe-west6\",\n      \"europe-west8\",\n      \"europe-west9\",\n      \"northamerica-northeast1\",\n      \"northamerica-northeast2\",\n      \"southamerica-east1\",\n      \"southamerica-west1\",\n      \"us-central1\",\n      \"us-east1\",\n      \"us-east4\",\n      \"us-east5\",\n      \"us-west1\",\n      \"us-west2\",\n      \"us-west3\",\n      \"us-west4\"\n    ]\n  },\n  \"description\": \"pp-individual\",\n  \"serviceDiscoveryEnabled\": false,\n  \"accountId\": \"gcp-pp-nprd\",\n  \"gcpBillingId\": \"\",\n  \"cloudGatewayEnabled\": true,\n  \"credType\": \"GCP\",\n  \"cloudType\": \"GCP\",\n  \"privateKeyId\": \"123456\", \n  \"accountIdDescription\": \"Project Id\",\n  }\n]"
+                Aws Account Details:
+                  description: Aws Account Details
+                  value: "[\n{\n  \"accountName\": \"pp-aws\",\n  \"regionList\": {\n    \"value\": [\n      \"af-south-1\",\n      \"eu-north-1\",\n      \"ap-south-1\",\n      \"eu-west-3\",\n      \"eu-west-2\",\n      \"eu-south-1\",\n      \"eu-west-1\",\n      \"ap-northeast-3\",\n      \"ap-northeast-2\",\n      \"me-south-1\",\n      \"ap-northeast-1\",\n      \"sa-east-1\",\n      \"ca-central-1\",\n      \"ap-east-1\",\n      \"ap-southeast-1\",\n      \"ap-southeast-2\",\n      \"eu-central-1\",\n      \"ap-southeast-3\",\n      \"us-east-1\",\n      \"us-east-2\",\n      \"us-west-1\",\n      \"us-west-2\"\n    ]\n  },\n  \"description\": \"AWS account - pp-individual\",\n  \"serviceDiscoveryEnabled\": false,\n  \"accountId\": \"aws-pp-nprd\",\n  \"cloudGatewayEnabled\": true,\n  \"credType\": \"AWS_KEY\",\n  \"cloudType\": \"AWS\"\n  \"accountIdDescription\": \"\",\n  }\n]"
+                Aws GovCloud Account Details:
+                  description: Aws GovCloud Account Details
+                  value: "[\n{\n  \"accountName\": \"pp-awsGovCloud\",\n  \"regionList\": {\n    \"value\": [\n      \"us-gov-west-1\",\n      \"us-gov-east-1\"\n    ]\n  },\n  \"description\": \"AWS govCloud account - pp-individual\",\n  \"serviceDiscoveryEnabled\": false,\n  \"accountId\": \"awsGovCloud-pp-nprd-68636\",\n  \"cloudGatewayEnabled\": true,\n  \"credType\": \"AWS_KEY\",\n  \"cloudType\": \"AWS_GOVCLOUD\"\n  \"accountIdDescription\": \"\",\n  }\n]"
+                Azure Account Details:
+                  description: Azure Account Details
+                  value:
+                  - accountName: pp-azure
+                    regionList:
+                      value:
+                      - eastus
+                      - eastus2
+                      - southcentralus
+                      - westus2
+                      - westus3
+                      - australiaeast
+                      - southeastasia
+                      - northeurope
+                      - swedencentral
+                      - uksouth
+                      - westeurope
+                      - centralus
+                      - southafricanorth
+                      - centralindia
+                      - eastasia
+                      - japaneast
+                      - koreacentral
+                      - canadacentral
+                      - francecentral
+                      - germanywestcentral
+                      - norwayeast
+                      - switzerlandnorth
+                      - brazilsouth
+                      - eastus2euap
+                      - centralusstage
+                      - eastusstage
+                      - eastus2stage
+                      - northcentralusstage
+                      - southcentralusstage
+                      - westusstage
+                      - westus2stage
+                      - asia
+                      - asiapacific
+                      - australia
+                      - brazil
+                      - canada
+                      - europe
+                      - france
+                      - germany
+                      - global
+                      - india
+                      - japan
+                      - korea
+                      - norway
+                      - southafrica
+                      - switzerland
+                      - uae
+                      - uk
+                      - unitedstates
+                      - unitedstateseuap
+                      - eastasiastage
+                      - southeastasiastage
+                      - northcentralus
+                      - westus
+                      - jioindiawest
+                      - uaenorth
+                      - centraluseuap
+                      - westcentralus
+                      - southafricawest
+                      - australiacentral
+                      - australiacentral2
+                      - australiasoutheast
+                      - japanwest
+                      - jioindiacentral
+                      - koreasouth
+                      - southindia
+                      - westindia
+                      - canadaeast
+                      - francesouth
+                      - germanynorth
+                      - norwaywest
+                      - switzerlandwest
+                      - ukwest
+                      - uaecentral
+                      - brazilsoutheast
+                    description: Azure account - pp-individual
+                    serviceDiscoveryEnabled: false
+                    discoverAllVnetsInTenantEnabled: false
+                    accountId: azure-pp-nprd-68636
+                    accountIdDescription: Subscription Id
+                    gcpBillingId: ''
+                    cloudGatewayEnabled: true
+                    credType: AZURE
+                    cloudType: AZURE
+                Azure GovCloud Account Details:
+                  description: Azure GovCloud Account Details
+                  value:
+                  - accountName: pp-awsGovCloud
+                    regionList:
+                      value:
+                      - usgovvirginia
+                      - global
+                      - usgovarizona
+                      - usdodcentral
+                      - usdodeast
+                      - usgoviowa
+                      - usgovtexas
+                    description: Azure govCloud account - pp-individual
+                    serviceDiscoveryEnabled: false
+                    discoverAllVnetsInTenantEnabled: false
+                    accountIdDescription: Subscription Id
+                    cloudGatewayEnabled: true
+                    credType: AZURE_KEY
+                    cloudType: AZURE_GOVCLOUD
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

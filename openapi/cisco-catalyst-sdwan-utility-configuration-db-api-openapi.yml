@@ -1,0 +1,250 @@
+openapi: 3.2.0
+info:
+  title: Others Utility - Configuration DB API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Utility - Configuration DB
+paths:
+  /util/configdb/metrics:
+    get:
+      tags:
+      - Utility - Configuration DB
+      summary: Return the values of the specific metric
+      description: 'By passing in the appropriate metric, it will return the values of the respective metric within the timeframe provided '
+      operationId: returnMetric
+      parameters:
+      - name: metricName
+        in: query
+        description: Pass the metric name
+        required: true
+        schema:
+          pattern: ^[a-zA-Z0-9._]*$
+          type: string
+        example: neo4j.bolt.connections_running
+      - name: startDate
+        in: query
+        description: Date in yyyy-MM-dd format or any Number format. If a number is passed, that will be the number of minutes. The start/end will be translated as <current date/time – minutes passed> and <current date/time> respectively.
+        required: true
+        schema:
+          type: string
+        examples:
+          yyyy-MM-dd:
+            description: yyyy-MM-dd
+            value: '2022-11-20'
+          number (minutes):
+            description: number (minutes)
+            value: 10
+      - name: endDate
+        in: query
+        description: Date in yyyy-MM-dd format. The end date is given if data from multiple dates needs to be extracted. If single date data needed then endDate can be empty. endDate cannot be a previous date to the startDate.
+        schema:
+          type: string
+        example: '2022-11-23'
+      - name: start
+        in: query
+        description: Start Time in HHMMSS format; Time in UTC timezone
+        schema:
+          pattern: ^(?:[01]\d|2[0123])(?:[012345]\d)(?:[012345]\d)$
+          type: string
+        example: 142430
+      - name: end
+        in: query
+        description: End Time in HHMMSS format; Time in UTC timezone
+        schema:
+          pattern: ^(?:[01]\d|2[0123])(?:[012345]\d)(?:[012345]\d)$
+          type: string
+        example: 235830
+      - name: pageNo
+        in: query
+        description: Page Number
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+          format: int32
+          default: 1
+      - name: limit
+        in: query
+        description: The numbers of items to return on given Page Number
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+          format: int32
+          default: 500
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        time:
+                          type: string
+                          description: timestamp in seconds
+                          example: '123344555'
+                        value:
+                          type: string
+                          description: count/value for corresponding timestamp
+                          example: '718'
+                      $$ref: '#/components/schemas/MetricData'
+                  limit:
+                    type: integer
+                    description: limit given in reqeust. By default - 500
+                    format: int64
+                    example: 50
+                  pageNo:
+                    type: integer
+                    description: Page Number given in request. By default - 1
+                    format: int32
+                    example: 3
+                  recordsCurrentPage:
+                    type: integer
+                    description: Records present on the current page
+                    format: int64
+                    example: 20
+                  totalPages:
+                    type: integer
+                    description: Total Pages calculates based on limit and totalRecords values
+                    format: int32
+                    example: 3
+                  totalRecords:
+                    type: integer
+                    description: Total count of metrics records ignoring limit
+                    format: int32
+                    example: 120
+                $$ref: '#/components/schemas/Neo4jMetricsResponse'
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /util/configdb/metrics/downloadfiles:
+    get:
+      tags:
+      - Utility - Configuration DB
+      summary: Return the tar file consisting of metrics
+      description: 'By passing in the appropriate metric, date, start and end time, it will return a tar file consisting of all the metric files of the respective metric within the timeframe provided '
+      operationId: returnMetricFiles
+      parameters:
+      - name: metricName
+        in: query
+        description: Pass the metric name
+        required: true
+        schema:
+          pattern: ^[a-zA-Z0-9._]*$
+          type: string
+        example: neo4j.bolt.connections_running
+      - name: startDate
+        in: query
+        description: Date in yyyy-MM-dd format or any Number format. If a number is passed, that will be the number of minutes. The start/end will be translated as <current date/time – minutes passed> and <current date/time> respectively.
+        required: true
+        schema:
+          type: string
+        examples:
+          yyyy-MM-dd:
+            description: yyyy-MM-dd
+            value: '2022-11-20'
+          number (minutes):
+            description: number (minutes)
+            value: 10
+      - name: endDate
+        in: query
+        description: Date in yyyy-MM-dd format. The end date is given if data from multiple dates needs to be extracted. If single date data needed then endDate can be empty. endDate cannot be a previous date to the startDate.
+        schema:
+          type: string
+        example: '2022-11-23'
+      - name: start
+        in: query
+        description: Start Time in HHMMSS format; Time in UTC timezone
+        schema:
+          pattern: ^(?:[01]\d|2[0123])(?:[012345]\d)(?:[012345]\d)$
+          type: string
+        example: 142430
+      - name: end
+        in: query
+        description: End Time in HHMMSS format; Time in UTC timezone
+        schema:
+          pattern: ^(?:[01]\d|2[0123])(?:[012345]\d)(?:[012345]\d)$
+          type: string
+        example: 235830
+      responses:
+        '200':
+          description: return tarball file matching criteria
+          content:
+            application/gzip:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /util/configdb/metrics/listmetrics:
+    get:
+      tags:
+      - Utility - Configuration DB
+      summary: Provides the list of enabled metrics
+      description: Fetches the list of enabled metrics
+      operationId: getMetricsList
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /util/configdb/size:
+    get:
+      tags:
+      - Utility - Configuration DB
+      description: Fetches the disk usage by configuration-db
+      operationId: getDBSizeOnFile
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

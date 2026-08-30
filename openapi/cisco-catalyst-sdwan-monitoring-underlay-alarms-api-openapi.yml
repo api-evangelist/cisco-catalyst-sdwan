@@ -1,0 +1,252 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Monitoring - Underlay Alarms API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Monitoring - Underlay Alarms
+paths:
+  /device/underlay/alarms/{type}:
+    get:
+      tags:
+      - Monitoring - Underlay Alarms
+      description: Get Underlay Alarms Overview
+      operationId: getUnderlayAlarmsOverview
+      parameters:
+      - name: type
+        in: path
+        description: Underlay Alarms filter
+        required: true
+        schema:
+          pattern: alarm|device
+          type: string
+          enum:
+          - alarm
+          - device
+      - name: last_n_hours
+        in: query
+        schema:
+          maximum: 24
+          minimum: 1
+          type: integer
+          format: int32
+          default: 12
+      - name: limit
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+          default: 30
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          alarms:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                count:
+                                  type: integer
+                                  format: int64
+                                  example: 10
+                                ruleName:
+                                  type: string
+                                  example: interface-state-change
+                                ruleNameDisplay:
+                                  type: string
+                                  example: Interface_State_Change
+                                severity:
+                                  type: string
+                                  example: Critical
+                              $$ref: '#/components/schemas/DeviceAlarmData'
+                          count:
+                            type: integer
+                            format: int64
+                            example: 50
+                          hostName:
+                            type: string
+                            example: vm4
+                          siteId:
+                            type: string
+                            example: '400'
+                          siteName:
+                            type: string
+                            example: SITE_400
+                          systemIp:
+                            type: string
+                            example: 172.16.255.14
+                        $$ref: '#/components/schemas/FilterByDeviceData'
+                  $$ref: '#/components/schemas/UnderlayAlarmFilterByDevice'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          count:
+                            type: integer
+                            format: int64
+                            example: 20
+                          devices:
+                            type: array
+                            description: devices values
+                            example:
+                            - 172.16.255.15
+                            - 172.16.255.16
+                            items:
+                              type: string
+                              description: device
+                              example: 172.16.255.15
+                          prevDevices:
+                            type: array
+                            description: previce devices values
+                            example:
+                            - 172.16.255.15
+                            - 172.16.255.16
+                            items:
+                              type: string
+                              description: prev device
+                              example: 172.16.255.15
+                          ruleName:
+                            type: string
+                            example: interface-state-change
+                          ruleNameDisplay:
+                            type: string
+                            example: Interface_State_Change
+                          severity:
+                            type: string
+                            example: Critical
+                        $$ref: '#/components/schemas/FilterByAlarmTypeData'
+                  $$ref: '#/components/schemas/UnderlayAlarmFilterByAlarmType'
+              examples:
+                UnderlayAlarmFilterByDevice:
+                  description: UnderlayAlarmFilterByDevice
+                  value:
+                    data:
+                    - system_ip: 172.16.255.16
+                      count: 2
+                      site_id: '600'
+                      site_name: SITE_600
+                      host_name: vm6
+                      alarms:
+                      - count: 1
+                        rule_name_display: BFD_Node_Down
+                        severity: Critical
+                        rulename: node_down
+                      - count: 1
+                        rule_name_display: Interface_State_Change
+                        severity: Critical
+                        rulename: interface-state-change
+                    - system_ip: 172.16.255.15
+                      count: 2
+                      site_id: '500'
+                      site_name: SITE_500
+                      host_name: vm5
+                      alarms:
+                      - count: 1
+                        rule_name_display: BFD_Node_Down
+                        severity: Critical
+                        rulename: node_down
+                      - count: 1
+                        rule_name_display: Interface_State_Change
+                        severity: Critical
+                        rulename: interface-state-change
+                    - system_ip: 172.16.255.11
+                      count: 1
+                      site_id: '100'
+                      site_name: SITE_100
+                      host_name: vm1
+                      alarms:
+                      - count: 1
+                        rule_name_display: BFD_Node_Down
+                        severity: Critical
+                        rulename: node_down
+                    - system_ip: 172.16.255.21
+                      count: 1
+                      site_id: '100'
+                      site_name: SITE_100
+                      host_name: vm11
+                      alarms:
+                      - count: 1
+                        rule_name_display: BFD_Node_Down
+                        severity: Critical
+                        rulename: node_down
+                    - system_ip: 172.16.255.14
+                      count: 1
+                      site_id: '400'
+                      site_name: SITE_400
+                      host_name: vm4
+                      alarms:
+                      - count: 1
+                        rule_name_display: BFD_Node_Down
+                        severity: Critical
+                        rulename: node_down
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceUnderlayUnderlayalarmsapiResponseExampleUnderlayalarmfilterbydevice'
+                UnderlayAlarmFilterByAlarmType:
+                  description: UnderlayAlarmFilterByAlarmType
+                  value:
+                    data:
+                    - rule_name_display: Interface_State_Change
+                      severity: Critical
+                      rulename: interface-state-change
+                      devices:
+                      - 172.16.255.15
+                      - 172.16.255.14
+                      prev_devices: []
+                    - rule_name_display: BFD_Site_Down
+                      severity: Critical
+                      rulename: site_down
+                      devices:
+                      - 172.16.255.15
+                      - 172.16.255.14
+                      prev_devices:
+                      - 172.16.255.15
+                      - 172.16.255.14
+                    - rule_name_display: BFD_Node_Down
+                      severity: Critical
+                      rulename: node_down
+                      devices:
+                      - 172.16.255.15
+                      - 172.16.255.14
+                      prev_devices: []
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceUnderlayUnderlayalarmsapiResponseExampleUnderlayalarmfilterbyalarmtype'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

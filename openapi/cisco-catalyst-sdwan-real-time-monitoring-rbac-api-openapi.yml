@@ -1,0 +1,195 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - RBAC API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - RBAC
+paths:
+  /device/csp/pnic:
+    get:
+      tags:
+      - Real-Time Monitoring - RBAC
+      description: Get pnic interfaces from device
+      operationId: getPnicStats
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                PNIC interfaces:
+                  description: PNIC interfaces
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.15
+                      vdevice-host-name: vm5
+                      name: eth0
+                      operational-speed: 1G
+                      operational-duplex: full-duplex
+                      autoneg: auto
+                      member_of: pc
+                      link_state: up
+                      lldp: enabled
+                      mac_address: d8:b1:90:ff:f5:88
+                      vdevice-dataKey: 172.16.255.15
+                      mtu: '900'
+                      refcnt: '110'
+                      bytes: '1469476983'
+                      packets: '17749881'
+                      errors: '0'
+                      dropped: '0'
+                      broadcast: '14159834'
+                      multicast: '2889066'
+                      tx-bytes: '198318715'
+                      tx-packets: '272603'
+                      tx-errors: '0'
+                      tx-dropped: '0'
+                      tx-broadcast: '14156964'
+                      tx-multicast: '2888574'
+                      lastupdated: 1661501479353
+                      pkt-capture: ICMP
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Interface-read,Interface-write
+  /device/csp/pnic/synced:
+    get:
+      tags:
+      - Real-Time Monitoring - RBAC
+      description: Get pnic stats from device
+      operationId: getPNICStatsFromDevice
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                PNIC stats:
+                  description: PNIC stats
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.15
+                      vdevice-host-name: vm5
+                      name: eth0
+                      operational-speed: 1G
+                      operational-duplex: full-duplex
+                      autoneg: auto
+                      member_of: pc
+                      link_state: up
+                      lldp: enabled
+                      mac_address: d8:b1:90:ff:f5:88
+                      vdevice-dataKey: 172.16.255.15
+                      mtu: '900'
+                      refcnt: '110'
+                      bytes: '1469476983'
+                      packets: '17749881'
+                      errors: '0'
+                      dropped: '0'
+                      broadcast: '14159834'
+                      multicast: '2889066'
+                      tx-bytes: '198318715'
+                      tx-packets: '272603'
+                      tx-errors: '0'
+                      tx-dropped: '0'
+                      tx-broadcast: '14156964'
+                      tx-multicast: '2888574'
+                      lastupdated: 1661501479353
+                      pkt-capture: ICMP
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Security-read,Security-write,Device Monitoring-read,Device Monitoring-write
+  /device/csp/rbac:
+    get:
+      tags:
+      - Real-Time Monitoring - RBAC
+      description: Get RBAC interfaces from device
+      operationId: getRBACInterface
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device RBAC interface:
+                  description: Device RBAC interface
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.11
+                      vdevice-host-name: vm1
+                      name: rbac_user
+                      password: Nbv12345
+                      role: network-admin
+                      active: 'true'
+                      last_5_passwords: Nbv12345
+                      last-login-ts: 21:43:28 UTC Mon Aug 27 2022
+                      lastupdated: 1661501479353
+                      vdevice-dataKey: 172.16.255.11
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Interface-read,Interface-write

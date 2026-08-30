@@ -1,0 +1,192 @@
+openapi: 3.2.0
+info:
+  title: Others Real-Time Monitoring -LTE450 Cellular API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring -LTE450 Cellular
+paths:
+  /device/lte450Cellular/hardware:
+    get:
+      tags:
+      - Real-Time Monitoring -LTE450 Cellular
+      description: Get LTE450 cellular hardware list from device
+      operationId: createHardwareList_RealTimeMonitoringLte450Cellular_3103
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Cellular LTE450 hardware list:
+                  description: Cellular LTE450 hardware list
+                  value:
+                  - free-ram: '59212'
+                    vdevice-name: 172.16.255.102
+                    mgmt-ipv4-addr: 192.168.200.1
+                    hw-wd-ctr: '0'
+                    modem-mac: 00:00:00:00:00:00
+                    pim-mac: fc:c2:3d:31:36:61
+                    sys-time: '2012-01-02T02:14:59+00:00'
+                    modem-fw-ver: 0.3.4.1/ML620EUV12_RELEASE_20230424
+                    pim-sn: '50030301535'
+                    vdevice-host-name: ir1101_blr1
+                    uptime: '94488'
+                    pim-temp: '50.5'
+                    if-name: GigabitEthernet0/1/0
+                    vdevice-dataKey: 172.16.255.102
+                    modem-hw-ver: ML620EU
+                    pim-hw-ver: IPS-701-V3
+                    modem-wd-ctr: '0'
+                    lastupdated: 1739882248933
+                    modem-temp: '48.0'
+                    free-disk: '83180'
+                    pim-fw-ver: IPS701-v1.2.10-Secured
+                    mgmt-ipv6-addr: fd00:ffff:c0:a8c8::1
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Interface-read,Interface-write
+  /device/lte450Cellular/network:
+    get:
+      tags:
+      - Real-Time Monitoring -LTE450 Cellular
+      description: Get LTE450 cellular network list from device
+      operationId: createNetworkList_RealTimeMonitoringLte450Cellular_3003
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Cellular LTE450 network list:
+                  description: Cellular LTE450 network list
+                  value:
+                  - cell-id: '0'
+                    tx-power: '0'
+                    conn-time: '0'
+                    apn2-ipv4-addr: 0.0.0.0
+                    apn3-ipv4-addr: 0.0.0.0
+                    lte-rx-chan: '0'
+                    vdevice-name: 172.16.255.102
+                    apn1-ipv4-addr: 0.0.0.0
+                    conn-status: conn-status-initializing
+                    current-download: '0.0'
+                    vdevice-host-name: ir1101_blr1
+                    cereg: '0'
+                    if-name: GigabitEthernet0/1/0
+                    iccid: '00000000000000000000'
+                    lte-tx-chan: '0'
+                    vdevice-dataKey: 172.16.255.102
+                    apn3-ipv6-addr: '::'
+                    current-upload: '0.0'
+                    pci: '0'
+                    imei: '***************'
+                    lastupdated: 1739879891307
+                    apn2-ipv6-addr: '::'
+                    band: '0'
+                    apn1-ipv6-addr: '::'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Interface-read,Interface-write
+  /device/lte450Cellular/radio:
+    get:
+      tags:
+      - Real-Time Monitoring -LTE450 Cellular
+      description: Get LTE450 cellular radio list from device
+      operationId: createRadioList_RealTimeMonitoringLte450Cellular_2803
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Cellular LTE450 radio list:
+                  description: Cellular LTE450 radio list
+                  value:
+                  - aux-rssi: '0'
+                    rssi: '0'
+                    main-rssi: '0'
+                    vdevice-name: 172.16.255.102
+                    aux-rsrp: '0'
+                    rsrp: '0'
+                    vdevice-host-name: ir1101_blr1
+                    sinr: '0'
+                    if-name: GigabitEthernet0/1/0
+                    vdevice-dataKey: 172.16.255.102
+                    rsrq: '0'
+                    lastupdated: 1739882151645
+                    main-rsrp: '0'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Interface-read,Interface-write

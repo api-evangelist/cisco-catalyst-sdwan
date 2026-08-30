@@ -1,0 +1,131 @@
+openapi: 3.2.0
+info:
+  title: SD-WAN Services Multicloud Interconnect - Resource Audit API
+  description: Includes API operations for managing SD-WAN services such as Cloud OnRamp for SaaS and MultiCloud
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Multicloud Interconnect - Resource Audit
+paths:
+  /multicloud/interconnect/audit:
+    get:
+      tags:
+      - Multicloud Interconnect - Resource Audit
+      summary: Get audit report for resources.
+      description: API to generate audit report for resources.
+      operationId: getAuditReport
+      parameters:
+      - name: interconnect-type
+        in: query
+        description: Interconnect provider type
+        required: true
+        schema:
+          type: string
+      - name: connection-type
+        in: query
+        description: Interconnect connectivity type
+        schema:
+          type: string
+      - name: cloud-type
+        in: query
+        description: Cloud provider type
+        schema:
+          type: string
+      - name: device-links
+        in: query
+        description: Interconnect Equinix device link enabled
+        schema:
+          pattern: (true|false)
+          type: string
+          default: 'false'
+      - name: refresh
+        in: query
+        description: Interconnect Audit Refresh Option
+        schema:
+          pattern: (true|false)
+          type: string
+          default: 'true'
+      responses:
+        '200':
+          description: Audit Report Get Response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  auditReport:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        errString:
+                          type: string
+                        region:
+                          type: string
+                          example: My-Region-1
+                        reportType:
+                          type: string
+                          example: Edge Gateway
+                        resourceName:
+                          type: string
+                          example: My-Interconnect-Gateway-1
+                        status:
+                          type: string
+                          example: IN_SYNC
+                      $$ref: '#/components/schemas/AuditReportAuditReport'
+                  auditStatus:
+                    type: string
+                    example: IN_SYNC
+                $$ref: '#/components/schemas/AuditReport'
+              examples:
+                Interconnect Audit In-Sync:
+                  description: Interconnect Audit In-Sync
+                  value:
+                    auditStatus: IN_SYNC
+                    auditReport:
+                    - status: IN_SYNC
+                      errString: ''
+                      reportType: Edge Gateway
+                      resourceName: MY-ICGW-1
+                      region: 'Equinix SY1, Sydney, NSW, Australia : Sydney'
+                Interconnect Audit Out-Of-Sync:
+                  description: Interconnect Audit Out-Of-Sync
+                  value:
+                    auditStatus: OUT_OF_SYNC
+                    auditReport:
+                    - status: IN_SYNC
+                      errString: ''
+                      reportType: Edge Gateway
+                      resourceName: MY-ICGW-1
+                      region: 'Equinix SY1, Sydney, NSW, Australia : Sydney'
+                    - status: OUT_OF_SYNC_DRY_RUN
+                      errString: BGP Status down
+                      reportType: Edge Connection
+                      resourceName: test-az-conn-1
+                      region: New York Primary - New York - NY - USA
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

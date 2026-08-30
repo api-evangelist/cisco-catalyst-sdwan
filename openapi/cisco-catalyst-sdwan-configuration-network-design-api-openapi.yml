@@ -1,0 +1,567 @@
+openapi: 3.2.0
+info:
+  title: Others Configuration - Network Design API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Configuration - Network Design
+paths:
+  /networkdesign:
+    get:
+      tags:
+      - Configuration - Network Design
+      description: Get existing network design
+      operationId: getNetworkDesign
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Network design:
+                  description: Network design
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Template Configuration-read,Template Configuration-write,Template Deploy-read,Template Deploy-write
+    put:
+      tags:
+      - Configuration - Network Design
+      description: Edit network segment
+      operationId: editNetworkDesign
+      parameters:
+      - name: id
+        in: query
+        description: Id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Network design payload
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              User:
+                description: User
+                value: {}
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Network design template:
+                  description: Network design template
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Template Configuration-write,Device Inventory > Edge-write
+    post:
+      tags:
+      - Configuration - Network Design
+      description: Create network design
+      operationId: createNetworkDesign
+      requestBody:
+        description: Network design payload
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              User:
+                description: User
+                value:
+                  dc:
+                  - name: DC4
+                    segments:
+                    - c952c18b-30b3-4f0b-b985-494693d7adfb
+                    deviceProfiles:
+                    - deviceProfileName: ASR1001
+                      deviceModel: vedge-ASR-1001-X
+                      deviceTemplateID: ''
+                      deviceProfileId: ''
+                      circuits:
+                      - 07dce48b-3c7d-46c0-ac91-36f0d64d61e7
+                  showDeviceProfileHelpText: true
+                  globalParameters:
+                  - templateType: aaa
+                    gTemplateClass: vedge
+                    isUsed: false
+                  - templateType: cisco_snmp
+                    gTemplateClass: cedge
+                    isUsed: false
+                  - templateType: omp-vedge
+                    gTemplateClass: vedge
+                    isUsed: false
+                  - templateType: banner
+                    gTemplateClass: vedge
+                    isUsed: false
+                  - templateType: ntp
+                    gTemplateClass: vedge
+                    isUsed: false
+                  - templateType: snmp
+                    gTemplateClass: vedge
+                    isUsed: false
+                  - templateType: cisco_bfd
+                    gTemplateClass: cedge
+                    isUsed: false
+                  - templateType: cisco_ntp
+                    gTemplateClass: cedge
+                    isUsed: false
+                  - templateType: cedge_global
+                    gTemplateClass: cedge
+                    isUsed: false
+                  - templateType: cisco_logging
+                    gTemplateClass: cedge
+                    isUsed: false
+                  - templateType: bfd-vedge
+                    gTemplateClass: vedge
+                    isUsed: false
+                  - templateType: cedge_aaa
+                    gTemplateClass: cedge
+                    isUsed: false
+                  - templateType: logging
+                    gTemplateClass: vedge
+                    isUsed: false
+                  - templateType: cisco_omp
+                    gTemplateClass: cedge
+                    isUsed: false
+                  - templateType: cisco_banner
+                    gTemplateClass: cedge
+                    isUsed: false
+                  customizedProfiles: []
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Template Id:
+                  description: Template Id
+                  value:
+                    id: 07c1e0a1-d28a-4372-b819-0f1ab5fc8e39
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Template Configuration-write
+  /networkdesign/attachment:
+    post:
+      tags:
+      - Configuration - Network Design
+      description: Attach network design
+      operationId: pushNetworkDesign
+      requestBody:
+        description: Device template
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Device template:
+                description: Device template
+                value: {}
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Template Id:
+                  description: Template Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Template Deploy-write
+  /networkdesign/global/parameters:
+    get:
+      tags:
+      - Configuration - Network Design
+      description: Get global parameter templates
+      operationId: getGlobalParameters
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Global parameters:
+                  description: Global parameters
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Template Configuration-read,Template Configuration-write,Template Deploy-read,Template Deploy-write
+  /networkdesign/lock/edit:
+    post:
+      tags:
+      - Configuration - Network Design
+      description: Acquire edit lock
+      operationId: acquireEditLock
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Lock Id:
+                  description: Lock Id
+                  value:
+                    id: nd_edit-96c1ff5a-44fa-4316-ad15-cc820347f7d3
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Template Configuration-write
+  /networkdesign/mytest/{name}:
+    get:
+      tags:
+      - Configuration - Network Design
+      description: Get all device templates for this feature template
+      operationId: runMyTest
+      parameters:
+      - name: name
+        in: path
+        description: Test bane
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device template:
+                  description: Device template
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Template Configuration-read,Template Configuration-write,Template Deploy-read,Template Deploy-write
+  /networkdesign/profile/attachment/{profileId}:
+    post:
+      tags:
+      - Configuration - Network Design
+      description: Attach to device profile
+      operationId: pushDeviceProfileTemplate
+      parameters:
+      - name: profileId
+        in: path
+        description: Device profile Id
+        required: true
+        schema:
+          pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+          type: string
+      requestBody:
+        description: Device template
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Device template:
+                description: Device template
+                value: {}
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Template Deploy-write
+  /networkdesign/profile/lock/{profileId}:
+    post:
+      tags:
+      - Configuration - Network Design
+      description: Get the service profile config for a given device profile id
+      operationId: acquireAttachLock
+      parameters:
+      - name: profileId
+        in: path
+        description: Device profile Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Template Deploy-write
+  /networkdesign/profile/status:
+    get:
+      tags:
+      - Configuration - Network Design
+      description: Get device profile configuration status
+      operationId: getDeviceProfileConfigStatus
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device config status:
+                  description: Device config status
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Template Configuration-read,Template Configuration-write,Template Deploy-read,Template Deploy-write
+  /networkdesign/profile/status/{profileId}:
+    get:
+      tags:
+      - Configuration - Network Design
+      description: Get device profile configuration status by profile Id
+      operationId: getDeviceProfileConfigStatusByProfileId
+      parameters:
+      - name: profileId
+        in: path
+        description: Device profile Id
+        required: true
+        schema:
+          pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device config status:
+                  description: Device config status
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Template Configuration-read,Template Configuration-write,Template Deploy-read,Template Deploy-write
+  /networkdesign/profile/task/count:
+    get:
+      tags:
+      - Configuration - Network Design
+      description: Get device profile configuration task count
+      operationId: getDeviceProfileTaskCount
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device config task count:
+                  description: Device config task count
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Template Configuration-read,Template Configuration-write,Template Deploy-read,Template Deploy-write
+  /networkdesign/profile/task/status:
+    get:
+      tags:
+      - Configuration - Network Design
+      description: Get device profile configuration task status
+      operationId: getDeviceProfileTaskStatus
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device config task status:
+                  description: Device config task status
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Template Configuration-read,Template Configuration-write,Template Deploy-read,Template Deploy-write
+  /networkdesign/profile/task/status/{profileId}:
+    get:
+      tags:
+      - Configuration - Network Design
+      description: Get device profile configuration status by profile Id
+      operationId: getDeviceProfileTaskStatusByProfileId
+      parameters:
+      - name: profileId
+        in: path
+        description: Device profile Id
+        required: true
+        schema:
+          pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device config task status:
+                  description: Device config task status
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Template Configuration-read,Template Configuration-write,Template Deploy-read,Template Deploy-write
+  /networkdesign/serviceProfileConfig/{profileId}:
+    get:
+      tags:
+      - Configuration - Network Design
+      description: Get the service profile config for a given device profile id
+      operationId: getServiceProfileConfig
+      parameters:
+      - name: profileId
+        in: path
+        description: Device profile Id
+        required: true
+        schema:
+          type: string
+      - name: deviceModel
+        in: query
+        description: Device model
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device profile:
+                  description: Device profile
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Template Configuration-read,Template Configuration-write,Template Deploy-read,Template Deploy-write

@@ -1,0 +1,1484 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Monitoring - Interface Statistics API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Monitoring - Interface Statistics
+paths:
+  /statistics/interface:
+    get:
+      tags:
+      - Monitoring - Interface Statistics
+      description: Get stats raw data
+      operationId: getStatDataRawData_MonitoringInterfaceStatistics_2103
+      parameters:
+      - name: query
+        in: query
+        required: true
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '24'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+            - value:
+              - 20.0.1.20
+              field: vdevice_name
+              type: string
+              operator: in
+      - name: page
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+      - name: sortBy
+        in: query
+        schema:
+          pattern: ^[a-zA-Z-_]+$
+          type: string
+      - name: sortOrder
+        in: query
+        schema:
+          type: string
+          enum:
+          - asc
+          - ASC
+          - Asc
+          - desc
+          - DESC
+          - Desc
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  query:
+                    type: object
+                    properties:
+                      condition:
+                        type: string
+                        example: AND
+                      rules:
+                        type: object
+                        properties:
+                          field:
+                            type: string
+                          operator:
+                            type: string
+                          type:
+                            type: string
+                          value:
+                            type: array
+                            items:
+                              type: string
+                        $$ref: '#/components/schemas/RuleTypes'
+                    $$ref: '#/components/schemas/QueryWithRule'
+                $$ref: '#/components/schemas/InterfaceQuery'
+              examples:
+                Search result:
+                  description: Search result
+                  value:
+                    data:
+                    - remote_color: lte
+                      fec_re: 0
+                      vqoe_score: 10
+                      device_model: vedge-cloud
+                      latency: 1
+                      tx_octets: 0
+                      dst_ip: 10.0.106.1
+                      local_color: lte
+                      src_ip: 10.1.15.15
+                      sla_class_names: test_sla_class
+                      loss: 0
+                      total: 600
+                      tx_pkts: 0
+                      fec_tx: 0
+                      rx_octets: 0
+                      statcycletime: 1589075400052
+                      state: Up
+                      local_system_ip: 172.16.255.15
+                      tenant: default
+                      entry_time: 1589073783045
+                      loss_percentage: 0
+                      rx_pkts: 0
+                      vmanage_system_ip: 172.16.255.15
+                      fec_rx: 0
+                      src_port: 12366
+                      jitter: 1
+                      remote_system_ip: 172.16.255.16
+                      vdevice_name: 172.16.255.15
+                      proto: IPSEC
+                      vip_idx: 351
+                      dst_port: 12386
+                      name: 172.16.255.15:lte-172.16.255.16:lte
+                      sla_class_list: 0,1
+                      tunnel_color: lte:lte
+                      host_name: vm5
+                      id: IuBG_HEB_JLsavezVkiZ
+                    pageInfo:
+                      startTime: '1589073783045'
+                      endTime: '1589072535795'
+                      count: 15
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+      - Monitoring - Interface Statistics
+      description: Get stats raw data
+      operationId: getStatsRawData_MonitoringInterfaceStatistics_2104
+      parameters:
+      - name: page
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+      - name: sortBy
+        in: query
+        schema:
+          pattern: ^[a-zA-Z-_]+$
+          type: string
+      - name: sortOrder
+        in: query
+        schema:
+          type: string
+          enum:
+          - asc
+          - ASC
+          - Asc
+          - desc
+          - DESC
+          - Desc
+      requestBody:
+        description: Query filter
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Query filter:
+                description: Query filter
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '24'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+                    - value:
+                      - 172.16.55.16
+                      field: vdevice_name
+                      type: string
+                      operator: in
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          device_model:
+                            type: string
+                          dst_ip:
+                            type: string
+                          dst_port:
+                            type: integer
+                            format: int32
+                          entry_time:
+                            type: string
+                          fec_re:
+                            type: integer
+                            format: int32
+                          fec_rx:
+                            type: integer
+                            format: int64
+                          fec_tx:
+                            type: integer
+                            format: int64
+                          host_name:
+                            type: string
+                          id:
+                            type: string
+                          jitter:
+                            type: integer
+                            format: int32
+                          latency:
+                            type: number
+                          local_color:
+                            type: string
+                          local_system_ip:
+                            type: string
+                          loss:
+                            type: integer
+                            format: int32
+                          loss_percentage:
+                            type: integer
+                            format: int32
+                          name:
+                            type: string
+                          proto:
+                            type: string
+                          remote_color:
+                            type: string
+                          remote_system_ip:
+                            type: string
+                          rx_octets:
+                            type: integer
+                            format: int64
+                          rx_pkts:
+                            type: integer
+                            format: int64
+                          sla_class_list:
+                            type: string
+                          sla_class_names:
+                            type: string
+                          src_ip:
+                            type: string
+                          src_port:
+                            type: integer
+                            format: int32
+                          statcycletime:
+                            type: string
+                          state:
+                            type: string
+                          tenant:
+                            type: string
+                          total:
+                            type: integer
+                            format: int32
+                          tunnel_color:
+                            type: string
+                          tx_octets:
+                            type: number
+                          tx_pkts:
+                            type: integer
+                            format: int64
+                          vdevice_name:
+                            type: string
+                          vip_idx:
+                            type: integer
+                            format: int32
+                          vmanage_system_ip:
+                            type: string
+                          vqoe_score:
+                            type: integer
+                            format: int32
+                        description: interface specific response
+                        $$ref: '#/components/schemas/InterfaceResp'
+                    pageInfo:
+                      type: object
+                      properties:
+                        count:
+                          type: integer
+                          description: number of alarms to be fetched
+                          format: int64
+                        endTime:
+                          type: integer
+                          description: end time of alarms to be fetched
+                          format: int64
+                        startTime:
+                          type: integer
+                          description: start time of alarms to be fetched
+                          format: int64
+                      $$ref: '#/components/schemas/PageInfo'
+                  description: interface response with page info
+                  $$ref: '#/components/schemas/InterfaceRespWithPageInfo'
+              examples:
+                QueryFields:
+                  description: QueryFields
+                  value:
+                    data:
+                    - remote_color: lte
+                      fec_re: 0
+                      vqoe_score: 10
+                      device_model: vedge-cloud
+                      latency: 1
+                      tx_octets: 0
+                      dst_ip: 10.0.106.1
+                      local_color: lte
+                      src_ip: 10.1.15.15
+                      sla_class_names: test_sla_class
+                      loss: 0
+                      total: 600
+                      tx_pkts: 0
+                      fec_tx: 0
+                      rx_octets: 0
+                      statcycletime: 1589075400052
+                      state: Up
+                      local_system_ip: 172.16.255.15
+                      tenant: default
+                      entry_time: 1589073783045
+                      loss_percentage: 0
+                      rx_pkts: 0
+                      vmanage_system_ip: 172.16.255.15
+                      fec_rx: 0
+                      src_port: 12366
+                      jitter: 1
+                      remote_system_ip: 172.16.255.16
+                      vdevice_name: 172.16.255.15
+                      proto: IPSEC
+                      vip_idx: 351
+                      dst_port: 12386
+                      name: 172.16.255.15:lte-172.16.255.16:lte
+                      sla_class_list: 0,1
+                      tunnel_color: lte:lte
+                      host_name: vm5
+                      id: IuBG_HEB_JLsavezVkiZ
+                    pageInfo:
+                      startTime: '1589073783045'
+                      endTime: '1589072535795'
+                      count: 15
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/interface/aggregation:
+    get:
+      tags:
+      - Monitoring - Interface Statistics
+      description: Get aggregated data based on input query and filters. The data can be filtered on time and other unique parameters based upon necessity and intended usage
+      operationId: getAggregationDataByQuery_MonitoringInterfaceStatistics_3303
+      parameters:
+      - name: query
+        in: query
+        required: true
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '24000'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+            - value:
+              - 172.16.255.16
+              field: vdevice_name
+              type: string
+              operator: in
+            - value:
+              - ge0/1
+              - system
+              - vmanage_system
+              - eth0
+              - loopback65528
+              - ge0/0
+              field: interface
+              type: string
+              operator: in
+          sort:
+          - field: entry_time
+            type: date
+            order: asc
+          aggregation:
+            field:
+            - property: interface
+              sequence: 1
+            histogram:
+              property: entry_time
+              type: minute
+              interval: 30
+              order: asc
+            metrics:
+            - property: rx_kbps
+              type: avg
+            - property: tx_kbps
+              type: avg
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          count:
+                            type: integer
+                            format: int32
+                          entry_time:
+                            type: string
+                          interface:
+                            type: string
+                          rx_kbps:
+                            type: number
+                          tx_kbps:
+                            type: number
+                          vdevice_name:
+                            type: string
+                        $$ref: '#/components/schemas/InterfaceAggResp'
+                    pageInfo:
+                      type: object
+                      properties:
+                        count:
+                          type: integer
+                          description: number of alarms to be fetched
+                          format: int64
+                        endTime:
+                          type: integer
+                          description: end time of alarms to be fetched
+                          format: int64
+                        startTime:
+                          type: integer
+                          description: start time of alarms to be fetched
+                          format: int64
+                      $$ref: '#/components/schemas/PageInfo'
+                  description: interface aggregation response with page info
+                  $$ref: '#/components/schemas/InterfaceAggRespWithPageInfo'
+              examples:
+                Aggregated Data:
+                  description: Aggregated Data
+                  value:
+                  - entry_time: 1673766000000
+                    count: 1
+                    interface: eth0
+                    tx_kbps: 0
+                    rx_kbps: 1
+                  - entry_time: 1673766000000
+                    count: 1
+                    interface: ge0/0
+                    tx_kbps: 0
+                    rx_kbps: 0
+                  - entry_time: 1673766000000
+                    count: 1
+                    interface: ge0/1
+                    tx_kbps: 0
+                    rx_kbps: 0
+                  - entry_time: 1673766000000
+                    count: 1
+                    interface: loopback65528
+                    tx_kbps: 0
+                    rx_kbps: 0
+                  - entry_time: 1673767800000
+                    count: 6
+                    interface: eth0
+                    tx_kbps: 0
+                    rx_kbps: 0
+                  - entry_time: 1673767800000
+                    count: 6
+                    interface: ge0/0
+                    tx_kbps: 0
+                    rx_kbps: 0
+                  - entry_time: 1673767800000
+                    count: 6
+                    interface: ge0/1
+                    tx_kbps: 0
+                    rx_kbps: 0
+                  - entry_time: 1673767800000
+                    count: 6
+                    interface: loopback65528
+                    tx_kbps: 0
+                    rx_kbps: 0
+                  - entry_time: 1673769600000
+                    count: 6
+                    interface: eth0
+                    tx_kbps: 1.8333333333333333
+                    rx_kbps: 0.8333333333333334
+                  - entry_time: 1673769600000
+                    count: 6
+                    interface: ge0/0
+                    tx_kbps: 0.3333333333333333
+                    rx_kbps: 2.8333333333333335
+                  - entry_time: 1673769600000
+                    count: 6
+                    interface: ge0/1
+                    tx_kbps: 0
+                    rx_kbps: 0
+                  - entry_time: 1673769600000
+                    count: 6
+                    interface: loopback65528
+                    tx_kbps: 0
+                    rx_kbps: 0
+                  - entry_time: 1673769600000
+                    count: 2
+                    interface: system
+                    tx_kbps: 0
+                    rx_kbps: 0
+                  - entry_time: 1673771400000
+                    count: 6
+                    interface: eth0
+                    tx_kbps: 0
+                    rx_kbps: 0
+                  - entry_time: 1673771400000
+                    count: 6
+                    interface: ge0/0
+                    tx_kbps: 5
+                    rx_kbps: 48.833333333333336
+                  - entry_time: 1673771400000
+                    count: 6
+                    interface: ge0/1
+                    tx_kbps: 0
+                    rx_kbps: 0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+      - Monitoring - Interface Statistics
+      description: Get aggregated data based on input query and filters. The data can be filtered on time and other unique parameters based upon necessity and intended usage
+      operationId: getPostAggregationDataByQuery_MonitoringInterfaceStatistics_3304
+      requestBody:
+        description: Query filter
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Query filter:
+                description: Query filter
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '168'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+                    - value:
+                      - 172.16.255.11
+                      field: vdevice_name
+                      type: string
+                      operator: in
+                    - value:
+                      - ge0/1
+                      - ge0/2
+                      - ge0/4
+                      - ge0/7
+                      - loopback1
+                      - loopback2
+                      field: interface
+                      type: string
+                      operator: in
+                  sort:
+                  - field: entry_time
+                    type: date
+                    order: asc
+                  aggregation:
+                    field:
+                    - property: interface
+                      sequence: 1
+                    histogram:
+                      property: entry_time
+                      type: hour
+                      interval: 6
+                      order: asc
+                    metrics:
+                    - property: rx_kbps
+                      type: avg
+                    - property: tx_kbps
+                      type: avg
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    count:
+                      type: integer
+                      format: int32
+                    entry_time:
+                      type: string
+                    interface:
+                      type: string
+                    rx_kbps:
+                      type: number
+                    tx_kbps:
+                      type: number
+                    vdevice_name:
+                      type: string
+                  $$ref: '#/components/schemas/InterfaceAggResp'
+              examples:
+                Aggregated Data:
+                  description: Aggregated Data
+                  value:
+                  - entry_time: 1673766000000
+                    count: 1
+                    interface: eth0
+                    tx_kbps: 0
+                    rx_kbps: 1
+                  - entry_time: 1673766000000
+                    count: 1
+                    interface: ge0/0
+                    tx_kbps: 0
+                    rx_kbps: 0
+                  - entry_time: 1673766000000
+                    count: 1
+                    interface: ge0/1
+                    tx_kbps: 0
+                    rx_kbps: 0
+                  - entry_time: 1673766000000
+                    count: 1
+                    interface: loopback65528
+                    tx_kbps: 0
+                    rx_kbps: 0
+                  - entry_time: 1673767800000
+                    count: 6
+                    interface: eth0
+                    tx_kbps: 0
+                    rx_kbps: 0
+                  - entry_time: 1673767800000
+                    count: 6
+                    interface: ge0/0
+                    tx_kbps: 0
+                    rx_kbps: 0
+                  - entry_time: 1673767800000
+                    count: 6
+                    interface: ge0/1
+                    tx_kbps: 0
+                    rx_kbps: 0
+                  - entry_time: 1673767800000
+                    count: 6
+                    interface: loopback65528
+                    tx_kbps: 0
+                    rx_kbps: 0
+                  - entry_time: 1673769600000
+                    count: 6
+                    interface: eth0
+                    tx_kbps: 1.8333333333333333
+                    rx_kbps: 0.8333333333333334
+                  - entry_time: 1673769600000
+                    count: 6
+                    interface: ge0/0
+                    tx_kbps: 0.3333333333333333
+                    rx_kbps: 2.8333333333333335
+                  - entry_time: 1673769600000
+                    count: 6
+                    interface: ge0/1
+                    tx_kbps: 0
+                    rx_kbps: 0
+                  - entry_time: 1673769600000
+                    count: 6
+                    interface: loopback65528
+                    tx_kbps: 0
+                    rx_kbps: 0
+                  - entry_time: 1673769600000
+                    count: 2
+                    interface: system
+                    tx_kbps: 0
+                    rx_kbps: 0
+                  - entry_time: 1673771400000
+                    count: 6
+                    interface: eth0
+                    tx_kbps: 0
+                    rx_kbps: 0
+                  - entry_time: 1673771400000
+                    count: 6
+                    interface: ge0/0
+                    tx_kbps: 5
+                    rx_kbps: 48.833333333333336
+                  - entry_time: 1673771400000
+                    count: 6
+                    interface: ge0/1
+                    tx_kbps: 0
+                    rx_kbps: 0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/interface/app-agg/aggregation:
+    post:
+      tags:
+      - Monitoring - Interface Statistics
+      description: Get aggregated data based on input query and filters. The data can be filtered on time and other unique parameters based upon necessity and intended usage
+      operationId: getPostAggregationAppDataByQuery_MonitoringInterfaceStatistics_4104
+      requestBody:
+        description: Query filter
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Query filter:
+                description: Query filter
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '2400'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+                    - value:
+                      - 172.16.255.16
+                      field: vdevice_name
+                      type: string
+                      operator: in
+                    - value:
+                      - ge0/1
+                      - system
+                      - vmanage_system
+                      - eth0
+                      - loopback65528
+                      - ge0/0
+                      field: interface
+                      type: string
+                      operator: in
+                  sort:
+                  - field: entry_time
+                    type: date
+                    order: asc
+                  aggregation:
+                    field:
+                    - property: interface
+                      sequence: 1
+                    histogram:
+                      property: entry_time
+                      type: minute
+                      interval: 30
+                      order: asc
+                    metrics:
+                    - property: rx_kbps
+                      type: avg
+                    - property: tx_kbps
+                      type: avg
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    count:
+                      type: integer
+                      format: int32
+                    entry_time:
+                      type: string
+                    interface:
+                      type: string
+                    rx_kbps:
+                      type: number
+                    tx_kbps:
+                      type: number
+                    vdevice_name:
+                      type: string
+                  $$ref: '#/components/schemas/InterfaceAggResp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/interface/ccapacity/distribution:
+    get:
+      tags:
+      - Monitoring - Interface Statistics
+      description: Get bandwidth distribution
+      operationId: getBandwidthDistribution
+      parameters:
+      - name: site-id
+        in: query
+        schema:
+          pattern: ^[0-9]+$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        avg_down_capacity_percentage:
+                          type: number
+                        avg_up_capacity_percentage:
+                          type: number
+                        bw_down:
+                          type: integer
+                          format: int64
+                        bw_up:
+                          type: number
+                        count:
+                          type: integer
+                          format: int64
+                        interface:
+                          type: string
+                        max_down_capacity_percentage:
+                          type: number
+                        max_up_capacity_percentage:
+                          type: number
+                        min_down_capacity_percentage:
+                          type: number
+                        min_up_capacity_percentage:
+                          type: integer
+                          format: int32
+                        range:
+                          type: string
+                        vdevice_name:
+                          type: string
+                      $$ref: '#/components/schemas/CapacityRespData'
+                  distribution:
+                    type: object
+                    properties:
+                      '100':
+                        type: integer
+                        format: int64
+                      0-25:
+                        type: integer
+                        format: int64
+                      25-50:
+                        type: integer
+                        format: int64
+                      50-75:
+                        type: integer
+                        format: int64
+                      75-100:
+                        type: integer
+                        format: int64
+                      uncategorized:
+                        type: integer
+                        format: int64
+                    $$ref: '#/components/schemas/CapDistribution'
+                $$ref: '#/components/schemas/CapacityResp'
+              examples:
+                Bandwidth Distribution:
+                  description: Bandwidth Distribution
+                  value:
+                    query:
+                      condition: AND
+                      rules:
+                      - value:
+                        - '24'
+                        field: entry_time
+                        type: date
+                        operator: last_n_hours
+                      - value:
+                        - 1.1.60.7
+                        field: vdevice_name
+                        type: string
+                        operator: in
+                    aggregation:
+                      field:
+                      - property: family
+                        size: 200
+                        sequence: 1
+                      metrics:
+                      - property: octets
+                        type: sum
+                        order: desc
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/interface/csv:
+    get:
+      tags:
+      - Monitoring - Interface Statistics
+      description: Get raw data with optional query as CSV
+      operationId: getStatDataRawDataAsCSV_MonitoringInterfaceStatistics_2503
+      parameters:
+      - name: query
+        in: query
+        required: true
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '24'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+            - value:
+              - 20.0.1.20
+              field: vdevice_name
+              type: string
+              operator: in
+      responses:
+        '200':
+          description: Success
+          content:
+            text/csv:
+              schema:
+                type: string
+              example: "{\n  \"blob\": https://<vmanageIP>/82c972bc-f9b3-4cce-bb70-1e1b033ef1cd\n}"
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/interface/doccount:
+    get:
+      tags:
+      - Monitoring - Interface Statistics
+      description: Get response count of a query
+      operationId: getCount10
+      parameters:
+      - name: query
+        in: query
+        required: true
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '24'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+            - value:
+              - 20.0.1.20
+              field: vdevice_name
+              type: string
+              operator: in
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                count: 17193
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+      - Monitoring - Interface Statistics
+      description: Get response count of a query
+      operationId: getCountPost_MonitoringInterfaceStatistics_3004
+      requestBody:
+        description: Query filter
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Query:
+                description: Query
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '24'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+                    - value:
+                      - 20.0.1.20
+                      field: vdevice_name
+                      type: string
+                      operator: in
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                count: 17193
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/interface/fields:
+    get:
+      tags:
+      - Monitoring - Interface Statistics
+      description: Get fields and type
+      operationId: getStatDataFields_MonitoringInterfaceStatistics_2803
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    dataType:
+                      type: string
+                    property:
+                      type: string
+                  $$ref: '#/components/schemas/InterfaceDocCountRequest'
+              examples:
+                Interface Fields:
+                  description: Interface Fields
+                  value:
+                  - property: entry_time
+                    dataType: date
+                  - property: vip_idx
+                    dataType: number
+                  - property: statcycletime
+                    dataType: date
+                  - property: vdevice_name
+                    dataType: string
+                  - property: device_model
+                    dataType: string
+                    display: keyvalue
+                  - property: host_name
+                    dataType: string
+                  - property: vpn_id
+                    dataType: number
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/interface/page:
+    get:
+      tags:
+      - Monitoring - Interface Statistics
+      description: Get stats raw data
+      operationId: getStatBulkRawData_MonitoringInterfaceStatistics_2603
+      parameters:
+      - name: query
+        in: query
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '24'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+            - value:
+              - 20.0.1.20
+              field: vdevice_name
+              type: string
+              operator: in
+      - name: scrollId
+        in: query
+        schema:
+          type: string
+      - name: count
+        in: query
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        count:
+                          type: integer
+                          format: int32
+                        entry_time:
+                          type: string
+                        interface:
+                          type: string
+                        rx_kbps:
+                          type: number
+                        tx_kbps:
+                          type: number
+                        vdevice_name:
+                          type: string
+                      $$ref: '#/components/schemas/InterfaceAggResp'
+                  pageInfo:
+                    type: object
+                    properties:
+                      count:
+                        type: integer
+                        description: number of alarms to be fetched
+                        format: int64
+                      endTime:
+                        type: integer
+                        description: end time of alarms to be fetched
+                        format: int64
+                      startTime:
+                        type: integer
+                        description: start time of alarms to be fetched
+                        format: int64
+                    $$ref: '#/components/schemas/PageInfo'
+                description: interface aggregation response with page info
+                $$ref: '#/components/schemas/InterfaceAggRespWithPageInfo'
+              examples:
+                Response with page info:
+                  description: Response with page info
+                  value: "[\n   {\n     \"down_capacity_percentage\": 0,\n     \"tx_pps\": 0,\n     \"total_mbps\": 0,\n     \"device_model\": \"vedge-cloud\",\n     \"rx_kbps\": 0,\n     \"interface\": \"system\",\n     \"tx_octets\": 0,\n     \"oper_status\": \"Up\",\n     \"rx_errors\": 0,\n     \"bw_down\": 10000,\n     \"tx_pkts\": 0,\n     \"tx_errors\": 0,\n     \"rx_octets\": 0,\n     \"statcycletime\": 1673959200022,\n     \"admin_status\": \"Up\",\n     \"bw_up\": 10000,\n     \"interface_type\": \"logical\",\n     \"tenant\": \"default\",\n     \"entry_time\": 1673958142101,\n     \"vip_time\": 1673958142101,\n     \"af_type\": \"IPv4\",\n     \"rx_pkts\": 0,\n     \"rx_pps\": 0,\n     \"vmanage_system_ip\": \"172.16.255.21\",\n     \"tx_drops\": 0,\n     \"rx_drops\": 0,\n     \"tx_kbps\": 0,\n     \"vdevice_name\": \"172.16.255.21\",\n     \"up_capacity_percentage\": 0,\n     \"vip_idx\": 284,\n     \"host_name\": \"vm11\",\n     \"vpn_id\": 0,\n     \"id\": \"RQG-v4UBrf5pDUb4VeQc\"\n   },\n   {\n     \"down_capacity_percentage\": 0,\n     \"tx_pps\": 0,\n     \"total_mbps\": 0,\n     \"device_model\": \"vedge-cloud\",\n     \"rx_kbps\": 0,\n     \"interface\": \"ge0/5\",\n     \"tx_octets\": 0,\n     \"oper_status\": \"Down\",\n     \"rx_errors\": 0,\n     \"bw_down\": 0,\n     \"tx_pkts\": 0,\n     \"tx_errors\": 0,\n     \"rx_octets\": 0,\n     \"statcycletime\": 1673959200022,\n     \"admin_status\": \"Down\",\n     \"bw_up\": 0,\n     \"interface_type\": \"physical\",\n     \"tenant\": \"default\",\n     \"entry_time\": 1673958414824,\n     \"vip_time\": 1673958414825,\n     \"af_type\": \"IPv4\",\n     \"rx_pkts\": 0,\n     \"rx_pps\": 0,\n     \"vmanage_system_ip\": \"172.16.255.21\",\n     \"tx_drops\": 0,\n     \"rx_drops\": 0,\n     \"tx_kbps\": 0,\n     \"vdevice_name\": \"172.16.255.21\",\n     \"up_capacity_percentage\": 0,\n     \"vip_idx\": 293,\n     \"host_name\": \"vm11\",\n     \"vpn_id\": 0,\n     \"id\": \"TgG-v4UBrf5pDUb4VeQc\"\n   }\n ],\n \"pageInfo\": {\n   \"startTime\": \"1673959200022\",\n   \"endTime\": \"1673959200022\",\n   \"scrollId\": \"FGluY2x1ZGVfY29udGV4dF91dWlkDXF1ZXJ5QW5kRmV0Y2gBFmxUeXprSGJ0VHRpam43TkwwaUVBUHcAAAAAAAAgaRZxdXlabXpNb1FOR1hRNVlQcGdfSldn_10\",\n   \"hasMoreData\": true,\n   \"count\": 10,\n   \"totalCount\": 27624\n }\n}"
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+      - Monitoring - Interface Statistics
+      description: Get stats raw data
+      operationId: getPostStatBulkRawData_MonitoringInterfaceStatistics_2604
+      parameters:
+      - name: scrollId
+        in: query
+        schema:
+          type: string
+      - name: count
+        in: query
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: Query filter
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Stats query string:
+                description: Stats query string
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '24'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+                    - value:
+                      - 172.16.55.16
+                      field: vdevice_name
+                      type: string
+                      operator: in
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        count:
+                          type: integer
+                          format: int32
+                        entry_time:
+                          type: string
+                        interface:
+                          type: string
+                        rx_kbps:
+                          type: number
+                        tx_kbps:
+                          type: number
+                        vdevice_name:
+                          type: string
+                      $$ref: '#/components/schemas/InterfaceAggResp'
+                  pageInfo:
+                    type: object
+                    properties:
+                      count:
+                        type: integer
+                        description: number of alarms to be fetched
+                        format: int64
+                      endTime:
+                        type: integer
+                        description: end time of alarms to be fetched
+                        format: int64
+                      startTime:
+                        type: integer
+                        description: start time of alarms to be fetched
+                        format: int64
+                    $$ref: '#/components/schemas/PageInfo'
+                description: interface aggregation response with page info
+                $$ref: '#/components/schemas/InterfaceAggRespWithPageInfo'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/interface/query/fields:
+    get:
+      tags:
+      - Monitoring - Interface Statistics
+      description: Get query fields
+      operationId: getStatQueryFields_MonitoringInterfaceStatistics_3403
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Interface Query Fields:
+                  description: Interface Query Fields
+                  value:
+                  - isRequired: true
+                    fieldData:
+                      type: dateList
+                    dataType: date
+                    property: entry_time
+                    name: Event Time
+                    options:
+                    - enableDateFields: false
+                      number: '1'
+                      value: Last 1 hour
+                      key: last_1_hour
+                    - enableDateFields: false
+                      number: '3'
+                      value: Last 3 hours
+                      key: last_3_hours
+                    - enableDateFields: false
+                      number: '6'
+                      value: Last 6 hours
+                      key: last_6_hours
+                    - enableDateFields: false
+                      number: '12'
+                      value: Last 12 hours
+                      key: last_12_hours
+                    - enableDateFields: false
+                      number: '24'
+                      isSelected: true
+                      value: Last 24 hours
+                      key: last_24_hours
+                    - enableDateFields: false
+                      number: '168'
+                      value: Last 7 days
+                      key: last_168_hours
+                    - enableDateFields: true
+                      value: Custom
+                      key: custom
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/interface/type:
+    get:
+      tags:
+      - Monitoring - Interface Statistics
+      description: Get statistics per interface
+      operationId: getStatisticsPerInterface
+      parameters:
+      - name: query
+        in: query
+        required: true
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '24'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+            - value:
+              - 20.0.1.20
+              field: vdevice_name
+              type: string
+              operator: in
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    format: int32
+                  entry_time:
+                    type: string
+                  interface:
+                    type: string
+                  rx_kbps:
+                    type: number
+                  tx_kbps:
+                    type: number
+                  vdevice_name:
+                    type: string
+                $$ref: '#/components/schemas/InterfaceAggResp'
+              examples:
+                Interface by type:
+                  description: Interface by type
+                  value:
+                  - down_capacity_percentage: 0
+                    tx_pps: 0
+                    total_mbps: 0
+                    device_model: vedge-cloud
+                    rx_kbps: 0
+                    interface: system
+                    tx_octets: 0
+                    oper_status: Up
+                    rx_errors: 0
+                    bw_down: 10000
+                    tx_pkts: 0
+                    tx_errors: 0
+                    rx_octets: 0
+                    statcycletime: 1673959200022
+                    admin_status: Up
+                    bw_up: 10000
+                    interface_type: logical
+                    tenant: default
+                    entry_time: 1673958142101
+                    vip_time: 1673958142101
+                    af_type: IPv4
+                    rx_pkts: 0
+                    rx_pps: 0
+                    vmanage_system_ip: 172.16.255.21
+                    tx_drops: 0
+                    rx_drops: 0
+                    tx_kbps: 0
+                    vdevice_name: 172.16.255.21
+                    up_capacity_percentage: 0
+                    vip_idx: 284
+                    host_name: vm11
+                    vpn_id: 0
+                    id: RQG-v4UBrf5pDUb4VeQc
+                  - down_capacity_percentage: 0
+                    tx_pps: 0
+                    total_mbps: 0
+                    device_model: vedge-cloud
+                    rx_kbps: 0
+                    interface: ge0/5
+                    tx_octets: 0
+                    oper_status: Down
+                    rx_errors: 0
+                    bw_down: 0
+                    tx_pkts: 0
+                    tx_errors: 0
+                    rx_octets: 0
+                    statcycletime: 1673959200022
+                    admin_status: Down
+                    bw_up: 0
+                    interface_type: physical
+                    tenant: default
+                    entry_time: 1673958414824
+                    vip_time: 1673958414825
+                    af_type: IPv4
+                    rx_pkts: 0
+                    rx_pps: 0
+                    vmanage_system_ip: 172.16.255.21
+                    tx_drops: 0
+                    rx_drops: 0
+                    tx_kbps: 0
+                    vdevice_name: 172.16.255.21
+                    up_capacity_percentage: 0
+                    vip_idx: 293
+                    host_name: vm11
+                    vpn_id: 0
+                    id: TgG-v4UBrf5pDUb4VeQc
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

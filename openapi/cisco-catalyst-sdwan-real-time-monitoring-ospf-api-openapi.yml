@@ -1,0 +1,663 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - OSPF API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - OSPF
+paths:
+  /device/ospf/database:
+    get:
+      tags:
+      - Real-Time Monitoring - OSPF
+      description: Get OSPF database list from device (Real Time)
+      operationId: createOSPFDatabaseList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                OSPF database list:
+                  description: OSPF database list
+                  value:
+                    data:
+                    - area: 0
+                      link-id: 172.16.255.11
+                      data: 10.2.2.11
+                      vdevice-name: 172.16.255.11
+                      link-count: '1'
+                      vpn-id: 1
+                      vdevice-host-name: vm1
+                      adv-router: 172.16.255.11
+                      lsa-type: router
+                      router-link-id: 10.2.2.12
+                      router-link-type: transit
+                      sequence: '2147483652'
+                      vdevice-dataKey: 172.16.255.11-1-0
+                      checksum: '50110'
+                      lastupdated: 1646791144576
+                      tos-metric: '10'
+                      age: '153'
+                    - area: 0
+                      link-id: 172.16.255.12
+                      data: 10.2.2.12
+                      vdevice-name: 172.16.255.11
+                      link-count: '2'
+                      vpn-id: 1
+                      vdevice-host-name: vm1
+                      adv-router: 172.16.255.12
+                      lsa-type: router
+                      router-link-id: 10.2.2.12
+                      router-link-type: transit
+                      sequence: '2147483655'
+                      vdevice-dataKey: 172.16.255.11-1-0
+                      checksum: '52821'
+                      lastupdated: 1646791144576
+                      tos-metric: '10'
+                      age: '153'
+                    - area: 0
+                      link-id: 172.16.255.21
+                      data: 10.2.3.21
+                      vdevice-name: 172.16.255.11
+                      link-count: '1'
+                      vpn-id: 1
+                      vdevice-host-name: vm1
+                      adv-router: 172.16.255.21
+                      lsa-type: router
+                      router-link-id: 10.2.3.21
+                      router-link-type: transit
+                      sequence: '2147483651'
+                      vdevice-dataKey: 172.16.255.11-1-0
+                      checksum: '8760'
+                      lastupdated: 1646791144576
+                      tos-metric: '10'
+                      age: '154'
+                    - area: 0
+                      sequence: '2147483649'
+                      link-id: 10.2.2.12
+                      vdevice-dataKey: 172.16.255.11-1-0
+                      vdevice-name: 172.16.255.11
+                      checksum: '63980'
+                      lastupdated: 1646791144576
+                      vpn-id: 1
+                      vdevice-host-name: vm1
+                      adv-router: 172.16.255.12
+                      age: '154'
+                      lsa-type: network
+                    - area: 0
+                      sequence: '2147483649'
+                      link-id: 10.2.3.21
+                      vdevice-dataKey: 172.16.255.11-1-0
+                      vdevice-name: 172.16.255.11
+                      checksum: '59106'
+                      lastupdated: 1646791144576
+                      vpn-id: 1
+                      vdevice-host-name: vm1
+                      adv-router: 172.16.255.21
+                      age: '155'
+                      lsa-type: network
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/ospf/databaseexternal:
+    get:
+      tags:
+      - Real-Time Monitoring - OSPF
+      description: Get OSPF external database list from device (Real Time)
+      operationId: createOSPFDatabaseExternal
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                OSPF external database list:
+                  description: OSPF external database list
+                  value:
+                    data:
+                    - link-id: 10.20.25.0
+                      options-flags: EDN
+                      vdevice-name: 172.16.255.11
+                      prefix: 10.20.25.0/24
+                      metric-type: type2
+                      length: 36
+                      flags: 11
+                      vpn-id: 1
+                      vdevice-host-name: vm1
+                      adv-router: 172.16.255.11
+                      forwarding-addr: 0.0.0.0
+                      sequence: 2147483650
+                      vdevice-dataKey: 172.16.255.11-1-10.20.25.0
+                      metric: '16777214'
+                      checksum: 62048
+                      options: 130
+                      lastupdated: 1646791949860
+                      tag: 0
+                      age: 958
+                    - link-id: 10.20.25.0
+                      options-flags: EDN
+                      vdevice-name: 172.16.255.11
+                      prefix: 10.20.25.0/24
+                      metric-type: type2
+                      length: 36
+                      flags: 6
+                      vpn-id: 1
+                      vdevice-host-name: vm1
+                      adv-router: 172.16.255.21
+                      forwarding-addr: 0.0.0.0
+                      sequence: 2147483650
+                      vdevice-dataKey: 172.16.255.11-1-10.20.25.0
+                      metric: '16777214'
+                      checksum: 46738
+                      options: 130
+                      lastupdated: 1646791949860
+                      tag: 0
+                      age: 959
+                    - link-id: 172.16.255.112
+                      options-flags: E
+                      vdevice-name: 172.16.255.11
+                      prefix: 172.16.255.112/32
+                      metric-type: type2
+                      length: 36
+                      flags: 6
+                      vpn-id: 1
+                      vdevice-host-name: vm1
+                      adv-router: 172.16.255.12
+                      forwarding-addr: 0.0.0.0
+                      sequence: 2147483651
+                      vdevice-dataKey: 172.16.255.11-1-172.16.255.112
+                      metric: '20'
+                      checksum: 58083
+                      options: 2
+                      lastupdated: 1646791949860
+                      tag: 0
+                      age: 958
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/ospf/databasesummary:
+    get:
+      tags:
+      - Real-Time Monitoring - OSPF
+      description: Get OSPF database summary list from device (Real Time)
+      operationId: createOSPFDatabaseSummaryList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                OSPF database summary list:
+                  description: OSPF database summary list
+                  value:
+                    data:
+                    - vdevice-dataKey: 172.16.255.11-1-0
+                      router-lsa: 3
+                      total-lsa: 5
+                      vdevice-name: 172.16.255.11
+                      summary-lsa: 0
+                      nssa-lsa: 0
+                      network-lsa: 2
+                      lastupdated: 1646792331519
+                      area-id: 0
+                      vpn-id: 1
+                      asbr-summary-lsa: 0
+                      vdevice-host-name: vm1
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/ospf/interface:
+    get:
+      tags:
+      - Real-Time Monitoring - OSPF
+      description: Get OSPF interface list from device (Real Time)
+      operationId: createOSPFInterface
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                OSPF interface list:
+                  description: OSPF interface list
+                  value:
+                    data:
+                    - lastupdated: 1646026461327
+                      vdevice-dataKey: 169.254.10.14-0-1--
+                      vdevice-name: 169.254.10.14
+                      router-id: '0'
+                      vdevice-host-name: vm16
+                      instance-id: '1'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/ospf/neighbor:
+    get:
+      tags:
+      - Real-Time Monitoring - OSPF
+      description: Get OSPF neighbor list from device (Real Time)
+      operationId: createOSPFNeighbors
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                OSPF neighbor list:
+                  description: OSPF neighbor list
+                  value:
+                    data:
+                    - lastupdated: 1646027273671
+                      vdevice-dataKey: 169.254.10.14-0-1---
+                      vdevice-name: 169.254.10.14
+                      router-id: '0'
+                      vdevice-host-name: vm16
+                      instance-id: '1'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/ospf/process:
+    get:
+      tags:
+      - Real-Time Monitoring - OSPF
+      description: Get OSPF process list from device (Real Time)
+      operationId: createOSPFProcess
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                OSPF process list:
+                  description: OSPF process list
+                  value:
+                    data:
+                    - ls-ack-sent: '5'
+                      summary-lsa-checksum: '0'
+                      vdevice-name: 172.16.255.11
+                      spf-max-holdtime: '10000'
+                      spf-holdtime: '1000'
+                      number-areas: '1'
+                      rfc1583-compatible: 'true'
+                      lsa-count: '5'
+                      external-lsa-checksum: '166869'
+                      router-id: 172.16.255.11
+                      hello-received: '172'
+                      ignore-down-bit: 'false'
+                      area-id: '0'
+                      dbd-received: '2'
+                      network-lsa-checksum: '123086'
+                      summary-lsa-count: '0'
+                      router-lsa-count: '3'
+                      router-lsa-checksum: '111691'
+                      spf-delay: '200'
+                      spf-hold-multiplier: '1'
+                      external-lsa-count: '3'
+                      ls-ack-received: '5'
+                      asbr-lsa-count: '0'
+                      vpn-id: '1'
+                      vdevice-host-name: vm1
+                      spf-last-exec-time: '1663'
+                      backbone-area: 'true'
+                      network-lsa-count: '2'
+                      ls-req-sent: '1'
+                      asbr-lsa-checksum: '0'
+                      dbd-sent: '3'
+                      vdevice-dataKey: 172.16.255.11-1-
+                      lsa-refresh-interval: '10'
+                      ls-upd-received: '12'
+                      nssa-lsa-count: '0'
+                      ls-req-received: '1'
+                      num-full-adj-routers: '1'
+                      spf-exec-count: '3'
+                      lastupdated: 1646792665279
+                      ls-upd-sent: '8'
+                      nssa-lsa-checksum: '0'
+                      hello-sent: '172'
+                      num-interfaces: '1'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/ospf/routes:
+    get:
+      tags:
+      - Real-Time Monitoring - OSPF
+      description: Get OSPF route list from device (Real Time)
+      operationId: createOSPFRoutesList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                OSPF route list:
+                  description: OSPF route list
+                  value:
+                    data:
+                    - cost: '10'
+                      dest-type: router
+                      vdevice-name: 172.16.255.11
+                      prefix: 172.16.255.12/32
+                      flags: '2'
+                      info-id: '0'
+                      vpn-id: '1'
+                      vdevice-host-name: vm1
+                      if-name: ge0/0
+                      vdevice-dataKey: 172.16.255.11-1-router-172.16.255.12/32-0
+                      route-type: router
+                      lastupdated: 1646793742274
+                      area-id: '0'
+                      next-hop: 10.2.2.12
+                      path-type: intra-area
+                    - cost: '20'
+                      dest-type: router
+                      vdevice-name: 172.16.255.11
+                      prefix: 172.16.255.21/32
+                      flags: '2'
+                      info-id: '0'
+                      vpn-id: '1'
+                      vdevice-host-name: vm1
+                      if-name: ge0/0
+                      vdevice-dataKey: 172.16.255.11-1-router-172.16.255.21/32-0
+                      route-type: router
+                      lastupdated: 1646793742276
+                      area-id: '0'
+                      next-hop: 10.2.2.12
+                      path-type: intra-area
+                    - cost: '10'
+                      dest-type: network
+                      vdevice-name: 172.16.255.11
+                      prefix: 10.2.2.0/24
+                      flags: '0'
+                      info-id: '0'
+                      vpn-id: '1'
+                      vdevice-host-name: vm1
+                      if-name: ge0/0
+                      vdevice-dataKey: 172.16.255.11-1-network-10.2.2.0/24-0
+                      route-type: network
+                      lastupdated: 1646793742276
+                      area-id: '0'
+                      next-hop: 0.0.0.0
+                      path-type: intra-area
+                    - cost: '20'
+                      dest-type: network
+                      vdevice-name: 172.16.255.11
+                      prefix: 10.2.3.0/24
+                      flags: '0'
+                      info-id: '0'
+                      vpn-id: '1'
+                      vdevice-host-name: vm1
+                      if-name: ge0/0
+                      vdevice-dataKey: 172.16.255.11-1-network-10.2.3.0/24-0
+                      route-type: network
+                      lastupdated: 1646793742276
+                      area-id: '0'
+                      next-hop: 10.2.2.12
+                      path-type: intra-area
+                    - dest-type: network
+                      vdevice-name: 172.16.255.11
+                      prefix: 172.16.255.112/32
+                      flags: '78'
+                      info-id: '0'
+                      vpn-id: '1'
+                      vdevice-host-name: vm1
+                      type2-cost: '20'
+                      if-name: ge0/0
+                      vdevice-dataKey: 172.16.255.11-1-external-172.16.255.112/32-0
+                      route-type: external
+                      lastupdated: 1646793742276
+                      tag: '0'
+                      next-hop: 10.2.2.12
+                      path-type: external2
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/ospf/v3interface:
+    get:
+      tags:
+      - Real-Time Monitoring - OSPF
+      description: Get OSPF v3 interface list from device (Real Time)
+      operationId: createOSPFv3Interface
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                OSPF v3 interface list:
+                  description: OSPF v3 interface list
+                  value:
+                    data:
+                    - router-id: 90.90.90.90
+                      af: ospfv3-address-family-ipv4
+                      area-id: '300'
+                      lastupdated: 1649681917917
+                      vpn-id: '10'
+                      vdevice-dataKey: 172.16.255.15-10-ospfv3-address-family-ipv4--90.90.90.90-300-
+                      process-id: '10'
+                      vdevice-host-name: vm5
+                      vdevice-name: 172.16.255.15
+                    - router-id: 100.100.5.101
+                      af: ospfv3-address-family-ipv6
+                      area-id: '300'
+                      lastupdated: 1649681917917
+                      vpn-id: '10'
+                      vdevice-dataKey: 172.16.255.15-10-ospfv3-address-family-ipv6--100.100.5.101-300-
+                      process-id: '10'
+                      vdevice-host-name: vm5
+                      vdevice-name: 172.16.255.15
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/ospf/v3neighbor:
+    get:
+      tags:
+      - Real-Time Monitoring - OSPF
+      description: Get OSPF v3 neighbor list from device (Real Time)
+      operationId: createOSPFv3Neighbors
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                OSPF v3 neighbor list:
+                  description: OSPF v3 neighbor list
+                  value:
+                    data:
+                    - router-id: 90.90.90.90
+                      af: ospfv3-address-family-ipv4
+                      area-id: '300'
+                      lastupdated: 1649682289885
+                      vpn-id: '10'
+                      vdevice-dataKey: 172.16.255.15-10-ospfv3-address-family-ipv4--90.90.90.90-300--
+                      process-id: '10'
+                      vdevice-host-name: vm5
+                      vdevice-name: 172.16.255.15
+                    - router-id: 100.100.5.101
+                      af: ospfv3-address-family-ipv6
+                      area-id: '300'
+                      lastupdated: 1649682289885
+                      vpn-id: '10'
+                      vdevice-dataKey: 172.16.255.15-10-ospfv3-address-family-ipv6--100.100.5.101-300--
+                      process-id: '10'
+                      vdevice-host-name: vm5
+                      vdevice-name: 172.16.255.15
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write

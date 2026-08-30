@@ -1,0 +1,1240 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - BFD API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - BFD
+paths:
+  /device/bfd/history:
+    get:
+      tags:
+      - Real-Time Monitoring - BFD
+      description: Get BFD session history from device (Real Time)
+      operationId: createBFDHistoryList
+      parameters:
+      - name: system-ip
+        in: query
+        description: System IP
+        schema:
+          type: string
+      - name: color
+        in: query
+        description: Remote color
+        schema:
+          type: string
+          enum:
+          - default
+          - mpls
+          - metro-ethernet
+          - biz-internet
+          - public-internet
+          - lte
+          - 3g
+          - red
+          - green
+          - blue
+          - gold
+          - silver
+          - bronze
+          - custom1
+          - custom2
+          - custom3
+          - private1
+          - private2
+          - private3
+          - private4
+          - private5
+          - private6
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                BFD session history:
+                  description: BFD session history
+                  value:
+                    data:
+                    - dst-ip: 10.101.2.2
+                      src-ip: 10.101.3.3
+                      color: default
+                      tx-pkts: 3856
+                      vdevice-name: 169.254.10.10
+                      src-port: 12366
+                      time-date: 1642187218000
+                      system-ip: 172.16.254.1
+                      index: 8
+                      dst-port: 12386
+                      del: 0
+                      site-id: 2
+                      vdevice-host-name: vm3
+                      vdevice-dataKey: 169.254.10.10-8-2022-01-14T19:06:58+0000
+                      proto: ipsec
+                      lastupdated: 1642581869106
+                      time: 2022-01-14T19:06:58+0000
+                      state: down
+                      rx-pkts: 3855
+                    - dst-ip: 10.101.2.2
+                      src-ip: 10.101.3.3
+                      color: default
+                      tx-pkts: 6
+                      vdevice-name: 169.254.10.10
+                      src-port: 12366
+                      time-date: 1642187218000
+                      system-ip: 172.16.254.1
+                      index: 9
+                      dst-port: 12386
+                      del: 1
+                      site-id: 2
+                      vdevice-host-name: vm3
+                      vdevice-dataKey: 169.254.10.10-9-2022-01-14T19:06:58+0000
+                      proto: ipsec
+                      lastupdated: 1642581869106
+                      time: 2022-01-14T19:06:58+0000
+                      state: down
+                      rx-pkts: 6
+                    - dst-ip: 10.101.2.2
+                      src-ip: 10.101.3.3
+                      color: biz-internet
+                      tx-pkts: 0
+                      vdevice-name: 169.254.10.10
+                      src-port: 12366
+                      time-date: 1642187219000
+                      system-ip: 172.16.254.1
+                      index: 6
+                      dst-port: 12406
+                      del: 0
+                      site-id: 2
+                      vdevice-host-name: vm3
+                      vdevice-dataKey: 169.254.10.10-6-2022-01-14T19:06:59+0000
+                      proto: ipsec
+                      lastupdated: 1642581869106
+                      time: 2022-01-14T19:06:59+0000
+                      state: down
+                      rx-pkts: 0
+                    - dst-ip: 10.101.2.2
+                      src-ip: 10.101.3.3
+                      color: biz-internet
+                      tx-pkts: 6
+                      vdevice-name: 169.254.10.10
+                      src-port: 12366
+                      time-date: 1642187219000
+                      system-ip: 172.16.254.1
+                      index: 7
+                      dst-port: 12406
+                      del: 0
+                      site-id: 2
+                      vdevice-host-name: vm3
+                      vdevice-dataKey: 169.254.10.10-7-2022-01-14T19:06:59+0000
+                      proto: ipsec
+                      lastupdated: 1642581869106
+                      time: 2022-01-14T19:06:59+0000
+                      state: up
+                      rx-pkts: 6
+                    - dst-ip: 10.102.5.5
+                      src-ip: 10.101.3.3
+                      color: default
+                      tx-pkts: 95431
+                      vdevice-name: 169.254.10.10
+                      src-port: 12346
+                      time-date: 1642577832000
+                      system-ip: 172.16.254.4
+                      index: 8
+                      dst-port: 12386
+                      del: 0
+                      site-id: 5
+                      vdevice-host-name: vm3
+                      vdevice-dataKey: 169.254.10.10-8-2022-01-19T07:37:12+0000
+                      proto: ipsec
+                      lastupdated: 1642581869106
+                      time: 2022-01-19T07:37:12+0000
+                      state: down
+                      rx-pkts: 95426
+                    - dst-ip: 10.102.16.16
+                      src-ip: 10.102.3.3
+                      color: lte
+                      tx-pkts: 0
+                      vdevice-name: 169.254.10.10
+                      src-port: 12366
+                      time-date: 1642163442000
+                      system-ip: 172.16.254.16
+                      index: 6
+                      dst-port: 12366
+                      del: 0
+                      site-id: 16
+                      vdevice-host-name: vm3
+                      vdevice-dataKey: 169.254.10.10-6-2022-01-14T12:30:42+0000
+                      proto: ipsec
+                      lastupdated: 1642581869106
+                      time: 2022-01-14T12:30:42+0000
+                      state: down
+                      rx-pkts: 0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write,System-read,System-write
+  /device/bfd/links:
+    get:
+      tags:
+      - Real-Time Monitoring - BFD
+      description: Get list of BFD connections
+      operationId: createBFDLinkList
+      parameters:
+      - name: state
+        in: query
+        description: Device state
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                BFD connections:
+                  description: BFD connections
+                  value:
+                    data:
+                    - linkKey: 172.16.255.14:lte - 172.16.255.16:lte
+                      linkKeyDisplay: 172.16.255.14 (lte) - 172.16.255.16 (lte)
+                      asystem-ip: 172.16.255.16
+                      bhost-name: vm4
+                      lastupdated: '1642494861369'
+                      bsite-id: '400'
+                      color1: lte
+                      bpersonality: vedge
+                      state: up
+                      color2: lte
+                      apersonality: vedge
+                      bdeviceId: 172.16.255.14
+                      ahost-name: vm6
+                      adeviceId: 172.16.255.16
+                      asite-id: '600'
+                      bsystem-ip: 172.16.255.14
+                    - linkKey: 172.16.255.11:lte - 172.16.255.16:lte
+                      linkKeyDisplay: 172.16.255.11 (lte) - 172.16.255.16 (lte)
+                      asystem-ip: 172.16.255.16
+                      bhost-name: vm1
+                      lastupdated: '1642663041881'
+                      bsite-id: '100'
+                      color1: lte
+                      bpersonality: vedge
+                      state: up
+                      color2: lte
+                      apersonality: vedge
+                      bdeviceId: 172.16.255.11
+                      ahost-name: vm6
+                      adeviceId: 172.16.255.16
+                      asite-id: '600'
+                      bsystem-ip: 172.16.255.11
+                    - linkKey: 172.16.255.16:lte - 172.16.255.21:lte
+                      linkKeyDisplay: 172.16.255.16 (lte) - 172.16.255.21 (lte)
+                      asystem-ip: 172.16.255.16
+                      bhost-name: vm11
+                      lastupdated: '1642494861369'
+                      bsite-id: '100'
+                      color1: lte
+                      bpersonality: vedge
+                      state: up
+                      color2: lte
+                      apersonality: vedge
+                      bdeviceId: 172.16.255.21
+                      ahost-name: vm6
+                      adeviceId: 172.16.255.16
+                      asite-id: '600'
+                      bsystem-ip: 172.16.255.21
+                    - linkKey: 172.16.255.15:lte - 172.16.255.16:lte
+                      linkKeyDisplay: 172.16.255.15 (lte) - 172.16.255.16 (lte)
+                      asystem-ip: 172.16.255.15
+                      bhost-name: vm6
+                      lastupdated: '1642975004139'
+                      bsite-id: '600'
+                      color1: lte
+                      bpersonality: vedge
+                      state: up
+                      color2: lte
+                      apersonality: vedge
+                      bdeviceId: 172.16.255.16
+                      ahost-name: vm5
+                      adeviceId: 172.16.255.15
+                      asite-id: '500'
+                      bsystem-ip: 172.16.255.16
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /device/bfd/sessions:
+    get:
+      tags:
+      - Real-Time Monitoring - BFD
+      description: Get list of BFD sessions from vManage (Real Time)
+      operationId: createBFDSessions
+      parameters:
+      - name: system-ip
+        in: query
+        description: System IP
+        schema:
+          type: string
+      - name: color
+        in: query
+        description: Remote color
+        schema:
+          type: string
+          enum:
+          - default
+          - mpls
+          - metro-ethernet
+          - biz-internet
+          - public-internet
+          - lte
+          - 3g
+          - red
+          - green
+          - blue
+          - gold
+          - silver
+          - bronze
+          - custom1
+          - custom2
+          - custom3
+          - private1
+          - private2
+          - private3
+          - private4
+          - private5
+          - private6
+      - name: local-color
+        in: query
+        description: Source color
+        schema:
+          type: string
+          enum:
+          - default
+          - mpls
+          - metro-ethernet
+          - biz-internet
+          - public-internet
+          - lte
+          - 3g
+          - red
+          - green
+          - blue
+          - gold
+          - silver
+          - bronze
+          - custom1
+          - custom2
+          - custom3
+          - private1
+          - private2
+          - private3
+          - private4
+          - private5
+          - private6
+      - name: region-type
+        in: query
+        description: Region type
+        schema:
+          type: string
+          enum:
+          - core
+          - access
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                BFD sessions:
+                  description: BFD sessions
+                  value:
+                    data:
+                    - src-ip: 10.101.3.3
+                      dst-ip: 10.101.2.2
+                      color: default
+                      vdevice-name: 169.254.10.10
+                      src-port: 12346
+                      system-ip: 172.16.254.1
+                      dst-port: 12426
+                      site-id: 2
+                      transitions: 1
+                      vdevice-host-name: vm3
+                      local-color: default
+                      uptime: 0:14:04:10
+                      detect-multiplier: '7'
+                      vdevice-dataKey: 169.254.10.10-default-172.16.254.1-default-ipsec
+                      proto: ipsec
+                      lastupdated: 1642583341666
+                      state: up
+                      tx-interval: 1000
+                      uptime-date: 1642532640000
+                    - src-ip: 10.101.3.3
+                      dst-ip: 10.101.4.4
+                      color: default
+                      vdevice-name: 169.254.10.10
+                      src-port: 12346
+                      system-ip: 172.16.254.3
+                      dst-port: 12386
+                      site-id: 4
+                      transitions: 1
+                      vdevice-host-name: vm3
+                      local-color: default
+                      uptime: 0:14:04:10
+                      detect-multiplier: '7'
+                      vdevice-dataKey: 169.254.10.10-default-172.16.254.3-default-ipsec
+                      proto: ipsec
+                      lastupdated: 1642583341666
+                      state: up
+                      tx-interval: 1000
+                      uptime-date: 1642532640000
+                    - src-ip: 10.101.3.3
+                      dst-ip: 10.102.5.5
+                      color: default
+                      vdevice-name: 169.254.10.10
+                      src-port: 12346
+                      system-ip: 172.16.254.4
+                      dst-port: 12386
+                      site-id: 5
+                      transitions: 3
+                      vdevice-host-name: vm3
+                      local-color: default
+                      uptime: 0:01:31:46
+                      detect-multiplier: '7'
+                      vdevice-dataKey: 169.254.10.10-default-172.16.254.4-default-ipsec
+                      proto: ipsec
+                      lastupdated: 1642583341666
+                      state: up
+                      tx-interval: 1000
+                      uptime-date: 1642577820000
+                    - src-ip: 10.101.3.3
+                      dst-ip: 10.102.6.6
+                      color: default
+                      vdevice-name: 169.254.10.10
+                      src-port: 12346
+                      system-ip: 172.16.254.5
+                      dst-port: 12386
+                      site-id: 6
+                      transitions: 2
+                      vdevice-host-name: vm3
+                      local-color: default
+                      uptime: 0:01:36:07
+                      detect-multiplier: '7'
+                      vdevice-dataKey: 169.254.10.10-default-172.16.254.5-default-ipsec
+                      proto: ipsec
+                      lastupdated: 1642583341666
+                      state: up
+                      tx-interval: 1000
+                      uptime-date: 1642577520000
+                    - src-ip: 10.101.3.3
+                      dst-ip: 10.102.16.16
+                      color: default
+                      vdevice-name: 169.254.10.10
+                      src-port: 12346
+                      system-ip: 172.16.254.16
+                      dst-port: 12386
+                      site-id: 16
+                      transitions: 1
+                      vdevice-host-name: vm3
+                      local-color: default
+                      uptime: 0:14:04:10
+                      detect-multiplier: '7'
+                      vdevice-dataKey: 169.254.10.10-default-172.16.254.16-default-ipsec
+                      proto: ipsec
+                      lastupdated: 1642583341666
+                      state: up
+                      tx-interval: 1000
+                      uptime-date: 1642532640000
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write,System-read,System-write
+  /device/bfd/sites/detail:
+    get:
+      tags:
+      - Real-Time Monitoring - BFD
+      description: Get detailed BFD site details
+      operationId: getBFDSiteStateDetail
+      parameters:
+      - name: state
+        in: query
+        description: State
+        schema:
+          type: string
+          enum:
+          - siteup
+          - sitedown
+          - sitepartial
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                'BFD site detail: state=siteup':
+                  description: 'BFD site detail: state=siteup'
+                  value:
+                    data:
+                    - bfdSessions: '5'
+                      site-id: '4'
+                      device-type: vedge
+                      uuid: 4125a7b2-65cd-43c5-a393-cba53ebcdc00
+                      lastupdated: 1648413952287
+                      reachability: reachable
+                      device-model: vedge-cloud
+                      version: 20.3.4-542
+                      system-ip: 169.254.10.11
+                      uptime-date: 1646298000000
+                      controlConnections: '3'
+                      host-name: vm4
+                      ompPeers: '2'
+                      number-vsmart-peers: 2
+                      local-system-ip: 172.16.254.3
+                      board-serial: '12345709'
+                    - bfdSessions: '5'
+                      site-id: '16'
+                      device-type: vedge
+                      uuid: CSR-aec2123c-f20b-4876-b9ac-ae1dba561fb5
+                      lastupdated: 1648416356665
+                      reachability: reachable
+                      device-model: vedge-CSR-1000v
+                      version: 17.03.06.0.6691
+                      system-ip: 169.254.10.14
+                      uptime-date: 1647300780000
+                      controlConnections: '3'
+                      host-name: vm16
+                      ompPeers: '2'
+                      number-vsmart-peers: 2
+                      local-system-ip: 172.16.254.16
+                      board-serial: 1234570F
+                    - bfdSessions: '5'
+                      site-id: '5'
+                      device-type: vedge
+                      uuid: C8K-d721a892-1cc1-4a30-9d17-98387348e2d4
+                      lastupdated: 1648418760239
+                      reachability: reachable
+                      device-model: vedge-C8000V
+                      version: 17.06.03.0.3496
+                      system-ip: 169.254.10.12
+                      uptime-date: 1646298240000
+                      controlConnections: '3'
+                      host-name: vm5
+                      ompPeers: '2'
+                      number-vsmart-peers: 2
+                      local-system-ip: 172.16.254.4
+                      board-serial: 1234570A
+                    - bfdSessions: '5'
+                      site-id: '2'
+                      device-type: vedge
+                      uuid: f713e867-4376-45f1-8ecf-7c5fbe2be2f8
+                      lastupdated: 1648453581214
+                      reachability: reachable
+                      device-model: vedge-cloud
+                      version: 20.8.0-218
+                      system-ip: 169.254.10.9
+                      uptime-date: 1648060560000
+                      controlConnections: '3'
+                      host-name: vm2
+                      ompPeers: '2'
+                      number-vsmart-peers: 2
+                      local-system-ip: 172.16.254.1
+                      board-serial: '12345707'
+                    - bfdSessions: '5'
+                      site-id: '6'
+                      device-type: vedge
+                      uuid: C8K-47924f4e-0029-4693-a3df-986cb132437f
+                      lastupdated: 1648413353813
+                      reachability: reachable
+                      device-model: vedge-C8000V
+                      version: 17.08.01.0.1034
+                      system-ip: 169.254.10.13
+                      uptime-date: 1646298240000
+                      controlConnections: '3'
+                      host-name: vm6
+                      ompPeers: '2'
+                      number-vsmart-peers: 2
+                      local-system-ip: 172.16.254.5
+                      board-serial: 1234570B
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: RBAC VPN-read,RBAC VPN-write
+  /device/bfd/sites/summary:
+    get:
+      tags:
+      - Real-Time Monitoring - BFD
+      description: Get BFD site summary
+      operationId: getBFDSitesSummary
+      parameters:
+      - name: isCached
+        in: query
+        description: Flag for caching
+        schema:
+          type: boolean
+          default: false
+      - name: vpnId
+        in: query
+        description: Filter VPN
+        required: true
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              vpn:
+                type: string
+            description: This is the valid list of VPN-IDs
+            $$ref: '#/components/schemas/VPNID'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                BFD site summary:
+                  description: BFD site summary
+                  value:
+                    data:
+                    - count: 6
+                      detailsURL: ''
+                      status: error
+                      statusList:
+                      - name: Full WAN Connectivity
+                        status: up
+                        message: 6 Full WAN Connectivity
+                        detailsURL: /dataservice/device/bfd/sites/detail?state=siteup
+                        count: 6
+                      - name: Partial WAN Connectivity
+                        status: warning
+                        message: 0 Partial WAN Connectivity
+                        detailsURL: /dataservice/device/bfd/sites/detail?state=sitepartial
+                        count: 0
+                      - name: No WAN Connectivity
+                        status: down
+                        message: 0 No WAN Connectivity
+                        detailsURL: /dataservice/device/bfd/sites/detail?state=sitedown
+                        count: 0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,RBAC VPN-read,System-read,System-write
+  /device/bfd/state/device:
+    get:
+      tags:
+      - Real-Time Monitoring - BFD
+      description: Get device BFD state summary
+      operationId: getDeviceBFDStateSummary
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                BFD state summary:
+                  description: BFD state summary
+                  value:
+                    data:
+                    - site-id: 400
+                      color: lte
+                      vmanage-system-ip: 172.16.255.11
+                      local-color: lte
+                      local-if-desc: ''
+                      vdevice-dataKey: 172.16.255.11-lte-172.16.255.14-lte-ipsec
+                      tx-interval: 1000
+                      vdevice-host-name: vm1
+                      transitions: 0
+                      proto: ipsec
+                      lastupdated: 1642663028239
+                      state: up
+                      uptime-date: 1642663020000
+                      dst-port: 12366
+                      system-ip: 172.16.255.14
+                      dst-ip: 10.1.14.14
+                      remote-if-desc: ''
+                      createTimeStamp: 1642494963368
+                      src-port: 12347
+                      vdevice-name: 172.16.255.11
+                      '@rid': 936
+                      detect-multiplier: '7'
+                      src-ip: 10.0.5.11
+                      local-remote-ifname: ge0/2-ge0/4
+                    - site-id: 600
+                      color: lte
+                      vmanage-system-ip: 172.16.255.11
+                      local-color: lte
+                      local-if-desc: ''
+                      vdevice-dataKey: 172.16.255.11-lte-172.16.255.16-lte-ipsec
+                      tx-interval: 1000
+                      vdevice-host-name: vm1
+                      transitions: 0
+                      proto: ipsec
+                      lastupdated: 1642663028239
+                      state: up
+                      uptime-date: 1642663020000
+                      dst-port: 12366
+                      system-ip: 172.16.255.16
+                      dst-ip: 10.1.16.16
+                      remote-if-desc: ''
+                      createTimeStamp: 1642494971424
+                      src-port: 12347
+                      vdevice-name: 172.16.255.11
+                      '@rid': 947
+                      detect-multiplier: '7'
+                      src-ip: 10.0.5.11
+                      local-remote-ifname: ge0/2-GigabitEthernet1
+                    - site-id: 500
+                      color: lte
+                      vmanage-system-ip: 172.16.255.11
+                      local-color: lte
+                      local-if-desc: ''
+                      vdevice-dataKey: 172.16.255.11-lte-172.16.255.15-lte-ipsec
+                      tx-interval: 1000
+                      vdevice-host-name: vm1
+                      transitions: 0
+                      proto: ipsec
+                      lastupdated: 1642663028239
+                      state: up
+                      uptime-date: 1642663020000
+                      dst-port: 12346
+                      system-ip: 172.16.255.15
+                      dst-ip: 10.1.15.15
+                      remote-if-desc: ''
+                      createTimeStamp: 1642657637570
+                      src-port: 12347
+                      vdevice-name: 172.16.255.11
+                      '@rid': 1004
+                      detect-multiplier: '7'
+                      src-ip: 10.0.5.11
+                      local-remote-ifname: ge0/2-GigabitEthernet1
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,RBAC VPN-read,RBAC VPN-write
+  /device/bfd/state/device/tloc:
+    get:
+      tags:
+      - Real-Time Monitoring - BFD
+      description: Get device BFD state summary with tloc color
+      operationId: getDeviceBFDStateSummaryTloc
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                BFD state summary with tloc:
+                  description: BFD state summary with tloc
+                  value:
+                    data:
+                    - local-color:
+                      - lte
+                      - dia
+                      color:
+                      - lte
+                      - dia
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,RBAC VPN-read,RBAC VPN-write
+  /device/bfd/state/device/tlocInterfaceMap:
+    get:
+      tags:
+      - Real-Time Monitoring - BFD
+      description: Get device tloc color to Intf Mapping Relationship
+      operationId: getDeviceTlocToIntfList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device tloc to intf mapping relationships:
+                  description: Device tloc to intf mapping relationships
+                  value:
+                    intfList:
+                      private1: GigabitEthernet1
+                      mpls: GigabitEthernet2
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,RBAC VPN-read,RBAC VPN-write
+  /device/bfd/status:
+    get:
+      tags:
+      - Real-Time Monitoring - BFD
+      description: Get device BFD status
+      operationId: getDeviceBFDStatus
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                BFD status:
+                  description: BFD status
+                  value:
+                    data:
+                    - count: 0
+                      statusList:
+                      - status: up
+                        count: 0
+                        name: up
+                        color: b0e276
+                        detailsURL: /dataservice/device/bfd/links?state=up
+                        detailView: dialog
+                        icon: images/connection/connection-network-up.png
+                      - status: down
+                        count: 0
+                        name: down
+                        color: fa7c7d
+                        detailsURL: /dataservice/device/bfd/links?state=down
+                        detailView: dialog
+                        icon: images/connection/connection-network-down.png
+                      name: BFD
+                      image: images/bfd.png
+                      detailsURL: /dataservice/device/bfd/links
+                      type: bfd
+                      detailView: dialog
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /device/bfd/summary:
+    get:
+      tags:
+      - Real-Time Monitoring - BFD
+      description: Get BFD summary from device (Real Time)
+      operationId: createBFDSummary
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                BFD summary:
+                  description: BFD summary
+                  value:
+                    data:
+                    - bfd-sessions-max: '22'
+                      vdevice-dataKey: 169.254.10.10
+                      bfd-sessions-flap: '111'
+                      vdevice-name: 169.254.10.10
+                      bfd-sessions-up: '5'
+                      lastupdated: 1642641879344
+                      bfd-sessions-total: '5'
+                      poll-interval: '600000'
+                      vdevice-host-name: vm3
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write,System-read,System-write
+  /device/bfd/summary/device:
+    get:
+      tags:
+      - Real-Time Monitoring - BFD
+      description: Get device BFD status summary
+      operationId: getDeviceBFDStatusSummary
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                BFD status summary:
+                  description: BFD status summary
+                  value:
+                    header:
+                      generatedOn: 1646894919672
+                      title: DataConnections
+                    data:
+                    - name: DataConnection
+                      count: 3
+                      detailsURL: ''
+                      status: error
+                      statusList:
+                      - name: up
+                        message: 3up
+                        detailsURL: /dataservice/device/bfd/sessions?deviceId=172.16.255.11&state=up
+                        count: 3
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /device/bfd/synced/sessions:
+    get:
+      tags:
+      - Real-Time Monitoring - BFD
+      description: Get list of BFD sessions from vManage synchronously
+      operationId: createSyncedBFDSession
+      parameters:
+      - name: system-ip
+        in: query
+        description: System IP
+        schema:
+          type: string
+      - name: color
+        in: query
+        description: Remote color
+        schema:
+          type: string
+          enum:
+          - default
+          - mpls
+          - metro-ethernet
+          - biz-internet
+          - public-internet
+          - lte
+          - 3g
+          - red
+          - green
+          - blue
+          - gold
+          - silver
+          - bronze
+          - custom1
+          - custom2
+          - custom3
+          - private1
+          - private2
+          - private3
+          - private4
+          - private5
+          - private6
+      - name: local-color
+        in: query
+        description: Source color
+        schema:
+          type: string
+          enum:
+          - default
+          - mpls
+          - metro-ethernet
+          - biz-internet
+          - public-internet
+          - lte
+          - 3g
+          - red
+          - green
+          - blue
+          - gold
+          - silver
+          - bronze
+          - custom1
+          - custom2
+          - custom3
+          - private1
+          - private2
+          - private3
+          - private4
+          - private5
+          - private6
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                BFD sessions:
+                  description: BFD sessions
+                  value:
+                    data:
+                    - src-ip: 10.0.5.11
+                      dst-ip: 10.1.14.14
+                      color: lte
+                      vdevice-name: 172.16.255.11
+                      src-port: 12347
+                      createTimeStamp: 1646804370042
+                      system-ip: 172.16.255.14
+                      dst-port: 12366
+                      site-id: 400
+                      transitions: 0
+                      vdevice-host-name: vm1
+                      local-color: lte
+                      detect-multiplier: '7'
+                      vdevice-dataKey: 172.16.255.11-lte-172.16.255.14-lte-ipsec
+                      '@rid': 1050
+                      vmanage-system-ip: 172.16.255.11
+                      proto: ipsec
+                      lastupdated: 1646893777827
+                      tx-interval: 1000
+                      state: up
+                      uptime-date: 1646893680000
+                    - src-ip: 10.0.5.11
+                      dst-ip: 10.1.15.15
+                      color: lte
+                      vdevice-name: 172.16.255.11
+                      src-port: 12347
+                      createTimeStamp: 1646804372038
+                      system-ip: 172.16.255.15
+                      dst-port: 12366
+                      site-id: 500
+                      transitions: 0
+                      vdevice-host-name: vm1
+                      local-color: lte
+                      detect-multiplier: '7'
+                      vdevice-dataKey: 172.16.255.11-lte-172.16.255.15-lte-ipsec
+                      '@rid': 1057
+                      vmanage-system-ip: 172.16.255.11
+                      proto: ipsec
+                      lastupdated: 1646893777827
+                      tx-interval: 1000
+                      state: up
+                      uptime-date: 1646893680000
+                    - src-ip: 10.0.5.11
+                      dst-ip: 10.1.16.16
+                      color: lte
+                      vdevice-name: 172.16.255.11
+                      src-port: 12347
+                      createTimeStamp: 1646804374521
+                      system-ip: 172.16.255.16
+                      dst-port: 12366
+                      site-id: 600
+                      transitions: 0
+                      vdevice-host-name: vm1
+                      local-color: lte
+                      detect-multiplier: '7'
+                      vdevice-dataKey: 172.16.255.11-lte-172.16.255.16-lte-ipsec
+                      '@rid': 1060
+                      vmanage-system-ip: 172.16.255.11
+                      proto: ipsec
+                      lastupdated: 1646893777827
+                      tx-interval: 1000
+                      state: up
+                      uptime-date: 1646893680000
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write,System-read,System-write
+  /device/bfd/tloc:
+    get:
+      tags:
+      - Real-Time Monitoring - BFD
+      description: Get TLOC summary from device (Real Time)
+      operationId: createTLOCSummary
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                TLOC summary:
+                  description: TLOC summary
+                  value:
+                    data:
+                    - sessions-flap: 90
+                      if-name: ge0/1
+                      sessions-total: 5
+                      vdevice-dataKey: 169.254.10.10
+                      vdevice-name: 169.254.10.10
+                      lastupdated: 1642641739756
+                      encap: ipsec
+                      sessions-up: 5
+                      vdevice-host-name: vm3
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write,System-read,System-write
+  /device/bfd/tloc/detail:
+    get:
+      tags:
+      - Real-Time Monitoring - BFD
+      description: Get detailed BFD tloc details
+      operationId: getBFDTlocStateDetail
+      parameters:
+      - name: state
+        in: query
+        description: State
+        schema:
+          type: string
+          enum:
+          - up
+          - down
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                'BFD tloc detail: state=up':
+                  description: 'BFD tloc detail: state=up'
+                  value:
+                    data:
+                    - color: lte
+                      site-id: '4'
+                      system-ip: 169.254.10.11
+                    - color: mpls
+                      site-id: '16'
+                      system-ip: 169.254.10.14
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,Device Monitoring-write

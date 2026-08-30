@@ -1,0 +1,2331 @@
+openapi: 3.2.0
+info:
+  title: Others Configuration - Device Actions API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Configuration - Device Actions
+paths:
+  /device/action/cancel:
+    post:
+      tags:
+      - Configuration - Device Actions
+      description: Cancel tasks
+      operationId: processCancelTask
+      requestBody:
+        description: Request body
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Example Value:
+                description: Example Value
+                value:
+                  action: cancel
+                  devices:
+                  - processId: software_install-xyz
+                    deviceIP: 172.16.255.21
+                    deviceId: 13cf949c-9192-4c5d-8096-12c41fbd366d
+                  deviceType: vedge
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiRequestExampleCancel'
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/action/changepartition:
+    get:
+      tags:
+      - Configuration - Device Actions
+      description: Get change partition information
+      operationId: generateChangePartitionInfo
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              deviceIp:
+                type: string
+            description: This is the valid DeviceIP
+            $$ref: '#/components/schemas/DeviceIP'
+        example:
+        - 172.16.255.15
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Example:
+                  description: Example
+                  value:
+                    data:
+                    - availableVersions:
+                      - string
+                      host-name: vm1
+                      system-ip: 172.16.255.11
+                      personality: vedge
+                      site-id: '100'
+                      uuid: 0fd462aa-f885-44e4-8b7e-843b5aa4040b
+                      device-type: vedge
+                      version: 20.10.999-1966
+                      uptime-date: '1652858640000'
+                      device-model: vedge-cloud
+                      platform: x86_64
+                      reachability: reachable
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiResponseExampleGetchangepartitionresp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+      - Configuration - Device Actions
+      description: Process change partition operation
+      operationId: processChangePartition
+      requestBody:
+        description: Request body for Process change partition operation
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Example Value:
+                description: Example Value
+                value:
+                  action: changepartition
+                  devices:
+                  - version: 20.3.0
+                    deviceIP: 172.16.51.1
+                    deviceId: 52fe5cd3-ec3d-4141-92e4-0c31d0e0347a
+                  deviceType: vedge
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiRequestExamplePostchangepartitionreq'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Example Value:
+                  description: Example Value
+                  value:
+                    id: change_partition-99b8ebd5-c8cf-439b-8504-2f80b0b75b73
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiResponseExamplePostchangepartitionresp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/action/deactivate:
+    get:
+      tags:
+      - Configuration - Device Actions
+      description: Get deactivate partition information
+      operationId: generateDeactivateInfo
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              deviceIp:
+                type: string
+            description: This is the valid DeviceIP
+            $$ref: '#/components/schemas/DeviceIP'
+        example:
+        - 172.16.255.15
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        availableVersions:
+                          type: array
+                          example: []
+                          items:
+                            type: string
+                            example: []
+                        device-model:
+                          type: string
+                          example: vedge-C8000V
+                        device-type:
+                          type: string
+                          example: vedge
+                        host-name:
+                          type: string
+                          example: vm5
+                        personality:
+                          type: string
+                          example: vedge
+                        platform:
+                          type: string
+                          example: x86_64
+                        reachability:
+                          type: string
+                          example: reachable
+                        site-id:
+                          type: string
+                          example: '500'
+                        system-ip:
+                          type: string
+                          example: 172.16.255.15
+                        uptime-date:
+                          type: string
+                          example: '1686317760000'
+                        uuid:
+                          type: string
+                          example: C8K-a06af989-6a80-472d-ac0f-ed5560b5068b
+                        version:
+                          type: string
+                          example: 17.13.01.0.180213
+                      $$ref: '#/components/schemas/GenerateDeactivateInfoData'
+                $$ref: '#/components/schemas/GenerateDeactivateInfo'
+              examples:
+                Get deactivate partition information example:
+                  description: Get deactivate partition information example
+                  value:
+                    data:
+                    - availableVersions: []
+                      host-name: vm5
+                      system-ip: 172.16.255.15
+                      personality: vedge
+                      site-id: '500'
+                      uuid: C8K-a06af989-6a80-472d-ac0f-ed5560b5068b
+                      device-type: vedge
+                      version: 17.13.01.0.180213
+                      uptime-date: '1686317760000'
+                      device-model: vedge-C8000V
+                      platform: x86_64
+                      reachability: reachable
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiResponseExampleGetdeactivateresp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Software Upgrade-read,Software Upgrade-write,Software Upgrade > Edge-write,Software Upgrade > Edge-read,Software Upgrade > Controller-write,Software Upgrade > Controller-read
+    post:
+      tags:
+      - Configuration - Device Actions
+      description: Process deactivate operation for smu image
+      operationId: processDeactivateSmu
+      requestBody:
+        description: Device smu image deactivate request
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Device deactivate request:
+                description: Device deactivate request
+                value:
+                  action: deactivate
+                  devices:
+                  - version: 20.3.0
+                    deviceIP: 172.16.51.1
+                    deviceId: 52fe5cd3-ec3d-4141-92e4-0c31d0e0347a
+                  - version: 20.3.0
+                    deviceIP: 172.16.51.2
+                    deviceId: 4d4507df-29b4-4f68-9129-36cfa4528847
+                  deviceType: vedge
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiRequestExamplePostdeactivatereq'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value:
+                    id: deactivate-01232017T154359940
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiResponseExamplePostdeactivateresp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Software Upgrade-write,Software Upgrade > Edge-write,Software Upgrade > Controller-write
+  /device/action/defaultpartition:
+    post:
+      tags:
+      - Configuration - Device Actions
+      description: Process marking default partition operation
+      operationId: processDefaultPartition
+      requestBody:
+        description: Request body for Process marking default partition operation
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Example Value:
+                description: Example Value
+                value:
+                  action: defaultpartition
+                  devices:
+                  - version: 99.99.999-2499
+                    deviceIP: 172.16.255.16
+                    deviceId: 13cf949c-9192-4c5d-8096-12c41fbd366d
+                  deviceType: vedge
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiRequestExamplePostdefaultpartitionreq'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Example:
+                  description: Example
+                  value:
+                    id: default_partition-99b8ebd5-c8cf-439b-8504-2f80b0b75b73
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiResponseExamplePostdefaultpartitionresp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/action/filter/vpn:
+    get:
+      tags:
+      - Configuration - Device Actions
+      description: Get filter VPN list
+      operationId: createFilterVPNList
+      parameters:
+      - name: site-id
+        in: query
+        description: site-id
+        schema:
+          type: string
+        example: 500
+      - name: deviceId
+        in: query
+        description: deviceId
+        schema:
+          type: string
+        example: 172.16.255.14
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  vedge:
+                    type: array
+                    items:
+                      type: string
+                  vsmart:
+                    type: array
+                    items:
+                      type: string
+                $$ref: '#/components/schemas/CreateFilterVPNList'
+              examples:
+                Example:
+                  description: Example
+                  value:
+                    vedge:
+                    - '1'
+                    - '65528'
+                    - '65530'
+                    - '65529'
+                    vsmart: []
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiResponseExampleFiltervpnresp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Software Upgrade-read,RBAC VPN-read,Software Upgrade > Edge-read,Software Upgrade > Controller-read
+  /device/action/image-download:
+    post:
+      tags:
+      - Configuration - Device Actions
+      description: Intitate image download on the given device.
+      operationId: initiateImageDownload
+      requestBody:
+        description: Request body to Intitate image download on the given device
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Example Value:
+                description: Example Value
+                value:
+                  action: image-download
+                  actionName: Test
+                  actionStart: Tue Jan 11 23:00:00 IST 2022
+                  actionStartMillis: 1641922200000
+                  actionEnd: Wed Jan 12 03:00:00 IST 2022
+                  actionEndMillis: 1641936600000
+                  timeZone: Asia/Kolkata
+                  actionTimeoutMins: 30
+                  input:
+                    data:
+                    - family: c800v
+                      version: 875d4845-df12-4fdf-91f6-b73c601b2c3f
+                      remoteServerId: 192448a2-36bd-4f50-af04-03b428cd5a8f
+                    versionType: remote
+                  devices:
+                  - deviceIP: 40.1.1.1
+                    deviceId: C8K-60c01ff3-1405-428f-93e9-f1606d22968e
+                  deviceType: vedge
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiRequestExampleImagedownload'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Example:
+                  description: Example
+                  value:
+                    task_id: default_partition-01112017T159951140
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiResponseExampleImagedownloadresp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/action/image-remove:
+    post:
+      tags:
+      - Configuration - Device Actions
+      description: Process remove software image operation
+      operationId: processRemoveSoftwareImage
+      requestBody:
+        description: Request body - Process remove software image operation
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Example Value:
+                description: Example Value
+                value:
+                  action: image-remove
+                  devices:
+                  - deviceIP: 172.16.255.21
+                    deviceId: 2b24a7be-077c-48f7-873f-47573986d148
+                    images:
+                    - viptela-20.4.2-x86_64.tar.gz
+                  deviceType: vedge
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiRequestExampleImageremove'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Example:
+                  description: Example
+                  value:
+                    id: image_remove-0a58029a-db1d-4d82-9400-3c867c8be533
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiResponseExampleImageremoveresp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/action/install:
+    post:
+      tags:
+      - Configuration - Device Actions
+      description: Process an installation operation
+      operationId: processInstall
+      requestBody:
+        description: Request body
+        content:
+          application/json:
+            schema:
+              required:
+              - action
+              type: object
+              properties:
+                action:
+                  type: string
+                  example: install
+                actionEnd:
+                  type: string
+                  description: Scheduled time for the action to end.
+                  example: Wed Nov 06 2024 15:27:32
+                actionEndMillis:
+                  type: integer
+                  description: Scheduled time in EPHOC millis for the action to end.
+                  format: int32
+                  example: 1730887052000
+                actionStart:
+                  type: string
+                  description: Scheduled time for the action to start.
+                  example: Wed Nov 06 2024 11:27:32
+                actionStartMillis:
+                  type: integer
+                  description: Scheduled time in EPHOC millis for the action to start.
+                  format: int32
+                  example: 1730872652000
+                deviceType:
+                  type: string
+                  example: vedge
+                devices:
+                  type: array
+                  items:
+                    required:
+                    - deviceIP
+                    - deviceId
+                    type: object
+                    properties:
+                      deviceIP:
+                        type: string
+                        description: Device IP address.
+                        example: 172.16.255.14
+                      deviceId:
+                        type: string
+                        description: Device ID.
+                        example: 2f876a33-9944-450a-91ee-f1f80eb68348
+                    $$ref: '#/components/schemas/ProcessInstallReqDevices'
+                input:
+                  required:
+                  - data
+                  - vEdgeVPN
+                  - vSmartVPN
+                  - versionType
+                  type: object
+                  properties:
+                    data:
+                      type: array
+                      description: Device action input data.
+                      items:
+                        required:
+                        - family
+                        - version
+                        type: object
+                        properties:
+                          family:
+                            type: string
+                            description: Platform family of the software image.
+                            example: c800v
+                          version:
+                            type: string
+                            description: Version of the software image.
+                            example: 17.17.01.0.209664.1728238032
+                          versionId:
+                            type: string
+                            description: Version id of the software image.
+                            example: 824ac3d6-7d2a-4dfa-8a8b-e6e5bc64acb8
+                        description: Device action input data.
+                        $$ref: '#/components/schemas/ProcessInstallReqInputData'
+                    reboot:
+                      type: boolean
+                      example: false
+                    sync:
+                      type: boolean
+                      example: true
+                    vEdgeVPN:
+                      type: integer
+                      description: VPN id of the vEdge.
+                      format: int32
+                      example: 0
+                    vSmartVPN:
+                      type: integer
+                      description: VPN id of the vSmart.
+                      format: int32
+                      example: 0
+                    versionType:
+                      type: string
+                      description: Version type of the software image.
+                      example: vmanage
+                  $$ref: '#/components/schemas/ProcessInstallReqInput'
+                timeZone:
+                  type: string
+                  description: Scheduled time zone for the action.
+                  example: UTC
+              $$ref: '#/components/schemas/ProcessInstallReq'
+            examples:
+              Example Value:
+                description: Example Value
+                value:
+                  action: install
+                  input:
+                    vEdgeVPN: 0
+                    vSmartVPN: 0
+                    data:
+                    - family: c8000v
+                      version: 17.17.01.0.209664.1728238032
+                      versionId: 824ac3d6-7d2a-4dfa-8a8b-e6e5bc64acb8
+                    versionType: vmanage
+                    reboot: false
+                    sync: true
+                  devices:
+                  - deviceIP: 172.16.255.14
+                    deviceId: 2f876a33-9944-450a-91ee-f1f80eb68348
+                  deviceType: vedge
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiRequestExampleInstall'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value:
+                    id: software_install-01232017T154359940
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiResponseExampleInstallresppost'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    get:
+      tags:
+      - Configuration - Device Actions
+      description: Generate install info
+      operationId: generateInstallInfo
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              deviceIp:
+                type: string
+            description: This is the valid DeviceIP
+            $$ref: '#/components/schemas/DeviceIP'
+        example:
+        - 172.16.255.15
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Example:
+                  description: Example
+                  value:
+                    data:
+                    - device-model: vedge-cloud
+                      device-os: next
+                      local-system-ip: 172.16.255.11
+                      system-ip: 172.16.255.11
+                      site-id: '100'
+                      downloadedImages:
+                      - string
+                      uuid: 0fd462aa-f885-44e4-8b7e-843b5aa4040b
+                      platform: x86_64
+                      isScheduleUpgradeSupported: true
+                      personality: vedge
+                      device-type: vedge
+                      reachability: reachable
+                      availableVersions:
+                      - string
+                      downloadedServices:
+                      - string
+                      availableServices:
+                      - string
+                      host-name: vm1
+                      version: 20.10.999-1966
+                      uptime-date: 1652858640000
+                      isMultiStepUpgradeSupported: true
+                      defaultVersion: 20.10.999-1966
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiResponseExampleInstallrespget'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/action/install/devices/{deviceType}:
+    get:
+      tags:
+      - Configuration - Device Actions
+      description: Get list of installed devices
+      operationId: generateDeviceList
+      parameters:
+      - name: deviceType
+        in: path
+        description: Device type
+        required: true
+        schema:
+          type: string
+        example: vmanage
+      - name: groupId
+        in: query
+        description: groupId
+        schema:
+          type: string
+        example: all
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    example:
+                      device-model: vmanage
+                      device-os: next
+                      local-system-ip: 172.16.255.22
+                      system-ip: 172.16.255.22
+                      site-id: '200'
+                      uuid: b642c56f-c899-4ca4-a3d6-d915e0660f9a
+                      platform: x86_64
+                      isScheduleUpgradeSupported: false
+                      personality: vmanage
+                      device-type: vmanage
+                      reachability: reachable
+                      availableVersions: []
+                      host-name: vm12
+                      version: 20.13.999-2846
+                      layoutLevel: 1
+                      uptime-date: 1683523320000
+                      isMultiStepUpgradeSupported: false
+                      defaultVersion: 20.13.999-2846
+                      platformFamily: vmanage
+                      current-partition: 20.13.999-2846
+                    items:
+                      type: object
+                      properties:
+                        availableVersions:
+                          type: array
+                          items:
+                            type: string
+                        current-partition:
+                          type: string
+                        defaultVersion:
+                          type: string
+                        device-model:
+                          type: string
+                        device-os:
+                          type: string
+                        device-type:
+                          type: string
+                        host-name:
+                          type: string
+                        isMultiStepUpgradeSupported:
+                          type: boolean
+                        isScheduleUpgradeSupported:
+                          type: boolean
+                        layoutLevel:
+                          type: integer
+                          format: int32
+                        local-system-ip:
+                          type: string
+                        personality:
+                          type: string
+                        platform:
+                          type: string
+                        platformFamily:
+                          type: string
+                        reachability:
+                          type: string
+                        site-id:
+                          type: string
+                        system-ip:
+                          type: string
+                        uptime-date:
+                          type: integer
+                          format: int32
+                        uuid:
+                          type: string
+                        version:
+                          type: string
+                      example:
+                        device-model: vmanage
+                        device-os: next
+                        local-system-ip: 172.16.255.22
+                        system-ip: 172.16.255.22
+                        site-id: '200'
+                        uuid: b642c56f-c899-4ca4-a3d6-d915e0660f9a
+                        platform: x86_64
+                        isScheduleUpgradeSupported: false
+                        personality: vmanage
+                        device-type: vmanage
+                        reachability: reachable
+                        availableVersions: []
+                        host-name: vm12
+                        version: 20.13.999-2846
+                        layoutLevel: 1
+                        uptime-date: 1683523320000
+                        isMultiStepUpgradeSupported: false
+                        defaultVersion: 20.13.999-2846
+                        platformFamily: vmanage
+                        current-partition: 20.13.999-2846
+                      $$ref: '#/components/schemas/GenerateDeviceListData'
+                $$ref: '#/components/schemas/GenerateDeviceList'
+              examples:
+                Example:
+                  description: Example
+                  value:
+                    data:
+                      device-model: vmanage
+                      device-os: next
+                      local-system-ip: 172.16.255.22
+                      system-ip: 172.16.255.22
+                      site-id: '200'
+                      uuid: b642c56f-c899-4ca4-a3d6-d915e0660f9a
+                      platform: x86_64
+                      isScheduleUpgradeSupported: false
+                      personality: vmanage
+                      device-type: vmanage
+                      reachability: reachable
+                      availableVersions: []
+                      host-name: vm12
+                      version: 20.13.999-2846
+                      layoutLevel: 1
+                      uptime-date: 1683523320000
+                      isMultiStepUpgradeSupported: false
+                      defaultVersion: 20.13.999-2846
+                      platformFamily: vmanage
+                      current-partition: 20.13.999-2846
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiResponseExampleGetinstalldevicesresp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Software Upgrade-read,Software Upgrade-write,Settings-read,vmanage-http-stream,Software Upgrade > Edge-write,Software Upgrade > Edge-read,Software Upgrade > Controller-write,Software Upgrade > Controller-read
+  /device/action/list:
+    get:
+      tags:
+      - Configuration - Device Actions
+      description: Get device action list
+      operationId: generateDeviceActionList
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                properties:
+                  empty:
+                    type: boolean
+                items:
+                  type: object
+                  properties:
+                    isCancelEnabled:
+                      type: boolean
+                    isParallelExecutionEnabled:
+                      type: boolean
+                    name:
+                      type: string
+                  $$ref: '#/components/schemas/GenerateDeviceActionListInner'
+                $$ref: '#/components/schemas/GenerateDeviceActionList'
+              examples:
+                Example:
+                  description: Example
+                  value:
+                  - name: Migrate shared templates
+                    isCancelEnabled: false
+                    isParallelExecutionEnabled: false
+                  - name: Multicloud - Create Gateway
+                    isCancelEnabled: false
+                    isParallelExecutionEnabled: false
+                  - name: Scheduled Export Backup
+                    isCancelEnabled: false
+                    isParallelExecutionEnabled: false
+                  - name: Deploy topology group to vSmarts
+                    isCancelEnabled: false
+                    isParallelExecutionEnabled: false
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiResponseExampleList'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Software Upgrade-read,Software Upgrade-write,Software Upgrade > Edge-write,Software Upgrade > Edge-read,Software Upgrade > Controller-write,Software Upgrade > Controller-read
+  /device/action/lxcactivate:
+    post:
+      tags:
+      - Configuration - Device Actions
+      description: Process an activation operation
+      operationId: processLxcActivate
+      requestBody:
+        description: Activation request payload
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Activation Operation:
+                description: Activation Operation
+                value:
+                  action: lxc_activate
+                  deviceType: vedge
+                  devices:
+                  - deviceIP: 172.16.255.15
+                    deviceId: C8K-61b9f39d-a5ef-402f-a395-ae6d6d49dda6
+                    installImages:
+                    - networkFunctionType: app-hosting
+                      versionTypeName: UTD-Snort-Feature
+                      versionName: 1.13.6_SV3.1.55.0_XEmain
+                    vEdgeVPN: 0
+                    versionType: vmanage
+                  input:
+                    vEdgeVPN: 0
+                    versionType: vmanage
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiRequestExampleLxcactivate'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value:
+                    id: lxc_activate-e03208d5-2c4b-492b-a10a-961bcd826f21
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiResponseExampleLxcactivate'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Software Upgrade-write,Software Upgrade > Edge-write,Software Upgrade > Controller-write
+  /device/action/lxcdelete:
+    post:
+      tags:
+      - Configuration - Device Actions
+      description: Process a delete operation
+      operationId: processLxcDelete
+      requestBody:
+        description: Delete request payload
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Delete Operation:
+                description: Delete Operation
+                value:
+                  action: lxc_delete
+                  deviceType: vedge
+                  devices:
+                  - deviceIP: 172.16.255.15
+                    deviceId: C8K-61b9f39d-a5ef-402f-a395-ae6d6d49dda6
+                    installImages:
+                    - networkFunctionType: app-hosting
+                      versionTypeName: UTD-Snort-Feature
+                      versionName: 1.13.6_SV3.1.55.0_XEmain
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiRequestExampleLxcdelete'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value:
+                    id: lxc_delete-cd3f7f8c-d7ef-47e6-9eee-c66d78a5dbde
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiResponseExampleLxcdelete'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Software Upgrade-write,Software Upgrade > Edge-write,Software Upgrade > Controller-write
+  /device/action/lxcinstall:
+    post:
+      tags:
+      - Configuration - Device Actions
+      description: Process an installation operation
+      operationId: processLxcInstall
+      requestBody:
+        description: Installation request payload
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Installation Operation:
+                description: Installation Operation
+                value: {}
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Software Upgrade-write,Software Upgrade > Edge-write,Software Upgrade > Controller-write
+  /device/action/lxcreload:
+    post:
+      tags:
+      - Configuration - Device Actions
+      description: Process a reload operation
+      operationId: processLxcReload
+      requestBody:
+        description: Reload request payload
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Reload Operation:
+                description: Reload Operation
+                value: {}
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Software Upgrade-write,Software Upgrade > Edge-write,Software Upgrade > Controller-write
+  /device/action/lxcreset:
+    post:
+      tags:
+      - Configuration - Device Actions
+      description: Process a reset operation
+      operationId: processLxcReset
+      requestBody:
+        description: Reset request payload
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Reset Operation:
+                description: Reset Operation
+                value: {}
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Software Upgrade-write,Software Upgrade > Edge-write,Software Upgrade > Controller-write
+  /device/action/lxcupgrade:
+    post:
+      tags:
+      - Configuration - Device Actions
+      description: Process an upgrade operation
+      operationId: processLxcUpgrade
+      requestBody:
+        description: Upgrade request payload
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Upgrade Operation:
+                description: Upgrade Operation
+                value:
+                  action: lxc_upgrade
+                  deviceType: vedge
+                  devices:
+                  - deviceIP: 172.16.255.15
+                    deviceId: C8K-61b9f39d-a5ef-402f-a395-ae6d6d49dda6
+                    installImages:
+                    - remoteServerId: b07865e0-29c4-4e46-b1ab-90e7a268eae
+                      networkFunctionType: app-hosting
+                      versionTypeName: UTD-Snort-Feature
+                      versionName: 1.13.6_SV3.1.55.0_XEmain
+                  input:
+                    vEdgeVPN: 0
+                    versionType: vmanage
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiRequestExampleLxcupgrade'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value:
+                    id: lxc_upgrade-c3a06c6f-af96-4861-986d-04c6000c3d6f
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiResponseExampleLxcupgrade'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Software Upgrade-write,Software Upgrade > Edge-write,Software Upgrade > Controller-write
+  /device/action/reboot:
+    post:
+      tags:
+      - Configuration - Device Actions
+      description: Process a reboot operation
+      operationId: processReboot
+      requestBody:
+        description: Device reboot request payload
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Device reboot request:
+                description: Device reboot request
+                value:
+                  action: reboot
+                  deviceType: vedge
+                  devices:
+                  - deviceIP: 172.16.255.11
+                    deviceId: 6ace13f8-fded-4669-994a-a100b84b14dd
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiRequestExamplePostrebootreq'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: reboot-01232017T154359940
+                $$ref: '#/components/schemas/TaskId'
+              examples:
+                Task Id:
+                  description: Task Id
+                  value:
+                    id: reboot-01232017T154359940
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiResponseExamplePostrebootresp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Reboot-write,Device Reboot > Edge-write,Device Reboot > Controller-write
+    get:
+      tags:
+      - Configuration - Device Actions
+      description: Get device reboot information
+      operationId: generateRebootInfo
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device Id
+        required: true
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              deviceIp:
+                type: string
+            description: This is the valid DeviceIP
+            $$ref: '#/components/schemas/DeviceIP'
+        example:
+        - 172.16.255.15
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Device list:
+                  description: Device list
+                  value:
+                    header:
+                      generatedOn: 1717612477967
+                      viewKeys:
+                        uniqueKey: []
+                        preferenceKey: grid-DeviceActionReboot
+                      columns:
+                      - title: Hostname
+                        property: host-name
+                        display: iconAndText
+                        iconProperty: device-type
+                        hideable: false
+                        icon:
+                        - key: vmanage
+                          value: images/vmanage_table.png
+                        - key: vedge
+                          value: images/vedge_table.png
+                        - key: vedge-vbond
+                          value: images/vedge-vbond_table.png
+                        - key: vsmart
+                          value: images/vsmart_table.png
+                        - key: vbond
+                          value: images/vbond_table.png
+                        minWidth: 110
+                        dataType: string
+                      - title: System IP
+                        property: local-system-ip
+                        hideable: false
+                        width: 110
+                        minWidth: 130
+                        dataType: ipv4
+                      - title: Chassis Number
+                        property: uuid
+                        hideable: false
+                        minWidth: 200
+                        dataType: string
+                      - title: Site ID
+                        property: site-id
+                        width: 100
+                        minWidth: 70
+                        dataType: number
+                      - title: Device Model
+                        property: device-model
+                        display: multiColumns
+                        hideable: false
+                        width: 120
+                        dataType: deviceModel
+                      - title: Reachability
+                        property: reachability
+                        colorProperty: reachability
+                        hideable: false
+                        color:
+                        - key: reachable
+                          value: '616161'
+                        - key: unreachable
+                          value: ef5350
+                        - key: auth-failed
+                          value: ffb300
+                        width: 110
+                        dataType: string
+                      - title: Available Services
+                        property: availableServices
+                        hideable: false
+                        minWidth: 140
+                        dataType: array
+                      - title: Up Since
+                        property: uptime-date
+                        displayFormat: DD MMM YYYY h:mm:ss A z
+                        inputFormat: unix-time
+                        width: 230
+                        dataType: date
+                      fields:
+                      - property: host-name
+                        dataType: string
+                        display: iconAndText
+                      - property: system-ip
+                        dataType: ipv4
+                      - property: local-system-ip
+                        dataType: ipv4
+                      - property: uuid
+                        dataType: string
+                      - property: site-id
+                        dataType: number
+                      - property: device-model
+                        dataType: deviceModel
+                        display: multiColumns
+                      - property: reachability
+                        dataType: string
+                      - property: availableServices
+                        dataType: array
+                      - property: uptime-date
+                        dataType: date
+                    data:
+                    - device-model: vedge-cloud
+                      device-os: next
+                      local-system-ip: 172.16.255.16
+                      availableServices: []
+                      system-ip: 172.16.255.16
+                      host-name: vm6
+                      site-id: '600'
+                      uuid: 970b3f78-a713-49e4-890d-beffe5db7dd0
+                      version: 20.9.5-801
+                      platform: x86_64
+                      personality: vedge
+                      device-type: vedge
+                      reachability: reachable
+                      uptime-date: 1717393860000
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiResponseExampleGetrebootresp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Reboot-read,Device Reboot-write,Device Reboot > Edge-read,Device Reboot > Edge-write,Device Reboot > Controller-read
+  /device/action/reboot/devices/{deviceType}:
+    get:
+      tags:
+      - Configuration - Device Actions
+      description: Get list of rebooted devices
+      operationId: generateRebootDeviceList
+      parameters:
+      - name: deviceType
+        in: path
+        description: Device type
+        required: true
+        schema:
+          type: string
+        example: vedge
+      - name: groupId
+        in: query
+        description: groupId
+        required: true
+        schema:
+          type: string
+        example: all
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        availableServices:
+                          type: array
+                          example: []
+                          items:
+                            type: string
+                            example: []
+                        device-model:
+                          type: string
+                          example: vsmart
+                        device-os:
+                          type: string
+                          example: next
+                        device-type:
+                          type: string
+                          example: vsmart
+                        host-name:
+                          type: string
+                          example: vm10
+                        layoutLevel:
+                          type: integer
+                          format: int32
+                          example: 2
+                        local-system-ip:
+                          type: string
+                          example: 172.16.255.20
+                        personality:
+                          type: string
+                          example: vsmart
+                        platform:
+                          type: string
+                          example: x86_64
+                        reachability:
+                          type: string
+                          example: reachable
+                        site-id:
+                          type: string
+                          example: '200'
+                        system-ip:
+                          type: string
+                          example: 172.16.255.20
+                        uptime-date:
+                          type: integer
+                          format: int32
+                          example: 1683651060000
+                        uuid:
+                          type: string
+                          example: 3ee91f17-fc89-4d25-9e31-684e823d5eba
+                        version:
+                          type: string
+                          example: 20.13.999-2847
+                      $$ref: '#/components/schemas/GenerateRebootDeviceListData'
+                $$ref: '#/components/schemas/GenerateRebootDeviceList'
+              examples:
+                Example:
+                  description: Example
+                  value:
+                    data:
+                    - device-model: vsmart
+                      device-os: next
+                      local-system-ip: 172.16.255.20
+                      system-ip: 172.16.255.20
+                      host-name: vm10
+                      site-id: '200'
+                      uuid: 3ee91f17-fc89-4d25-9e31-684e823d5eba
+                      version: 20.13.999-2847
+                      platform: x86_64
+                      layoutLevel: 2
+                      personality: vsmart
+                      device-type: vsmart
+                      reachability: reachable
+                      uptime-date: 1683651060000
+                      availableServices: []
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiResponseExampleGetrebootdevicesresp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Reboot-read,Device Reboot-write,Device Reboot > Edge-read,Device Reboot > Edge-write,Device Reboot > Controller-read
+  /device/action/rediscover:
+    get:
+      tags:
+      - Configuration - Device Actions
+      description: Get rediscover operation information
+      operationId: generateRediscoverInfo
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        board-serial:
+                          type: string
+                          example: '12345982'
+                        certificate-validity:
+                          type: string
+                          example: Valid
+                        connectedVManages:
+                          type: array
+                          items:
+                            type: string
+                        controlConnections:
+                          type: string
+                          example: '8'
+                        device-groups:
+                          type: array
+                          items:
+                            type: string
+                        device-model:
+                          type: string
+                          example: vmanage
+                        device-os:
+                          type: string
+                          example: next
+                        device-type:
+                          type: string
+                          example: vmanage
+                        deviceId:
+                          type: string
+                          example: 172.16.255.22
+                        domain-id:
+                          type: string
+                          example: '0'
+                        host-name:
+                          type: string
+                          example: vm12
+                        isDeviceGeoData:
+                          type: boolean
+                          example: false
+                        lastupdated:
+                          type: integer
+                          format: int32
+                          example: 1683524985013
+                        latitude:
+                          type: string
+                          example: '37.666684'
+                        layoutLevel:
+                          type: integer
+                          format: int32
+                          example: 1
+                        local-system-ip:
+                          type: string
+                          example: 172.16.255.22
+                        longitude:
+                          type: string
+                          example: '-122.777023'
+                        max-controllers:
+                          type: string
+                          example: '0'
+                        model_sku:
+                          type: string
+                          example: None
+                        personality:
+                          type: string
+                          example: vmanage
+                        platform:
+                          type: string
+                          example: x86_64
+                        reachability:
+                          type: string
+                          example: reachable
+                        site-id:
+                          type: string
+                          example: '200'
+                        state:
+                          type: string
+                          example: green
+                        state_description:
+                          type: string
+                          example: All daemons up
+                        status:
+                          type: string
+                          example: normal
+                        statusOrder:
+                          type: integer
+                          format: int32
+                          example: 4
+                        system-ip:
+                          type: string
+                          example: 172.16.255.22
+                        testbed_mode:
+                          type: boolean
+                          example: true
+                        timezone:
+                          type: string
+                          example: UTC
+                        total_cpu_count:
+                          type: string
+                          example: '4'
+                        uptime-date:
+                          type: integer
+                          format: int32
+                          example: 1683523320000
+                        uuid:
+                          type: string
+                          example: b642c56f-c899-4ca4-a3d6-d915e0660f9a
+                        validity:
+                          type: string
+                          example: valid
+                        version:
+                          type: string
+                          example: 20.13.999-2846
+                      $$ref: '#/components/schemas/GenerateRediscoverInfoData'
+                $$ref: '#/components/schemas/GenerateRediscoverInfo'
+              examples:
+                Example:
+                  description: Example
+                  value:
+                    data:
+                    - deviceId: 172.16.255.22
+                      system-ip: 172.16.255.22
+                      host-name: vm12
+                      reachability: reachable
+                      status: normal
+                      personality: vmanage
+                      device-type: vmanage
+                      timezone: UTC
+                      device-groups:
+                      - No groups
+                      lastupdated: 1683524985013
+                      domain-id: '0'
+                      board-serial: '12345982'
+                      certificate-validity: Valid
+                      max-controllers: '0'
+                      uuid: b642c56f-c899-4ca4-a3d6-d915e0660f9a
+                      controlConnections: '8'
+                      device-model: vmanage
+                      version: 20.13.999-2846
+                      connectedVManages:
+                      - 172.16.255.22
+                      site-id: '200'
+                      latitude: '37.666684'
+                      longitude: '-122.777023'
+                      isDeviceGeoData: false
+                      platform: x86_64
+                      uptime-date: 1683523320000
+                      statusOrder: 4
+                      device-os: next
+                      validity: valid
+                      state: green
+                      state_description: All daemons up
+                      model_sku: None
+                      local-system-ip: 172.16.255.22
+                      total_cpu_count: '4'
+                      testbed_mode: true
+                      layoutLevel: 1
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiResponseExampleGetrediscoverresp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Tools-read,Tools-write
+    post:
+      tags:
+      - Configuration - Device Actions
+      description: Rediscover device
+      operationId: reDiscoverDevices
+      requestBody:
+        description: Rediscover device request payload
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Rediscover device request:
+                description: Rediscover device request
+                value:
+                  action: rediscover
+                  devices:
+                  - deviceId: CSR-940ad679-a16a-48ea-9920-16278597d98e
+                    deviceIP: 10.3.0.1
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiRequestExamplePostrediscoverreq'
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-write,Tools-write
+  /device/action/rediscoverall:
+    post:
+      tags:
+      - Configuration - Device Actions
+      description: Rediscover all devices
+      operationId: reDiscoverAllDevice
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-write,Tools-write
+  /device/action/removepartition:
+    get:
+      tags:
+      - Configuration - Device Actions
+      description: Get remove partition information
+      operationId: generateRemovePartitionInfo
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              deviceIp:
+                type: string
+            description: This is the valid DeviceIP
+            $$ref: '#/components/schemas/DeviceIP'
+        example:
+        - 172.16.255.15
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        availableVersions:
+                          type: array
+                          example: []
+                          items:
+                            type: string
+                            example: []
+                        device-model:
+                          type: string
+                          example: vmanage
+                        device-type:
+                          type: string
+                          example: vmanage
+                        host-name:
+                          type: string
+                          example: vm12
+                        personality:
+                          type: string
+                          example: vmanage
+                        platform:
+                          type: string
+                          example: x86_64
+                        reachability:
+                          type: string
+                          example: reachable
+                        site-id:
+                          type: string
+                          example: '200'
+                        system-ip:
+                          type: string
+                          example: 172.16.255.22
+                        uptime-date:
+                          type: string
+                          example: '1686317760000'
+                        uuid:
+                          type: string
+                          example: eb4c84bd-5da6-4adc-8ba5-21360549da74
+                        version:
+                          type: string
+                          example: 20.13.999-2912
+                      $$ref: '#/components/schemas/GenerateRemovePartitionInfoData'
+                $$ref: '#/components/schemas/GenerateRemovePartitionInfo'
+              examples:
+                Example:
+                  description: Example
+                  value:
+                    data:
+                    - availableVersions: []
+                      host-name: vm12
+                      system-ip: 172.16.255.22
+                      personality: vmanage
+                      site-id: '200'
+                      uuid: eb4c84bd-5da6-4adc-8ba5-21360549da74
+                      device-type: vmanage
+                      version: 20.13.999-2912
+                      uptime-date: '1686317760000'
+                      device-model: vmanage
+                      platform: x86_64
+                      reachability: reachable
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiResponseExampleGetremovepartition'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Software Upgrade-read,Software Upgrade-write,Software Upgrade > Edge-write,Software Upgrade > Edge-read,Software Upgrade > Controller-write,Software Upgrade > Controller-read
+    post:
+      tags:
+      - Configuration - Device Actions
+      description: Process remove partition operation
+      operationId: processRemovePartition
+      requestBody:
+        description: Device remove partition request payload
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Device remove partition request:
+                description: Device remove partition request
+                value:
+                  action: removepartition
+                  devices:
+                  - deviceIP: 172.16.255.11
+                    deviceId: 6ace13f8-fded-4669-994a-a100b84b14dd
+                    version:
+                    - 20.1.1
+                    - 20.3.1
+                  - deviceIP: 172.16.255.21
+                    deviceId: bedf3db0-c9c9-439d-b5fe-0edf09c2f33f
+                    version:
+                    - 20.1.1
+                  deviceType: vedge
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiRequestExamplePostremovepartitionreq'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value:
+                    id: delete_partition-2762efba-c37d-4dd2-bbca-9d910ca27325
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiResponseExamplePostremovepartitionresp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Software Upgrade-write,Software Upgrade > Edge-write,Software Upgrade > Controller-write
+  /device/action/security/amp/apikey/{uuid}:
+    delete:
+      tags:
+      - Configuration - Device Actions
+      description: Process amp api key deletion operation
+      operationId: processDeleteAmpApiKey
+      parameters:
+      - name: uuid
+        in: path
+        description: Uuid
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                AMP API key deletion request:
+                  description: AMP API key deletion request
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Software Upgrade-write,Software Upgrade > Edge-write,Software Upgrade > Controller-write
+  /device/action/security/amp/rekey:
+    post:
+      tags:
+      - Configuration - Device Actions
+      description: Process amp api re-key operation
+      operationId: processAmpApiReKey
+      requestBody:
+        description: AMP API re-key request payload
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              AMP API re-key request:
+                description: AMP API re-key request
+                value: {}
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Software Upgrade-write,Software Upgrade > Edge-write,Software Upgrade > Controller-write
+  /device/action/security/apikey/{uuid}:
+    get:
+      tags:
+      - Configuration - Device Actions
+      description: Get API key from device
+      operationId: testApiKey
+      parameters:
+      - name: uuid
+        in: path
+        description: Device uuid
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                API key:
+                  description: API key
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Software Upgrade-read,Software Upgrade-write,Settings-read,Software Upgrade > Edge-write,Software Upgrade > Edge-read,Software Upgrade > Controller-write,Software Upgrade > Controller-read
+  /device/action/security/devices/{policyType}:
+    get:
+      tags:
+      - Configuration - Device Actions
+      description: Get list of devices by security policy type
+      operationId: generateSecurityDevicesList
+      parameters:
+      - name: policyType
+        in: path
+        description: Policy type
+        required: true
+        schema:
+          type: string
+          enum:
+          - zoneBasedFW
+          - intrusionPrevention
+          - urlFiltering
+          - advancedMalwareProtection
+          - dnsSecurity
+          - sslDecryption
+      - name: groupId
+        in: query
+        description: Group Id
+        required: true
+        schema:
+          type: object
+          properties:
+            groupId:
+              type: string
+          description: This is the valid GroupId
+          $$ref: '#/components/schemas/GroupId'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Device list:
+                  description: Device list
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Software Upgrade-read,Software Upgrade-write,Settings-read,Security-read,Security-read,Security-write,Software Upgrade > Edge-write,Software Upgrade > Edge-read,Software Upgrade > Controller-write,Software Upgrade > Controller-read
+  /device/action/startmonitor:
+    get:
+      tags:
+      - Configuration - Device Actions
+      description: Triggers global monitoring thread
+      operationId: triggerPendingTasksMonitoring
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Software Upgrade-read,Software Upgrade-write,Software Upgrade > Edge-write,Software Upgrade > Edge-read,Software Upgrade > Controller-write,Software Upgrade > Controller-read
+  /device/action/test/ioxconfig/{deviceIP}:
+    get:
+      tags:
+      - Configuration - Device Actions
+      description: testIoxConfig
+      operationId: testIoxConfig
+      parameters:
+      - name: deviceIP
+        in: path
+        description: Device IP
+        required: true
+        schema:
+          type: object
+          properties:
+            deviceIp:
+              type: string
+          description: This is the valid DeviceIP
+          $$ref: '#/components/schemas/DeviceIP'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Software Upgrade-read,Software Upgrade-write,Software Upgrade > Edge-write,Software Upgrade > Edge-read,Software Upgrade > Controller-write,Software Upgrade > Controller-read
+  /device/action/uniquevpnlist:
+    post:
+      tags:
+      - Configuration - Device Actions
+      description: Create unique VPN list
+      operationId: createUniqueVPNList
+      requestBody:
+        description: Device IPs
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Device IPs:
+                description: Device IPs
+                value:
+                  deviceId:
+                  - 172.16.255.14
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiRequestExampleUniquevpnlistreq'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Example:
+                  description: Example
+                  value:
+                    vedge:
+                    - 512
+                    - 0
+                    - 65528
+                    - 65529
+                    vsmart: []
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiResponseExampleUniquevpnlistresp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Software Upgrade-read,Software Upgrade > Edge-read,Software Upgrade > Controller-read
+  /device/action/vnfinstall:
+    post:
+      tags:
+      - Configuration - Device Actions
+      description: Process an installation operation
+      operationId: processVnfInstall
+      requestBody:
+        description: Installation request payload
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Installation Operation:
+                description: Installation Operation
+                value: {}
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Software Upgrade-write,Software Upgrade > Edge-write,Software Upgrade > Controller-write
+  /device/action/vpn:
+    get:
+      tags:
+      - Configuration - Device Actions
+      description: Create VPN list
+      operationId: createVPNList
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  vedge:
+                    type: array
+                    items:
+                      type: string
+                  vsmart:
+                    type: array
+                    items:
+                      type: string
+                $$ref: '#/components/schemas/CreateVPNList'
+              examples:
+                Example:
+                  description: Example
+                  value:
+                    vedge:
+                    - '0'
+                    - '1'
+                    - '512'
+                    - '65528'
+                    - '65530'
+                    vsmart:
+                    - '0'
+                    - '512'
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiResponseExampleVpnresp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: default
+  /device/action/ztp/upgrade:
+    get:
+      tags:
+      - Configuration - Device Actions
+      description: Get ZTP upgrade configuration
+      operationId: getZTPUpgradeConfig
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Example Value:
+                  description: Example Value
+                  value:
+                    '0':
+                      versionId: '-'
+                      platformFamily: ir1101
+                      enableUpgrade: false
+                      versionName: ''
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiResponseExampleGetztpupgraderesp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+      - Configuration - Device Actions
+      description: Process ZTP upgrade configuration setting
+      operationId: postprocessZTPUpgradeConfigSetting
+      requestBody:
+        description: Request body for ZTP upgrade configuration setting
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Example Value:
+                description: Example Value
+                value:
+                  data:
+                  - enableUpgrade: false
+                    platformFamily: ir1101
+                  - enableUpgrade: false
+                    platformFamily: vedge-mips
+                  - enableUpgrade: false
+                    platformFamily: c8000aes
+                  - enableUpgrade: false
+                    platformFamily: isr4400
+                  - enableUpgrade: false
+                    platformFamily: c8000aep
+                  - enableUpgrade: false
+                    platformFamily: Teleworker
+                  - enableUpgrade: false
+                    platformFamily: asr1001x
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiRequestExamplePostztpupgradereq'
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/action/ztp/upgrade/setting:
+    post:
+      tags:
+      - Configuration - Device Actions
+      description: Process ZTP upgrade configuration setting
+      operationId: processZTPUpgradeConfigSetting
+      requestBody:
+        description: Request body for ZTP upgrade configuration setting
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Example Value:
+                description: Example Value
+                value:
+                  data:
+                  - enableUpgrade: false
+                    platformFamily: ir1101
+                  - enableUpgrade: false
+                    platformFamily: vedge-mips
+                  - enableUpgrade: false
+                    platformFamily: c8000aes
+                  - enableUpgrade: false
+                    platformFamily: isr4400
+                  - enableUpgrade: false
+                    platformFamily: c8000aep
+                  - enableUpgrade: false
+                    platformFamily: Teleworker
+                  - enableUpgrade: false
+                    platformFamily: asr1001x
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiRequestExamplePostztpupgradesettingreq'
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    get:
+      tags:
+      - Configuration - Device Actions
+      description: Get ZTP upgrade configuration setting
+      operationId: getZTPUpgradeConfigSetting
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Example Value:
+                  description: Example Value
+                  value:
+                    '0':
+                      versionId: '-'
+                      platformFamily: ir1101
+                      enableUpgrade: false
+                      versionName: ''
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionapiResponseExampleGetztpupgraderesp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

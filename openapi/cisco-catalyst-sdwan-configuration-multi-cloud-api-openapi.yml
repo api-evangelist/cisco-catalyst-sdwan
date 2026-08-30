@@ -1,0 +1,2183 @@
+openapi: 3.2.0
+info:
+  title: SD-WAN Services Configuration - Multi Cloud API
+  description: Includes API operations for managing SD-WAN services such as Cloud OnRamp for SaaS and MultiCloud
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Configuration - Multi Cloud
+paths:
+  /multicloud/accounts/edge:
+    post:
+      tags:
+      - Configuration - Multi Cloud
+      description: Authenticate edge account credentials
+      operationId: validateEdgeAccountAdd
+      requestBody:
+        description: Multicloud edge account info
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Edge Account info:
+                description: Edge Account info
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+    get:
+      tags:
+      - Configuration - Multi Cloud
+      description: Get all Multicloud edge accounts
+      operationId: getEdgeAccounts
+      parameters:
+      - name: edgeType
+        in: query
+        description: Edge type
+        schema:
+          type: string
+          enum:
+          - MEGAPORT
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Edge accounts:
+                  description: Edge accounts
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /multicloud/accounts/edge/{accountId}:
+    get:
+      tags:
+      - Configuration - Multi Cloud
+      description: Get edge account by account Id
+      operationId: getEdgeAccountDetails
+      parameters:
+      - name: accountId
+        in: path
+        description: Edge Account Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Cloud account:
+                  description: Cloud account
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+    put:
+      tags:
+      - Configuration - Multi Cloud
+      description: Update Multicloud edge account
+      operationId: updateEdgeAccount
+      parameters:
+      - name: accountId
+        in: path
+        description: Multicloud Edge Account Id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Multicloud edge account info
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Account info:
+                description: Account info
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+    delete:
+      tags:
+      - Configuration - Multi Cloud
+      description: Delete edge account
+      operationId: deleteEdgeAccount
+      parameters:
+      - name: accountId
+        in: path
+        description: Edge Account Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /multicloud/accounts/edge/{accountId}/credentials:
+    put:
+      tags:
+      - Configuration - Multi Cloud
+      description: Update Multicloud edge account credential
+      operationId: validateEdgeAccountUpdateCredentials
+      parameters:
+      - name: accountId
+        in: path
+        description: Multicloud Edge Account Id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Multicloud edge account info
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Account info:
+                description: Account info
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /multicloud/billingaccounts/edge/{edgeType}/{edgeAccountId}:
+    get:
+      tags:
+      - Configuration - Multi Cloud
+      description: Get Edge Billing Accounts
+      operationId: getEdgeBillingAccounts
+      parameters:
+      - name: edgeType
+        in: path
+        description: Interconnect Provider
+        required: true
+        schema:
+          type: string
+          enum:
+          - EQUINIX
+      - name: edgeAccountId
+        in: path
+        description: Interconnect Provider Account ID
+        required: true
+        schema:
+          type: string
+      - name: region
+        in: query
+        description: Region
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Edge Billing Accounts:
+                  description: Edge Billing Accounts
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /multicloud/cloudRoutersAndAttachments:
+    get:
+      tags:
+      - Configuration - Multi Cloud
+      description: Get all Cloud Routers and their Attachments
+      operationId: getCloudRoutersAndAttachments
+      parameters:
+      - name: accountId
+        in: query
+        description: Account Id
+        schema:
+          type: string
+      - name: region
+        in: query
+        description: Region
+        schema:
+          type: string
+      - name: network
+        in: query
+        description: Network
+        schema:
+          type: string
+      - name: connectivityGatewayName
+        in: query
+        description: Connectivity Gateway Name
+        schema:
+          type: string
+      - name: cloudGatewayName
+        in: query
+        description: Cloud Gateway Name
+        schema:
+          type: string
+      - name: state
+        in: query
+        description: State
+        schema:
+          type: string
+      - name: refresh
+        in: query
+        description: Refresh
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Cloud Router:
+                  description: Cloud Router
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /multicloud/connected-sites/edge/{edgeType}:
+    get:
+      tags:
+      - Configuration - Multi Cloud
+      description: Get sites with connectivity to the interconnect gateways by edge type
+      operationId: getCloudConnectedSites_ConfigurationMultiCloud_4303
+      parameters:
+      - name: edgeType
+        in: path
+        description: Edge type
+        required: true
+        schema:
+          type: string
+      - name: edgeGatewayName
+        in: query
+        description: Interconnect Gateway Name
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Interconnect connected sites:
+                  description: Interconnect connected sites
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Cloud OnRamp-read
+  /multicloud/connectivity/edge:
+    get:
+      tags:
+      - Configuration - Multi Cloud
+      description: Get Interconnect Connectivity details
+      operationId: getEdgeConnectivityDetails
+      parameters:
+      - name: edgeType
+        in: query
+        description: Edge type
+        schema:
+          type: string
+          enum:
+          - MEGAPORT
+          - EQUINIX
+      - name: connectivityName
+        in: query
+        description: Connectivity Name
+        schema:
+          type: string
+      - name: connectivityType
+        in: query
+        description: Connectivity Type
+        schema:
+          type: string
+      - name: edgeGatewayName
+        in: query
+        description: Interconnect Gateway name
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                IC-GW Connectivity:
+                  description: IC-GW Connectivity
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+    put:
+      tags:
+      - Configuration - Multi Cloud
+      description: Update Interconnect connectivity
+      operationId: updateEdgeConnectivity
+      requestBody:
+        description: Edge connectivity
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Edge connectivity:
+                description: Edge connectivity
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+    post:
+      tags:
+      - Configuration - Multi Cloud
+      description: Create Interconnect connectivity
+      operationId: createEdgeConnectivity
+      requestBody:
+        description: Edge connectivity
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Edge connectivity:
+                description: Edge connectivity
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /multicloud/connectivity/edge/{connectionName}:
+    delete:
+      tags:
+      - Configuration - Multi Cloud
+      description: Delete Interconnect connectivity
+      operationId: deleteEdgeConnectivity
+      parameters:
+      - name: connectionName
+        in: path
+        description: Edge connectivity name
+        required: true
+        schema:
+          type: string
+      - name: deleteCloudResources
+        in: query
+        description: Delete Cloud Resources
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+    get:
+      tags:
+      - Configuration - Multi Cloud
+      description: Get Interconnect Connectivity by name
+      operationId: getEdgeConnectivityDetailByName
+      parameters:
+      - name: connectionName
+        in: path
+        description: IC-GW connectivity name
+        required: true
+        schema:
+          type: string
+          example: interconnect
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                IC-GW Connectivity Name:
+                  description: IC-GW Connectivity Name
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /multicloud/connectivitygateway:
+    post:
+      tags:
+      - Configuration - Multi Cloud
+      description: Create Connectivity gateway
+      operationId: createConnectivityGateway
+      requestBody:
+        description: Connectivity gateway
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Connectivity gateway:
+                description: Connectivity gateway
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+    get:
+      tags:
+      - Configuration - Multi Cloud
+      description: Get all Connectivity Gateways
+      operationId: getConnectivityGateways
+      parameters:
+      - name: accountId
+        in: query
+        description: Account Id
+        schema:
+          type: string
+      - name: cloudType
+        in: query
+        description: Cloud Type
+        schema:
+          type: string
+      - name: connectivityType
+        in: query
+        description: Cloud Connectivity Type
+        schema:
+          type: string
+      - name: connectivityGatewayName
+        in: query
+        description: Connectivity Gateway Name
+        schema:
+          type: string
+      - name: region
+        in: query
+        description: Region
+        schema:
+          type: string
+      - name: network
+        in: query
+        description: Network
+        schema:
+          type: string
+      - name: state
+        in: query
+        description: State
+        schema:
+          type: string
+      - name: refresh
+        in: query
+        description: Refresh
+        schema:
+          type: string
+      - name: edgeType
+        in: query
+        description: Edge type
+        schema:
+          type: string
+          enum:
+          - MEGAPORT
+          - EQUINIX
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Edge gateways:
+                  description: Edge gateways
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+    delete:
+      tags:
+      - Configuration - Multi Cloud
+      description: Delete all Connectivity Gateways in local DB
+      operationId: cleanUpAllConnectivityGatewaysInLocalDB
+      parameters:
+      - name: deletionType
+        in: query
+        description: Deletion Type
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /multicloud/connectivitygateway/{cloudProvider}/{connectivityGatewayName}:
+    delete:
+      tags:
+      - Configuration - Multi Cloud
+      description: Delete Connectivity Gateway
+      operationId: deleteConnectivityGateway
+      parameters:
+      - name: cloudProvider
+        in: path
+        description: Cloud Provider
+        required: true
+        schema:
+          type: string
+      - name: connectivityGatewayName
+        in: path
+        description: Connectivity gateway name
+        required: true
+        schema:
+          type: string
+      - name: connectivityType
+        in: query
+        description: Cloud Connectivity Type
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /multicloud/connectivitygatewaycreationoptions:
+    get:
+      tags:
+      - Configuration - Multi Cloud
+      description: Get connectivity gateway creation options
+      operationId: getConnectivityGatewayCreationOptions
+      parameters:
+      - name: accountId
+        in: query
+        description: Account Id
+        schema:
+          type: string
+      - name: cloudType
+        in: query
+        description: Cloud Type
+        schema:
+          type: string
+      - name: connectivityType
+        in: query
+        description: Cloud Connectivity Type
+        schema:
+          type: string
+      - name: refresh
+        in: query
+        description: Refresh
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Connectivity Gateway Creation options:
+                  description: Connectivity Gateway Creation options
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /multicloud/dashboard/edge:
+    get:
+      tags:
+      - Configuration - Multi Cloud
+      description: Get interconnect edge gateway dashboard info
+      operationId: getDashboardEdgeInfo
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Dashboard edge info:
+                  description: Dashboard edge info
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /multicloud/devicelink/edge:
+    put:
+      tags:
+      - Configuration - Multi Cloud
+      description: Update Device Link
+      operationId: updateDeviceLink
+      requestBody:
+        description: Device Link
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Device Link:
+                description: Device Link
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+    get:
+      tags:
+      - Configuration - Multi Cloud
+      description: Get Device Links
+      operationId: getDeviceLinks
+      parameters:
+      - name: edgeType
+        in: query
+        description: Edge type
+        schema:
+          type: string
+          enum:
+          - MEGAPORT
+          - EQUINIX
+      - name: deviceLinkName
+        in: query
+        description: Device Link Name
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device Links:
+                  description: Device Links
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+    post:
+      tags:
+      - Configuration - Multi Cloud
+      description: Create Device Link
+      operationId: createDeviceLink
+      requestBody:
+        description: Device Link
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Device Link:
+                description: Device Link
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /multicloud/devicelink/edge/portspeed/{edgeType}:
+    get:
+      tags:
+      - Configuration - Multi Cloud
+      description: Get supported port speed for Device Link
+      operationId: getDlPortSpeed
+      parameters:
+      - name: edgeType
+        in: path
+        description: Interconnect Provider
+        required: true
+        schema:
+          type: string
+          enum:
+          - MEGAPORT
+          - EQUINIX
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                port-speed:
+                  description: port-speed
+                  value: '{100, 200}'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /multicloud/devicelink/edge/{deviceLinkName}:
+    delete:
+      tags:
+      - Configuration - Multi Cloud
+      description: Delete Device Link
+      operationId: deleteDeviceLink
+      parameters:
+      - name: deviceLinkName
+        in: path
+        description: Device Link Name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /multicloud/devicelink/metroSpeed/edge:
+    post:
+      tags:
+      - Configuration - Multi Cloud
+      description: Get Device Link Metro Speed based on device link config
+      operationId: getDeviceLinkMetroSpeed
+      requestBody:
+        description: Device Link
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Device Link:
+                description: Device Link
+                value:
+                  edgeType: EQUINIX
+                  edgeAccountId: cisco_dev
+                  deviceLinkName: test
+                  bandwidth: '50'
+                  deviceList:
+                  - deviceName: test-dev-0
+                  - deviceName: test-dev-1
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                dlMetroBandwidth:
+                  description: dlMetroBandwidth
+                  value: 1000
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /multicloud/devices/edge/{edgeType}:
+    get:
+      tags:
+      - Configuration - Multi Cloud
+      description: Get cloud devices by cloud type
+      operationId: getCloudDevices_ConfigurationMultiCloud_3503
+      parameters:
+      - name: edgeType
+        in: path
+        description: Edge type
+        required: true
+        schema:
+          type: string
+      - name: edgeGatewayName
+        in: query
+        description: Edge Gateway Name
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Cloud devices:
+                  description: Cloud devices
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Cloud OnRamp-read
+  /multicloud/edge/{edgeType}/device:
+    get:
+      tags:
+      - Configuration - Multi Cloud
+      description: Get available WAN edge devices
+      operationId: getEdgeWanDevices
+      parameters:
+      - name: edgeType
+        in: path
+        description: Edge Type
+        required: true
+        schema:
+          type: string
+          enum:
+          - MEGAPORT
+          - EQUINIX
+          default: MEGAPORT
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Edge devices:
+                  description: Edge devices
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Cloud OnRamp-read
+  /multicloud/gateway/edge:
+    get:
+      tags:
+      - Configuration - Multi Cloud
+      description: Get Interconnect Gateways
+      operationId: getIcgws
+      parameters:
+      - name: edgeType
+        in: query
+        description: Edge type
+        schema:
+          type: string
+          enum:
+          - MEGAPORT
+          - EQUINIX
+      - name: accountId
+        in: query
+        description: Account Id
+        schema:
+          type: string
+      - name: region
+        in: query
+        description: Region
+        schema:
+          type: string
+      - name: regionId
+        in: query
+        description: Region Id
+        schema:
+          type: string
+      - name: resourceState
+        in: query
+        description: Resource State
+        schema:
+          type: string
+      - name: edgeGatewayName
+        in: query
+        description: Edge gateway name
+        schema:
+          type: string
+      - name: billingAccountId
+        in: query
+        description: billing Account Id
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Interconnect Gateways:
+                  description: Interconnect Gateways
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+    post:
+      tags:
+      - Configuration - Multi Cloud
+      description: Create Interconnect Gateway
+      operationId: createIcgw
+      requestBody:
+        description: Interconnect Gateway
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Interconnect Gateway:
+                description: Interconnect Gateway
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /multicloud/gateway/edge/setting/{edgeGatewayName}:
+    get:
+      tags:
+      - Configuration - Multi Cloud
+      description: Get Interconnect Gateway custom setting by Interconnect Gateway name
+      operationId: getIcgwCustomSettingDetails
+      parameters:
+      - name: edgeGatewayName
+        in: path
+        description: Edge gateway name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Interconnect Gateway custom setting:
+                  description: Interconnect Gateway custom setting
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /multicloud/gateway/edge/types:
+    get:
+      tags:
+      - Configuration - Multi Cloud
+      description: Get Interconnect Gateway type for specified Edge Provider
+      operationId: getIcgwTypes
+      parameters:
+      - name: edgeType
+        in: query
+        description: Edge type
+        schema:
+          type: string
+          enum:
+          - MEGAPORT
+          - EQUINIX
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Interconnect Gateway type:
+                  description: Interconnect Gateway type
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /multicloud/gateway/edge/{edgeGatewayName}:
+    get:
+      tags:
+      - Configuration - Multi Cloud
+      description: Get Interconnect Gateway by name
+      operationId: getIcgwDetails
+      parameters:
+      - name: edgeGatewayName
+        in: path
+        description: Edge gateway name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Interconnect Gateway:
+                  description: Interconnect Gateway
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+    put:
+      tags:
+      - Configuration - Multi Cloud
+      description: Update Interconnect Gateway
+      operationId: updateIcgw
+      parameters:
+      - name: edgeGatewayName
+        in: path
+        description: Edge gateway name
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties:
+                type: object
+                properties:
+                  valueType:
+                    type: string
+                    enum:
+                    - ARRAY
+                    - OBJECT
+                    - STRING
+                    - NUMBER
+                    - 'TRUE'
+                    - 'FALSE'
+                    - 'NULL'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+    delete:
+      tags:
+      - Configuration - Multi Cloud
+      description: Delete Interconnect Gateway
+      operationId: deleteIcgw
+      parameters:
+      - name: edgeGatewayName
+        in: path
+        description: Edge gateway name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /multicloud/gateways/edge/{edgeType}:
+    get:
+      tags:
+      - Configuration - Multi Cloud
+      description: Get sites with connectivity to the interconnect gateways by edge type
+      operationId: getEdgeGateways
+      parameters:
+      - name: edgeType
+        in: path
+        description: Edge type
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Edge Gateways:
+                  description: Edge Gateways
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Cloud OnRamp-read
+  /multicloud/imagename/edge:
+    get:
+      tags:
+      - Configuration - Multi Cloud
+      description: Get Edge provider supported images
+      operationId: getSupportedEdgeImageNames
+      parameters:
+      - name: edgeType
+        in: query
+        description: Edge type
+        schema:
+          type: string
+          enum:
+          - MEGAPORT
+          - EQUINIX
+          default: MEGAPORT
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Edge provider images:
+                  description: Edge provider images
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /multicloud/instancesize/edge:
+    get:
+      tags:
+      - Configuration - Multi Cloud
+      description: Get Edge provider supported size
+      operationId: getSupportedEdgeInstanceSize
+      parameters:
+      - name: edgeType
+        in: query
+        description: Edge type
+        schema:
+          type: string
+          enum:
+          - MEGAPORT
+          - EQUINIX
+          default: MEGAPORT
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Edge provider size:
+                  description: Edge provider size
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /multicloud/license/edge:
+    get:
+      tags:
+      - Configuration - Multi Cloud
+      description: Get License Info for Edge Gateways/Connections
+      operationId: getLicenses
+      parameters:
+      - name: edgeType
+        in: query
+        description: Edge type
+        schema:
+          type: string
+          enum:
+          - MEGAPORT
+      - name: accountId
+        in: query
+        description: Edge Account Id
+        schema:
+          type: string
+      - name: productType
+        in: query
+        description: product Type
+        schema:
+          type: string
+          enum:
+          - GATEWAY
+          - CONNECTION
+          - AWSHC
+      - name: refresh
+        in: query
+        description: Refresh License Cache from Megaport
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Licenses:
+                  description: Licenses
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /multicloud/locations/edge/{edgeType}:
+    delete:
+      tags:
+      - Configuration - Multi Cloud
+      description: Delete edge account
+      operationId: deleteAllEdgeLocationInfo
+      parameters:
+      - name: edgeType
+        in: path
+        description: Edge Type
+        required: true
+        schema:
+          type: string
+          enum:
+          - MEGAPORT
+          - EQUINIX
+          default: MEGAPORT
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+    get:
+      tags:
+      - Configuration - Multi Cloud
+      description: Get Edge Locations
+      operationId: getEdgeLocationsInfo
+      parameters:
+      - name: edgeType
+        in: path
+        description: Edge Type
+        required: true
+        schema:
+          type: string
+          enum:
+          - MEGAPORT
+          - EQUINIX
+          default: MEGAPORT
+      - name: accountId
+        in: query
+        description: Edge Account Id
+        schema:
+          type: string
+      - name: region
+        in: query
+        description: Region
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Edge locations:
+                  description: Edge locations
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /multicloud/locations/edge/{edgeType}/accountId/{accountId}:
+    put:
+      tags:
+      - Configuration - Multi Cloud
+      description: Update Edge Locations
+      operationId: updateEdgeLocationsInfo
+      parameters:
+      - name: edgeType
+        in: path
+        description: Edge Type
+        required: true
+        schema:
+          type: string
+          enum:
+          - MEGAPORT
+          - EQUINIX
+          default: MEGAPORT
+      - name: accountId
+        in: path
+        description: Edge Account Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Edge locations:
+                  description: Edge locations
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /multicloud/loopbackCGWColor/edge:
+    get:
+      tags:
+      - Configuration - Multi Cloud
+      description: Get Edge Loopback CGW supported colors
+      operationId: getSupportedLoopbackCgwColors
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Edge Loopback CGW colors:
+                  description: Edge Loopback CGW colors
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /multicloud/loopbacktransportcolor/edge:
+    get:
+      tags:
+      - Configuration - Multi Cloud
+      description: Get Edge Loopback Tunnel supported colors
+      operationId: getSupportedLoopbackTransportColors
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Edge Loopback Tunnel colors:
+                  description: Edge Loopback Tunnel colors
+                  value:
+                    loopbackTunnelColor:
+                    - mpls
+                    - metro-ethernet
+                    - biz-internet
+                    - public-internet
+                    - lte
+                    - 3g
+                    - red
+                    - green
+                    - blue
+                    - gold
+                    - silver
+                    - bronze
+                    - custom1
+                    - custom2
+                    - custom3
+                    - private1
+                    - private2
+                    - private3
+                    - private4
+                    - private5
+                    - private6
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /multicloud/map/tags/edge:
+    get:
+      tags:
+      - Configuration - Multi Cloud
+      description: Get default Interconnect mapping tag values
+      operationId: getEdgeMappingTags
+      parameters:
+      - name: cloudType
+        in: query
+        description: Cloud type
+        required: true
+        schema:
+          type: string
+          enum:
+          - AWS
+          - AWS_GOVCLOUD
+          - AZURE
+      - name: accountId
+        in: query
+        description: Cloud Account Id
+        schema:
+          type: string
+      - name: resourceGroup
+        in: query
+        description: Resource Group
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Interconnect Cloud Tags:
+                  description: Interconnect Cloud Tags
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Cloud OnRamp-read
+  /multicloud/partnerports/edge:
+    get:
+      tags:
+      - Configuration - Multi Cloud
+      description: Get partner ports
+      operationId: getPartnerPorts
+      parameters:
+      - name: edgeType
+        in: query
+        description: Edge type
+        schema:
+          type: string
+          enum:
+          - MEGAPORT
+          - EQUINIX
+      - name: accountId
+        in: query
+        description: Edge Account Id
+        schema:
+          type: string
+      - name: cloudType
+        in: query
+        description: Cloud Type
+        schema:
+          type: string
+      - name: connectType
+        in: query
+        description: Connect Type filter
+        schema:
+          type: string
+      - name: vxcPermitted
+        in: query
+        description: VXC Permitted on the port
+        schema:
+          type: string
+      - name: authorizationKey
+        in: query
+        description: authorization Key
+        schema:
+          type: string
+      - name: refresh
+        in: query
+        description: Refresh
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                'Edge Partners ':
+                  description: 'Edge Partners '
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /multicloud/portSpeed/edge/{edgeType}/{edgeAccountId}/{connectivityType}:
+    get:
+      tags:
+      - Configuration - Multi Cloud
+      description: Get supported port speed
+      operationId: getPortSpeed
+      parameters:
+      - name: edgeType
+        in: path
+        description: Interconnect Provider
+        required: true
+        schema:
+          type: string
+          enum:
+          - MEGAPORT
+          - EQUINIX
+      - name: edgeAccountId
+        in: path
+        description: Interconnect Provider Account ID
+        required: true
+        schema:
+          type: string
+      - name: connectivityType
+        in: path
+        description: Interconnect Connectivity Type
+        required: true
+        schema:
+          type: string
+      - name: cloudType
+        in: query
+        description: Cloud Service Provider
+        schema:
+          type: string
+          enum:
+          - AWS
+          - AZURE
+          - GCP
+      - name: cloudAccountId
+        in: query
+        description: Cloud Service Provider Account ID
+        schema:
+          type: string
+      - name: connectType
+        in: query
+        description: Connection Type filter
+        schema:
+          type: string
+      - name: connectSubType
+        in: query
+        description: Connection Sub-Type filter
+        schema:
+          type: string
+      - name: connectivityGateway
+        in: query
+        description: Connectivity Gateway
+        schema:
+          type: string
+      - name: partnerPort
+        in: query
+        description: partnerPort
+        schema:
+          type: string
+      - name: authorizationKey
+        in: query
+        description: authorizationKey
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                port-speed:
+                  description: port-speed
+                  value: '{100, 200}'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /multicloud/settings/edge/global:
+    post:
+      tags:
+      - Configuration - Multi Cloud
+      description: Add global settings for Edge provider
+      operationId: addEdgeGlobalSettings
+      requestBody:
+        description: Global setting
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Global setting:
+                description: Global setting
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+    get:
+      tags:
+      - Configuration - Multi Cloud
+      description: Get edge global settings
+      operationId: getEdgeGlobalSettings
+      parameters:
+      - name: edgeType
+        in: query
+        description: Edge type
+        required: true
+        schema:
+          type: string
+          enum:
+          - MP
+          - EQ
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Global setting:
+                  description: Global setting
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+    put:
+      tags:
+      - Configuration - Multi Cloud
+      description: Update edge global settings for Edge provider
+      operationId: updateEdgeGlobalSettings
+      requestBody:
+        description: Global setting
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Global setting:
+                description: Global setting
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /multicloud/types/edge:
+    get:
+      tags:
+      - Configuration - Multi Cloud
+      description: Get edge types
+      operationId: getEdgeTypes
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Cloud types:
+                  description: Cloud types
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /multicloud/vhubs:
+    get:
+      tags:
+      - Configuration - Multi Cloud
+      description: Get Virtual Hubs
+      operationId: getVHubs
+      parameters:
+      - name: cloudType
+        in: query
+        description: Cloud Type
+        schema:
+          type: string
+      - name: accountId
+        in: query
+        description: Account Id
+        schema:
+          type: string
+      - name: resourceGroup
+        in: query
+        description: Resource Group
+        schema:
+          type: string
+      - name: vWanName
+        in: query
+        description: VWan Name
+        schema:
+          type: string
+      - name: vNetTags
+        in: query
+        description: VNet Tags
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Azure Virtual WANs:
+                  description: Azure Virtual WANs
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /multicloud/vwan:
+    post:
+      tags:
+      - Configuration - Multi Cloud
+      description: Create Virtual WAN
+      operationId: createVirtualWan
+      requestBody:
+        description: Virtual WAN
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Virtual WAN:
+                description: Virtual WAN
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /multicloud/vwan/{cloudProvider}/{vWanName}:
+    delete:
+      tags:
+      - Configuration - Multi Cloud
+      description: Delete Virtual Wan
+      operationId: deleteVirtualWan
+      parameters:
+      - name: cloudProvider
+        in: path
+        description: Cloud Provider
+        required: true
+        schema:
+          type: string
+      - name: vWanName
+        in: path
+        description: Virtual Wan name
+        required: true
+        schema:
+          type: string
+      - name: accountId
+        in: query
+        description: Account Id
+        schema:
+          type: string
+      - name: resourceGroup
+        in: query
+        description: Resource Group
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /multicloud/vwans:
+    get:
+      tags:
+      - Configuration - Multi Cloud
+      description: Get Virtual Wans
+      operationId: getVWans
+      parameters:
+      - name: accountId
+        in: query
+        description: Account Id
+        schema:
+          type: string
+      - name: cloudType
+        in: query
+        description: Cloud Type
+        schema:
+          type: string
+      - name: resourceGroup
+        in: query
+        description: Resource Group
+        schema:
+          type: string
+      - name: refresh
+        in: query
+        description: Refresh
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Azure Virtual WANs:
+                  description: Azure Virtual WANs
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /multicloud/widget/edge:
+    get:
+      tags:
+      - Configuration - Multi Cloud
+      description: 'Get All Interconnect Edge widgets '
+      operationId: getAllEdgeWidgets
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Edge widget:
+                  description: Edge widget
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Cloud OnRamp-read
+  /multicloud/widget/edge/{edgeType}:
+    get:
+      tags:
+      - Configuration - Multi Cloud
+      description: Get Interconnect Edge widget by edge type
+      operationId: getEdgeWidget
+      parameters:
+      - name: edgeType
+        in: path
+        description: Edge type
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Edge widget:
+                  description: Edge widget
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Cloud OnRamp-read

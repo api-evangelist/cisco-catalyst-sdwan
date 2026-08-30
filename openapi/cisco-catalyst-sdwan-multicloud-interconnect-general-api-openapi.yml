@@ -1,0 +1,379 @@
+openapi: 3.2.0
+info:
+  title: SD-WAN Services Multicloud Interconnect - General API
+  description: Includes API operations for managing SD-WAN services such as Cloud OnRamp for SaaS and MultiCloud
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Multicloud Interconnect - General
+paths:
+  /multicloud/interconnect/dashboard:
+    get:
+      tags:
+      - Multicloud Interconnect - General
+      summary: Get Multicloud Interconnect dashboard view.
+      description: API to retrieve Multicloud Interconnect dashboard view.
+      operationId: getInterconnectDashboard
+      responses:
+        '200':
+          description: Interconnect Dashboard Response.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    connections:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          connectivityName:
+                            type: string
+                          resourceState:
+                            type: string
+                        $$ref: '#/components/schemas/InterconnectDashboardConnections'
+                    devices:
+                      type: array
+                      items:
+                        type: string
+                    edgeAccountId:
+                      type: string
+                    edgeAccountName:
+                      type: string
+                    edgeGatewayId:
+                      type: string
+                    edgeGatewayName:
+                      type: string
+                    edgeType:
+                      type: string
+                      enum:
+                      - MEGAPORT
+                      - EQUINIX
+                    linkList:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          deviceLinkName:
+                            type: string
+                          resourceState:
+                            type: string
+                        $$ref: '#/components/schemas/InterconnectDashboardLinkList'
+                    region:
+                      type: string
+                    resourceState:
+                      type: string
+                    resourceStateUpdateTs:
+                      type: string
+                  $$ref: '#/components/schemas/InterconnectDashboard'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/interconnect/ip-transit:
+    get:
+      tags:
+      - Multicloud Interconnect - General
+      summary: Get Interconnect IP transit support.
+      description: API to retrieve Interconnect ip transit in MB supported by an  Interconnect provider.
+      operationId: getInterconnectIpTransit
+      parameters:
+      - name: interconnect-service-type
+        in: query
+        description: Interconnect Service Type
+        required: true
+        schema:
+          type: string
+      - name: interconnect-type
+        in: query
+        description: Interconnect provider type
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sshKeys:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        keyName:
+                          type: string
+                          description: Ssh Key Name
+                          example: service-ssh-key
+                        keyType:
+                          type: string
+                          description: Ssh key Type
+                          example: RSA
+                        keyValue:
+                          type: string
+                          description: Ssh Key Value
+                          example: ssh-rsa xxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                      $$ref: '#/components/schemas/InterconnectSshKeyInfo'
+                $$ref: '#/components/schemas/InlineResponse20016'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/interconnect/sshkeys:
+    get:
+      tags:
+      - Multicloud Interconnect - General
+      summary: Get ssh keys for Interconnect provider.
+      description: Get ssh keys for Interconnect provider.
+      operationId: getInterconnectSshKeys
+      parameters:
+      - name: interconnect-provider-name
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: interconnect-account-id
+        in: query
+        description: Interconnect account id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Service Ssh Keys in provider account.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sshKeys:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        keyName:
+                          type: string
+                          description: Ssh Key Name
+                          example: service-ssh-key
+                        keyType:
+                          type: string
+                          description: Ssh key Type
+                          example: RSA
+                        keyValue:
+                          type: string
+                          description: Ssh Key Value
+                          example: ssh-rsa xxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                      $$ref: '#/components/schemas/InterconnectSshKeyInfo'
+                $$ref: '#/components/schemas/InlineResponse20016'
+              examples:
+                Service Ssh Keys:
+                  description: Service Ssh Keys
+                  value:
+                    sshKeys:
+                    - keyName: service-ssh-key
+                      keyType: RSA
+                      keyValue: ssh-rsa xxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/interconnect/types:
+    get:
+      tags:
+      - Multicloud Interconnect - General
+      summary: Get supported Multicloud Interconnect providers.
+      description: API to retrieve list of supported Interconnect provider Types.
+      operationId: getInterconnectTypes
+      responses:
+        '200':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    description: data list
+                    example:
+                    - MEGAPORT
+                    - EQUINIX
+                    - ATT
+                    items:
+                      type: string
+                      description: data
+                      example: MEGAPORT
+                $$ref: '#/components/schemas/InlineResponse200'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/interconnect/{interconnect-type}/config-group/{config-group-id}/topology:
+    put:
+      tags:
+      - Multicloud Interconnect - General
+      summary: Update Multicloud Interconnect topology.
+      description: API to update current Multicloud Interconnect topology for the Config Group.
+      operationId: updateInterconnectConfigGroupTopology
+      parameters:
+      - name: interconnect-type
+        in: path
+        description: Interconnect provider type
+        required: true
+        schema:
+          type: string
+      - name: config-group-id
+        in: path
+        description: Config Group Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Interconnect Config-Group Topology Response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  topology:
+                    type: object
+                    properties:
+                      devices:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            criteria:
+                              type: object
+                              properties:
+                                attribute:
+                                  type: string
+                                  description: Name of attribute type
+                                  example: tag
+                                value:
+                                  type: string
+                                  description: Value of attribute
+                                  example: ICGW_NAME
+                              $$ref: '#/components/schemas/InlineResponse20013TopologyCriteria'
+                            unsupportedFeatures:
+                              type: object
+                              properties:
+                                parcelId:
+                                  type: string
+                                  description: Config-Group Parcel Id
+                                  example: e16efd46-6d7b-4d09-872d-d34ce307400f
+                                parcelType:
+                                  type: string
+                                  description: Config-Group Parcel Type
+                                  example: wan/vpn/interface/ethernet
+                              $$ref: '#/components/schemas/InlineResponse20013TopologyUnsupportedFeatures'
+                          $$ref: '#/components/schemas/InlineResponse20013TopologyDevices'
+                    $$ref: '#/components/schemas/InlineResponse20013Topology'
+                $$ref: '#/components/schemas/InlineResponse20013'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    get:
+      tags:
+      - Multicloud Interconnect - General
+      summary: Get Multicloud Interconnect topology.
+      description: API to retrieve current Multicloud Interconnect topology for the Config Group.
+      operationId: getInterconnectConfigGroupTopology
+      parameters:
+      - name: interconnect-type
+        in: path
+        description: Interconnect provider type
+        required: true
+        schema:
+          type: string
+      - name: config-group-id
+        in: path
+        description: Config Group Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Interconnect Config-Group Topology Response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  topology:
+                    type: object
+                    properties:
+                      devices:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            criteria:
+                              type: object
+                              properties:
+                                attribute:
+                                  type: string
+                                  description: Name of attribute type
+                                  example: tag
+                                value:
+                                  type: string
+                                  description: Value of attribute
+                                  example: ICGW_NAME
+                              $$ref: '#/components/schemas/InlineResponse20013TopologyCriteria'
+                            unsupportedFeatures:
+                              type: object
+                              properties:
+                                parcelId:
+                                  type: string
+                                  description: Config-Group Parcel Id
+                                  example: e16efd46-6d7b-4d09-872d-d34ce307400f
+                                parcelType:
+                                  type: string
+                                  description: Config-Group Parcel Type
+                                  example: wan/vpn/interface/ethernet
+                              $$ref: '#/components/schemas/InlineResponse20013TopologyUnsupportedFeatures'
+                          $$ref: '#/components/schemas/InlineResponse20013TopologyDevices'
+                    $$ref: '#/components/schemas/InlineResponse20013Topology'
+                $$ref: '#/components/schemas/InlineResponse20013'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

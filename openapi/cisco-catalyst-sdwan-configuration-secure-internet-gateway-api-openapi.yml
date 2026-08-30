@@ -1,0 +1,266 @@
+openapi: 3.2.0
+info:
+  title: Others Configuration - Secure Internet Gateway API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Configuration - Secure Internet Gateway
+paths:
+  /sig/datacenters/{type}/{tunneltype}:
+    get:
+      tags:
+      - Configuration - Secure Internet Gateway
+      description: The API to get all sig data center for given provider type
+      operationId: getSigDynamicDataCenterList
+      parameters:
+      - name: type
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: tunneltype
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mapping:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        CITY/COUNTRY:
+                          type: string
+                        FQDN:
+                          type: string
+                        IP:
+                          type: string
+                      $$ref: '#/components/schemas/MappingEntries'
+                  title:
+                    type: string
+                $$ref: '#/components/schemas/GetDataCenters'
+              example: "{\n   \"title\":\"Zscaler Data center locations\",\n      \"mapping\":[\n         {\n            \"city/country\":\"Auckland, New Zealand\",\n            \"IP\":\"147.161.216.40\"\n            \"FQDN\":\"akl2-vpn.zscalerthree.net\"\n         },\n         {\n            \"city/country\":\"Auckland, New Zealand\",\n            \"IP\":\"147.161.216.41\"\n            \"FQDN\":\"akl2-vpn.zscalerthree.net\"\n         },\n         {\n            \"city/country\":\"Auckland, New Zealand\",\n            \"IP\":\"147.161.216.42\"\n            \"FQDN\":\"akl2-vpn.zscalerthree.net\"\n         },\n         {\n            \"city/country\":\"Amsterdam, The Netherlands\",\n            \"IP\":\"165.225.240.38\"\n            \"FQDN\":\"ams2-vpn.zscalerthree.net\"\n         },\n         {\n            \"city/country\":\"Beijing, China\",\n            \"IP\":\"211.144.19.18\"\n            \"FQDN\":\"bjs1-vpn.zscalerthree.net\"\n         },\n      ]"
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /sig/datacenters/{type}/{tunneltype}/{devicetype}:
+    get:
+      tags:
+      - Configuration - Secure Internet Gateway
+      description: Get list of data centers for zscaler or umbrella
+      operationId: getSigDataCenterList
+      parameters:
+      - name: type
+        in: path
+        description: Provider type
+        required: true
+        schema:
+          type: string
+      - name: tunneltype
+        in: path
+        description: Type of the tunnel ipsec/gre
+        required: true
+        schema:
+          type: string
+      - name: devicetype
+        in: path
+        description: Type of the device vedge/cedge
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Policy:
+                  description: Policy
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Deploy-read,Template Deploy-write,Policy Configuration-read,Policy Configuration-write,Policy Deploy-read,Policy Deploy-write
+  /sig/sigGlobalCredentials/{featureTemplateType}:
+    get:
+      tags:
+      - Configuration - Secure Internet Gateway
+      description: Get sig global credentials
+      operationId: getSigGlobalCredentials
+      parameters:
+      - name: featureTemplateType
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  umbrella:
+                    type: object
+                    properties:
+                      api-key:
+                        type: object
+                        properties:
+                          vipObjectType:
+                            type: string
+                            example: object
+                          vipType:
+                            type: string
+                            example: constant
+                          vipValue:
+                            type: string
+                            example: sdfsd
+                          vipVariableName:
+                            type: string
+                            example: system_api_key
+                        description: API secret information
+                        $$ref: '#/components/schemas/APIKey'
+                      api-key-v2:
+                        type: object
+                        properties:
+                          vipObjectType:
+                            type: string
+                            example: object
+                          vipType:
+                            type: string
+                            example: constant
+                          vipValue:
+                            type: string
+                            example: sdfsd
+                          vipVariableName:
+                            type: string
+                            example: system_api_key
+                        description: API secret information
+                        $$ref: '#/components/schemas/APIKey'
+                      api-secret:
+                        type: object
+                        properties:
+                          vipNeedsEncryption:
+                            type: boolean
+                            example: true
+                          vipObjectType:
+                            type: string
+                            example: object
+                          vipType:
+                            type: string
+                            example: constant
+                          vipValue:
+                            type: string
+                            example: $CRYPT_CLUSTER$0y3Eq1EFF5Hurtda/Z9eHQ==$gtnBC/bVtpuhWX5r905iYw==
+                          vipVariableName:
+                            type: string
+                            example: system_api_secret
+                        description: API key information
+                        $$ref: '#/components/schemas/APISecret'
+                      api-secret-v2:
+                        type: object
+                        properties:
+                          vipNeedsEncryption:
+                            type: boolean
+                            example: true
+                          vipObjectType:
+                            type: string
+                            example: object
+                          vipType:
+                            type: string
+                            example: constant
+                          vipValue:
+                            type: string
+                            example: $CRYPT_CLUSTER$0y3Eq1EFF5Hurtda/Z9eHQ==$gtnBC/bVtpuhWX5r905iYw==
+                          vipVariableName:
+                            type: string
+                            example: system_api_secret
+                        description: API key information
+                        $$ref: '#/components/schemas/APISecret'
+                      org-id:
+                        type: object
+                        properties:
+                          vipObjectType:
+                            type: string
+                            example: object
+                          vipType:
+                            type: string
+                            example: constant
+                          vipValue:
+                            type: string
+                            example: '980'
+                          vipVariableName:
+                            type: string
+                            example: system_org_id
+                        description: Org ID
+                        $$ref: '#/components/schemas/OrgID'
+                    description: Umbrella object
+                    $$ref: '#/components/schemas/Umbrella'
+                description: Response from metaDataType API
+                $$ref: '#/components/schemas/FeatureTemplateType'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /sig/umbrella/childOrg/{type}:
+    get:
+      tags:
+      - Configuration - Secure Internet Gateway
+      description: 'Get the list of child org IDs given the type management or device '
+      operationId: getChildOrgs
+      parameters:
+      - name: type
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

@@ -1,0 +1,271 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Monitoring - Device Statistics Details V2 API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Monitoring - Device Statistics Details V2
+paths:
+  /v2/data/device/statistics/interfacestatistics:
+    get:
+      tags:
+      - Monitoring - Device Statistics Details V2
+      description: Get device statistics data
+      operationId: generateDeviceInterfaceStatisticsData
+      parameters:
+      - name: startDate
+        in: query
+        description: Start date (example:2023-1-1T00:00:00)
+        schema:
+          pattern: ^\d{4}-(0?[1-9]|1[0-2])-(0?[1-9]|[12][0-9]|3[01])T\d{2}:\d{2}:\d{2}$
+          type: string
+      - name: endDate
+        in: query
+        description: End date (example:2023-1-1T00:00:00)
+        schema:
+          pattern: ^\d{4}-(0?[1-9]|1[0-2])-(0?[1-9]|[12][0-9]|3[01])T\d{2}:\d{2}:\d{2}$
+          type: string
+      - name: scrollId
+        in: query
+        description: Scroll Id
+        schema:
+          type: string
+      - name: count
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: timeZone
+        in: query
+        description: Time zone
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    admin_status:
+                      type: string
+                      example: Up
+                    af_type:
+                      type: string
+                      example: IPv4
+                    bw_down:
+                      type: number
+                      example: 1000000
+                    bw_up:
+                      type: number
+                      example: 1000000
+                    device_model:
+                      type: string
+                      example: vedge-C8000V
+                    down_capacity_percentage:
+                      type: number
+                      example: 0.0015
+                    entry_time:
+                      type: integer
+                      format: int32
+                      example: 1687177528
+                    host_name:
+                      type: string
+                      example: vm6
+                    id:
+                      type: string
+                      example: ZmOr04gBUJf8VowqUaIl
+                    interface:
+                      type: string
+                      example: GigabitEthernet1
+                    interface_type:
+                      type: string
+                      example: physical
+                    oper_status:
+                      type: string
+                      example: Up
+                    platform_type:
+                      type: string
+                    rx_drops:
+                      type: number
+                      example: 0
+                    rx_errors:
+                      type: number
+                      example: 0
+                    rx_kbps:
+                      type: number
+                      example: 15
+                    rx_octets:
+                      type: number
+                      example: 679091
+                    rx_pkts:
+                      type: number
+                      example: 3876
+                    rx_pps:
+                      type: number
+                      example: 0
+                    statcycletime:
+                      type: integer
+                      format: int32
+                      example: 168717840
+                    stats_data_id:
+                      type: string
+                    system-ip:
+                      type: string
+                    tenant:
+                      type: string
+                      example: default
+                    total_mbps:
+                      type: number
+                      example: 0
+                    tx_drops:
+                      type: number
+                      example: 0
+                    tx_errors:
+                      type: number
+                      example: 0
+                    tx_kbps:
+                      type: number
+                      example: 14
+                    tx_octets:
+                      type: number
+                      example: 769358
+                    tx_pkts:
+                      type: number
+                      example: 3757
+                    tx_pps:
+                      type: number
+                      example: 11
+                    up_capacity_percentage:
+                      type: number
+                      example: 0.0014
+                    vdevice_name:
+                      type: string
+                      example: 172.16.255.16
+                    vip_idx:
+                      type: number
+                      example: 7
+                    vip_time:
+                      type: integer
+                      format: int32
+                    vmanage_system_ip:
+                      type: string
+                      example: 172.16.255.16
+                    vnf_name:
+                      type: string
+                    vnic_id:
+                      type: string
+                    vpn_id:
+                      type: number
+                      example: 0
+                  $$ref: '#/components/schemas/InterfaceStatisticsRes'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,Device Monitoring-write,dca
+  /v2/data/device/statistics/interfacestatistics/doccount:
+    get:
+      tags:
+      - Monitoring - Device Statistics Details V2
+      description: Get response count of a query
+      operationId: getCountWithInterfaceStatistics
+      parameters:
+      - name: startDate
+        in: query
+        description: Start date (example:2023-1-1T00:00:00)
+        required: true
+        schema:
+          pattern: ^\d{4}-(0?[1-9]|1[0-2])-(0?[1-9]|[12][0-9]|3[01])T\d{2}:\d{2}:\d{2}$
+          type: string
+      - name: endDate
+        in: query
+        description: End date (example:2023-1-1T00:00:00)
+        required: true
+        schema:
+          pattern: ^\d{4}-(0?[1-9]|1[0-2])-(0?[1-9]|[12][0-9]|3[01])T\d{2}:\d{2}:\d{2}$
+          type: string
+      - name: timeZone
+        in: query
+        description: Time zone (example:UTC)
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    format: int64
+                    example: 35174
+                $$ref: '#/components/schemas/DocCountRes'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,Device Monitoring-write,dca
+  /v2/data/device/statistics/interfacestatistics/fields:
+    get:
+      tags:
+      - Monitoring - Device Statistics Details V2
+      description: Get statistics fields and types
+      operationId: getStatDataFieldsByInterfaceStatistics
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    dataType:
+                      type: string
+                      example: number
+                    display:
+                      type: string
+                      example: keyvalue
+                    property:
+                      type: string
+                      example: vip_idx
+                  $$ref: '#/components/schemas/Field'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,Device Monitoring-write,dca

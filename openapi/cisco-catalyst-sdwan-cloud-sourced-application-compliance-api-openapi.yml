@@ -1,0 +1,200 @@
+openapi: 3.2.0
+info:
+  title: Others Cloud Sourced Application Compliance API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Cloud Sourced Application Compliance
+paths:
+  /sdavc/cloud-sourced/compliance:
+    post:
+      tags:
+      - Cloud Sourced Application Compliance
+      operationId: complianceWithExtendedApplications
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      appName:
+                        type: string
+                        example: nordvpn
+                    $$ref: '#/components/schemas/ApplicationRequestDetails'
+                selectAll:
+                  type: boolean
+                  example: false
+              $$ref: '#/components/schemas/ExtendedApplicationRequestData'
+        required: true
+      responses:
+        '200':
+          description: all policy compliance data with selected cloud sourced apps
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    format: int32
+                    example: 1
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        appList:
+                          type: object
+                          properties:
+                            createdBy:
+                              type: string
+                              example: admin
+                            id:
+                              type: string
+                              example: c8a4164a-4778-4a7e-8d93-45f78f387010
+                            name:
+                              type: string
+                              example: my_app_list
+                            type:
+                              type: string
+                              example: app-list
+                            version:
+                              type: string
+                              example: UX 2.0
+                          $$ref: '#/components/schemas/AppListDetails'
+                        applications:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              newApplications:
+                                type: array
+                                items:
+                                  type: string
+                              oldApplications:
+                                type: array
+                                items:
+                                  type: string
+                            $$ref: '#/components/schemas/PolicyComplianceApplications'
+                        policy:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                                example: c8a4164a-4778-4a7e-8d93-45f78f387011
+                              name:
+                                type: string
+                                example: policy1
+                              type:
+                                type: string
+                                example: security
+                              version:
+                                type: string
+                                example: UX 2.0
+                            $$ref: '#/components/schemas/PolicyDetails'
+                      $$ref: '#/components/schemas/PolicyComplianceDetails'
+                $$ref: '#/components/schemas/PolicyComplianceResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+  /sdavc/cloud-sourced/compliance/application:
+    post:
+      tags:
+      - Cloud Sourced Application Compliance
+      operationId: applicationComplianceWithExtendedApplications
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      appName:
+                        type: string
+                        example: nordvpn
+                    $$ref: '#/components/schemas/ApplicationRequestDetails'
+                selectAll:
+                  type: boolean
+                  example: false
+              $$ref: '#/components/schemas/ExtendedApplicationRequestData'
+        required: true
+      responses:
+        '200':
+          description: all policy compliance data with selected cloud sourced apps
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  applicationLists:
+                    uniqueItems: true
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        policies:
+                          uniqueItems: true
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              name:
+                                type: string
+                              type:
+                                type: string
+                            $$ref: '#/components/schemas/Policy'
+                        type:
+                          type: string
+                      $$ref: '#/components/schemas/ApplicationList'
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  type:
+                    type: string
+                $$ref: '#/components/schemas/Application'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden

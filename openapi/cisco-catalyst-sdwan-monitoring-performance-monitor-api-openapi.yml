@@ -1,0 +1,520 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Monitoring - Performance Monitor API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Monitoring - Performance Monitor
+paths:
+  /statistics/perfmon/aggregation:
+    post:
+      tags:
+      - Monitoring - Performance Monitor
+      summary: one site one application line chart data
+      description: 'Get one application one site line chart data '
+      operationId: getPostAggregationDataByQuery_MonitoringPerformanceMonitor_3104
+      requestBody:
+        description: Stats query string
+        content:
+          application/json:
+            schema:
+              type: string
+            examples:
+              all paths chart query string:
+                description: all paths chart query string
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '24'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+                    - value:
+                      - 3pc
+                      field: application
+                      type: string
+                      operator: equal
+                    - value:
+                      - '600'
+                      field: siteid
+                      type: string
+                      operator: equal
+                  aggregation:
+                    histogram:
+                      property: entry_time
+                      type: minute
+                      interval: 30
+                      order: asc
+                    metrics:
+                    - property: qoe
+                      type: avg
+                $$ref: '#/components/examples/ComViptelaVmanageServerDevicePerfmonStatisticsapiParameterExamplePerfmonpathchart'
+        required: true
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  required:
+                  - entry_time
+                  - qoe
+                  type: object
+                  properties:
+                    entry_time:
+                      type: integer
+                      format: int64
+                      example: 1639897200000
+                    qoe:
+                      type: number
+                      format: double
+                      example: 9
+                  $$ref: '#/components/schemas/ApplicationSiteChartItem'
+        '400':
+          description: Bad Request
+      x-roles-required: Application Monitoring-read,Application Monitoring-write
+  /statistics/perfmon/application/heatmap/detail:
+    get:
+      tags:
+      - Monitoring - Performance Monitor
+      summary: single application site health detail within time-range
+      description: 'Get single applicaiton site health detail in a time range '
+      operationId: getApplicationHeatMapDetail
+      parameters:
+      - name: application
+        in: query
+        required: true
+        schema:
+          pattern: ^[a-zA-Z0-9-_\s]+$
+          type: string
+      - name: siteid
+        in: query
+        schema:
+          pattern: ^[0-9]+$
+          type: string
+      - name: start_time
+        in: query
+        description: Heatmap single box entry_time
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: heatmap_time
+        in: query
+        description: Heatmap generation time
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: last_n_hours
+        in: query
+        schema:
+          type: string
+          enum:
+          - '1'
+          - '3'
+          - '6'
+          - '12'
+          - '24'
+          default: '12'
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  required:
+                  - fair_site
+                  - good_site
+                  - poor_site
+                  type: object
+                  properties:
+                    fair_site:
+                      type: integer
+                      format: int32
+                      example: 1
+                    good_site:
+                      type: integer
+                      format: int32
+                      example: 10
+                    poor_site:
+                      type: integer
+                      format: int32
+                      example: 1
+                  $$ref: '#/components/schemas/ApplicationHeatMapDetail'
+        '400':
+          description: Bad Request
+  /statistics/perfmon/application/site/health:
+    post:
+      tags:
+      - Monitoring - Performance Monitor
+      summary: one site one application health data
+      description: 'Get one application health for one site '
+      operationId: getApplicationSiteHealth
+      parameters:
+      - name: health
+        in: query
+        schema:
+          type: string
+          enum:
+          - GOOD
+          - FAIR
+          - POOR
+      requestBody:
+        description: Stats query string
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              all paths table query string:
+                description: all paths table query string
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '24'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+                    - value:
+                      - 3pc
+                      field: application
+                      type: string
+                      operator: equal
+                    - value:
+                      - '600'
+                      field: siteid
+                      type: string
+                      operator: equal
+                  aggregation:
+                    field:
+                    - property: path
+                      sequence: 1
+                    metrics:
+                    - property: qoe
+                      type: avg
+                    - property: jitter
+                      type: avg
+                    - property: lost_samples
+                      type: sum
+                    - property: total_samples
+                      type: sum
+                    - property: latency
+                      type: avg
+                $$ref: '#/components/examples/ComViptelaVmanageServerDevicePerfmonStatisticsapiParameterExamplePerfmonpathtable'
+        required: true
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  required:
+                  - health
+                  - jitter
+                  - latency
+                  - loss
+                  - path
+                  type: object
+                  properties:
+                    health:
+                      pattern: (good|fair|poor)
+                      type: string
+                      example: good
+                    jitter:
+                      type: number
+                      format: double
+                      example: 1
+                    latency:
+                      type: number
+                      format: double
+                      example: 10
+                    loss:
+                      type: number
+                      format: double
+                      example: 1
+                    path:
+                      type: string
+                      example: Tunnel3->SIG
+                    qoe:
+                      type: number
+                      format: double
+                      example: 9
+                  $$ref: '#/components/schemas/ApplicationSiteItem'
+        '400':
+          description: Bad Request
+      x-roles-required: Application Monitoring-read,Application Monitoring-write
+  /statistics/perfmon/application/sites/health:
+    get:
+      tags:
+      - Monitoring - Performance Monitor
+      summary: all sites one application health data
+      description: 'Get one application health for all sites '
+      operationId: getApplicationSitesHealth
+      parameters:
+      - name: application
+        in: query
+        required: true
+        schema:
+          pattern: ^[a-zA-Z0-9-_\s]+$
+          type: string
+      - name: isHeatMap
+        in: query
+        schema:
+          type: boolean
+      - name: last_n_hours
+        in: query
+        schema:
+          type: string
+          enum:
+          - '1'
+          - '3'
+          - '6'
+          - '12'
+          - '24'
+      - name: health
+        in: query
+        schema:
+          type: string
+          enum:
+          - GOOD
+          - FAIR
+          - POOR
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  required:
+                  - fair_path
+                  - good_path
+                  - health
+                  - poor_path
+                  - siteid
+                  type: object
+                  properties:
+                    fair_path:
+                      type: integer
+                      format: int32
+                      example: 1
+                    good_path:
+                      type: integer
+                      format: int32
+                      example: 10
+                    health:
+                      pattern: (good|fair|poor)
+                      type: string
+                      example: good
+                    poor_path:
+                      type: integer
+                      format: int32
+                      example: 1
+                    siteid:
+                      type: string
+                      example: '100'
+                  $$ref: '#/components/schemas/ApplicationSitesItem'
+        '400':
+          description: Bad Request
+      x-roles-required: Application Monitoring-read,Application Monitoring-write
+  /statistics/perfmon/applications/site/health:
+    get:
+      tags:
+      - Monitoring - Performance Monitor
+      summary: one site all applications health data
+      description: 'Get all applications health for one site '
+      operationId: getApplicationsSiteHealth
+      parameters:
+      - name: siteid
+        in: query
+        required: true
+        schema:
+          pattern: ^[0-9]+$
+          type: string
+      - name: isHeatMap
+        in: query
+        schema:
+          type: boolean
+      - name: last_n_hours
+        in: query
+        schema:
+          type: string
+          enum:
+          - '1'
+          - '3'
+          - '6'
+          - '12'
+          - '24'
+      - name: health
+        in: query
+        schema:
+          type: string
+          enum:
+          - GOOD
+          - FAIR
+          - POOR
+      - name: includeUsage
+        in: query
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  required:
+                  - application
+                  - family
+                  - health
+                  - jitter
+                  - latency
+                  - loss
+                  type: object
+                  properties:
+                    application:
+                      type: string
+                      example: http
+                    family:
+                      type: string
+                      example: audio
+                    health:
+                      pattern: (good|fair|poor)
+                      type: string
+                      example: good
+                    jitter:
+                      type: number
+                      format: double
+                      example: 1
+                    latency:
+                      type: number
+                      format: double
+                      example: 10
+                    loss:
+                      type: number
+                      format: double
+                      example: 1
+                  $$ref: '#/components/schemas/ApplicationsSiteItem'
+        '400':
+          description: Bad Request
+      x-roles-required: Application Monitoring-read,Application Monitoring-write
+  /statistics/perfmon/applications/sites/health:
+    get:
+      tags:
+      - Monitoring - Performance Monitor
+      summary: all sites all applications health data
+      description: 'Get applications health for all sites '
+      operationId: getApplicationsSitesHealth
+      parameters:
+      - name: isHeatMap
+        in: query
+        schema:
+          type: boolean
+      - name: last_n_hours
+        in: query
+        schema:
+          type: string
+          enum:
+          - '1'
+          - '3'
+          - '6'
+          - '12'
+          - '24'
+      - name: health
+        in: query
+        schema:
+          type: string
+          enum:
+          - GOOD
+          - FAIR
+          - POOR
+      - name: includeUsage
+        in: query
+        schema:
+          type: boolean
+          default: false
+      - name: useCache
+        in: query
+        description: Use cache data
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  required:
+                  - application
+                  - fair_site
+                  - family
+                  - good_site
+                  - health
+                  - poor_site
+                  type: object
+                  properties:
+                    application:
+                      type: string
+                      example: http
+                    fair_site:
+                      type: integer
+                      format: int32
+                      example: 1
+                    family:
+                      type: string
+                      example: audio
+                    good_site:
+                      type: integer
+                      format: int32
+                      example: 10
+                    health:
+                      pattern: (good|fair|poor)
+                      type: string
+                      example: good
+                    poor_site:
+                      type: integer
+                      format: int32
+                      example: 1
+                  $$ref: '#/components/schemas/ApplicationsSitesItem'
+        '400':
+          description: Bad Request
+      x-roles-required: Application Monitoring-read,Application Monitoring-write

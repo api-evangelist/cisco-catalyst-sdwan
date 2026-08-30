@@ -1,0 +1,167 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - EIGRP API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - EIGRP
+paths:
+  /device/eigrp/interface:
+    get:
+      tags:
+      - Real-Time Monitoring - EIGRP
+      description: Get EIGRP interface list from device (Real Time)
+      operationId: createEIGRPInterface
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                EIGRP interface list:
+                  description: EIGRP interface list
+                  value:
+                    data:
+                    - vdevice-name: 169.254.10.13
+                      vdevice-host-name: vm6
+                      name: GigabitEthernet0
+                      passive: GigabitEthernet0/0
+                      hello-interval: '5'
+                      hold-timer: '15'
+                      auth-mode: md5
+                      lastupdated: 1654586532070
+                      vdevice-dataKey: 169.254.10.13-eigrp-af-ipv4-0.0.0.0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/eigrp/route:
+    get:
+      tags:
+      - Real-Time Monitoring - EIGRP
+      description: Get EIGRP route from device (Real Time)
+      operationId: createEIGRPRoute
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                EIGRP route:
+                  description: EIGRP route
+                  value:
+                    data:
+                    - vdevice-name: 169.254.10.13
+                      afi: eigrp-af-ipv4
+                      origin: eigrp-origin-redistributed
+                      infosource: 0.0.0.0
+                      omp-tag: '0'
+                      succ-metric: '0'
+                      vdevice-host-name: vm6
+                      nexthop: 172.16.254.2
+                      vdevice-dataKey: 169.254.10.13-eigrp-af-ipv4-0.0.0.0
+                      metric: '1'
+                      lastupdated: 1654586532070
+                    - vdevice-name: 169.254.10.13
+                      afi: eigrp-af-ipv4
+                      origin: eigrp-origin-redistributed
+                      infosource: 0.0.0.0
+                      omp-tag: '0'
+                      succ-metric: '0'
+                      vdevice-host-name: vm6
+                      nexthop: 172.16.254.4
+                      vdevice-dataKey: 169.254.10.13-eigrp-af-ipv4-0.0.0.0
+                      metric: '1'
+                      lastupdated: 1654586532070
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/eigrp/topology:
+    get:
+      tags:
+      - Real-Time Monitoring - EIGRP
+      description: Get EIGRP topology info from device (Real Time)
+      operationId: createEIGRPTopology
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                EIGRP topology info:
+                  description: EIGRP topology info
+                  value:
+                    data:
+                    - vdevice-host-name: vm5
+                      vdevice-dataKey: 172.16.255.15-0----
+                      vdevice-name: 172.16.255.15
+                      topo-id: '0'
+                      lastupdated: 1649307997571
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write

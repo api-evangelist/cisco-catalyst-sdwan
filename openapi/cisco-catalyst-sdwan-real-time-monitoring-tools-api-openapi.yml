@@ -1,0 +1,252 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - Tools API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - Tools
+paths:
+  /device/tools/netstat:
+    get:
+      tags:
+      - Real-Time Monitoring - Tools
+      description: Get device tool net stat
+      operationId: getDeviceToolsNetstat
+      parameters:
+      - name: vpn
+        in: query
+        description: VPN
+        schema:
+          type: string
+          enum:
+          - '0'
+          - '512'
+      - name: options
+        in: query
+        description: Options
+        schema:
+          type: string
+      - name: deviceId
+        in: query
+        description: Device Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Tools netstat Data Example:
+                  description: Tools netstat Data Example
+                  value: "{{\n  \"rawOutput\": [\n    \"Active Internet connections (w/o servers)\",\n    \"Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name\",\n    \"tcp        0      0 vm1:ssh                 10.0.1.1:54932          ESTABLISHED 8964/sshd: admin [p\",\n    \"Active UNIX domain sockets (w/o servers)\",\n    \"Proto RefCnt Flags       Type       State         I-Node   PID/Program name    Path\",\n    \"unix  3      [ ]         STREAM     CONNECTED     1154465  3283/ftmd           /var/run/.ftmd.512\",\n    \"unix  3      [ ]         STREAM     CONNECTED     767015   2519/zebra          \",\n    \"unix  3      [ ]         STREAM     CONNECTED     1154461  2519/zebra          \",\n    \"unix  3      [ ]         STREAM     CONNECTED     767017   2181/cfgmgr         /var/run/quagga/zebra_protobuf_notify.api.512\",\n    \"unix  3      [ ]         STREAM     CONNECTED     1177839  8966/0              \",\n    \"unix  2      [ ]         STREAM     CONNECTED     1177830  8964/sshd: admin [p \",\n    \"unix  3      [ ]         STREAM     CONNECTED     1177840  8964/sshd: admin [p \",\n    \"unix  2      [ ]         DGRAM                    1177838  8964/sshd: admin [p \",\n    \"unix  2      [ ]         DGRAM                    766216   2519/zebra          \"\n  ]\n}"
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/tools/nslookup:
+    get:
+      tags:
+      - Real-Time Monitoring - Tools
+      description: Get device tool nslookup
+      operationId: getDeviceToolsNSlookup
+      parameters:
+      - name: vpn
+        in: query
+        description: VPN
+        required: true
+        schema:
+          type: string
+          enum:
+          - '0'
+          - '512'
+      - name: dns
+        in: query
+        description: DNS
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 8.8.8.8
+      - name: deviceId
+        in: query
+        description: Device Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device tool nslookup data:
+                  description: Device tool nslookup data
+                  value:
+                    rawOutput:
+                    - 'Server:    10.0.1.1'
+                    - 'Address 1: 10.0.1.1'
+                    - ''
+                    - 'Name:      8.8.8.8'
+                    - 'Address 1: 8.8.8.8'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/tools/realtimeinfo:
+    get:
+      tags:
+      - Real-Time Monitoring - Tools
+      description: Get hardware real time info from device
+      operationId: getRealTimeinfo
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                hardware real time info data:
+                  description: hardware real time info data
+                  value: '{  "hardware-info" : "Hardware Information\n---------------------------------\n
+
+                    Baseboard Details:\nboard type : ISR1100-4G\nboard serial number:
+
+                    ISR1100-4G-FCH2414L04T\n-------------------------------\nTPM Details:\nAikido FPGA : 07250006\n---------------------------------------------------------\nBootloader version:\nBIOS Version:17.7(1r)\nBootloader Source: Upgrade
+
+                    BIOS\n----------------------------------------------------------------\nTemperature threshold history:\n<none>",
+
+                    "Kernel-log" : "Critical Kernel Logs:"
+
+                    }'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/tools/ss:
+    get:
+      tags:
+      - Real-Time Monitoring - Tools
+      description: Get device tool ss
+      operationId: getDeviceToolsSS
+      parameters:
+      - name: vpn
+        in: query
+        description: VPN
+        schema:
+          type: string
+          enum:
+          - '0'
+          - '512'
+      - name: options
+        in: query
+        description: Options
+        schema:
+          type: string
+      - name: deviceId
+        in: query
+        description: Device Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                'Device tool SS data ':
+                  description: 'Device tool SS data '
+                  value:
+                    rawOutput:
+                    - 'Netid State Recv-Q Send-Q                                 Local Address:Port       Peer Address:Port   Process                                                  '
+                    - 'u_str ESTAB 0      0                                                  * 767015                * 0       users:(("zebra",pid=2519,fd=13))                        '
+                    - 'u_str ESTAB 0      0      /var/run/quagga/zebra_protobuf_notify.api.512 767017                * 0       users:(("cfgmgr",pid=2181,fd=30))                       '
+                    - 'u_str ESTAB 0      0                                                  * 1154461               * 0       users:(("zebra",pid=2519,fd=16))                        '
+                    - 'u_str ESTAB 0      0                                 /var/run/.ftmd.512 1154465               * 0       users:(("ftmd",pid=3283,fd=58))                         '
+                    - 'u_str ESTAB 0      0                                                  * 1177830               * 0       users:(("sshd",pid=8966,fd=6),("sshd",pid=8964,fd=6))   '
+                    - 'u_str ESTAB 0      0                                                  * 1177839               * 0       users:(("sshd",pid=8966,fd=5))                          '
+                    - 'u_str ESTAB 0      0                                                  * 1177840               * 0       users:(("sshd",pid=8964,fd=7))                          '
+                    - 'u_dgr ESTAB 0      0                                                  * 766216                * 0       users:(("zebra",pid=2519,fd=3))                         '
+                    - 'u_dgr ESTAB 0      0                                                  * 1177838               * 0       users:(("sshd",pid=8966,fd=3),("sshd",pid=8964,fd=3))   '
+                    - 'tcp   ESTAB 0      0                                          10.0.1.11:ssh            10.0.1.1:54932   users:(("sshd",pid=8966,fd=4),("sshd",pid=8964,fd=4))   '
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/tools/system-netfilter:
+    get:
+      tags:
+      - Real-Time Monitoring - Tools
+      description: Get system netfilter info from device
+      operationId: getSystemNetfilter
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                System Netfilter info:
+                  description: System Netfilter info
+                  value:
+                    ipv4: "Chain POLICE_PROT (2 references)\n pkts bytes target     prot opt in     out     source               destination         \n 113K   16M ACCEPT     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp dpt:830\n    0     0 ACCEPT     tcp  --  *      *       0.0.0.0/0            172.16.255.11        tcp dpt:830\n    0     0 ACCEPT     icmp --  ge0_2  *       0.0.0.0/0            0.0.0.0/0           \n    0     0 ACCEPT     89   --  ge0_2  *       0.0.0.0/0            0.0.0.0/0           \n    0     0 ACCEPT     tcp  --  ge0_2  *       0.0.0.0/0            0.0.0.0/0            tcp dpt:22\n    0     0 ACCEPT     tcp  --  ge0_2  *       0.0.0.0/0            0.0.0.0/0            tcp dpt:179\n    0     0 ACCEPT     tcp  --  ge0_2  *       0.0.0.0/0            0.0.0.0/0            tcp dpt:830\n    0     0 ACCEPT     udp  --  ge0_2  *       0.0.0.0/0            0.0.0.0/0            udp spt:67 dpt:68\nChain INPUT (policy ACCEPT 760K packets, 433M bytes)\n pkts bytes target     prot opt in     out     source               destination         \n 113K   16M POLICE_PROT  tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp dpt:830\n    0     0 LOGGING    tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp dpt:830\n 921K  494M ACCEPT     all  --  ge0_2  *       0.0.0.0/0            0.0.0.0/0            ctstate ESTABLISHED\n    0     0 POLICE_PROT  all  --  ge0_2  *       0.0.0.0/0            0.0.0.0/0           \n    0     0 LOGGING    all  --  ge0_2  *       0.0.0.0/0            0.0.0.0/0           \nChain LOGGING (2 references)\n pkts bytes target     prot opt in     out     source               destination         \n    0     0 DROP       all  --  *      *       0.0.0.0/0            0.0.0.0/0           "
+                    ipv6: "Chain INPUT (policy ACCEPT 90 packets, 5040 bytes)\n pkts bytes target     prot opt in     out     source               destination         \n    0     0 ACCEPT     all      ge0_2  *       ::/0                 ::/0                 ctstate ESTABLISHED\n   30  1680 POLICE_PROT  all      ge0_2  *       ::/0                 ::/0                \n    0     0 LOGGING    all      ge0_2  *       ::/0                 ::/0                \nChain POLICE_PROT (1 references)\n pkts bytes target     prot opt in     out     source               destination         \n    0     0 ACCEPT     tcp      *      *       ::/0                 ::/0                 tcp dpt:830\n   30  1680 ACCEPT     icmpv6    ge0_2  *       ::/0                 ::/0                \n    0     0 ACCEPT     89       ge0_2  *       ::/0                 ::/0                \n    0     0 ACCEPT     tcp      ge0_2  *       ::/0                 ::/0                 tcp dpt:22\n    0     0 ACCEPT     tcp      ge0_2  *       ::/0                 ::/0                 tcp dpt:179\n    0     0 ACCEPT     tcp      ge0_2  *       ::/0                 ::/0                 tcp dpt:830\n    0     0 ACCEPT     udp      ge0_2  *       ::/0                 ::/0                 udp spt:547 dpt:546\nChain LOGGING (1 references)\n pkts bytes target     prot opt in     out     source               destination         \n    0     0 DROP       all      *      *       ::/0                 ::/0                "
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

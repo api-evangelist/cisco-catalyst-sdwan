@@ -1,0 +1,3269 @@
+openapi: 3.2.0
+info:
+  title: SD-WAN Services Multicloud Interconnect - Cloud Resource Management API
+  description: Includes API operations for managing SD-WAN services such as Cloud OnRamp for SaaS and MultiCloud
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Multicloud Interconnect - Cloud Resource Management
+paths:
+  /multicloud/interconnect/cloud/{cloud-type}/accounts/{cloud-account-id}/gcr-and-attachments:
+    get:
+      tags:
+      - Multicloud Interconnect - Cloud Resource Management
+      summary: Get Google Cloud Router and Attachments.
+      description: API to get Google Cloud Router and Attachments.
+      operationId: getGoogleCloudRouterAndAttachments
+      parameters:
+      - name: cloud-type
+        in: path
+        description: Cloud Provider Type
+        required: true
+        schema:
+          type: string
+          enum:
+          - AWS
+          - AZURE
+          - GCP
+      - name: cloud-account-id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: connectivity-gateway-name
+        in: query
+        schema:
+          type: string
+      - name: cloud-gateway-name
+        in: query
+        schema:
+          type: string
+      - name: region
+        in: query
+        schema:
+          type: string
+      - name: network
+        in: query
+        schema:
+          type: string
+      - name: resource-state
+        in: query
+        schema:
+          type: string
+      - name: refresh
+        in: query
+        schema:
+          pattern: (true|false)
+          type: string
+          default: 'false'
+      responses:
+        '200':
+          description: Google Cloud Router and Attachments Response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  gcpCloudRouters:
+                    type: array
+                    items:
+                      required:
+                      - name
+                      - network
+                      type: object
+                      properties:
+                        attachmentDetails:
+                          type: array
+                          description: List of GCR Attachments
+                          items:
+                            type: object
+                            properties:
+                              cloudRouterIpAddress:
+                                type: string
+                              customerIpAddress:
+                                type: string
+                              id:
+                                type: string
+                              mtu:
+                                type: string
+                                description: MTU of the Interconnect attachment
+                                example: '1500'
+                              name:
+                                pattern: (?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?)
+                                type: string
+                              pairingKey:
+                                type: string
+                                example: 96fbc59c-8926-40ec-b6cd-4cb3501e4c47/us-west1/1
+                              region:
+                                type: string
+                              secondaryZone:
+                                type: string
+                                description: Option to create Interconnect attachment in secondary zone
+                                example: 'true'
+                              state:
+                                type: string
+                            description: Google cloud Interconnect Attachment Object.
+                            $$ref: '#/components/schemas/GcpInterconnectAttachment'
+                        cloudRouterAsn:
+                          pattern: \d+
+                          type: string
+                        id:
+                          type: string
+                        name:
+                          pattern: (?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?)
+                          type: string
+                        network:
+                          type: string
+                        region:
+                          type: string
+                      description: Google cloud GCR Object.
+                      $$ref: '#/components/schemas/GcpCloudRouter'
+                $$ref: '#/components/schemas/InlineResponse20010'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/interconnect/cloud/{cloud-type}/accounts/{cloud-account-id}/transit-gateways:
+    get:
+      tags:
+      - Multicloud Interconnect - Cloud Resource Management
+      summary: Get AWS Transit Gateways.
+      description: API to retrieve AWS Transit Gateways.
+      operationId: getAwsTransitGateways
+      parameters:
+      - name: cloud-type
+        in: path
+        description: Cloud Provider Type
+        required: true
+        schema:
+          type: string
+          enum:
+          - AWS
+      - name: cloud-account-id
+        in: path
+        required: true
+        schema:
+          maxLength: 255
+          minLength: 1
+          type: string
+      - name: transit-gateway-name
+        in: query
+        schema:
+          type: string
+      - name: region
+        in: query
+        schema:
+          type: string
+      - name: tag-name
+        in: query
+        schema:
+          type: string
+      - name: refresh
+        in: query
+        schema:
+          pattern: (true|false)
+          type: string
+          default: 'false'
+      responses:
+        '200':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  connectivityGateway:
+                    type: array
+                    items:
+                      required:
+                      - awsConnectivityGateway
+                      - azureConnectivityGateway
+                      - cloudAccountId
+                      - cloudType
+                      - gatewayName
+                      - gcpConnectivityGateway
+                      - region
+                      type: object
+                      properties:
+                        awsConnectivityGateway:
+                          required:
+                          - awsConnectivityType
+                          type: object
+                          properties:
+                            awsConnectivityType:
+                              type: string
+                              example: DIRECT_CONNECT_GATEWAY
+                            directConnectGateway:
+                              required:
+                              - amazonSideAsn
+                              type: object
+                              properties:
+                                amazonSideAsn:
+                                  pattern: ^[1-9]\d*$
+                                  type: string
+                                gatewayAssociationList:
+                                  type: array
+                                  description: List of associated Gateways
+                                  items:
+                                    type: object
+                                    properties:
+                                      advertisedPrefixList:
+                                        type: array
+                                        description: Advertized prefix list
+                                        example:
+                                        - 10.10.0.0/24
+                                        - 10.20.0.0/24
+                                        items:
+                                          type: string
+                                          description: prefix
+                                          example: 10.10.0.0/24
+                                      associatedGateway:
+                                        type: object
+                                        properties:
+                                          cloudAccountId:
+                                            type: string
+                                          cloudGatewayName:
+                                            type: string
+                                          cloudType:
+                                            type: string
+                                            enum:
+                                            - AWS
+                                            - AWS_GOVCLOUD
+                                            - AZURE
+                                            - AZURE_GOVCLOUD
+                                            - GCP
+                                          description:
+                                            type: string
+                                          gatewayId:
+                                            type: string
+                                          gatewayName:
+                                            type: string
+                                          region:
+                                            type: string
+                                        description: Cloud Connectivity Gateway Object
+                                        $$ref: '#/components/schemas/GatewayAssociationAssociatedGateway'
+                                      associationAction:
+                                        type: string
+                                        example: ASSOCIATE
+                                        enum:
+                                        - ASSOCIATE
+                                        - DISASSOCIATE
+                                        - REMOVE_PREFIX_LIST
+                                        - NO_ACTION
+                                      associationId:
+                                        type: string
+                                        example: '12345'
+                                      associationState:
+                                        type: string
+                                        example: ASSOCIATED
+                                      stateChangeError:
+                                        type: string
+                                    description: Generic multicloud gateway association object
+                                    $$ref: '#/components/schemas/GatewayAssociation'
+                                ownerAccount:
+                                  type: string
+                                virtualInterfaceAttachmentList:
+                                  type: array
+                                  description: List of virtual interfaces attached to DxGW
+                                  items:
+                                    type: object
+                                    properties:
+                                      attachmentState:
+                                        type: string
+                                      cloudType:
+                                        type: string
+                                        enum:
+                                        - AWS
+                                        - AWS_GOVCLOUD
+                                        - AZURE
+                                        - AZURE_GOVCLOUD
+                                        - GCP
+                                      connectionId:
+                                        type: string
+                                        description: Id of the private cross connect
+                                        example: 12345-1234-1234
+                                      connectionType:
+                                        type: string
+                                        description: Type of AWS connection
+                                        example: HCONN
+                                        enum:
+                                        - HVIF
+                                        - HCONN
+                                      ownerAccount:
+                                        type: string
+                                      region:
+                                        type: string
+                                      stateChangeError:
+                                        type: string
+                                      virtualInterfaceData:
+                                        type: object
+                                        properties:
+                                          advertisedPrefixList:
+                                            type: array
+                                            items:
+                                              type: string
+                                          asn:
+                                            type: integer
+                                            format: int64
+                                            example: 65500
+                                          bgpKey:
+                                            type: string
+                                            example: EC-12345678
+                                          customerIpAddress:
+                                            type: string
+                                          ipAddress:
+                                            type: string
+                                          vlan:
+                                            type: integer
+                                            format: int64
+                                            example: 45678
+                                        description: VIrtual Interface Object
+                                        $$ref: '#/components/schemas/AwsDirectConnectGatewayVirtualInterfaceData'
+                                      virtualInterfaceId:
+                                        type: string
+                                      virtualInterfaceName:
+                                        type: string
+                                      virtualInterfaceType:
+                                        type: string
+                                        example: TRANSIT
+                                        enum:
+                                        - TRANSIT
+                                        - PRIVATE
+                                        - PUBLIC
+                                        - ATTACHMENT
+                                    description: Virtual Interface Object
+                                    $$ref: '#/components/schemas/AwsDirectConnectGatewayVirtualInterfaceAttachmentList'
+                                vpcTagNamesForGatewayAssociations:
+                                  type: array
+                                  description: VPC Tags associated to the Direct Connect Gateway
+                                  items:
+                                    type: string
+                                    description: VPC Tags associated to the Direct Connect Gateway
+                              description: AWS Direct Connect Gateway specific Object.
+                              $$ref: '#/components/schemas/AwsDirectConnectGateway'
+                            transitGateway:
+                              required:
+                              - amazonSideAsn
+                              type: object
+                              properties:
+                                amazonSideAsn:
+                                  pattern: ^[1-9]\d*$
+                                  type: string
+                                associationDefaultRouteTableId:
+                                  type: string
+                                  example: tgw-rtb-07ace6b22f9de8502
+                                autoAcceptSharedAttachments:
+                                  type: boolean
+                                creationTime:
+                                  type: string
+                                  example: 11-Jun-2022 (00:10:30:00000)
+                                defaultRouteTableAssociation:
+                                  type: boolean
+                                defaultRouteTablePropogation:
+                                  type: boolean
+                                dnsSupport:
+                                  type: boolean
+                                multicastSupport:
+                                  type: boolean
+                                ownerAccount:
+                                  type: string
+                                propogationDefaultRouteTableId:
+                                  type: string
+                                vpcAttachmentList:
+                                  type: array
+                                  description: List of VPC attachments
+                                  items:
+                                    type: object
+                                    properties:
+                                      region:
+                                        type: string
+                                      vpcId:
+                                        type: string
+                                        description: VPC Id
+                                        example: vpc-012345-2000
+                                      vpcRoutePrefixList:
+                                        type: array
+                                        description: List of ip prefixes to be advertized towards DxGw on the VPC routing table.
+                                        example:
+                                        - 198.18.0.4/30
+                                        - 198.18.0.7/30
+                                        items:
+                                          type: string
+                                          description: ip prefix
+                                          example: 198.18.0.4/30
+                                      vpcState:
+                                        type: string
+                                      vpcSubnetPrefixList:
+                                        type: array
+                                        description: List of VPC subnets to be added to DxGw association
+                                        example:
+                                        - 10.10.0.0/24
+                                        - 10.10.1.0/24
+                                        items:
+                                          type: string
+                                          description: VPC subnet
+                                          example: 10.10.0.0/24
+                                    description: AWS VPC attachment Object
+                                    $$ref: '#/components/schemas/AwsVpcAttachments'
+                                vpnEcmpSupport:
+                                  type: boolean
+                              description: AWS Transit Gateway specific Object.
+                              $$ref: '#/components/schemas/AwsTransitGateway'
+                            virtualPrivateGateway:
+                              type: object
+                              properties:
+                                amazonSideAsn:
+                                  type: integer
+                                  format: int64
+                                availabilityZone:
+                                  type: string
+                                vpcAttachmentList:
+                                  type: array
+                                  description: List of VPC attachments
+                                  items:
+                                    type: object
+                                    properties:
+                                      region:
+                                        type: string
+                                      vpcId:
+                                        type: string
+                                        description: VPC Id
+                                        example: vpc-012345-2000
+                                      vpcRoutePrefixList:
+                                        type: array
+                                        description: List of ip prefixes to be advertized towards DxGw on the VPC routing table.
+                                        example:
+                                        - 198.18.0.4/30
+                                        - 198.18.0.7/30
+                                        items:
+                                          type: string
+                                          description: ip prefix
+                                          example: 198.18.0.4/30
+                                      vpcState:
+                                        type: string
+                                      vpcSubnetPrefixList:
+                                        type: array
+                                        description: List of VPC subnets to be added to DxGw association
+                                        example:
+                                        - 10.10.0.0/24
+                                        - 10.10.1.0/24
+                                        items:
+                                          type: string
+                                          description: VPC subnet
+                                          example: 10.10.0.0/24
+                                    description: AWS VPC attachment Object
+                                    $$ref: '#/components/schemas/AwsVpcAttachments'
+                                vpgType:
+                                  type: string
+                                  example: ipsec.1
+                              description: AWS Virtual Private Gateway specific Object.
+                              $$ref: '#/components/schemas/AwsVirtualPrivateGateway'
+                          description: AWS cloud Connectivity Gateway Object
+                          $$ref: '#/components/schemas/CloudConnectivityGatewayAws'
+                        azureConnectivityGateway:
+                          required:
+                          - azureConnectivityType
+                          type: object
+                          properties:
+                            azureConnectivityType:
+                              type: string
+                            expressRouteCircuit:
+                              required:
+                              - resourceGroupName
+                              type: object
+                              properties:
+                                allowClassicOperations:
+                                  type: boolean
+                                  example: true
+                                bandwidthInGbps:
+                                  type: integer
+                                  format: int32
+                                  example: 200
+                                gatewayAssociationList:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      advertisedPrefixList:
+                                        type: array
+                                        description: Advertized prefix list
+                                        example:
+                                        - 10.10.0.0/24
+                                        - 10.20.0.0/24
+                                        items:
+                                          type: string
+                                          description: prefix
+                                          example: 10.10.0.0/24
+                                      associatedGateway:
+                                        type: object
+                                        properties:
+                                          cloudAccountId:
+                                            type: string
+                                          cloudGatewayName:
+                                            type: string
+                                          cloudType:
+                                            type: string
+                                            enum:
+                                            - AWS
+                                            - AWS_GOVCLOUD
+                                            - AZURE
+                                            - AZURE_GOVCLOUD
+                                            - GCP
+                                          description:
+                                            type: string
+                                          gatewayId:
+                                            type: string
+                                          gatewayName:
+                                            type: string
+                                          region:
+                                            type: string
+                                        description: Cloud Connectivity Gateway Object
+                                        $$ref: '#/components/schemas/GatewayAssociationAssociatedGateway'
+                                      associationAction:
+                                        type: string
+                                        example: ASSOCIATE
+                                        enum:
+                                        - ASSOCIATE
+                                        - DISASSOCIATE
+                                        - REMOVE_PREFIX_LIST
+                                        - NO_ACTION
+                                      associationId:
+                                        type: string
+                                        example: '12345'
+                                      associationState:
+                                        type: string
+                                        example: ASSOCIATED
+                                      stateChangeError:
+                                        type: string
+                                    description: Generic multicloud gateway association object
+                                    $$ref: '#/components/schemas/GatewayAssociation'
+                                globalReachEnabled:
+                                  type: boolean
+                                  example: true
+                                peeringList:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      advertisedPublicPrefixList:
+                                        type: array
+                                        items:
+                                          type: string
+                                      azureAsn:
+                                        type: string
+                                      expressRouteConnectionId:
+                                        type: string
+                                        example: '12345'
+                                      id:
+                                        type: string
+                                      name:
+                                        type: string
+                                      peerAsn:
+                                        type: string
+                                      peeringState:
+                                        type: string
+                                        example: ENABLED
+                                        enum:
+                                        - DISABLED
+                                        - ENABLED
+                                      peeringType:
+                                        type: string
+                                        example: PUBLIC
+                                        enum:
+                                        - PRIVATE
+                                        - PUBLIC
+                                      primaryAzurePort:
+                                        type: string
+                                      primaryPeerAddressPrefix:
+                                        type: string
+                                      secondaryAzurePort:
+                                        type: string
+                                      secondaryPeerAddressPrefix:
+                                        type: string
+                                      sharedKey:
+                                        type: string
+                                        description: BGP Peering Key
+                                        example: EC-12345
+                                      vlanId:
+                                        type: integer
+                                        format: int64
+                                        example: 1618
+                                    description: Azure Express Route Circuit Peering
+                                    $$ref: '#/components/schemas/AzureERCPeering'
+                                provisioningState:
+                                  type: string
+                                  example: PROVISIONED
+                                resourceGroupName:
+                                  type: string
+                                serviceKey:
+                                  type: string
+                                serviceProviderProperties:
+                                  type: object
+                                  properties:
+                                    bandwidthInMbps:
+                                      type: integer
+                                      format: int64
+                                      example: 1000
+                                    peeringLocation:
+                                      type: string
+                                      example: New York
+                                    serviceProviderName:
+                                      type: string
+                                  description: Azure Express Route Circuit Service Provider Properties
+                                  $$ref: '#/components/schemas/AzureERCServiceProviderProperties'
+                                serviceProviderProvisioningState:
+                                  type: string
+                                  enum:
+                                  - DEPROVISIONING
+                                  - NOT_PROVISIONED
+                                  - PROVISIONED
+                                  - PROVISIONING
+                                sku:
+                                  required:
+                                  - family
+                                  - tier
+                                  type: object
+                                  properties:
+                                    family:
+                                      type: string
+                                    name:
+                                      type: string
+                                    tier:
+                                      type: string
+                                      example: STANDARD
+                                  description: Express Route Circuit SKU
+                                  $$ref: '#/components/schemas/AzureExpressRouteCircuitSku'
+                                vWanAttachmentList:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      vHubList:
+                                        type: array
+                                        items:
+                                          type: object
+                                          properties:
+                                            isDelete:
+                                              type: boolean
+                                              example: true
+                                            vHub:
+                                              type: object
+                                              properties:
+                                                accountId:
+                                                  type: string
+                                                accountName:
+                                                  type: string
+                                                addressPrefix:
+                                                  type: string
+                                                cloudType:
+                                                  type: string
+                                                  enum:
+                                                  - AWS
+                                                  - AWS_GOVCLOUD
+                                                  - AZURE
+                                                  - AZURE_GOVCLOUD
+                                                  - GCP
+                                                id:
+                                                  type: string
+                                                name:
+                                                  type: string
+                                                provisioningState:
+                                                  type: string
+                                                  example: PROVISIONED
+                                                region:
+                                                  type: string
+                                                resourceGroupName:
+                                                  type: string
+                                                routingState:
+                                                  type: string
+                                                sku:
+                                                  type: string
+                                                  example: STANDARD
+                                                tagList:
+                                                  type: array
+                                                  items:
+                                                    type: object
+                                                    properties:
+                                                      name:
+                                                        type: string
+                                                      value:
+                                                        type: string
+                                                        example: mytag
+                                                    description: Azure Virtual WAN Tag Object
+                                                    $$ref: '#/components/schemas/AzureVirtualWanTagList'
+                                                virtualRouterAsn:
+                                                  type: string
+                                                virtualRouterIp:
+                                                  type: array
+                                                  items:
+                                                    type: object
+                                                    properties:
+                                                      privateIp:
+                                                        type: string
+                                                    description: Virtual Router IP
+                                                    $$ref: '#/components/schemas/AzureVirtualHubVirtualRouterIp'
+                                                vwanName:
+                                                  type: string
+                                              description: Azure Virtual Hub
+                                              $$ref: '#/components/schemas/AzureVirtualHub'
+                                          $$ref: '#/components/schemas/AzureExpressRouteCircuitVHubList'
+                                      vWan:
+                                        required:
+                                        - name
+                                        - region
+                                        - resourceGroupName
+                                        type: object
+                                        properties:
+                                          accountId:
+                                            maxLength: 255
+                                            minLength: 1
+                                            type: string
+                                          accountName:
+                                            type: string
+                                            description: Cloud account name
+                                            example: my-cloud-account
+                                          allowBranchToBranchTraffic:
+                                            type: boolean
+                                            example: false
+                                          cloudType:
+                                            type: string
+                                          description:
+                                            type: string
+                                          id:
+                                            type: string
+                                          name:
+                                            maxLength: 80
+                                            minLength: 1
+                                            type: string
+                                          provisioningState:
+                                            type: string
+                                            example: PROVISIONED
+                                          region:
+                                            maxLength: 255
+                                            minLength: 1
+                                            type: string
+                                          resourceGroupName:
+                                            maxLength: 80
+                                            minLength: 1
+                                            type: string
+                                          tagList:
+                                            type: array
+                                            items:
+                                              type: object
+                                              properties:
+                                                name:
+                                                  type: string
+                                                value:
+                                                  type: string
+                                                  example: mytag
+                                              description: Azure Virtual WAN Tag Object
+                                              $$ref: '#/components/schemas/AzureVirtualWanTagList'
+                                          virtualWanType:
+                                            type: string
+                                          vnetTovnetTrafficEnabled:
+                                            type: boolean
+                                            example: false
+                                        description: Azure Virtual Wan
+                                        $$ref: '#/components/schemas/AzureVirtualWan'
+                                    description: vWan Attachment Name
+                                    $$ref: '#/components/schemas/AzureExpressRouteCircuitVWanAttachmentList'
+                                vnetTagNamesForConnections:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      isDelete:
+                                        type: boolean
+                                        example: true
+                                      vnetTagName:
+                                        type: string
+                                    description: Vnet Tag Object Names
+                                    $$ref: '#/components/schemas/AzureExpressRouteCircuitVnetTagNamesForConnections'
+                              description: Azure Express Route Circuit Object
+                              $$ref: '#/components/schemas/AzureExpressRouteCircuit'
+                            expressRouteGateway:
+                              type: object
+                              properties:
+                                autoScaleConfiguration:
+                                  type: string
+                                resourceGroupName:
+                                  type: string
+                                vHubId:
+                                  type: string
+                                  description: Id of the Azure vHUB.
+                                  example: vhub-1234
+                              description: Azure Express Route Gateway Object
+                              $$ref: '#/components/schemas/AzureExpressRouteGateway'
+                            virtualNetworkGateway:
+                              type: object
+                              properties:
+                                enableBgp:
+                                  type: boolean
+                                  example: true
+                                publicIPAddress:
+                                  type: string
+                                sku:
+                                  type: object
+                                  properties:
+                                    capacity:
+                                      type: integer
+                                      format: int32
+                                      example: 100
+                                    name:
+                                      type: string
+                                    tier:
+                                      type: string
+                                      example: STANDARD
+                                  description: VNET Gateway SKU parameters
+                                  $$ref: '#/components/schemas/AzureVirtualNetworkGatewaySku'
+                                subnet:
+                                  type: string
+                                virtualNetworkGatewayType:
+                                  type: string
+                                  example: EXPRESS_ROUTE
+                                  enum:
+                                  - VPN
+                                  - EXPRESS_ROUTE
+                              description: Azure Virtual Network Gateway Object
+                              $$ref: '#/components/schemas/AzureVirtualNetworkGateway'
+                          description: Cloud Connectivity Gateway Object
+                          $$ref: '#/components/schemas/CloudConnectivityGatewayAzure'
+                        cloudAccountId:
+                          type: string
+                        cloudGatewayName:
+                          type: string
+                        cloudType:
+                          type: string
+                        connectivityGatewayState:
+                          type: string
+                        description:
+                          type: string
+                        gatewayId:
+                          type: string
+                        gatewayName:
+                          type: string
+                        gcpConnectivityGateway:
+                          required:
+                          - gcConnectivityType
+                          - routerInfo
+                          type: object
+                          properties:
+                            gcConnectivityType:
+                              type: string
+                              example: GCR_ATTACHMENT
+                            interconnectAsn:
+                              pattern: \d+
+                              type: string
+                              description: BGP ASN assigned to Interconnect Gateway.
+                              example: '64500'
+                            pairingKey:
+                              type: string
+                              example: 96fbc59c-8926-40ec-b6cd-4cb3501e4c47/us-west1/1
+                            routerInfo:
+                              required:
+                              - name
+                              - network
+                              type: object
+                              properties:
+                                attachmentDetails:
+                                  type: array
+                                  description: List of GCR Attachments
+                                  items:
+                                    type: object
+                                    properties:
+                                      cloudRouterIpAddress:
+                                        type: string
+                                      customerIpAddress:
+                                        type: string
+                                      id:
+                                        type: string
+                                      mtu:
+                                        type: string
+                                        description: MTU of the Interconnect attachment
+                                        example: '1500'
+                                      name:
+                                        pattern: (?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?)
+                                        type: string
+                                      pairingKey:
+                                        type: string
+                                        example: 96fbc59c-8926-40ec-b6cd-4cb3501e4c47/us-west1/1
+                                      region:
+                                        type: string
+                                      secondaryZone:
+                                        type: string
+                                        description: Option to create Interconnect attachment in secondary zone
+                                        example: 'true'
+                                      state:
+                                        type: string
+                                    description: Google cloud Interconnect Attachment Object.
+                                    $$ref: '#/components/schemas/GcpInterconnectAttachment'
+                                cloudRouterAsn:
+                                  pattern: \d+
+                                  type: string
+                                id:
+                                  type: string
+                                name:
+                                  pattern: (?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?)
+                                  type: string
+                                network:
+                                  type: string
+                                region:
+                                  type: string
+                              description: Google cloud GCR Object.
+                              $$ref: '#/components/schemas/GcpCloudRouter'
+                          description: Google cloud Connectivity Gateway Object.
+                          $$ref: '#/components/schemas/CloudConnectivityGatewayGcp'
+                        isVmanageCreated:
+                          type: boolean
+                          description: Resource created by vManage
+                          example: true
+                        newFormat:
+                          type: boolean
+                          description: Option indicates object type
+                          example: true
+                        region:
+                          type: string
+                      description: Cloud Connectivity Gateway Object
+                      $$ref: '#/components/schemas/CloudConnectivityGateway'
+                description: Cloud Connectivity Gateway Object
+                $$ref: '#/components/schemas/InlineResponse2008'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/interconnect/cloud/{cloud-type}/accounts/{cloud-account-id}/vhubs:
+    get:
+      tags:
+      - Multicloud Interconnect - Cloud Resource Management
+      summary: Get Azure Virtual Hubs.
+      description: API to retrieve Azure Virtual Hubs.
+      operationId: getAzVirtualHubs
+      parameters:
+      - name: cloud-type
+        in: path
+        description: Cloud Provider Type
+        required: true
+        schema:
+          type: string
+      - name: cloud-account-id
+        in: path
+        required: true
+        schema:
+          maxLength: 255
+          minLength: 1
+          type: string
+      - name: resource-group
+        in: query
+        description: Azure cloud resource group name
+        schema:
+          maxLength: 128
+          minLength: 1
+          type: string
+      - name: refresh
+        in: query
+        schema:
+          pattern: (true|false)
+          type: string
+          default: 'false'
+      - name: vwan-name
+        in: query
+        schema:
+          type: string
+      - name: tag-name
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/interconnect/cloud/{cloud-type}/accounts/{cloud-account-id}/vwans:
+    get:
+      tags:
+      - Multicloud Interconnect - Cloud Resource Management
+      summary: Get Azure Virtual Wans.
+      description: API to retrieve Azure Virtual Wans.
+      operationId: getAzVirtualWans
+      parameters:
+      - name: cloud-type
+        in: path
+        description: Cloud Provider Type
+        required: true
+        schema:
+          type: string
+      - name: cloud-account-id
+        in: path
+        required: true
+        schema:
+          maxLength: 255
+          minLength: 1
+          type: string
+      - name: resource-group
+        in: query
+        description: Azure cloud resource group name
+        required: true
+        schema:
+          type: string
+      - name: refresh
+        in: query
+        schema:
+          pattern: (true|false)
+          type: string
+          default: 'false'
+      - name: vwan-name
+        in: query
+        description: Vwan Name
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Azure Virtual Wan Response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  vWans:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        vWan:
+                          required:
+                          - name
+                          - region
+                          - resourceGroupName
+                          type: object
+                          properties:
+                            accountId:
+                              maxLength: 255
+                              minLength: 1
+                              type: string
+                            accountName:
+                              type: string
+                              description: Cloud account name
+                              example: my-cloud-account
+                            allowBranchToBranchTraffic:
+                              type: boolean
+                              example: false
+                            cloudType:
+                              type: string
+                            description:
+                              type: string
+                            id:
+                              type: string
+                            name:
+                              maxLength: 80
+                              minLength: 1
+                              type: string
+                            provisioningState:
+                              type: string
+                              example: PROVISIONED
+                            region:
+                              maxLength: 255
+                              minLength: 1
+                              type: string
+                            resourceGroupName:
+                              maxLength: 80
+                              minLength: 1
+                              type: string
+                            tagList:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  name:
+                                    type: string
+                                  value:
+                                    type: string
+                                    example: mytag
+                                description: Azure Virtual WAN Tag Object
+                                $$ref: '#/components/schemas/AzureVirtualWanTagList'
+                            virtualWanType:
+                              type: string
+                            vnetTovnetTrafficEnabled:
+                              type: boolean
+                              example: false
+                          description: Azure Virtual Wan
+                          $$ref: '#/components/schemas/AzureVirtualWan'
+                        vWanInUse:
+                          type: boolean
+                          example: false
+                      $$ref: '#/components/schemas/InlineResponse2009VWans'
+                $$ref: '#/components/schemas/InlineResponse2009'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+      - Multicloud Interconnect - Cloud Resource Management
+      summary: Create an Azure Virtual Wan.
+      description: API to create an Azure Virtual Wan..
+      operationId: createAzVirtualWan
+      parameters:
+      - name: cloud-type
+        in: path
+        description: Cloud Provider Type
+        required: true
+        schema:
+          type: string
+      - name: cloud-account-id
+        in: path
+        required: true
+        schema:
+          maxLength: 255
+          minLength: 1
+          type: string
+      requestBody:
+        description: Request Payload for Multicloud Interconnect Azure Vwan
+        content:
+          application/json:
+            schema:
+              required:
+              - name
+              - region
+              - resourceGroupName
+              type: object
+              properties:
+                accountId:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+                accountName:
+                  type: string
+                  description: Cloud account name
+                  example: my-cloud-account
+                allowBranchToBranchTraffic:
+                  type: boolean
+                  example: false
+                cloudType:
+                  type: string
+                description:
+                  type: string
+                id:
+                  type: string
+                name:
+                  maxLength: 80
+                  minLength: 1
+                  type: string
+                provisioningState:
+                  type: string
+                  example: PROVISIONED
+                region:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+                resourceGroupName:
+                  maxLength: 80
+                  minLength: 1
+                  type: string
+                tagList:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      value:
+                        type: string
+                        example: mytag
+                    description: Azure Virtual WAN Tag Object
+                    $$ref: '#/components/schemas/AzureVirtualWanTagList'
+                virtualWanType:
+                  type: string
+                vnetTovnetTrafficEnabled:
+                  type: boolean
+                  example: false
+              description: Azure Virtual Wan
+              $$ref: '#/components/schemas/AzureVirtualWan'
+            examples:
+              Interconnect Azure VWAN:
+                description: Interconnect Azure VWAN
+                value:
+                  cloudType: AZURE
+                  accountId: cloud-account-id
+                  accountName: my-cloud-account-name
+                  name: my-vwan-name
+                  description: string
+                  region: My Azure Region
+                  resourceGroupName: az-resource-group
+                  tagList:
+                  - name: string
+                    value: mytag
+                  virtualWanType: optional vwan type
+                  allowBranchToBranchTraffic: false
+                  vnetTovnetTrafficEnabled: false
+        required: true
+      responses:
+        '200':
+          description: Azure Virtual Wan Response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  vWans:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        vWan:
+                          required:
+                          - name
+                          - region
+                          - resourceGroupName
+                          type: object
+                          properties:
+                            accountId:
+                              maxLength: 255
+                              minLength: 1
+                              type: string
+                            accountName:
+                              type: string
+                              description: Cloud account name
+                              example: my-cloud-account
+                            allowBranchToBranchTraffic:
+                              type: boolean
+                              example: false
+                            cloudType:
+                              type: string
+                            description:
+                              type: string
+                            id:
+                              type: string
+                            name:
+                              maxLength: 80
+                              minLength: 1
+                              type: string
+                            provisioningState:
+                              type: string
+                              example: PROVISIONED
+                            region:
+                              maxLength: 255
+                              minLength: 1
+                              type: string
+                            resourceGroupName:
+                              maxLength: 80
+                              minLength: 1
+                              type: string
+                            tagList:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  name:
+                                    type: string
+                                  value:
+                                    type: string
+                                    example: mytag
+                                description: Azure Virtual WAN Tag Object
+                                $$ref: '#/components/schemas/AzureVirtualWanTagList'
+                            virtualWanType:
+                              type: string
+                            vnetTovnetTrafficEnabled:
+                              type: boolean
+                              example: false
+                          description: Azure Virtual Wan
+                          $$ref: '#/components/schemas/AzureVirtualWan'
+                        vWanInUse:
+                          type: boolean
+                          example: false
+                      $$ref: '#/components/schemas/InlineResponse2009VWans'
+                $$ref: '#/components/schemas/InlineResponse2009'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/interconnect/cloud/{cloud-type}/accounts/{cloud-account-id}/vwans/{vwan-name}:
+    delete:
+      tags:
+      - Multicloud Interconnect - Cloud Resource Management
+      summary: Delete an Azure Virtual Wan.
+      description: API to delete an Azure Virtual Wan.
+      operationId: deleteAzVirtualWan
+      parameters:
+      - name: cloud-type
+        in: path
+        description: Cloud Provider Type
+        required: true
+        schema:
+          type: string
+          enum:
+          - AWS
+          - AZURE
+          - GCP
+      - name: cloud-account-id
+        in: path
+        required: true
+        schema:
+          maxLength: 255
+          minLength: 1
+          type: string
+      - name: vwan-name
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: resource-group
+        in: query
+        description: Azure cloud resource group name
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/interconnect/cloud/{cloud-type}/cloud-connectivity-gateways:
+    get:
+      tags:
+      - Multicloud Interconnect - Cloud Resource Management
+      summary: Get all Cloud Connectivity Gateways.
+      description: API to retrieve all Cloud Connectivity Gateways.
+      operationId: getCloudConnectivityGateways
+      parameters:
+      - name: cloud-type
+        in: path
+        description: Cloud Provider Type
+        required: true
+        schema:
+          type: string
+          enum:
+          - AWS
+          - AZURE
+          - GCP
+      - name: cloud-account-id
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: connectivity-gateway-name
+        in: query
+        schema:
+          type: string
+      - name: connectivity-gateway-type
+        in: query
+        description: Cloud Connectivity Gateway Type
+        schema:
+          type: string
+          enum:
+          - DIRECT_CONNECT_GATEWAY
+          - VIRTUAL_PRIVATE_GATEWAY
+          - TRANSIT_GATEWAY
+          - VIRTUAL_INTERFACES
+          - EXPRESS_ROUTE_CIRCUIT
+          - GCR_ATTACHMENT
+      - name: interconnect-type
+        in: query
+        description: Interconnect Provider Type
+        schema:
+          type: string
+          enum:
+          - MEGAPORT
+          - EQUINIX
+      - name: region
+        in: query
+        schema:
+          type: string
+      - name: network
+        in: query
+        schema:
+          type: string
+      - name: resource-state
+        in: query
+        description: resource state
+        schema:
+          type: string
+      - name: refresh
+        in: query
+        schema:
+          pattern: (true|false)
+          type: string
+          default: 'false'
+      responses:
+        '200':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  connectivityGateway:
+                    type: array
+                    items:
+                      required:
+                      - awsConnectivityGateway
+                      - azureConnectivityGateway
+                      - cloudAccountId
+                      - cloudType
+                      - gatewayName
+                      - gcpConnectivityGateway
+                      - region
+                      type: object
+                      properties:
+                        awsConnectivityGateway:
+                          required:
+                          - awsConnectivityType
+                          type: object
+                          properties:
+                            awsConnectivityType:
+                              type: string
+                              example: DIRECT_CONNECT_GATEWAY
+                            directConnectGateway:
+                              required:
+                              - amazonSideAsn
+                              type: object
+                              properties:
+                                amazonSideAsn:
+                                  pattern: ^[1-9]\d*$
+                                  type: string
+                                gatewayAssociationList:
+                                  type: array
+                                  description: List of associated Gateways
+                                  items:
+                                    type: object
+                                    properties:
+                                      advertisedPrefixList:
+                                        type: array
+                                        description: Advertized prefix list
+                                        example:
+                                        - 10.10.0.0/24
+                                        - 10.20.0.0/24
+                                        items:
+                                          type: string
+                                          description: prefix
+                                          example: 10.10.0.0/24
+                                      associatedGateway:
+                                        type: object
+                                        properties:
+                                          cloudAccountId:
+                                            type: string
+                                          cloudGatewayName:
+                                            type: string
+                                          cloudType:
+                                            type: string
+                                            enum:
+                                            - AWS
+                                            - AWS_GOVCLOUD
+                                            - AZURE
+                                            - AZURE_GOVCLOUD
+                                            - GCP
+                                          description:
+                                            type: string
+                                          gatewayId:
+                                            type: string
+                                          gatewayName:
+                                            type: string
+                                          region:
+                                            type: string
+                                        description: Cloud Connectivity Gateway Object
+                                        $$ref: '#/components/schemas/GatewayAssociationAssociatedGateway'
+                                      associationAction:
+                                        type: string
+                                        example: ASSOCIATE
+                                        enum:
+                                        - ASSOCIATE
+                                        - DISASSOCIATE
+                                        - REMOVE_PREFIX_LIST
+                                        - NO_ACTION
+                                      associationId:
+                                        type: string
+                                        example: '12345'
+                                      associationState:
+                                        type: string
+                                        example: ASSOCIATED
+                                      stateChangeError:
+                                        type: string
+                                    description: Generic multicloud gateway association object
+                                    $$ref: '#/components/schemas/GatewayAssociation'
+                                ownerAccount:
+                                  type: string
+                                virtualInterfaceAttachmentList:
+                                  type: array
+                                  description: List of virtual interfaces attached to DxGW
+                                  items:
+                                    type: object
+                                    properties:
+                                      attachmentState:
+                                        type: string
+                                      cloudType:
+                                        type: string
+                                        enum:
+                                        - AWS
+                                        - AWS_GOVCLOUD
+                                        - AZURE
+                                        - AZURE_GOVCLOUD
+                                        - GCP
+                                      connectionId:
+                                        type: string
+                                        description: Id of the private cross connect
+                                        example: 12345-1234-1234
+                                      connectionType:
+                                        type: string
+                                        description: Type of AWS connection
+                                        example: HCONN
+                                        enum:
+                                        - HVIF
+                                        - HCONN
+                                      ownerAccount:
+                                        type: string
+                                      region:
+                                        type: string
+                                      stateChangeError:
+                                        type: string
+                                      virtualInterfaceData:
+                                        type: object
+                                        properties:
+                                          advertisedPrefixList:
+                                            type: array
+                                            items:
+                                              type: string
+                                          asn:
+                                            type: integer
+                                            format: int64
+                                            example: 65500
+                                          bgpKey:
+                                            type: string
+                                            example: EC-12345678
+                                          customerIpAddress:
+                                            type: string
+                                          ipAddress:
+                                            type: string
+                                          vlan:
+                                            type: integer
+                                            format: int64
+                                            example: 45678
+                                        description: VIrtual Interface Object
+                                        $$ref: '#/components/schemas/AwsDirectConnectGatewayVirtualInterfaceData'
+                                      virtualInterfaceId:
+                                        type: string
+                                      virtualInterfaceName:
+                                        type: string
+                                      virtualInterfaceType:
+                                        type: string
+                                        example: TRANSIT
+                                        enum:
+                                        - TRANSIT
+                                        - PRIVATE
+                                        - PUBLIC
+                                        - ATTACHMENT
+                                    description: Virtual Interface Object
+                                    $$ref: '#/components/schemas/AwsDirectConnectGatewayVirtualInterfaceAttachmentList'
+                                vpcTagNamesForGatewayAssociations:
+                                  type: array
+                                  description: VPC Tags associated to the Direct Connect Gateway
+                                  items:
+                                    type: string
+                                    description: VPC Tags associated to the Direct Connect Gateway
+                              description: AWS Direct Connect Gateway specific Object.
+                              $$ref: '#/components/schemas/AwsDirectConnectGateway'
+                            transitGateway:
+                              required:
+                              - amazonSideAsn
+                              type: object
+                              properties:
+                                amazonSideAsn:
+                                  pattern: ^[1-9]\d*$
+                                  type: string
+                                associationDefaultRouteTableId:
+                                  type: string
+                                  example: tgw-rtb-07ace6b22f9de8502
+                                autoAcceptSharedAttachments:
+                                  type: boolean
+                                creationTime:
+                                  type: string
+                                  example: 11-Jun-2022 (00:10:30:00000)
+                                defaultRouteTableAssociation:
+                                  type: boolean
+                                defaultRouteTablePropogation:
+                                  type: boolean
+                                dnsSupport:
+                                  type: boolean
+                                multicastSupport:
+                                  type: boolean
+                                ownerAccount:
+                                  type: string
+                                propogationDefaultRouteTableId:
+                                  type: string
+                                vpcAttachmentList:
+                                  type: array
+                                  description: List of VPC attachments
+                                  items:
+                                    type: object
+                                    properties:
+                                      region:
+                                        type: string
+                                      vpcId:
+                                        type: string
+                                        description: VPC Id
+                                        example: vpc-012345-2000
+                                      vpcRoutePrefixList:
+                                        type: array
+                                        description: List of ip prefixes to be advertized towards DxGw on the VPC routing table.
+                                        example:
+                                        - 198.18.0.4/30
+                                        - 198.18.0.7/30
+                                        items:
+                                          type: string
+                                          description: ip prefix
+                                          example: 198.18.0.4/30
+                                      vpcState:
+                                        type: string
+                                      vpcSubnetPrefixList:
+                                        type: array
+                                        description: List of VPC subnets to be added to DxGw association
+                                        example:
+                                        - 10.10.0.0/24
+                                        - 10.10.1.0/24
+                                        items:
+                                          type: string
+                                          description: VPC subnet
+                                          example: 10.10.0.0/24
+                                    description: AWS VPC attachment Object
+                                    $$ref: '#/components/schemas/AwsVpcAttachments'
+                                vpnEcmpSupport:
+                                  type: boolean
+                              description: AWS Transit Gateway specific Object.
+                              $$ref: '#/components/schemas/AwsTransitGateway'
+                            virtualPrivateGateway:
+                              type: object
+                              properties:
+                                amazonSideAsn:
+                                  type: integer
+                                  format: int64
+                                availabilityZone:
+                                  type: string
+                                vpcAttachmentList:
+                                  type: array
+                                  description: List of VPC attachments
+                                  items:
+                                    type: object
+                                    properties:
+                                      region:
+                                        type: string
+                                      vpcId:
+                                        type: string
+                                        description: VPC Id
+                                        example: vpc-012345-2000
+                                      vpcRoutePrefixList:
+                                        type: array
+                                        description: List of ip prefixes to be advertized towards DxGw on the VPC routing table.
+                                        example:
+                                        - 198.18.0.4/30
+                                        - 198.18.0.7/30
+                                        items:
+                                          type: string
+                                          description: ip prefix
+                                          example: 198.18.0.4/30
+                                      vpcState:
+                                        type: string
+                                      vpcSubnetPrefixList:
+                                        type: array
+                                        description: List of VPC subnets to be added to DxGw association
+                                        example:
+                                        - 10.10.0.0/24
+                                        - 10.10.1.0/24
+                                        items:
+                                          type: string
+                                          description: VPC subnet
+                                          example: 10.10.0.0/24
+                                    description: AWS VPC attachment Object
+                                    $$ref: '#/components/schemas/AwsVpcAttachments'
+                                vpgType:
+                                  type: string
+                                  example: ipsec.1
+                              description: AWS Virtual Private Gateway specific Object.
+                              $$ref: '#/components/schemas/AwsVirtualPrivateGateway'
+                          description: AWS cloud Connectivity Gateway Object
+                          $$ref: '#/components/schemas/CloudConnectivityGatewayAws'
+                        azureConnectivityGateway:
+                          required:
+                          - azureConnectivityType
+                          type: object
+                          properties:
+                            azureConnectivityType:
+                              type: string
+                            expressRouteCircuit:
+                              required:
+                              - resourceGroupName
+                              type: object
+                              properties:
+                                allowClassicOperations:
+                                  type: boolean
+                                  example: true
+                                bandwidthInGbps:
+                                  type: integer
+                                  format: int32
+                                  example: 200
+                                gatewayAssociationList:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      advertisedPrefixList:
+                                        type: array
+                                        description: Advertized prefix list
+                                        example:
+                                        - 10.10.0.0/24
+                                        - 10.20.0.0/24
+                                        items:
+                                          type: string
+                                          description: prefix
+                                          example: 10.10.0.0/24
+                                      associatedGateway:
+                                        type: object
+                                        properties:
+                                          cloudAccountId:
+                                            type: string
+                                          cloudGatewayName:
+                                            type: string
+                                          cloudType:
+                                            type: string
+                                            enum:
+                                            - AWS
+                                            - AWS_GOVCLOUD
+                                            - AZURE
+                                            - AZURE_GOVCLOUD
+                                            - GCP
+                                          description:
+                                            type: string
+                                          gatewayId:
+                                            type: string
+                                          gatewayName:
+                                            type: string
+                                          region:
+                                            type: string
+                                        description: Cloud Connectivity Gateway Object
+                                        $$ref: '#/components/schemas/GatewayAssociationAssociatedGateway'
+                                      associationAction:
+                                        type: string
+                                        example: ASSOCIATE
+                                        enum:
+                                        - ASSOCIATE
+                                        - DISASSOCIATE
+                                        - REMOVE_PREFIX_LIST
+                                        - NO_ACTION
+                                      associationId:
+                                        type: string
+                                        example: '12345'
+                                      associationState:
+                                        type: string
+                                        example: ASSOCIATED
+                                      stateChangeError:
+                                        type: string
+                                    description: Generic multicloud gateway association object
+                                    $$ref: '#/components/schemas/GatewayAssociation'
+                                globalReachEnabled:
+                                  type: boolean
+                                  example: true
+                                peeringList:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      advertisedPublicPrefixList:
+                                        type: array
+                                        items:
+                                          type: string
+                                      azureAsn:
+                                        type: string
+                                      expressRouteConnectionId:
+                                        type: string
+                                        example: '12345'
+                                      id:
+                                        type: string
+                                      name:
+                                        type: string
+                                      peerAsn:
+                                        type: string
+                                      peeringState:
+                                        type: string
+                                        example: ENABLED
+                                        enum:
+                                        - DISABLED
+                                        - ENABLED
+                                      peeringType:
+                                        type: string
+                                        example: PUBLIC
+                                        enum:
+                                        - PRIVATE
+                                        - PUBLIC
+                                      primaryAzurePort:
+                                        type: string
+                                      primaryPeerAddressPrefix:
+                                        type: string
+                                      secondaryAzurePort:
+                                        type: string
+                                      secondaryPeerAddressPrefix:
+                                        type: string
+                                      sharedKey:
+                                        type: string
+                                        description: BGP Peering Key
+                                        example: EC-12345
+                                      vlanId:
+                                        type: integer
+                                        format: int64
+                                        example: 1618
+                                    description: Azure Express Route Circuit Peering
+                                    $$ref: '#/components/schemas/AzureERCPeering'
+                                provisioningState:
+                                  type: string
+                                  example: PROVISIONED
+                                resourceGroupName:
+                                  type: string
+                                serviceKey:
+                                  type: string
+                                serviceProviderProperties:
+                                  type: object
+                                  properties:
+                                    bandwidthInMbps:
+                                      type: integer
+                                      format: int64
+                                      example: 1000
+                                    peeringLocation:
+                                      type: string
+                                      example: New York
+                                    serviceProviderName:
+                                      type: string
+                                  description: Azure Express Route Circuit Service Provider Properties
+                                  $$ref: '#/components/schemas/AzureERCServiceProviderProperties'
+                                serviceProviderProvisioningState:
+                                  type: string
+                                  enum:
+                                  - DEPROVISIONING
+                                  - NOT_PROVISIONED
+                                  - PROVISIONED
+                                  - PROVISIONING
+                                sku:
+                                  required:
+                                  - family
+                                  - tier
+                                  type: object
+                                  properties:
+                                    family:
+                                      type: string
+                                    name:
+                                      type: string
+                                    tier:
+                                      type: string
+                                      example: STANDARD
+                                  description: Express Route Circuit SKU
+                                  $$ref: '#/components/schemas/AzureExpressRouteCircuitSku'
+                                vWanAttachmentList:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      vHubList:
+                                        type: array
+                                        items:
+                                          type: object
+                                          properties:
+                                            isDelete:
+                                              type: boolean
+                                              example: true
+                                            vHub:
+                                              type: object
+                                              properties:
+                                                accountId:
+                                                  type: string
+                                                accountName:
+                                                  type: string
+                                                addressPrefix:
+                                                  type: string
+                                                cloudType:
+                                                  type: string
+                                                  enum:
+                                                  - AWS
+                                                  - AWS_GOVCLOUD
+                                                  - AZURE
+                                                  - AZURE_GOVCLOUD
+                                                  - GCP
+                                                id:
+                                                  type: string
+                                                name:
+                                                  type: string
+                                                provisioningState:
+                                                  type: string
+                                                  example: PROVISIONED
+                                                region:
+                                                  type: string
+                                                resourceGroupName:
+                                                  type: string
+                                                routingState:
+                                                  type: string
+                                                sku:
+                                                  type: string
+                                                  example: STANDARD
+                                                tagList:
+                                                  type: array
+                                                  items:
+                                                    type: object
+                                                    properties:
+                                                      name:
+                                                        type: string
+                                                      value:
+                                                        type: string
+                                                        example: mytag
+                                                    description: Azure Virtual WAN Tag Object
+                                                    $$ref: '#/components/schemas/AzureVirtualWanTagList'
+                                                virtualRouterAsn:
+                                                  type: string
+                                                virtualRouterIp:
+                                                  type: array
+                                                  items:
+                                                    type: object
+                                                    properties:
+                                                      privateIp:
+                                                        type: string
+                                                    description: Virtual Router IP
+                                                    $$ref: '#/components/schemas/AzureVirtualHubVirtualRouterIp'
+                                                vwanName:
+                                                  type: string
+                                              description: Azure Virtual Hub
+                                              $$ref: '#/components/schemas/AzureVirtualHub'
+                                          $$ref: '#/components/schemas/AzureExpressRouteCircuitVHubList'
+                                      vWan:
+                                        required:
+                                        - name
+                                        - region
+                                        - resourceGroupName
+                                        type: object
+                                        properties:
+                                          accountId:
+                                            maxLength: 255
+                                            minLength: 1
+                                            type: string
+                                          accountName:
+                                            type: string
+                                            description: Cloud account name
+                                            example: my-cloud-account
+                                          allowBranchToBranchTraffic:
+                                            type: boolean
+                                            example: false
+                                          cloudType:
+                                            type: string
+                                          description:
+                                            type: string
+                                          id:
+                                            type: string
+                                          name:
+                                            maxLength: 80
+                                            minLength: 1
+                                            type: string
+                                          provisioningState:
+                                            type: string
+                                            example: PROVISIONED
+                                          region:
+                                            maxLength: 255
+                                            minLength: 1
+                                            type: string
+                                          resourceGroupName:
+                                            maxLength: 80
+                                            minLength: 1
+                                            type: string
+                                          tagList:
+                                            type: array
+                                            items:
+                                              type: object
+                                              properties:
+                                                name:
+                                                  type: string
+                                                value:
+                                                  type: string
+                                                  example: mytag
+                                              description: Azure Virtual WAN Tag Object
+                                              $$ref: '#/components/schemas/AzureVirtualWanTagList'
+                                          virtualWanType:
+                                            type: string
+                                          vnetTovnetTrafficEnabled:
+                                            type: boolean
+                                            example: false
+                                        description: Azure Virtual Wan
+                                        $$ref: '#/components/schemas/AzureVirtualWan'
+                                    description: vWan Attachment Name
+                                    $$ref: '#/components/schemas/AzureExpressRouteCircuitVWanAttachmentList'
+                                vnetTagNamesForConnections:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      isDelete:
+                                        type: boolean
+                                        example: true
+                                      vnetTagName:
+                                        type: string
+                                    description: Vnet Tag Object Names
+                                    $$ref: '#/components/schemas/AzureExpressRouteCircuitVnetTagNamesForConnections'
+                              description: Azure Express Route Circuit Object
+                              $$ref: '#/components/schemas/AzureExpressRouteCircuit'
+                            expressRouteGateway:
+                              type: object
+                              properties:
+                                autoScaleConfiguration:
+                                  type: string
+                                resourceGroupName:
+                                  type: string
+                                vHubId:
+                                  type: string
+                                  description: Id of the Azure vHUB.
+                                  example: vhub-1234
+                              description: Azure Express Route Gateway Object
+                              $$ref: '#/components/schemas/AzureExpressRouteGateway'
+                            virtualNetworkGateway:
+                              type: object
+                              properties:
+                                enableBgp:
+                                  type: boolean
+                                  example: true
+                                publicIPAddress:
+                                  type: string
+                                sku:
+                                  type: object
+                                  properties:
+                                    capacity:
+                                      type: integer
+                                      format: int32
+                                      example: 100
+                                    name:
+                                      type: string
+                                    tier:
+                                      type: string
+                                      example: STANDARD
+                                  description: VNET Gateway SKU parameters
+                                  $$ref: '#/components/schemas/AzureVirtualNetworkGatewaySku'
+                                subnet:
+                                  type: string
+                                virtualNetworkGatewayType:
+                                  type: string
+                                  example: EXPRESS_ROUTE
+                                  enum:
+                                  - VPN
+                                  - EXPRESS_ROUTE
+                              description: Azure Virtual Network Gateway Object
+                              $$ref: '#/components/schemas/AzureVirtualNetworkGateway'
+                          description: Cloud Connectivity Gateway Object
+                          $$ref: '#/components/schemas/CloudConnectivityGatewayAzure'
+                        cloudAccountId:
+                          type: string
+                        cloudGatewayName:
+                          type: string
+                        cloudType:
+                          type: string
+                        connectivityGatewayState:
+                          type: string
+                        description:
+                          type: string
+                        gatewayId:
+                          type: string
+                        gatewayName:
+                          type: string
+                        gcpConnectivityGateway:
+                          required:
+                          - gcConnectivityType
+                          - routerInfo
+                          type: object
+                          properties:
+                            gcConnectivityType:
+                              type: string
+                              example: GCR_ATTACHMENT
+                            interconnectAsn:
+                              pattern: \d+
+                              type: string
+                              description: BGP ASN assigned to Interconnect Gateway.
+                              example: '64500'
+                            pairingKey:
+                              type: string
+                              example: 96fbc59c-8926-40ec-b6cd-4cb3501e4c47/us-west1/1
+                            routerInfo:
+                              required:
+                              - name
+                              - network
+                              type: object
+                              properties:
+                                attachmentDetails:
+                                  type: array
+                                  description: List of GCR Attachments
+                                  items:
+                                    type: object
+                                    properties:
+                                      cloudRouterIpAddress:
+                                        type: string
+                                      customerIpAddress:
+                                        type: string
+                                      id:
+                                        type: string
+                                      mtu:
+                                        type: string
+                                        description: MTU of the Interconnect attachment
+                                        example: '1500'
+                                      name:
+                                        pattern: (?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?)
+                                        type: string
+                                      pairingKey:
+                                        type: string
+                                        example: 96fbc59c-8926-40ec-b6cd-4cb3501e4c47/us-west1/1
+                                      region:
+                                        type: string
+                                      secondaryZone:
+                                        type: string
+                                        description: Option to create Interconnect attachment in secondary zone
+                                        example: 'true'
+                                      state:
+                                        type: string
+                                    description: Google cloud Interconnect Attachment Object.
+                                    $$ref: '#/components/schemas/GcpInterconnectAttachment'
+                                cloudRouterAsn:
+                                  pattern: \d+
+                                  type: string
+                                id:
+                                  type: string
+                                name:
+                                  pattern: (?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?)
+                                  type: string
+                                network:
+                                  type: string
+                                region:
+                                  type: string
+                              description: Google cloud GCR Object.
+                              $$ref: '#/components/schemas/GcpCloudRouter'
+                          description: Google cloud Connectivity Gateway Object.
+                          $$ref: '#/components/schemas/CloudConnectivityGatewayGcp'
+                        isVmanageCreated:
+                          type: boolean
+                          description: Resource created by vManage
+                          example: true
+                        newFormat:
+                          type: boolean
+                          description: Option indicates object type
+                          example: true
+                        region:
+                          type: string
+                      description: Cloud Connectivity Gateway Object
+                      $$ref: '#/components/schemas/CloudConnectivityGateway'
+                description: Cloud Connectivity Gateway Object
+                $$ref: '#/components/schemas/InlineResponse2008'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+      - Multicloud Interconnect - Cloud Resource Management
+      summary: Create a Cloud Connectivity Gateway.
+      description: API to create a Cloud Connectivity Gateway such as Direct Connect Gateway, Express Route Circuit or Google Cloud routers.
+      operationId: addCloudConnectivityGateway
+      parameters:
+      - name: cloud-type
+        in: path
+        description: Cloud Provider Type
+        required: true
+        schema:
+          type: string
+          enum:
+          - AWS
+          - AZURE
+          - GCP
+      requestBody:
+        description: Request Payload for Multicloud Interconnect Cloud Connectivity Gateways
+        content:
+          application/json:
+            schema:
+              required:
+              - awsConnectivityGateway
+              - azureConnectivityGateway
+              - cloudAccountId
+              - cloudType
+              - gatewayName
+              - gcpConnectivityGateway
+              - region
+              type: object
+              properties:
+                awsConnectivityGateway:
+                  required:
+                  - awsConnectivityType
+                  type: object
+                  properties:
+                    awsConnectivityType:
+                      type: string
+                      example: DIRECT_CONNECT_GATEWAY
+                    directConnectGateway:
+                      required:
+                      - amazonSideAsn
+                      type: object
+                      properties:
+                        amazonSideAsn:
+                          pattern: ^[1-9]\d*$
+                          type: string
+                        gatewayAssociationList:
+                          type: array
+                          description: List of associated Gateways
+                          items:
+                            type: object
+                            properties:
+                              advertisedPrefixList:
+                                type: array
+                                description: Advertized prefix list
+                                example:
+                                - 10.10.0.0/24
+                                - 10.20.0.0/24
+                                items:
+                                  type: string
+                                  description: prefix
+                                  example: 10.10.0.0/24
+                              associatedGateway:
+                                type: object
+                                properties:
+                                  cloudAccountId:
+                                    type: string
+                                  cloudGatewayName:
+                                    type: string
+                                  cloudType:
+                                    type: string
+                                    enum:
+                                    - AWS
+                                    - AWS_GOVCLOUD
+                                    - AZURE
+                                    - AZURE_GOVCLOUD
+                                    - GCP
+                                  description:
+                                    type: string
+                                  gatewayId:
+                                    type: string
+                                  gatewayName:
+                                    type: string
+                                  region:
+                                    type: string
+                                description: Cloud Connectivity Gateway Object
+                                $$ref: '#/components/schemas/GatewayAssociationAssociatedGateway'
+                              associationAction:
+                                type: string
+                                example: ASSOCIATE
+                                enum:
+                                - ASSOCIATE
+                                - DISASSOCIATE
+                                - REMOVE_PREFIX_LIST
+                                - NO_ACTION
+                              associationId:
+                                type: string
+                                example: '12345'
+                              associationState:
+                                type: string
+                                example: ASSOCIATED
+                              stateChangeError:
+                                type: string
+                            description: Generic multicloud gateway association object
+                            $$ref: '#/components/schemas/GatewayAssociation'
+                        ownerAccount:
+                          type: string
+                        virtualInterfaceAttachmentList:
+                          type: array
+                          description: List of virtual interfaces attached to DxGW
+                          items:
+                            type: object
+                            properties:
+                              attachmentState:
+                                type: string
+                              cloudType:
+                                type: string
+                                enum:
+                                - AWS
+                                - AWS_GOVCLOUD
+                                - AZURE
+                                - AZURE_GOVCLOUD
+                                - GCP
+                              connectionId:
+                                type: string
+                                description: Id of the private cross connect
+                                example: 12345-1234-1234
+                              connectionType:
+                                type: string
+                                description: Type of AWS connection
+                                example: HCONN
+                                enum:
+                                - HVIF
+                                - HCONN
+                              ownerAccount:
+                                type: string
+                              region:
+                                type: string
+                              stateChangeError:
+                                type: string
+                              virtualInterfaceData:
+                                type: object
+                                properties:
+                                  advertisedPrefixList:
+                                    type: array
+                                    items:
+                                      type: string
+                                  asn:
+                                    type: integer
+                                    format: int64
+                                    example: 65500
+                                  bgpKey:
+                                    type: string
+                                    example: EC-12345678
+                                  customerIpAddress:
+                                    type: string
+                                  ipAddress:
+                                    type: string
+                                  vlan:
+                                    type: integer
+                                    format: int64
+                                    example: 45678
+                                description: VIrtual Interface Object
+                                $$ref: '#/components/schemas/AwsDirectConnectGatewayVirtualInterfaceData'
+                              virtualInterfaceId:
+                                type: string
+                              virtualInterfaceName:
+                                type: string
+                              virtualInterfaceType:
+                                type: string
+                                example: TRANSIT
+                                enum:
+                                - TRANSIT
+                                - PRIVATE
+                                - PUBLIC
+                                - ATTACHMENT
+                            description: Virtual Interface Object
+                            $$ref: '#/components/schemas/AwsDirectConnectGatewayVirtualInterfaceAttachmentList'
+                        vpcTagNamesForGatewayAssociations:
+                          type: array
+                          description: VPC Tags associated to the Direct Connect Gateway
+                          items:
+                            type: string
+                            description: VPC Tags associated to the Direct Connect Gateway
+                      description: AWS Direct Connect Gateway specific Object.
+                      $$ref: '#/components/schemas/AwsDirectConnectGateway'
+                    transitGateway:
+                      required:
+                      - amazonSideAsn
+                      type: object
+                      properties:
+                        amazonSideAsn:
+                          pattern: ^[1-9]\d*$
+                          type: string
+                        associationDefaultRouteTableId:
+                          type: string
+                          example: tgw-rtb-07ace6b22f9de8502
+                        autoAcceptSharedAttachments:
+                          type: boolean
+                        creationTime:
+                          type: string
+                          example: 11-Jun-2022 (00:10:30:00000)
+                        defaultRouteTableAssociation:
+                          type: boolean
+                        defaultRouteTablePropogation:
+                          type: boolean
+                        dnsSupport:
+                          type: boolean
+                        multicastSupport:
+                          type: boolean
+                        ownerAccount:
+                          type: string
+                        propogationDefaultRouteTableId:
+                          type: string
+                        vpcAttachmentList:
+                          type: array
+                          description: List of VPC attachments
+                          items:
+                            type: object
+                            properties:
+                              region:
+                                type: string
+                              vpcId:
+                                type: string
+                                description: VPC Id
+                                example: vpc-012345-2000
+                              vpcRoutePrefixList:
+                                type: array
+                                description: List of ip prefixes to be advertized towards DxGw on the VPC routing table.
+                                example:
+                                - 198.18.0.4/30
+                                - 198.18.0.7/30
+                                items:
+                                  type: string
+                                  description: ip prefix
+                                  example: 198.18.0.4/30
+                              vpcState:
+                                type: string
+                              vpcSubnetPrefixList:
+                                type: array
+                                description: List of VPC subnets to be added to DxGw association
+                                example:
+                                - 10.10.0.0/24
+                                - 10.10.1.0/24
+                                items:
+                                  type: string
+                                  description: VPC subnet
+                                  example: 10.10.0.0/24
+                            description: AWS VPC attachment Object
+                            $$ref: '#/components/schemas/AwsVpcAttachments'
+                        vpnEcmpSupport:
+                          type: boolean
+                      description: AWS Transit Gateway specific Object.
+                      $$ref: '#/components/schemas/AwsTransitGateway'
+                    virtualPrivateGateway:
+                      type: object
+                      properties:
+                        amazonSideAsn:
+                          type: integer
+                          format: int64
+                        availabilityZone:
+                          type: string
+                        vpcAttachmentList:
+                          type: array
+                          description: List of VPC attachments
+                          items:
+                            type: object
+                            properties:
+                              region:
+                                type: string
+                              vpcId:
+                                type: string
+                                description: VPC Id
+                                example: vpc-012345-2000
+                              vpcRoutePrefixList:
+                                type: array
+                                description: List of ip prefixes to be advertized towards DxGw on the VPC routing table.
+                                example:
+                                - 198.18.0.4/30
+                                - 198.18.0.7/30
+                                items:
+                                  type: string
+                                  description: ip prefix
+                                  example: 198.18.0.4/30
+                              vpcState:
+                                type: string
+                              vpcSubnetPrefixList:
+                                type: array
+                                description: List of VPC subnets to be added to DxGw association
+                                example:
+                                - 10.10.0.0/24
+                                - 10.10.1.0/24
+                                items:
+                                  type: string
+                                  description: VPC subnet
+                                  example: 10.10.0.0/24
+                            description: AWS VPC attachment Object
+                            $$ref: '#/components/schemas/AwsVpcAttachments'
+                        vpgType:
+                          type: string
+                          example: ipsec.1
+                      description: AWS Virtual Private Gateway specific Object.
+                      $$ref: '#/components/schemas/AwsVirtualPrivateGateway'
+                  description: AWS cloud Connectivity Gateway Object
+                  $$ref: '#/components/schemas/CloudConnectivityGatewayAws'
+                azureConnectivityGateway:
+                  required:
+                  - azureConnectivityType
+                  type: object
+                  properties:
+                    azureConnectivityType:
+                      type: string
+                    expressRouteCircuit:
+                      required:
+                      - resourceGroupName
+                      type: object
+                      properties:
+                        allowClassicOperations:
+                          type: boolean
+                          example: true
+                        bandwidthInGbps:
+                          type: integer
+                          format: int32
+                          example: 200
+                        gatewayAssociationList:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              advertisedPrefixList:
+                                type: array
+                                description: Advertized prefix list
+                                example:
+                                - 10.10.0.0/24
+                                - 10.20.0.0/24
+                                items:
+                                  type: string
+                                  description: prefix
+                                  example: 10.10.0.0/24
+                              associatedGateway:
+                                type: object
+                                properties:
+                                  cloudAccountId:
+                                    type: string
+                                  cloudGatewayName:
+                                    type: string
+                                  cloudType:
+                                    type: string
+                                    enum:
+                                    - AWS
+                                    - AWS_GOVCLOUD
+                                    - AZURE
+                                    - AZURE_GOVCLOUD
+                                    - GCP
+                                  description:
+                                    type: string
+                                  gatewayId:
+                                    type: string
+                                  gatewayName:
+                                    type: string
+                                  region:
+                                    type: string
+                                description: Cloud Connectivity Gateway Object
+                                $$ref: '#/components/schemas/GatewayAssociationAssociatedGateway'
+                              associationAction:
+                                type: string
+                                example: ASSOCIATE
+                                enum:
+                                - ASSOCIATE
+                                - DISASSOCIATE
+                                - REMOVE_PREFIX_LIST
+                                - NO_ACTION
+                              associationId:
+                                type: string
+                                example: '12345'
+                              associationState:
+                                type: string
+                                example: ASSOCIATED
+                              stateChangeError:
+                                type: string
+                            description: Generic multicloud gateway association object
+                            $$ref: '#/components/schemas/GatewayAssociation'
+                        globalReachEnabled:
+                          type: boolean
+                          example: true
+                        peeringList:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              advertisedPublicPrefixList:
+                                type: array
+                                items:
+                                  type: string
+                              azureAsn:
+                                type: string
+                              expressRouteConnectionId:
+                                type: string
+                                example: '12345'
+                              id:
+                                type: string
+                              name:
+                                type: string
+                              peerAsn:
+                                type: string
+                              peeringState:
+                                type: string
+                                example: ENABLED
+                                enum:
+                                - DISABLED
+                                - ENABLED
+                              peeringType:
+                                type: string
+                                example: PUBLIC
+                                enum:
+                                - PRIVATE
+                                - PUBLIC
+                              primaryAzurePort:
+                                type: string
+                              primaryPeerAddressPrefix:
+                                type: string
+                              secondaryAzurePort:
+                                type: string
+                              secondaryPeerAddressPrefix:
+                                type: string
+                              sharedKey:
+                                type: string
+                                description: BGP Peering Key
+                                example: EC-12345
+                              vlanId:
+                                type: integer
+                                format: int64
+                                example: 1618
+                            description: Azure Express Route Circuit Peering
+                            $$ref: '#/components/schemas/AzureERCPeering'
+                        provisioningState:
+                          type: string
+                          example: PROVISIONED
+                        resourceGroupName:
+                          type: string
+                        serviceKey:
+                          type: string
+                        serviceProviderProperties:
+                          type: object
+                          properties:
+                            bandwidthInMbps:
+                              type: integer
+                              format: int64
+                              example: 1000
+                            peeringLocation:
+                              type: string
+                              example: New York
+                            serviceProviderName:
+                              type: string
+                          description: Azure Express Route Circuit Service Provider Properties
+                          $$ref: '#/components/schemas/AzureERCServiceProviderProperties'
+                        serviceProviderProvisioningState:
+                          type: string
+                          enum:
+                          - DEPROVISIONING
+                          - NOT_PROVISIONED
+                          - PROVISIONED
+                          - PROVISIONING
+                        sku:
+                          required:
+                          - family
+                          - tier
+                          type: object
+                          properties:
+                            family:
+                              type: string
+                            name:
+                              type: string
+                            tier:
+                              type: string
+                              example: STANDARD
+                          description: Express Route Circuit SKU
+                          $$ref: '#/components/schemas/AzureExpressRouteCircuitSku'
+                        vWanAttachmentList:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              vHubList:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    isDelete:
+                                      type: boolean
+                                      example: true
+                                    vHub:
+                                      type: object
+                                      properties:
+                                        accountId:
+                                          type: string
+                                        accountName:
+                                          type: string
+                                        addressPrefix:
+                                          type: string
+                                        cloudType:
+                                          type: string
+                                          enum:
+                                          - AWS
+                                          - AWS_GOVCLOUD
+                                          - AZURE
+                                          - AZURE_GOVCLOUD
+                                          - GCP
+                                        id:
+                                          type: string
+                                        name:
+                                          type: string
+                                        provisioningState:
+                                          type: string
+                                          example: PROVISIONED
+                                        region:
+                                          type: string
+                                        resourceGroupName:
+                                          type: string
+                                        routingState:
+                                          type: string
+                                        sku:
+                                          type: string
+                                          example: STANDARD
+                                        tagList:
+                                          type: array
+                                          items:
+                                            type: object
+                                            properties:
+                                              name:
+                                                type: string
+                                              value:
+                                                type: string
+                                                example: mytag
+                                            description: Azure Virtual WAN Tag Object
+                                            $$ref: '#/components/schemas/AzureVirtualWanTagList'
+                                        virtualRouterAsn:
+                                          type: string
+                                        virtualRouterIp:
+                                          type: array
+                                          items:
+                                            type: object
+                                            properties:
+                                              privateIp:
+                                                type: string
+                                            description: Virtual Router IP
+                                            $$ref: '#/components/schemas/AzureVirtualHubVirtualRouterIp'
+                                        vwanName:
+                                          type: string
+                                      description: Azure Virtual Hub
+                                      $$ref: '#/components/schemas/AzureVirtualHub'
+                                  $$ref: '#/components/schemas/AzureExpressRouteCircuitVHubList'
+                              vWan:
+                                required:
+                                - name
+                                - region
+                                - resourceGroupName
+                                type: object
+                                properties:
+                                  accountId:
+                                    maxLength: 255
+                                    minLength: 1
+                                    type: string
+                                  accountName:
+                                    type: string
+                                    description: Cloud account name
+                                    example: my-cloud-account
+                                  allowBranchToBranchTraffic:
+                                    type: boolean
+                                    example: false
+                                  cloudType:
+                                    type: string
+                                  description:
+                                    type: string
+                                  id:
+                                    type: string
+                                  name:
+                                    maxLength: 80
+                                    minLength: 1
+                                    type: string
+                                  provisioningState:
+                                    type: string
+                                    example: PROVISIONED
+                                  region:
+                                    maxLength: 255
+                                    minLength: 1
+                                    type: string
+                                  resourceGroupName:
+                                    maxLength: 80
+                                    minLength: 1
+                                    type: string
+                                  tagList:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        name:
+                                          type: string
+                                        value:
+                                          type: string
+                                          example: mytag
+                                      description: Azure Virtual WAN Tag Object
+                                      $$ref: '#/components/schemas/AzureVirtualWanTagList'
+                                  virtualWanType:
+                                    type: string
+                                  vnetTovnetTrafficEnabled:
+                                    type: boolean
+                                    example: false
+                                description: Azure Virtual Wan
+                                $$ref: '#/components/schemas/AzureVirtualWan'
+                            description: vWan Attachment Name
+                            $$ref: '#/components/schemas/AzureExpressRouteCircuitVWanAttachmentList'
+                        vnetTagNamesForConnections:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              isDelete:
+                                type: boolean
+                                example: true
+                              vnetTagName:
+                                type: string
+                            description: Vnet Tag Object Names
+                            $$ref: '#/components/schemas/AzureExpressRouteCircuitVnetTagNamesForConnections'
+                      description: Azure Express Route Circuit Object
+                      $$ref: '#/components/schemas/AzureExpressRouteCircuit'
+                    expressRouteGateway:
+                      type: object
+                      properties:
+                        autoScaleConfiguration:
+                          type: string
+                        resourceGroupName:
+                          type: string
+                        vHubId:
+                          type: string
+                          description: Id of the Azure vHUB.
+                          example: vhub-1234
+                      description: Azure Express Route Gateway Object
+                      $$ref: '#/components/schemas/AzureExpressRouteGateway'
+                    virtualNetworkGateway:
+                      type: object
+                      properties:
+                        enableBgp:
+                          type: boolean
+                          example: true
+                        publicIPAddress:
+                          type: string
+                        sku:
+                          type: object
+                          properties:
+                            capacity:
+                              type: integer
+                              format: int32
+                              example: 100
+                            name:
+                              type: string
+                            tier:
+                              type: string
+                              example: STANDARD
+                          description: VNET Gateway SKU parameters
+                          $$ref: '#/components/schemas/AzureVirtualNetworkGatewaySku'
+                        subnet:
+                          type: string
+                        virtualNetworkGatewayType:
+                          type: string
+                          example: EXPRESS_ROUTE
+                          enum:
+                          - VPN
+                          - EXPRESS_ROUTE
+                      description: Azure Virtual Network Gateway Object
+                      $$ref: '#/components/schemas/AzureVirtualNetworkGateway'
+                  description: Cloud Connectivity Gateway Object
+                  $$ref: '#/components/schemas/CloudConnectivityGatewayAzure'
+                cloudAccountId:
+                  type: string
+                cloudGatewayName:
+                  type: string
+                cloudType:
+                  type: string
+                connectivityGatewayState:
+                  type: string
+                description:
+                  type: string
+                gatewayId:
+                  type: string
+                gatewayName:
+                  type: string
+                gcpConnectivityGateway:
+                  required:
+                  - gcConnectivityType
+                  - routerInfo
+                  type: object
+                  properties:
+                    gcConnectivityType:
+                      type: string
+                      example: GCR_ATTACHMENT
+                    interconnectAsn:
+                      pattern: \d+
+                      type: string
+                      description: BGP ASN assigned to Interconnect Gateway.
+                      example: '64500'
+                    pairingKey:
+                      type: string
+                      example: 96fbc59c-8926-40ec-b6cd-4cb3501e4c47/us-west1/1
+                    routerInfo:
+                      required:
+                      - name
+                      - network
+                      type: object
+                      properties:
+                        attachmentDetails:
+                          type: array
+                          description: List of GCR Attachments
+                          items:
+                            type: object
+                            properties:
+                              cloudRouterIpAddress:
+                                type: string
+                              customerIpAddress:
+                                type: string
+                              id:
+                                type: string
+                              mtu:
+                                type: string
+                                description: MTU of the Interconnect attachment
+                                example: '1500'
+                              name:
+                                pattern: (?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?)
+                                type: string
+                              pairingKey:
+                                type: string
+                                example: 96fbc59c-8926-40ec-b6cd-4cb3501e4c47/us-west1/1
+                              region:
+                                type: string
+                              secondaryZone:
+                                type: string
+                                description: Option to create Interconnect attachment in secondary zone
+                                example: 'true'
+                              state:
+                                type: string
+                            description: Google cloud Interconnect Attachment Object.
+                            $$ref: '#/components/schemas/GcpInterconnectAttachment'
+                        cloudRouterAsn:
+                          pattern: \d+
+                          type: string
+                        id:
+                          type: string
+                        name:
+                          pattern: (?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?)
+                          type: string
+                        network:
+                          type: string
+                        region:
+                          type: string
+                      description: Google cloud GCR Object.
+                      $$ref: '#/components/schemas/GcpCloudRouter'
+                  description: Google cloud Connectivity Gateway Object.
+                  $$ref: '#/components/schemas/CloudConnectivityGatewayGcp'
+                isVmanageCreated:
+                  type: boolean
+                  description: Resource created by vManage
+                  example: true
+                newFormat:
+                  type: boolean
+                  description: Option indicates object type
+                  example: true
+                region:
+                  type: string
+              description: Cloud Connectivity Gateway Object
+              $$ref: '#/components/schemas/CloudConnectivityGateway'
+            examples:
+              AWS Direct Connect Gateway:
+                description: AWS Direct Connect Gateway
+                value: "{\n  \"gatewayName\": \"resource-name\",\n  \"description\": \"This is my resource\",\n  \"cloudType\": \"AWS\",\n  \"cloudAccountId\": \"ABCD-1234-CDEF\",\n  \"region\": \"My AWS region\",\n  \"cloudGatewayName\": \"my-mc-cloud-gateway\",\n  \"awsConnectivityGateway\": {\n    \"awsConnectivityType\": \"DIRECT_CONNECT_GATEWAY\",\n    \"directConnectGateway\": {\n      \"amazonSideAsn\": 64515,\n    }\n  }\n}"
+              AWS Virtual Private Gateway:
+                description: AWS Virtual Private Gateway
+                value: "{\n  \"gatewayName\": \"resource-name\",\n  \"description\": \"This is my resource\",\n  \"cloudType\": \"AWS\",\n  \"cloudAccountId\": \"ABCD-1234-CDEF\",\n  \"region\": \"My AWS region\",\n  \"cloudGatewayName\": \"my-mc-cloud-gateway\",\n  \"awsConnectivityGateway\": {\n    \"awsConnectivityType\": \"VIRTUAL_PRIVATE_GATEWAY\",\n    \"virtualPrivateGateway\": {\n      \"availabilityZone\": \"\",\n      \"vpgType\": \"ipsec.1\",\n      \"amazonSideAsn\": 64515\n    },\n  }\n}"
+              AWS Transit Gateway:
+                description: AWS Transit Gateway
+                value:
+                  gatewayName: resource-name
+                  description: This is my resource
+                  cloudType: AWS
+                  cloudAccountId: ABCD-1234-CDEF
+                  region: My AWS region
+                  cloudGatewayName: my-mc-cloud-gateway
+                  awsConnectivityGateway:
+                    awsConnectivityType: TRANSIT_GATEWAY
+                    transitGateway:
+                      amazonSideAsn: 64515
+              AZURE Express Route Circuit:
+                description: AZURE Express Route Circuit
+                value:
+                  gatewayName: resource-name
+                  description: This is my resource
+                  cloudType: AZURE
+                  cloudAccountId: ABCD-1234-CDEF
+                  region: My Azure region
+                  azureConnectivityGateway:
+                    azureConnectivityType: EXPRESS_ROUTE_CIRCUIT
+                    expressRouteCircuit:
+                      resourceGroupName: az-resource-group
+                      allowClassicOperations: true
+                      globalReachEnabled: true
+                      bandwidthInGbps: 200
+                      sku:
+                        name: resource-name
+                        tier: STANDARD
+                        family: METERED_DATA
+                      serviceProviderProperties:
+                        serviceProviderName: Equinix
+                        peeringLocation: New York
+                        bandwidthInMbps: 200
+              AZURE Express Route Gateway:
+                description: AZURE Express Route Gateway
+                value:
+                  gatewayName: resource-name
+                  description: This is my resource
+                  cloudType: AZURE
+                  cloudAccountId: ABCD-1234-CDEF
+                  region: My Azure region
+                  azureConnectivityGateway:
+                    azureConnectivityType: EXPRESS_ROUTE_GATEWAY
+                    expressRouteGateway:
+                      resourceGroupName: az-resource-group
+                      vHubId: vhub-1234
+              AZURE Virtual Network Gateway:
+                description: AZURE Virtual Network Gateway
+                value:
+                  gatewayName: resource-name
+                  description: This is my resource
+                  cloudType: AZURE
+                  cloudAccountId: ABCD-1234-CDEF
+                  region: My Azure region
+                  azureConnectivityGateway:
+                    azureConnectivityType: VIRTUAL_NETWORK_GATEWAY
+                    virtualNetworkGateway:
+                      virtualNetworkGatewayType: EXPRESS_ROUTE
+                      enableBgp: true
+                      subnet: 192.168.10.0/24
+                      publicIPAddress: 198.18.0.34/30
+                      sku:
+                        name: resource-name
+                        tier: STANDARD
+                        capacity: 100
+              Google Cloud Router and Attachments:
+                description: Google Cloud Router and Attachments
+                value:
+                  gatewayName: resource-name
+                  description: This is my resource
+                  cloudType: GCP
+                  cloudAccountId: ABCD-1234-CDEF
+                  region: My GCP region
+                  gcpConnectivityGateway:
+                    gcConnectivityType: GCR_ATTACHMENT
+                    routerInfo:
+                      name: resource-name
+                      region: My GCP region
+                      network: my-vpc-network
+                      attachmentDetails:
+                      - name: resource-name
+                        region: My GCP region
+                        secondaryZone: true
+        required: true
+      responses:
+        '200':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+      - Multicloud Interconnect - Cloud Resource Management
+      summary: Delete Cloud Connectivity Gateways by type.
+      description: API to delete Cloud Connectivity Gateways by type.
+      operationId: deleteCloudConnectivityGateways
+      parameters:
+      - name: cloud-type
+        in: path
+        description: Cloud Provider Type
+        required: true
+        schema:
+          type: string
+          enum:
+          - AWS
+          - AZURE
+          - GCP
+      - name: connectivity-gateway-type
+        in: query
+        description: Cloud Connectivity Gateway Type
+        schema:
+          type: string
+          enum:
+          - DIRECT_CONNECT_GATEWAY
+          - VIRTUAL_PRIVATE_GATEWAY
+          - TRANSIT_GATEWAY
+          - VIRTUAL_INTERFACES
+          - EXPRESS_ROUTE_CIRCUIT
+          - GCR_ATTACHMENT
+      responses:
+        '200':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/interconnect/cloud/{cloud-type}/cloud-connectivity-gateways/create-options:
+    get:
+      tags:
+      - Multicloud Interconnect - Cloud Resource Management
+      summary: Get Cloud Connectivity Gateway create Options.
+      description: API to retrieve Cloud Connectivity Gateway create options.
+      operationId: getCloudConnectivityGatewayCreateOptions
+      parameters:
+      - name: cloud-type
+        in: path
+        description: Cloud Provider Type
+        required: true
+        schema:
+          type: string
+      - name: cloud-account-id
+        in: query
+        required: true
+        schema:
+          maxLength: 255
+          minLength: 1
+          type: string
+      - name: connectivity-gateway-type
+        in: query
+        description: Cloud Connectivity Gateway Type
+        schema:
+          type: string
+          enum:
+          - DIRECT_CONNECT_GATEWAY
+          - VIRTUAL_PRIVATE_GATEWAY
+          - TRANSIT_GATEWAY
+          - VIRTUAL_INTERFACES
+          - EXPRESS_ROUTE_CIRCUIT
+          - GCR_ATTACHMENT
+      - name: refresh
+        in: query
+        schema:
+          pattern: (true|false)
+          type: string
+          default: 'false'
+      responses:
+        '200':
+          description: Cloud Connectivity Gateway Create Options Response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  creationOptions:
+                    type: object
+                    properties:
+                      expressRouteCircuitServiceProviderList:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            bandwidthsOffered:
+                              type: array
+                              example:
+                              - 50
+                              - 100
+                              - 200
+                              items:
+                                type: integer
+                                format: int64
+                            id:
+                              type: string
+                            location:
+                              type: string
+                            name:
+                              type: string
+                            peeringLocations:
+                              type: array
+                              items:
+                                type: string
+                            provisioningState:
+                              type: string
+                              description: Provisioning state of the resource
+                              example: Succeeded
+                            type:
+                              type: string
+                              description: Type of Resource
+                              example: /subscriptions//resourceGroups//providers/Microsoft.Network/expressRouteServiceProviders/
+                          $$ref: '#/components/schemas/InlineResponse20014CreationOptionsExpressRouteCircuitServiceProviderList'
+                      resourceGroupList:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                            location:
+                              type: string
+                            name:
+                              type: string
+                          $$ref: '#/components/schemas/InlineResponse20014CreationOptionsResourceGroupList'
+                    $$ref: '#/components/schemas/InlineResponse20014CreationOptions'
+                $$ref: '#/components/schemas/InlineResponse20014'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/interconnect/cloud/{cloud-type}/cloud-connectivity-gateways/{connectivity-gateway-name}:
+    delete:
+      tags:
+      - Multicloud Interconnect - Cloud Resource Management
+      summary: Delete a Cloud Connectivity Gateway.
+      description: API to delete a Cloud Connectivity Gateway.
+      operationId: deleteCloudConnectivityGateway
+      parameters:
+      - name: connectivity-gateway-name
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: cloud-type
+        in: path
+        description: Cloud Provider Type
+        required: true
+        schema:
+          type: string
+          enum:
+          - AWS
+          - AZURE
+          - GCP
+      - name: connectivity-gateway-type
+        in: query
+        description: Cloud Connectivity Gateway Type
+        schema:
+          type: string
+          enum:
+          - DIRECT_CONNECT_GATEWAY
+          - VIRTUAL_PRIVATE_GATEWAY
+          - TRANSIT_GATEWAY
+          - VIRTUAL_INTERFACES
+          - EXPRESS_ROUTE_CIRCUIT
+          - GCR_ATTACHMENT
+      responses:
+        '200':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

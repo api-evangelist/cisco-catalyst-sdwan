@@ -1,0 +1,560 @@
+openapi: 3.2.0
+info:
+  title: Others MultiCloud - BranchConnect API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: MultiCloud - BranchConnect
+paths:
+  /multicloud/cloudgateway/{cloudGatewayName}/site:
+    get:
+      tags:
+      - MultiCloud - BranchConnect
+      description: Get sites attached to CGW
+      operationId: getCgwAttachedSites
+      parameters:
+      - name: cloudGatewayName
+        in: path
+        description: Name of Cloud Gateway to attach site
+        required: true
+        schema:
+          pattern: ^[\w.-]{1,128}$
+          type: string
+      - name: systemIp
+        in: query
+        description: System Ip of Branch Device
+        schema:
+          pattern: ^((([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\p{N}\p{L}]+)?)((\s)(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\p{N}\p{L}]+)?)?$
+          type: string
+      - name: siteId
+        in: query
+        description: Site Id
+        schema:
+          pattern: ^\d+$
+          type: string
+      - name: color
+        in: query
+        description: color
+        schema:
+          pattern: ^(default|mpls|metro-ethernet|biz-internet|public-internet|lte|3g|red|green|blue|gold|silver|bronze|custom1|custom2|custom3|private1|private2|private3|private4|private5|private6)$
+          type: string
+      - name: vpnTunnelStatus
+        in: query
+        description: Tunnel status of device
+        schema:
+          pattern: ^(true|false)$
+          type: string
+      - name: solution
+        in: query
+        description: Solution of branch device
+        schema:
+          pattern: ^(sdwan|sd-routing)$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  acceleratedVpn:
+                    type: boolean
+                  aggTunnelStatus:
+                    type: string
+                  attached:
+                    type: boolean
+                  color:
+                    type: string
+                  hostname:
+                    type: string
+                  interface:
+                    type: string
+                  preferredInterface:
+                    type: boolean
+                    example: true
+                  privateIp:
+                    type: string
+                  publicIp:
+                    type: string
+                  siteId:
+                    type: string
+                  systemIp:
+                    type: string
+                  tunnelCount:
+                    type: number
+                  tunnels:
+                    type: array
+                    properties:
+                      empty:
+                        type: boolean
+                    description: CGW details relevant to AWS/AWS_GOVCLOUD
+                    items:
+                      type: object
+                      properties:
+                        acceptedRouteCount:
+                          type: integer
+                          format: int32
+                        lastStatusChangeTimestamp:
+                          type: string
+                        outerIpAddr:
+                          type: string
+                        status:
+                          type: string
+                        statusMessage:
+                          type: string
+                        tunnelId:
+                          type: string
+                        tunnelInnerIp:
+                          type: array
+                          items:
+                            type: string
+                      description: CGW details relevant to AWS/AWS_GOVCLOUD
+                      $$ref: '#/components/schemas/TunnelsInner'
+                  uuid:
+                    type: string
+                $$ref: '#/components/schemas/GetSitesResponse'
+              examples:
+                Sites:
+                  description: Sites
+                  value:
+                    uuid: C8K-a165f574-e75e-11ec-8fea-0242ac120002
+                    siteId: '10'
+                    hostname: Branch-10
+                    systemIp: 1.1.1.10
+                    interface: GigabitEthernet2
+                    color: red
+                    privateIp: 10.11.2.248
+                    publicIp: 3.109.26.54
+                    attached: true
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+      - MultiCloud - BranchConnect
+      description: Detach sites from cloud gateway
+      operationId: detachSites_MulticloudBranchconnect_4806
+      parameters:
+      - name: cloudGatewayName
+        in: path
+        description: Name of Cloud Gateway to attach site
+        required: true
+        schema:
+          pattern: ^[\w.-]{1,128}$
+          type: string
+      requestBody:
+        description: Site Information
+        content:
+          application/json:
+            schema:
+              type: array
+              properties:
+                empty:
+                  type: boolean
+              items:
+                required:
+                - siteId
+                - systemIp
+                type: object
+                properties:
+                  color:
+                    pattern: ^(default|mpls|metro-ethernet|biz-internet|public-internet|lte|3g|red|green|blue|gold|silver|bronze|custom1|custom2|custom3|private1|private2|private3|private4|private5|private6)$
+                    type: string
+                    example: red
+                  interface:
+                    type: string
+                    example: GigabitEthernet1
+                  siteId:
+                    pattern: ^\d+$
+                    type: string
+                    example: '578'
+                  solution:
+                    pattern: ^(sdwan|sd-routing)$
+                    type: string
+                    example: sd-routing
+                  systemIp:
+                    pattern: ^((([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\p{N}\p{L}]+)?)((\s)(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\p{N}\p{L}]+)?)?$
+                    type: string
+                    example: 1.1.1.178
+                $$ref: '#/components/schemas/DetachSitesRequestPayloadInner'
+              $$ref: '#/components/schemas/DetachSitesRequestPayload'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: 6c723f65-9106-4f43-9d2b-a033a39353b3
+                description: Task id for polling status
+                $$ref: '#/components/schemas/Taskid'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+      - MultiCloud - BranchConnect
+      description: Attach sites to Cloud Gateway
+      operationId: attachSites
+      parameters:
+      - name: cloudGatewayName
+        in: path
+        description: Name of Cloud Gateway to attach site
+        required: true
+        schema:
+          pattern: ^[\w.-]{1,128}$
+          type: string
+      requestBody:
+        description: Site Information
+        content:
+          application/json:
+            schema:
+              type: array
+              properties:
+                empty:
+                  type: boolean
+              items:
+                required:
+                - color
+                - siteId
+                - solution
+                - systemIp
+                - tunnelCount
+                type: object
+                properties:
+                  acceleratedVpn:
+                    pattern: ^(true|false)$
+                    type: string
+                  color:
+                    pattern: ^(default|mpls|metro-ethernet|biz-internet|public-internet|lte|3g|red|green|blue|gold|silver|bronze|custom1|custom2|custom3|private1|private2|private3|private4|private5|private6)$
+                    type: string
+                  interface:
+                    type: string
+                    example: GigabitEthernet1
+                  preferredInterface:
+                    pattern: ^[a-zA-Z0-9]*$
+                    type: string
+                    example: 'true'
+                  publicIp:
+                    pattern: ^((([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\p{N}\p{L}]+)?)((\s)(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\p{N}\p{L}]+)?)?$
+                    type: string
+                    example: 18.219.1.221
+                  siteId:
+                    pattern: ^\d+$
+                    type: string
+                  solution:
+                    pattern: ^(sdwan|sd-routing)$
+                    type: string
+                    description: Multicloud Branch Connect Solution type
+                    example: sd-routing
+                  systemIp:
+                    pattern: ^((([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\p{N}\p{L}]+)?)((\s)(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\p{N}\p{L}]+)?)?$
+                    type: string
+                  tunnelCount:
+                    pattern: ^[1-8]$
+                    type: string
+                    example: '4'
+                $$ref: '#/components/schemas/AttachSitesRequestPayloadInner'
+              $$ref: '#/components/schemas/AttachSitesRequestPayload'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: 6c723f65-9106-4f43-9d2b-a033a39353b3
+                description: Task id for polling status
+                $$ref: '#/components/schemas/Taskid'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    put:
+      tags:
+      - MultiCloud - BranchConnect
+      description: Update tunnel scaling and accelerated vpn parameter for a branch endpoint
+      operationId: tunnelScaling
+      parameters:
+      - name: cloudGatewayName
+        in: path
+        description: Name of Cloud Gateway to attach site
+        required: true
+        schema:
+          pattern: ^[\w.-]{1,128}$
+          type: string
+      requestBody:
+        description: Site Information
+        content:
+          application/json:
+            schema:
+              required:
+              - cloudType
+              type: object
+              properties:
+                branchEndpoints:
+                  type: array
+                  items:
+                    required:
+                    - acceleratedVpn
+                    - cloudType
+                    - color
+                    - siteId
+                    - systemIp
+                    - tunnelCount
+                    type: object
+                    properties:
+                      acceleratedVpn:
+                        pattern: ^(true|false)$
+                        type: string
+                      cloudType:
+                        pattern: ^[a-zA-Z_]+$
+                        type: string
+                        example: AWS
+                      color:
+                        pattern: ^(default|mpls|metro-ethernet|biz-internet|public-internet|lte|3g|red|green|blue|gold|silver|bronze|custom1|custom2|custom3|private1|private2|private3|private4|private5|private6)$
+                        type: string
+                        example: red
+                      hostName:
+                        type: string
+                        example: test_device
+                      interface:
+                        type: string
+                        example: GigabitEthernet1
+                      preferredInterface:
+                        pattern: ^[a-zA-Z0-9]*$
+                        type: string
+                        example: 'true'
+                      publicIp:
+                        pattern: ^((([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\p{N}\p{L}]+)?)((\s)(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\p{N}\p{L}]+)?)?$
+                        type: string
+                        example: 3.129.232.5
+                      siteId:
+                        pattern: ^\d+$
+                        type: string
+                        example: '578'
+                      solution:
+                        pattern: ^(sdwan|sd-routing)$
+                        type: string
+                        example: sd-routing
+                      status:
+                        type: string
+                        example: unavailable
+                      systemIp:
+                        pattern: ^((([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\p{N}\p{L}]+)?)((\s)(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\p{N}\p{L}]+)?)?$
+                        type: string
+                        example: 1.1.1.178
+                      tunnelCount:
+                        pattern: ^[1-8]$
+                        type: string
+                        example: '4'
+                      uuid:
+                        type: string
+                        example: C8K-b78a317a-0d6c-4023-9690-8559d6ac803d
+                    $$ref: '#/components/schemas/TunnelScalingRequestPayloadBranchEndpoints'
+                cloudType:
+                  pattern: ^[a-zA-Z_]+$
+                  type: string
+                  example: AWS
+              $$ref: '#/components/schemas/TunnelScalingRequestPayload'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: 6c723f65-9106-4f43-9d2b-a033a39353b3
+                description: Task id for polling status
+                $$ref: '#/components/schemas/Taskid'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/interfacecolor:
+    get:
+      tags:
+      - MultiCloud - BranchConnect
+      description: Get WAN interface colors
+      operationId: getWanInterfaceColors
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: array
+                  properties:
+                    empty:
+                      type: boolean
+                  items:
+                    type: string
+                  $$ref: '#/components/schemas/InterfaceColorResponse'
+              examples:
+                Interface Colors:
+                  description: Interface Colors
+                  value:
+                  - default
+                  - red
+                  - green
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/site:
+    get:
+      tags:
+      - MultiCloud - BranchConnect
+      description: Get available sites
+      operationId: getSites
+      parameters:
+      - name: color
+        in: query
+        description: color
+        schema:
+          pattern: ^(?:(default|mpls|metro-ethernet|biz-internet|public-internet|lte|3g|red|green|blue|gold|silver|bronze|custom1|custom2|custom3|private1|private2|private3|private4|private5|private6)(,(default|mpls|metro-ethernet|biz-internet|public-internet|lte|3g|red|green|blue|gold|silver|bronze|custom1|custom2|custom3|private1|private2|private3|private4|private5|private6))*)?$
+          type: string
+      - name: attached
+        in: query
+        description: Get attached Sites
+        schema:
+          pattern: ^(true|false)$
+          type: string
+      - name: solution
+        in: query
+        description: Solution of branch device
+        schema:
+          pattern: ^(sdwan|sd-routing)$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  acceleratedVpn:
+                    type: boolean
+                  aggTunnelStatus:
+                    type: string
+                  attached:
+                    type: boolean
+                  color:
+                    type: string
+                  hostname:
+                    type: string
+                  interface:
+                    type: string
+                  preferredInterface:
+                    type: boolean
+                    example: true
+                  privateIp:
+                    type: string
+                  publicIp:
+                    type: string
+                  siteId:
+                    type: string
+                  systemIp:
+                    type: string
+                  tunnelCount:
+                    type: number
+                  tunnels:
+                    type: array
+                    properties:
+                      empty:
+                        type: boolean
+                    description: CGW details relevant to AWS/AWS_GOVCLOUD
+                    items:
+                      type: object
+                      properties:
+                        acceptedRouteCount:
+                          type: integer
+                          format: int32
+                        lastStatusChangeTimestamp:
+                          type: string
+                        outerIpAddr:
+                          type: string
+                        status:
+                          type: string
+                        statusMessage:
+                          type: string
+                        tunnelId:
+                          type: string
+                        tunnelInnerIp:
+                          type: array
+                          items:
+                            type: string
+                      description: CGW details relevant to AWS/AWS_GOVCLOUD
+                      $$ref: '#/components/schemas/TunnelsInner'
+                  uuid:
+                    type: string
+                $$ref: '#/components/schemas/GetSitesResponse'
+              examples:
+                Sites:
+                  description: Sites
+                  value:
+                    uuid: C8K-a165f574-e75e-11ec-8fea-0242ac120002
+                    siteId: '10'
+                    hostname: Branch-10
+                    systemIp: 1.1.1.10
+                    interface: GigabitEthernet2
+                    color: red
+                    privateIp: 10.11.2.248
+                    publicIp: 3.109.26.54
+                    attached: true
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

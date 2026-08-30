@@ -1,0 +1,270 @@
+openapi: 3.2.0
+info:
+  title: Partner Integrations System - Cloud Service Webex API
+  description: Includes API operations for partner integrations, such as Webex, Identity Services Engine (ISE), Secure Access, and more
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: System - Cloud Service Webex
+paths:
+  /webex/accesscode:
+    get:
+      tags:
+      - System - Cloud Service Webex
+      description: Webex Access Code Details
+      operationId: webexAccessCode
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    example: ZDI3MGEyYzQtNmFlNS00NDNhLWFlNzAtZGVjNjE0MGU1OGZmZWNmZDEwN2ItYTU
+                $$ref: '#/components/schemas/AccessCodeResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /webex/datacenter:
+    post:
+      tags:
+      - System - Cloud Service Webex
+      description: TEMP-Insert webex data center details manually for test setup
+      operationId: getWebexDataCenters
+      requestBody:
+        description: Webex Data Center
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ETag:
+                  type: string
+                  example: vmanagemockwebexetag
+                config:
+                  type: object
+                  properties:
+                    items:
+                      type: array
+                      properties:
+                        empty:
+                          type: boolean
+                      items:
+                        type: object
+                        properties:
+                          prefixes:
+                            type: object
+                            properties:
+                              owned:
+                                type: array
+                                description: Owned data list
+                                example:
+                                - 23.89.48.0/20
+                                - 64.68.96.0/24
+                                - 64.68.103.0/24
+                                items:
+                                  type: string
+                                  description: Owned data
+                                  example: 23.89.48.0/20
+                              provider_allocated:
+                                type: array
+                                description: Provider allocated list
+                                example:
+                                - 23.89.48.0/20
+                                - 64.68.96.0/24
+                                - 64.68.103.0/24
+                                items:
+                                  type: string
+                                  description: Provider allocated
+                                  example: 23.89.48.0/20
+                              provider_reserved:
+                                type: array
+                                description: Provider reserved list
+                                example:
+                                - 23.89.48.0/20
+                                - 64.68.96.0/24
+                                - 64.68.103.0/24
+                                items:
+                                  type: string
+                                  description: provider reserved
+                                  example: 23.89.48.0/20
+                            $$ref: '#/components/schemas/Prefixinfo'
+                          region:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                format: int64
+                                example: 1
+                              name:
+                                type: string
+                                example: us-west-1
+                              responder_fqdn:
+                                type: string
+                                example: pinger.us-west-1.infnet.webex.com
+                            $$ref: '#/components/schemas/Regioninfo'
+                        $$ref: '#/components/schemas/RegionPrefixinfo'
+                    revision:
+                      type: string
+                      example: 20201120.ace4cb0
+                    version:
+                      type: string
+                      example: 1.0.0
+                  $$ref: '#/components/schemas/Configinfo'
+              $$ref: '#/components/schemas/WebexDataCenter'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: boolean
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+      - System - Cloud Service Webex
+      description: Delete webex data center data in DB
+      operationId: deleteWebexDataCenters
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: boolean
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /webex/datacenter/sync:
+    post:
+      tags:
+      - System - Cloud Service Webex
+      description: TEMP-Update webex data center data in DB with data from Webex API
+      operationId: updateWebexDataCenters
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: boolean
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /webex/datacenter/syncstatus:
+    get:
+      tags:
+      - System - Cloud Service Webex
+      description: Get webex data center sync status from DB
+      operationId: getWebexDataCentersSyncStatus
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Last Synced:
+                    type: string
+                    example: 04 Dec 2020 19:23:54 UTC
+                  webexSyncNeeded:
+                    type: boolean
+                    example: true
+                $$ref: '#/components/schemas/SyncStatusResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    put:
+      tags:
+      - System - Cloud Service Webex
+      description: Set webex data center sync needed            to false
+      operationId: setWebexDataCentersSyncStatus
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: boolean
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /webex/redirect:
+    get:
+      tags:
+      - System - Cloud Service Webex
+      description: Redirect Info
+      operationId: redirectWebexDataCenters
+      parameters:
+      - name: code
+        in: query
+        description: code
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Redirect success! Please close this window
+                  type:
+                    type: string
+                    example: ok
+                $$ref: '#/components/schemas/RedirectCodeResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

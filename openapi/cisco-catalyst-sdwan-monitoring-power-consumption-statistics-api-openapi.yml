@@ -1,0 +1,785 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Monitoring - Power Consumption Statistics API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Monitoring - Power Consumption Statistics
+paths:
+  /statistics/powerconsumption:
+    post:
+      tags:
+      - Monitoring - Power Consumption Statistics
+      description: Get aggregated data based on input query and filters. The data can be filtered on time and other unique parameters based upon necessity and intended usage
+      operationId: getStatsRawData_MonitoringPowerConsumptionStatistics_2804
+      parameters:
+      - name: page
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+      - name: sortBy
+        in: query
+        schema:
+          pattern: ^[a-zA-Z-_]+$
+          type: string
+      - name: sortOrder
+        in: query
+        schema:
+          type: string
+          enum:
+          - asc
+          - ASC
+          - Asc
+          - desc
+          - DESC
+          - Desc
+      requestBody:
+        description: Stats query string
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              power consumption query:
+                description: power consumption query
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '12'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+                    - value:
+                      - 172.16.255.15
+                      field: vdevice_name
+                      type: string
+                      operator: in
+                  fields:
+                  - entry_time
+                  - count
+                  - power_usage
+                  - current_reading
+                  sort:
+                  - field: entry_time
+                    type: date
+                    order: asc
+                $$ref: '#/components/examples/ComViptelaVmanageServerDevicePowerconsumptionStatisticsapiParameterExamplePowerconsumption'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          cost:
+                            type: number
+                            example: 0.029
+                          count:
+                            type: integer
+                            format: int32
+                            example: 1
+                          emission:
+                            type: number
+                            example: 0.031
+                          entry_time:
+                            type: integer
+                            format: int32
+                            example: 171705600
+                          power_usage:
+                            type: number
+                            example: 0.19
+                        $$ref: '#/components/schemas/PowerConsumptionRespData'
+                    entryTimeList:
+                      type: array
+                      items:
+                        type: integer
+                        format: int64
+                    header:
+                      type: object
+                      properties:
+                        chart:
+                          type: object
+                          properties:
+                            series:
+                              type: array
+                              items:
+                                type: string
+                            title:
+                              type: string
+                            xAxis:
+                              type: array
+                              items:
+                                type: string
+                            xAxisLabel:
+                              type: string
+                            yAxis:
+                              type: array
+                              items:
+                                type: string
+                            yAxisLabel:
+                              type: string
+                          $$ref: '#/components/schemas/ChartObject'
+                        columns:
+                          required:
+                          - dataType
+                          - property
+                          - title
+                          type: object
+                          properties:
+                            dataType:
+                              type: string
+                              example: date
+                            displayFormat:
+                              type: string
+                              example: DD MMM YYYY h:mm:ss A z
+                            hideable:
+                              type: boolean
+                              example: true
+                            inputFormat:
+                              type: string
+                              example: unix-time
+                            isDisplay:
+                              type: boolean
+                              example: true
+                            minWidth:
+                              type: integer
+                              format: int32
+                              example: 300
+                            property:
+                              type: string
+                              example: entry_time
+                            title:
+                              type: string
+                              example: Timestamp
+                            width:
+                              type: integer
+                              format: int32
+                              example: 220
+                          $$ref: '#/components/schemas/PowerConsumptionColumns'
+                        fields:
+                          type: object
+                          properties:
+                            dataType:
+                              type: string
+                              example: date
+                            property:
+                              type: string
+                              example: entry_time
+                          $$ref: '#/components/schemas/GetStatDataFields'
+                        generatedOn:
+                          type: integer
+                          format: int64
+                        viewKeys:
+                          type: object
+                          properties:
+                            preferenceKey:
+                              type: string
+                            uniqueKey:
+                              type: array
+                              items:
+                                type: string
+                          $$ref: '#/components/schemas/PowerConsumptionViewKeys'
+                      $$ref: '#/components/schemas/PowerConsumptionRespHeader'
+                  $$ref: '#/components/schemas/PowerConsumptionResp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Energy Management-read
+  /statistics/powerconsumption/aggregation:
+    post:
+      tags:
+      - Monitoring - Power Consumption Statistics
+      description: Get aggregated data based on input query and filters. The data can be filtered on time and other unique parameters based upon necessity and intended usage
+      operationId: getPostAggregationDataByQuery_MonitoringPowerConsumptionStatistics_4004
+      requestBody:
+        description: Stats query string
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              power consumption aggregation query:
+                description: power consumption aggregation query
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '12'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+                    - value:
+                      - <PWR_NA/>
+                      field: dir
+                      type: string
+                      operator: in
+                    - value:
+                      - SystemEnergy
+                      field: comp_name
+                      type: string
+                      operator: in
+                  sort:
+                  - field: entry_time
+                    type: date
+                    order: asc
+                  aggregation:
+                    histogram:
+                      property: entry_time
+                      type: hour
+                      interval: 1
+                      order: asc
+                    metrics:
+                    - property: power_usage
+                      type: sum
+                    - property: emission
+                      type: sum
+                    - property: cost
+                      type: sum
+                $$ref: '#/components/examples/ComViptelaVmanageServerDevicePowerconsumptionStatisticsapiParameterExamplePowerconsumptionaggregation'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          cost:
+                            type: number
+                            example: 0.029
+                          count:
+                            type: integer
+                            format: int32
+                            example: 1
+                          emission:
+                            type: number
+                            example: 0.031
+                          entry_time:
+                            type: integer
+                            format: int32
+                            example: 171705600
+                          power_usage:
+                            type: number
+                            example: 0.19
+                        $$ref: '#/components/schemas/PowerConsumptionRespData'
+                    entryTimeList:
+                      type: array
+                      items:
+                        type: integer
+                        format: int64
+                    header:
+                      type: object
+                      properties:
+                        chart:
+                          type: object
+                          properties:
+                            series:
+                              type: array
+                              items:
+                                type: string
+                            title:
+                              type: string
+                            xAxis:
+                              type: array
+                              items:
+                                type: string
+                            xAxisLabel:
+                              type: string
+                            yAxis:
+                              type: array
+                              items:
+                                type: string
+                            yAxisLabel:
+                              type: string
+                          $$ref: '#/components/schemas/ChartObject'
+                        columns:
+                          required:
+                          - dataType
+                          - property
+                          - title
+                          type: object
+                          properties:
+                            dataType:
+                              type: string
+                              example: date
+                            displayFormat:
+                              type: string
+                              example: DD MMM YYYY h:mm:ss A z
+                            hideable:
+                              type: boolean
+                              example: true
+                            inputFormat:
+                              type: string
+                              example: unix-time
+                            isDisplay:
+                              type: boolean
+                              example: true
+                            minWidth:
+                              type: integer
+                              format: int32
+                              example: 300
+                            property:
+                              type: string
+                              example: entry_time
+                            title:
+                              type: string
+                              example: Timestamp
+                            width:
+                              type: integer
+                              format: int32
+                              example: 220
+                          $$ref: '#/components/schemas/PowerConsumptionColumns'
+                        fields:
+                          type: object
+                          properties:
+                            dataType:
+                              type: string
+                              example: date
+                            property:
+                              type: string
+                              example: entry_time
+                          $$ref: '#/components/schemas/GetStatDataFields'
+                        generatedOn:
+                          type: integer
+                          format: int64
+                        viewKeys:
+                          type: object
+                          properties:
+                            preferenceKey:
+                              type: string
+                            uniqueKey:
+                              type: array
+                              items:
+                                type: string
+                          $$ref: '#/components/schemas/PowerConsumptionViewKeys'
+                      $$ref: '#/components/schemas/PowerConsumptionRespHeader'
+                  $$ref: '#/components/schemas/PowerConsumptionResp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Energy Management-read
+  /statistics/powerconsumption/device:
+    post:
+      tags:
+      - Monitoring - Power Consumption Statistics
+      description: Get Power Consumption Per Device stats
+      operationId: getPowerConsumptionDevice
+      requestBody:
+        description: Stats query string
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              power consumption per device query:
+                description: power consumption per device query
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '12'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+                    - value:
+                      - <PWR_NA/>
+                      field: dir
+                      type: string
+                      operator: in
+                    - value:
+                      - SystemEnergy
+                      field: comp_name
+                      type: string
+                      operator: in
+                  aggregation:
+                    metrics:
+                    - property: power_usage
+                      type: sum
+                    - property: emission
+                      type: sum
+                    - property: cost
+                      type: sum
+                    field:
+                    - property: vdevice_name
+                    - property: site_id
+                $$ref: '#/components/examples/ComViptelaVmanageServerDevicePowerconsumptionStatisticsapiParameterExamplePowerconsumptiondevice'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        carbon_intensity:
+                          type: number
+                          example: 460.4
+                        change:
+                          type: number
+                          example: 0.3518
+                        cost:
+                          type: number
+                          example: 0.315
+                        devices:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              carbon_intensity:
+                                type: number
+                                example: 460.4
+                              change:
+                                type: number
+                                example: 0.3518
+                              cost:
+                                type: number
+                                example: 0.315
+                              device_model:
+                                type: string
+                                example: vedge-C8300-1N1S-6T
+                              device_type:
+                                type: string
+                                example: vedge
+                              emission:
+                                type: number
+                                example: 0.338
+                              local_system_ip:
+                                type: string
+                                example: 172.16.255.16
+                              name:
+                                type: string
+                                example: pm5
+                              power_usage:
+                                type: number
+                                example: 2.098
+                              site_id:
+                                type: string
+                                example: '600'
+                              site_name:
+                                type: string
+                                example: SITE_600
+                              system_ip:
+                                type: string
+                                example: 172.16.255.16
+                              uuid:
+                                type: string
+                                format: uuid
+                            $$ref: '#/components/schemas/PowerConsumptionDeviceEntry'
+                        emission:
+                          type: number
+                          example: 0.338
+                        power_usage:
+                          type: number
+                          example: 2.098
+                        site_id:
+                          type: string
+                          example: '500'
+                        site_name:
+                          type: string
+                          example: SITE_500
+                      $$ref: '#/components/schemas/PowerConsumptionSiteEntry'
+                $$ref: '#/components/schemas/PowerConsumptionDeviceResp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Energy Management-read
+  /statistics/powerconsumption/energymix:
+    post:
+      tags:
+      - Monitoring - Power Consumption Statistics
+      description: Get Power Consumption Energy Mix
+      operationId: getPowerConsumptionEnergyMix
+      requestBody:
+        description: Stats query string
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              power consumption energy mix query:
+                description: power consumption energy mix query
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '12'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+                    - value:
+                      - <PWR_NA/>
+                      field: dir
+                      type: string
+                      operator: in
+                    - value:
+                      - SystemEnergy
+                      field: comp_name
+                      type: string
+                      operator: in
+                  aggregation:
+                    metrics:
+                    - property: power_usage
+                      type: sum
+                $$ref: '#/components/examples/ComViptelaVmanageServerDevicePowerconsumptionStatisticsapiParameterExamplePowerconsumptionenergymix'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  energyMix:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        percentage:
+                          type: number
+                          example: 12
+                        property:
+                          type: string
+                          example: nuclear
+                        usage:
+                          type: number
+                          example: 12
+                      $$ref: '#/components/schemas/PowerConsumptionBreakDown'
+                  low_carbon:
+                    type: number
+                    example: 68
+                $$ref: '#/components/schemas/PowerConsumptionEnergyMixResp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Energy Management-read
+  /statistics/powerconsumption/supportdevicelist:
+    get:
+      tags:
+      - Monitoring - Power Consumption Statistics
+      description: Get power consumption collection supported device list
+      operationId: getSupportedDeviceList
+      parameters:
+      - name: last_n_hours
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 24
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  devices:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        device_model:
+                          type: string
+                          example: vedge-C8000V
+                        local_system_ip:
+                          type: string
+                          example: 172.16.255.15
+                        name:
+                          type: string
+                          example: vm5
+                        site_id:
+                          type: string
+                          example: '500'
+                        site_name:
+                          type: string
+                          example: SITE_500
+                        system_ip:
+                          type: string
+                          example: 172.16.255.15
+                        uuid:
+                          type: string
+                          example: C8K-f8472498-bb89-4e88-a2da-1760257c0825
+                      $$ref: '#/components/schemas/DeviceListEntry'
+                  supported-devices:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        device_model:
+                          type: string
+                          example: vedge-C8000V
+                        hasEstimated:
+                          type: boolean
+                          example: true
+                        local_system_ip:
+                          type: string
+                          example: 172.16.255.16
+                        name:
+                          type: string
+                          example: vm6
+                        site_id:
+                          type: string
+                          example: '600'
+                        site_name:
+                          type: string
+                          example: SITE_600
+                        system_ip:
+                          type: string
+                          example: 172.16.255.16
+                        uuid:
+                          type: string
+                          example: C8K-f8472498-bb89-4e88-a2da-1760257c0825
+                      $$ref: '#/components/schemas/SupportedDeviceListEntry'
+                $$ref: '#/components/schemas/SupportedDeviceList'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Energy Management-read
+  /statistics/powerconsumption/total:
+    post:
+      tags:
+      - Monitoring - Power Consumption Statistics
+      description: Get Power Consumption Total stats
+      operationId: getPowerConsumptionTotal
+      requestBody:
+        description: Stats query string
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              power consumption total query:
+                description: power consumption total query
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '12'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+                    - value:
+                      - <PWR_NA/>
+                      field: dir
+                      type: string
+                      operator: in
+                    - value:
+                      - SystemEnergy
+                      field: comp_name
+                      type: string
+                      operator: in
+                  aggregation:
+                    metrics:
+                    - property: power_usage
+                      type: sum
+                    - property: emission
+                      type: sum
+                    - property: cost
+                      type: sum
+                $$ref: '#/components/examples/ComViptelaVmanageServerDevicePowerconsumptionStatisticsapiParameterExamplePowerconsumptiontotal'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  carbon_intensity:
+                    type: number
+                    example: 460.4
+                  change:
+                    type: number
+                    example: 0.2518
+                  cost:
+                    type: number
+                    example: 0.215
+                  emission:
+                    type: number
+                    example: 0.238
+                  power_usage:
+                    type: number
+                    example: 3.098
+                $$ref: '#/components/schemas/PowerConsumptionTotalResp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Energy Management-read

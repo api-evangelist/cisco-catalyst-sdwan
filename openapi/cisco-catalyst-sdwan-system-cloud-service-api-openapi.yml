@@ -1,0 +1,531 @@
+openapi: 3.2.0
+info:
+  title: SD-WAN Services System - Cloud Service API
+  description: Includes API operations for managing SD-WAN services such as Cloud OnRamp for SaaS and MultiCloud
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: System - Cloud Service
+paths:
+  /cloudservices/accesstoken:
+    get:
+      tags:
+      - System - Cloud Service
+      operationId: getAccessTokenforDevice
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /cloudservices/authtoken:
+    post:
+      tags:
+      - System - Cloud Service
+      description: Get Azure token
+      operationId: getAzureToken
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              type: string
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/octet-stream:
+              schema:
+                type: object
+              examples:
+                Telemetry state:
+                  description: Telemetry state
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: CXP-read,CXP-write,Cloud OnRamp-read,Cloud OnRamp-write
+  /cloudservices/connect:
+    get:
+      tags:
+      - System - Cloud Service
+      description: Telemetry Opt In
+      operationId: connect_SystemCloudService_2203
+      responses:
+        '200':
+          description: Success
+          content:
+            application/octet-stream:
+              schema:
+                type: object
+              examples:
+                Telemetry Opt In:
+                  description: Telemetry Opt In
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: CXP-read,CXP-write,Cloud OnRamp-read,Cloud OnRamp-write
+  /cloudservices/credentials:
+    get:
+      tags:
+      - System - Cloud Service
+      description: Get cloud service credentials
+      operationId: getCloudCredentials
+      responses:
+        '200':
+          description: Success
+          content:
+            application/octet-stream:
+              schema:
+                type: object
+              examples:
+                Cloud service credentials:
+                  description: Cloud service credentials
+                  value:
+                    clientId: exampleClientId
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: CXP-read,CXP-write,Cloud OnRamp-read,Cloud OnRamp-write
+    post:
+      tags:
+      - System - Cloud Service
+      description: Add cloud service credentials
+      operationId: addCloudCredentials
+      requestBody:
+        description: Cloud service credentials
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Cloud service credentials:
+                description: Cloud service credentials
+                value:
+                  clientId: exampleClientId
+                  clientsecret: exampleClientSecret
+                  cloudTenantId: exampleCloudTenantId
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: dca,CXP-write,Cloud OnRamp-write
+  /cloudservices/devicecode:
+    post:
+      tags:
+      - System - Cloud Service
+      description: Get Azure device code
+      operationId: getDeviceCode
+      responses:
+        '200':
+          description: Success
+          content:
+            application/octet-stream:
+              schema:
+                type: object
+              examples:
+                Telemetry state:
+                  description: Telemetry state
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: CXP-read,CXP-write,Cloud OnRamp-read,Cloud OnRamp-write
+  /cloudservices/m365/preferredpath:
+    post:
+      tags:
+      - System - Cloud Service
+      description: Get vAnalytics Preferred Path for Office365 over time. The data can be filtered on time and other unique parameters based upon necessity and intended usage
+      operationId: getO365PreferredPathFromVAnalytics
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties:
+                type: object
+                properties:
+                  valueType:
+                    type: string
+                    enum:
+                    - ARRAY
+                    - OBJECT
+                    - STRING
+                    - NUMBER
+                    - 'TRUE'
+                    - 'FALSE'
+                    - 'NULL'
+        required: true
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /cloudservices/staging:
+    get:
+      tags:
+      - System - Cloud Service
+      description: Check if testbed or production
+      operationId: isStaging
+      responses:
+        '200':
+          description: Success
+          content:
+            application/octet-stream:
+              schema:
+                type: object
+              examples:
+                Environment:
+                  description: Environment
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: CXP-read,CXP-write,Cloud OnRamp-read,Cloud OnRamp-write
+  /cloudservices/telemetry:
+    get:
+      tags:
+      - System - Cloud Service
+      description: Get Telemetry state
+      operationId: getTelemetryState
+      responses:
+        '200':
+          description: Success
+          content:
+            application/octet-stream:
+              schema:
+                type: object
+              examples:
+                Telemetry state:
+                  description: Telemetry state
+                  value:
+                  - tenantId: default
+                    optIn: 'true'
+                    geography: north-america
+                    feature_name: webex-group
+                    cloudTenantId: 113d24ba-139b-4dfe-a0eb-9a4e32d525a0
+                    org_name: my org name
+                  $$ref: '#/components/examples/ComViptelaVmanageServerCloudservicesResponseExampleO365Telemetry'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: CXP-read,CXP-write,Settings-read,Settings-write,Cloud OnRamp-read,Cloud OnRamp-write
+  /cloudservices/telemetry/optin:
+    put:
+      tags:
+      - System - Cloud Service
+      description: Telemetry Opt In
+      operationId: optIn
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              type: string
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/octet-stream:
+              schema:
+                type: object
+              examples:
+                Telemetry Opt In:
+                  description: Telemetry Opt In
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: CXP-read,CXP-write,Cloud OnRamp-read,Cloud OnRamp-write
+  /cloudservices/telemetry/optout:
+    delete:
+      tags:
+      - System - Cloud Service
+      description: Telemetry Opt Out
+      operationId: optOut
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/octet-stream:
+              schema:
+                type: object
+              examples:
+                Telemetry Opt Out:
+                  description: Telemetry Opt Out
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Configuration-write,Template Deploy-write,CXP-read,CXP-write,Cloud OnRamp-read,Cloud OnRamp-write
+  /cloudservices/vanalytics/dashboardlist:
+    get:
+      tags:
+      - System - Cloud Service
+      description: Get vAnalytics Dashboard List
+      operationId: getvAnalyticsDashboardList
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DCA access token:
+                  description: DCA access token
+                  value:
+                    body:
+                    - dashboardContainer: monitor
+                      dashboardName: overview
+                      displayName: Overview
+                      path: /analytics/v4/overview
+                      srcUrl: analytics-us-stg01.sdwan.cisco.com
+                    - dashboardContainer: Monitor
+                      dashboardName: applications
+                      displayName: Applications
+                      path: /analytics/v4/applications
+                      srcUrl: analytics-us-stg01.sdwan.cisco.com
+                    - dashboardContainer: Monitor
+                      dashboardName: sites
+                      displayName: Sites
+                      path: /analytics/v4/sites
+                      srcUrl: analytics-us-stg01.sdwan.cisco.com
+                  $$ref: '#/components/examples/ComViptelaVmanageServerCloudservicesResponseExampleVaDashboardList'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: vAnalytics-readvAnalytics-write
+  /dca/cloudservices:
+    get:
+      tags:
+      - System - Cloud Service
+      description: Get cloud service settings
+      operationId: getCloudSettings
+      responses:
+        '200':
+          description: Success
+          content:
+            application/octet-stream:
+              schema:
+                type: object
+              examples:
+                Cloud service setting:
+                  description: Cloud service setting
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: dca
+  /dca/cloudservices/otp:
+    get:
+      tags:
+      - System - Cloud Service
+      description: Get cloud service OTP value
+      operationId: getOTP
+      responses:
+        '200':
+          description: Success
+          content:
+            application/octet-stream:
+              schema:
+                type: object
+              examples:
+                Cloud service OTP value:
+                  description: Cloud service OTP value
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: dca
+    put:
+      tags:
+      - System - Cloud Service
+      description: Update cloud service OTP value
+      operationId: updatetOTP
+      requestBody:
+        description: Cloud service OTP value
+        content:
+          application/octet-stream:
+            schema:
+              type: object
+            examples:
+              Cloud service OTP value:
+                description: Cloud service OTP value
+                value: {}
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: dca
+  /dca/cloudservices/vanalytics:
+    post:
+      tags:
+      - System - Cloud Service
+      description: Get session from DCS for vAnalytics
+      operationId: getvAnalytics
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              type: string
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/octet-stream:
+              schema:
+                type: object
+              examples:
+                Cloud service OTP value:
+                  description: Cloud service OTP value
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: vAnalytics-readvAnalytics-writedca
+  /entityownership/list:
+    get:
+      tags:
+      - System - Cloud Service
+      summary: List all entity ownership info
+      description: List all entity ownership info
+      operationId: listEntityOwnershipInfo
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  bucket:
+                    type: string
+                  entityName:
+                    type: string
+                  owner:
+                    type: string
+                $$ref: '#/components/schemas/EntityOwnershipInfo'
+              examples:
+                Entity Ownership List Response:
+                  description: Entity Ownership List Response
+                  value:
+                  - entityName: all
+                    bucket: bucket1
+                    owner: e730d2b0-20ab-4875-81ac-4994e1386f9e
+                  - entityName: singleton-service-selector
+                    bucket: bucket1
+                    owner: e730d2b0-20ab-4875-81ac-4994e1386f9e
+                  - entityName: singleton-service-client
+                    bucket: bucket1
+                    owner: e730d2b0-20ab-4875-81ac-4994e1386f9e
+                  - entityName: tenantCreator
+                    bucket: bucket1
+                    owner: e730d2b0-20ab-4875-81ac-4994e1386f9e
+                  - entityName: notificationService
+                    bucket: bucket1
+                    owner: e730d2b0-20ab-4875-81ac-4994e1386f9e
+                  $$ref: '#/components/examples/ComViptelaVmanageServerEntityownershipResponseExampleEntityOwnershipList'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /entityownership/tree:
+    get:
+      tags:
+      - System - Cloud Service
+      description: Entity ownership info grouped by buckets
+      operationId: entityOwnershipInfo
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Entity ownership:
+                  description: Entity ownership
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

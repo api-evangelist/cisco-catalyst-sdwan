@@ -1,0 +1,540 @@
+openapi: 3.2.0
+info:
+  title: SD-WAN Services Multicloud Interconnect - Monitoring API
+  description: Includes API operations for managing SD-WAN services such as Cloud OnRamp for SaaS and MultiCloud
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Multicloud Interconnect - Monitoring
+paths:
+  /multicloud/interconnect/widget:
+    get:
+      tags:
+      - Multicloud Interconnect - Monitoring
+      summary: Get all Interconnect widgets
+      description: API to retrieve all Interconnect widgets.
+      operationId: getAllInterconnectWidgets
+      responses:
+        '200':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    edgeGatewaySolution:
+                      type: string
+                      enum:
+                      - MVE
+                      - NE
+                    edgeType:
+                      type: string
+                      enum:
+                      - MEGAPORT
+                      - EQUINIX
+                    gwDeviceSiteIds:
+                      type: array
+                      properties:
+                        empty:
+                          type: boolean
+                      items:
+                        type: integer
+                        format: int64
+                    gwDeviceStatus:
+                      type: object
+                      properties:
+                        count:
+                          type: integer
+                          format: int64
+                        name:
+                          type: string
+                        statusList:
+                          type: array
+                          properties:
+                            empty:
+                              type: boolean
+                          items:
+                            type: object
+                            properties:
+                              count:
+                                type: integer
+                                format: int64
+                              message:
+                                type: string
+                              name:
+                                type: string
+                              status:
+                                type: string
+                            $$ref: '#/components/schemas/StatusObject'
+                        unreachableCount:
+                          type: integer
+                          format: int64
+                      $$ref: '#/components/schemas/GwDeviceStatus'
+                    gwSitestatus:
+                      type: object
+                      properties:
+                        count:
+                          type: integer
+                          format: int64
+                        name:
+                          type: string
+                        statusList:
+                          type: array
+                          properties:
+                            empty:
+                              type: boolean
+                          items:
+                            type: object
+                            properties:
+                              count:
+                                type: integer
+                                format: int64
+                              message:
+                                type: string
+                              name:
+                                type: string
+                              status:
+                                type: string
+                            $$ref: '#/components/schemas/StatusObject'
+                      $$ref: '#/components/schemas/GwSiteStatus'
+                    gwStatus:
+                      type: object
+                      properties:
+                        count:
+                          type: integer
+                          format: int64
+                        name:
+                          type: string
+                        statusList:
+                          type: array
+                          properties:
+                            empty:
+                              type: boolean
+                          items:
+                            type: object
+                            properties:
+                              count:
+                                type: integer
+                                format: int64
+                              message:
+                                type: string
+                              name:
+                                type: string
+                              status:
+                                type: string
+                            $$ref: '#/components/schemas/StatusObject'
+                      $$ref: '#/components/schemas/GwStatus'
+                    numAccounts:
+                      type: integer
+                      format: int64
+                    numConn:
+                      type: integer
+                      format: int64
+                    numConnDown:
+                      type: integer
+                      format: int64
+                    numConnLive:
+                      type: integer
+                      format: int64
+                      writeOnly: true
+                    numConnPartial:
+                      type: integer
+                      format: int64
+                    numConnUp:
+                      type: integer
+                      format: int64
+                    numSdwanTunnels:
+                      type: integer
+                      format: int64
+                  $$ref: '#/components/schemas/InterconnectWidget'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/interconnect/{interconnect-type}/monitoring/connected-sites:
+    get:
+      tags:
+      - Multicloud Interconnect - Monitoring
+      summary: Get Interconnect devices for monitoring.
+      description: API to retrieve Interconnect devices by Interconnect type for monitoring.
+      operationId: getMonitoringInterconnectConnectedSites
+      parameters:
+      - name: interconnect-type
+        in: path
+        description: Interconnect provider type
+        required: true
+        schema:
+          type: string
+      - name: interconnect-gateway-name
+        in: query
+        description: Interconnect Gateway Name
+        schema:
+          maxLength: 255
+          minLength: 1
+          type: string
+      responses:
+        '200':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    bfdSessions:
+                      type: integer
+                      format: int32
+                    bfdSessionsUp:
+                      type: integer
+                      format: int32
+                    device-model:
+                      type: string
+                    device-type:
+                      type: string
+                    host-name:
+                      type: string
+                    lastUpdated:
+                      type: number
+                    local-system-ip:
+                      type: string
+                    reachability:
+                      type: string
+                    site-id:
+                      type: string
+                    status:
+                      type: string
+                    statusBfd:
+                      type: string
+                    system-ip:
+                      type: string
+                    uuid:
+                      type: string
+                    version:
+                      type: string
+                  $$ref: '#/components/schemas/InterconnectConnectedSite'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/interconnect/{interconnect-type}/monitoring/devices:
+    get:
+      tags:
+      - Multicloud Interconnect - Monitoring
+      summary: Retrieve Interconnect devices for monitoring.
+      description: API to retrieve Interconnect devices by Interconnect type for monitoring.
+      operationId: getMonitoringInterconnectDevices
+      parameters:
+      - name: interconnect-type
+        in: path
+        description: Interconnect provider type
+        required: true
+        schema:
+          type: string
+      - name: interconnect-gateway-name
+        in: query
+        description: Interconnect Gateway Name
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    configStatusMessage:
+                      type: string
+                    configuredSystemIP:
+                      type: string
+                    device-model:
+                      type: string
+                    device-type:
+                      type: string
+                    edgeGatewayName:
+                      type: string
+                    host-name:
+                      type: string
+                    lastUpdated:
+                      type: number
+                    local-system-ip:
+                      type: string
+                    reachability:
+                      type: string
+                    site-id:
+                      type: string
+                    status:
+                      type: string
+                    system-ip:
+                      type: string
+                    uptimeDate:
+                      type: number
+                    uuid:
+                      type: string
+                    version:
+                      type: string
+                  $$ref: '#/components/schemas/InterconnectDeviceInfoExtended'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/interconnect/{interconnect-type}/monitoring/gateways:
+    get:
+      tags:
+      - Multicloud Interconnect - Monitoring
+      summary: Get Interconnect gateways for monitoring.
+      description: API to retrieve Interconnect gateways by Interconnect type for monitoring.
+      operationId: getMonitoringInterconnectGateways
+      parameters:
+      - name: interconnect-type
+        in: path
+        description: Interconnect provider type
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  required:
+                  - deviceUuid
+                  - edgeAccountId
+                  - edgeGatewayName
+                  - edgeType
+                  - region
+                  - siteName
+                  type: object
+                  properties:
+                    description:
+                      maxLength: 255
+                      minLength: 1
+                      type: string
+                    deviceUuid:
+                      maxLength: 255
+                      minLength: 1
+                      type: string
+                    edgeAccountId:
+                      maxLength: 255
+                      minLength: 1
+                      type: string
+                    edgeAccountName:
+                      type: string
+                    edgeGatewayId:
+                      type: string
+                    edgeGatewayName:
+                      maxLength: 255
+                      minLength: 1
+                      type: string
+                    edgeType:
+                      type: string
+                    isCustomSetting:
+                      type: boolean
+                      description: Custom Settings enabled for Interconnect Gateway
+                      example: true
+                    region:
+                      maxLength: 255
+                      minLength: 1
+                      type: string
+                    resourceState:
+                      type: string
+                    siteName:
+                      maxLength: 255
+                      minLength: 1
+                      type: string
+                    status:
+                      type: string
+                  $$ref: '#/components/schemas/InterconnectGatewayMonitoring'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/interconnect/{interconnect-type}/widget:
+    get:
+      tags:
+      - Multicloud Interconnect - Monitoring
+      summary: Get an Interconnect widget for Interconnect type.
+      description: API to retrieve an Interconnect widget for an Interconnect type.
+      operationId: getInterconnectWidget
+      parameters:
+      - name: interconnect-type
+        in: path
+        description: Interconnect provider type
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  edgeGatewaySolution:
+                    type: string
+                    enum:
+                    - MVE
+                    - NE
+                  edgeType:
+                    type: string
+                    enum:
+                    - MEGAPORT
+                    - EQUINIX
+                  gwDeviceSiteIds:
+                    type: array
+                    properties:
+                      empty:
+                        type: boolean
+                    items:
+                      type: integer
+                      format: int64
+                  gwDeviceStatus:
+                    type: object
+                    properties:
+                      count:
+                        type: integer
+                        format: int64
+                      name:
+                        type: string
+                      statusList:
+                        type: array
+                        properties:
+                          empty:
+                            type: boolean
+                        items:
+                          type: object
+                          properties:
+                            count:
+                              type: integer
+                              format: int64
+                            message:
+                              type: string
+                            name:
+                              type: string
+                            status:
+                              type: string
+                          $$ref: '#/components/schemas/StatusObject'
+                      unreachableCount:
+                        type: integer
+                        format: int64
+                    $$ref: '#/components/schemas/GwDeviceStatus'
+                  gwSitestatus:
+                    type: object
+                    properties:
+                      count:
+                        type: integer
+                        format: int64
+                      name:
+                        type: string
+                      statusList:
+                        type: array
+                        properties:
+                          empty:
+                            type: boolean
+                        items:
+                          type: object
+                          properties:
+                            count:
+                              type: integer
+                              format: int64
+                            message:
+                              type: string
+                            name:
+                              type: string
+                            status:
+                              type: string
+                          $$ref: '#/components/schemas/StatusObject'
+                    $$ref: '#/components/schemas/GwSiteStatus'
+                  gwStatus:
+                    type: object
+                    properties:
+                      count:
+                        type: integer
+                        format: int64
+                      name:
+                        type: string
+                      statusList:
+                        type: array
+                        properties:
+                          empty:
+                            type: boolean
+                        items:
+                          type: object
+                          properties:
+                            count:
+                              type: integer
+                              format: int64
+                            message:
+                              type: string
+                            name:
+                              type: string
+                            status:
+                              type: string
+                          $$ref: '#/components/schemas/StatusObject'
+                    $$ref: '#/components/schemas/GwStatus'
+                  numAccounts:
+                    type: integer
+                    format: int64
+                  numConn:
+                    type: integer
+                    format: int64
+                  numConnDown:
+                    type: integer
+                    format: int64
+                  numConnLive:
+                    type: integer
+                    format: int64
+                    writeOnly: true
+                  numConnPartial:
+                    type: integer
+                    format: int64
+                  numConnUp:
+                    type: integer
+                    format: int64
+                  numSdwanTunnels:
+                    type: integer
+                    format: int64
+                $$ref: '#/components/schemas/InterconnectWidget'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

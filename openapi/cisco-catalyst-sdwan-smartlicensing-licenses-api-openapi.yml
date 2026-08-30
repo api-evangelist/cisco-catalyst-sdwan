@@ -1,0 +1,340 @@
+openapi: 3.2.0
+info:
+  title: Others SmartLicensing - Licenses API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: SmartLicensing - Licenses
+paths:
+  /msla/assignLicenses:
+    post:
+      tags:
+      - SmartLicensing - Licenses
+      description: Assign msla licenses to devices
+      operationId: assignMslaLicensesToDevices
+      requestBody:
+        description: List of devices for assigning licenses
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                baseLicense:
+                  type: object
+                  properties:
+                    billing_type:
+                      type: string
+                      example: PREPAID
+                    license_type:
+                      type: string
+                      example: DEMO
+                    saId:
+                      type: string
+                      example: '316449'
+                    subscription_id:
+                      type: string
+                      example: '2425252522'
+                    tag:
+                      type: string
+                      example: regid.2020-10.com.cisco.DSTACK_T0_P,1.0_5446d77e-a22d-4343-a9f9-cefb53116b22
+                    vaId:
+                      type: string
+                      example: '703805'
+                  $$ref: '#/components/schemas/AssignMslaLicensesBaseLicense'
+                tenantLicense:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      billing_type:
+                        type: string
+                        example: PREPAID
+                      count:
+                        type: integer
+                        format: int32
+                        example: 4
+                      license_type:
+                        type: string
+                        example: TERM
+                      saId:
+                        type: string
+                        example: '316448'
+                      subscription_id:
+                        type: string
+                        example: '6376389267'
+                      tag:
+                        type: string
+                        example: regid.2020-10.com.cisco.DSTACK_T0_P,1.0_5446d77e-a22d-4343-a9f9-cefb53116b22
+                      vaId:
+                        type: string
+                        example: '702544'
+                    $$ref: '#/components/schemas/AssignMslaLicensesTenantLicense'
+                uuid:
+                  type: array
+                  items:
+                    type: string
+              $$ref: '#/components/schemas/AssignMslaLicenses'
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /msla/devices/{uuid}:
+    get:
+      tags:
+      - SmartLicensing - Licenses
+      description: Get licenses associated to device
+      operationId: getLicenseByUuid_SmartlicensingLicenses_2003
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                properties:
+                  empty:
+                    type: boolean
+                items:
+                  type: object
+                  properties:
+                    billing_model:
+                      type: string
+                      example: committed
+                    billing_type:
+                      type: string
+                      example: PREPAID
+                    display_name:
+                      type: string
+                      example: 'Routing DNA Advantage: Tier 2'
+                    end_date:
+                      type: string
+                      example: 2025-Nov-08
+                    inUse:
+                      type: string
+                      example: '4'
+                    license_category:
+                      type: string
+                      example: regular
+                    license_type:
+                      type: string
+                      example: TERM
+                    saname:
+                      type: string
+                      example: testaccount1.viptela.com
+                    start_date:
+                      type: string
+                      example: 2023-Aug-29
+                    subscription_id:
+                      type: string
+                      example: SR100446
+                    tag:
+                      type: string
+                      example: regid.2020-10.com.cisco.DSTACK_T2_A,1.0_b072e613-aa2c-4ed0-ab46-ae91ddc7dfb5
+                    vaname:
+                      type: string
+                      example: DEFAULT
+                  $$ref: '#/components/schemas/GetDeviceLicensesInner'
+                $$ref: '#/components/schemas/GetDeviceLicenses'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /msla/licenses:
+    get:
+      tags:
+      - SmartLicensing - Licenses
+      description: Get all the licenses
+      operationId: getMslaLicenses
+      parameters:
+      - name: uuid
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                properties:
+                  empty:
+                    type: boolean
+                items:
+                  type: object
+                  properties:
+                    available:
+                      type: string
+                      example: '30'
+                    billing_type:
+                      type: string
+                      example: prepaid
+                    display_name:
+                      type: string
+                      example: 'Routing DNA Premier: Tier 3'
+                    end_date:
+                      type: string
+                      example: 024-Feb-25
+                    inUse:
+                      type: string
+                      example: '5'
+                    license_category:
+                      type: string
+                      example: Tenant
+                    saname:
+                      type: string
+                      example: testaccount1.viptela.com
+                    subscription_id:
+                      type: string
+                      example: '77823882922'
+                    tag:
+                      type: string
+                      example: regid.2020-10.com.cisco.DSTACK_T3_P,1.0_4fbf7891-fdee-4b78-9d70-696b260ef347
+                    vaname:
+                      type: string
+                      example: DEFAULT
+                  $$ref: '#/components/schemas/MslaLicensesInner'
+                $$ref: '#/components/schemas/MslaLicenses'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /msla/monitoring/licensedDeviceCount:
+    get:
+      tags:
+      - SmartLicensing - Licenses
+      description: Get licenses associated to device
+      operationId: getDeviceDetailsForDashboard
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /msla/monitoring/licensedDistributionDetails:
+    get:
+      tags:
+      - SmartLicensing - Licenses
+      description: Get all license distribution
+      operationId: getLicenseDistributionDetails
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: object
+                    properties:
+                      display_name:
+                        type: string
+                        example: somename
+                      lastUpdated:
+                        type: string
+                        example: '1706830360239'
+                      tag:
+                        type: string
+                        example: regid.2020-10.com.cisco.DSTACK_T0_P,1.0_5446d77e-a22d-4343-a9f9-cefb53116b22
+                      totalDevices:
+                        type: integer
+                        format: int32
+                        example: 1
+                      totalLicense:
+                        type: integer
+                        format: int32
+                        example: 1
+                    $$ref: '#/components/schemas/LicenseDistributionResult'
+                $$ref: '#/components/schemas/LicenseDistribution'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /msla/monitoring/packagingDistributionDetails:
+    get:
+      tags:
+      - SmartLicensing - Licenses
+      description: Get all license distribution
+      operationId: getPackagingDistributionDetails
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      availableCssm:
+                        type: integer
+                        format: int32
+                        example: 1
+                      license:
+                        type: string
+                        example: 'Routing DNA Advantage: Tier 0'
+                      usedCssm:
+                        type: string
+                        example: '33'
+                      usedVmanage:
+                        type: integer
+                        format: int32
+                        example: 1
+                    $$ref: '#/components/schemas/PackagingDistributionData'
+                $$ref: '#/components/schemas/PackagingDistribution'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

@@ -1,0 +1,845 @@
+openapi: 3.2.0
+info:
+  title: Others Configuration - Disaster Recovery API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Configuration - Disaster Recovery
+paths:
+  /disasterrecovery/activate:
+    post:
+      tags:
+      - Configuration - Disaster Recovery
+      description: Activate cluster to start working as primary
+      operationId: activate
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /disasterrecovery/clusterInfo:
+    get:
+      tags:
+      - Configuration - Disaster Recovery
+      description: Get disaster recovery cluster info
+      operationId: getClusterInfo
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DR cluster info:
+                  description: DR cluster info
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Disaster Recovery-read,Disaster Recovery-write
+  /disasterrecovery/dbrestorestatus:
+    get:
+      tags:
+      - Configuration - Disaster Recovery
+      description: Config-db restore status
+      operationId: getConfigDBRestoreStatus
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Config-db Restore Status:
+                  description: Config-db Restore Status
+                  value:
+                    currentState: DOWNLOADING
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /disasterrecovery/deleteLocalDataCenter:
+    post:
+      tags:
+      - Configuration - Disaster Recovery
+      description: Delete local data center
+      operationId: deleteLocalDC
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Request status:
+                  description: Request status
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Disaster Recovery-write
+  /disasterrecovery/deleteRemoteDataCenter:
+    post:
+      tags:
+      - Configuration - Disaster Recovery
+      description: Delete data center
+      operationId: deleteDC
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Request status:
+                  description: Request status
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /disasterrecovery/deleteRemoteDrDetails:
+    post:
+      tags:
+      - Configuration - Disaster Recovery
+      description: Delete data center
+      operationId: deleteDr
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Request status:
+                  description: Request status
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /disasterrecovery/deregister:
+    post:
+      tags:
+      - Configuration - Disaster Recovery
+      description: Delete disaster recovery
+      operationId: delete
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Disaster Recovery-write
+  /disasterrecovery/details:
+    get:
+      tags:
+      - Configuration - Disaster Recovery
+      description: Get disaster recovery details
+      operationId: getDetails
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DR details:
+                  description: DR details
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Disaster Recovery-read,Disaster Recovery-write
+  /disasterrecovery/drstatus:
+    get:
+      tags:
+      - Configuration - Disaster Recovery
+      description: Disaster recovery status
+      operationId: getDisasterRecoveryStatus
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                DR status:
+                  description: DR status
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /disasterrecovery/history:
+    get:
+      tags:
+      - Configuration - Disaster Recovery
+      description: Get disaster recovery switchover history
+      operationId: getHistory
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DR switchover history:
+                  description: DR switchover history
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Disaster Recovery-read,Disaster Recovery-write
+  /disasterrecovery/localLatestHistory:
+    get:
+      tags:
+      - Configuration - Disaster Recovery
+      description: Get disaster recovery local switchover history
+      operationId: getLocalHistory
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DR local switchover history:
+                  description: DR local switchover history
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Disaster Recovery-read,Disaster Recovery-write
+  /disasterrecovery/localdc:
+    get:
+      tags:
+      - Configuration - Disaster Recovery
+      description: Get data center details
+      operationId: getLocalDataCenterState
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Datacenters detail:
+                  description: Datacenters detail
+                  value:
+                  - dcName: DC1 (Primary)
+                    nodes:
+                    - hostName: vm12
+                      deviceIP: 10.0.105.32
+                      state: UP
+                  - dcName: DC2
+                    nodes:
+                    - hostName: vm18
+                      deviceIP: 10.0.105.38
+                      state: UP
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Disaster Recovery-read,Disaster Recovery-write
+  /disasterrecovery/password:
+    post:
+      tags:
+      - Configuration - Disaster Recovery
+      description: Update data centers and vBonds passwords for disaster recovery
+      operationId: update_ConfigurationDisasterRecovery_2604
+      requestBody:
+        description: Datacenter/vBond password update request
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Datacenter/vBond password update request:
+                description: Datacenter/vBond password update request
+                value:
+                  dataCenters: []
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DR setting updated:
+                  description: DR setting updated
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Disaster Recovery-write
+  /disasterrecovery/pause:
+    post:
+      tags:
+      - Configuration - Disaster Recovery
+      description: Pause DR
+      operationId: pauseDR
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Request Status:
+                  description: Request Status
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Disaster Recovery-write
+  /disasterrecovery/pauseLocalArbitrator:
+    post:
+      tags:
+      - Configuration - Disaster Recovery
+      description: Pause DR for Local Arbitrator
+      operationId: pauseLocalArbitrator
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Request Status:
+                  description: Request Status
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Disaster Recovery-write
+  /disasterrecovery/pauseLocalDC:
+    post:
+      tags:
+      - Configuration - Disaster Recovery
+      description: Pause DR for Local datacenter
+      operationId: pauseLocalDCForDR
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Request Status:
+                  description: Request Status
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Disaster Recovery-write
+  /disasterrecovery/pauseLocalReplication:
+    post:
+      tags:
+      - Configuration - Disaster Recovery
+      description: Pause DR replication for Local datacenter
+      operationId: pauseLocalDCReplication
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Request Status:
+                  description: Request Status
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: admin
+  /disasterrecovery/pausereplication:
+    post:
+      tags:
+      - Configuration - Disaster Recovery
+      description: Pause DR data replication
+      operationId: disasterRecoveryPauseReplication
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Request Status:
+                  description: Request Status
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Disaster Recovery-write
+  /disasterrecovery/register:
+    put:
+      tags:
+      - Configuration - Disaster Recovery
+      description: Update data centers for disaster recovery
+      operationId: update_ConfigurationDisasterRecovery_2603
+      requestBody:
+        description: Datacenter registration request
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Datacenter registration request:
+                description: Datacenter registration request
+                value:
+                  dataCenters: []
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DR setting updated:
+                  description: DR setting updated
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Disaster Recovery-write
+    post:
+      tags:
+      - Configuration - Disaster Recovery
+      description: Register data centers for disaster recovery
+      operationId: register
+      requestBody:
+        description: Datacenter registration request
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Datacenter registration request:
+                description: Datacenter registration request
+                value: {}
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Disaster Recovery-write
+  /disasterrecovery/remoteDcState:
+    get:
+      tags:
+      - Configuration - Disaster Recovery
+      description: Gets remote data center member state
+      operationId: getRemoteDCMembersState
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Remote DC member details:
+                  description: Remote DC member details
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Disaster Recovery-read,Disaster Recovery-write
+  /disasterrecovery/schedule:
+    get:
+      tags:
+      - Configuration - Disaster Recovery
+      description: Get disaster recovery local replication schedule
+      operationId: getDisasterRecoveryLocalReplicationSchedule
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DR replication schedule:
+                  description: DR replication schedule
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Disaster Recovery-read,Disaster Recovery-write
+  /disasterrecovery/status:
+    get:
+      tags:
+      - Configuration - Disaster Recovery
+      description: Get disaster recovery status
+      operationId: getdrStatus
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DR status:
+                  description: DR status
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Disaster Recovery-read,Disaster Recovery-write,Template Deploy-read,Template Deploy-write
+  /disasterrecovery/unpause:
+    post:
+      tags:
+      - Configuration - Disaster Recovery
+      description: Unpause DR
+      operationId: unpauseDR
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Request Status:
+                  description: Request Status
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Disaster Recovery-write
+  /disasterrecovery/unpauseLocalArbitrator:
+    post:
+      tags:
+      - Configuration - Disaster Recovery
+      description: Unpause DR for Local Arbitrator
+      operationId: unpauseLocalArbitrator
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Request Status:
+                  description: Request Status
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Disaster Recovery-write
+  /disasterrecovery/unpauseLocalDC:
+    post:
+      tags:
+      - Configuration - Disaster Recovery
+      description: Unpause DR for Local datacenter
+      operationId: unpauseLocalDCForDR
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Request Status:
+                  description: Request Status
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Disaster Recovery-write
+  /disasterrecovery/unpauseLocalReplication:
+    post:
+      tags:
+      - Configuration - Disaster Recovery
+      description: Unpause DR replication for local datacenter
+      operationId: unpauseLocalDCReplication
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Request Status:
+                  description: Request Status
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: admin
+  /disasterrecovery/unpausereplication:
+    post:
+      tags:
+      - Configuration - Disaster Recovery
+      description: Un-Pause DR data replication
+      operationId: disasterRecoveryUnPauseReplication
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Request Status:
+                  description: Request Status
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Disaster Recovery-write
+  /disasterrecovery/updateDRConfigOnArbitrator:
+    post:
+      tags:
+      - Configuration - Disaster Recovery
+      description: Update arbitrator with primary and secondary states cluster
+      operationId: updateDrState
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Request status:
+                  description: Request status
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /disasterrecovery/updateReplicationCheckEnabled:
+    put:
+      tags:
+      - Configuration - Disaster Recovery
+      description: Update replicationCheckEnabled Flag used in DR replication
+      operationId: updateReplicationCheckEnabled
+      requestBody:
+        description: Datacenter registration request
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              replicationCheckEnabled:
+                description: replicationCheckEnabled
+                value: true
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DR setting updated:
+                  description: DR setting updated
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Disaster Recovery-write
+  /disasterrecovery/usernames:
+    get:
+      tags:
+      - Configuration - Disaster Recovery
+      description: Fetch data centers and vBonds usernames for disaster recovery
+      operationId: get
+      requestBody:
+        description: Datacenter/vBond password update request
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Datacenter/vBond password update request:
+                description: Datacenter/vBond password update request
+                value: {}
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DR setting updated:
+                  description: DR setting updated
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Disaster Recovery-write

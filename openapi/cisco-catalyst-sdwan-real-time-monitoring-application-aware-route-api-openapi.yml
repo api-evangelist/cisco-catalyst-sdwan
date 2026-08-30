@@ -1,0 +1,219 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - Application-Aware Route API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - Application-Aware Route
+paths:
+  /device/app-route/sla-class:
+    get:
+      tags:
+      - Real-Time Monitoring - Application-Aware Route
+      description: Get SLA class list from device (Real Time)
+      operationId: createAppRouteSlaClassList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                SLA class:
+                  description: SLA class
+                  value:
+                    data:
+                    - app-probe-class: None
+                      loss: 0
+                      fallback-best-tunnel: None
+                      jitter: 0
+                      vdevice-dataKey: 169.254.10.10-0
+                      vdevice-name: 169.254.10.10
+                      latency: 0
+                      name: __all_tunnels__
+                      index: 0
+                      lastupdated: 1642576726463
+                      vdevice-host-name: vm3
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write
+  /device/app-route/statistics:
+    get:
+      tags:
+      - Real-Time Monitoring - Application-Aware Route
+      description: Get application-aware routing statistics from device (Real Time)
+      operationId: createAppRouteStatisticsList
+      parameters:
+      - name: remote-system-ip
+        in: query
+        description: Remote system IP
+        schema:
+          type: string
+      - name: local-color
+        in: query
+        description: Local color
+        schema:
+          type: string
+          enum:
+          - default
+          - mpls
+          - metro-ethernet
+          - biz-internet
+          - public-internet
+          - lte
+          - 3g
+          - red
+          - green
+          - blue
+          - gold
+          - silver
+          - bronze
+          - custom1
+          - custom2
+          - custom3
+          - private1
+          - private2
+          - private3
+          - private4
+          - private5
+          - private6
+      - name: remote-color
+        in: query
+        description: Remote color
+        schema:
+          type: string
+          enum:
+          - default
+          - mpls
+          - metro-ethernet
+          - biz-internet
+          - public-internet
+          - lte
+          - 3g
+          - red
+          - green
+          - blue
+          - gold
+          - silver
+          - bronze
+          - custom1
+          - custom2
+          - custom3
+          - private1
+          - private2
+          - private3
+          - private4
+          - private5
+          - private6
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Application-aware routing statistics:
+                  description: Application-aware routing statistics
+                  value:
+                    data:
+                    - src-ip: 10.101.3.3
+                      dst-ip: 10.101.2.2
+                      tx-data-pkts: '0'
+                      vdevice-name: 169.254.10.10
+                      src-port: 12346
+                      dst-port: '12426'
+                      remote-color: default
+                      remote-system-ip: 172.16.254.1
+                      fallback-sla-class-index: None
+                      mean-latency: 0
+                      total-packets: '600'
+                      loss: '0'
+                      mean-jitter: 0
+                      average-latency: '0'
+                      index: '3'
+                      sla-class-index: '0'
+                      vdevice-host-name: vm3
+                      local-color: default
+                      app-probe-class: None
+                      mean-loss: 0
+                      vdevice-dataKey: 169.254.10.10-3
+                      proto: ipsec
+                      lastupdated: 1642577794383
+                      average-jitter: '0'
+                      rx-data-pkts: '0'
+                    - src-ip: 10.101.3.3
+                      dst-ip: 10.101.2.2
+                      tx-data-pkts: '0'
+                      vdevice-name: 169.254.10.10
+                      src-port: 12346
+                      dst-port: '12426'
+                      remote-color: default
+                      remote-system-ip: 172.16.254.1
+                      fallback-sla-class-index: None
+                      mean-latency: 0
+                      total-packets: '600'
+                      loss: '0'
+                      mean-jitter: 0
+                      average-latency: '0'
+                      index: '4'
+                      sla-class-index: '0'
+                      vdevice-host-name: vm3
+                      local-color: default
+                      app-probe-class: None
+                      mean-loss: 0
+                      vdevice-dataKey: 169.254.10.10-4
+                      proto: ipsec
+                      lastupdated: 1642577794385
+                      average-jitter: '0'
+                      rx-data-pkts: '0'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write

@@ -1,0 +1,651 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - Hardware API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - Hardware
+paths:
+  /device/hardware/alarms:
+    get:
+      tags:
+      - Real-Time Monitoring - Hardware
+      description: Get hardware alarm list from device
+      operationId: createAlarmList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Hardware alarm list:
+                  description: Hardware alarm list
+                  value:
+                    data:
+                    - alarm-time: '2022-04-26T02:28:26+00:00'
+                      vdevice-dataKey: 10.0.0.121-22-0
+                      vdevice-name: 10.0.0.121
+                      alarm-id: '22'
+                      alarm-description: PowerSupply/FANModuleMissing
+                      lastupdated: 1652171693495
+                      alarm-instance: '0'
+                      alarm-category: alarm-severity-critical
+                      vdevice-host-name: Router
+                      alarm-name: PowerSupplyBay1
+                    - alarm-time: '2022-04-26T02:28:26+00:00'
+                      vdevice-dataKey: 10.0.0.121-62-0
+                      vdevice-name: 10.0.0.121
+                      alarm-id: '62'
+                      alarm-description: PowerOverEthernetModuleMissing
+                      lastupdated: 1652171693495
+                      alarm-instance: '0'
+                      alarm-category: alarm-severity-info
+                      vdevice-host-name: Router
+                      alarm-name: POEBay0
+                    - alarm-time: '2022-04-26T02:28:26+00:00'
+                      vdevice-dataKey: 10.0.0.121-82-0
+                      vdevice-name: 10.0.0.121
+                      alarm-id: '82'
+                      alarm-description: PowerOverEthernetModuleMissing
+                      lastupdated: 1652171693495
+                      alarm-instance: '0'
+                      alarm-category: alarm-severity-info
+                      vdevice-host-name: Router
+                      alarm-name: POEBay1
+                    - alarm-time: '2022-04-26T02:29:44+00:00'
+                      vdevice-dataKey: 10.0.0.121-1090-1
+                      vdevice-name: 10.0.0.121
+                      alarm-id: '1090'
+                      alarm-description: TransceiverMissing-LinkDown
+                      lastupdated: 1652171693495
+                      alarm-instance: '1'
+                      alarm-category: alarm-severity-info
+                      vdevice-host-name: Router
+                      alarm-name: subslot0/0transceivercontainer0
+                    - alarm-time: '2022-04-26T02:29:44+00:00'
+                      vdevice-dataKey: 10.0.0.121-1100-1
+                      vdevice-name: 10.0.0.121
+                      alarm-id: '1100'
+                      alarm-description: TransceiverMissing-LinkDown
+                      lastupdated: 1652171693495
+                      alarm-instance: '1'
+                      alarm-category: alarm-severity-info
+                      vdevice-host-name: Router
+                      alarm-name: subslot0/0transceivercontainer1
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write
+  /device/hardware/environment:
+    get:
+      tags:
+      - Real-Time Monitoring - Hardware
+      description: Get hardware environment list from device
+      operationId: createEnvironmentList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Hardware environment list:
+                  description: Hardware environment list
+                  value:
+                    data:
+                    - vdevice-dataKey: 169.254.10.10-Interface module-0
+                      vdevice-name: 169.254.10.10
+                      hw-class: PIM
+                      hw-item: Interface module
+                      hw-dev-index: 0
+                      lastupdated: 1643076101789
+                      vdevice-host-name: vm3
+                      measurement: 'Present: yes; Powered On: no; Fault: no'
+                      status: Down
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write
+  /device/hardware/errors:
+    get:
+      tags:
+      - Real-Time Monitoring - Hardware
+      description: Get hardware error list from device
+      operationId: createErrorAlarmList
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Hardware error list:
+                  description: Hardware error list
+                  value:
+                    data:
+                    - vdevice-dataKey: 169.254.10.10-Interface module-0
+                      vdevice-name: 169.254.10.10
+                      vdevice-host-name: vm3
+                      alarm-id: '22'
+                      alarm-instance: '0'
+                      alarm-name: POEBay0
+                      alarm-time: '2022-04-26T02:28:26+00:00'
+                      alarm-category: alarm-severity-critical
+                      alarm-description: PowerSupply/FANModuleMissing
+                      lastupdated: 1652171693495
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write
+  /device/hardware/inventory:
+    get:
+      tags:
+      - Real-Time Monitoring - Hardware
+      description: Get hardware inventory list from device
+      operationId: createInventoryList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Hardware inventory list:
+                  description: Hardware inventory list
+                  value:
+                    data:
+                    - hw-type: Chassis
+                      vdevice-dataKey: 169.254.10.10-Chassis-0
+                      vdevice-name: 169.254.10.10
+                      hw-dev-index: 0
+                      serial-number: sim
+                      part-number: vEdge-Cloud
+                      lastupdated: 1643076350328
+                      version: '1.0'
+                      vdevice-host-name: vm3
+                      hw-description: vEdge-Cloud
+                    - hw-type: PIM
+                      vdevice-dataKey: 169.254.10.10-PIM-0
+                      vdevice-name: 169.254.10.10
+                      hw-dev-index: 0
+                      serial-number: None
+                      part-number: ge-8
+                      lastupdated: 1643076350328
+                      version: None
+                      vdevice-host-name: vm3
+                      hw-description: Max 8 x 1GE VM ports
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write
+  /device/hardware/status/summary:
+    get:
+      tags:
+      - Real-Time Monitoring - Hardware
+      description: Get hardware status summary from device
+      operationId: createStatusSummary
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Hardware status summary:
+                  description: Hardware status summary
+                  value:
+                    data:
+                    - vdevice-name: 10.0.0.121
+                      createTimeStamp: 1611557599955
+                      current-reading: '1015'
+                      vdevice-host-name: Router
+                      sensor-name: voltage
+                      vdevice-dataKey: 10.0.0.121-V:Vcore-A-R0
+                      '@rid': 927
+                      vmanage-system-ip: 10.0.0.121
+                      sensor-units: millivolts
+                      name: V:Vcore-A
+                      lastupdated: 1652152463462
+                      location: R0
+                      state: Normal
+                    - vdevice-name: 10.0.0.121
+                      createTimeStamp: 1611557593593
+                      current-reading: '31'
+                      vdevice-host-name: Router
+                      sensor-name: temperature
+                      vdevice-dataKey: 10.0.0.121-Temp:Temp1-P0
+                      '@rid': 1731
+                      vmanage-system-ip: 10.0.0.121
+                      sensor-units: celsius
+                      name: Temp:Temp1
+                      lastupdated: 1651807463843
+                      location: P0
+                      state: Normal
+                    - vdevice-name: 10.0.0.121
+                      createTimeStamp: 1611557593651
+                      current-reading: '25'
+                      vdevice-host-name: Router
+                      sensor-name: temperature
+                      vdevice-dataKey: 10.0.0.121-Temp:Temp2-P0
+                      '@rid': 1760
+                      vmanage-system-ip: 10.0.0.121
+                      sensor-units: celsius
+                      name: Temp:Temp2
+                      lastupdated: 1652152463462
+                      location: P0
+                      state: Normal
+                    - vdevice-name: 10.0.0.121
+                      createTimeStamp: 1611557599821
+                      current-reading: '1508'
+                      vdevice-host-name: Router
+                      sensor-name: voltage
+                      vdevice-dataKey: 10.0.0.121-V:1.5v-A-R0
+                      '@rid': 1881
+                      vmanage-system-ip: 10.0.0.121
+                      sensor-units: millivolts
+                      name: V:1.5v-A
+                      lastupdated: 1652152463462
+                      location: R0
+                      state: Normal
+                    - vdevice-name: 10.0.0.121
+                      createTimeStamp: 1611557593684
+                      current-reading: '28'
+                      vdevice-host-name: Router
+                      sensor-name: temperature
+                      vdevice-dataKey: 10.0.0.121-Temp:Temp3-P0
+                      '@rid': 2044
+                      vmanage-system-ip: 10.0.0.121
+                      sensor-units: celsius
+                      name: Temp:Temp3
+                      lastupdated: 1651999921808
+                      location: P0
+                      state: Normal
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write
+  /device/hardware/synced/alarms:
+    get:
+      tags:
+      - Real-Time Monitoring - Hardware
+      description: Get hardware alarm list synchronously from device
+      operationId: createSyncedAlarmList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Hardware alarm list:
+                  description: Hardware alarm list
+                  value:
+                    data:
+                    - vdevice-name: 10.0.0.121
+                      alarm-id: '22'
+                      alarm-description: PowerSupply/FANModuleMissing
+                      createTimeStamp: 1650884158338
+                      alarm-instance: '0'
+                      vdevice-host-name: Router
+                      alarm-time: '2022-04-26T02:28:26+00:00'
+                      vdevice-dataKey: 10.0.0.121-22-0
+                      '@rid': 3034
+                      vmanage-system-ip: 10.0.0.121
+                      lastupdated: 1650941679362
+                      alarm-category: alarm-severity-critical
+                      alarm-name: PowerSupplyBay1
+                    - vdevice-name: 10.0.0.121
+                      alarm-id: '62'
+                      alarm-description: PowerOverEthernetModuleMissing
+                      createTimeStamp: 1650884158392
+                      alarm-instance: '0'
+                      vdevice-host-name: Router
+                      alarm-time: '2022-04-26T02:28:26+00:00'
+                      vdevice-dataKey: 10.0.0.121-62-0
+                      '@rid': 3035
+                      vmanage-system-ip: 10.0.0.121
+                      lastupdated: 1650941679362
+                      alarm-category: alarm-severity-info
+                      alarm-name: POEBay0
+                    - vdevice-name: 10.0.0.121
+                      alarm-id: '82'
+                      alarm-description: PowerOverEthernetModuleMissing
+                      createTimeStamp: 1650884158434
+                      alarm-instance: '0'
+                      vdevice-host-name: Router
+                      alarm-time: '2022-04-26T02:28:26+00:00'
+                      vdevice-dataKey: 10.0.0.121-82-0
+                      '@rid': 3036
+                      vmanage-system-ip: 10.0.0.121
+                      lastupdated: 1650941679362
+                      alarm-category: alarm-severity-info
+                      alarm-name: POEBay1
+                    - vdevice-name: 10.0.0.121
+                      alarm-id: '1090'
+                      alarm-description: TransceiverMissing-LinkDown
+                      createTimeStamp: 1650884158484
+                      alarm-instance: '1'
+                      vdevice-host-name: Router
+                      alarm-time: '2022-04-26T02:29:44+00:00'
+                      vdevice-dataKey: 10.0.0.121-1090-1
+                      '@rid': 3037
+                      vmanage-system-ip: 10.0.0.121
+                      lastupdated: 1650941679362
+                      alarm-category: alarm-severity-info
+                      alarm-name: subslot0/0transceivercontainer0
+                    - vdevice-name: 10.0.0.121
+                      alarm-id: '1100'
+                      alarm-description: TransceiverMissing-LinkDown
+                      createTimeStamp: 1650884158543
+                      alarm-instance: '1'
+                      vdevice-host-name: Router
+                      alarm-time: '2022-04-26T02:29:44+00:00'
+                      vdevice-dataKey: 10.0.0.121-1100-1
+                      '@rid': 3042
+                      vmanage-system-ip: 10.0.0.121
+                      lastupdated: 1650941679362
+                      alarm-category: alarm-severity-info
+                      alarm-name: subslot0/0transceivercontainer1
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write
+  /device/hardware/synced/environment:
+    get:
+      tags:
+      - Real-Time Monitoring - Hardware
+      description: Get hardware environment list synchronously from device
+      operationId: createSyncedEnvironmentList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Hardware environment list:
+                  description: Hardware environment list
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.11
+                      hw-dev-index: 0
+                      createTimeStamp: 1647316012518
+                      vdevice-host-name: vm1
+                      measurement: Present:yes;PoweredOn:no;Fault:no
+                      vdevice-dataKey: 172.16.255.11-Interfacemodule-0
+                      '@rid': 1156
+                      hw-item: Interfacemodule
+                      hw-class: PIM
+                      vmanage-system-ip: 172.16.255.11
+                      lastupdated: 1647316012314
+                      status: Down
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write
+  /device/hardware/synced/inventory:
+    get:
+      tags:
+      - Real-Time Monitoring - Hardware
+      description: Get hardware inventory list synchronously from device
+      operationId: createSyncedInventoryList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Hardware inventory list:
+                  description: Hardware inventory list
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.11
+                      serial-number: sim
+                      hw-dev-index: 0
+                      createTimeStamp: 1647316018898
+                      version: '1.0'
+                      vdevice-host-name: vm1
+                      hw-description: vEdge-Cloud
+                      hw-type: Chassis
+                      vdevice-dataKey: 172.16.255.11-Chassis-0
+                      '@rid': 1163
+                      vmanage-system-ip: 172.16.255.11
+                      part-number: vEdge-Cloud
+                      lastupdated: 1647316017498
+                    - vdevice-name: 172.16.255.11
+                      serial-number: None
+                      hw-dev-index: 0
+                      createTimeStamp: 1647316036497
+                      version: None
+                      vdevice-host-name: vm1
+                      hw-description: Max8x1GEVMports
+                      hw-type: PIM
+                      vdevice-dataKey: 172.16.255.11-PIM-0
+                      '@rid': 1169
+                      vmanage-system-ip: 172.16.255.11
+                      part-number: ge-8
+                      lastupdated: 1647316017498
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write
+  /device/hardware/system:
+    get:
+      tags:
+      - Real-Time Monitoring - Hardware
+      description: Get hardware system data list from device
+      operationId: createSystemList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Hardware system data list:
+                  description: Hardware system data list
+                  value:
+                  - last-reboot-reason: reload
+                    software-version: 'Cisco IOS Software [Cupertino], Virtual XE Software (X86_64_LINUX_IOSD-UNIVERSALK9-M), Experimental Version 17.8.20211216:090342 [BLD_POLARIS_DEV_LATEST_20211216_061759:/nobackup/mcpre/s2c-build-ws 101]
+
+                      Copyright (c) 1986-2021 by Cisco Systems, Inc.
+
+                      Compiled Thu 16-Dec-21 01:03 by mcpre'
+                    lastupdated: 1643186341301
+                    vdevice-dataKey: 172.16.255.15-2022-01-26T08:40:53.165+00:00-2022-01-26T08:37:03+00:00
+                    boot-time: '2022-01-26T08:37:03+00:00'
+                    rommon-version: IOS-XE ROMMON
+                    current-time: '2022-01-26T08:40:53.165+00:00'
+                    vdevice-host-name: vm5
+                    vdevice-name: 172.16.255.15
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write
+  /device/hardware/threshold:
+    get:
+      tags:
+      - Real-Time Monitoring - Hardware
+      description: Get hardware temperature list from device
+      operationId: createTempThresholdList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Hardware temperature list:
+                  description: Hardware temperature list
+                  value:
+                    data:
+                    - vdevice-name: 169.254.10.9
+                      vdevice-host-name: vm2
+                      hw-sensor-type: Board
+                      hw-dev-index: '0'
+                      fan-speed-normal: '64'
+                      yellow-alarm-normal: '65'
+                      yellow-alarm-bad-fan: '60'
+                      red-alarm-normal: '80'
+                      red-alarm-bad-fan: '75'
+                      lastupdated: 1658194642863
+                      vdevice-dataKey: 169.254.10.9-Interface module-0
+                    - vdevice-name: 169.254.10.9
+                      vdevice-host-name: vm2
+                      hw-sensor-type: CPU Junction
+                      hw-dev-index: '1'
+                      fan-speed-normal: '64'
+                      yellow-alarm-normal: '65'
+                      yellow-alarm-bad-fan: '60'
+                      red-alarm-normal: '80'
+                      red-alarm-bad-fan: '75'
+                      lastupdated: 1658194642863
+                      vdevice-dataKey: 169.254.10.9-Interface module-1
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write

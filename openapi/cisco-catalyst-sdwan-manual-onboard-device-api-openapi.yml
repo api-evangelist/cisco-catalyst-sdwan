@@ -1,0 +1,338 @@
+openapi: 3.2.0
+info:
+  title: Others Manual Onboard Device API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Manual Onboard Device
+paths:
+  /onboard/delete-devices:
+    post:
+      tags:
+      - Manual Onboard Device
+      summary: Delete Manual Onboard Device details
+      description: Delete Manual Onboard Device details
+      operationId: deleteDevices
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                devices:
+                  type: array
+                  items:
+                    type: string
+              $$ref: '#/components/schemas/DeleteDetails'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                properties:
+                  empty:
+                    type: boolean
+                items:
+                  type: object
+                  properties:
+                    host:
+                      type: string
+                      example: 172.16.255.11
+                    reason:
+                      type: string
+                      example: Software install task is in progress or scheduled for this device
+                  $$ref: '#/components/schemas/DeleteResponseInner'
+                $$ref: '#/components/schemas/DeleteResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /onboard/details:
+    post:
+      tags:
+      - Manual Onboard Device
+      summary: Add Manual Onboard Device details
+      description: Add Manual Onboard Device details
+      operationId: addDevices
+      requestBody:
+        description: On board Device details
+        content:
+          application/json:
+            schema:
+              required:
+              - devices
+              type: object
+              properties:
+                devices:
+                  maxItems: 2147483647
+                  minItems: 1
+                  type: array
+                  description: Device list to onboard
+                  items:
+                    required:
+                    - host
+                    - password
+                    - username
+                    - wan
+                    type: object
+                    properties:
+                      device_uuid:
+                        type: string
+                        description: device uuid/chassis number
+                        example: C8K-4facbd05-855b-45f0-af2f-c844af179bd6
+                      enable_password:
+                        type: string
+                        description: enable password
+                        example: admin
+                      host:
+                        pattern: ((^\s*((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))\s*$)|(^\s*((([0-9a-f]{1,4}:){7}([0-9a-f]{1,4}|:))|(([0-9a-f]{1,4}:){6}(:[0-9a-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9a-f]{1,4}:){5}(((:[0-9a-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9a-f]{1,4}:){4}(((:[0-9a-f]{1,4}){1,3})|((:[0-9a-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9a-f]{1,4}:){3}(((:[0-9a-f]{1,4}){1,4})|((:[0-9a-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9a-f]{1,4}:){2}(((:[0-9a-f]{1,4}){1,5})|((:[0-9a-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9a-f]{1,4}:){1}(((:[0-9a-f]{1,4}){1,6})|((:[0-9a-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9a-f]{1,4}){1,7})|((:[0-9a-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?\s*$))
+                        type: string
+                        description: host ip
+                        example: 1.1.1.1
+                      local_file_name:
+                        type: string
+                        description: local file name
+                        example: c8000v-universalk9.17.12.01.0.175851.SSA.bin
+                      password:
+                        type: string
+                        description: ssh password
+                        example: admin
+                      remote_server_file_name:
+                        type: string
+                        description: remote server file name
+                        example: c8000v-universalk9.17.12.01.0.175851.SSA.bin
+                      remote_server_id:
+                        type: string
+                        description: remote server Id
+                        example: 56a32849-aafb-4703-8887-ba64c0394835
+                      username:
+                        type: string
+                        description: ssh username
+                        example: admin
+                      wan:
+                        maxLength: 32
+                        minLength: 3
+                        pattern: (Cellular|Dialer|Ethernet|FastEthernet|FiftyGigabitEthernet|FiveGigabitEthernet|FortyGigabitEthernet|FourHundredGigE|GigabitEthernet|HundredGigE|Loopback|Multilink|Port-channel|Serial|TenGigabitEthernet|Tunnel|TwentyFiveGigE|TwentyFiveGigabitEthernet|TwoGigabitEthernet|TwoHundredGigE|Vlan|Wlan-GigabitEthernet)([0-9]*(. ?[1-9][0-9]*)*|[0-9/]+|[0-9]+/[0-9]+/[0-9]+:[0-9]+|[0-9]+/[0-9]+/[0-9]+|[0-9]+/[0-9]+|[0-9]+)
+                        type: string
+                        description: WAN interface name
+                        example: GigabitEthernet1
+                    description: Device list to onboard
+                    $$ref: '#/components/schemas/DeviceDetails'
+              $$ref: '#/components/schemas/DeviceDetailsData'
+        required: true
+      responses:
+        '201':
+          description: item created
+        '400':
+          description: Bad Request
+        '409':
+          description: an existing item already exists
+  /onboard/devices:
+    get:
+      tags:
+      - Manual Onboard Device
+      summary: GET Manual Onboard Device details
+      description: GET Manual Onboard Device details
+      operationId: getDevices_ManualOnboardDevice_1603
+      parameters:
+      - name: status
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                properties:
+                  empty:
+                    type: boolean
+                items:
+                  required:
+                  - devices
+                  type: object
+                  properties:
+                    devices:
+                      maxItems: 2147483647
+                      minItems: 1
+                      type: array
+                      description: Device list to onboard
+                      items:
+                        required:
+                        - host
+                        - password
+                        - username
+                        - wan
+                        type: object
+                        properties:
+                          device_uuid:
+                            type: string
+                            description: device uuid/chassis number
+                            example: C8K-4facbd05-855b-45f0-af2f-c844af179bd6
+                          enable_password:
+                            type: string
+                            description: enable password
+                            example: admin
+                          host:
+                            pattern: ((^\s*((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))\s*$)|(^\s*((([0-9a-f]{1,4}:){7}([0-9a-f]{1,4}|:))|(([0-9a-f]{1,4}:){6}(:[0-9a-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9a-f]{1,4}:){5}(((:[0-9a-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9a-f]{1,4}:){4}(((:[0-9a-f]{1,4}){1,3})|((:[0-9a-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9a-f]{1,4}:){3}(((:[0-9a-f]{1,4}){1,4})|((:[0-9a-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9a-f]{1,4}:){2}(((:[0-9a-f]{1,4}){1,5})|((:[0-9a-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9a-f]{1,4}:){1}(((:[0-9a-f]{1,4}){1,6})|((:[0-9a-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9a-f]{1,4}){1,7})|((:[0-9a-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?\s*$))
+                            type: string
+                            description: host ip
+                            example: 1.1.1.1
+                          local_file_name:
+                            type: string
+                            description: local file name
+                            example: c8000v-universalk9.17.12.01.0.175851.SSA.bin
+                          password:
+                            type: string
+                            description: ssh password
+                            example: admin
+                          remote_server_file_name:
+                            type: string
+                            description: remote server file name
+                            example: c8000v-universalk9.17.12.01.0.175851.SSA.bin
+                          remote_server_id:
+                            type: string
+                            description: remote server Id
+                            example: 56a32849-aafb-4703-8887-ba64c0394835
+                          username:
+                            type: string
+                            description: ssh username
+                            example: admin
+                          wan:
+                            maxLength: 32
+                            minLength: 3
+                            pattern: (Cellular|Dialer|Ethernet|FastEthernet|FiftyGigabitEthernet|FiveGigabitEthernet|FortyGigabitEthernet|FourHundredGigE|GigabitEthernet|HundredGigE|Loopback|Multilink|Port-channel|Serial|TenGigabitEthernet|Tunnel|TwentyFiveGigE|TwentyFiveGigabitEthernet|TwoGigabitEthernet|TwoHundredGigE|Vlan|Wlan-GigabitEthernet)([0-9]*(. ?[1-9][0-9]*)*|[0-9/]+|[0-9]+/[0-9]+/[0-9]+:[0-9]+|[0-9]+/[0-9]+/[0-9]+|[0-9]+/[0-9]+|[0-9]+)
+                            type: string
+                            description: WAN interface name
+                            example: GigabitEthernet1
+                        description: Device list to onboard
+                        $$ref: '#/components/schemas/DeviceDetails'
+                  $$ref: '#/components/schemas/DeviceDetailsData'
+                $$ref: '#/components/schemas/Details'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+      - Manual Onboard Device
+      summary: Manual Onboard added Device details
+      description: Manual Onboard added Device details
+      operationId: manualOnboardDevices
+      requestBody:
+        description: On board Devices
+        content:
+          application/json:
+            schema:
+              required:
+              - devices
+              type: object
+              properties:
+                devices:
+                  maxItems: 2147483647
+                  minItems: 1
+                  type: array
+                  description: Device list to onboard
+                  items:
+                    required:
+                    - host
+                    - password
+                    - username
+                    - wan
+                    type: object
+                    properties:
+                      device_uuid:
+                        type: string
+                        description: device uuid/chassis number
+                        example: C8K-4facbd05-855b-45f0-af2f-c844af179bd6
+                      enable_password:
+                        type: string
+                        description: enable password
+                        example: admin
+                      host:
+                        pattern: ((^\s*((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))\s*$)|(^\s*((([0-9a-f]{1,4}:){7}([0-9a-f]{1,4}|:))|(([0-9a-f]{1,4}:){6}(:[0-9a-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9a-f]{1,4}:){5}(((:[0-9a-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9a-f]{1,4}:){4}(((:[0-9a-f]{1,4}){1,3})|((:[0-9a-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9a-f]{1,4}:){3}(((:[0-9a-f]{1,4}){1,4})|((:[0-9a-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9a-f]{1,4}:){2}(((:[0-9a-f]{1,4}){1,5})|((:[0-9a-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9a-f]{1,4}:){1}(((:[0-9a-f]{1,4}){1,6})|((:[0-9a-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9a-f]{1,4}){1,7})|((:[0-9a-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?\s*$))
+                        type: string
+                        description: host ip
+                        example: 1.1.1.1
+                      local_file_name:
+                        type: string
+                        description: local file name
+                        example: c8000v-universalk9.17.12.01.0.175851.SSA.bin
+                      password:
+                        type: string
+                        description: ssh password
+                        example: admin
+                      remote_server_file_name:
+                        type: string
+                        description: remote server file name
+                        example: c8000v-universalk9.17.12.01.0.175851.SSA.bin
+                      remote_server_id:
+                        type: string
+                        description: remote server Id
+                        example: 56a32849-aafb-4703-8887-ba64c0394835
+                      username:
+                        type: string
+                        description: ssh username
+                        example: admin
+                      wan:
+                        maxLength: 32
+                        minLength: 3
+                        pattern: (Cellular|Dialer|Ethernet|FastEthernet|FiftyGigabitEthernet|FiveGigabitEthernet|FortyGigabitEthernet|FourHundredGigE|GigabitEthernet|HundredGigE|Loopback|Multilink|Port-channel|Serial|TenGigabitEthernet|Tunnel|TwentyFiveGigE|TwentyFiveGigabitEthernet|TwoGigabitEthernet|TwoHundredGigE|Vlan|Wlan-GigabitEthernet)([0-9]*(. ?[1-9][0-9]*)*|[0-9/]+|[0-9]+/[0-9]+/[0-9]+:[0-9]+|[0-9]+/[0-9]+/[0-9]+|[0-9]+/[0-9]+|[0-9]+)
+                        type: string
+                        description: WAN interface name
+                        example: GigabitEthernet1
+                    description: Device list to onboard
+                    $$ref: '#/components/schemas/DeviceDetails'
+              $$ref: '#/components/schemas/DeviceDetailsData'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value:
+                    parentTaskId: sd_routing_device_onboard-6f1fafdf-3389-457e-b6a6-f756f1644efa
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

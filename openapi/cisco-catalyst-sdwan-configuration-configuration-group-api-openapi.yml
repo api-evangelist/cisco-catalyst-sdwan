@@ -1,0 +1,1984 @@
+openapi: 3.2.0
+info:
+  title: UX 2.0 Configuration Configuration - Configuration Group API
+  description: "Configuration of UX 2.0 device, policy, and topology\nIncludes API operations for the following\n  Configuration Groups (SD-WAN and SD-Routing)\n  Policy Groups\n  Topology Groups"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Configuration - Configuration Group
+paths:
+  /v1/config-group:
+    get:
+      tags:
+      - Configuration - Configuration Group
+      description: Get a Configuration Group by Solution
+      operationId: GetConfigGroupBySolution
+      parameters:
+      - name: solution
+        in: query
+        schema:
+          type: string
+      - name: name
+        in: query
+        schema:
+          pattern: ^[^&<>! "]{1,128}$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  required:
+                  - name
+                  - solution
+                  - state
+                  - version
+                  type: object
+                  properties:
+                    copyInfo:
+                      type: string
+                    createdBy:
+                      type: string
+                      description: User who last created this.
+                      readOnly: true
+                    createdOn:
+                      type: integer
+                      description: Timestamp of creation
+                      format: int64
+                      readOnly: true
+                    description:
+                      type: string
+                      description: Description of the  Group.
+                      example: group for west coast retail stores
+                    devices:
+                      uniqueItems: true
+                      type: array
+                      items:
+                        type: string
+                    fullConfigCli:
+                      type: boolean
+                    id:
+                      type: string
+                      description: System generated unique identifier of the  Group in UUID format.
+                      example: 6fa14197-c25f-4a14-b81b-299de32ed2ca
+                    iosConfigCli:
+                      type: boolean
+                    lastUpdatedBy:
+                      type: string
+                      description: User who last updated this.
+                      readOnly: true
+                    lastUpdatedOn:
+                      type: integer
+                      description: Timestamp of last update
+                      format: int64
+                      readOnly: true
+                    name:
+                      type: string
+                      description: Name of the  Group. Must be unique.
+                      example: West coast retail stores
+                    numberOfDevices:
+                      type: integer
+                      format: int64
+                    numberOfDevicesUpToDate:
+                      type: integer
+                      format: int64
+                    origin:
+                      type: string
+                    originInfo:
+                      type: object
+                      additionalProperties:
+                        type: string
+                    profiles:
+                      type: array
+                      description: List of devices UUIDs associated with this group
+                      example:
+                      - id: 6fa14197-c25f-4a14-b81b-299de32ed2ca
+                        name: system feature profile
+                        solution: sdwan
+                        type: system
+                        description: Profile file description
+                        lastUpdatedBy: admin
+                        lastUpdatedOn: 1694179200000
+                        createdBy: admin
+                        createdOn: 1694092800000
+                        profileParcelCount: 5
+                        origin: internal
+                      items:
+                        required:
+                        - name
+                        - solution
+                        - type
+                        type: object
+                        properties:
+                          createdBy:
+                            type: string
+                            description: User who last created this.
+                            readOnly: true
+                          createdOn:
+                            type: integer
+                            description: Timestamp of creation
+                            format: int64
+                            readOnly: true
+                          description:
+                            type: string
+                            description: Description of the feature Profile.
+                            example: Profile file description
+                          id:
+                            type: string
+                            description: System generated unique identifier of the feature profile in UUID format.
+                            example: 6fa14197-c25f-4a14-b81b-299de32ed2ca
+                          lastUpdatedBy:
+                            type: string
+                            description: User who last updated this.
+                            readOnly: true
+                          lastUpdatedOn:
+                            type: integer
+                            description: Timestamp of last update
+                            format: int64
+                            readOnly: true
+                          name:
+                            type: string
+                            description: Name of the feature Profile. Must be unique.
+                            example: system feature profile
+                          origin:
+                            type: string
+                          profileParcelCount:
+                            type: integer
+                            description: Number of Parcels attached with Feature Profile
+                            format: int64
+                            readOnly: true
+                          solution:
+                            type: string
+                            description: Solution of the feature Profile.
+                            example: sdwan
+                          type:
+                            type: string
+                            description: Type of the feature Profile.
+                            example: system
+                        $$ref: '#/components/schemas/FeatureProfile'
+                    solution:
+                      type: string
+                      description: Specify one of the device platform solution
+                      example: sdwan
+                      enum:
+                      - mobility
+                      - sdwan
+                      - sd-routing
+                      - common
+                      - nfvirtual
+                      - service-insertion
+                      - cellulargateway
+                    source:
+                      type: string
+                      description: Source of group
+                      example: retail_workflow
+                    state:
+                      type: string
+                      description: ' Group Deployment state'
+                      example: ' Group Deployment state.Initial state Deployed '
+                    topology:
+                      type: object
+                      properties:
+                        devices:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              criteria:
+                                type: object
+                                properties:
+                                  attribute:
+                                    type: string
+                                    enum:
+                                    - tag
+                                  value:
+                                    type: string
+                                $$ref: '#/components/schemas/Criteria'
+                              unsupportedFeatures:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    parcelId:
+                                      type: string
+                                      format: uuid
+                                    parcelType:
+                                      type: string
+                                      enum:
+                                      - wan/vpn/interface/gre
+                                      - wan/vpn/interface/ethernet
+                                      - wan/vpn/interface/cellular
+                                      - wan/vpn/interface/ipsec
+                                      - wan/vpn/interface/serial
+                                      - wan/vpn/interface/dsl-pppoe
+                                      - wan/vpn/interface/dsl-pppoa
+                                      - wan/vpn/interface/dsl-ipoe
+                                      - routing/ospf
+                                      - lan/vpn/interface/ethernet
+                                      - lan/vpn/interface/gre
+                                      - lan/vpn/interface/svi
+                                      - lan/vpn/interface/ipsec
+                                      - lan/vpn
+                                      - global-vrf
+                                      - vrf/wan/interface/gre
+                                      - vrf/wan/interface/ethernet
+                                      - vrf/wan/interface/ipsec
+                                      - vrf/lan/interface/gre
+                                      - vrf/lan/interface/ethernet
+                                      - vrf/lan/interface/ipsec
+                                      - vrf
+                                      - vrf/routing/bgp
+                                      - global-vrf/routing/bgp
+                                      - wan/multicloud-connection
+                                      - lan/multicloud-connection
+                                      - vrf/wan/multicloud-connection
+                                      - vrf/lan/multicloud-connection
+                                      - global-vrf/wan/interface/ipsec
+                                      - routing/bgp
+                                      - route-policy
+                                      - service-insertion-attachment
+                                  $$ref: '#/components/schemas/UnsupportedFeature'
+                            $$ref: '#/components/schemas/ConfigGroupDevice'
+                        siteDevices:
+                          type: integer
+                          format: int32
+                      $$ref: '#/components/schemas/Topology'
+                    version:
+                      type: integer
+                      description: ' Group Version Flag'
+                      format: int64
+                    versionIncrementReason:
+                      type: string
+                  $$ref: '#/components/schemas/ConfigGroup'
+              examples:
+                West coast retail stores:
+                  value:
+                  - description: group for west coast retail stores
+                    id: 6fa14197-c25f-4a14-b81b-299de32ed2ca
+                    name: West coast retail stores
+                    profiles:
+                    - description: Profile file description
+                      id: 6fa14197-c25f-4a14-b81b-299de32ed2ca
+                      name: system feature profile
+                      solution: sdwan
+                      type: system
+                    solution: sdwan
+                    source: retail_workflow
+                    state: ' Group Deployment state.Initial state Deployed '
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Config Group-read
+    post:
+      tags:
+      - Configuration - Configuration Group
+      description: Create a new Configuration Group
+      operationId: CreateConfigGroup
+      requestBody:
+        description: Config Group
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  pattern: ^[^&<>! "]+$
+                  minLength: 1
+                  maxLength: 128
+                  $$ref: '#/components/schemas/CommonCommonDefs_cgFpPpNameDef'
+                description:
+                  type: string
+                source:
+                  type: string
+                  enum:
+                  - retail_workflow
+                  - custom_workflow
+                  - nfvirtual_workflow
+                  - equinix_workflow
+                solution:
+                  type: string
+                  enum:
+                  - mobility
+                  - sdwan
+                  - sd-routing
+                  - nfvirtual
+                  - service-insertion
+                  - cellulargateway
+                  $$ref: '#/components/schemas/CommonCommonDefs_solutionDef'
+                topology:
+                  type: object
+                  description: list of device provisioning rules that belongs to the config group topology
+                  properties:
+                    devices:
+                      type: array
+                      description: list of devices in a site
+                      minItems: 1
+                      maxItems: 20
+                      uniqueItems: true
+                      items:
+                        type: object
+                        properties:
+                          criteria:
+                            type: object
+                            oneOf:
+                            - properties:
+                                attribute:
+                                  type: string
+                                  enum:
+                                  - tag
+                                value:
+                                  type: string
+                                  pattern: ^[a-zA-Z0-9_\-]+$
+                              required:
+                              - attribute
+                              - value
+                              additionalProperties: false
+                          unsupportedFeatures:
+                            type: array
+                            uniqueItems: true
+                            items:
+                              properties:
+                                parcelType:
+                                  type: string
+                                  enum:
+                                  - wan/vpn/interface/gre
+                                  - wan/vpn/interface/ethernet
+                                  - wan/vpn/interface/cellular
+                                  - wan/vpn/interface/ipsec
+                                  - wan/vpn/interface/serial
+                                  - wan/vpn/interface/dsl-pppoa
+                                  - wan/vpn/interface/dsl-pppoe
+                                  - wan/vpn/interface/dsl-ipoe
+                                  - routing/ospf
+                                  - lan/vpn/interface/ethernet
+                                  - lan/vpn/interface/svi
+                                  - lan/vpn/interface/ipsec
+                                  - lan/vpn
+                                  - wan/multicloud-connection
+                                  - lan/multicloud-connection
+                                  - vrf/wan/interface/gre
+                                  - vrf/wan/interface/ethernet
+                                  - vrf/wan/interface/ipsec
+                                  - vrf/lan/interface/ethernet
+                                  - vrf/lan/interface/ipsec
+                                  - vrf
+                                  - vrf/wan/multicloud-connection
+                                  - vrf/lan/multicloud-connection
+                                  - vrf/routing/bgp
+                                  - routing/bgp
+                                  - route-policy
+                                  $$ref: '#/components/schemas/CommonCommonDefs_unsupportedFeaturesEnumDef'
+                                parcelId:
+                                  type: string
+                                  format: uuid
+                              required:
+                              - parcelType
+                              - parcelId
+                              additionalProperties: false
+                            additionalProperties: false
+                        required:
+                        - criteria
+                        additionalProperties: false
+                        $$ref: '#/components/schemas/ConfiggroupCommonPostRequest_topologyDevicePropertiesDef'
+                      additionalProperties: false
+                    siteDevices:
+                      type: integer
+                      minimum: 1
+                      maximum: 20
+                  required:
+                  - devices
+                  additionalProperties: false
+                  $$ref: '#/components/schemas/ConfiggroupCommonPostRequest_topologyDef'
+                profiles:
+                  type: array
+                  description: list of profile ids that belongs to the config group
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                    required:
+                    - id
+                    additionalProperties: false
+                    $$ref: '#/components/schemas/ConfiggroupCommonPostRequest_profileIdObjDef'
+                  uniqueItems: true
+                  additionalProperties: false
+                fromConfigGroup:
+                  type: object
+                  description: from another config group
+                  oneOf:
+                  - properties:
+                      copy:
+                        type: string
+                        pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+                        $$ref: '#/components/schemas/CommonCommonDefs_uuidDef'
+                    required:
+                    - copy
+                    additionalProperties: false
+                  $$ref: '#/components/schemas/ConfiggroupCommonPostRequest_fromConfigGroupDef'
+              required:
+              - name
+              - description
+              - solution
+              additionalProperties: false
+              $$ref: '#/components/schemas/ConfiggroupCommonPostRequest_SchemaPayload'
+            examples:
+              CEDGE-ConfigGroup1-NY:
+                value:
+                  name: CEDGE-ConfigGroup1-NY
+                  description: CEDGE Config Group 1 for devices at site NY
+                  solution: sdwan
+                  profiles:
+                  - id: EEBE1AaD-DbC6-A9C2-E5F2-a9aFDD993FED
+                  - id: 4D7eb1e4-Bf34-9aeA-58d8-C86824ECF8f4
+                  - id: 4C56e3c3-C67F-Cf66-d02f-8c666bd005CC
+                $$ref: '#/components/examples/ConfiggroupCommonPostRequest_CEDGE-ConfigGroup1-NY'
+              AON-ConfigGroup1-SF:
+                value:
+                  name: AON-ConfigGroup1-SF
+                  description: AON Config Group 1 for devices at site SF
+                  solution: mobility
+                $$ref: '#/components/examples/ConfiggroupCommonPostRequest_AON-ConfigGroup1-SF'
+              CEDGE-ConfigGroup2-DualDeviceSiteDeployment:
+                value:
+                  name: CEDGE-ConfigGroup2-DualDeviceSiteDeployment
+                  description: CEDGE Config Group 2 for Dual Device Site Deployment
+                  solution: sdwan
+                  topology:
+                    devices:
+                    - criteria:
+                        attribute: tag
+                        value: EdgeDevice_01
+                      unsupportedFeatures:
+                      - parcelType: wan/vpn/interface/ethernet
+                        parcelId: EEBE1AaD-DbC6-A9C2-E5F2-a9aFDD993FEE
+                      - parcelType: wan/vpn/interface/ethernet
+                        parcelId: EEBE1AaD-DbC6-A9C2-E5F2-a9aFDD993FEF
+                      - parcelType: wan/vpn/interface/ethernet
+                        parcelId: EEBE1AaD-DbC6-A9C2-E5F2-a9aFDD993FEG
+                    - criteria:
+                        attribute: tag
+                        value: EdgeDevice_02
+                      unsupportedFeatures:
+                      - parcelType: wan/vpn/interface/ethernet
+                        parcelId: FFBE1AaD-DbC6-A9C2-E5F2-a9aFDD993FEE
+                      - parcelType: wan/vpn/interface/ethernet
+                        parcelId: FGBE1AaD-DbC6-A9C2-E5F2-a9aFDD993FEF
+                      - parcelType: wan/vpn/interface/ethernet
+                        parcelId: FMBE1AaD-DbC6-A9C2-E5F2-a9aFDD993FEG
+                    siteDevices: 2
+                  profiles:
+                  - id: EEBE1AaD-DbC6-A9C2-E5F2-a9aFDD993FED
+                  - id: 4D7eb1e4-Bf34-9aeA-58d8-C86824ECF8f4
+                  - id: 4C56e3c3-C67F-Cf66-d02f-8c666bd005CC
+                $$ref: '#/components/examples/ConfiggroupCommonPostRequest_CEDGE-ConfigGroup2-DualDeviceSiteDeployment'
+              NFVIRTUAL-ConfigGroup1-SF:
+                value:
+                  name: NFVIRTUAL-ConfigGroup1-SF
+                  description: NFVIRTUAL Config Group 1 for devices at site SF
+                  solution: nfvirtual
+                  profiles:
+                  - id: EEBE1AaD-DbC6-A9C2-E5F2-a9aFDD993F99
+                  - id: 4D7eb1e4-Bf34-9aeA-58d8-C86824ECF8f4
+                $$ref: '#/components/examples/ConfiggroupCommonPostRequest_NFVIRTUAL-ConfigGroup1-SF'
+              CEDGE-ConfigGroup1-COPY:
+                value:
+                  name: CEDGE-ConfigGroup1-COPY
+                  description: Copy Config Group from EEBE1AaD-DbC6-A9C2-E5F2-a9aFDD993F99
+                  solution: sdwan
+                  fromConfigGroup:
+                    copy: EEBE1AaD-DbC6-A9C2-E5F2-a9aFDD993F99
+                $$ref: '#/components/examples/ConfiggroupCommonPostRequest_CEDGE-ConfigGroup1-COPY'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+                  profiles:
+                    type: array
+                    description: (Optional - only applicable for AON) List of profile ids that belongs to the config group
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        profileType:
+                          type: string
+                          enum:
+                          - global
+                      required:
+                      - id
+                      - profileType
+                      additionalProperties: false
+                      $$ref: '#/components/schemas/ConfiggroupCommonPostResponse_profileObjDef'
+                required:
+                - id
+                additionalProperties: false
+                $$ref: '#/components/schemas/ConfiggroupCommonPostResponse_SchemaPayload'
+              examples:
+                example_1:
+                  value:
+                    id: 3EEF02A6-DD2A-bE42-ae6d-cda4CF2C30ac
+                  $$ref: '#/components/examples/ConfiggroupCommonPostResponse_example_1'
+                example_2:
+                  value:
+                    id: 5eDFc2F7-3F0A-0Efe-6E1f-E5caAE0C6060
+                    profiles:
+                    - id: 002C4d1e-AA45-8e75-8CAB-C9CA0FE882a6
+                      profileType: global
+                  $$ref: '#/components/examples/ConfiggroupCommonPostResponse_example_2'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Config Group-write
+  /v1/config-group/{configGroupId}:
+    put:
+      tags:
+      - Configuration - Configuration Group
+      description: Edit a Configuration Group
+      operationId: EditConfigGroup
+      parameters:
+      - name: configGroupId
+        in: path
+        required: true
+        schema:
+          pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+          type: string
+      requestBody:
+        description: Config Group
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  pattern: ^[^&<>! "]+$
+                  minLength: 1
+                  maxLength: 128
+                  $$ref: '#/components/schemas/CommonCommonDefs_cgFpPpNameDef'
+                description:
+                  type: string
+                solution:
+                  type: string
+                  enum:
+                  - mobility
+                  - sdwan
+                  - sd-routing
+                  - nfvirtual
+                  - service-insertion
+                  - cellulargateway
+                  $$ref: '#/components/schemas/CommonCommonDefs_solutionDef'
+                topology:
+                  type: object
+                  description: list of device provisioning rules that belongs to the config group topology
+                  properties:
+                    devices:
+                      type: array
+                      description: list of devices in a site
+                      minItems: 1
+                      maxItems: 20
+                      uniqueItems: true
+                      items:
+                        type: object
+                        properties:
+                          criteria:
+                            type: object
+                            oneOf:
+                            - properties:
+                                attribute:
+                                  type: string
+                                  enum:
+                                  - tag
+                                value:
+                                  type: string
+                                  pattern: ^[a-zA-Z0-9_\-]+$
+                              required:
+                              - attribute
+                              - value
+                              additionalProperties: false
+                          unsupportedFeatures:
+                            type: array
+                            uniqueItems: true
+                            items:
+                              properties:
+                                parcelType:
+                                  type: string
+                                  enum:
+                                  - wan/vpn/interface/gre
+                                  - wan/vpn/interface/ethernet
+                                  - wan/vpn/interface/cellular
+                                  - wan/vpn/interface/ipsec
+                                  - wan/vpn/interface/serial
+                                  - wan/vpn/interface/dsl-pppoa
+                                  - wan/vpn/interface/dsl-pppoe
+                                  - wan/vpn/interface/dsl-ipoe
+                                  - routing/ospf
+                                  - lan/vpn/interface/ethernet
+                                  - lan/vpn/interface/svi
+                                  - lan/vpn/interface/ipsec
+                                  - lan/vpn
+                                  - wan/multicloud-connection
+                                  - lan/multicloud-connection
+                                  - vrf/wan/interface/gre
+                                  - vrf/wan/interface/ethernet
+                                  - vrf/wan/interface/ipsec
+                                  - vrf/lan/interface/ethernet
+                                  - vrf/lan/interface/ipsec
+                                  - vrf
+                                  - vrf/wan/multicloud-connection
+                                  - vrf/lan/multicloud-connection
+                                  - vrf/routing/bgp
+                                  - routing/bgp
+                                  - route-policy
+                                  $$ref: '#/components/schemas/CommonCommonDefs_unsupportedFeaturesEnumDef'
+                                parcelId:
+                                  type: string
+                                  format: uuid
+                              required:
+                              - parcelType
+                              - parcelId
+                              additionalProperties: false
+                            additionalProperties: false
+                        required:
+                        - criteria
+                        additionalProperties: false
+                        $$ref: '#/components/schemas/ConfiggroupCommonPutRequest_topologyDevicePropertiesDef'
+                      additionalProperties: false
+                    siteDevices:
+                      type: integer
+                      minimum: 1
+                      maximum: 20
+                  required:
+                  - devices
+                  additionalProperties: false
+                  $$ref: '#/components/schemas/ConfiggroupCommonPutRequest_topologyDef'
+                profiles:
+                  type: array
+                  description: list of profile ids that belongs to the config group
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                    required:
+                    - id
+                    additionalProperties: false
+                    $$ref: '#/components/schemas/ConfiggroupCommonPutRequest_profileIdObjDef'
+                  uniqueItems: true
+                  additionalProperties: false
+              required:
+              - name
+              - description
+              - solution
+              additionalProperties: false
+              $$ref: '#/components/schemas/ConfiggroupCommonPutRequest_SchemaPayload'
+            examples:
+              CEDGE-ConfigGroup1-NY:
+                value:
+                  name: CEDGE-ConfigGroup1-NY
+                  description: CEDGE Config Group 1 for devices at site NY
+                  solution: sdwan
+                  profiles:
+                  - id: EEBE1AaD-DbC6-A9C2-E5F2-a9aFDD993FED
+                  - id: 4D7eb1e4-Bf34-9aeA-58d8-C86824ECF8f4
+                  - id: 4C56e3c3-C67F-Cf66-d02f-8c666bd005CC
+                $$ref: '#/components/examples/ConfiggroupCommonPutRequest_CEDGE-ConfigGroup1-NY'
+              AON-ConfigGroup1-SF:
+                value:
+                  name: AON-ConfigGroup1-SF
+                  description: AON Config Group 1 for devices at site SF
+                  solution: mobility
+                $$ref: '#/components/examples/ConfiggroupCommonPutRequest_AON-ConfigGroup1-SF'
+              CEDGE-ConfigGroup2-DualDeviceSiteDeployment:
+                value:
+                  name: CEDGE-ConfigGroup2-DualDeviceSiteDeployment
+                  description: CEDGE Config Group 2 for Dual Device Site Deployment
+                  solution: sdwan
+                  topology:
+                    devices:
+                    - criteria:
+                        attribute: tag
+                        value: EdgeDevice_01
+                      unsupportedFeatures:
+                      - parcelType: wan/vpn/interface/ethernet
+                        parcelId: EEBE1AaD-DbC6-A9C2-E5F2-a9aFDD993FEE
+                      - parcelType: wan/vpn/interface/ethernet
+                        parcelId: EEBE1AaD-DbC6-A9C2-E5F2-a9aFDD993FEF
+                      - parcelType: wan/vpn/interface/ethernet
+                        parcelId: EEBE1AaD-DbC6-A9C2-E5F2-a9aFDD993FEG
+                    - criteria:
+                        attribute: tag
+                        value: EdgeDevice_02
+                      unsupportedFeatures:
+                      - parcelType: wan/vpn/interface/ethernet
+                        parcelId: FFBE1AaD-DbC6-A9C2-E5F2-a9aFDD993FEE
+                      - parcelType: wan/vpn/interface/ethernet
+                        parcelId: FGBE1AaD-DbC6-A9C2-E5F2-a9aFDD993FEF
+                      - parcelType: wan/vpn/interface/ethernet
+                        parcelId: FMBE1AaD-DbC6-A9C2-E5F2-a9aFDD993FEG
+                    siteDevices: 2
+                  profiles:
+                  - id: EEBE1AaD-DbC6-A9C2-E5F2-a9aFDD993FED
+                  - id: 4D7eb1e4-Bf34-9aeA-58d8-C86824ECF8f4
+                  - id: 4C56e3c3-C67F-Cf66-d02f-8c666bd005CC
+                $$ref: '#/components/examples/ConfiggroupCommonPutRequest_CEDGE-ConfigGroup2-DualDeviceSiteDeployment'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+                  profiles:
+                    type: array
+                    description: (Optional - only applicable for AON) List of profile ids that belongs to the config group
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        profileType:
+                          type: string
+                          enum:
+                          - global
+                      required:
+                      - id
+                      - profileType
+                      additionalProperties: false
+                      $$ref: '#/components/schemas/ConfiggroupCommonPutResponse_profileObjDef'
+                required:
+                - id
+                additionalProperties: false
+                $$ref: '#/components/schemas/ConfiggroupCommonPutResponse_SchemaPayload'
+              examples:
+                example_1:
+                  value:
+                    id: 3EEF02A6-DD2A-bE42-ae6d-cda4CF2C30ac
+                  $$ref: '#/components/examples/ConfiggroupCommonPutResponse_example_1'
+                example_2:
+                  value:
+                    id: 5eDFc2F7-3F0A-0Efe-6E1f-E5caAE0C6060
+                    profiles:
+                    - id: 002C4d1e-AA45-8e75-8CAB-C9CA0FE882a6
+                      profileType: global
+                  $$ref: '#/components/examples/ConfiggroupCommonPutResponse_example_2'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Config Group-write
+    get:
+      tags:
+      - Configuration - Configuration Group
+      description: Get a Configuration Group by ID
+      operationId: GetConfigGroup
+      parameters:
+      - name: configGroupId
+        in: path
+        required: true
+        schema:
+          pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+          type: string
+      - name: deviceList
+        in: query
+        description: Including associated devices list
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                required:
+                - name
+                - solution
+                - state
+                - version
+                type: object
+                properties:
+                  copyInfo:
+                    type: string
+                  createdBy:
+                    type: string
+                    description: User who last created this.
+                    readOnly: true
+                  createdOn:
+                    type: integer
+                    description: Timestamp of creation
+                    format: int64
+                    readOnly: true
+                  description:
+                    type: string
+                    description: Description of the  Group.
+                    example: group for west coast retail stores
+                  devices:
+                    uniqueItems: true
+                    type: array
+                    items:
+                      type: string
+                  fullConfigCli:
+                    type: boolean
+                  id:
+                    type: string
+                    description: System generated unique identifier of the  Group in UUID format.
+                    example: 6fa14197-c25f-4a14-b81b-299de32ed2ca
+                  iosConfigCli:
+                    type: boolean
+                  lastUpdatedBy:
+                    type: string
+                    description: User who last updated this.
+                    readOnly: true
+                  lastUpdatedOn:
+                    type: integer
+                    description: Timestamp of last update
+                    format: int64
+                    readOnly: true
+                  name:
+                    type: string
+                    description: Name of the  Group. Must be unique.
+                    example: West coast retail stores
+                  numberOfDevices:
+                    type: integer
+                    format: int64
+                  numberOfDevicesUpToDate:
+                    type: integer
+                    format: int64
+                  origin:
+                    type: string
+                  originInfo:
+                    type: object
+                    additionalProperties:
+                      type: string
+                  profiles:
+                    type: array
+                    description: List of devices UUIDs associated with this group
+                    example:
+                    - id: 6fa14197-c25f-4a14-b81b-299de32ed2ca
+                      name: system feature profile
+                      solution: sdwan
+                      type: system
+                      description: Profile file description
+                      lastUpdatedBy: admin
+                      lastUpdatedOn: 1694179200000
+                      createdBy: admin
+                      createdOn: 1694092800000
+                      profileParcelCount: 5
+                      origin: internal
+                    items:
+                      required:
+                      - name
+                      - solution
+                      - type
+                      type: object
+                      properties:
+                        createdBy:
+                          type: string
+                          description: User who last created this.
+                          readOnly: true
+                        createdOn:
+                          type: integer
+                          description: Timestamp of creation
+                          format: int64
+                          readOnly: true
+                        description:
+                          type: string
+                          description: Description of the feature Profile.
+                          example: Profile file description
+                        id:
+                          type: string
+                          description: System generated unique identifier of the feature profile in UUID format.
+                          example: 6fa14197-c25f-4a14-b81b-299de32ed2ca
+                        lastUpdatedBy:
+                          type: string
+                          description: User who last updated this.
+                          readOnly: true
+                        lastUpdatedOn:
+                          type: integer
+                          description: Timestamp of last update
+                          format: int64
+                          readOnly: true
+                        name:
+                          type: string
+                          description: Name of the feature Profile. Must be unique.
+                          example: system feature profile
+                        origin:
+                          type: string
+                        profileParcelCount:
+                          type: integer
+                          description: Number of Parcels attached with Feature Profile
+                          format: int64
+                          readOnly: true
+                        solution:
+                          type: string
+                          description: Solution of the feature Profile.
+                          example: sdwan
+                        type:
+                          type: string
+                          description: Type of the feature Profile.
+                          example: system
+                      $$ref: '#/components/schemas/FeatureProfile'
+                  solution:
+                    type: string
+                    description: Specify one of the device platform solution
+                    example: sdwan
+                    enum:
+                    - mobility
+                    - sdwan
+                    - sd-routing
+                    - common
+                    - nfvirtual
+                    - service-insertion
+                    - cellulargateway
+                  source:
+                    type: string
+                    description: Source of group
+                    example: retail_workflow
+                  state:
+                    type: string
+                    description: ' Group Deployment state'
+                    example: ' Group Deployment state.Initial state Deployed '
+                  topology:
+                    type: object
+                    properties:
+                      devices:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            criteria:
+                              type: object
+                              properties:
+                                attribute:
+                                  type: string
+                                  enum:
+                                  - tag
+                                value:
+                                  type: string
+                              $$ref: '#/components/schemas/Criteria'
+                            unsupportedFeatures:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  parcelId:
+                                    type: string
+                                    format: uuid
+                                  parcelType:
+                                    type: string
+                                    enum:
+                                    - wan/vpn/interface/gre
+                                    - wan/vpn/interface/ethernet
+                                    - wan/vpn/interface/cellular
+                                    - wan/vpn/interface/ipsec
+                                    - wan/vpn/interface/serial
+                                    - wan/vpn/interface/dsl-pppoe
+                                    - wan/vpn/interface/dsl-pppoa
+                                    - wan/vpn/interface/dsl-ipoe
+                                    - routing/ospf
+                                    - lan/vpn/interface/ethernet
+                                    - lan/vpn/interface/gre
+                                    - lan/vpn/interface/svi
+                                    - lan/vpn/interface/ipsec
+                                    - lan/vpn
+                                    - global-vrf
+                                    - vrf/wan/interface/gre
+                                    - vrf/wan/interface/ethernet
+                                    - vrf/wan/interface/ipsec
+                                    - vrf/lan/interface/gre
+                                    - vrf/lan/interface/ethernet
+                                    - vrf/lan/interface/ipsec
+                                    - vrf
+                                    - vrf/routing/bgp
+                                    - global-vrf/routing/bgp
+                                    - wan/multicloud-connection
+                                    - lan/multicloud-connection
+                                    - vrf/wan/multicloud-connection
+                                    - vrf/lan/multicloud-connection
+                                    - global-vrf/wan/interface/ipsec
+                                    - routing/bgp
+                                    - route-policy
+                                    - service-insertion-attachment
+                                $$ref: '#/components/schemas/UnsupportedFeature'
+                          $$ref: '#/components/schemas/ConfigGroupDevice'
+                      siteDevices:
+                        type: integer
+                        format: int32
+                    $$ref: '#/components/schemas/Topology'
+                  version:
+                    type: integer
+                    description: ' Group Version Flag'
+                    format: int64
+                  versionIncrementReason:
+                    type: string
+                $$ref: '#/components/schemas/ConfigGroup'
+              examples:
+                West coast retail stores:
+                  value:
+                    description: group for west coast retail stores
+                    id: 6fa14197-c25f-4a14-b81b-299de32ed2ca
+                    name: West coast retail stores
+                    profiles:
+                    - description: Profile file description
+                      id: 6fa14197-c25f-4a14-b81b-299de32ed2ca
+                      name: system feature profile
+                      solution: sdwan
+                      type: system
+                    solution: sdwan
+                    source: retail_workflow
+                    state: ' Group Deployment state.Initial state Deployed '
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Config Group-read
+    delete:
+      tags:
+      - Configuration - Configuration Group
+      description: Delete Config Group
+      operationId: DeleteConfigGroup
+      parameters:
+      - name: configGroupId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: deleteProfiles
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Config Group-write
+  /v1/config-group/{configGroupId}/device/associate:
+    get:
+      tags:
+      - Configuration - Configuration Group
+      description: Get devices association with a config group
+      operationId: GetConfigGroupAssociation
+      parameters:
+      - name: configGroupId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: associatedGroups
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  devices:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: Unique identifier for the device
+                          pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+                        site-name:
+                          type: string
+                          description: Name of the site
+                        host-name:
+                          type: string
+                          description: Host name of the device
+                        site-id:
+                          type: string
+                          description: Identifier for the site
+                        deviceModel:
+                          type: string
+                          description: Model of the device
+                        tags:
+                          type: array
+                          description: Tags associated with the device
+                          items:
+                            type: string
+                        device-lock:
+                          type: string
+                          description: Indicates if the device is locked
+                        addedByRule:
+                          type: boolean
+                          description: Indicates if the device was added by a rule
+                        configStatusMessage:
+                          type: string
+                          description: Configuration status message
+                        deviceIP:
+                          type: string
+                          description: IP address of the device
+                          format: ipv4
+                        configGroupLastUpdatedOn:
+                          type: string
+                          description: Timestamp of the last update to the config group
+                          format: date-time
+                        unsupportedFeatures:
+                          type: array
+                          description: List of unsupported features
+                          items:
+                            type: string
+                        hierarchyNamePath:
+                          type: string
+                          description: Hierarchy name path
+                        hierarchyTypePath:
+                          type: string
+                          description: Hierarchy type path
+                        configGroupUpToDate:
+                          type: string
+                          description: Indicates if the config group is up to date
+                        groupTopologyLabel:
+                          type: string
+                          description: 'Label indicating the topology information about the device. e.g.: Device1, Device2, Primary, Secondary'
+                      required:
+                      - id
+                      - site-name
+                      - host-name
+                      - site-id
+                      - deviceModel
+                      - tags
+                      - device-lock
+                      - addedByRule
+                      - configStatusMessage
+                      - deviceIP
+                      - configGroupLastUpdatedOn
+                      - unsupportedFeatures
+                      - hierarchyNamePath
+                      - hierarchyTypePath
+                      - configGroupUpToDate
+                required:
+                - devices
+                additionalProperties: false
+                $$ref: '#/components/schemas/ConfiggroupCommonAssociateGetResponse_SchemaPayload'
+              examples:
+                Config Group Associate:
+                  description: Config Group Associate
+                  value:
+                    devices:
+                    - id: C8K-0f43906e-bd8f-443c-83f2-11eb85e45a51
+                      site-name: SITE_500
+                      host-name: vm5
+                      site-id: '500'
+                      deviceModel: vedge-C8000V
+                      tags: []
+                      device-lock: 'No'
+                      addedByRule: false
+                      configStatusMessage: ''
+                      deviceIP: 172.16.255.15
+                      configGroupLastUpdatedOn: ''
+                      unsupportedFeatures: []
+                      hierarchyNamePath: Global/SITE_500
+                      hierarchyTypePath: GLOBAL/SITE
+                      configGroupUpToDate: 'False'
+                  $$ref: '#/components/examples/ComViptelaVmanageServerConfiggroupGetResponseAssociate'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Config Group > Device-read
+    put:
+      tags:
+      - Configuration - Configuration Group
+      description: Move the devices from one config group to another
+      operationId: UpdateConfigGroupAssociation
+      parameters:
+      - name: configGroupId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                devices:
+                  type: array
+                  description: list of device ids that config group need to be associated with
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        pattern: ^[a-zA-Z0-9\-/]+$
+                      groupTopologyLabel:
+                        type: string
+                    required:
+                    - id
+                    additionalProperties: false
+                    $$ref: '#/components/schemas/ConfiggroupCommonAssociatePutRequest_deviceIdDef'
+                  uniqueItems: true
+                  additionalProperties: false
+              required:
+              - devices
+              additionalProperties: false
+              $$ref: '#/components/schemas/ConfiggroupCommonAssociatePutRequest_SchemaPayload'
+            examples:
+              example_1:
+                value:
+                  devices:
+                  - id: C8K-bee4a662-2a65-4b45-872a-b501bc5a465d
+                  - id: C8K-knt4aui2-2a65-4b45-872a-b501bc5a465d
+                $$ref: '#/components/examples/ConfiggroupCommonAssociatePutRequest_example_1'
+              example_2:
+                value:
+                  devices:
+                  - id: C8K-iuvbubb2-2a65-4b45-872a-86987buh24ss
+                  - id: C8K-ad1235hb-13se-kjbi-421v-86987buh24ss
+                $$ref: '#/components/examples/ConfiggroupCommonAssociatePutRequest_example_2'
+              example_3:
+                value:
+                  devices:
+                  - id: C8K-1234-1234-1234-1234
+                    groupTopologyLabel: device1
+                  - id: C8K-1234-1234-1234-4321
+                    groupTopologyLabel: device2
+                $$ref: '#/components/examples/ConfiggroupCommonAssociatePutRequest_example_3'
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Config Group > Device-write
+    post:
+      tags:
+      - Configuration - Configuration Group
+      description: Create associations with device and a config group
+      operationId: CreateConfigGroupAssociation
+      parameters:
+      - name: configGroupId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                devices:
+                  type: array
+                  description: list of device ids that config group need to be associated with
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        pattern: ^[a-zA-Z0-9\-/]+$
+                      groupTopologyLabel:
+                        type: string
+                    required:
+                    - id
+                    additionalProperties: false
+                    $$ref: '#/components/schemas/ConfiggroupCommonAssociatePostRequest_deviceIdDef'
+                  uniqueItems: true
+                  minItems: 1
+                  additionalProperties: false
+              required:
+              - devices
+              additionalProperties: false
+              $$ref: '#/components/schemas/ConfiggroupCommonAssociatePostRequest_SchemaPayload'
+            examples:
+              example_1:
+                value:
+                  devices:
+                  - id: C8K-bee4a662-2a65-4b45-872a-b501bc5a465d
+                  - id: C8K-knt4aui2-2a65-4b45-872a-b501bc5a465d
+                $$ref: '#/components/examples/ConfiggroupCommonAssociatePostRequest_example_1'
+              example_2:
+                value:
+                  devices:
+                  - id: C8K-iuvbubb2-2a65-4b45-872a-86987buh24ss
+                  - id: C8K-ad1235hb-13se-kjbi-421v-86987buh24ss
+                $$ref: '#/components/examples/ConfiggroupCommonAssociatePostRequest_example_2'
+              example_3:
+                value:
+                  devices:
+                  - id: C8K-1234-1234-1234-1234
+                    groupTopologyLabel: device1
+                  - id: C8K-1234-1234-1234-4321
+                    groupTopologyLabel: device2
+                $$ref: '#/components/examples/ConfiggroupCommonAssociatePostRequest_example_3'
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Config Group > Device-write
+    delete:
+      tags:
+      - Configuration - Configuration Group
+      description: Delete Config Group Association from devices
+      operationId: DeleteConfigGroupAssociation
+      parameters:
+      - name: configGroupId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                devices:
+                  type: array
+                  description: list of device ids that config group need to be associated with
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        pattern: ^[a-zA-Z0-9\-/]+$
+                    required:
+                    - id
+                    additionalProperties: false
+                    $$ref: '#/components/schemas/ConfiggroupCommonAssociateDeleteRequest_deviceIdDef'
+                  uniqueItems: true
+                  minItems: 1
+                  additionalProperties: false
+              required:
+              - devices
+              additionalProperties: false
+              $$ref: '#/components/schemas/ConfiggroupCommonAssociateDeleteRequest_SchemaPayload'
+            examples:
+              example_1:
+                value:
+                  devices:
+                  - id: C8K-bee4a662-2a65-4b45-872a-b501bc5a465d
+                  - id: C8K-knt4aui2-2a65-4b45-872a-b501bc5a465d
+                $$ref: '#/components/examples/ConfiggroupCommonAssociateDeleteRequest_example_1'
+              example_2:
+                value:
+                  devices:
+                  - id: C8K-iuvbubb2-2a65-4b45-872a-86987buh24ss
+                  - id: C8K-ad1235hb-13se-kjbi-421v-86987buh24ss
+                $$ref: '#/components/examples/ConfiggroupCommonAssociateDeleteRequest_example_2'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Config Group > Device-write
+  /v1/config-group/{configGroupId}/device/deploy:
+    post:
+      tags:
+      - Configuration - Configuration Group
+      description: 'deploy config group to devices<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: deployConfigGroup
+      parameters:
+      - name: configGroupId
+        in: path
+        description: Config Group Id
+        required: true
+        schema:
+          pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                devices:
+                  type: array
+                  description: list of device ids that config group need to be deployed
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        pattern: ^[a-zA-Z0-9\-/]+$
+                    required:
+                    - id
+                    additionalProperties: false
+                    $$ref: '#/components/schemas/CommonCommonDefs_deviceIdDef'
+                  uniqueItems: true
+                  minItems: 1
+                  additionalProperties: false
+              required: []
+              additionalProperties: false
+              $$ref: '#/components/schemas/ConfiggroupCommonDeployPostRequest_SchemaPayload'
+            examples:
+              example_1:
+                value:
+                  devices:
+                  - id: 7f97aaa9-fac0-4461-aa31-9bf234d5f0af
+                  - id: 3ed9aab9-b965-421f-973e-6887b17e5d68
+                $$ref: '#/components/examples/ConfiggroupCommonDeployPostRequest_example_1'
+              example_2:
+                value:
+                  devices:
+                  - id: 3ed9aab9-b965-421f-973e-6887b17e5d78
+                  - id: ce1f3c7a-11c8-4c68-b71b-1fff5206ff09
+                $$ref: '#/components/examples/ConfiggroupCommonDeployPostRequest_example_2'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  parentTaskId:
+                    type: string
+                    minLength: 1
+                    $$ref: '#/components/schemas/CommonCommonDefs_nonEmptyStringDef'
+                required:
+                - parentTaskId
+                additionalProperties: false
+                $$ref: '#/components/schemas/ConfiggroupCommonDeployPostResponse_SchemaPayload'
+              examples:
+                example_1:
+                  value:
+                    parentTaskId: deploy-config-group-73C544A7-5B4d-8f6c-feB4-b4af830b0d2c
+                  $$ref: '#/components/examples/ConfiggroupCommonDeployPostResponse_example_1'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Config Group > Device > Deploy-write
+  /v1/config-group/{configGroupId}/device/variables:
+    get:
+      tags:
+      - Configuration - Configuration Group
+      description: Get device variables
+      operationId: getConfigGroupDeviceVariables
+      parameters:
+      - name: configGroupId
+        in: path
+        description: Config Group Id
+        required: true
+        schema:
+          type: string
+      - name: device-id
+        in: query
+        description: Comma separated device id's like d1,d2
+        schema:
+          type: string
+      - name: suggestions
+        in: query
+        description: Suggestions for possible values
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  family:
+                    type: string
+                    description: Family of the configuration
+                  devices:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        device-id:
+                          type: string
+                          description: Unique identifier for the device
+                          pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+                        variables:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                                description: Name of the variable
+                              value:
+                                type: string
+                                description: Value of the variable
+                              suggestions:
+                                type: array
+                                description: List of suggestions for the variable
+                                items:
+                                  type: string
+                            required:
+                            - name
+                      required:
+                      - device-id
+                      - variables
+                  groups:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: Name of the group
+                        group-variables:
+                          type: array
+                          description: Variables associated with the group
+                          items:
+                            type: object
+                      required:
+                      - name
+                      - group-variables
+                required:
+                - family
+                - devices
+                - groups
+                additionalProperties: false
+                $$ref: '#/components/schemas/ConfiggroupCommonVariablesGetResponse_SchemaPayload'
+              examples:
+                Config Group Device Variables:
+                  description: Config Group Device Variables
+                  value:
+                    family: sdwan
+                    devices:
+                    - device-id: C8K-fa8ecea0-541e-4544-a077-e18fcb963b49
+                      variables: []
+                    groups:
+                    - name: test_CG1
+                      group-variables: []
+                  $$ref: '#/components/examples/ComViptelaVmanageServerConfiggroupGetResponseVariables'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Config Group-read
+    post:
+      tags:
+      - Configuration - Configuration Group
+      description: Fetch device variables
+      operationId: fetchConfigGroupDeviceVariables
+      parameters:
+      - name: configGroupId
+        in: path
+        description: Config Group Id
+        required: true
+        schema:
+          pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                deviceIds:
+                  description: ID of devices for which Variables need to be fetched
+                  type: array
+                  uniqueItems: true
+                  items:
+                    description: 'Device unique id '
+                    type: string
+                    pattern: ^[a-zA-Z0-9\-/]+$
+                suggestions:
+                  description: Variable object for the device
+                  type: boolean
+              additionalProperties: false
+              $$ref: '#/components/schemas/ConfiggroupCommonVariablesPostRequest_SchemaPayload'
+            examples:
+              example_1:
+                value:
+                  deviceIds:
+                  - C1111-8PWH-FGL2128903M
+                  - C8200-1N-4T-FGL2433L3BA
+                  suggestions: true
+                $$ref: '#/components/examples/ConfiggroupCommonVariablesPostRequest_example_1'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Config Group-read
+    put:
+      tags:
+      - Configuration - Configuration Group
+      description: assign values to device variables
+      operationId: createConfigGroupDeviceVariables
+      parameters:
+      - name: configGroupId
+        in: path
+        description: Config Group Id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                solution:
+                  type: string
+                  enum:
+                  - mobility
+                  - sdwan
+                  - sd-routing
+                  - nfvirtual
+                  - service-insertion
+                  - cellulargateway
+                  $$ref: '#/components/schemas/CommonCommonDefs_solutionDef'
+                devices:
+                  description: Variables for devices
+                  type: array
+                  uniqueItems: true
+                  items:
+                    type: object
+                    properties:
+                      device-id:
+                        description: 'Device unique id '
+                        type: string
+                        pattern: ^[a-zA-Z0-9\-/]+$
+                      variables:
+                        description: Variable object for the device
+                        type: array
+                        uniqueItems: true
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            value:
+                              type:
+                              - string
+                              - integer
+                              - number
+                              - boolean
+                              - array
+                          required:
+                          - name
+                          - value
+                          additionalProperties: false
+                    required:
+                    - device-id
+                    - variables
+                    additionalProperties: false
+                  $$ref: '#/components/schemas/CommonCommonDefs_devicesDef'
+                groups:
+                  description: Variables for groups
+                  type: array
+                  uniqueItems: true
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        pattern: ^[^&<>! "]+$
+                        minLength: 1
+                        maxLength: 128
+                        $$ref: '#/components/schemas/CommonCommonDefs_cgFpPpNameDef'
+                      group-variables:
+                        description: global variables object for the group
+                        type: array
+                        uniqueItems: true
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            value:
+                              type:
+                              - string
+                              - integer
+                              - number
+                              - boolean
+                              - array
+                          required:
+                          - name
+                          - value
+                          additionalProperties: false
+                    required:
+                    - name
+                    - group-variables
+                    additionalProperties: false
+              required:
+              - solution
+              - devices
+              additionalProperties: false
+              $$ref: '#/components/schemas/ConfiggroupCommonVariablesPutRequest_SchemaPayload'
+            examples:
+              example_1:
+                value:
+                  solution: sdwan
+                  devices:
+                  - device-id: device1
+                    variables:
+                    - name: var1
+                      value: vm5
+                    - name: var2
+                      value: 20
+                  - device-id: device2
+                    variables:
+                    - name: var3
+                      value: 10.10.10.10
+                    - name: var4
+                      value: true
+                  groups:
+                  - name: groupabcd
+                    group-variables:
+                    - name: name1
+                      value: value1
+                    - name: name2
+                      value: value2
+                $$ref: '#/components/examples/ConfiggroupCommonVariablesPutRequest_example_1'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Config Group-write
+  /v1/config-group/{configGroupId}/device/variables/schema:
+    get:
+      tags:
+      - Configuration - Configuration Group
+      description: get device variables schema
+      operationId: getConfigGroupDeviceVariablesSchema
+      parameters:
+      - name: configGroupId
+        in: path
+        description: Config Group Id
+        required: true
+        schema:
+          type: string
+      - name: all
+        in: query
+        description: All variables(including sub-feature)
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                TODO:
+                  description: TODO
+                  value: TODO
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Config Group-read
+  /v1/config-group/{configGroupId}/device/{deviceId}/preview:
+    post:
+      tags:
+      - Configuration - Configuration Group
+      description: Get a preview of the configuration for a device
+      operationId: getConfigGroupDeviceConfigurationPreview
+      parameters:
+      - name: configGroupId
+        in: path
+        description: Config Group Id
+        required: true
+        schema:
+          type: string
+      - name: deviceId
+        in: path
+        description: Device Id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties:
+                type: object
+                properties:
+                  valueType:
+                    type: string
+                    enum:
+                    - ARRAY
+                    - OBJECT
+                    - STRING
+                    - NUMBER
+                    - 'TRUE'
+                    - 'FALSE'
+                    - 'NULL'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  existingConfig:
+                    type: string
+                  newConfig:
+                    type: string
+                  unsupportedParcels:
+                    type: array
+                    minItems: 0
+                    items:
+                      type: object
+                required:
+                - existingConfig
+                - newConfig
+                additionalProperties: false
+                $$ref: '#/components/schemas/ConfiggroupCommonPreviewPostResponse_SchemaPayload'
+              examples:
+                example_1:
+                  value:
+                    newConfig: "system\n ztp-status success\n pseudo-confirm-commit 300\npersonality vedge\ndevice-model vedge-C8000V\nchassis-number C8K-44ff74b5-fa18-4c3a-ad92-cc3520409963\nsystem-ip 172.16.255.15\ndomain-id 1\noverlay-id 1\nsite-id 500\nipv6-strict-control false\nrole edge-router\nport-offset 0\ncontrol-session-pps 300\nadmin-tech-on-failure\nsp-organization-name \"vIPtela Inc Regression\"\norganization-name \"vIPtela Inc Regression\"\nport-hop\ntrack-transport\ntrack-default-gateway"
+                    existingConfig: ''
+                    unsupportedFeatureTypes: []
+                    iOSConfigDeployFailure: ''
+                  $$ref: '#/components/examples/ConfiggroupCommonPreviewPostResponse_example_1'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Config Group > Device > Deploy-read
+  /v1/config-group/{configGroupId}/rules:
+    get:
+      tags:
+      - Configuration - Configuration Group
+      description: 'Get Rule by associated object Id, example : get rules by config group Id'
+      operationId: getRuleAssociationByConfigGroupId
+      parameters:
+      - name: configGroupId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                Config Group:
+                  description: Config Group
+                  value:
+                    name: C8KV_East_Coast_Rule
+                    description: All C8KV devices in the east cost
+                    useCase: config-group-device
+                    matchCriteria:
+                      match-type: all
+                      conditions:
+                      - attribute: tags
+                        operator: equals
+                        value: East_Coast
+                      - attribute: model
+                        operator: equals
+                        value: C8000v
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

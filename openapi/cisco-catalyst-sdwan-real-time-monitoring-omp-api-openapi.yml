@@ -1,0 +1,1304 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - OMP API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - OMP
+paths:
+  /device/omp/cloudx:
+    get:
+      tags:
+      - Real-Time Monitoring - OMP
+      description: Get CloudExpress routes received list
+      operationId: createOMPCloudXRecv
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                CloudExpress routes received list:
+                  description: CloudExpress routes received list
+                  value:
+                    data:
+                    - vdevice-name: 172.16.254.1
+                      vdevice-host-name: vm2
+                      vpn-id: '1'
+                      originator: 172.16.255.14
+                      app-id: '1'
+                      app-name: salesforce
+                      to-peer: 172.16.255.19
+                      from-peer: 172.16.255.20
+                      status: C,I,R
+                      latency: '0'
+                      loss: '0'
+                      vdevice-dataKey: 172.16.254.1
+                      lastupdated: 1658131633272
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Routing-read,Routing-write,Policy-read,Policy-write
+  /device/omp/links:
+    get:
+      tags:
+      - Real-Time Monitoring - OMP
+      description: Get OMP connection list
+      operationId: createOMPLinkList
+      parameters:
+      - name: state
+        in: query
+        description: Connection state
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                OMP connection list:
+                  description: OMP connection list
+                  value:
+                    data:
+                    - state: up
+                      lastupdated: '1646804216515'
+                      linkKey: 172.16.255.16-172.16.255.20
+                      adeviceId: 172.16.255.16
+                      bdeviceId: 172.16.255.20
+                      asystem-ip: 172.16.255.16
+                      bsystem-ip: 172.16.255.20
+                      asite-id: '600'
+                      bsite-id: '200'
+                      ahost-name: vm6
+                      bhost-name: vm10
+                      apersonality: vedge
+                      bpersonality: vsmart
+                    - state: up
+                      lastupdated: '1646804204258'
+                      linkKey: 172.16.255.16-172.16.255.19
+                      adeviceId: 172.16.255.16
+                      bdeviceId: 172.16.255.19
+                      asystem-ip: 172.16.255.16
+                      bsystem-ip: 172.16.255.19
+                      asite-id: '600'
+                      bsite-id: '100'
+                      ahost-name: vm6
+                      bhost-name: vm9
+                      apersonality: vedge
+                      bpersonality: vsmart
+                    - state: up
+                      lastupdated: '1646804204257'
+                      linkKey: 172.16.255.15-172.16.255.19
+                      adeviceId: 172.16.255.15
+                      bdeviceId: 172.16.255.19
+                      asystem-ip: 172.16.255.15
+                      bsystem-ip: 172.16.255.19
+                      asite-id: '500'
+                      bsite-id: '100'
+                      ahost-name: vm5
+                      bhost-name: vm9
+                      apersonality: vedge
+                      bpersonality: vsmart
+                    - state: up
+                      lastupdated: '1646804216515'
+                      linkKey: 172.16.255.15-172.16.255.20
+                      adeviceId: 172.16.255.15
+                      bdeviceId: 172.16.255.20
+                      asystem-ip: 172.16.255.15
+                      bsystem-ip: 172.16.255.20
+                      asite-id: '500'
+                      bsite-id: '200'
+                      ahost-name: vm5
+                      bhost-name: vm10
+                      apersonality: vedge
+                      bpersonality: vsmart
+                    - state: up
+                      lastupdated: '1646804204257'
+                      linkKey: 172.16.255.14-172.16.255.19
+                      adeviceId: 172.16.255.14
+                      bdeviceId: 172.16.255.19
+                      asystem-ip: 172.16.255.14
+                      bsystem-ip: 172.16.255.19
+                      asite-id: '400'
+                      bsite-id: '100'
+                      ahost-name: vm4
+                      bhost-name: vm9
+                      apersonality: vedge
+                      bpersonality: vsmart
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /device/omp/mcastautodiscoveradvt:
+    get:
+      tags:
+      - Real-Time Monitoring - OMP
+      description: Get OMP multicast autodiscover advertised list
+      operationId: createOMPMcastAutoDiscoverAdvt
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                OMP multicast autodiscover advertised list:
+                  description: OMP multicast autodiscover advertised list
+                  value:
+                    data:
+                    - vdevice-dataKey: 169.254.10.10-ipv4-10
+                      vdevice-name: 169.254.10.10
+                      lastupdated: 1643180905996
+                      source-originator: 172.16.254.2
+                      vpn-id: '10'
+                      vdevice-host-name: vm3
+                      address-family: ipv4
+                      to-peer: 172.16.253.129
+                    - vdevice-dataKey: 169.254.10.10-ipv4-10
+                      vdevice-name: 169.254.10.10
+                      lastupdated: 1643180905996
+                      source-originator: 172.16.254.2
+                      vpn-id: '10'
+                      vdevice-host-name: vm3
+                      address-family: ipv4
+                      to-peer: 172.16.255.130
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Routing-read,Routing-write,Policy-read,Policy-write
+  /device/omp/mcastautodiscoverrecv:
+    get:
+      tags:
+      - Real-Time Monitoring - OMP
+      description: Get OMP multicast autodiscover received list
+      operationId: createOMPMcastAutoDiscoverRecv
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                OMP multicast autodiscover received list:
+                  description: OMP multicast autodiscover received list
+                  value:
+                    data:
+                    - vdevice-dataKey: 169.254.10.10-ipv4-10
+                      vdevice-name: 169.254.10.10
+                      from-peer: 172.16.253.129
+                      lastupdated: 1643181632850
+                      source-originator: 172.16.254.1
+                      vpn-id: '10'
+                      vdevice-host-name: vm3
+                      address-family: ipv4
+                      status: C I R
+                    - vdevice-dataKey: 169.254.10.10-ipv4-10
+                      vdevice-name: 169.254.10.10
+                      from-peer: 172.16.255.130
+                      lastupdated: 1643181632851
+                      source-originator: 172.16.254.1
+                      vpn-id: '10'
+                      vdevice-host-name: vm3
+                      address-family: ipv4
+                      status: C I R
+                    - vdevice-dataKey: 169.254.10.10-ipv4-10
+                      vdevice-name: 169.254.10.10
+                      from-peer: 0.0.0.0
+                      lastupdated: 1643181632852
+                      source-originator: 172.16.254.2
+                      vpn-id: '10'
+                      vdevice-host-name: vm3
+                      address-family: ipv4
+                      status: C Red R
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Routing-read,Routing-write,Policy-read,Policy-write
+  /device/omp/mcastroutesadvt:
+    get:
+      tags:
+      - Real-Time Monitoring - OMP
+      description: Get OMP multicast routes advertised list
+      operationId: createOMPMcastRoutesAdvt
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                OMP multicast routes advertised list:
+                  description: OMP multicast routes advertised list
+                  value:
+                    data:
+                    - vdevice-name: 172.16.254.1
+                      vdevice-host-name: vm2
+                      address-family: ipv4
+                      vpn-id: '1'
+                      source-originator: 172.16.255.14
+                      destination: 172.16.255.16
+                      group: 225.0.0.1
+                      source: 0.0.0.0
+                      rp: 10.20.25.18
+                      to-peer: 172.16.255.20
+                      vdevice-dataKey: 172.16.254.1-ipv4-10
+                      lastupdated: 0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Routing-read,Routing-write,Policy-read,Policy-write
+  /device/omp/mcastroutesrecv:
+    get:
+      tags:
+      - Real-Time Monitoring - OMP
+      description: Get OMP multicast routes received list
+      operationId: createOMPMcastRoutesRecv
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                OMP multicast routes received list:
+                  description: OMP multicast routes received list
+                  value:
+                    data:
+                    - vdevice-name: 172.16.254.1
+                      vdevice-host-name: vm2
+                      address-family: ipv4
+                      vpn-id: '1'
+                      source-originator: 172.16.255.14
+                      destination: 172.16.255.16
+                      group: 225.0.0.1
+                      source: 0.0.0.0
+                      from-peer: 172.16.255.19
+                      status: C,I,R
+                      vdevice-dataKey: 172.16.254.1-ipv4-10
+                      lastupdated: 1658131633272
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Routing-read,Routing-write,Policy-read,Policy-write
+  /device/omp/peers:
+    get:
+      tags:
+      - Real-Time Monitoring - OMP
+      description: Get OMP session list (Real Time)
+      operationId: createOMPSessionList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                OP session list:
+                  description: OP session list
+                  value:
+                    data:
+                    - domain-id: 1
+                      vdevice-name: 169.254.10.10
+                      refresh: supported
+                      site-id: 129
+                      type: vsmart
+                      vdevice-host-name: vm3
+                      up-time-date: 1643135160000
+                      vdevice-dataKey: 169.254.10.10-172.16.253.129-vsmart
+                      peer: 172.16.253.129
+                      up-time: 0:12:57:30
+                      legit: 'yes'
+                      lastupdated: 1643181828115
+                      state: up
+                    - domain-id: 1
+                      vdevice-name: 169.254.10.10
+                      refresh: supported
+                      site-id: 130
+                      type: vsmart
+                      vdevice-host-name: vm3
+                      up-time-date: 1643135160000
+                      vdevice-dataKey: 169.254.10.10-172.16.255.130-vsmart
+                      peer: 172.16.255.130
+                      up-time: 0:12:57:30
+                      legit: 'yes'
+                      lastupdated: 1643181828115
+                      state: up
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Routing-read,Routing-write,Policy-read,Policy-write
+  /device/omp/routes/advertised:
+    get:
+      tags:
+      - Real-Time Monitoring - OMP
+      description: Get OMP advertised routes list (Real Time)
+      operationId: createAdvertisedRoutesList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                OMP advertised routes list:
+                  description: OMP advertised routes list
+                  value:
+                    data:
+                    - overlay-id: '1'
+                      color: default
+                      vdevice-name: 169.254.10.10
+                      prefix: 100.100.3.0/24
+                      ip: 172.16.254.2
+                      label: '1069'
+                      encap: ipsec
+                      site-id: '3'
+                      originator: 172.16.254.2
+                      vpn-id: '10'
+                      vdevice-host-name: vm3
+                      path-id: '65'
+                      protocol: connected
+                      vdevice-dataKey: 169.254.10.10-10
+                      metric: '0'
+                      lastupdated: 1643179668956
+                      to-peer: 172.16.253.129
+                    - overlay-id: '1'
+                      color: default
+                      vdevice-name: 169.254.10.10
+                      prefix: 100.100.3.0/24
+                      ip: 172.16.254.2
+                      label: '1069'
+                      encap: ipsec
+                      site-id: '3'
+                      originator: 172.16.254.2
+                      vpn-id: '10'
+                      vdevice-host-name: vm3
+                      path-id: '65'
+                      protocol: connected
+                      vdevice-dataKey: 169.254.10.10-10
+                      metric: '0'
+                      lastupdated: 1643179668956
+                      to-peer: 172.16.255.130
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Routing-read,Routing-write,Policy-read,Policy-write
+  /device/omp/routes/advertised/ompIpv6:
+    get:
+      tags:
+      - Real-Time Monitoring - OMP
+      description: Get OMP advertised routes list (Real Time)
+      operationId: createAdvertisedRoutesListIpv6
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                OMP advertised routes list:
+                  description: OMP advertised routes list
+                  value:
+                    data:
+                    - color: lte
+                      vdevice-name: 172.16.255.16
+                      prefix: 2001:a14:19::/64
+                      ip: 172.16.255.16
+                      advertise-id: '70'
+                      label: '1003'
+                      encap: ipsec
+                      site-id: '600'
+                      originator: 172.16.255.16
+                      vpn-id: '1'
+                      vdevice-host-name: vm6
+                      tenant-id: '0'
+                      path-id: '70'
+                      protocol: connected
+                      vdevice-dataKey: 172.16.255.16-1
+                      metric: '0'
+                      lastupdated: 1653905306196
+                      to-peer: 172.16.255.19
+                    - color: lte
+                      vdevice-name: 172.16.255.16
+                      prefix: 2001:a14:19::/64
+                      ip: 172.16.255.16
+                      advertise-id: '70'
+                      label: '1003'
+                      encap: ipsec
+                      site-id: '600'
+                      originator: 172.16.255.16
+                      vpn-id: '1'
+                      vdevice-host-name: vm6
+                      tenant-id: '0'
+                      path-id: '70'
+                      protocol: connected
+                      vdevice-dataKey: 172.16.255.16-1
+                      metric: '0'
+                      lastupdated: 1653905306196
+                      to-peer: 172.16.255.20
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/omp/routes/received:
+    get:
+      tags:
+      - Real-Time Monitoring - OMP
+      description: Get OMP received routes list (Real Time)
+      operationId: createReceivedRoutesList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                OMP received routes list:
+                  description: OMP received routes list
+                  value:
+                    data:
+                    - overlay-id: '1'
+                      color: default
+                      vdevice-name: 169.254.10.10
+                      prefix: 10.0.5.0/24
+                      ip: 172.16.254.4
+                      from-peer: 172.16.253.129
+                      label: '1047'
+                      encap: ipsec
+                      site-id: '5'
+                      originator: 172.16.254.4
+                      vpn-id: '10'
+                      vdevice-host-name: vm3
+                      path-id: '42'
+                      protocol: connected
+                      vdevice-dataKey: 169.254.10.10-10
+                      metric: '0'
+                      lastupdated: 1643182041519
+                      attribute-type: installed
+                      status: C I R
+                    - overlay-id: '1'
+                      color: default
+                      vdevice-name: 169.254.10.10
+                      prefix: 10.0.5.0/24
+                      ip: 172.16.254.4
+                      from-peer: 172.16.255.130
+                      label: '1047'
+                      encap: ipsec
+                      site-id: '5'
+                      originator: 172.16.254.4
+                      vpn-id: '10'
+                      vdevice-host-name: vm3
+                      path-id: '42'
+                      protocol: connected
+                      vdevice-dataKey: 169.254.10.10-10
+                      metric: '0'
+                      lastupdated: 1643182041519
+                      attribute-type: installed
+                      status: C R
+                    - overlay-id: '1'
+                      color: default
+                      vdevice-name: 169.254.10.10
+                      prefix: 10.0.16.0/24
+                      ip: 172.16.254.16
+                      from-peer: 172.16.253.129
+                      label: '1014'
+                      encap: ipsec
+                      site-id: '16'
+                      originator: 172.16.254.16
+                      vpn-id: '10'
+                      vdevice-host-name: vm3
+                      path-id: '38'
+                      protocol: connected
+                      vdevice-dataKey: 169.254.10.10-10
+                      metric: '0'
+                      lastupdated: 1643182041519
+                      attribute-type: installed
+                      status: C I R
+                    - overlay-id: '1'
+                      color: default
+                      vdevice-name: 169.254.10.10
+                      prefix: 10.0.16.0/24
+                      ip: 172.16.254.16
+                      from-peer: 172.16.255.130
+                      label: '1014'
+                      encap: ipsec
+                      site-id: '16'
+                      originator: 172.16.254.16
+                      vpn-id: '10'
+                      vdevice-host-name: vm3
+                      path-id: '38'
+                      protocol: connected
+                      vdevice-dataKey: 169.254.10.10-10
+                      metric: '0'
+                      lastupdated: 1643182041519
+                      attribute-type: installed
+                      status: C R
+                    - overlay-id: '1'
+                      color: default
+                      vdevice-name: 169.254.10.10
+                      prefix: 100.100.2.0/24
+                      ip: 172.16.254.1
+                      from-peer: 172.16.253.129
+                      label: '1018'
+                      encap: ipsec
+                      site-id: '2'
+                      originator: 172.16.254.1
+                      vpn-id: '10'
+                      vdevice-host-name: vm3
+                      path-id: '29'
+                      protocol: connected
+                      vdevice-dataKey: 169.254.10.10-10
+                      metric: '0'
+                      lastupdated: 1643182041519
+                      attribute-type: installed
+                      status: C I R
+                    - overlay-id: '1'
+                      color: default
+                      vdevice-name: 169.254.10.10
+                      prefix: 100.100.2.0/24
+                      ip: 172.16.254.1
+                      from-peer: 172.16.255.130
+                      label: '1018'
+                      encap: ipsec
+                      site-id: '2'
+                      originator: 172.16.254.1
+                      vpn-id: '10'
+                      vdevice-host-name: vm3
+                      path-id: '29'
+                      protocol: connected
+                      vdevice-dataKey: 169.254.10.10-10
+                      metric: '0'
+                      lastupdated: 1643182041519
+                      attribute-type: installed
+                      status: C R
+                    - overlay-id: '1'
+                      color: default
+                      vdevice-name: 169.254.10.10
+                      prefix: 100.100.3.0/24
+                      ip: 172.16.254.2
+                      from-peer: 0.0.0.0
+                      label: '1069'
+                      encap: ipsec
+                      site-id: '3'
+                      originator: 172.16.254.2
+                      vpn-id: '10'
+                      vdevice-host-name: vm3
+                      path-id: '65'
+                      protocol: connected
+                      vdevice-dataKey: 169.254.10.10-10
+                      metric: '0'
+                      lastupdated: 1643182041520
+                      attribute-type: installed
+                      status: C Red R
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Routing-read,Routing-write,Policy-read,Policy-write
+  /device/omp/routes/received/ompIpv6:
+    get:
+      tags:
+      - Real-Time Monitoring - OMP
+      description: Get OMP received routes list (Real Time)
+      operationId: createReceivedRoutesListIpv6
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                OMP received routes list:
+                  description: OMP received routes list
+                  value:
+                    data:
+                    - path-id: '830'
+                      vdevice-dataKey: 172.16.255.16-1
+                      vdevice-name: 172.16.255.16
+                      prefix: 2001:a14:18::/64
+                      from-peer: 172.16.255.19
+                      lastupdated: 1653904719952
+                      label: '1003'
+                      vpn-id: '1'
+                      vdevice-host-name: vm6
+                      tenant-id: '0'
+                      status: C I R
+                    - path-id: '861'
+                      vdevice-dataKey: 172.16.255.16-1
+                      vdevice-name: 172.16.255.16
+                      prefix: 2001:a14:18::/64
+                      from-peer: 172.16.255.20
+                      lastupdated: 1653904719952
+                      label: '1003'
+                      vpn-id: '1'
+                      vdevice-host-name: vm6
+                      tenant-id: '0'
+                      status: C R
+                    - path-id: '70'
+                      vdevice-dataKey: 172.16.255.16-1
+                      vdevice-name: 172.16.255.16
+                      prefix: 2001:a14:19::/64
+                      from-peer: 0.0.0.0
+                      lastupdated: 1653904719952
+                      label: '1003'
+                      vpn-id: '1'
+                      vdevice-host-name: vm6
+                      tenant-id: '0'
+                      status: C Red R
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/omp/services:
+    get:
+      tags:
+      - Real-Time Monitoring - OMP
+      description: Get OMP services list
+      operationId: createOMPServices
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                OMP services list:
+                  description: OMP services list
+                  value:
+                    data:
+                    - path-id: '65'
+                      vdevice-dataKey: 169.254.10.10-10-VPN-172.16.254.2
+                      vdevice-name: 169.254.10.10
+                      service: VPN
+                      from-peer: 0.0.0.0
+                      lastupdated: 1643250832867
+                      originator: 172.16.254.2
+                      label: '1077'
+                      vpn-id: '10'
+                      vdevice-host-name: vm3
+                      address-family: ipv4
+                      status: C Red R
+                    - vdevice-dataKey: 169.254.10.10-10-VPN-172.16.254.2
+                      vdevice-name: 169.254.10.10
+                      service: VPN
+                      lastupdated: 1643250832868
+                      originator: 172.16.254.2
+                      vpn-id: '10'
+                      vdevice-host-name: vm3
+                      address-family: ipv4
+                      to-peer: 172.16.253.129
+                    - vdevice-dataKey: 169.254.10.10-10-VPN-172.16.254.2
+                      vdevice-name: 169.254.10.10
+                      service: VPN
+                      lastupdated: 1643250832869
+                      originator: 172.16.254.2
+                      vpn-id: '10'
+                      vdevice-host-name: vm3
+                      address-family: ipv4
+                      to-peer: 172.16.255.130
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Routing-read,Routing-write,Policy-read,Policy-write
+  /device/omp/status:
+    get:
+      tags:
+      - Real-Time Monitoring - OMP
+      description: Get device OMP status
+      operationId: getDeviceOMPStatus
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device OMP status:
+                  description: Device OMP status
+                  value:
+                    data:
+                    - type: omp
+                      name: OMP
+                      image: images/omp.png
+                      count: 0
+                      detailView: dialog
+                      detailsURL: /dataservice/device/omp/links
+                      statusList:
+                      - status: up
+                        icon: images/connection/connection-network-up.png
+                        color: b0e276
+                        name: up
+                        detailView: dialog
+                        detailsURL: /dataservice/device/omp/links?state=up
+                        count: 0
+                      - status: down
+                        icon: images/connection/connection-network-down.png
+                        color: fa7c7d
+                        name: down
+                        detailView: dialog
+                        detailsURL: /dataservice/device/omp/links?state=down
+                        count: 0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /device/omp/summary:
+    get:
+      tags:
+      - Real-Time Monitoring - OMP
+      description: Get OMP summary
+      operationId: createOMPSummary
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                OMP summary:
+                  description: OMP summary
+                  value:
+                    data:
+                    - tlocs-sent: 4
+                      policy-sent: 0
+                      mcast-routes-sent: 0
+                      packets-sent: 81579
+                      vdevice-name: 169.254.10.10
+                      inform-sent: 14
+                      packets-received: 81956
+                      routes-received: 18
+                      tlocs-received: 22
+                      mcast-routes-installed: 0
+                      update-sent: 84
+                      devicetype: vedge
+                      mcast-routes-received: 0
+                      hello-received: 81472
+                      alert-sent: 0
+                      update-received: 468
+                      vsmart-peers: 2
+                      operstate: UP
+                      policy-received: 0
+                      handshake-received: 2
+                      handshake-sent: 2
+                      alert-received: 0
+                      services-sent: 4
+                      vdevice-host-name: vm3
+                      inform-received: 14
+                      vdevice-dataKey: 169.254.10.10--
+                      tlocs-installed: 10
+                      services-installed: 0
+                      ompuptime: '9:11:16:34'
+                      services-received: 2
+                      lastupdated: 1645494228477
+                      routes-sent: 4
+                      hello-sent: 81479
+                      routes-installed: 8
+                      adminstate: UP
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Routing-read,Routing-write,Policy-read,Policy-write
+  /device/omp/synced/peers:
+    get:
+      tags:
+      - Real-Time Monitoring - OMP
+      description: Get OP session list
+      operationId: createSyncedOMPSessionList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                OP session list:
+                  description: OP session list
+                  value:
+                    data:
+                    - domain-id: 1
+                      vdevice-name: 172.16.255.11
+                      createTimeStamp: 1646804055895
+                      refresh: supported
+                      site-id: 100
+                      type: vsmart
+                      vdevice-host-name: vm1
+                      vdevice-dataKey: 172.16.255.11-172.16.255.19-vsmart
+                      '@rid': 568
+                      vmanage-system-ip: 172.16.255.11
+                      peer: 172.16.255.19
+                      legit: 'yes'
+                      lastupdated: 1646804055844
+                      region-id: None
+                      state: up
+                    - domain-id: 1
+                      vdevice-name: 172.16.255.11
+                      createTimeStamp: 1646804061584
+                      refresh: supported
+                      site-id: 200
+                      type: vsmart
+                      vdevice-host-name: vm1
+                      vdevice-dataKey: 172.16.255.11-172.16.255.20-vsmart
+                      '@rid': 574
+                      vmanage-system-ip: 172.16.255.11
+                      peer: 172.16.255.20
+                      legit: 'yes'
+                      lastupdated: 1646804055844
+                      region-id: None
+                      state: up
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Routing-read,Routing-write,Policy-read,Policy-write
+  /device/omp/tlocs/advertised:
+    get:
+      tags:
+      - Real-Time Monitoring - OMP
+      description: Get advertised TLOCs list (Real Time)
+      operationId: createAdvertisedTlocsList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Advertised TLOCs list:
+                  description: Advertised TLOCs list
+                  value:
+                    data:
+                    - color: default
+                      vdevice-name: 169.254.10.10
+                      ip: 172.16.254.2
+                      tloc-auth-type: sha1-hmac ah-sha1-hmac
+                      preference: '0'
+                      weight: '1'
+                      encap: ipsec
+                      site-id: '3'
+                      originator: 172.16.254.2
+                      vdevice-host-name: vm3
+                      tloc-public-ip: 10.101.3.3
+                      tloc-public-port: '12406'
+                      tloc-private-ip: 10.101.3.3
+                      vdevice-dataKey: 169.254.10.10-ipv4-172.16.254.2
+                      tloc-private-port: '12406'
+                      tloc-spi: '286'
+                      lastupdated: 1643179953349
+                      tloc-encrypt-type: aes256
+                      tloc-proto: '0'
+                      address-family: ipv4
+                      to-peer: 172.16.253.129
+                    - color: default
+                      vdevice-name: 169.254.10.10
+                      ip: 172.16.254.2
+                      tloc-auth-type: sha1-hmac ah-sha1-hmac
+                      preference: '0'
+                      weight: '1'
+                      encap: ipsec
+                      site-id: '3'
+                      originator: 172.16.254.2
+                      vdevice-host-name: vm3
+                      tloc-public-ip: 10.101.3.3
+                      tloc-public-port: '12406'
+                      tloc-private-ip: 10.101.3.3
+                      vdevice-dataKey: 169.254.10.10-ipv4-172.16.254.2
+                      tloc-private-port: '12406'
+                      tloc-spi: '286'
+                      lastupdated: 1643179953351
+                      tloc-encrypt-type: aes256
+                      tloc-proto: '0'
+                      address-family: ipv4
+                      to-peer: 172.16.255.130
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Routing-read,Routing-write,Policy-read,Policy-write
+  /device/omp/tlocs/received:
+    get:
+      tags:
+      - Real-Time Monitoring - OMP
+      description: Get received TLOCs list (Real Time)
+      operationId: createReceivedTlocsList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Received TLOCs list:
+                  description: Received TLOCs list
+                  value:
+                    data:
+                    - bfd-status: up
+                      color: default
+                      vdevice-name: 169.254.10.10
+                      ip: 172.16.254.1
+                      tloc-auth-type: sha1-hmac ah-sha1-hmac
+                      preference: '0'
+                      from-peer: 172.16.253.129
+                      weight: '1'
+                      encap: ipsec
+                      site-id: '2'
+                      originator: 172.16.254.1
+                      vdevice-host-name: vm3
+                      tloc-public-ip: 10.101.2.2
+                      tloc-public-port: '12386'
+                      tloc-private-ip: 10.101.2.2
+                      vdevice-dataKey: 169.254.10.10-ipv4-172.16.254.1
+                      tloc-private-port: '12386'
+                      tloc-spi: '263'
+                      lastupdated: 1643185163270
+                      tloc-encrypt-type: aes256
+                      tloc-proto: '0'
+                      address-family: ipv4
+                    - bfd-status: up
+                      color: default
+                      vdevice-name: 169.254.10.10
+                      ip: 172.16.254.2
+                      tloc-auth-type: sha1-hmac ah-sha1-hmac
+                      preference: '0'
+                      from-peer: 0.0.0.0
+                      weight: '1'
+                      encap: ipsec
+                      site-id: '3'
+                      originator: 172.16.254.2
+                      vdevice-host-name: vm3
+                      tloc-public-ip: 10.101.3.3
+                      tloc-public-port: '12406'
+                      tloc-private-ip: 10.101.3.3
+                      vdevice-dataKey: 169.254.10.10-ipv4-172.16.254.2
+                      tloc-private-port: '12406'
+                      tloc-spi: '287'
+                      lastupdated: 1643185163276
+                      tloc-encrypt-type: aes256
+                      tloc-proto: '0'
+                      address-family: ipv4
+                    - bfd-status: up
+                      color: default
+                      vdevice-name: 169.254.10.10
+                      ip: 172.16.254.3
+                      tloc-auth-type: sha1-hmac ah-sha1-hmac
+                      preference: '0'
+                      from-peer: 172.16.255.130
+                      weight: '1'
+                      encap: ipsec
+                      site-id: '4'
+                      originator: 172.16.254.3
+                      vdevice-host-name: vm3
+                      tloc-public-ip: 10.101.4.4
+                      tloc-public-port: '12406'
+                      tloc-private-ip: 10.101.4.4
+                      vdevice-dataKey: 169.254.10.10-ipv4-172.16.254.3
+                      tloc-private-port: '12406'
+                      tloc-spi: '284'
+                      lastupdated: 1643185163281
+                      tloc-encrypt-type: aes256
+                      tloc-proto: '0'
+                      address-family: ipv4
+                    - bfd-status: up
+                      color: default
+                      vdevice-name: 169.254.10.10
+                      ip: 172.16.254.4
+                      tloc-auth-type: sha1-hmac ah-sha1-hmac
+                      preference: '0'
+                      from-peer: 172.16.255.130
+                      weight: '1'
+                      encap: ipsec
+                      site-id: '5'
+                      originator: 172.16.254.4
+                      vdevice-host-name: vm3
+                      tloc-public-ip: 10.102.5.5
+                      tloc-public-port: '12406'
+                      tloc-private-ip: 10.102.5.5
+                      vdevice-dataKey: 169.254.10.10-ipv4-172.16.254.4
+                      tloc-private-port: '12406'
+                      tloc-spi: '288'
+                      lastupdated: 1643185163286
+                      tloc-encrypt-type: aes256
+                      tloc-proto: '0'
+                      address-family: ipv4
+                    - bfd-status: up
+                      color: default
+                      vdevice-name: 169.254.10.10
+                      ip: 172.16.254.5
+                      tloc-auth-type: sha1-hmac ah-sha1-hmac
+                      preference: '0'
+                      from-peer: 172.16.253.129
+                      weight: '1'
+                      encap: ipsec
+                      site-id: '6'
+                      originator: 172.16.254.5
+                      vdevice-host-name: vm3
+                      tloc-public-ip: 10.102.6.6
+                      tloc-public-port: '12406'
+                      tloc-private-ip: 10.102.6.6
+                      vdevice-dataKey: 169.254.10.10-ipv4-172.16.254.5
+                      tloc-private-port: '12406'
+                      tloc-spi: '292'
+                      lastupdated: 1643185163290
+                      tloc-encrypt-type: aes256
+                      tloc-proto: '0'
+                      address-family: ipv4
+                    - bfd-status: up
+                      color: default
+                      vdevice-name: 169.254.10.10
+                      ip: 172.16.254.16
+                      tloc-auth-type: sha1-hmac ah-sha1-hmac
+                      preference: '0'
+                      from-peer: 172.16.253.129
+                      weight: '1'
+                      encap: ipsec
+                      site-id: '16'
+                      originator: 172.16.254.16
+                      vdevice-host-name: vm3
+                      tloc-public-ip: 10.102.16.16
+                      tloc-public-port: '12406'
+                      tloc-private-ip: 10.102.16.16
+                      vdevice-dataKey: 169.254.10.10-ipv4-172.16.254.16
+                      tloc-private-port: '12406'
+                      tloc-spi: '287'
+                      lastupdated: 1643185163295
+                      tloc-encrypt-type: aes256
+                      tloc-proto: '0'
+                      address-family: ipv4
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Routing-read,Routing-write,Policy-read,Policy-write

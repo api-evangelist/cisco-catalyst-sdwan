@@ -1,0 +1,256 @@
+openapi: 3.2.0
+info:
+  title: UX 1.0 Configuration Configuration - Policy Custom Application Builder API
+  description: "Configuration of UX 1.0 device and policy.\nIncludes API operations for the following:\n  Managing original SD-WAN device configurations and policy configurations\n  Device templates and feature templates"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Configuration - Policy Custom Application Builder
+paths:
+  /template/policy/clouddiscoveredapp:
+    post:
+      tags:
+      - Configuration - Policy Custom Application Builder
+      description: Set SLA class for policy cloud discovered applications
+      operationId: MapTrafficProfiles
+      requestBody:
+        description: App payload
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              App payload:
+                description: App payload
+                value: "[\n   {\n      \"appId\":\"71001c48-fdcf-4ac0-aaf3-ca4a20386a18\",\n      \"slaClass\":\"video\",\n   }\n]"
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                App:
+                  description: App
+                  value:
+                    appId: 679cdb6f-67d8-45bd-9de0-a73138a9ca05
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/policy/customapp:
+    get:
+      tags:
+      - Configuration - Policy Custom Application Builder
+      description: Get all policy custom applications
+      operationId: getCustomApps
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Custom App:
+                  description: Custom App
+                  value:
+                    data:
+                    - appId: 679cdb6f-67d8-45bd-9de0-a73138a9ca05
+                      appName: DemoApp
+                      lastUpdated: '1590201349732'
+                      owner: admin
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+      - Configuration - Policy Custom Application Builder
+      description: Create Custom Applications
+      operationId: createCustomApplication
+      requestBody:
+        description: Create Custom Application
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Create Custom Application Payload:
+                description: Create Custom Application Payload
+                value:
+                  appName: demo_app
+                  serverNames:
+                  - demo.app.com
+                  L3L4:
+                  - ipAddresses:
+                    - 10.2.56.45
+                    ports: '5666'
+                    l4Protocol: TCP-UDP
+                  attributes:
+                    application-family: instant-messaging
+                    application-group: flash-group
+                    traffic-class: multimedia-conferencing
+                    business-relevance: business-irrelevant
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Response:
+                  description: Task Response
+                  value:
+                    taskId: sdavc_rest_api_call-27166314-0a04-4bc3-8af5-27b78684c902
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/policy/customapp/{id}:
+    get:
+      tags:
+      - Configuration - Policy Custom Application Builder
+      description: Get a policy custom applications
+      operationId: getCustomAppById
+      parameters:
+      - name: id
+        in: path
+        description: Id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Custom App:
+                  description: Custom App
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+      - Configuration - Policy Custom Application Builder
+      description: Delete Custom Application
+      operationId: deleteCustomApp
+      parameters:
+      - name: id
+        in: path
+        description: Custom Application UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Response:
+                  description: Task Response
+                  value:
+                    taskId: sdavc_rest_api_call-27166314-0a04-4bc3-8af5-27b78684c902
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    put:
+      tags:
+      - Configuration - Policy Custom Application Builder
+      description: Update Custom Applications
+      operationId: updateCustomApplication
+      parameters:
+      - name: id
+        in: path
+        description: Custom Application UUID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Update Custom Application
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Update Custom Application Payload:
+                description: Update Custom Application Payload
+                value:
+                  appName: demo_app
+                  serverNames:
+                  - demo.app.com
+                  L3L4:
+                  - ipAddresses:
+                    - 10.2.56.45
+                    ports: '5666'
+                    l4Protocol: TCP-UDP
+                  attributes:
+                    application-family: instant-messaging
+                    application-group: flash-group
+                    traffic-class: multimedia-conferencing
+                    business-relevance: business-irrelevant
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Response:
+                  description: Task Response
+                  value:
+                    taskId: sdavc_rest_api_call-27166314-0a04-4bc3-8af5-27b78684c902
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

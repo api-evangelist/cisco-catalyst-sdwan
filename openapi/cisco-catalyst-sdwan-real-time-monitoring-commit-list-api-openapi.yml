@@ -1,0 +1,125 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - Commit List API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - Commit List
+paths:
+  /device/configuration/commit-list:
+    get:
+      tags:
+      - Real-Time Monitoring - Commit List
+      description: Get device commit list
+      operationId: getDeviceConfigurationCommitList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device commit list:
+                  description: Device commit list
+                  value:
+                    data:
+                    - time-stamp: 2022-03-1006:53:10
+                      vdevice-dataKey: 172.16.255.11-0-10032
+                      vdevice-name: 172.16.255.11
+                      client: system
+                      lastupdated: 1646900329409
+                      sn: '0'
+                      id: '10032'
+                      user: system-vdaemon
+                      vdevice-host-name: vm1
+                    - time-stamp: 2022-03-1006:48:02
+                      vdevice-dataKey: 172.16.255.11-1-10031
+                      vdevice-name: 172.16.255.11
+                      client: netconf
+                      lastupdated: 1646900329409
+                      sn: '1'
+                      id: '10031'
+                      user: vmanage-admin
+                      vdevice-host-name: vm1
+                    - time-stamp: 2022-03-1006:47:42
+                      vdevice-dataKey: 172.16.255.11-2-10030
+                      vdevice-name: 172.16.255.11
+                      client: cli
+                      lastupdated: 1646900329409
+                      sn: '2'
+                      id: '10030'
+                      user: admin
+                      vdevice-host-name: vm1
+                    - time-stamp: 2022-03-1006:28:31
+                      vdevice-dataKey: 172.16.255.11-3-10026
+                      vdevice-name: 172.16.255.11
+                      client: system
+                      lastupdated: 1646900329409
+                      sn: '3'
+                      id: '10026'
+                      user: system-vdaemon
+                      vdevice-host-name: vm1
+                    - time-stamp: 2022-03-1006:23:22
+                      vdevice-dataKey: 172.16.255.11-4-10025
+                      vdevice-name: 172.16.255.11
+                      client: netconf
+                      lastupdated: 1646900329409
+                      sn: '4'
+                      id: '10025'
+                      user: vmanage-admin
+                      vdevice-host-name: vm1
+                    - time-stamp: 2022-03-1006:02:22
+                      vdevice-dataKey: 172.16.255.11-5-10024
+                      vdevice-name: 172.16.255.11
+                      client: netconf
+                      lastupdated: 1646900329409
+                      sn: '5'
+                      id: '10024'
+                      user: vmanage-admin
+                      vdevice-host-name: vm1
+                    - time-stamp: 2022-03-1005:56:46
+                      vdevice-dataKey: 172.16.255.11-6-10023
+                      vdevice-name: 172.16.255.11
+                      client: system
+                      lastupdated: 1646900329409
+                      sn: '6'
+                      id: '10023'
+                      user: system-vdaemon
+                      vdevice-host-name: vm1
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write

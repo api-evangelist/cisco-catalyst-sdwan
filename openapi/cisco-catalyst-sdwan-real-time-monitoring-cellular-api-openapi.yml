@@ -1,0 +1,559 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - Cellular API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - Cellular
+paths:
+  /device/cellular/connection:
+    get:
+      tags:
+      - Real-Time Monitoring - Cellular
+      description: Get cellular connection list from device
+      operationId: createCellularConnectionList
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Cellular connection list:
+                  description: Cellular connection list
+                  value:
+                  - lastupdated: 1649242617635
+                    cellular-interface: Cellular0/1/0
+                    active-profile: '1'
+                    cellular-packet-status: packet-session-status-active
+                    rx-packets: '20905'
+                    rx-bytes: '10301'
+                    tx-packets: '20905'
+                    tx-bytes: '10301'
+                    ipv4-addr: 29.29.29.105
+                    ipv4-dns-pri: 8.0.0.8
+                    ipv4-dns-sec: 4.4.4.4
+                    ipv6-addr: 2001:a0:c::1a
+                    ipv6-dns-pri: 2400:da00::6666
+                    ipv6-dns-sec: 2400:da00::6666
+                    scope: scope
+                    ursp-configured: 'true'
+                    vdevice-name: 172.16.255.15
+                    vdevice-host-name: vm5
+                    vdevice-dataKey: 172.16.255.15
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Interface-read,Interface-write
+  /device/cellular/hardware:
+    get:
+      tags:
+      - Real-Time Monitoring - Cellular
+      description: Get cellular hardware list from device
+      operationId: createHardwareList_RealTimeMonitoringCellular_2503
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Cellular hardware list:
+                  description: Cellular hardware list
+                  value:
+                  - lastupdated: 1649242617635
+                    cellular-interface: Cellular0/1/0
+                    cellular-firmware-build-time: '1649242617635'
+                    cellular-firmware-version: '1.0'
+                    cellular-hardware-version: '1.0'
+                    cellular-device-model: HMOD1
+                    cellular-imsi: HUID1
+                    cellular-imei: imei
+                    cellular-iccid: iccid
+                    cellular-msisdn: msisdn
+                    cellular-fsn: fsn
+                    cellular-modem-status: active
+                    cellular-modem-temperature: 16c
+                    cellular-pri-skuid: skuid
+                    cellular-pri-version: '2.0'
+                    cellular-carrier: carrier
+                    cellular-oem-pri-version: '2.0'
+                    vdevice-name: 172.16.255.15
+                    vdevice-host-name: vm5
+                    vdevice-dataKey: 172.16.255.15
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Interface-read,Interface-write
+  /device/cellular/modem:
+    get:
+      tags:
+      - Real-Time Monitoring - Cellular
+      description: Get cellular modem list from device
+      operationId: createModemList
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device Id
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Cellular modem list:
+                  description: Cellular modem list
+                  value:
+                  - lastupdated: 1649242617635
+                    if-name: Cellular0/1/0
+                    model: model
+                    fw-version: '1.0'
+                    fw-date: '2022-04-18'
+                    fw-time: '1649242617635'
+                    fw-pkg-ver: '1.2'
+                    fw-pkg-carrier: carrier
+                    fw-pkg-pri: pri
+                    fw-pkg-subver: subver
+                    hw-version: '1.5'
+                    modem-status: active
+                    temperature: 16c
+                    imsi: imsi
+                    imei: imei
+                    iccid: iccid
+                    msisdn: msisdn
+                    esn: esn
+                    vdevice-name: 172.16.255.15
+                    vdevice-host-name: vm5
+                    vdevice-dataKey: 172.16.255.15
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Interface-read,Interface-write
+  /device/cellular/network:
+    get:
+      tags:
+      - Real-Time Monitoring - Cellular
+      description: Get cellular network list from device
+      operationId: createNetworkList_RealTimeMonitoringCellular_2403
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Cellular network list:
+                  description: Cellular network list
+                  value:
+                  - lastupdated: 1649242617635
+                    if-name: Cellular0/1/0
+                    reg-status: status
+                    roam-status: status
+                    domain-status: status
+                    mcc: mcc
+                    mnc: mnc
+                    nw-name: name
+                    emm-state: state
+                    emm-substate: good
+                    emm-connstate: good
+                    cellid: cellid
+                    tac: tac
+                    sid: sid
+                    nid: nid
+                    bid: bid
+                    lac: lac
+                    psc: psc
+                    bsic: bsic
+                    vdevice-name: 172.16.255.15
+                    vdevice-host-name: vm5
+                    vdevice-dataKey: 172.16.255.15
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Interface-read,Interface-write
+  /device/cellular/profiles:
+    get:
+      tags:
+      - Real-Time Monitoring - Cellular
+      description: Get cellular profile list from device
+      operationId: createProfileList
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Cellular profile list:
+                  description: Cellular profile list
+                  value:
+                  - lastupdated: 1649242617635
+                    if-name: Cellular0/1/0
+                    profile-id: '123'
+                    pdn-type: type
+                    apn: apn
+                    name: name
+                    auth: auth
+                    ip-addr: 172.16.255.15
+                    primary-dns: 8.8.8.8
+                    secondary-dns: 4.4.4.4
+                    user-name: uname
+                    vdevice-name: 172.16.255.15
+                    vdevice-host-name: vm5
+                    vdevice-dataKey: 172.16.255.15
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Interface-read,Interface-write
+  /device/cellular/radio:
+    get:
+      tags:
+      - Real-Time Monitoring - Cellular
+      description: Get cellular radio list from device
+      operationId: createRadioList_RealTimeMonitoringCellular_2203
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Cellular radio list:
+                  description: Cellular radio list
+                  value:
+                  - lastupdated: 1649242617635
+                    if-name: Cellular0/1/0
+                    band: 123
+                    bandwidth: 1000.2
+                    tx-channel: 1
+                    rx-channel: 2
+                    rssi: 1
+                    rsrp: 2
+                    rsrp-comment: comment
+                    rsrq: 4
+                    rsrq-comment: comment
+                    snr: 3.4
+                    snr-comment: comment
+                    ecio: ecio
+                    sinr: sinr
+                    io: io
+                    mode: mode
+                    band-class: band class
+                    channel: unam123e
+                    vdevice-name: 172.16.255.15
+                    vdevice-host-name: vm5
+                    vdevice-dataKey: 172.16.255.15
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Interface-read,Interface-write
+  /device/cellular/sessions:
+    get:
+      tags:
+      - Real-Time Monitoring - Cellular
+      description: Get cellular session list from device
+      operationId: createSessionsList
+      parameters:
+      - name: if-name
+        in: query
+        description: Interface name
+        schema:
+          type: string
+          enum:
+          - ge0/0
+          - ge0/1
+          - ge0/2
+          - ge0/3
+          - ge0/4
+          - ge0/5
+          - ge0/6
+          - ge0/7
+          - system
+          - eth0
+      - name: ipv4-dns-pri
+        in: query
+        description: DNS primary IP
+        schema:
+          type: string
+      - name: deviceId
+        in: query
+        description: Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Cellular session list:
+                  description: Cellular session list
+                  value:
+                  - lastupdated: 1649242617635
+                    if-name: Cellular0/1/0
+                    session-id: '123'
+                    data-bearer: bearer
+                    dormancy-state: state
+                    active-profile: 1
+                    rx-packets: 18
+                    rx-drops: 15
+                    rx-errors: 888
+                    rx-overflows: 444
+                    rx-octets: 235
+                    tx-packets: 234
+                    tx-drops: 234
+                    tx-errors: 123
+                    tx-overflows: 123
+                    tx-octets: 123
+                    ipv4-addr: 172.16.255.15
+                    ipv4-mask: 255.255.255.0
+                    ipv4-gw: 192.168.0.1
+                    ipv4-dns-pri: 8.8.8.8
+                    ipv4-dns-sec: 4.4.4.4
+                    vdevice-name: 172.16.255.15
+                    vdevice-host-name: vm5
+                    vdevice-dataKey: 172.16.255.15
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Interface-read,Interface-write
+  /device/cellular/status:
+    get:
+      tags:
+      - Real-Time Monitoring - Cellular
+      description: Get cellular status list from device
+      operationId: getCellularStatusList
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Cellular status list:
+                  description: Cellular status list
+                  value:
+                  - lastupdated: 1649242617635
+                    if-name: Cellular0/1/0
+                    modem-status: status
+                    sim-status: status
+                    signal-strength: '12'
+                    network-status: health
+                    last-seen-error: last error
+                    vdevice-name: 172.16.255.15
+                    vdevice-host-name: vm5
+                    vdevice-dataKey: 172.16.255.15
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Interface-read,Interface-write
+  /device/cellular/ursp/routes:
+    get:
+      tags:
+      - Real-Time Monitoring - Cellular
+      description: Get cellular URSP routes from device
+      operationId: getCellularUrspRoutes
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Cellular URSP routes:
+                  description: Cellular URSP routes
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Interface-read,Interface-write
+  /device/cellular/ursp/rules:
+    get:
+      tags:
+      - Real-Time Monitoring - Cellular
+      description: Get cellular URSP rules from device
+      operationId: getCellularUrspRules
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Cellular URSP rules:
+                  description: Cellular URSP rules
+                  value:
+                  - vdevice-dataKey: 172.16.255.101-Cellular0/2/0-1
+                    cellular-interface: Cellular0/2/0
+                    policy-source: '0'
+                    vdevice-name: 172.16.255.101
+                    pdu-session-type: '0'
+                    lastupdated: 1749206177430
+                    rule-precedence: '1'
+                    vdevice-host-name: Router
+                    match-all: '0'
+                  - vdevice-dataKey: 172.16.255.101-Cellular0/2/0-2
+                    cellular-interface: Cellular0/2/0
+                    policy-source: '0'
+                    vdevice-name: 172.16.255.101
+                    pdu-session-type: '0'
+                    lastupdated: 1749206177430
+                    rule-precedence: '2'
+                    vdevice-host-name: Router
+                    match-all: '0'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Interface-read,Interface-write

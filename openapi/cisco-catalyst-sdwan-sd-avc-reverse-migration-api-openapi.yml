@@ -1,0 +1,370 @@
+openapi: 3.2.0
+info:
+  title: Others SD AVC - Reverse Migration API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: SD AVC - Reverse Migration
+paths:
+  /sdavc/reverse-migration/custom-application/replay:
+    post:
+      tags:
+      - SD AVC - Reverse Migration
+      description: Replay Custom Application to current SDAVC instance
+      operationId: replayCustomApplications
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                OK Response:
+                  description: OK Response
+                  value:
+                    task-id: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: scheduled
+                    message: Task scheduled
+                  $$ref: '#/components/examples/ComViptelaVmanageServerSdavcReverseMigrationResponseExamplesReplayCustomApplicationsOk'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                500 - Internal Server Error:
+                  description: 500 - Internal Server Error
+                  value:
+                    error:
+                      message: <Short Message>
+                      code: PP0015
+                      details: <Detailed Message>
+                  $$ref: '#/components/examples/ComViptelaVmanageServerSdavcReverseMigrationResponseExamples500'
+  /sdavc/reverse-migration/custom-application/replay/status/{task-id}:
+    get:
+      tags:
+      - SD AVC - Reverse Migration
+      description: Get Replay Custom Applications status for given Task UUID
+      operationId: replayCustomApplicationsStatus
+      parameters:
+      - name: task-id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Task Id got from Replay Request
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Scheduled Response:
+                  description: Scheduled Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: scheduled
+                    message: Task scheduled
+                  $$ref: '#/components/examples/ComViptelaVmanageServerSdavcReverseMigrationResponseExamplesScheduledResponse'
+                In Progress Response:
+                  description: In Progress Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: in_progress
+                    message: Task is in progress
+                  $$ref: '#/components/examples/ComViptelaVmanageServerSdavcReverseMigrationResponseExamplesInProgressResponse'
+                Success Response:
+                  description: Success Response
+                  value:
+                    uuid: 7519de9f-cfb0-4372-be98-8acdea47fbd6
+                    status: success
+                    message: Successfully completed Synchronize Custom Applications with SDAVC task for vIPtela Inc Regression
+                    failed-list: []
+                    success-list:
+                    - test-Custom
+                    - test2-Custom
+                    - test3-Custom
+                    - test4-Custom
+                    - test5-Custom
+                    - test6-Custom
+                    - test7-Custom
+                    - test8-Custom
+                    - test9-Custom
+                    tenantId: default
+                    process-task-id: sdavc_custom_application_synchronizer-7519de9f-cfb0-4372-be98-8acdea47fbd6
+                    task-id: 7519de9f-cfb0-4372-be98-8acdea47fbd6
+                    synchronizer-status-type: sdavc_custom_application_synchronizer
+                    timestamp: 1727712608340
+                  $$ref: '#/components/examples/ComViptelaVmanageServerSdavcReverseMigrationResponseExamplesCustomApplicationSuccessResponse'
+                Failure Response:
+                  description: Failure Response
+                  value:
+                    uuid: 7519de9f-cfb0-4372-be98-8acdea47fbd6
+                    status: failure
+                    message: 'Error completing Synchronize Protocol Packs with SDAVC for vIPtela Inc Regression, Reason : Failed to upload one or more Protocol Packs'
+                    failed-list:
+                    - test1-Custom
+                    - test11-Custom
+                    - test21-Custom
+                    - test31-Custom
+                    success-list:
+                    - test2-Custom
+                    - test12-Custom
+                    - test22-Custom
+                    - test32-Custom
+                    tenantId: default
+                    process-task-id: sdavc_custom_application_synchronizer-7519de9f-cfb0-4372-be98-8acdea47fbd6
+                    task-id: 7519de9f-cfb0-4372-be98-8acdea47fbd6
+                    synchronizer-status-type: sdavc_custom_application_synchronizer
+                    timestamp: 1727727990218
+                  $$ref: '#/components/examples/ComViptelaVmanageServerSdavcReverseMigrationResponseExamplesFailedCustomApplicationReplayResponse'
+                Not Started Response:
+                  description: Not Started Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: not_started
+                    message: The task has not started yet
+                  $$ref: '#/components/examples/ComViptelaVmanageServerSdavcReverseMigrationResponseExamplesNotStartedResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                500 - Internal Server Error:
+                  description: 500 - Internal Server Error
+                  value:
+                    error:
+                      message: <Short Message>
+                      code: PP0015
+                      details: <Detailed Message>
+                  $$ref: '#/components/examples/ComViptelaVmanageServerSdavcReverseMigrationResponseExamples500'
+  /sdavc/reverse-migration/protocol-pack/replay:
+    post:
+      tags:
+      - SD AVC - Reverse Migration
+      description: Replay Protocol Pack to current SDAVC instance
+      operationId: replayProtocolPacks
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                OK Response:
+                  description: OK Response
+                  value:
+                    task-id: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: scheduled
+                    message: Task scheduled
+                  $$ref: '#/components/examples/ComViptelaVmanageServerSdavcReverseMigrationResponseExamplesReplayProtocolPacksOk'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                500 - Internal Server Error:
+                  description: 500 - Internal Server Error
+                  value:
+                    error:
+                      message: <Short Message>
+                      code: PP0015
+                      details: <Detailed Message>
+                  $$ref: '#/components/examples/ComViptelaVmanageServerSdavcReverseMigrationResponseExamples500'
+  /sdavc/reverse-migration/protocol-pack/replay/status/{task-id}:
+    get:
+      tags:
+      - SD AVC - Reverse Migration
+      description: Get Replay Protocol Packs status for given Task UUID
+      operationId: replayProtocolPacksStatus
+      parameters:
+      - name: task-id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Task Id got from Replay Request
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Scheduled Response:
+                  description: Scheduled Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: scheduled
+                    message: Task scheduled
+                  $$ref: '#/components/examples/ComViptelaVmanageServerSdavcReverseMigrationResponseExamplesScheduledResponse'
+                In Progress Response:
+                  description: In Progress Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: in_progress
+                    message: Task is in progress
+                  $$ref: '#/components/examples/ComViptelaVmanageServerSdavcReverseMigrationResponseExamplesInProgressResponse'
+                Success Response:
+                  description: Success Response
+                  value:
+                    uuid: bc50de11-6f9d-4448-b356-f1b6bdfa93d0
+                    status: success
+                    message: Successfully uploaded Protocol Packs
+                    failed-list: []
+                    success-list:
+                    - pp-adv-cat8k-1712.1a-49-70.0.0.pack
+                    - pp-adv-cat8k-179.1a-46-64.0.0.pack
+                    - pp-adv-cat8k-179.1a-46-66.0.0.pack
+                    tenantId: default
+                    process-task-id: sdavc_protocol_pack_synchronizer-bc50de11-6f9d-4448-b356-f1b6bdfa93d0
+                    task-id: bc50de11-6f9d-4448-b356-f1b6bdfa93d0
+                    synchronizer-status-type: sdavc_protocol_pack_synchronizer
+                    timestamp: 1727727990218
+                  $$ref: '#/components/examples/ComViptelaVmanageServerSdavcReverseMigrationResponseExamplesProtocolPackSuccessResponse'
+                Failure Response:
+                  description: Failure Response
+                  value:
+                    uuid: bc50de11-6f9d-4448-b356-f1b6bdfa93d0
+                    status: failure
+                    message: 'Error completing Synchronize Protocol Packs with SDAVC for vIPtela Inc Regression, Reason : Failed to upload one or more Protocol Packs'
+                    failed-list:
+                    - pp-adv-asr1k-179.1a-46-65.0.0.pack
+                    - pp-adv-cat8k-1712.1a-49-68.0.0.pack
+                    - pp-adv-cat8k-1712.1a-49-69.0.0.pack
+                    - pp-adv-cat8k-1712.1a-49-71.0.0.pack
+                    - pp-adv-cat8k-1715.1a-52-71.0.0.pack
+                    - pp-adv-cat8k-176.1a-43-64.0.0.pack
+                    - pp-adv-cat8k-179.1a-46-67.0.0.pack
+                    success-list:
+                    - pp-adv-cat8k-1712.1a-49-70.0.0.pack
+                    - pp-adv-cat8k-179.1a-46-64.0.0.pack
+                    - pp-adv-cat8k-179.1a-46-66.0.0.pack
+                    tenantId: default
+                    process-task-id: sdavc_protocol_pack_synchronizer-bc50de11-6f9d-4448-b356-f1b6bdfa93d0
+                    task-id: bc50de11-6f9d-4448-b356-f1b6bdfa93d0
+                    synchronizer-status-type: sdavc_protocol_pack_synchronizer
+                    timestamp: 1727727990218
+                  $$ref: '#/components/examples/ComViptelaVmanageServerSdavcReverseMigrationResponseExamplesFailedProtocolPackReplayResponse'
+                Not Started Response:
+                  description: Not Started Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: not_started
+                    message: The task has not started yet
+                  $$ref: '#/components/examples/ComViptelaVmanageServerSdavcReverseMigrationResponseExamplesNotStartedResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                500 - Internal Server Error:
+                  description: 500 - Internal Server Error
+                  value:
+                    error:
+                      message: <Short Message>
+                      code: PP0015
+                      details: <Detailed Message>
+                  $$ref: '#/components/examples/ComViptelaVmanageServerSdavcReverseMigrationResponseExamples500'
+  /sdavc/reverse-migration/validate:
+    get:
+      tags:
+      - SD AVC - Reverse Migration
+      description: Validate Reverse Migration of Custom Application and Protocol Pack
+      operationId: validate
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                All OK Response:
+                  description: All OK Response
+                  value:
+                    custom-application-status: ok
+                    custom-application-count: 10
+                    protocol-pack-status: ok
+                    protocol-pack-needs-re-upload: []
+                  $$ref: '#/components/examples/ComViptelaVmanageServerSdavcReverseMigrationResponseExamplesValidateOk'
+                Protocol Pack re-upload required Response:
+                  description: Protocol Pack re-upload required Response
+                  value:
+                    custom-application-status: ok
+                    custom-application-count: 10
+                    protocol-pack-status: not-ok
+                    protocol-pack-needs-re-upload:
+                    - pp-adv-cat8k-179.1a-46-64.0.0.pack
+                    - pp-adv-cat8k-1712.1a-49-68.0.0.pack
+                  $$ref: '#/components/examples/ComViptelaVmanageServerSdavcReverseMigrationResponseExamplesValidateNotOk'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                500 - Internal Server Error:
+                  description: 500 - Internal Server Error
+                  value:
+                    error:
+                      message: <Short Message>
+                      code: PP0015
+                      details: <Detailed Message>
+                  $$ref: '#/components/examples/ComViptelaVmanageServerSdavcReverseMigrationResponseExamples500'

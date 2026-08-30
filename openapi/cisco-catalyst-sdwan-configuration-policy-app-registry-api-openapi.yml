@@ -1,0 +1,269 @@
+openapi: 3.2.0
+info:
+  title: Others Configuration - Policy App Registry API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Configuration - Policy App Registry
+paths:
+  /app-registry/applications:
+    get:
+      tags:
+      - Configuration - Policy App Registry
+      description: Get All the App for the given conditions
+      operationId: getAppList
+      parameters:
+      - name: trafficClass
+        in: query
+        description: Traffic Class
+        schema:
+          type: string
+        example: bulk-data
+      - name: businessRelevance
+        in: query
+        description: Business Relevance
+        schema:
+          type: string
+        example: business-relevant
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                properties:
+                  empty:
+                    type: boolean
+                items:
+                  type: object
+                $$ref: '#/components/schemas/ApplicationsResponseNoUUID'
+              examples:
+                Example:
+                  description: Example
+                  value:
+                    applications:
+                    - nbar_family: thin-client
+                      numericId: '1367'
+                      common_family_display: thin-client
+                      applicationFamily: thin-client
+                      nbar_name: synergy
+                      rootApplications: '[]'
+                      uuid: 43d282db-5a56-444e-8ab9-26d4a43403e8
+                      '@rid': 131
+                      common_family: thin-client
+                      applicationGroup: other
+                      appId: 13:379
+                      tenantId: default
+                      traffic_class: bulk-data
+                      business_relevance: business-relevant
+                      common_name_display: Synergy
+                      common_name: synergy
+                      applicationSource: inBuiltApps
+                      protocolPackVersion: '69.0'
+                    - nbar_family: database
+                      numericId: '1359'
+                      common_family_display: database
+                      applicationFamily: database
+                      nbar_name: oracle-bi
+                      rootApplications: '[]'
+                      uuid: 2f1a776b-2fba-485e-af2a-0384ad6b0267
+                      '@rid': 147
+                      common_family: database
+                      applicationGroup: oracle-group
+                      appId: 3:9703
+                      tenantId: default
+                      traffic_class: bulk-data
+                      business_relevance: business-relevant
+                      common_name_display: Oracle-bi
+                      common_name: oracle-bi
+                      protocolPackVersion: '69.0'
+                      applicationSource: inBuiltApps
+                  $$ref: '#/components/examples/ComViptelaVmanageServerSdavcAppregistryApiAppregistryapiResponseExampleGetappregistryappresp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    put:
+      tags:
+      - Configuration - Policy App Registry
+      description: Edit App Details
+      operationId: editAppDetails
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  valueType:
+                    type: string
+                    enum:
+                    - ARRAY
+                    - OBJECT
+                    - STRING
+                    - NUMBER
+                    - 'TRUE'
+                    - 'FALSE'
+                    - 'NULL'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                properties:
+                  empty:
+                    type: boolean
+                items:
+                  type: object
+                $$ref: '#/components/schemas/ApplicationsResponseNoUUID'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /app-registry/applications/{appId}:
+    put:
+      tags:
+      - Configuration - Policy App Registry
+      description: Edit App Details
+      operationId: editAppDetailsWithUUID
+      parameters:
+      - name: appId
+        in: path
+        description: appId
+        required: true
+        schema:
+          type: string
+        example: 3fda54ed-3b92-49e5-b1e5-adec30bfd17f
+      requestBody:
+        description: Request body
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Example Value:
+                description: Example Value
+                value:
+                  nbar_family: file-server
+                  numericId: '1157'
+                  common_family_display: file-server
+                  applicationFamily: file-server
+                  nbar_name: zannet
+                  rootApplications: '[]'
+                  uuid: 3fda54ed-3b92-49e5-b1e5-adec30bfd17f
+                  '@rid': 110
+                  common_family: file-server
+                  applicationGroup: other
+                  tenantId: default
+                  traffic_class: bulk-data
+                  business_relevance: default
+                  common_name_display: Zannet123
+                  common_name: zannet
+                  applicationSource: inBuiltApps
+                  protocolPackVersion: '69.0'
+                $$ref: '#/components/examples/ComViptelaVmanageServerSdavcAppregistryApiAppregistryapiRequestExampleGetappregistryappidreq'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                required:
+                - _rid
+                - business_relevance
+                - common_family
+                - common_family_display
+                - common_name
+                - common_name_display
+                - nbar_family
+                - nbar_name
+                - qosmos_family
+                - qosmos_name
+                - traffic_class
+                - uuid
+                type: object
+                properties:
+                  _rid:
+                    type: string
+                    example: 0:PolicyAppListsNode:1675729045113:1700
+                  business_relevance:
+                    type: string
+                    example: business-irrelevant
+                  common_family:
+                    type: string
+                    example: web
+                  common_family_display:
+                    type: string
+                    example: Web
+                  common_name:
+                    type: string
+                    example: zulily
+                  common_name_display:
+                    type: string
+                    example: Zulily
+                  nbar_family:
+                    type: string
+                    example: web
+                  nbar_name:
+                    type: string
+                    example: zulily
+                  qosmos_family:
+                    type: string
+                    example: web
+                  qosmos_name:
+                    type: string
+                    example: zulily
+                  traffic_class:
+                    type: string
+                    example: transactional-data
+                  uuid:
+                    type: string
+                    format: uuid
+                    example: 345fa8c9-6115-434b-b1f7-2c1d97f09f91
+                $$ref: '#/components/schemas/PayloadItems'
+              examples:
+                Status:
+                  description: Status
+                  value:
+                    type: ok
+                    message: '{"appId": "3fda54ed-3b92-49e5-b1e5-adec30bfd17f"}'
+                  $$ref: '#/components/examples/ComViptelaVmanageServerSdavcAppregistryApiAppregistryapiResponseExampleGetappregistryappidresp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

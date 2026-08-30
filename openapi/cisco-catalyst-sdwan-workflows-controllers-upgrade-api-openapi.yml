@@ -1,0 +1,996 @@
+openapi: 3.2.0
+info:
+  title: Others Workflows - Controllers Upgrade API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Workflows - Controllers Upgrade
+paths:
+  /v1/controllers-upgrade:
+    post:
+      tags:
+      - Workflows - Controllers Upgrade
+      summary: Trigger controllers upgrade.
+      description: Trigger controllers upgrade.
+      operationId: triggerControllersUpgrade
+      requestBody:
+        description: Request payload for controllers upgrade
+        content:
+          application/json:
+            schema:
+              required:
+              - action
+              - imageLocation
+              - isScheduleNow
+              - targetVersion
+              type: object
+              properties:
+                action:
+                  type: string
+                  description: Action to perform
+                  example: controllers_upgrade/controllers_patch_upgrade
+                applicableControllerTypes:
+                  type: array
+                  description: List of controller types applicable for patch upgrade
+                  example:
+                  - Manager
+                  - Controller
+                  - Validator
+                  items:
+                    type: string
+                    description: List of controller types applicable for patch upgrade
+                    example:
+                    - Manager
+                    - Controller
+                    - Validator
+                imageLocation:
+                  type: string
+                  description: Image location
+                  example: vmanage/cco
+                isScheduleNow:
+                  type: boolean
+                  description: Flag to schedule the upgrade immediately
+                  example: false
+                schedule:
+                  type: object
+                  additionalProperties:
+                    type: object
+                    properties:
+                      actionStartDate:
+                        type: string
+                        description: Start date for the action
+                        example: Sep 30 2026
+                      actionStartTime:
+                        type: string
+                        description: Start time for the action
+                        example: 12:00:00 AM
+                      timeZone:
+                        type: string
+                        description: Timezone for the scheduled action
+                        example: Asia/Kolkata
+                    description: Scheduling details for a controller component
+                    $$ref: '#/components/schemas/ComponentSchedule'
+                  description: Scheduling details for different component types
+                targetVersion:
+                  type: string
+                  description: Target version for upgrade
+                  example: 20.18.1
+              description: Request payload for controllers upgrade process
+              $$ref: '#/components/schemas/ControllerUpgradeRequest'
+            examples:
+              Schedule Now Controllers Upgrade:
+                description: Schedule Now Controllers Upgrade
+                value:
+                  action: controllers_upgrade
+                  targetVersion: 20.18.1
+                  imageLocation: vmanage/cco
+                  isScheduleNow: true
+              Schedule Later Controllers Upgrade:
+                description: Schedule Later Controllers Upgrade
+                value:
+                  action: controllers_upgrade
+                  targetVersion: 20.18.1
+                  imageLocation: vmanage/cco
+                  isScheduleNow: false
+                  schedule:
+                    Controller:
+                      actionStartDate: Sep 30 2026
+                      actionStartTime: 12:00:00 AM
+                      timeZone: Asia/Kolkata
+                    Manager:
+                      actionStartDate: Sep 30 2026
+                      actionStartTime: 12:00:00 AM
+                      timeZone: Asia/Kolkata
+                    Validator:
+                      actionStartDate: Sep 30 2026
+                      actionStartTime: 12:00:00 AM
+                      timeZone: Asia/Kolkata
+              Schedule Now Patch Upgrade:
+                description: Schedule Now Patch Upgrade
+                value:
+                  action: controllers_patch_upgrade
+                  targetVersion: 20.18.1.0.0.1
+                  imageLocation: vmanage/cco
+                  isScheduleNow: true
+                  applicableControllerTypes:
+                  - Manager
+                  - Controller
+                  - Validator
+              Schedule Later Patch Upgrade:
+                description: Schedule Later Patch Upgrade
+                value:
+                  action: controllers_patch_upgrade
+                  targetVersion: 20.18.1.0.0.1
+                  imageLocation: vmanage/cco
+                  isScheduleNow: false
+                  applicableControllerTypes:
+                  - Manager
+                  - Controller
+                  - Validator
+                  schedule:
+                    Controller:
+                      actionStartDate: Sep 30 2026
+                      actionStartTime: 12:00:00 AM
+                      timeZone: Asia/Kolkata
+                    Manager:
+                      actionStartDate: Sep 30 2026
+                      actionStartTime: 12:00:00 AM
+                      timeZone: Asia/Kolkata
+                    Validator:
+                      actionStartDate: Sep 30 2026
+                      actionStartTime: 12:00:00 AM
+                      timeZone: Asia/Kolkata
+        required: true
+      responses:
+        '200':
+          description: Successful response with the controllers upgrade process Id.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: The unique process Id of the Controllers upgrade.
+                    example: controllers_upgrade-0ba19b6e-3b6c-4cd0-9669-dce7e148c623
+                $$ref: '#/components/schemas/ControllersUpgradeResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /v1/controllers-upgrade/available-versions:
+    get:
+      tags:
+      - Workflows - Controllers Upgrade
+      summary: Retrieve available versions for Controllers upgrade.
+      description: Returns a list of available versions for controller upgrades based on the specified image type.
+      operationId: getAvailableVersions
+      parameters:
+      - name: imageType
+        in: query
+        required: true
+        schema:
+          type: string
+          description: 'software: Supports vmanage/viptela images
+
+            patch: Supports 6 tuple patch images'
+          enum:
+          - upgrade
+          - patch
+      responses:
+        '200':
+          description: Successful response with the list of available versions.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  availableVersions:
+                    type: array
+                    description: List of available versions for controller upgrades
+                    items:
+                      type: object
+                      properties:
+                        compatibleControllerTypes:
+                          uniqueItems: true
+                          type: array
+                          description: Set of controller types compatible with this version
+                          example:
+                          - Manager
+                          - Controller
+                          - Validator
+                          items:
+                            type: string
+                            description: Set of controller types compatible with this version
+                            example:
+                            - Manager
+                            - Controller
+                            - Validator
+                        imageType:
+                          uniqueItems: true
+                          type: array
+                          description: Set of supported controller types for this image
+                          example:
+                          - Manager
+                          - Controller
+                          - Validator
+                          items:
+                            type: string
+                            description: Set of supported controller types for this image
+                            example:
+                            - Manager
+                            - Controller
+                            - Validator
+                        location:
+                          type: string
+                          description: Location of the image
+                          example: cco
+                          enum:
+                          - cco
+                          - vmanage
+                        tag:
+                          type: string
+                          description: Version tag indicating version status
+                          example: recommended
+                          enum:
+                          - recommended
+                          - latest
+                          - custom
+                        version:
+                          type: string
+                          description: Software version number
+                      description: Version information for controllers upgrade
+                      $$ref: '#/components/schemas/VersionInfo'
+                description: Response containing available controller software versions
+                $$ref: '#/components/schemas/AvailableVersionsResponse'
+              examples:
+                ExampleUpgradePayload:
+                  description: ExampleUpgradePayload
+                  value: "{\n\"availableVersions\": [\n  {\n    \"version\": \"20.15.2\",\n    \"imageType\": [\"Manager\",\"Controller\",\"Validator\"],\n    \"location\": \"cco\",\n    \"tag\": \"recommended\",\n    \"compatibleControllerTypes\": [\"Manager\",\"Controller\",\"Validator\"]\n  },\n  {\n    \"version\": \"20.17.1\",\n    \"imageType\": [\"Manager\",\"Controller\",\"Validator\"],\n    \"location\": \"cco\",\n    \"tag\": \"latest\",\n    \"compatibleControllerTypes\": [\"Manager\",\"Controller\",\"Validator\"]\n  },\n  {\n    \"version\": \"20.17.1\",\n    \"imageType\": [\"Controller\",\"Validator\"],\n    \"location\": \"vmanage\",\n    \"tag\": \"custom\",\n    \"compatibleControllerTypes\": [\"Controller\",\"Validator\"],\n  },\n  {\n    \"version\": \"20.17.2\",\n    \"imageType\": [\"Manager\"],\n    \"location\": \"vmanage\",\n    \"tag\": \"custom\",\n    \"compatibleControllerTypes\":  [\"Manager\"],\n  },\n  {\n    \"version\": \"20.17.3\",\n    \"imageType\": [\"Manager\",\"Controller\",\"Validator\"],\n    \"location\": \"vmanage\",\n    \"tag\": \"custom\",\n    \"compatibleControllerTypes\": [\"Manager\",\"Controller\",\"Validator\"],\n  }\n]\n}"
+                ExamplePatchPayload:
+                  description: ExamplePatchPayload
+                  value: "{\n\"availableVersions\": [\n  {\n    \"version\": \"20.17.2.1.2.3\",\n    \"imageType\": [\"Manager\",\"Controller\",\"Validator\"],\n    \"location\": \"cco\",\n    \"tag\": \"recommended\",\n    \"compatibleControllerTypes\": [\"Manager\",\"Controller\",\"Validator\"],\n  },\n  {\n    \"version\": \"20.17.1.0.0.1\",\n    \"imageType\": [\"Manager\",\"Controller\",\"Validator\"],\n    \"location\": \"cco\",\n    \"tag\": \"latest\",\n    \"compatibleControllerTypes\": [\"Controller\",\"Validator\"],\n  },\n  {\n    \"version\": \"20.17.1.1.0.0\",\n    \"imageType\": [\"Controller\",\"Validator\"],\n    \"location\": \"vmanage\",\n    \"tag\": \"custom\",\n    \"compatibleControllerTypes\": [\"Validator\"],\n  },\n  {\n    \"version\": \"20.17.2.0.1.0\",\n    \"imageType\": [\"Manager\"],\n    \"location\": \"vmanage\",\n    \"tag\": \"custom\",\n    \"compatibleControllerTypes\": [\"Manager\"],\n  },\n  {\n    \"version\": \"20.17.3.1.1.1\",\n    \"imageType\": [\"Manager\",\"Controller\",\"Validator\"],\n    \"location\": \"vmanage\",\n    \"tag\": \"custom\",\n    \"compatibleControllerTypes\":  [\"Manager\",\"Controller\",\"Validator\"],\n  }\n]\n}"
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /v1/controllers-upgrade/cancel:
+    put:
+      tags:
+      - Workflows - Controllers Upgrade
+      summary: Cancel controllers upgrade process.
+      description: Cancel the upgrade process for controllers, managers, and validators.
+      operationId: cancelUpgrade
+      requestBody:
+        description: Request payload for controllers upgrade
+        content:
+          application/json:
+            schema:
+              required:
+              - processId
+              type: object
+              properties:
+                processId:
+                  type: string
+                  description: Unique ID of the upgrade process to cancel
+                  example: controllers_upgrade-61fe5fb4-81d2-4ff0-8294-e23c17b0d79e
+              description: Request payload for cancelling controller upgrade process
+              $$ref: '#/components/schemas/ControllerUpgradeCancelRequest'
+            examples:
+              Request Payload:
+                description: Request Payload
+                value:
+                  processId: controllers_upgrade-61fe5fb4-81d2-4ff0-8294-e23c17b0d79e
+        required: true
+      responses:
+        '200':
+          description: Successfully cancelled the upgrade process
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Status of the operation (Cancel/Reschedule)
+                  statusDetail:
+                    type: string
+                    description: Detailed description of the operation (Cancel/Reschedule) result
+                $$ref: '#/components/schemas/ControllersOperationResponse'
+              examples:
+                Response Payload:
+                  description: Response Payload
+                  value:
+                    status: Success
+                    statusDetail: Upgrade process successfully cancelled
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+  /v1/controllers-upgrade/reschedule:
+    put:
+      tags:
+      - Workflows - Controllers Upgrade
+      summary: Reschedule controllers upgrade process.
+      description: Reschedule the upgrade process for managers, validators, and controllers by providing new execution timestamps.
+      operationId: rescheduleUpgrade
+      requestBody:
+        description: Request payload for controllers upgrade
+        content:
+          application/json:
+            schema:
+              required:
+              - isScheduleNow
+              - processId
+              type: object
+              properties:
+                isScheduleNow:
+                  type: boolean
+                  description: Flag to schedule the upgrade immediately
+                  example: false
+                processId:
+                  type: string
+                  description: Unique ID of the upgrade process
+                  example: controllers_upgrade-61fe5fb4-81d2-4ff0-8294-e23c17b0d79e
+                schedule:
+                  type: object
+                  additionalProperties:
+                    type: object
+                    properties:
+                      actionStartDate:
+                        type: string
+                        description: Start date for the action
+                        example: Sep 30 2026
+                      actionStartTime:
+                        type: string
+                        description: Start time for the action
+                        example: 12:00:00 AM
+                      timeZone:
+                        type: string
+                        description: Timezone for the scheduled action
+                        example: Asia/Kolkata
+                    description: Scheduling details for a controller component
+                    $$ref: '#/components/schemas/ComponentSchedule'
+                  description: Scheduling details for different component types
+              description: Request payload for rescheduling controller upgrade process
+              $$ref: '#/components/schemas/ControllerUpgradeRescheduleRequest'
+            examples:
+              Request Payload - Controllers:
+                description: Request Payload - Controllers
+                value:
+                  processId: controllers_upgrade-61fe5fb4-81d2-4ff0-8294-e23c17b0d79e
+                  isScheduleNow: false
+                  schedule:
+                    Controller:
+                      actionStartDate: Sep 30 2026
+                      actionStartTime: 12:00:00 AM
+                      timeZone: Asia/Kolkata
+                    Manager:
+                      actionStartDate: Sep 30 2026
+                      actionStartTime: 12:00:00 AM
+                      timeZone: Asia/Kolkata
+                    Validator:
+                      actionStartDate: Sep 30 2026
+                      actionStartTime: 12:00:00 AM
+                      timeZone: Asia/Kolkata
+              Request Payload - Patch:
+                description: Request Payload - Patch
+                value:
+                  processId: controllers_patch_upgrade-61fe5fb4-81d2-4ff0-8294-e23c17b0d79e
+                  isScheduleNow: false
+                  schedule:
+                    Validator:
+                      actionStartDate: Sep 30 2026
+                      actionStartTime: 12:00:00 AM
+                      timeZone: Asia/Kolkata
+              Request Payload - Schedule Now:
+                description: Request Payload - Schedule Now
+                value:
+                  processId: controllers_upgrade-61fe5fb4-81d2-4ff0-8294-e23c17b0d79e
+                  isScheduleNow: true
+        required: true
+      responses:
+        '200':
+          description: Successfully rescheduled the upgrade process
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Status of the operation (Cancel/Reschedule)
+                  statusDetail:
+                    type: string
+                    description: Detailed description of the operation (Cancel/Reschedule) result
+                $$ref: '#/components/schemas/ControllersOperationResponse'
+              examples:
+                Response Payload:
+                  description: Response Payload
+                  value:
+                    status: Success
+                    statusDetail: Upgrade process successfully rescheduled
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+  /v1/controllers-upgrade/status:
+    get:
+      tags:
+      - Workflows - Controllers Upgrade
+      summary: Retrieve detailed controllers upgrade status.
+      description: Retrieve detailed upgrade status of controllers by providing process Id.
+      operationId: getUpgradeStatus
+      parameters:
+      - name: processId
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response with detailed upgrade status.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Status of the operation (Cancel/Reschedule)
+                  statusDetail:
+                    type: string
+                    description: Detailed description of the operation (Cancel/Reschedule) result
+                $$ref: '#/components/schemas/ControllersOperationResponse'
+              examples:
+                Sample Response:
+                  description: Sample Response
+                  value:
+                    validation:
+                      processId: controllers_patch_upgrade-18a1ba4e-743f-4f47-91b2-c2babb4f3c60
+                      uuid: Validation
+                      status: Validation success
+                      totalChecksPerDevice: 4
+                      activity:
+                      - stage-name: Validation
+                        checks:
+                        - check-name: Active Tasks
+                          status: Success
+                          details: No active tasks found
+                        - check-name: Version Compatibility
+                          status: Success
+                          details: Version Compatibility check completed
+                        - check-name: Impacted Controller Types
+                          status: Success
+                          details: Validating impacted controller types check completed
+                        - check-name: Summary
+                          status: Success
+                          details: All validation checks completed
+                        noOfChecks: 4
+                        status: Validation success
+                    preparation:
+                      processId: controllers_patch_upgrade-18a1ba4e-743f-4f47-91b2-c2babb4f3c60
+                      uuid: Preparation
+                      status: Success
+                      totalChecksPerDevice: 3
+                      activity:
+                      - stage-name: Preparation
+                        checks:
+                        - check-name: Image Availability
+                          status: success
+                          details: Found patch upgrade image in local repository for version 20.17.1.0.0.2
+                        - check-name: Launch UC Service
+                          status: success
+                          details: Manager has successfully started NMS Upgrade Coordinator for patch upgrade
+                        - check-name: Summary
+                          status: success
+                          details: Preparation done successfully
+                        noOfChecks: 3
+                        status: Success
+                    data:
+                    - processId: controllers_patch_upgrade-18a1ba4e-743f-4f47-91b2-c2babb4f3c60
+                      uuid: 00fe3eb9-1ead-4237-b48f-2fd5f48bcac7
+                      device-type: vbond
+                      host-name: vm16
+                      system-ip: 172.16.255.26
+                      site-id: '100'
+                      status: Failure
+                      totalChecksPerDevice: 31
+                      activity:
+                      - stage-name: preDownloadCheck
+                        checks:
+                        - check-name: Checking Certification expiry
+                          status: Success
+                          details: Device certificate is valid
+                        - check-name: Checking device reachability
+                          status: Success
+                          details: Device is reachable
+                        - check-name: disk-space-check
+                          status: Success
+                          details: 'Sufficient space in /boot partition. Required space: 3266560 bytes, Available space: 2292785152 bytes ,remediation:No Remediation required'
+                        - check-name: version-check
+                          status: Failure
+                          details: Patch version Check Failed ,remediation:Patch major version mismatch
+                        - check-name: memory-usage-check
+                          status: Success
+                          details: System has healthy Memory levels ,remediation:No remediation needed
+                        - check-name: cpu-load-check
+                          status: Success
+                          details: System has healthy CPU levels ,remediation:No remediation needed
+                        - check-name: precheck-fail
+                          status: Warning
+                          details: Finished Pre-Download image check and Failed ,remediation:Fix the errors and try again
+                        noOfChecks: 8
+                        status: Failure
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /v1/controllers-upgrade/version-compliance-info:
+    get:
+      tags:
+      - Workflows - Controllers Upgrade
+      summary: Get version compliance across tenants.
+      description: Returns compliance information for the specified version of Controllers upgrade across all tenants.
+      operationId: getVersionComplianceInfo
+      parameters:
+      - name: version
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response with compliance information for the specified version.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  minimumControllerCompatibleVersion:
+                    type: string
+                    description: Minimum compatible controller version
+                  minimumDeviceCompatibleVersion:
+                    type: string
+                    description: Minimum compatible device version
+                  minimumValidatorCompatibleVersion:
+                    type: string
+                    description: Minimum compatible validator version
+                  nearNonCompliantDeviceCount:
+                    type: integer
+                    description: Count of devices approaching non-compliance
+                    format: int32
+                  nonCompliantControllersCount:
+                    type: integer
+                    description: Count of non-compliant controllers
+                    format: int32
+                  nonCompliantControllersCountLTSMinusOne:
+                    type: integer
+                    description: Count of non-compliant controllers at LTS minus one version
+                    format: int32
+                  nonCompliantControllersCountLTSMinusThree:
+                    type: integer
+                    description: Count of non-compliant controllers at LTS minus three or lower versions
+                    format: int32
+                  nonCompliantControllersCountLTSMinusTwo:
+                    type: integer
+                    description: Count of non-compliant controllers at LTS minus two versions
+                    format: int32
+                  nonCompliantControllersLTSMinusThree:
+                    type: array
+                    description: List of non-compliant controllers at LTS minus three or lower versions
+                    items:
+                      type: object
+                      properties:
+                        checkList:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              message:
+                                type: string
+                              status:
+                                type: string
+                              type:
+                                type: string
+                              upgradeCompatibilityStatus:
+                                type: string
+                            $$ref: '#/components/schemas/CheckList'
+                        deviceDetails:
+                          required:
+                          - host
+                          - password
+                          - username
+                          - wan
+                          type: object
+                          properties:
+                            device_uuid:
+                              type: string
+                              description: device uuid/chassis number
+                              example: C8K-4facbd05-855b-45f0-af2f-c844af179bd6
+                            enable_password:
+                              type: string
+                              description: enable password
+                              example: admin
+                            host:
+                              pattern: ((^\s*((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))\s*$)|(^\s*((([0-9a-f]{1,4}:){7}([0-9a-f]{1,4}|:))|(([0-9a-f]{1,4}:){6}(:[0-9a-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9a-f]{1,4}:){5}(((:[0-9a-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9a-f]{1,4}:){4}(((:[0-9a-f]{1,4}){1,3})|((:[0-9a-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9a-f]{1,4}:){3}(((:[0-9a-f]{1,4}){1,4})|((:[0-9a-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9a-f]{1,4}:){2}(((:[0-9a-f]{1,4}){1,5})|((:[0-9a-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9a-f]{1,4}:){1}(((:[0-9a-f]{1,4}){1,6})|((:[0-9a-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9a-f]{1,4}){1,7})|((:[0-9a-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?\s*$))
+                              type: string
+                              description: host ip
+                              example: 1.1.1.1
+                            local_file_name:
+                              type: string
+                              description: local file name
+                              example: c8000v-universalk9.17.12.01.0.175851.SSA.bin
+                            password:
+                              type: string
+                              description: ssh password
+                              example: admin
+                            remote_server_file_name:
+                              type: string
+                              description: remote server file name
+                              example: c8000v-universalk9.17.12.01.0.175851.SSA.bin
+                            remote_server_id:
+                              type: string
+                              description: remote server Id
+                              example: 56a32849-aafb-4703-8887-ba64c0394835
+                            username:
+                              type: string
+                              description: ssh username
+                              example: admin
+                            wan:
+                              maxLength: 32
+                              minLength: 3
+                              pattern: (Cellular|Dialer|Ethernet|FastEthernet|FiftyGigabitEthernet|FiveGigabitEthernet|FortyGigabitEthernet|FourHundredGigE|GigabitEthernet|HundredGigE|Loopback|Multilink|Port-channel|Serial|TenGigabitEthernet|Tunnel|TwentyFiveGigE|TwentyFiveGigabitEthernet|TwoGigabitEthernet|TwoHundredGigE|Vlan|Wlan-GigabitEthernet)([0-9]*(. ?[1-9][0-9]*)*|[0-9/]+|[0-9]+/[0-9]+/[0-9]+:[0-9]+|[0-9]+/[0-9]+/[0-9]+|[0-9]+/[0-9]+|[0-9]+)
+                              type: string
+                              description: WAN interface name
+                              example: GigabitEthernet1
+                          description: Device list to onboard
+                          $$ref: '#/components/schemas/DeviceDetails'
+                        status:
+                          type: string
+                      description: List of non-compliant validators at LTS minus three or lower versions
+                      $$ref: '#/components/schemas/DeviceComplianceData'
+                  nonCompliantDeviceCount:
+                    type: integer
+                    description: Count of non-compliant devices
+                    format: int32
+                  nonCompliantValidatorsCount:
+                    type: integer
+                    description: Count of non-compliant validators
+                    format: int32
+                  nonCompliantValidatorsCountLTSMinusOne:
+                    type: integer
+                    description: Count of non-compliant validators at LTS minus one version
+                    format: int32
+                  nonCompliantValidatorsCountLTSMinusThree:
+                    type: integer
+                    description: Count of non-compliant validators at LTS minus three or lower versions
+                    format: int32
+                  nonCompliantValidatorsCountLTSMinusTwo:
+                    type: integer
+                    description: Count of non-compliant validators at LTS minus two versions
+                    format: int32
+                  nonCompliantValidatorsLTSMinusThree:
+                    type: array
+                    description: List of non-compliant validators at LTS minus three or lower versions
+                    items:
+                      type: object
+                      properties:
+                        checkList:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              message:
+                                type: string
+                              status:
+                                type: string
+                              type:
+                                type: string
+                              upgradeCompatibilityStatus:
+                                type: string
+                            $$ref: '#/components/schemas/CheckList'
+                        deviceDetails:
+                          required:
+                          - host
+                          - password
+                          - username
+                          - wan
+                          type: object
+                          properties:
+                            device_uuid:
+                              type: string
+                              description: device uuid/chassis number
+                              example: C8K-4facbd05-855b-45f0-af2f-c844af179bd6
+                            enable_password:
+                              type: string
+                              description: enable password
+                              example: admin
+                            host:
+                              pattern: ((^\s*((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))\s*$)|(^\s*((([0-9a-f]{1,4}:){7}([0-9a-f]{1,4}|:))|(([0-9a-f]{1,4}:){6}(:[0-9a-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9a-f]{1,4}:){5}(((:[0-9a-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9a-f]{1,4}:){4}(((:[0-9a-f]{1,4}){1,3})|((:[0-9a-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9a-f]{1,4}:){3}(((:[0-9a-f]{1,4}){1,4})|((:[0-9a-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9a-f]{1,4}:){2}(((:[0-9a-f]{1,4}){1,5})|((:[0-9a-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9a-f]{1,4}:){1}(((:[0-9a-f]{1,4}){1,6})|((:[0-9a-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9a-f]{1,4}){1,7})|((:[0-9a-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?\s*$))
+                              type: string
+                              description: host ip
+                              example: 1.1.1.1
+                            local_file_name:
+                              type: string
+                              description: local file name
+                              example: c8000v-universalk9.17.12.01.0.175851.SSA.bin
+                            password:
+                              type: string
+                              description: ssh password
+                              example: admin
+                            remote_server_file_name:
+                              type: string
+                              description: remote server file name
+                              example: c8000v-universalk9.17.12.01.0.175851.SSA.bin
+                            remote_server_id:
+                              type: string
+                              description: remote server Id
+                              example: 56a32849-aafb-4703-8887-ba64c0394835
+                            username:
+                              type: string
+                              description: ssh username
+                              example: admin
+                            wan:
+                              maxLength: 32
+                              minLength: 3
+                              pattern: (Cellular|Dialer|Ethernet|FastEthernet|FiftyGigabitEthernet|FiveGigabitEthernet|FortyGigabitEthernet|FourHundredGigE|GigabitEthernet|HundredGigE|Loopback|Multilink|Port-channel|Serial|TenGigabitEthernet|Tunnel|TwentyFiveGigE|TwentyFiveGigabitEthernet|TwoGigabitEthernet|TwoHundredGigE|Vlan|Wlan-GigabitEthernet)([0-9]*(. ?[1-9][0-9]*)*|[0-9/]+|[0-9]+/[0-9]+/[0-9]+:[0-9]+|[0-9]+/[0-9]+/[0-9]+|[0-9]+/[0-9]+|[0-9]+)
+                              type: string
+                              description: WAN interface name
+                              example: GigabitEthernet1
+                          description: Device list to onboard
+                          $$ref: '#/components/schemas/DeviceDetails'
+                        status:
+                          type: string
+                      description: List of non-compliant validators at LTS minus three or lower versions
+                      $$ref: '#/components/schemas/DeviceComplianceData'
+                  tenantDetails:
+                    type: array
+                    description: Tenant compliance details
+                    items:
+                      type: object
+                      properties:
+                        nearNonCompliantDeviceCount:
+                          type: integer
+                          description: Count of devices approaching non-compliance
+                          format: int32
+                        nonCompliantDeviceCount:
+                          type: integer
+                          description: Count of non-compliant devices
+                          format: int32
+                        nonCompliantDevices:
+                          type: array
+                          description: List of non-compliant devices
+                          items:
+                            type: object
+                            properties:
+                              checkList:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    message:
+                                      type: string
+                                    status:
+                                      type: string
+                                    type:
+                                      type: string
+                                    upgradeCompatibilityStatus:
+                                      type: string
+                                  $$ref: '#/components/schemas/CheckList'
+                              deviceDetails:
+                                required:
+                                - host
+                                - password
+                                - username
+                                - wan
+                                type: object
+                                properties:
+                                  device_uuid:
+                                    type: string
+                                    description: device uuid/chassis number
+                                    example: C8K-4facbd05-855b-45f0-af2f-c844af179bd6
+                                  enable_password:
+                                    type: string
+                                    description: enable password
+                                    example: admin
+                                  host:
+                                    pattern: ((^\s*((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))\s*$)|(^\s*((([0-9a-f]{1,4}:){7}([0-9a-f]{1,4}|:))|(([0-9a-f]{1,4}:){6}(:[0-9a-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9a-f]{1,4}:){5}(((:[0-9a-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9a-f]{1,4}:){4}(((:[0-9a-f]{1,4}){1,3})|((:[0-9a-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9a-f]{1,4}:){3}(((:[0-9a-f]{1,4}){1,4})|((:[0-9a-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9a-f]{1,4}:){2}(((:[0-9a-f]{1,4}){1,5})|((:[0-9a-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9a-f]{1,4}:){1}(((:[0-9a-f]{1,4}){1,6})|((:[0-9a-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9a-f]{1,4}){1,7})|((:[0-9a-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?\s*$))
+                                    type: string
+                                    description: host ip
+                                    example: 1.1.1.1
+                                  local_file_name:
+                                    type: string
+                                    description: local file name
+                                    example: c8000v-universalk9.17.12.01.0.175851.SSA.bin
+                                  password:
+                                    type: string
+                                    description: ssh password
+                                    example: admin
+                                  remote_server_file_name:
+                                    type: string
+                                    description: remote server file name
+                                    example: c8000v-universalk9.17.12.01.0.175851.SSA.bin
+                                  remote_server_id:
+                                    type: string
+                                    description: remote server Id
+                                    example: 56a32849-aafb-4703-8887-ba64c0394835
+                                  username:
+                                    type: string
+                                    description: ssh username
+                                    example: admin
+                                  wan:
+                                    maxLength: 32
+                                    minLength: 3
+                                    pattern: (Cellular|Dialer|Ethernet|FastEthernet|FiftyGigabitEthernet|FiveGigabitEthernet|FortyGigabitEthernet|FourHundredGigE|GigabitEthernet|HundredGigE|Loopback|Multilink|Port-channel|Serial|TenGigabitEthernet|Tunnel|TwentyFiveGigE|TwentyFiveGigabitEthernet|TwoGigabitEthernet|TwoHundredGigE|Vlan|Wlan-GigabitEthernet)([0-9]*(. ?[1-9][0-9]*)*|[0-9/]+|[0-9]+/[0-9]+/[0-9]+:[0-9]+|[0-9]+/[0-9]+/[0-9]+|[0-9]+/[0-9]+|[0-9]+)
+                                    type: string
+                                    description: WAN interface name
+                                    example: GigabitEthernet1
+                                description: Device list to onboard
+                                $$ref: '#/components/schemas/DeviceDetails'
+                              status:
+                                type: string
+                            description: List of non-compliant validators at LTS minus three or lower versions
+                            $$ref: '#/components/schemas/DeviceComplianceData'
+                        tenantId:
+                          type: string
+                          description: Tenant ID
+                        tenantName:
+                          type: string
+                          description: Tenant name
+                      description: Tenant compliance details
+                      $$ref: '#/components/schemas/TenantCompliance'
+                  version:
+                    type: string
+                    description: Software version number
+                description: Version compliance information across all tenants
+                $$ref: '#/components/schemas/VersionComplianceInfoResponse'
+              examples:
+                Version 20.18.999:
+                  summary: Example response for version 20.18.999
+                  description: Version 20.18.999
+                  value:
+                    version: 20.18.999
+                    minimumControllerCompatibleVersion: '20.18'
+                    minimumValidatorCompatibleVersion: '20.18'
+                    minimumDeviceCompatibleVersion: '17.12'
+                    nonCompliantControllersCount: 0
+                    nonCompliantControllersCountLTSMinusOne: 0
+                    nonCompliantControllersCountLTSMinusTwo: 0
+                    nonCompliantControllersCountLTSMinusThree: 0
+                    nonCompliantValidatorsCount: 0
+                    nonCompliantValidatorsCountLTSMinusOne: 0
+                    nonCompliantValidatorsCountLTSMinusTwo: 0
+                    nonCompliantValidatorsCountLTSMinusThree: 0
+                    nonCompliantDeviceCount: 2
+                    nearNonCompliantDeviceCount: 0
+                    tenantDetails:
+                    - tenantName: Default
+                      tenantId: default
+                      nonCompliantDevices:
+                      - hostname: vm11
+                        systemIp: 172.16.255.21
+                        siteId: '100'
+                        siteName: SITE_100
+                        uuid: 9dd1e23f-3c21-4c93-ade3-6fb7b7cbe0ea
+                        chassisNumber: 9dd1e23f-3c21-4c93-ade3-6fb7b7cbe0ea
+                        reachability: reachable
+                        platform: x86_64
+                        deviceType: vedge
+                        personality: vedge
+                        currentVersion: 20.9.6-957
+                      - hostname: vm4
+                        systemIp: 172.16.255.14
+                        siteId: '400'
+                        siteName: SITE_400
+                        uuid: add106e3-be72-4ddb-88d4-f07108b1ef12
+                        chassisNumber: add106e3-be72-4ddb-88d4-f07108b1ef12
+                        reachability: reachable
+                        platform: x86_64
+                        deviceType: vedge
+                        personality: vedge
+                        currentVersion: 20.9.6-957
+                      nonCompliantDeviceCount: 2
+                      nearNonCompliantDeviceCount: 0
+                Version 20.25.999:
+                  summary: Example response for version 20.25.999
+                  description: Version 20.25.999
+                  value:
+                    version: 20.25.999
+                    minimumControllerCompatibleVersion: '20.25'
+                    minimumValidatorCompatibleVersion: '20.25'
+                    minimumDeviceCompatibleVersion: '17.21'
+                    nonCompliantControllersCount: 1
+                    nonCompliantControllersCountLTSMinusOne: 0
+                    nonCompliantControllersCountLTSMinusTwo: 0
+                    nonCompliantControllersCountLTSMinusThree: 1
+                    nonCompliantValidatorsCount: 1
+                    nonCompliantValidatorsCountLTSMinusOne: 0
+                    nonCompliantValidatorsCountLTSMinusTwo: 0
+                    nonCompliantValidatorsCountLTSMinusThree: 1
+                    nonCompliantDeviceCount: 1
+                    nearNonCompliantDeviceCount: 0
+                    tenantDetails:
+                    - tenantName: Default
+                      tenantId: default
+                      nonCompliantDevices:
+                      - hostname: vm11
+                        systemIp: 172.16.255.21
+                        siteId: '100'
+                        siteName: SITE_100
+                        uuid: 9dd1e23f-3c21-4c93-ade3-6fb7b7cbe0ea
+                        chassisNumber: 9dd1e23f-3c21-4c93-ade3-6fb7b7cbe0ea
+                        reachability: reachable
+                        platform: x86_64
+                        deviceType: vedge
+                        personality: vedge
+                        currentVersion: 20.9.6-957
+                      nonCompliantDeviceCount: 1
+                      nearNonCompliantDeviceCount: 0
+                    nonCompliantControllersLTSMinusThree:
+                    - hostname: vm10
+                      systemIp: 172.16.255.20
+                      siteId: '200'
+                      siteName: SITE_200
+                      uuid: a5af47b2-b257-4831-93bd-ef7911cc47f4
+                      chassisNumber: a5af47b2-b257-4831-93bd-ef7911cc47f4
+                      reachability: reachable
+                      platform: x86_64
+                      deviceType: vsmart
+                      personality: vsmart
+                      currentVersion: 20.18.999-4446
+                    nonCompliantValidatorsLTSMinusThree:
+                    - hostname: vm16
+                      systemIp: 172.16.255.26
+                      siteId: '-'
+                      siteName: '-'
+                      uuid: 48a73b3b-1b97-42de-9128-5bab93ba614c
+                      chassisNumber: 48a73b3b-1b97-42de-9128-5bab93ba614c
+                      reachability: reachable
+                      platform: x86_64
+                      deviceType: vbond
+                      personality: vbond
+                      currentVersion: 20.18.999-4446
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

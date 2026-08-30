@@ -1,0 +1,236 @@
+openapi: 3.2.0
+info:
+  title: Partner Integrations Deployment Mode API
+  description: Includes API operations for partner integrations, such as Webex, Identity Services Engine (ISE), Secure Access, and more
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Deployment Mode
+paths:
+  /fedramp/dnssec/actions:
+    get:
+      tags:
+      - Deployment Mode
+      description: Request DNS-Sec actions
+      operationId: requesDNSSecActions
+      parameters:
+      - name: action
+        in: query
+        description: DNS-Sec action
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DNS-Sec action status:
+                  description: DNS-Sec action status
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Settings-read,FedRamp-read
+  /fedramp/dnssec/config:
+    post:
+      tags:
+      - Deployment Mode
+      description: Configure DNS-Sec
+      operationId: configureDNSSec
+      requestBody:
+        description: DNS sec config request
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              DNS sec config request:
+                description: DNS sec config request
+                value: {}
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Settings-write,FedRamp-write
+  /fedramp/dnssec/status:
+    get:
+      tags:
+      - Deployment Mode
+      description: Get DNS-Sec status
+      operationId: getDNSSecStatus
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DNS-Sec status:
+                  description: DNS-Sec status
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Settings-read,FedRamp-read
+  /fedramp/status:
+    post:
+      tags:
+      - Deployment Mode
+      description: Set network deployment mode
+      operationId: configFedrampMode
+      requestBody:
+        description: Network deployment mode
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Network deployment mode:
+                description: Network deployment mode
+                value:
+                  deploymentMode:
+                  - FRMod: FedRAMP Moderate
+                  - DODIL5: DOD-IL5
+                  - PCIDSS: PCI-DSS
+                  - SOC2: SOC2
+                  - SOC3: SOC3
+                  - C5: C5
+                  - ENS: ENS
+                  - ISO27001: ISO 27001
+                  - ISO27017: ISO 27017
+                  - ISO27018: ISO 27018
+                  - ISO27701: ISO 27701
+                  - Tx-RAMP: Tx-RAMP
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Settings-write,FedRamp-write
+  /fedramp/wazuh/actions:
+    get:
+      tags:
+      - Deployment Mode
+      description: Wazuh agent action
+      operationId: requestWazuhActions
+      parameters:
+      - name: action
+        in: query
+        description: Wazhuh Action
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Wazhug agent action status:
+                  description: Wazhug agent action status
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Settings-read,FedRamp-read
+  /fedramp/wazuh/config:
+    post:
+      tags:
+      - Deployment Mode
+      description: Configure Wazuh agent
+      operationId: configureWazuhClient
+      requestBody:
+        description: Wazhuh configuration
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Wazhuh configuration request:
+                description: Wazhuh configuration request
+                value: {}
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Settings-write,FedRamp-write
+  /fedramp/wazuh/status:
+    get:
+      tags:
+      - Deployment Mode
+      description: Get Wazuh agent status
+      operationId: getWazuhAgentStatus
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Wazhug agent status:
+                  description: Wazhug agent status
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Settings-read,FedRamp-read

@@ -1,0 +1,2317 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Troubleshooting Tools - Network Wide Path Insight API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Troubleshooting Tools - Network Wide Path Insight
+paths:
+  /stream/device/nwpi/exportTrace:
+    get:
+      tags:
+      - Troubleshooting Tools - Network Wide Path Insight
+      description: Export NWPI Trace Data
+      operationId: exportTrace
+      parameters:
+      - name: traceId
+        in: query
+        description: trace id
+        required: true
+        schema:
+          maximum: 262144
+          minimum: 1
+          type: integer
+          format: int32
+      - name: timestamp
+        in: query
+        description: start time
+        required: true
+        schema:
+          maximum: 10000000000000
+          minimum: 1
+          type: integer
+          format: int64
+      - name: traceModel
+        in: query
+        description: traceModel
+        schema:
+          pattern: ^(SDWAN_MANUAL|SDWAN_AUTO_ON|SD_ROUTING_MANUAL)$
+          type: string
+        examples:
+          Get manual traces:
+            description: Get manual traces
+            value: SDWAN_MANUAL
+          Get auto on traces:
+            description: Get auto on traces
+            value: SDWAN_AUTO_ON
+          Get sd-routing traces:
+            description: Get sd-routing traces
+            value: SD_ROUTING_MANUAL
+      responses:
+        '200':
+          description: Success
+          content:
+            application/octet-stream:
+              schema:
+                type: object
+              examples:
+                Nwpi Trace Data File:
+                  description: Nwpi Trace Data File
+                  value: '{binary format response}'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,Device Monitoring-write
+  /stream/device/nwpi/importTrace:
+    post:
+      tags:
+      - Troubleshooting Tools - Network Wide Path Insight
+      description: Import Trace
+      operationId: importTrace
+      parameters:
+      - name: newTraceName
+        in: query
+        schema:
+          type: string
+      - name: mode
+        in: query
+        description: mode
+        schema:
+          pattern: ^(SD-WAN|SD Routing)$
+          type: string
+        examples:
+          default:
+            description: default
+          sdwan platform:
+            description: sdwan platform
+            value: SD-WAN
+          sd-routing platform:
+            description: sd-routing platform
+            value: SD Routing
+      requestBody:
+        description: Trace Data File
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+              $$ref: '#/components/schemas/ImportTraceRequest'
+        required: true
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  state:
+                    type: boolean
+                $$ref: '#/components/schemas/ImportTraceResponse'
+              examples:
+                Success Response:
+                  description: Success Response
+                  value:
+                    state: true
+                    msg: Trace imported successfully.
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /stream/device/nwpi/tasks/create:
+    post:
+      tags:
+      - Troubleshooting Tools - Network Wide Path Insight
+      description: Task Action - Create
+      operationId: taskCreate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Create Trace Start Task with empty Duration:
+                description: Create Trace Start Task with empty Duration
+                value:
+                  taskName: auto-on
+                  events:
+                  - sla-violation
+                  - qos-congestion
+                  sites:
+                  - '100'
+                  - '500'
+                  duration: ''
+              Create Trace Start Task with Duration:
+                description: Create Trace Start Task with Duration
+                value:
+                  taskName: auto-on
+                  events:
+                  - sla-violation
+                  - qos-congestion
+                  sites:
+                  - '100'
+                  - '500'
+                  duration: '1440'
+              Create Trace Start Task without Duration:
+                description: Create Trace Start Task without Duration
+                value:
+                  taskName: auto-on
+                  events:
+                  - sla-violation
+                  - qos-congestion
+                  sites:
+                  - '100'
+                  - '500'
+              Create Trace Start Task with Event Extensions:
+                description: Create Trace Start Task with Event Extensions
+                value:
+                  taskName: auto_on
+                  events:
+                  - qos-congestion
+                  - sla-violation
+                  - security-alert
+                  - wan-loss
+                  - tunnel-ipsec-anti-replay-drop
+                  sites:
+                  - '100'
+                  - '500'
+                  duration: 1440
+                  qosCongestionExtensions:
+                    applications:
+                    - google-services
+                    qosCongestionOccurrencesCount: 2
+                    qosCongestionBurstInterval: 60
+                    filters:
+                    - application-in-event
+                  slaViolationExtensions:
+                    applications:
+                    - rtp-video
+                    slaViolationOccurrencesCount: 2
+                    filters:
+                    - application-in-event
+                  securityAlertExtensions:
+                    firewallDropRate: 10
+                    utdIpsAlertGid: 1
+                    utdIpsAlertSid: 49043
+                    utdFileSha: 131f95c51cc819465fa1797f6ccacf9d494aaaff46fa3eac73ae63ffbdfd8267
+                    utdFileRetrospectiveSha: 131f95c51cc819465fa1797f6ccacf9d494aaaff46fa3eac73ae63ffbdfd8267
+                    securityAlertSubEvent:
+                    - utd-ips-alert
+                    - utd-file-reputation-alert
+                    - utd-file-reputation-retrospective-alert
+                    - firewall-drop
+                    filters:
+                    - source-ip-in-alert-event
+                    - destination-ip-in-alert-event
+                  wanLossExtensions:
+                    wanLossRate: 30
+                  ipsecAntiReplayDropExtensions:
+                    ipsecAntiReplayDropRate: 30
+              Create Task with Time Scheduled Traces:
+                description: Create Task with Time Scheduled Traces
+                value:
+                  taskName: auto_on
+                  duration: 1440
+                  taskTimeZone: UTC+08:00
+                  createdBy: admin
+                  timeScheduledTraceExtensions:
+                    traceSchedule:
+                      recurDaysList:
+                      - Monday
+                      - Tuesday
+                      - Wednesday
+                      - Thursday
+                      - Friday
+                      - Saturday
+                      - Sunday
+                      traceActiveTimeList:
+                      - traceStartTime: '10:00'
+                        traceDuration: '60'
+                      - traceStartTime: '15:00'
+                        traceDuration: '60'
+                    tracePayload:
+                      source-site: '500'
+                      local-drop-rate-threshold: 5
+                      wan-drop-rate-threshold: 5
+                      device-list:
+                      - local-system-ip: 172.16.255.15
+                        deviceId: 172.16.255.15
+                        uuid: C8K-646ad78f-fee8-41f1-be58-2f9c5b82f2cf
+                        version: 17.18.01.0.214177
+                      vpn-list:
+                      - '1'
+                      - '100'
+                      art-vis: 'true'
+                      app-vis: 'true'
+                      qos-mon: 'true'
+                      te-mon: 'true'
+                      source-site-version: '17.18'
+                      traceModel: SDWAN_AUTO_ON
+              Create Trace Start Task with Task Schedule Extensions:
+                description: Create Trace Start Task with Task Schedule Extensions
+                value:
+                  taskName: auto_on
+                  duration: 1440
+                  events:
+                  - sla-violation
+                  - qos-congestion
+                  sites:
+                  - '500'
+                  - '600'
+                  taskTimeZone: UTC+08:00
+                  taskScheduleExtensions:
+                    recurDaysList:
+                    - Monday
+                    - Tuesday
+                    - Wednesday
+                    - Thursday
+                    - Friday
+                    - Saturday
+                    - Sunday
+                    taskActiveTimeList:
+                    - taskActiveStartTime: '10:00'
+                      taskActiveDuration: '3'
+              Create Task with Time Scheduled Traces and Task Schedule Extensions:
+                description: Create Task with Time Scheduled Traces and Task Schedule Extensions
+                value:
+                  taskName: auto_on
+                  duration: 1440
+                  events:
+                  - sla-violation
+                  - qos-congestion
+                  sites:
+                  - '500'
+                  - '600'
+                  taskTimeZone: UTC+08:00
+                  createdBy: admin
+                  taskScheduleExtensions:
+                    recurDaysList:
+                    - Monday
+                    - Tuesday
+                    - Wednesday
+                    - Thursday
+                    - Friday
+                    - Saturday
+                    - Sunday
+                    taskActiveTimeList:
+                    - taskActiveStartTime: '10:00'
+                      taskActiveDuration: '3'
+                  timeScheduledTraceExtensions:
+                    traceSchedule:
+                      recurDaysList:
+                      - Monday
+                      - Friday
+                      traceActiveTimeList:
+                      - traceStartTime: 09:00
+                        traceDuration: '60'
+                    tracePayload:
+                      source-site: '500'
+                      local-drop-rate-threshold: 5
+                      wan-drop-rate-threshold: 5
+                      device-list:
+                      - local-system-ip: 172.16.255.15
+                        deviceId: 172.16.255.15
+                        uuid: C8K-646ad78f-fee8-41f1-be58-2f9c5b82f2cf
+                        version: 17.18.01.0.214177
+                      vpn-list:
+                      - '1'
+                      - '100'
+                      art-vis: 'true'
+                      app-vis: 'true'
+                      qos-mon: 'true'
+                      te-mon: 'true'
+                      source-site-version: '17.18'
+                      traceModel: SDWAN_AUTO_ON
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  action:
+                    type: string
+                  entry_time:
+                    type: integer
+                    format: int32
+                  expire-time:
+                    type: integer
+                    format: int32
+                  sites:
+                    type: array
+                    items:
+                      type: string
+                  state:
+                    type: string
+                  taskId:
+                    type: integer
+                    format: int32
+                  taskName:
+                    type: string
+                description: Auto on task create schema for POST response
+                $$ref: '#/components/schemas/TasksCreateResponsePayload'
+              examples:
+                Create task response:
+                  description: Create task response
+                  value:
+                    action: success
+                    sites:
+                    - '100'
+                    - '500'
+                    taskId: 3
+                    taskName: auto_on
+                    entry_time: 1716795211822
+                    expire-time: 1716881611822
+                    state: active
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-write
+  /stream/device/nwpi/tasks/delete/{taskId}:
+    delete:
+      tags:
+      - Troubleshooting Tools - Network Wide Path Insight
+      description: Delete Auto On Task
+      operationId: taskDelete
+      parameters:
+      - name: taskId
+        in: path
+        description: taskId
+        required: true
+        schema:
+          pattern: ^[1-9][0-9]{0,5}$
+          type: string
+          example: '2'
+      - name: taskStartTime
+        in: query
+        description: task start time
+        schema:
+          maximum: 10000000000000
+          minimum: 1
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  action:
+                    type: string
+                  message:
+                    type: object
+                    properties:
+                      duration:
+                        type: string
+                      entry_time:
+                        type: integer
+                        format: int64
+                      events:
+                        type: string
+                      expire-time:
+                        type: integer
+                        format: int64
+                      message:
+                        type: string
+                      sites:
+                        type: string
+                      state:
+                        type: string
+                      taskId:
+                        type: integer
+                        format: int32
+                      taskName:
+                        type: string
+                      traces:
+                        type: boolean
+                    $$ref: '#/components/schemas/TasksDeleteResponsePayloadMessage'
+                  taskId:
+                    type: string
+                description: Auto on task schema for DELETE response
+                $$ref: '#/components/schemas/TasksDeleteResponsePayload'
+              examples:
+                Delete task response:
+                  description: Delete task response
+                  value:
+                    action: success
+                    taskId: '2'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-write
+  /stream/device/nwpi/tasks/stop/{taskId}:
+    post:
+      tags:
+      - Troubleshooting Tools - Network Wide Path Insight
+      description: Task Action - Stop
+      operationId: taskStop
+      parameters:
+      - name: taskId
+        in: path
+        description: taskId
+        required: true
+        schema:
+          type: string
+          example: '2'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  action:
+                    type: string
+                  entry_time:
+                    type: integer
+                    format: int32
+                  message:
+                    type: string
+                  state:
+                    type: string
+                  taskId:
+                    type: string
+                  taskName:
+                    type: string
+                description: Auto on task stop schema for POST response
+                $$ref: '#/components/schemas/TasksStopResponsePayload'
+              examples:
+                Task stop response:
+                  description: Task stop response
+                  value:
+                    action: success
+                    taskId: 2
+                    taskName: auto-on
+                    state: finished
+                    message: Task Stop initiated successfully (user stop)
+                    startTime: 1716777834490
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-write
+  /stream/device/nwpi/tasks/taskHistory:
+    get:
+      tags:
+      - Troubleshooting Tools - Network Wide Path Insight
+      description: Get all the auto on tasks
+      operationId: getTaskHistory
+      parameters:
+      - name: startTime
+        in: query
+        description: query start time
+        schema:
+          maximum: 10000000000000
+          minimum: 1
+          type: integer
+          format: int64
+      - name: endTime
+        in: query
+        description: query end time
+        schema:
+          maximum: 10000000000000
+          minimum: 1
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        duration:
+                          type: string
+                        entry_time:
+                          type: integer
+                          format: int32
+                        events:
+                          type: array
+                          items:
+                            type: string
+                        expire-time:
+                          type: integer
+                          format: int32
+                        sites:
+                          type: array
+                          items:
+                            type: string
+                        state:
+                          type: string
+                        taskId:
+                          type: integer
+                          format: int32
+                        taskName:
+                          type: string
+                        traces:
+                          type: boolean
+                        type:
+                          type: string
+                      $$ref: '#/components/schemas/TaskHistoryResponsePayloadData'
+                description: Auto on task schema for GET response
+                $$ref: '#/components/schemas/TaskHistoryResponsePayload'
+              examples:
+                Response for getting tasks:
+                  description: Response for getting tasks
+                  value:
+                    header:
+                      generatedOn: 1716795499234
+                      viewKeys:
+                        uniqueKey: []
+                        preferenceKey: grid-nwpiTaskData
+                      columns:
+                      - title: Task Name
+                        property: taskName
+                        dataType: string
+                      - title: Task ID
+                        property: taskId
+                        dataType: number
+                      - title: Event(s)
+                        property: events
+                        dataType: array
+                      - title: Site(s)
+                        property: sites
+                        dataType: array
+                      - title: State
+                        property: state
+                        dataType: string
+                      - title: Start Time
+                        property: startTime
+                        displayFormat: DD MMM YYYY h:mm:ss A z
+                        inputFormat: unix-time
+                        dataType: date
+                      - title: Duration
+                        property: duration
+                        dataType: string
+                      - title: Stop Time
+                        property: stopTime
+                        displayFormat: DD MMM YYYY h:mm:ss A z
+                        inputFormat: unix-time
+                        dataType: date
+                      fields:
+                      - property: taskName
+                        dataType: string
+                      - property: taskId
+                        dataType: number
+                      - property: events
+                        dataType: array
+                      - property: sites
+                        dataType: array
+                      - property: state
+                        dataType: string
+                      - property: startTime
+                        dataType: date
+                      - property: duration
+                        dataType: string
+                      - property: stopTime
+                        dataType: date
+                      - property: data
+                        dataType: object
+                    data:
+                    - taskId: 4
+                      taskName: auto_on
+                      duration: '600'
+                      events:
+                      - qos-congestion
+                      - sla-violation
+                      sites:
+                      - '100'
+                      - '500'
+                      sitesName:
+                      - SITE_100
+                      - SITE_500
+                      stopTime: 1716831311226
+                      traces: false
+                      startTime: 1716795311226
+                      entry_time: 1716795311226
+                      state: active
+                      type: task-history
+                      insertTime: 1716795499234
+                    - startTime: 1716795211822
+                      taskId: 3
+                      taskName: auto_on
+                      duration: '1440'
+                      events:
+                      - qos-congestion
+                      - sla-violation
+                      sites:
+                      - '100'
+                      - '500'
+                      sitesName:
+                      - SITE_100
+                      - SITE_500
+                      stopTime: 1716795289048
+                      traces: 'false'
+                      state: finished
+                      type: task-history
+                      tenant: default
+                    - startTime: 1716443790022
+                      taskId: 1
+                      taskName: auto-on
+                      duration: '1440'
+                      events:
+                      - qos-congestion
+                      - sla-violation
+                      sites:
+                      - '100'
+                      - '400'
+                      - '500'
+                      - '600'
+                      sitesName:
+                      - SITE_100
+                      - SITE_400
+                      - SITE_500
+                      - SITE_600
+                      stopTime: 1716530190022
+                      traces: 'true'
+                      state: finished
+                      type: task-history
+                      tenant: default
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,Device Monitoring-write
+  /stream/device/nwpi/tasks/{taskId}/traces:
+    get:
+      tags:
+      - Troubleshooting Tools - Network Wide Path Insight
+      description: Get all traces in one task
+      operationId: getTaskTrace
+      parameters:
+      - name: taskId
+        in: path
+        description: taskId
+        required: true
+        schema:
+          pattern: ^[1-9][0-9]{0,5}$
+          type: string
+          example: '119'
+      - name: taskStartTime
+        in: query
+        description: task start time
+        schema:
+          maximum: 10000000000000
+          minimum: 1
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        data:
+                          type: object
+                          properties:
+                            devices:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  app-vis:
+                                    type: string
+                                  art-vis:
+                                    type: string
+                                  connectedVManages:
+                                    type: string
+                                  device-ip:
+                                    type: string
+                                  device-type:
+                                    type: string
+                                  dia-vis:
+                                    type: string
+                                  domain-mon:
+                                    type: string
+                                  domain_monitor_can_be_started:
+                                    type: string
+                                  dscp-is-valid:
+                                    type: string
+                                  duration:
+                                    type: string
+                                  entry_time:
+                                    type: integer
+                                    format: int64
+                                  expire-time:
+                                    type: integer
+                                    format: int64
+                                  local-system-ip:
+                                    type: string
+                                  message:
+                                    type: string
+                                  parent-trace-id:
+                                    type: integer
+                                    format: int32
+                                  qos-mon:
+                                    type: string
+                                  site-id:
+                                    type: string
+                                  source-site:
+                                    type: string
+                                  state:
+                                    type: string
+                                  trace-id:
+                                    type: integer
+                                    format: int32
+                                  trace-name:
+                                    type: string
+                                  uuid:
+                                    type: string
+                                  version:
+                                    type: string
+                                  vpn-id:
+                                    type: string
+                                $$ref: '#/components/schemas/NwpiDomainMonitorStateRespPayloadDevicelist'
+                            summary:
+                              type: object
+                              properties:
+                                agg-client-prefix:
+                                  type: string
+                                agg-src-sgt:
+                                  type: string
+                                agg-svr-prefix:
+                                  type: string
+                                agg-user-name:
+                                  type: string
+                                app:
+                                  type: string
+                                app-grp:
+                                  type: string
+                                app-vis:
+                                  type: string
+                                art-vis:
+                                  type: string
+                                common_app:
+                                  type: string
+                                device-ip:
+                                  type: string
+                                devicesCheckInfo:
+                                  type: string
+                                dia-vis:
+                                  type: string
+                                domain-mon:
+                                  type: string
+                                dscp:
+                                  type: string
+                                dst-ip:
+                                  type: string
+                                dst-pfx:
+                                  type: string
+                                dst-pfx-len:
+                                  type: string
+                                dst-port:
+                                  type: string
+                                duration:
+                                  type: string
+                                health-app-server-mem:
+                                  type: string
+                                health-cpu-core:
+                                  type: string
+                                health-cpu-load:
+                                  type: string
+                                health-cpu-load-average:
+                                  type: string
+                                health-mem-usage:
+                                  type: string
+                                health-running-traces:
+                                  type: integer
+                                  format: int32
+                                health-server-ip:
+                                  type: string
+                                hub-wan-vis:
+                                  type: string
+                                local-drop-rate-threshold:
+                                  type: integer
+                                  format: int32
+                                message:
+                                  type: string
+                                protocol:
+                                  type: string
+                                qos-mon:
+                                  type: string
+                                sampling:
+                                  type: string
+                                source-site:
+                                  type: string
+                                source-site-vmanage-version:
+                                  type: string
+                                spl-intvl:
+                                  type: string
+                                src-if:
+                                  type: string
+                                src-ip:
+                                  type: string
+                                src-pfx:
+                                  type: string
+                                src-pfx-len:
+                                  type: string
+                                src-port:
+                                  type: string
+                                state:
+                                  type: string
+                                stop-time:
+                                  type: integer
+                                  format: int32
+                                taskId:
+                                  type: integer
+                                  format: int32
+                                trace-name:
+                                  type: string
+                                trace-trigger-event:
+                                  type: string
+                                trace_stop_type:
+                                  type: string
+                                username:
+                                  type: string
+                                vpn-id:
+                                  type: string
+                                vpn-list:
+                                  type: string
+                                wan-drop-rate-threshold:
+                                  type: integer
+                                  format: int32
+                                warning:
+                                  type: string
+                              $$ref: '#/components/schemas/NwpiTraceHistoryRespPayloadDataSummary'
+                          $$ref: '#/components/schemas/NwpiTraceHistoryRespPayloadData'
+                        entry_time:
+                          type: integer
+                          format: int64
+                        tenant:
+                          type: string
+                        trace-id:
+                          type: integer
+                          format: int32
+                        type:
+                          type: string
+                      $$ref: '#/components/schemas/TaskTracesResponsePayloadInner'
+                description: Auto on task schema for GET response
+                $$ref: '#/components/schemas/TaskTracesResponsePayload'
+              examples:
+                Response for traces of task:
+                  description: Response for traces of task
+                  value:
+                    header:
+                      generatedOn: 1716794459431
+                      viewKeys:
+                        uniqueKey: []
+                        preferenceKey: grid-nwpiTraceData
+                      columns:
+                      - title: Start Time
+                        property: entry_time
+                        displayFormat: DD MMM YYYY h:mm:ss A z
+                        inputFormat: unix-time
+                        dataType: date
+                      - title: Trace Id
+                        property: trace-id
+                        dataType: number
+                      fields:
+                      - property: entry_time
+                        dataType: date
+                      - property: trace-id
+                        dataType: number
+                      - property: type
+                        dataType: string
+                      - property: data
+                        dataType: object
+                    data:
+                    - entry_time: 1716531432110
+                      trace-id: 39600
+                      type: trace-history
+                      data:
+                        summary:
+                          source-site: '3'
+                          device-ip: 4.4.4.103
+                          vpn-id: '0'
+                          vpn-list:
+                          - '10'
+                          src-if: N/A
+                          src-ip: N/A
+                          src-port: N/A
+                          dst-ip: N/A
+                          dst-port: N/A
+                          src-pfx: N/A
+                          src-pfx-len: N/A
+                          dst-pfx: N/A
+                          dst-pfx-len: N/A
+                          app: N/A
+                          username: N/A
+                          common_app: N/A
+                          app-grp: N/A
+                          protocol: N/A
+                          dscp: N/A
+                          duration: '6'
+                          trace-name: auto_on-yicliu-security-demo1_security_drop_39600
+                          domain-mon: disabled
+                          qos-mon: 'true'
+                          art-vis: 'true'
+                          app-vis: 'true'
+                          dia-vis: N/A
+                          hub-wan-vis: N/A
+                          sampling: N/A
+                          spl-intvl: N/A
+                          stop-time: 1716531870136
+                          source-site-vmanage-version: 20.15.0-12
+                          taskId: 119
+                          trace-trigger-event: N/A
+                          enable-cmd-header: N/A
+                          state: stopped
+                          message: Trace Stop successfully (auto stop)
+                          warning: ''
+                          wan-drop-rate-threshold: 5
+                          local-drop-rate-threshold: 5
+                          agg-client-prefix: N/A
+                          agg-svr-prefix: N/A
+                          agg-src-sgt: N/A
+                          agg-user-name: N/A
+                          tenant-id: default
+                          auto-on-task-name: auto_on-yicliu-security-demo1
+                          area-name: Global
+                          event-color: none
+                          sla-class: none
+                          event-vpn: '10'
+                          event-application: none
+                          up-bfd-session: 4
+                          bfd-session-with-traffic: 0
+                          peerSitesCount: 0
+                          health-server-ip: 4.4.4.2
+                          health-cpu-load: '37.77'
+                          health-mem-usage: '17'
+                          health-device-cpu-load: '16.74'
+                          health-device-mem-usage: '54'
+                          health-cpu-load-average: '0.85'
+                          health-cpu-core: '32'
+                          health-app-server-mem: '0.07'
+                          health-running-traces: 2
+                          trace_stop_type: ''
+                        devices:
+                        - device-ip: 4.4.4.103
+                          local-system-ip: 4.4.4.103
+                          source-site: '3'
+                          art-vis: 'true'
+                          site-id: '3'
+                          uuid: C8K-53b44a53-9467-481e-b595-2407df133b67
+                          duration: '6'
+                          '@rid': 9135
+                          trace-id: 39600
+                          device-type: src
+                          model: AutoOn
+                          state: completed
+                          dscp-is-valid: 'false'
+                          qos-mon: 'true'
+                          entry_time: 1716531432110
+                          connectedVManages: 4.4.4.2
+                          parent-trace-id: 39600
+                          domain_monitor_can_be_started: 'true'
+                          message: Trace Done
+                          vpn-id: '0'
+                          version: 17.15.01.6.385
+                          app-vis: 'true'
+                          vpn-list:
+                          - '10'
+                          trace-name: auto_on-yicliu-security-demo1_security_drop_39600
+                          expire-time: 1716531792110
+                          tenantId: default
+                        - device-ip: 4.4.4.130
+                          traceModel: 1
+                          health-device-mem-usage: '54'
+                          source-site: '3'
+                          art-vis: 'true'
+                          event-vpn: '10'
+                          uuid: C8K-8d7c2053-93d3-45b9-b13c-5a6c1ea87092
+                          health-running-traces: 2
+                          wan-drop-rate-threshold: 5
+                          trace-id: 39600
+                          device-type: notsrc
+                          warning: ''
+                          model: AutoOn
+                          state: completed
+                          health-mem-usage: '17'
+                          qos-mon: 'true'
+                          entry_time: 1716531432110
+                          health-cpu-core: '32'
+                          local-drop-rate-threshold: 5
+                          parent-trace-id: 39600
+                          targetVmanageMgmtIp: 4.4.4.2
+                          vpn-id: '0'
+                          version: 17.15.01.3.529
+                          bfd-session-with-traffic: 0
+                          vpn-list:
+                          - '10'
+                          trace-name: auto_on-yicliu-security-demo1_security_drop_39600
+                          source-site-vmanage-version: 20.15.0-12
+                          expire-time: 1716531432116
+                          health-device-cpu-load: '16.74'
+                          local-system-ip: 4.4.4.130
+                          event-application: none
+                          site-id: '30'
+                          health-app-server-mem: '0.07'
+                          duration: '6'
+                          '@rid': 8510
+                          dscp-is-valid: 'false'
+                          connectedVManages: 4.4.4.2
+                          health-cpu-load: '37.77'
+                          message: Trace Done
+                          health-cpu-load-average: '0.85'
+                          up-bfd-session: 4
+                          peerSitesCount: 0
+                          health-server-ip: 4.4.4.2
+                          app-vis: 'true'
+                          trace_stop_type: ''
+                          trace-trigger-event: N/A
+                          tenantId: default
+                        readout:
+                          detail: []
+                        flowTimeRange:
+                          start_time: 1716531342000
+                          end_time: 1716531711000
+                      tenant: default
+                      traceModel: 1
+                    - entry_time: 1716531295367
+                      trace-id: 39584
+                      type: trace-history
+                      data:
+                        summary:
+                          source-site: ''
+                          device-ip: N/A
+                          vpn-id: '0'
+                          vpn-list:
+                          - '1'
+                          - '996'
+                          - '10'
+                          src-if: N/A
+                          src-ip: N/A
+                          src-port: N/A
+                          dst-ip: N/A
+                          dst-port: N/A
+                          src-pfx: N/A
+                          src-pfx-len: N/A
+                          dst-pfx: N/A
+                          dst-pfx-len: N/A
+                          app: N/A
+                          username: N/A
+                          common_app: N/A
+                          app-grp: N/A
+                          protocol: N/A
+                          dscp: N/A
+                          duration: '1440'
+                          trace-name: daemon_monitor_trace
+                          domain-mon: disabled
+                          qos-mon: 'true'
+                          art-vis: N/A
+                          app-vis: 'true'
+                          dia-vis: N/A
+                          hub-wan-vis: N/A
+                          sampling: N/A
+                          spl-intvl: N/A
+                          stop-time: 1716617842854
+                          source-site-vmanage-version: 20.15.0-12
+                          taskId: 119
+                          trace-trigger-event: N/A
+                          enable-cmd-header: N/A
+                          state: stopped-with-exception
+                          message: "Trace Stop with exception (auto stop)\n       * vmanage received 1 trace done message from [4.4.4.130]\n       *  vmanage hasn't received trace done message from [4.4.4.135, 4.4.4.136, 4.4.4.105, 4.4.4.103, 4.4.4.180, 4.4.4.181, 4.4.4.106, 4.4.4.120, 4.4.4.119, 4.4.4.108, 4.4.4.137]"
+                          warning: ''
+                          wan-drop-rate-threshold: 5
+                          local-drop-rate-threshold: 5
+                          agg-client-prefix: N/A
+                          agg-svr-prefix: N/A
+                          agg-src-sgt: N/A
+                          agg-user-name: N/A
+                          health-server-ip: 4.4.4.2
+                          health-cpu-load: '7.18'
+                          health-mem-usage: '19'
+                          health-cpu-load-average: '0'
+                          health-cpu-core: '0'
+                          health-app-server-mem: '0'
+                          health-running-traces: 1
+                          trace_stop_type: ''
+                          devicesCheckInfo:
+                          - bfd-session-with-traffic: 1
+                            up-bfd-session: 1
+                            health-device-cpu-load: '18.31'
+                            health-device-mem-usage: '27'
+                            deviceHostName: -4.4.4.120
+                            peerSitesCount: 1
+                          - bfd-session-with-traffic: 0
+                            up-bfd-session: 4
+                            health-device-cpu-load: '14.21'
+                            health-device-mem-usage: '47'
+                            deviceHostName: -4.4.4.130
+                            peerSitesCount: 0
+                          - bfd-session-with-traffic: 0
+                            up-bfd-session: 0
+                            health-device-cpu-load: '0'
+                            health-device-mem-usage: '0'
+                            deviceHostName: -4.4.4.135
+                            peerSitesCount: 0
+                          - bfd-session-with-traffic: 0
+                            up-bfd-session: 0
+                            health-device-cpu-load: '4.57'
+                            health-device-mem-usage: '65'
+                            deviceHostName: -4.4.4.137
+                            peerSitesCount: 0
+                          - bfd-session-with-traffic: 2
+                            up-bfd-session: 4
+                            health-device-cpu-load: '16.74'
+                            health-device-mem-usage: '54'
+                            deviceHostName: -4.4.4.103
+                            peerSitesCount: 1
+                          - bfd-session-with-traffic: 0
+                            up-bfd-session: 0
+                            health-device-cpu-load: '0'
+                            health-device-mem-usage: '0'
+                            deviceHostName: -4.4.4.136
+                            peerSitesCount: 0
+                          - bfd-session-with-traffic: 0
+                            up-bfd-session: 0
+                            health-device-cpu-load: '0'
+                            health-device-mem-usage: '0'
+                            deviceHostName: -4.4.4.106
+                            peerSitesCount: 0
+                          - bfd-session-with-traffic: 0
+                            up-bfd-session: 4
+                            health-device-cpu-load: '25.41'
+                            health-device-mem-usage: '47'
+                            deviceHostName: -4.4.4.105
+                            peerSitesCount: 0
+                          - bfd-session-with-traffic: 0
+                            up-bfd-session: 0
+                            health-device-cpu-load: '0'
+                            health-device-mem-usage: '0'
+                            deviceHostName: -4.4.4.180
+                            peerSitesCount: 0
+                          - bfd-session-with-traffic: 1
+                            up-bfd-session: 1
+                            health-device-cpu-load: '18.26'
+                            health-device-mem-usage: '26'
+                            deviceHostName: -4.4.4.119
+                            peerSitesCount: 1
+                          - bfd-session-with-traffic: 0
+                            up-bfd-session: 0
+                            health-device-cpu-load: '0'
+                            health-device-mem-usage: '0'
+                            deviceHostName: Site8-cEdge-1-4.4.4.108
+                            peerSitesCount: 0
+                          - bfd-session-with-traffic: 0
+                            up-bfd-session: 0
+                            health-device-cpu-load: '0'
+                            health-device-mem-usage: '0'
+                            deviceHostName: -4.4.4.181
+                            peerSitesCount: 0
+                        devices:
+                        - device-ip: 4.4.4.135
+                          local-system-ip: 4.4.4.135
+                          log: device is unreachable
+                          source-site: '35'
+                          site-id: '35'
+                          uuid: ASR1001-HX-JAE222202LC
+                          duration: '1440'
+                          '@rid': 9125
+                          trace-id: 39584
+                          device-type: src
+                          model: Lite
+                          state: start-failed
+                          dscp-is-valid: 'false'
+                          qos-mon: 'true'
+                          entry_time: 1716531295367
+                          parent-trace-id: 39584
+                          domain_monitor_can_be_started: 'true'
+                          message: device is unreachable
+                          vpn-id: '0'
+                          version: 17.09.01.0.03211858
+                          app-vis: 'true'
+                          vpn-list:
+                          - '10'
+                          trace-name: daemon_monitor_trace
+                          expire-time: 1716617695367
+                          tenantId: default
+                        - device-ip: 4.4.4.136
+                          local-system-ip: 4.4.4.136
+                          log: device is unreachable
+                          source-site: '36'
+                          site-id: '36'
+                          uuid: C1111-8PWE-FGL2149919Y
+                          duration: '1440'
+                          '@rid': 9127
+                          trace-id: 39584
+                          device-type: src
+                          model: Lite
+                          state: start-failed
+                          dscp-is-valid: 'false'
+                          qos-mon: 'true'
+                          entry_time: 1716531295367
+                          parent-trace-id: 39584
+                          domain_monitor_can_be_started: 'true'
+                          message: device is unreachable
+                          vpn-id: '0'
+                          version: 17.09.01.0.03160742
+                          app-vis: 'true'
+                          vpn-list:
+                          - '10'
+                          trace-name: daemon_monitor_trace
+                          expire-time: 1716617695367
+                          tenantId: default
+                        - device-ip: 4.4.4.105
+                          local-system-ip: 4.4.4.105
+                          source-site: '5'
+                          site-id: '5'
+                          uuid: C8K-00c313bc-8e69-4c1e-981e-84197567f8d1
+                          duration: '1440'
+                          '@rid': 9118
+                          trace-id: 39584
+                          device-type: src
+                          model: Lite
+                          state: running
+                          dscp-is-valid: 'false'
+                          qos-mon: 'true'
+                          entry_time: 1716531295367
+                          connectedVManages: 4.4.4.2
+                          parent-trace-id: 39584
+                          domain_monitor_can_be_started: 'true'
+                          message: Trace Start successfully
+                          vpn-id: '0'
+                          version: 17.14.01.0.03142250
+                          app-vis: 'true'
+                          vpn-list:
+                          - '10'
+                          trace-name: daemon_monitor_trace
+                          expire-time: 1716617695367
+                          tenantId: default
+                        - device-ip: 4.4.4.103
+                          local-system-ip: 4.4.4.103
+                          source-site: '3'
+                          site-id: '3'
+                          uuid: C8K-53b44a53-9467-481e-b595-2407df133b67
+                          duration: '1440'
+                          '@rid': 9120
+                          trace-id: 39584
+                          device-type: src
+                          model: Lite
+                          state: running
+                          dscp-is-valid: 'false'
+                          qos-mon: 'true'
+                          entry_time: 1716531295367
+                          connectedVManages: 4.4.4.2
+                          parent-trace-id: 39584
+                          domain_monitor_can_be_started: 'true'
+                          message: Trace Start successfully
+                          vpn-id: '0'
+                          version: 17.15.01.6.385
+                          app-vis: 'true'
+                          vpn-list:
+                          - '10'
+                          trace-name: daemon_monitor_trace
+                          expire-time: 1716617695367
+                          tenantId: default
+                        - device-ip: 4.4.4.180
+                          local-system-ip: 4.4.4.180
+                          log: device is unreachable
+                          source-site: '180'
+                          site-id: '180'
+                          uuid: C8K-668344fe-842d-4308-ae9b-2fee6f5d213f
+                          duration: '1440'
+                          '@rid': 9121
+                          trace-id: 39584
+                          device-type: src
+                          model: Lite
+                          state: start-failed
+                          dscp-is-valid: 'false'
+                          qos-mon: 'true'
+                          entry_time: 1716531295367
+                          parent-trace-id: 39584
+                          domain_monitor_can_be_started: 'true'
+                          message: device is unreachable
+                          vpn-id: '0'
+                          version: 17.06.01.0.313
+                          app-vis: 'true'
+                          vpn-list:
+                          - '1'
+                          trace-name: daemon_monitor_trace
+                          expire-time: 1716617695367
+                          tenantId: default
+                        - device-ip: 4.4.4.181
+                          local-system-ip: 4.4.4.181
+                          log: device is unreachable
+                          source-site: '181'
+                          site-id: '181'
+                          uuid: C8K-7a391403-fe2c-4f14-a5e4-cf93288dceae
+                          duration: '1440'
+                          '@rid': 9122
+                          trace-id: 39584
+                          device-type: src
+                          model: Lite
+                          state: start-failed
+                          dscp-is-valid: 'false'
+                          qos-mon: 'true'
+                          entry_time: 1716531295367
+                          parent-trace-id: 39584
+                          domain_monitor_can_be_started: 'true'
+                          message: device is unreachable
+                          vpn-id: '0'
+                          version: 17.06.01.0.313
+                          app-vis: 'true'
+                          vpn-list:
+                          - '1'
+                          trace-name: daemon_monitor_trace
+                          expire-time: 1716617695367
+                          tenantId: default
+                        - device-ip: 4.4.4.130
+                          local-system-ip: 4.4.4.130
+                          source-site: '30'
+                          site-id: '30'
+                          uuid: C8K-8d7c2053-93d3-45b9-b13c-5a6c1ea87092
+                          duration: '1440'
+                          '@rid': 9119
+                          trace-id: 39584
+                          device-type: src
+                          model: Lite
+                          state: completed
+                          dscp-is-valid: 'false'
+                          qos-mon: 'true'
+                          entry_time: 1716531295367
+                          connectedVManages: 4.4.4.2
+                          parent-trace-id: 39584
+                          domain_monitor_can_be_started: 'true'
+                          message: Trace Done
+                          vpn-id: '0'
+                          version: 17.15.01.3.529
+                          app-vis: 'true'
+                          vpn-list:
+                          - '10'
+                          trace-name: daemon_monitor_trace
+                          expire-time: 1716617695367
+                          tenantId: default
+                        - device-ip: 4.4.4.106
+                          local-system-ip: 4.4.4.106
+                          log: device is unreachable
+                          source-site: '6'
+                          site-id: '6'
+                          uuid: CSR-134623c5-a814-4552-9a75-27e28aae3c06
+                          duration: '1440'
+                          '@rid': 9129
+                          trace-id: 39584
+                          device-type: src
+                          model: Lite
+                          state: start-failed
+                          dscp-is-valid: 'false'
+                          qos-mon: 'true'
+                          entry_time: 1716531295367
+                          parent-trace-id: 39584
+                          domain_monitor_can_be_started: 'true'
+                          message: device is unreachable
+                          vpn-id: '0'
+                          version: 17.06.01.3.135059
+                          app-vis: 'true'
+                          vpn-list:
+                          - '10'
+                          trace-name: daemon_monitor_trace
+                          expire-time: 1716617695367
+                          tenantId: default
+                        - device-ip: 4.4.4.120
+                          local-system-ip: 4.4.4.120
+                          source-site: '20'
+                          site-id: '20'
+                          uuid: CSR-7c9f706c-288e-49da-8f57-9f5a5b3e3333
+                          duration: '1440'
+                          '@rid': 9124
+                          trace-id: 39584
+                          device-type: src
+                          model: Lite
+                          state: running
+                          dscp-is-valid: 'false'
+                          qos-mon: 'true'
+                          entry_time: 1716531295367
+                          connectedVManages: 4.4.4.2
+                          parent-trace-id: 39584
+                          domain_monitor_can_be_started: 'true'
+                          message: Trace Start successfully
+                          vpn-id: '0'
+                          version: 17.14.01.0.262
+                          app-vis: 'true'
+                          vpn-list:
+                          - '996'
+                          - '10'
+                          trace-name: daemon_monitor_trace
+                          expire-time: 1716617695367
+                          tenantId: default
+                        - device-ip: 4.4.4.119
+                          local-system-ip: 4.4.4.119
+                          source-site: '19'
+                          site-id: '19'
+                          uuid: CSR-7c9f706c-288e-49da-8f57-9f5a5b3e5555
+                          duration: '1440'
+                          '@rid': 9123
+                          trace-id: 39584
+                          device-type: src
+                          model: Lite
+                          state: running
+                          dscp-is-valid: 'false'
+                          qos-mon: 'true'
+                          entry_time: 1716531295367
+                          connectedVManages: 4.4.4.2
+                          parent-trace-id: 39584
+                          domain_monitor_can_be_started: 'true'
+                          message: Trace Start successfully
+                          vpn-id: '0'
+                          version: 17.14.01.2.1085
+                          app-vis: 'true'
+                          vpn-list:
+                          - '10'
+                          trace-name: daemon_monitor_trace
+                          expire-time: 1716617695367
+                          tenantId: default
+                        - device-ip: 4.4.4.108
+                          local-system-ip: 4.4.4.108
+                          log: device is unreachable
+                          source-site: '8'
+                          site-id: '8'
+                          uuid: CSR-8e3a07d0-6e22-4a85-9397-f86c1e4e4f4d
+                          duration: '1440'
+                          '@rid': 9130
+                          trace-id: 39584
+                          device-type: src
+                          model: Lite
+                          state: start-failed
+                          dscp-is-valid: 'false'
+                          qos-mon: 'true'
+                          entry_time: 1716531295367
+                          parent-trace-id: 39584
+                          domain_monitor_can_be_started: 'true'
+                          message: device is unreachable
+                          vpn-id: '0'
+                          version: 17.06.01.3.135059
+                          app-vis: 'true'
+                          vpn-list:
+                          - '10'
+                          trace-name: daemon_monitor_trace
+                          expire-time: 1716617695367
+                          tenantId: default
+                        - device-ip: 4.4.4.137
+                          local-system-ip: 4.4.4.137
+                          log: 'Trace Start initiated failed (unknown element: qos-mon in /Cisco-IOS-XE-nwpi-rpc:device-nwpi) '
+                          source-site: '37'
+                          site-id: '37'
+                          uuid: ISR4451-X/K9-FOC17042FM3
+                          duration: '1440'
+                          '@rid': 9128
+                          trace-id: 39584
+                          device-type: src
+                          model: Lite
+                          state: start-failed
+                          dscp-is-valid: 'false'
+                          qos-mon: 'true'
+                          entry_time: 1716531295367
+                          connectedVManages: 4.4.4.2
+                          parent-trace-id: 39584
+                          domain_monitor_can_be_started: 'true'
+                          message: 'Trace Start initiated failed (unknown element: qos-mon in /Cisco-IOS-XE-nwpi-rpc:device-nwpi) '
+                          vpn-id: '0'
+                          version: 17.09.01.0.03212256
+                          app-vis: 'true'
+                          vpn-list:
+                          - '10'
+                          trace-name: daemon_monitor_trace
+                          expire-time: 1716617695367
+                          tenantId: default
+                        readout:
+                          detail: []
+                        flowTimeRange:
+                          start_time: 0
+                          end_time: 0
+                      tenant: default
+                      traceModel: 2
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,Device Monitoring-write
+  /stream/device/nwpi/trace/delete:
+    delete:
+      tags:
+      - Troubleshooting Tools - Network Wide Path Insight
+      description: Trace Action - Delete
+      operationId: traceDelete
+      parameters:
+      - name: traceId
+        in: query
+        description: trace id
+        required: true
+        schema:
+          pattern: ^[1-9][0-9]{0,5}$
+          type: string
+          example: '16'
+      - name: timestamp
+        in: query
+        description: start time
+        required: true
+        schema:
+          maximum: 10000000000000
+          minimum: 1
+          type: integer
+          format: int64
+          example: 1716782661675
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  action:
+                    type: string
+                  trace-id:
+                    type: string
+                description: Nwpi trace delete response schema
+                $$ref: '#/components/schemas/NwpiTraceDeleteRespPayload'
+              examples:
+                Trace delete successfully:
+                  description: Trace delete successfully
+                  value:
+                    action: success
+                    trace-id: '16'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-write
+  /stream/device/nwpi/trace/start:
+    post:
+      tags:
+      - Troubleshooting Tools - Network Wide Path Insight
+      description: Trace Action - Start
+      operationId: traceStart
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                app:
+                  type: array
+                  items:
+                    type: string
+                app-vis:
+                  type: string
+                art-vis:
+                  type: string
+                dia-vis:
+                  type: string
+                dscp:
+                  type: string
+                dst-pfx:
+                  type: string
+                dst-port:
+                  type: string
+                duration:
+                  type: string
+                hub-wan-vis:
+                  type: string
+                protocol:
+                  type: string
+                sampling:
+                  type: string
+                source-site:
+                  type: string
+                spl-intvl:
+                  type: string
+                src-if:
+                  type: string
+                src-pfx:
+                  type: string
+                src-port:
+                  type: string
+                trace-name:
+                  type: string
+                vpn-id:
+                  type: string
+              description: Trace start payload schema
+              $$ref: '#/components/schemas/NwpiTraceStartReqPayload'
+            examples:
+              Start trace simply:
+                description: Start trace simply
+                value:
+                  source-site: '500'
+                  duration: '60'
+                  vpn-id: '1'
+              Start trace simply (use vpn-list):
+                description: Start trace simply (use vpn-list)
+                value:
+                  source-site: '500'
+                  duration: '60'
+                  vpn-list:
+                  - '1'
+              Start trace simply (UI default paramters):
+                description: Start trace simply (UI default paramters)
+                value:
+                  source-site: '500'
+                  duration: '60'
+                  local-drop-rate-threshold: 5
+                  wan-drop-rate-threshold: 5
+                  device-list:
+                  - local-system-ip: 172.16.255.15
+                    deviceId: 172.16.255.15
+                    uuid: C8K-4efe30b8-f843-4443-bba3-a8b7a5138492
+                    version: 17.15.01.0.727
+                    transport-interface: []
+                  vpn-id: '1'
+                  art-vis: 'true'
+                  app-vis: 'true'
+                  qos-mon: 'true'
+                  source-site-version: '17.15'
+                  traceModel: SDWAN_MANUAL
+                  warning: ''
+              Start trace with synthetic traffic:
+                description: Start trace with synthetic traffic
+                value:
+                  source-site: '500'
+                  duration: '60'
+                  local-drop-rate-threshold: 5
+                  wan-drop-rate-threshold: 5
+                  device-list:
+                  - local-system-ip: 172.16.255.15
+                    deviceId: 172.16.255.15
+                    uuid: C8K-4efe30b8-f843-4443-bba3-a8b7a5138492
+                    version: 17.15.01.0.727
+                    transport-interface: []
+                  vpn-id: '1'
+                  test:
+                  - target-url: www.chatgpt.com
+                    dscp: '0'
+                    test-intvl: '1'
+                    dns-svr: 8.8.8.8
+                    vpn-id: '1'
+                    username: ''
+                    user_grp: ''
+                  art-vis: 'true'
+                  app-vis: 'true'
+                  qos-mon: 'true'
+                  source-site-version: '17.15'
+                  traceModel: SDWAN_MANUAL
+                  warning: ''
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  action:
+                    type: string
+                  domain-mon:
+                    type: boolean
+                  entry_time:
+                    type: integer
+                    format: int64
+                  expire-time:
+                    type: integer
+                    format: int64
+                  local-drop-rate-threshold:
+                    type: integer
+                    format: int32
+                  qos-mon:
+                    type: boolean
+                  source-site:
+                    type: string
+                  state:
+                    type: string
+                  trace-id:
+                    type: integer
+                    format: int32
+                  trace-name:
+                    type: string
+                  traces:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        device-ip:
+                          type: string
+                        entry_time:
+                          type: integer
+                          format: int64
+                        local-system-ip:
+                          type: string
+                        message:
+                          type: string
+                        status:
+                          type: string
+                        trace-id:
+                          type: integer
+                          format: int32
+                        uuid:
+                          type: string
+                      $$ref: '#/components/schemas/NwpiTraceStartRespPayloadTraces'
+                  wan-drop-rate-threshold:
+                    type: integer
+                    format: int32
+                description: Nwpi trace start response payload schema
+                $$ref: '#/components/schemas/NwpiTraceStartRespPayload'
+              examples:
+                Start trace simply:
+                  description: Start trace simply
+                  value:
+                    action: success
+                    qos-mon: true
+                    source-site: '500'
+                    trace-id: 80
+                    trace-name: trace_80
+                    traceModel: 0
+                    entry_time: 1716789542704
+                    expire-time: 1716793142704
+                    state: starting
+                    traces:
+                    - uuid: C8K-4efe30b8-f843-4443-bba3-a8b7a5138492
+                      device-ip: 172.16.255.15
+                      local-system-ip: 172.16.255.15
+                      trace-id: 80
+                      entry_time: 1716789542704
+                      status: success
+                      message: Trace Starting
+                    domain-mon: false
+                    local-drop-rate-threshold: 5
+                    wan-drop-rate-threshold: 5
+                Start trace simply (UI default paramters):
+                  description: Start trace simply (UI default paramters)
+                  value:
+                    action: success
+                    qos-mon: true
+                    source-site: '500'
+                    trace-id: 96
+                    trace-name: trace_96
+                    traceModel: 0
+                    entry_time: 1716790090943
+                    expire-time: 1716793690943
+                    state: starting
+                    traces:
+                    - uuid: C8K-4efe30b8-f843-4443-bba3-a8b7a5138492
+                      device-ip: 172.16.255.15
+                      local-system-ip: 172.16.255.15
+                      trace-id: 96
+                      entry_time: 1716790090943
+                      status: success
+                      message: Trace Starting
+                    domain-mon: false
+                    local-drop-rate-threshold: 5
+                    wan-drop-rate-threshold: 5
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-write
+  /stream/device/nwpi/trace/stop/{traceId}:
+    post:
+      tags:
+      - Troubleshooting Tools - Network Wide Path Insight
+      description: Trace Action - Stop
+      operationId: traceStop
+      parameters:
+      - name: traceId
+        in: path
+        description: traceId
+        required: true
+        schema:
+          pattern: ^[1-9][0-9]{0,5}$
+          type: string
+          example: '48'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  action:
+                    type: string
+                  domain-mon:
+                    type: boolean
+                  entry_time:
+                    type: integer
+                    format: int64
+                  message:
+                    type: string
+                  qos-mon:
+                    type: boolean
+                  state:
+                    type: string
+                  trace-id:
+                    type: string
+                  trace-name:
+                    type: string
+                  traces:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        action:
+                          type: string
+                        device-ip:
+                          type: string
+                        entry_time:
+                          type: integer
+                          format: int64
+                        local-system-ip:
+                          type: string
+                        message:
+                          type: string
+                        trace-id:
+                          type: integer
+                          format: int32
+                        uuid:
+                          type: string
+                      $$ref: '#/components/schemas/NwpiTraceStopRespPayloadTraces'
+                description: Nwpi trace stoppayload schema
+                $$ref: '#/components/schemas/NwpiTraceStopRespPayload'
+              examples:
+                Trace stop successfully:
+                  description: Trace stop successfully
+                  value:
+                    action: success
+                    trace-id: '48'
+                    trace-name: trace_48
+                    state: stopping
+                    message: Trace Stop initiated successfully (user stop), ready to notify devices
+                    qos-mon: true
+                    entry_time: 1716782691675
+                    domain-mon: false
+                    traces:
+                    - uuid: C8K-4efe30b8-f843-4443-bba3-a8b7a5138492
+                      device-ip: 172.16.255.15
+                      local-system-ip: 172.16.255.15
+                      trace-id: 48
+                      entry_time: 1716782691675
+                      action: success
+                      message: Device Trace Stop initiated successfully (device is waiting to be notified)
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-write
+  /stream/device/nwpi/traceHistory:
+    get:
+      tags:
+      - Troubleshooting Tools - Network Wide Path Insight
+      description: Get historical traces
+      operationId: getTraceHistory
+      parameters:
+      - name: traceModel
+        in: query
+        description: traceModel
+        schema:
+          pattern: ^(SDWAN_MANUAL|SDWAN_AUTO_ON|SD_ROUTING_MANUAL|SDWAN_NWPI_LITE).*
+          type: string
+        examples:
+          Get manual traces:
+            description: Get manual traces
+            value: SDWAN_MANUAL
+          Get auto on traces:
+            description: Get auto on traces
+            value: SDWAN_AUTO_ON
+          Get sd-routing traces:
+            description: Get sd-routing traces
+            value: SD_ROUTING_MANUAL
+          Get multiple types of traces with parameters separated by commas:
+            description: Get multiple types of traces with parameters separated by commas
+            value: SDWAN_MANUAL,SDWAN_AUTO_ON,SD_ROUTING_MANUAL
+      - name: startTime
+        in: query
+        description: query start time
+        schema:
+          maximum: 10000000000000
+          minimum: 1
+          type: integer
+          format: int64
+      - name: endTime
+        in: query
+        description: query end time
+        schema:
+          maximum: 10000000000000
+          minimum: 1
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      devices:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            app-vis:
+                              type: string
+                            art-vis:
+                              type: string
+                            connectedVManages:
+                              type: string
+                            device-ip:
+                              type: string
+                            device-type:
+                              type: string
+                            dia-vis:
+                              type: string
+                            domain-mon:
+                              type: string
+                            domain_monitor_can_be_started:
+                              type: string
+                            dscp-is-valid:
+                              type: string
+                            duration:
+                              type: string
+                            entry_time:
+                              type: integer
+                              format: int64
+                            expire-time:
+                              type: integer
+                              format: int64
+                            local-system-ip:
+                              type: string
+                            message:
+                              type: string
+                            parent-trace-id:
+                              type: integer
+                              format: int32
+                            qos-mon:
+                              type: string
+                            site-id:
+                              type: string
+                            source-site:
+                              type: string
+                            state:
+                              type: string
+                            trace-id:
+                              type: integer
+                              format: int32
+                            trace-name:
+                              type: string
+                            uuid:
+                              type: string
+                            version:
+                              type: string
+                            vpn-id:
+                              type: string
+                          $$ref: '#/components/schemas/NwpiDomainMonitorStateRespPayloadDevicelist'
+                      summary:
+                        type: object
+                        properties:
+                          agg-client-prefix:
+                            type: string
+                          agg-src-sgt:
+                            type: string
+                          agg-svr-prefix:
+                            type: string
+                          agg-user-name:
+                            type: string
+                          app:
+                            type: string
+                          app-grp:
+                            type: string
+                          app-vis:
+                            type: string
+                          art-vis:
+                            type: string
+                          common_app:
+                            type: string
+                          device-ip:
+                            type: string
+                          devicesCheckInfo:
+                            type: string
+                          dia-vis:
+                            type: string
+                          domain-mon:
+                            type: string
+                          dscp:
+                            type: string
+                          dst-ip:
+                            type: string
+                          dst-pfx:
+                            type: string
+                          dst-pfx-len:
+                            type: string
+                          dst-port:
+                            type: string
+                          duration:
+                            type: string
+                          health-app-server-mem:
+                            type: string
+                          health-cpu-core:
+                            type: string
+                          health-cpu-load:
+                            type: string
+                          health-cpu-load-average:
+                            type: string
+                          health-mem-usage:
+                            type: string
+                          health-running-traces:
+                            type: integer
+                            format: int32
+                          health-server-ip:
+                            type: string
+                          hub-wan-vis:
+                            type: string
+                          local-drop-rate-threshold:
+                            type: integer
+                            format: int32
+                          message:
+                            type: string
+                          protocol:
+                            type: string
+                          qos-mon:
+                            type: string
+                          sampling:
+                            type: string
+                          source-site:
+                            type: string
+                          source-site-vmanage-version:
+                            type: string
+                          spl-intvl:
+                            type: string
+                          src-if:
+                            type: string
+                          src-ip:
+                            type: string
+                          src-pfx:
+                            type: string
+                          src-pfx-len:
+                            type: string
+                          src-port:
+                            type: string
+                          state:
+                            type: string
+                          stop-time:
+                            type: integer
+                            format: int32
+                          taskId:
+                            type: integer
+                            format: int32
+                          trace-name:
+                            type: string
+                          trace-trigger-event:
+                            type: string
+                          trace_stop_type:
+                            type: string
+                          username:
+                            type: string
+                          vpn-id:
+                            type: string
+                          vpn-list:
+                            type: string
+                          wan-drop-rate-threshold:
+                            type: integer
+                            format: int32
+                          warning:
+                            type: string
+                        $$ref: '#/components/schemas/NwpiTraceHistoryRespPayloadDataSummary'
+                    $$ref: '#/components/schemas/NwpiTraceHistoryRespPayloadData'
+                  entry_time:
+                    type: integer
+                    format: int64
+                  trace-id:
+                    type: integer
+                    format: int32
+                  type:
+                    type: string
+                description: Nwpi traceHistory response payload schema
+                $$ref: '#/components/schemas/NwpiTraceHistoryRespPayload'
+              examples:
+                Response for getting historical traces:
+                  description: Response for getting historical traces
+                  value:
+                    header:
+                      generatedOn: 1716888241874
+                      viewKeys:
+                        uniqueKey: []
+                        preferenceKey: grid-nwpiTraceData
+                      columns:
+                      - title: Start Time
+                        property: entry_time
+                        displayFormat: DD MMM YYYY h:mm:ss A z
+                        inputFormat: unix-time
+                        dataType: date
+                      - title: Trace Id
+                        property: trace-id
+                        dataType: number
+                      fields:
+                      - property: entry_time
+                        dataType: date
+                      - property: trace-id
+                        dataType: number
+                      - property: type
+                        dataType: string
+                      - property: data
+                        dataType: object
+                    data:
+                    - trace-id: 144
+                      entry_time: 1716885120542
+                      traceModel: 0
+                      type: trace-history
+                      data:
+                        summary:
+                          source-site: '500'
+                          device-ip: N/A
+                          vpn-id: '0'
+                          vpn-list:
+                          - '1'
+                          src-if: N/A
+                          src-ip: N/A
+                          src-port: N/A
+                          dst-ip: N/A
+                          dst-port: N/A
+                          src-pfx: N/A
+                          src-pfx-len: N/A
+                          dst-pfx: N/A
+                          dst-pfx-len: N/A
+                          app: N/A
+                          username: N/A
+                          common_app: N/A
+                          app-grp: N/A
+                          protocol: N/A
+                          dscp: N/A
+                          duration: '60'
+                          trace-name: trace_144
+                          domain-mon: disabled
+                          qos-mon: N/A
+                          art-vis: N/A
+                          app-vis: N/A
+                          dia-vis: N/A
+                          hub-wan-vis: N/A
+                          sampling: N/A
+                          spl-intvl: N/A
+                          stop-time: -1
+                          source-site-vmanage-version: 20.15.0-50
+                          taskId: -1
+                          trace-trigger-event: N/A
+                          enable-cmd-header: N/A
+                          state: stopping
+                          message: Trace Stop initiated successfully (user stop), ready to notify devices
+                          warning: ''
+                          wan-drop-rate-threshold: 5
+                          local-drop-rate-threshold: 5
+                          agg-client-prefix: N/A
+                          agg-svr-prefix: N/A
+                          agg-src-sgt: N/A
+                          agg-user-name: N/A
+                          health-server-ip: 172.16.255.22
+                          health-cpu-load: '3.06'
+                          health-mem-usage: '44'
+                          health-cpu-load-average: '0.06'
+                          health-cpu-core: '16'
+                          health-app-server-mem: '0.09'
+                          health-running-traces: 1
+                          trace_stop_type: ''
+                          devicesCheckInfo:
+                          - bfd-session-with-traffic: 0
+                            up-bfd-session: 18
+                            health-device-cpu-load: '30.56'
+                            health-device-mem-usage: '83'
+                            deviceHostName: vm5-172.16.255.15
+                            peerSitesCount: 0
+                        devices:
+                        - entry_time: 1716885120542
+                          device-ip: 172.16.255.15
+                          local-system-ip: 172.16.255.15
+                          connectedVManages: 172.16.255.22
+                          parent-trace-id: 144
+                          domain_monitor_can_be_started: 'true'
+                          source-site: '500'
+                          site-id: '500'
+                          message: Device Trace Stop initiated successfully (received device reply ok)
+                          vpn-id: '0'
+                          uuid: C8K-4efe30b8-f843-4443-bba3-a8b7a5138492
+                          version: 17.15.01.0.727
+                          duration: '60'
+                          vpn-list:
+                          - '1'
+                          trace-name: trace_144
+                          '@rid': 4365
+                          trace-id: 144
+                          expire-time: 1716888720542
+                          tenantId: default
+                          device-type: src
+                          state: stopped
+                          dscp-is-valid: 'false'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,Device Monitoring-write

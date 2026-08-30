@@ -1,0 +1,201 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - Reboot History API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - Reboot History
+paths:
+  /device/reboothistory:
+    get:
+      tags:
+      - Real-Time Monitoring - Reboot History
+      description: Get device reboot history
+      operationId: createRebootHistoryList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device reboot history:
+                  description: Device reboot history
+                  value:
+                    data:
+                    - reboot_date_time-date: 1642651714000
+                      lastupdated: 1642656685355
+                      vdevice-dataKey: 172.16.255.11-2022-01-20T04:08:34+00:00
+                      reboot_date_time: '2022-01-20T04:08:34+00:00'
+                      reboot_reason: Initiated by user - Reboot issued via NETCONF
+                      vdevice-host-name: vm1
+                      vdevice-name: 172.16.255.11
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Device Monitoring-read,Device Monitoring-write,Software Upgrade-read,Software Upgrade-write,Device Reboot-read,Device Reboot-write,dca,Software Upgrade > Edge-write,Software Upgrade > Edge-read,Software Upgrade > Controller-write,Software Upgrade > Controller-read
+  /device/reboothistory/details:
+    get:
+      tags:
+      - Real-Time Monitoring - Reboot History
+      description: Get detailed reboot history list
+      operationId: getRebootHistoryDetails
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Detailed device reboot history:
+                  description: Detailed device reboot history
+                  value:
+                    data:
+                    - reboot_date_time-date: 1642651714000
+                      lastupdated: 1642652319187
+                      reboot_date_time: '2022-01-20T04:08:34+00:00'
+                      reboot_reason: Initiated by user - Reboot issued via NETCONF
+                      vdevice-host-name: vm1
+                      vdevice-name: 172.16.255.11
+                    - reboot_date_time-date: 1642656388000
+                      lastupdated: 1642656695661
+                      reboot_date_time: '2022-01-20T05:26:28+00:00'
+                      reboot_reason: Initiated by user - Reboot issued via NETCONF
+                      vdevice-host-name: vm1
+                      vdevice-name: 172.16.255.11
+                    - reboot_date_time-date: 1642657398000
+                      lastupdated: 1642657658587
+                      reboot_date_time: '2022-01-20T05:43:18+00:00'
+                      reboot_reason: reload
+                      vdevice-host-name: vm5
+                      vdevice-name: 172.16.255.15
+                    - reboot_date_time-date: 1642658548000
+                      lastupdated: 1642659153477
+                      reboot_date_time: '2022-01-20T06:02:28+00:00'
+                      reboot_reason: Initiated by user - Reboot issued via NETCONF
+                      vdevice-host-name: vm1
+                      vdevice-name: 172.16.255.11
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Device Monitoring-read,Device Monitoring-write,Software Upgrade-read,Software Upgrade-write,Device Reboot-read,Device Reboot-write,Software Upgrade > Edge-write,Software Upgrade > Edge-read,Software Upgrade > Controller-write,Software Upgrade > Controller-read
+  /device/reboothistory/synced:
+    get:
+      tags:
+      - Real-Time Monitoring - Reboot History
+      description: Get device reboot history synchronously
+      operationId: createSyncedRebootHistoryList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device reboot history:
+                  description: Device reboot history
+                  value:
+                    data:
+                    - reboot_date_time-date: 1642658548000
+                      vmanage-system-ip: 172.16.255.11
+                      reboot_date_time: '2022-01-20T06:02:28+00:00'
+                      vdevice-dataKey: 172.16.255.11-2022-01-20T06:02:28+00:00
+                      createTimeStamp: 1642659153490
+                      lastupdated: 1642659153477
+                      reboot_reason: Initiated by user - Reboot issued via NETCONF
+                      vdevice-host-name: vm1
+                      vdevice-name: 172.16.255.11
+                      '@rid': 1078
+                    - reboot_date_time-date: 1642651714000
+                      vmanage-system-ip: 172.16.255.11
+                      reboot_date_time: '2022-01-20T04:08:34+00:00'
+                      vdevice-dataKey: 172.16.255.11-2022-01-20T04:08:34+00:00
+                      createTimeStamp: 1642652319194
+                      lastupdated: 1642652319187
+                      reboot_reason: Initiated by user - Reboot issued via NETCONF
+                      vdevice-host-name: vm1
+                      vdevice-name: 172.16.255.11
+                      '@rid': 1086
+                    - reboot_date_time-date: 1642656388000
+                      vmanage-system-ip: 172.16.255.11
+                      reboot_date_time: '2022-01-20T05:26:28+00:00'
+                      vdevice-dataKey: 172.16.255.11-2022-01-20T05:26:28+00:00
+                      createTimeStamp: 1642656696210
+                      lastupdated: 1642656695661
+                      reboot_reason: Initiated by user - Reboot issued via NETCONF
+                      vdevice-host-name: vm1
+                      vdevice-name: 172.16.255.11
+                      '@rid': 1095
+                    - reboot_date_time-date: 1642659874000
+                      vmanage-system-ip: 172.16.255.11
+                      reboot_date_time: '2022-01-20T06:24:34+00:00'
+                      vdevice-dataKey: 172.16.255.11-2022-01-20T06:24:34+00:00
+                      createTimeStamp: 1642660158532
+                      lastupdated: 1642660158402
+                      reboot_reason: Initiated by user - Reboot issued via NETCONF
+                      vdevice-host-name: vm1
+                      vdevice-name: 172.16.255.11
+                      '@rid': 1103
+                    - reboot_date_time-date: 1642659181000
+                      vmanage-system-ip: 172.16.255.11
+                      reboot_date_time: '2022-01-20T06:13:01+00:00'
+                      vdevice-dataKey: 172.16.255.11-2022-01-20T06:13:01+00:00
+                      createTimeStamp: 1642659460686
+                      lastupdated: 1642659460446
+                      reboot_reason: Initiated by user - Reboot issued via NETCONF
+                      vdevice-host-name: vm1
+                      vdevice-name: 172.16.255.11
+                      '@rid': 1104
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Device Monitoring-read,Device Monitoring-write,Software Upgrade-read,Software Upgrade-write,Device Reboot-read,Device Reboot-write,Software Upgrade > Edge-write,Software Upgrade > Edge-read,Software Upgrade > Controller-write,Software Upgrade > Controller-read

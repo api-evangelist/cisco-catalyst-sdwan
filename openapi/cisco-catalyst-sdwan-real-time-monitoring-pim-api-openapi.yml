@@ -1,0 +1,273 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - PIM API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - PIM
+paths:
+  /device/pim/interface:
+    get:
+      tags:
+      - Real-Time Monitoring - PIM
+      description: Get PIM interface list from device
+      operationId: createPIMInterfaceList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                PIM interface list:
+                  description: PIM interface list
+                  value:
+                    data:
+                    - if-name: ge0/0
+                      dr-address: 100.100.3.101
+                      vdevice-dataKey: 169.254.10.10
+                      vdevice-name: 169.254.10.10
+                      if-addr: 100.100.3.101/24
+                      neighbor-count: 0
+                      hello-interval: 30
+                      lastupdated: 1643258686605
+                      join-prune-interval: 60
+                      vpn-id: '10'
+                      priority: 1
+                      vdevice-host-name: vm3
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/pim/neighbor:
+    get:
+      tags:
+      - Real-Time Monitoring - PIM
+      description: Get PIM neighbor list from device
+      operationId: createPIMNeighborList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                PIM neighbor list:
+                  description: PIM neighbor list
+                  value:
+                    data:
+                    - vdevice-name: 169.254.10.9
+                      vdevice-host-name: vm2
+                      vpn-id: '1'
+                      if-name: ge0/0.1
+                      nbr-addr: 10.0.9.11
+                      up-time: 0:12:12:12
+                      up-time-date: 0:12:12:12 2022/07/19
+                      expires: 0:23:01:44
+                      expires-date: 0:23:01:44 2022/07/19
+                      priority: '1'
+                      hold-time: '105'
+                      dr-address: 10.0.9.14
+                      lastupdated: 1658198416779
+                      vdevice-dataKey: 169.254.10.9
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/pim/rp-mapping:
+    get:
+      tags:
+      - Real-Time Monitoring - PIM
+      description: Get PIM Rp-mapping list from device
+      operationId: createPIMRpMappingList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                PIM Rp-mapping list:
+                  description: PIM Rp-mapping list
+                  value:
+                    data:
+                    - vdevice-name: 169.254.10.9
+                      vdevice-host-name: vm2
+                      vpn-id: '1'
+                      type: Auto-RP
+                      group: 225.0.0.0/24
+                      rp-address: 225.0.0.0/24
+                      lastupdated: 1658198416779
+                      vdevice-dataKey: 169.254.10.9
+                    - vdevice-name: 169.254.10.9
+                      vdevice-host-name: vm2
+                      vpn-id: '2'
+                      type: Auto-RP
+                      group: 227.0.0.0/24
+                      rp-address: '58.0.2.100  '
+                      lastupdated: 1658198416779
+                      vdevice-dataKey: 169.254.10.9
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/pim/statistics:
+    get:
+      tags:
+      - Real-Time Monitoring - PIM
+      description: Get PIM statistics list from device
+      operationId: createPIMStatisticsList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                PIM statistics list:
+                  description: PIM statistics list
+                  value:
+                    data:
+                    - hello-rx: 0
+                      unknown-rx: 0
+                      vdevice-name: 169.254.10.10
+                      vpn-id: '10'
+                      vdevice-host-name: vm3
+                      bad-rx: 0
+                      join-prune-tx: 0
+                      vdevice-dataKey: 169.254.10.10
+                      join-prune-rx: 0
+                      auto-rp-mapping-rx: 0
+                      unsupported-rx: 0
+                      lastupdated: 1643259067333
+                      assert-rx: 0
+                      auto-rp-announce-rx: 0
+                      assert-tx: 0
+                      hello-tx: 1090
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/ppp/interface:
+    get:
+      tags:
+      - Real-Time Monitoring - PIM
+      description: Get PPP interface list from device (Real Time)
+      operationId: createPPPInterfaceList
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                PPP interface list:
+                  description: PPP interface list
+                  value:
+                    data:
+                    - vdevice-dataKey: 169.254.10.9-ppp1
+                      vdevice-name: 169.254.10.9
+                      ifname: ppp1
+                      lastupdated: 1654477366044
+                      pppoe-interface: ge0/0
+                      vpn-id: '0'
+                      vdevice-host-name: vm2
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Interface-read,Interface-write

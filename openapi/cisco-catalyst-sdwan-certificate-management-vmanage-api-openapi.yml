@@ -1,0 +1,772 @@
+openapi: 3.2.0
+info:
+  title: Others Certificate Management - vManage API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Certificate Management - vManage
+paths:
+  /certificate/enterprise/estclient/gencsr:
+    post:
+      tags:
+      - Certificate Management - vManage
+      summary: Generate CSR of EST proxy client
+      description: Generate CSR of EST proxy client
+      operationId: enterpriseESTClientGenCSR
+      requestBody:
+        description: Payload
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Gen CSR Payload:
+                description: Gen CSR Payload
+                value:
+                  company_name: abc
+                  org_unit: abc
+                  org: abc
+                  city: abc
+                  state: abc
+                  country: IN
+                  email: abc@cisco.com
+                  subject_alternative_name_dns:
+                  - ''
+                  subject_alternative_name_uri:
+                  - ''
+                $$ref: '#/components/examples/ComViptelaVmanageServerCertificateapiRequestExamplePostenterpriseestclientgencsrrequest'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                Gen CSR Response:
+                  description: Gen CSR Response
+                  value:
+                    status: success
+                    csrDetails: '-----BEGIN CERTIFICATE REQUEST-----
+
+                      MIICtDCCAZwCAQAwUzEMMAoGA1UEAwwDYWJjMQswCQYDVQQGEwJJTjEMMAoGA1UE
+
+                      CAwDYWJjMQwwCgYDVQQHDANhYmMxDDAKBgNVBAoMA2FiYzEMMAoGA1UECwwDYWJj
+
+                      MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArnPatRDaE3Q2g5Y/JLRY
+
+                      WEdFPjgqMD1jBPiEYatPpKnn0Xd+bCidc5+OC+hboX8R8KZr55eii+3Li3PVXKKP
+
+                      dyOoJS+rn9NLE3fP+c9QFXBoALOdVG+GrxEHBHDvO92hHv9sRaI77WmHSw7kDf8J
+
+                      KmvuumaRbLHB1LukYkhx0wDy6HyKBvXwyIrdDdVH4izYQn6FqZcohYCBd4COLr3E
+
+                      DTaEjT7mJFS/mdNtowq6IPgnRV0eD1+Eusok1q2r3MKR+mvCdS9N2ps+ukss5Ryc
+
+                      YU7Wanq4HNpsWiC6neRvdFmPZNnipTDJhCqItsJEs5e4MkQTuLEA7aECJlxvzo4K
+
+                      HwIDAQABoBwwGgYJKoZIhvcNAQkOMQ0wCzAJBgNVHREEAjAAMA0GCSqGSIb3DQEB
+
+                      BQUAA4IBAQCtzk9qwB3KutcMdSeKGnJIg2emvvpcl2Myzk4xCk1Z2R/8VeC8R9Su
+
+                      JTBC62ptohWglAiePUMA284ieDnQYdg9BDQCJyK9Mi9dEcaa5u50XZkk9Xon5w9U
+
+                      CuwahOEDUm23RBCuXWfzZJA5Jj4oAu24Y0zIQFeUoUqsDO5GoBgrRPU3MxtCKu+J
+
+                      5xlYgvfLVDUAYvpQzGkiufbbJBSj49yidchQX9H/ub+qzLSl9sXv6eGiH7BRGVTD
+
+                      g8Yhk3ik0n8GZrtXep89utFRwL+oWwe2QpJR0WffL0eyyxegjkWkMhHkoCdHKVay
+
+                      vCiN1B07UUqgyR0Yya30Y4QL4Li6w/IS
+
+                      -----END CERTIFICATE REQUEST-----'
+                  $$ref: '#/components/examples/ComViptelaVmanageServerCertificateapiResponseExamplePostenterpriseestclientgencsrresponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /certificate/enterprise/estclient/getcsr:
+    get:
+      tags:
+      - Certificate Management - vManage
+      summary: Get generated CSR for EST proxy client
+      description: Get generated CSR for EST proxy client
+      operationId: enterpriseESTClientGetCSR
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                Success:
+                  description: Success
+                  value:
+                    status: success
+                    csrDetails: '-----BEGIN CERTIFICATE REQUEST-----
+
+                      MIICtDCCAZwCAQAwUzEMMAoGA1UEAwwDYWJjMQswCQYDVQQGEwJJTjEMMAoGA1UE
+
+                      CAwDYWJjMQwwCgYDVQQHDANhYmMxDDAKBgNVBAoMA2FiYzEMMAoGA1UECwwDYWJj
+
+                      MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArnPatRDaE3Q2g5Y/JLRY
+
+                      WEdFPjgqMD1jBPiEYatPpKnn0Xd+bCidc5+OC+hboX8R8KZr55eii+3Li3PVXKKP
+
+                      dyOoJS+rn9NLE3fP+c9QFXBoALOdVG+GrxEHBHDvO92hHv9sRaI77WmHSw7kDf8J
+
+                      KmvuumaRbLHB1LukYkhx0wDy6HyKBvXwyIrdDdVH4izYQn6FqZcohYCBd4COLr3E
+
+                      DTaEjT7mJFS/mdNtowq6IPgnRV0eD1+Eusok1q2r3MKR+mvCdS9N2ps+ukss5Ryc
+
+                      YU7Wanq4HNpsWiC6neRvdFmPZNnipTDJhCqItsJEs5e4MkQTuLEA7aECJlxvzo4K
+
+                      HwIDAQABoBwwGgYJKoZIhvcNAQkOMQ0wCzAJBgNVHREEAjAAMA0GCSqGSIb3DQEB
+
+                      BQUAA4IBAQCtzk9qwB3KutcMdSeKGnJIg2emvvpcl2Myzk4xCk1Z2R/8VeC8R9Su
+
+                      JTBC62ptohWglAiePUMA284ieDnQYdg9BDQCJyK9Mi9dEcaa5u50XZkk9Xon5w9U
+
+                      CuwahOEDUm23RBCuXWfzZJA5Jj4oAu24Y0zIQFeUoUqsDO5GoBgrRPU3MxtCKu+J
+
+                      5xlYgvfLVDUAYvpQzGkiufbbJBSj49yidchQX9H/ub+qzLSl9sXv6eGiH7BRGVTD
+
+                      g8Yhk3ik0n8GZrtXep89utFRwL+oWwe2QpJR0WffL0eyyxegjkWkMhHkoCdHKVay
+
+                      vCiN1B07UUqgyR0Yya30Y4QL4Li6w/IS
+
+                      -----END CERTIFICATE REQUEST-----'
+                  $$ref: '#/components/examples/ComViptelaVmanageServerCertificateapiResponseExampleGetenterpriseestclientgetcsrresponse'
+                Not generated:
+                  description: Not generated
+                  value:
+                    status: not_generated
+                  $$ref: '#/components/examples/ComViptelaVmanageServerCertificateapiResponseExampleGetenterpriseestclientgetcsrfailedresponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /certificate/enterprise/estclient/install/signedCert:
+    post:
+      tags:
+      - Certificate Management - vManage
+      summary: Install signed EST proxy client certificate
+      description: Install signed EST proxy client certificate
+      operationId: enterpriseESTClientInstallCertificate
+      requestBody:
+        description: Certificate
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Certificate:
+                description: Certificate
+                value: '-----BEGIN CERTIFICATE-----
+
+                  <Cert>
+
+                  -----END CERTIFICATE-----'
+                $$ref: '#/components/examples/ComViptelaVmanageServerCertificateapiRequestExamplePostinstallsignedcertrequest'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                Task ID:
+                  description: Task ID
+                  value:
+                    status: success
+                  $$ref: '#/components/examples/ComViptelaVmanageServerCertificateapiResponseExamplePostenterpriseestclientinstallsignedcertresponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /certificate/orgname/from-config:
+    get:
+      tags:
+      - Certificate Management - vManage
+      summary: Get ORG Name from ConfD
+      description: Get ORG Name from ConfD
+      operationId: getOrgNameFromConfig
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                Org Name:
+                  description: Org Name
+                  value:
+                    configured: true
+                    organization-name: Cisco
+                  $$ref: '#/components/examples/ComViptelaVmanageServerCertificateapiResponseExampleGetorgnamefromconfig'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /setting/configuration/webserver/certificate:
+    get:
+      tags:
+      - Certificate Management - vManage
+      summary: Retrieves Signed Certificate Details
+      description: Retrieves Signed Certificate Details
+      operationId: showInfo
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                Web Server Certificate Response:
+                  description: Web Server Certificate Response
+                  value:
+                    org_unit: Cisco SD-WAN
+                    org: Cisco Systems
+                    location: Milpitas
+                    state: CA
+                    country: US
+                    company_name: cisco.com
+                    notBefore: 1716453273000
+                    notAfter: 1811061273000
+                    certificateDetails: "[\n[\n  Version: V3\n  Subject: OU=Cisco SD-WAN, O=Cisco Systems, L=Milpitas, ST=CA, C=US, CN=cisco.com\n  Signature Algorithm: SHA256withRSA, OID = 1.2.840.113549.1.1.11\n\n  Key:  Sun RSA public key, 2048 bits\n  params: null\n  modulus: 24415088922664979671266902719578448729590096123090308050409894246597037700826457468704530842642857210156719189053986929777579954182298529791833634799228627082206493387686427677536313110839238698248165839347164214877888890446621780244952412251221990595038507887048648188323999541630899482272693863504123774666852341902112064345683135475647894137312832136535446260038835674001216595312699436648811347882223942474007050591244735744391580907566490720180118367224323510481486966646378660911263056906871142696104218558212034525779150587185709393002825262227305564185461530730580791421717034120540280561841311367840663024203\n  public exponent: 65537\n  Validity: [From: Thu May 23 08:34:33 UTC 2024,\n               To: Sun May 23 08:34:33 UTC 2027]\n  Issuer: OU=Cisco SD-WAN, O=Cisco Systems, L=Milpitas, ST=CA, C=US, CN=cisco.com\n  SerialNumber: [    70e8ae87 ce97a5cd 24eb8b4a 1d79f4ca 3d6e6c6b]\n\nCertificate Extensions: 3\n[1]: ObjectId: 2.5.29.35 Criticality=false\nAuthorityKeyIdentifier [\nKeyIdentifier [\n0000: 15 4A 9F 50 00 1F A2 E7   E4 53 BB C4 96 B2 63 15  .J.P.....S....c.\n0010: 3C 74 CD ED                                        <t..\n]\n]\n\n[2]: ObjectId: 2.5.29.19 Criticality=true\nBasicConstraints:[\n  CA:true\n  PathLen:2147483647\n]\n\n[3]: ObjectId: 2.5.29.14 Criticality=false\nSubjectKeyIdentifier [\nKeyIdentifier [\n0000: 15 4A 9F 50 00 1F A2 E7   E4 53 BB C4 96 B2 63 15  .J.P.....S....c.\n0010: 3C 74 CD ED                                        <t..\n]\n]\n\n]\n  Algorithm: [SHA256withRSA]\n  Signature:\n0000: 85 12 9B E8 53 28 21 0F   30 5C 67 AB 53 B1 B8 45  ....S(!.0\\g.S..E\n0010: E4 60 EB 39 3A 17 71 08   FB 1F 75 67 42 77 1C F9  .`.9:.q...ugBw..\n0020: B7 F6 31 02 E7 9C E2 04   62 2D EC 8A CD F3 13 02  ..1.....b-......\n0030: 42 AE EB 3B 91 68 8F 6D   FA 1C 2A AF FB 0C 23 BE  B..;.h.m..*...#.\n0040: 56 0F 75 73 72 01 C0 02   8D 44 1B 5F 93 3A 46 5D  V.usr....D._.:F]\n0050: 7D BA 8B D9 64 1E 20 29   D1 FE 1F 79 53 B1 C9 4E  ....d. )...yS..N\n0060: 74 47 F2 4E E8 C9 C7 66   A9 AB 8D 27 4C C4 BF F8  tG.N...f...'L...\n0070: FE AF B2 0D 02 9B 97 33   4C 02 15 0D 5C 77 05 B4  .......3L...\\w..\n0080: D3 15 0E A6 AE 6D B3 B9   92 B4 C2 23 D1 14 A4 82  .....m.....#....\n0090: 73 38 C2 CA 99 B2 3C E5   3A 81 8F 4D BB 4F CC 50  s8....<.:..M.O.P\n00A0: F4 4D E5 C6 DB 3E 4C FE   67 E5 04 8B BB F9 44 6C  .M...>L.g.....Dl\n00B0: A3 BA CC AA 9B 2D D9 04   71 C6 C7 47 1A CF 8C 1A  .....-..q..G....\n00C0: AC C8 02 36 6F DD 16 6B   04 67 AE BF 03 05 C5 6C  ...6o..k.g.....l\n00D0: 43 DC 4C D0 F3 CD 83 1C   5C B3 17 95 EC FA 2E 80  C.L.....\\.......\n00E0: D2 FA 62 81 A7 67 AF AF   8A 35 B2 E0 8E C9 B3 1E  ..b..g...5......\n00F0: 58 12 7F B2 8F 54 83 56   42 A6 6B E1 39 B8 0A 49  X....T.VB.k.9..I\n\n]"
+                    validity: Valid
+                  $$ref: '#/components/examples/ComViptelaVmanageServerSettingapiResponseExampleGetwebservercertificateresponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Settings-read,dca
+    put:
+      tags:
+      - Certificate Management - vManage
+      summary: Import a signed web server certificate
+      description: Import a signed web server certificate
+      operationId: importCertificate
+      requestBody:
+        description: Web Server Certificate configuration
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Web Server Certificate Request:
+                description: Web Server Certificate Request
+                value: '-----BEGIN CERTIFICATE-----
+
+                  MIIDhDCCAmwCCQCcDeb1sPMdpjANBgkqhkiG9w0BAQsFADCBhjELMAkGA1UEBhMC
+
+                  VVMxEzARBgNVBAgTCkNhbGlmb3JuaWExETAPBgNVBAcTCFNhbiBKb3NlMRUwEwYD
+
+                  VQQLEwx2SVB0ZWxhIFRlc3QxFDASBgNVBAoTC3ZJUHRlbGEgSW5jMSIwIAYJKoZI
+
+                  hvcNAQkBFhNzYW50b3NoQHZpcHRlbGEuY29tMB4XDTIzMDYwMzE1MDM1MFoXDTM0
+
+                  MDUzMTE1MDM1MFowgYAxFzAVBgNVBAMMDnZtbmdfc2NhbGVfaW5kMQswCQYDVQQG
+
+                  EwJJTjESMBAGA1UECAwJS2FybmF0YWthMRIwEAYDVQQHDAlCYW5nYWxvcmUxFzAV
+
+                  BgNVBAoMDnZtbmdfc2NhbGVfaW5kMRcwFQYDVQQLDA52bW5nX3NjYWxlX2luZDCC
+
+                  ASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAL9ZSFCz5JKuUUobW6sjela8
+
+                  XJa3BwJpza8GjALlYiseVW93vAI3cgn90pO/eXETG5e8EEj8/N3HTqIgbpcooHTf
+
+                  UuzfwjIXR5FWlbaDLsJEAXVDFiv3MDtGQ/RtFrrw49OBtlhAG3AmEkaMZ63dOksQ
+
+                  v5y9wu0XfDoLmkg0q47NlJ682j2KjcsLud68Vn6y7OWmzk8B2ErV3SP4dwpaDzic
+
+                  0BfOdn5oSXX+wGKpbJ0n5hCuwDreyDpsO5jJ5UYr1eUpvH4Sj2llli/n+7BOjLCT
+
+                  3Jy9RXotiajSxx1k0sNYuajcWw5qxzGAJes9R4fPqBSvKq/G3Lyc4tinwBOWLEMC
+
+                  AwEAATANBgkqhkiG9w0BAQsFAAOCAQEAjr1EajpucmaQmwHb+J531NxivLzhVxlu
+
+                  3F+Bklo4JLxoo/2CImjuE3X5NNed5qj4v1zgjPPxSSyOGcbXreiodXOSRsGpb6+I
+
+                  7AlPZRboS52Y6Zigwnw8HIBCINMkII2wNVY+gYJzFPg58UJobdedx7qNS+Pyu6W3
+
+                  avGXOGXEREzAqzE5WP+csV/5Too62EwAV3cT3vElpdE3kASHzNFJfbu9xctrQHeF
+
+                  jxOweOjsbMuikOSyRaYJqs0H4gQcP2Vyb9i+unHvPGKZruhFLsGdIxNq/FPv5cMx
+
+                  aNH3W/qegrUYlcdeCH6zRxXRJSTxy1f7114TMP039Zhphd0O6gNVrA==
+
+                  -----END CERTIFICATE-----'
+                $$ref: '#/components/examples/ComViptelaVmanageServerSettingapiRequestExamplePutwebservercertificaterequest'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                Web Server Certificate Response:
+                  description: Web Server Certificate Response
+                  value:
+                    certificateDetails: "[\n[\n  Version: V1\n  Subject: OU=vmng_scale_ind, O=vmng_scale_ind, L=Bangalore, ST=Karnataka, C=IN, CN=vmng_scale_ind\n  Signature Algorithm: SHA256withRSA, OID = 1.2.840.113549.1.1.11\n\n  Key:  Sun RSA public key, 2048 bits\n  params: null\n  modulus: 24155543081010666491409394023380679253122680778601796383855494877290567036851294649532947903502512148949137747965411702956028620652998659095890130433247893949793766734241156014006484814662929610619573362657269970917386638647513113592323387261234621120613330625805248590714250058390333902187045076542030949923447605099243054675098588656816214473046976503799476814975137571732365286577103115602090974885327456287119700641930853545850019624136710419292648007969922415482923961055123266248393248076331450596008061127664094168201756085094764933763470164620652670237031095864930773557728603890998822635409093442573492956227\n  public exponent: 65537\n  Validity: [From: Sat Jun 03 15:03:50 UTC 2023,\n               To: Wed May 31 15:03:50 UTC 2034]\n  Issuer: EMAILADDRESS=santosh@viptela.com, O=vIPtela Inc, OU=vIPtela Test, L=San Jose, ST=California, C=US\n  SerialNumber: [    9c0de6f5 b0f31da6]\n\n]\n  Algorithm: [SHA256withRSA]\n  Signature:\n0000: 8E BD 44 6A 3A 6E 72 66   90 9B 01 DB F8 9E 77 D4  ..Dj:nrf......w.\n0010: DC 62 BC BC E1 57 19 6E   DC 5F 81 92 5A 38 24 BC  .b...W.n._..Z8$.\n0020: 68 A3 FD 82 22 68 EE 13   75 F9 34 D7 9D E6 A8 F8  h...\"h..u.4.....\n0030: BF 5C E0 8C F3 F1 49 2C   8E 19 C6 D7 AD E8 A8 75  .\\....I,.......u\n0040: 73 92 46 C1 A9 6F AF 88   EC 09 4F 65 16 E8 4B 9D  s.F..o....Oe..K.\n0050: 98 E9 98 A0 C2 7C 3C 1C   80 42 20 D3 24 20 8D B0  ......<..B .$ ..\n0060: 35 56 3E 81 82 73 14 F8   39 F1 42 68 6D D7 9D C7  5V>..s..9.Bhm...\n0070: BA 8D 4B E3 F2 BB A5 B7   6A F1 97 38 65 C4 44 4C  ..K.....j..8e.DL\n0080: C0 AB 31 39 58 FF 9C B1   5F F9 4E 8A 3A D8 4C 00  ..19X..._.N.:.L.\n0090: 57 77 13 DE F1 25 A5 D1   37 90 04 87 CC D1 49 7D  Ww...%..7.....I.\n00A0: BB BD C5 CB 6B 40 77 85   8F 13 B0 78 E8 EC 6C CB  ....k@w....x..l.\n00B0: A2 90 E4 B2 45 A6 09 AA   CD 07 E2 04 1C 3F 65 72  ....E........?er\n00C0: 6F D8 BE BA 71 EF 3C 62   99 AE E8 45 2E C1 9D 23  o...q.<b...E...#\n00D0: 13 6A FC 53 EF E5 C3 31   68 D1 F7 5B FA 9E 82 B5  .j.S...1h..[....\n00E0: 18 95 C7 5E 08 7E B3 47   15 D1 25 24 F1 CB 57 FB  ...^...G..%$..W.\n00F0: D7 5E 13 30 FD 37 F5 98   69 85 DD 0E EA 03 55 AC  .^.0.7..i.....U.\n\n]"
+                  $$ref: '#/components/examples/ComViptelaVmanageServerSettingapiResponseExamplePutwebservercertificateresponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Settings-write
+    post:
+      tags:
+      - Certificate Management - vManage
+      summary: Generate Certificate Signing Request
+      description: Generate Certificate Signing Request
+      operationId: getCSR_CertificateManagementVmanage_4404
+      requestBody:
+        description: Web Server Certificate configuration
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Web Server Certificate Request:
+                description: Web Server Certificate Request
+                value:
+                  company_name: abc
+                  org_unit: abc
+                  org: abc
+                  location: abc
+                  state: abc
+                  country: US
+                  email: abc@cisco.com
+                  subject_alternative_name_dns:
+                  - www.example.com
+                  subject_alternative_name_uri:
+                  - ''
+                  rsa_key_length: '2048'
+                $$ref: '#/components/examples/ComViptelaVmanageServerSettingapiRequestExamplePostwebservercertificaterequest'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                Web Server Certificate Response:
+                  description: Web Server Certificate Response
+                  value:
+                    csrDetails: '-----BEGIN CERTIFICATE REQUEST-----
+
+                      MIICtDCCAZwCAQAwUzEMMAoGA1UEAwwDYWJjMQswCQYDVQQGEwJJTjEMMAoGA1UE
+
+                      CAwDYWJjMQwwCgYDVQQHDANhYmMxDDAKBgNVBAoMA2FiYzEMMAoGA1UECwwDYWJj
+
+                      MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArnPatRDaE3Q2g5Y/JLRY
+
+                      WEdFPjgqMD1jBPiEYatPpKnn0Xd+bCidc5+OC+hboX8R8KZr55eii+3Li3PVXKKP
+
+                      dyOoJS+rn9NLE3fP+c9QFXBoALOdVG+GrxEHBHDvO92hHv9sRaI77WmHSw7kDf8J
+
+                      KmvuumaRbLHB1LukYkhx0wDy6HyKBvXwyIrdDdVH4izYQn6FqZcohYCBd4COLr3E
+
+                      DTaEjT7mJFS/mdNtowq6IPgnRV0eD1+Eusok1q2r3MKR+mvCdS9N2ps+ukss5Ryc
+
+                      YU7Wanq4HNpsWiC6neRvdFmPZNnipTDJhCqItsJEs5e4MkQTuLEA7aECJlxvzo4K
+
+                      HwIDAQABoBwwGgYJKoZIhvcNAQkOMQ0wCzAJBgNVHREEAjAAMA0GCSqGSIb3DQEB
+
+                      BQUAA4IBAQCtzk9qwB3KutcMdSeKGnJIg2emvvpcl2Myzk4xCk1Z2R/8VeC8R9Su
+
+                      JTBC62ptohWglAiePUMA284ieDnQYdg9BDQCJyK9Mi9dEcaa5u50XZkk9Xon5w9U
+
+                      CuwahOEDUm23RBCuXWfzZJA5Jj4oAu24Y0zIQFeUoUqsDO5GoBgrRPU3MxtCKu+J
+
+                      5xlYgvfLVDUAYvpQzGkiufbbJBSj49yidchQX9H/ub+qzLSl9sXv6eGiH7BRGVTD
+
+                      g8Yhk3ik0n8GZrtXep89utFRwL+oWwe2QpJR0WffL0eyyxegjkWkMhHkoCdHKVay
+
+                      vCiN1B07UUqgyR0Yya30Y4QL4Li6w/IS
+
+                      -----END CERTIFICATE REQUEST-----'
+                  $$ref: '#/components/examples/ComViptelaVmanageServerSettingapiResponseExamplePostwebservercertificateresponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        description: Error code associated with the error event
+                      details:
+                        type: string
+                        description: Error message details
+                      message:
+                        type: string
+                        description: Error message title
+                      type:
+                        type: string
+                        description: Error message type
+                    $$ref: '#/components/schemas/InlineResponse400Error'
+                $$ref: '#/components/schemas/InlineResponse400'
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Settings-write
+  /setting/configuration/webserver/certificate-signing-request:
+    get:
+      tags:
+      - Certificate Management - vManage
+      summary: Obtain Certificate Signing Request
+      description: Retrieve Certificate Signing Request Generated
+      operationId: getGeneratedAsync
+      parameters:
+      - name: withParam
+        in: query
+        description: Flag to extract CSR parameters
+        schema:
+          type: boolean
+        examples:
+          WithParam:
+            description: WithParam
+            value: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                Web Server Certificate Response:
+                  description: Web Server Certificate Response
+                  value:
+                    csrDetails: '-----BEGIN CERTIFICATE REQUEST-----
+
+                      MIICtDCCAZwCAQAwUzEMMAoGA1UEAwwDYWJjMQswCQYDVQQGEwJJTjEMMAoGA1UE
+
+                      CAwDYWJjMQwwCgYDVQQHDANhYmMxDDAKBgNVBAoMA2FiYzEMMAoGA1UECwwDYWJj
+
+                      MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArnPatRDaE3Q2g5Y/JLRY
+
+                      WEdFPjgqMD1jBPiEYatPpKnn0Xd+bCidc5+OC+hboX8R8KZr55eii+3Li3PVXKKP
+
+                      dyOoJS+rn9NLE3fP+c9QFXBoALOdVG+GrxEHBHDvO92hHv9sRaI77WmHSw7kDf8J
+
+                      KmvuumaRbLHB1LukYkhx0wDy6HyKBvXwyIrdDdVH4izYQn6FqZcohYCBd4COLr3E
+
+                      DTaEjT7mJFS/mdNtowq6IPgnRV0eD1+Eusok1q2r3MKR+mvCdS9N2ps+ukss5Ryc
+
+                      YU7Wanq4HNpsWiC6neRvdFmPZNnipTDJhCqItsJEs5e4MkQTuLEA7aECJlxvzo4K
+
+                      HwIDAQABoBwwGgYJKoZIhvcNAQkOMQ0wCzAJBgNVHREEAjAAMA0GCSqGSIb3DQEB
+
+                      BQUAA4IBAQCtzk9qwB3KutcMdSeKGnJIg2emvvpcl2Myzk4xCk1Z2R/8VeC8R9Su
+
+                      JTBC62ptohWglAiePUMA284ieDnQYdg9BDQCJyK9Mi9dEcaa5u50XZkk9Xon5w9U
+
+                      CuwahOEDUm23RBCuXWfzZJA5Jj4oAu24Y0zIQFeUoUqsDO5GoBgrRPU3MxtCKu+J
+
+                      5xlYgvfLVDUAYvpQzGkiufbbJBSj49yidchQX9H/ub+qzLSl9sXv6eGiH7BRGVTD
+
+                      g8Yhk3ik0n8GZrtXep89utFRwL+oWwe2QpJR0WffL0eyyxegjkWkMhHkoCdHKVay
+
+                      vCiN1B07UUqgyR0Yya30Y4QL4Li6w/IS
+
+                      -----END CERTIFICATE REQUEST-----'
+                  $$ref: '#/components/examples/ComViptelaVmanageServerSettingapiResponseExamplePostwebservercertificateresponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        description: Error code associated with the error event
+                      details:
+                        type: string
+                        description: Error message details
+                      message:
+                        type: string
+                        description: Error message title
+                      type:
+                        type: string
+                        description: Error message type
+                    $$ref: '#/components/schemas/InlineResponse400Error'
+                $$ref: '#/components/schemas/InlineResponse400'
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Settings-write
+  /setting/configuration/webserver/certificate-signing-request/async:
+    post:
+      tags:
+      - Certificate Management - vManage
+      summary: Generate Certificate Signing Request Async
+      description: Generate Certificate Signing Request Async
+      operationId: generateCSRASync
+      requestBody:
+        description: Generate CSR with provided CSR parameters
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Web Server Certificate Request:
+                description: Web Server Certificate Request
+                value:
+                  company_name: abc
+                  org_unit: abc
+                  org: abc
+                  location: abc
+                  state: abc
+                  country: US
+                  email: abc@cisco.com
+                  subject_alternative_name_dns:
+                  - www.example.com
+                  subject_alternative_name_uri:
+                  - ''
+                  rsa_key_length: '2048'
+                $$ref: '#/components/examples/ComViptelaVmanageServerSettingapiRequestExamplePostwebservercertificaterequest'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                Web Server Certificate Response:
+                  description: Web Server Certificate Response
+                  value:
+                    id: 8f8c9b0e-4d3a-4b2c-8f1e-5d6f7a8b9c0d
+                  $$ref: '#/components/examples/ComViptelaVmanageServerSettingapiResponseExamplePostwebservercertificateresponseasync'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        description: Error code associated with the error event
+                      details:
+                        type: string
+                        description: Error message details
+                      message:
+                        type: string
+                        description: Error message title
+                      type:
+                        type: string
+                        description: Error message type
+                    $$ref: '#/components/schemas/InlineResponse400Error'
+                $$ref: '#/components/schemas/InlineResponse400'
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Settings-write
+  /setting/configuration/webserver/certificate/async:
+    post:
+      tags:
+      - Certificate Management - vManage
+      summary: Import a signed web server certificate asyncronously
+      description: Import a signed web server certificate and install certificate asynchronously
+      operationId: importCertificateAsync
+      requestBody:
+        description: Import Web Server Certificate configuration
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Web Server Certificate Request:
+                description: Web Server Certificate Request
+                value: '-----BEGIN CERTIFICATE-----
+
+                  MIIDhDCCAmwCCQCcDeb1sPMdpjANBgkqhkiG9w0BAQsFADCBhjELMAkGA1UEBhMC
+
+                  VVMxEzARBgNVBAgTCkNhbGlmb3JuaWExETAPBgNVBAcTCFNhbiBKb3NlMRUwEwYD
+
+                  VQQLEwx2SVB0ZWxhIFRlc3QxFDASBgNVBAoTC3ZJUHRlbGEgSW5jMSIwIAYJKoZI
+
+                  hvcNAQkBFhNzYW50b3NoQHZpcHRlbGEuY29tMB4XDTIzMDYwMzE1MDM1MFoXDTM0
+
+                  MDUzMTE1MDM1MFowgYAxFzAVBgNVBAMMDnZtbmdfc2NhbGVfaW5kMQswCQYDVQQG
+
+                  EwJJTjESMBAGA1UECAwJS2FybmF0YWthMRIwEAYDVQQHDAlCYW5nYWxvcmUxFzAV
+
+                  BgNVBAoMDnZtbmdfc2NhbGVfaW5kMRcwFQYDVQQLDA52bW5nX3NjYWxlX2luZDCC
+
+                  ASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAL9ZSFCz5JKuUUobW6sjela8
+
+                  XJa3BwJpza8GjALlYiseVW93vAI3cgn90pO/eXETG5e8EEj8/N3HTqIgbpcooHTf
+
+                  UuzfwjIXR5FWlbaDLsJEAXVDFiv3MDtGQ/RtFrrw49OBtlhAG3AmEkaMZ63dOksQ
+
+                  v5y9wu0XfDoLmkg0q47NlJ682j2KjcsLud68Vn6y7OWmzk8B2ErV3SP4dwpaDzic
+
+                  0BfOdn5oSXX+wGKpbJ0n5hCuwDreyDpsO5jJ5UYr1eUpvH4Sj2llli/n+7BOjLCT
+
+                  3Jy9RXotiajSxx1k0sNYuajcWw5qxzGAJes9R4fPqBSvKq/G3Lyc4tinwBOWLEMC
+
+                  AwEAATANBgkqhkiG9w0BAQsFAAOCAQEAjr1EajpucmaQmwHb+J531NxivLzhVxlu
+
+                  3F+Bklo4JLxoo/2CImjuE3X5NNed5qj4v1zgjPPxSSyOGcbXreiodXOSRsGpb6+I
+
+                  7AlPZRboS52Y6Zigwnw8HIBCINMkII2wNVY+gYJzFPg58UJobdedx7qNS+Pyu6W3
+
+                  avGXOGXEREzAqzE5WP+csV/5Too62EwAV3cT3vElpdE3kASHzNFJfbu9xctrQHeF
+
+                  jxOweOjsbMuikOSyRaYJqs0H4gQcP2Vyb9i+unHvPGKZruhFLsGdIxNq/FPv5cMx
+
+                  aNH3W/qegrUYlcdeCH6zRxXRJSTxy1f7114TMP039Zhphd0O6gNVrA==
+
+                  -----END CERTIFICATE-----'
+                $$ref: '#/components/examples/ComViptelaVmanageServerSettingapiRequestExamplePutwebservercertificaterequest'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                Web Server Certificate Response:
+                  description: Web Server Certificate Response
+                  value:
+                    id: 8f8c9b0e-4d3a-4b2c-8f1e-5d6f7a8b9c0d
+                  $$ref: '#/components/examples/ComViptelaVmanageServerSettingapiResponseExamplePostwebservercertificateresponseasync'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Settings-write
+  /setting/configuration/webserver/certificate/getcertificate:
+    get:
+      tags:
+      - Certificate Management - vManage
+      summary: Get certificate for alias server
+      description: Get certificate for alias server
+      operationId: getCertificate
+      parameters:
+      - name: format
+        in: query
+        description: Format of certificate
+        schema:
+          type: string
+        examples:
+          PEM:
+            description: PEM
+            value: pem
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                Get Certificate Response:
+                  description: Get Certificate Response
+                  value:
+                    certificateDetails: "[\n[\n  Version: V3\n  Subject: OU=Cisco SD-WAN, O=Cisco Systems, L=Milpitas, ST=CA, C=US, CN=cisco.com\n  Signature Algorithm: SHA256withRSA, OID = 1.2.840.113549.1.1.11\n\n  Key:  Sun RSA public key, 2048 bits\n  params: null\n  modulus: 24415088922664979671266902719578448729590096123090308050409894246597037700826457468704530842642857210156719189053986929777579954182298529791833634799228627082206493387686427677536313110839238698248165839347164214877888890446621780244952412251221990595038507887048648188323999541630899482272693863504123774666852341902112064345683135475647894137312832136535446260038835674001216595312699436648811347882223942474007050591244735744391580907566490720180118367224323510481486966646378660911263056906871142696104218558212034525779150587185709393002825262227305564185461530730580791421717034120540280561841311367840663024203\n  public exponent: 65537\n  Validity: [From: Thu May 23 08:34:33 UTC 2024,\n               To: Sun May 23 08:34:33 UTC 2027]\n  Issuer: OU=Cisco SD-WAN, O=Cisco Systems, L=Milpitas, ST=CA, C=US, CN=cisco.com\n  SerialNumber: [    70e8ae87 ce97a5cd 24eb8b4a 1d79f4ca 3d6e6c6b]\n\nCertificate Extensions: 3\n[1]: ObjectId: 2.5.29.35 Criticality=false\nAuthorityKeyIdentifier [\nKeyIdentifier [\n0000: 15 4A 9F 50 00 1F A2 E7   E4 53 BB C4 96 B2 63 15  .J.P.....S....c.\n0010: 3C 74 CD ED                                        <t..\n]\n]\n\n[2]: ObjectId: 2.5.29.19 Criticality=true\nBasicConstraints:[\n  CA:true\n  PathLen:2147483647\n]\n\n[3]: ObjectId: 2.5.29.14 Criticality=false\nSubjectKeyIdentifier [\nKeyIdentifier [\n0000: 15 4A 9F 50 00 1F A2 E7   E4 53 BB C4 96 B2 63 15  .J.P.....S....c.\n0010: 3C 74 CD ED                                        <t..\n]\n]\n\n]\n  Algorithm: [SHA256withRSA]\n  Signature:\n0000: 85 12 9B E8 53 28 21 0F   30 5C 67 AB 53 B1 B8 45  ....S(!.0\\g.S..E\n0010: E4 60 EB 39 3A 17 71 08   FB 1F 75 67 42 77 1C F9  .`.9:.q...ugBw..\n0020: B7 F6 31 02 E7 9C E2 04   62 2D EC 8A CD F3 13 02  ..1.....b-......\n0030: 42 AE EB 3B 91 68 8F 6D   FA 1C 2A AF FB 0C 23 BE  B..;.h.m..*...#.\n0040: 56 0F 75 73 72 01 C0 02   8D 44 1B 5F 93 3A 46 5D  V.usr....D._.:F]\n0050: 7D BA 8B D9 64 1E 20 29   D1 FE 1F 79 53 B1 C9 4E  ....d. )...yS..N\n0060: 74 47 F2 4E E8 C9 C7 66   A9 AB 8D 27 4C C4 BF F8  tG.N...f...'L...\n0070: FE AF B2 0D 02 9B 97 33   4C 02 15 0D 5C 77 05 B4  .......3L...\\w..\n0080: D3 15 0E A6 AE 6D B3 B9   92 B4 C2 23 D1 14 A4 82  .....m.....#....\n0090: 73 38 C2 CA 99 B2 3C E5   3A 81 8F 4D BB 4F CC 50  s8....<.:..M.O.P\n00A0: F4 4D E5 C6 DB 3E 4C FE   67 E5 04 8B BB F9 44 6C  .M...>L.g.....Dl\n00B0: A3 BA CC AA 9B 2D D9 04   71 C6 C7 47 1A CF 8C 1A  .....-..q..G....\n00C0: AC C8 02 36 6F DD 16 6B   04 67 AE BF 03 05 C5 6C  ...6o..k.g.....l\n00D0: 43 DC 4C D0 F3 CD 83 1C   5C B3 17 95 EC FA 2E 80  C.L.....\\.......\n00E0: D2 FA 62 81 A7 67 AF AF   8A 35 B2 E0 8E C9 B3 1E  ..b..g...5......\n00F0: 58 12 7F B2 8F 54 83 56   42 A6 6B E1 39 B8 0A 49  X....T.VB.k.9..I\n\n]"
+                  $$ref: '#/components/examples/ComViptelaVmanageServerSettingapiResponseExampleGetwebservercertificategetcertificateresponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Settings-write
+  /setting/configuration/webserver/certificate/renew:
+    post:
+      tags:
+      - Certificate Management - vManage
+      summary: Renew webserver cert
+      description: Renew Web Server Certificate
+      operationId: renewWebServerCertificate
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                Status:
+                  description: Status
+                  value:
+                    success: 'true'
+                  $$ref: '#/components/examples/ComViptelaVmanageServerSettingapiResponseExamplePostrenewwebcertresponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

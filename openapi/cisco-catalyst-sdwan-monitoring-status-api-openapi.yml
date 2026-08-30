@@ -1,0 +1,221 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Monitoring - Status API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Monitoring - Status
+paths:
+  /statistics/settings/disable/devicelist/{indexName}:
+    get:
+      tags:
+      - Monitoring - Status
+      description: Get list of disabled devices for a statistics index
+      operationId: getDisabledDeviceList
+      parameters:
+      - name: indexName
+        in: path
+        description: Index name
+        required: true
+        schema:
+          pattern: ^[a-zA-Z-_]+$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Disabled device list:
+                  description: Disabled device list
+                  value:
+                  - 172.16.255.14
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Settings-read
+    put:
+      tags:
+      - Monitoring - Status
+      description: Update list of disabled devices for a statistics index
+      operationId: updateStatisticsDeviceList
+      parameters:
+      - name: indexName
+        in: path
+        description: Index name
+        required: true
+        schema:
+          pattern: ^[a-zA-Z-_]+$
+          type: string
+      requestBody:
+        description: Disabled device
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Disabled device:
+                description: Disabled device
+                value:
+                - 172.16.255.14
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Update status:
+                  description: Update status
+                  value:
+                    response: true
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Settings-write
+  /statistics/settings/status:
+    put:
+      tags:
+      - Monitoring - Status
+      description: Update statistics settings
+      operationId: updateStatisticsSettings
+      requestBody:
+        description: Stats setting
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Stats setting:
+                description: Stats setting
+                value:
+                - indexName: interfacestatistics
+                  status: enable
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Settings-write,dca
+    get:
+      tags:
+      - Monitoring - Status
+      description: Get statistics settings
+      operationId: getStatisticsSettings
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Statistics settings:
+                  description: Statistics settings
+                  value:
+                  - indexName: approutestatsstatistics
+                    status: enable
+                    displayName: Approute
+                  - indexName: interfacestatistics
+                    status: enable
+                    displayName: Interface
+                  - indexName: wlanclientinfostatistics
+                    status: enable
+                    displayName: Wlan Client Info
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Settings-read,dca
+  /statistics/settings/status/device:
+    get:
+      tags:
+      - Monitoring - Status
+      description: Get list of enabled device for statistics index
+      operationId: getEnabledIndexForDevice
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Enabled device:
+                  description: Enabled device
+                  value:
+                  - interfacestatistics
+                  - eioltestatistics
+                  - sulstatistics
+                  - qosstatistics
+                  - devicesystemstatusstatistics
+                  - bridgemacstatistics
+                  - dpistatistics
+                  - approutestatsstatistics
+                  - wlanclientinfostatistics
+                  - flowlogstatistics
+                  - urlf
+                  - fwall
+                  - vnfstatistics
+                  - umbrella
+                  - apphostingstatistics
+                  - utddaqioxstatistics
+                  - ipsalert
+                  - aggregatedappsdpistatistics
+                  - bridgeinterfacestatistics
+                  - artstatistics
+                  - trackerstatistics
+                  - cloudxstatistics
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Settings-read

@@ -1,0 +1,1510 @@
+openapi: 3.2.0
+info:
+  title: SD-WAN Services Multicloud Interconnect - Accounts API
+  description: Includes API operations for managing SD-WAN services such as Cloud OnRamp for SaaS and MultiCloud
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Multicloud Interconnect - Accounts
+paths:
+  /multicloud/interconnect/accounts:
+    get:
+      tags:
+      - Multicloud Interconnect - Accounts
+      summary: Get Interconnect provider accounts.
+      description: API to retrieve Interconnect provider accounts.
+      operationId: getInterconnectAccounts
+      parameters:
+      - name: interconnect-type
+        in: query
+        description: Interconnect provider type
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  required:
+                  - attCredentials
+                  - edgeAccountId
+                  - edgeAccountName
+                  - edgeType
+                  - equinixCredentials
+                  type: object
+                  properties:
+                    attCredentials:
+                      required:
+                      - clientId
+                      - clientSecret
+                      type: object
+                      properties:
+                        clientId:
+                          type: string
+                          description: Client id of the AT&T Account.
+                          example: att-abcd-1234
+                        clientSecret:
+                          type: string
+                          description: Client secret of the AT&T Account.
+                          example: XXXX-XXXX-XXXX
+                      description: AT&T Credential information.
+                      $$ref: '#/components/schemas/InterconnectAccountAttCredentials'
+                    billingProviderType:
+                      type: string
+                    credType:
+                      type: string
+                    description:
+                      maxLength: 1024
+                      minLength: 1
+                      pattern: ^[a-zA-Z0-9_\-\s]+$
+                      type: string
+                    edgeAccountId:
+                      maxLength: 255
+                      minLength: 1
+                      type: string
+                    edgeAccountName:
+                      maxLength: 255
+                      minLength: 1
+                      pattern: ^[a-zA-Z0-9_\-\s]+$
+                      type: string
+                    edgeType:
+                      type: string
+                    equinixCredentials:
+                      required:
+                      - clientId
+                      - clientSecret
+                      type: object
+                      properties:
+                        clientId:
+                          type: string
+                          description: Client id of the Equinix Account.
+                          example: abcd-1234
+                        clientSecret:
+                          type: string
+                          description: Client secret of the Equinix Account.
+                          example: XXXX-XXXX-XXXX
+                      description: Equinix Credential information.
+                      $$ref: '#/components/schemas/InterconnectAccountEquinixCredentials'
+                    megaportCredentials:
+                      required:
+                      - password
+                      - username
+                      type: object
+                      properties:
+                        password:
+                          type: string
+                          description: Password of the Megaport Account.
+                          example: XXXXX
+                        username:
+                          type: string
+                          description: Username of the Megaport Account.
+                          example: cisco@megaport.com
+                      description: Megaport Credential Information
+                      $$ref: '#/components/schemas/InterconnectAccountMegaportCredentials'
+                    megaportOauthCredentials:
+                      required:
+                      - clientId
+                      - clientSecret
+                      type: object
+                      properties:
+                        clientId:
+                          type: string
+                          description: Client id of the Megaport Account.
+                          example: abcd-1234
+                        clientSecret:
+                          type: string
+                          description: Client secret of the Megaport Account.
+                          example: XXXXX-XXXXX-XXXXX
+                      description: Megaport Oauth Credential Information
+                      $$ref: '#/components/schemas/InterconnectAccountMegaportOauthCredentials'
+                    regionList:
+                      type: array
+                      properties:
+                        empty:
+                          type: boolean
+                      description: List of regions
+                      items:
+                        type: string
+                        description: List of regions
+                  $$ref: '#/components/schemas/InterconnectAccount'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+      - Multicloud Interconnect - Accounts
+      summary: Add an Interconnect provider account to vManage.
+      description: API to associate an Interconnect provider account to vManage.
+      operationId: addInterconnectAccount
+      requestBody:
+        description: Request Payload for Multicloud Interconnect Accounts
+        content:
+          application/json:
+            schema:
+              required:
+              - attCredentials
+              - edgeAccountId
+              - edgeAccountName
+              - edgeType
+              - equinixCredentials
+              type: object
+              properties:
+                attCredentials:
+                  required:
+                  - clientId
+                  - clientSecret
+                  type: object
+                  properties:
+                    clientId:
+                      type: string
+                      description: Client id of the AT&T Account.
+                      example: att-abcd-1234
+                    clientSecret:
+                      type: string
+                      description: Client secret of the AT&T Account.
+                      example: XXXX-XXXX-XXXX
+                  description: AT&T Credential information.
+                  $$ref: '#/components/schemas/InterconnectAccountAttCredentials'
+                billingProviderType:
+                  type: string
+                credType:
+                  type: string
+                description:
+                  maxLength: 1024
+                  minLength: 1
+                  pattern: ^[a-zA-Z0-9_\-\s]+$
+                  type: string
+                edgeAccountId:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+                edgeAccountName:
+                  maxLength: 255
+                  minLength: 1
+                  pattern: ^[a-zA-Z0-9_\-\s]+$
+                  type: string
+                edgeType:
+                  type: string
+                equinixCredentials:
+                  required:
+                  - clientId
+                  - clientSecret
+                  type: object
+                  properties:
+                    clientId:
+                      type: string
+                      description: Client id of the Equinix Account.
+                      example: abcd-1234
+                    clientSecret:
+                      type: string
+                      description: Client secret of the Equinix Account.
+                      example: XXXX-XXXX-XXXX
+                  description: Equinix Credential information.
+                  $$ref: '#/components/schemas/InterconnectAccountEquinixCredentials'
+                megaportCredentials:
+                  required:
+                  - password
+                  - username
+                  type: object
+                  properties:
+                    password:
+                      type: string
+                      description: Password of the Megaport Account.
+                      example: XXXXX
+                    username:
+                      type: string
+                      description: Username of the Megaport Account.
+                      example: cisco@megaport.com
+                  description: Megaport Credential Information
+                  $$ref: '#/components/schemas/InterconnectAccountMegaportCredentials'
+                megaportOauthCredentials:
+                  required:
+                  - clientId
+                  - clientSecret
+                  type: object
+                  properties:
+                    clientId:
+                      type: string
+                      description: Client id of the Megaport Account.
+                      example: abcd-1234
+                    clientSecret:
+                      type: string
+                      description: Client secret of the Megaport Account.
+                      example: XXXXX-XXXXX-XXXXX
+                  description: Megaport Oauth Credential Information
+                  $$ref: '#/components/schemas/InterconnectAccountMegaportOauthCredentials'
+                regionList:
+                  type: array
+                  properties:
+                    empty:
+                      type: boolean
+                  description: List of regions
+                  items:
+                    type: string
+                    description: List of regions
+              $$ref: '#/components/schemas/InterconnectAccount'
+            examples:
+              Interconnect Megaport Account:
+                description: Interconnect Megaport Account
+                value:
+                  edgeType: MEGAPORT
+                  edgeAccountName: interconnect-mp-account-name
+                  edgeAccountId: ABCD-1234-CDEF
+                  description: This is my Megaport account
+                  megaportCredentials:
+                    username: cisco@megaport.com
+                    password: XXXXX
+              Interconnect Megaport OAuth Account:
+                description: Interconnect Megaport OAuth Account
+                value:
+                  edgeType: MEGAPORT
+                  edgeAccountName: interconnect-mp-account-name
+                  edgeAccountId: ABCD-1234-CDEF
+                  description: This is my Megaport account
+                  megaportOauthCredentials:
+                    clientId: abcd-1234
+                    clientSecret: XXXX-XXXX-XXXX
+              Interconnect Equinix Account:
+                description: Interconnect Equinix Account
+                value:
+                  edgeType: EQUINIX
+                  edgeAccountName: interconnect-eq-account-name
+                  edgeAccountId: ABCD-1234-CDEF
+                  description: This is my Equinix account
+                  equinixCredentials:
+                    clientId: abcd-1234
+                    clientSecret: XXXX-XXXX-XXXX
+        required: true
+      responses:
+        '200':
+          description: Interconnect Provider Account Information.
+          content:
+            application/json:
+              schema:
+                required:
+                - attCredentials
+                - edgeAccountId
+                - edgeAccountName
+                - edgeType
+                - equinixCredentials
+                type: object
+                properties:
+                  attCredentials:
+                    required:
+                    - clientId
+                    - clientSecret
+                    type: object
+                    properties:
+                      clientId:
+                        type: string
+                        description: Client id of the AT&T Account.
+                        example: att-abcd-1234
+                      clientSecret:
+                        type: string
+                        description: Client secret of the AT&T Account.
+                        example: XXXX-XXXX-XXXX
+                    description: AT&T Credential information.
+                    $$ref: '#/components/schemas/InterconnectAccountAttCredentials'
+                  billingProviderType:
+                    type: string
+                  credType:
+                    type: string
+                  description:
+                    maxLength: 1024
+                    minLength: 1
+                    pattern: ^[a-zA-Z0-9_\-\s]+$
+                    type: string
+                  edgeAccountId:
+                    maxLength: 255
+                    minLength: 1
+                    type: string
+                  edgeAccountName:
+                    maxLength: 255
+                    minLength: 1
+                    pattern: ^[a-zA-Z0-9_\-\s]+$
+                    type: string
+                  edgeType:
+                    type: string
+                  equinixCredentials:
+                    required:
+                    - clientId
+                    - clientSecret
+                    type: object
+                    properties:
+                      clientId:
+                        type: string
+                        description: Client id of the Equinix Account.
+                        example: abcd-1234
+                      clientSecret:
+                        type: string
+                        description: Client secret of the Equinix Account.
+                        example: XXXX-XXXX-XXXX
+                    description: Equinix Credential information.
+                    $$ref: '#/components/schemas/InterconnectAccountEquinixCredentials'
+                  megaportCredentials:
+                    required:
+                    - password
+                    - username
+                    type: object
+                    properties:
+                      password:
+                        type: string
+                        description: Password of the Megaport Account.
+                        example: XXXXX
+                      username:
+                        type: string
+                        description: Username of the Megaport Account.
+                        example: cisco@megaport.com
+                    description: Megaport Credential Information
+                    $$ref: '#/components/schemas/InterconnectAccountMegaportCredentials'
+                  megaportOauthCredentials:
+                    required:
+                    - clientId
+                    - clientSecret
+                    type: object
+                    properties:
+                      clientId:
+                        type: string
+                        description: Client id of the Megaport Account.
+                        example: abcd-1234
+                      clientSecret:
+                        type: string
+                        description: Client secret of the Megaport Account.
+                        example: XXXXX-XXXXX-XXXXX
+                    description: Megaport Oauth Credential Information
+                    $$ref: '#/components/schemas/InterconnectAccountMegaportOauthCredentials'
+                  regionList:
+                    type: array
+                    properties:
+                      empty:
+                        type: boolean
+                    description: List of regions
+                    items:
+                      type: string
+                      description: List of regions
+                $$ref: '#/components/schemas/InterconnectAccount'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/interconnect/accounts/{interconnect-account-id}:
+    get:
+      tags:
+      - Multicloud Interconnect - Accounts
+      summary: Get associated Interconnect provider account by id.
+      description: API to retrieve associated Interconnect provider account details by id.
+      operationId: getInterconnectAccount
+      parameters:
+      - name: interconnect-account-id
+        in: path
+        description: Interconnect provider account id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Interconnect Provider Account Information.
+          content:
+            application/json:
+              schema:
+                required:
+                - attCredentials
+                - edgeAccountId
+                - edgeAccountName
+                - edgeType
+                - equinixCredentials
+                type: object
+                properties:
+                  attCredentials:
+                    required:
+                    - clientId
+                    - clientSecret
+                    type: object
+                    properties:
+                      clientId:
+                        type: string
+                        description: Client id of the AT&T Account.
+                        example: att-abcd-1234
+                      clientSecret:
+                        type: string
+                        description: Client secret of the AT&T Account.
+                        example: XXXX-XXXX-XXXX
+                    description: AT&T Credential information.
+                    $$ref: '#/components/schemas/InterconnectAccountAttCredentials'
+                  billingProviderType:
+                    type: string
+                  credType:
+                    type: string
+                  description:
+                    maxLength: 1024
+                    minLength: 1
+                    pattern: ^[a-zA-Z0-9_\-\s]+$
+                    type: string
+                  edgeAccountId:
+                    maxLength: 255
+                    minLength: 1
+                    type: string
+                  edgeAccountName:
+                    maxLength: 255
+                    minLength: 1
+                    pattern: ^[a-zA-Z0-9_\-\s]+$
+                    type: string
+                  edgeType:
+                    type: string
+                  equinixCredentials:
+                    required:
+                    - clientId
+                    - clientSecret
+                    type: object
+                    properties:
+                      clientId:
+                        type: string
+                        description: Client id of the Equinix Account.
+                        example: abcd-1234
+                      clientSecret:
+                        type: string
+                        description: Client secret of the Equinix Account.
+                        example: XXXX-XXXX-XXXX
+                    description: Equinix Credential information.
+                    $$ref: '#/components/schemas/InterconnectAccountEquinixCredentials'
+                  megaportCredentials:
+                    required:
+                    - password
+                    - username
+                    type: object
+                    properties:
+                      password:
+                        type: string
+                        description: Password of the Megaport Account.
+                        example: XXXXX
+                      username:
+                        type: string
+                        description: Username of the Megaport Account.
+                        example: cisco@megaport.com
+                    description: Megaport Credential Information
+                    $$ref: '#/components/schemas/InterconnectAccountMegaportCredentials'
+                  megaportOauthCredentials:
+                    required:
+                    - clientId
+                    - clientSecret
+                    type: object
+                    properties:
+                      clientId:
+                        type: string
+                        description: Client id of the Megaport Account.
+                        example: abcd-1234
+                      clientSecret:
+                        type: string
+                        description: Client secret of the Megaport Account.
+                        example: XXXXX-XXXXX-XXXXX
+                    description: Megaport Oauth Credential Information
+                    $$ref: '#/components/schemas/InterconnectAccountMegaportOauthCredentials'
+                  regionList:
+                    type: array
+                    properties:
+                      empty:
+                        type: boolean
+                    description: List of regions
+                    items:
+                      type: string
+                      description: List of regions
+                $$ref: '#/components/schemas/InterconnectAccount'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+      - Multicloud Interconnect - Accounts
+      summary: Delete Interconnect provider account from vManage.
+      description: API to disassociate Interconnect provider account from vManage.
+      operationId: deleteInterconnectAccount
+      parameters:
+      - name: interconnect-account-id
+        in: path
+        description: Interconnect provider account id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Accepted
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    put:
+      tags:
+      - Multicloud Interconnect - Accounts
+      summary: Edit Interconnect provider account details.
+      description: API to edit associated Interconnect provider account name and description.
+      operationId: updateInterconnectAccount
+      parameters:
+      - name: interconnect-account-id
+        in: path
+        description: Interconnect provider account id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Request Payload for Multicloud Interconnect Accounts
+        content:
+          application/json:
+            schema:
+              required:
+              - attCredentials
+              - edgeAccountId
+              - edgeAccountName
+              - edgeType
+              - equinixCredentials
+              type: object
+              properties:
+                attCredentials:
+                  required:
+                  - clientId
+                  - clientSecret
+                  type: object
+                  properties:
+                    clientId:
+                      type: string
+                      description: Client id of the AT&T Account.
+                      example: att-abcd-1234
+                    clientSecret:
+                      type: string
+                      description: Client secret of the AT&T Account.
+                      example: XXXX-XXXX-XXXX
+                  description: AT&T Credential information.
+                  $$ref: '#/components/schemas/InterconnectAccountAttCredentials'
+                billingProviderType:
+                  type: string
+                credType:
+                  type: string
+                description:
+                  maxLength: 1024
+                  minLength: 1
+                  pattern: ^[a-zA-Z0-9_\-\s]+$
+                  type: string
+                edgeAccountId:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+                edgeAccountName:
+                  maxLength: 255
+                  minLength: 1
+                  pattern: ^[a-zA-Z0-9_\-\s]+$
+                  type: string
+                edgeType:
+                  type: string
+                equinixCredentials:
+                  required:
+                  - clientId
+                  - clientSecret
+                  type: object
+                  properties:
+                    clientId:
+                      type: string
+                      description: Client id of the Equinix Account.
+                      example: abcd-1234
+                    clientSecret:
+                      type: string
+                      description: Client secret of the Equinix Account.
+                      example: XXXX-XXXX-XXXX
+                  description: Equinix Credential information.
+                  $$ref: '#/components/schemas/InterconnectAccountEquinixCredentials'
+                megaportCredentials:
+                  required:
+                  - password
+                  - username
+                  type: object
+                  properties:
+                    password:
+                      type: string
+                      description: Password of the Megaport Account.
+                      example: XXXXX
+                    username:
+                      type: string
+                      description: Username of the Megaport Account.
+                      example: cisco@megaport.com
+                  description: Megaport Credential Information
+                  $$ref: '#/components/schemas/InterconnectAccountMegaportCredentials'
+                megaportOauthCredentials:
+                  required:
+                  - clientId
+                  - clientSecret
+                  type: object
+                  properties:
+                    clientId:
+                      type: string
+                      description: Client id of the Megaport Account.
+                      example: abcd-1234
+                    clientSecret:
+                      type: string
+                      description: Client secret of the Megaport Account.
+                      example: XXXXX-XXXXX-XXXXX
+                  description: Megaport Oauth Credential Information
+                  $$ref: '#/components/schemas/InterconnectAccountMegaportOauthCredentials'
+                regionList:
+                  type: array
+                  properties:
+                    empty:
+                      type: boolean
+                  description: List of regions
+                  items:
+                    type: string
+                    description: List of regions
+              $$ref: '#/components/schemas/InterconnectAccount'
+            examples:
+              Interconnect Megaport Account:
+                description: Interconnect Megaport Account
+                value:
+                  edgeType: MEGAPORT
+                  edgeAccountName: interconnect-mp-account-name
+                  edgeAccountId: ABCD-1234-CDEF
+                  description: This is my Megaport account
+                  megaportCredentials:
+                    username: cisco@megaport.com
+                    password: XXXXX
+              Interconnect Megaport OAuth Account:
+                description: Interconnect Megaport OAuth Account
+                value:
+                  edgeType: MEGAPORT
+                  edgeAccountName: interconnect-mp-account-name
+                  edgeAccountId: ABCD-1234-CDEF
+                  description: This is my Megaport account
+                  megaportOauthCredentials:
+                    clientId: abcd-1234
+                    clientSecret: XXXX-XXXX-XXXX
+              Interconnect Equinix Account:
+                description: Interconnect Equinix Account
+                value:
+                  edgeType: EQUINIX
+                  edgeAccountName: interconnect-eq-account-name
+                  edgeAccountId: ABCD-1234-CDEF
+                  description: This is my Equinix account
+                  equinixCredentials:
+                    clientId: abcd-1234
+                    clientSecret: XXXX-XXXX-XXXX
+        required: true
+      responses:
+        '200':
+          description: Accepted
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/interconnect/accounts/{interconnect-account-id}/credentials:
+    put:
+      tags:
+      - Multicloud Interconnect - Accounts
+      summary: Edit associated Interconnect provider account credentials.
+      description: API to edit associated Interconnect provider account credentials.
+      operationId: updateInterconnectAccountCredentials
+      parameters:
+      - name: interconnect-account-id
+        in: path
+        description: Interconnect provider account id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Request Payload for Multicloud Interconnect Accounts
+        content:
+          application/json:
+            schema:
+              required:
+              - attCredentials
+              - edgeAccountId
+              - edgeAccountName
+              - edgeType
+              - equinixCredentials
+              type: object
+              properties:
+                attCredentials:
+                  required:
+                  - clientId
+                  - clientSecret
+                  type: object
+                  properties:
+                    clientId:
+                      type: string
+                      description: Client id of the AT&T Account.
+                      example: att-abcd-1234
+                    clientSecret:
+                      type: string
+                      description: Client secret of the AT&T Account.
+                      example: XXXX-XXXX-XXXX
+                  description: AT&T Credential information.
+                  $$ref: '#/components/schemas/InterconnectAccountAttCredentials'
+                billingProviderType:
+                  type: string
+                credType:
+                  type: string
+                description:
+                  maxLength: 1024
+                  minLength: 1
+                  pattern: ^[a-zA-Z0-9_\-\s]+$
+                  type: string
+                edgeAccountId:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+                edgeAccountName:
+                  maxLength: 255
+                  minLength: 1
+                  pattern: ^[a-zA-Z0-9_\-\s]+$
+                  type: string
+                edgeType:
+                  type: string
+                equinixCredentials:
+                  required:
+                  - clientId
+                  - clientSecret
+                  type: object
+                  properties:
+                    clientId:
+                      type: string
+                      description: Client id of the Equinix Account.
+                      example: abcd-1234
+                    clientSecret:
+                      type: string
+                      description: Client secret of the Equinix Account.
+                      example: XXXX-XXXX-XXXX
+                  description: Equinix Credential information.
+                  $$ref: '#/components/schemas/InterconnectAccountEquinixCredentials'
+                megaportCredentials:
+                  required:
+                  - password
+                  - username
+                  type: object
+                  properties:
+                    password:
+                      type: string
+                      description: Password of the Megaport Account.
+                      example: XXXXX
+                    username:
+                      type: string
+                      description: Username of the Megaport Account.
+                      example: cisco@megaport.com
+                  description: Megaport Credential Information
+                  $$ref: '#/components/schemas/InterconnectAccountMegaportCredentials'
+                megaportOauthCredentials:
+                  required:
+                  - clientId
+                  - clientSecret
+                  type: object
+                  properties:
+                    clientId:
+                      type: string
+                      description: Client id of the Megaport Account.
+                      example: abcd-1234
+                    clientSecret:
+                      type: string
+                      description: Client secret of the Megaport Account.
+                      example: XXXXX-XXXXX-XXXXX
+                  description: Megaport Oauth Credential Information
+                  $$ref: '#/components/schemas/InterconnectAccountMegaportOauthCredentials'
+                regionList:
+                  type: array
+                  properties:
+                    empty:
+                      type: boolean
+                  description: List of regions
+                  items:
+                    type: string
+                    description: List of regions
+              $$ref: '#/components/schemas/InterconnectAccount'
+            examples:
+              Interconnect Megaport Account:
+                description: Interconnect Megaport Account
+                value:
+                  edgeType: MEGAPORT
+                  edgeAccountName: interconnect-mp-account-name
+                  edgeAccountId: ABCD-1234-CDEF
+                  description: This is my Megaport account
+                  megaportCredentials:
+                    username: cisco@megaport.com
+                    password: XXXXX
+              Interconnect Megaport OAuth Account:
+                description: Interconnect Megaport OAuth Account
+                value:
+                  edgeType: MEGAPORT
+                  edgeAccountName: interconnect-mp-account-name
+                  edgeAccountId: ABCD-1234-CDEF
+                  description: This is my Megaport account
+                  megaportOauthCredentials:
+                    clientId: abcd-1234
+                    clientSecret: XXXX-XXXX-XXXX
+              Interconnect Equinix Account:
+                description: Interconnect Equinix Account
+                value:
+                  edgeType: EQUINIX
+                  edgeAccountName: interconnect-eq-account-name
+                  edgeAccountId: ABCD-1234-CDEF
+                  description: This is my Equinix account
+                  equinixCredentials:
+                    clientId: abcd-1234
+                    clientSecret: XXXX-XXXX-XXXX
+        required: true
+      responses:
+        '200':
+          description: Interconnect Provider Account Information.
+          content:
+            application/json:
+              schema:
+                required:
+                - attCredentials
+                - edgeAccountId
+                - edgeAccountName
+                - edgeType
+                - equinixCredentials
+                type: object
+                properties:
+                  attCredentials:
+                    required:
+                    - clientId
+                    - clientSecret
+                    type: object
+                    properties:
+                      clientId:
+                        type: string
+                        description: Client id of the AT&T Account.
+                        example: att-abcd-1234
+                      clientSecret:
+                        type: string
+                        description: Client secret of the AT&T Account.
+                        example: XXXX-XXXX-XXXX
+                    description: AT&T Credential information.
+                    $$ref: '#/components/schemas/InterconnectAccountAttCredentials'
+                  billingProviderType:
+                    type: string
+                  credType:
+                    type: string
+                  description:
+                    maxLength: 1024
+                    minLength: 1
+                    pattern: ^[a-zA-Z0-9_\-\s]+$
+                    type: string
+                  edgeAccountId:
+                    maxLength: 255
+                    minLength: 1
+                    type: string
+                  edgeAccountName:
+                    maxLength: 255
+                    minLength: 1
+                    pattern: ^[a-zA-Z0-9_\-\s]+$
+                    type: string
+                  edgeType:
+                    type: string
+                  equinixCredentials:
+                    required:
+                    - clientId
+                    - clientSecret
+                    type: object
+                    properties:
+                      clientId:
+                        type: string
+                        description: Client id of the Equinix Account.
+                        example: abcd-1234
+                      clientSecret:
+                        type: string
+                        description: Client secret of the Equinix Account.
+                        example: XXXX-XXXX-XXXX
+                    description: Equinix Credential information.
+                    $$ref: '#/components/schemas/InterconnectAccountEquinixCredentials'
+                  megaportCredentials:
+                    required:
+                    - password
+                    - username
+                    type: object
+                    properties:
+                      password:
+                        type: string
+                        description: Password of the Megaport Account.
+                        example: XXXXX
+                      username:
+                        type: string
+                        description: Username of the Megaport Account.
+                        example: cisco@megaport.com
+                    description: Megaport Credential Information
+                    $$ref: '#/components/schemas/InterconnectAccountMegaportCredentials'
+                  megaportOauthCredentials:
+                    required:
+                    - clientId
+                    - clientSecret
+                    type: object
+                    properties:
+                      clientId:
+                        type: string
+                        description: Client id of the Megaport Account.
+                        example: abcd-1234
+                      clientSecret:
+                        type: string
+                        description: Client secret of the Megaport Account.
+                        example: XXXXX-XXXXX-XXXXX
+                    description: Megaport Oauth Credential Information
+                    $$ref: '#/components/schemas/InterconnectAccountMegaportOauthCredentials'
+                  regionList:
+                    type: array
+                    properties:
+                      empty:
+                        type: boolean
+                    description: List of regions
+                    items:
+                      type: string
+                      description: List of regions
+                $$ref: '#/components/schemas/InterconnectAccount'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/interconnect/{interconnect-type}/accounts/{interconnect-account-id}/billing-accounts:
+    get:
+      tags:
+      - Multicloud Interconnect - Accounts
+      summary: Get Interconnect provider billing accounts.
+      description: API to retrieve billing accounts for an Interconnect provider type and account.
+      operationId: getInterconnectBillingAccounts
+      parameters:
+      - name: interconnect-type
+        in: path
+        description: Interconnect provider type
+        required: true
+        schema:
+          type: string
+      - name: interconnect-account-id
+        in: path
+        description: Interconnect provider account id
+        required: true
+        schema:
+          type: string
+      - name: region
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  edgeBillingAccountInfoList:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        edgeBillingAccountId:
+                          type: string
+                          description: Interconnect billing account Id
+                          example: '12345'
+                        edgeBillingAccountName:
+                          type: string
+                          description: Interconnect billing account name
+                          example: Cisco IC
+                      description: Interconnect billing account Information
+                      $$ref: '#/components/schemas/InterconnectBillingAccountInfo'
+                $$ref: '#/components/schemas/InlineResponse2001'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/interconnect/{interconnect-type}/accounts/{interconnect-account-id}/locations:
+    put:
+      tags:
+      - Multicloud Interconnect - Accounts
+      summary: Update Interconnect provider available regions.
+      description: API to retrieve and update the available regions for an Interconnect provider and account.
+      operationId: updateInterconnectLocationInfo
+      parameters:
+      - name: interconnect-type
+        in: path
+        description: Interconnect provider type
+        required: true
+        schema:
+          type: string
+      - name: interconnect-account-id
+        in: path
+        description: Interconnect account id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Interconnect Provider Location List.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  edgeLocationInfoList:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        attLocationInfo:
+                          type: object
+                          properties:
+                            attNEInfo:
+                              type: object
+                              properties:
+                                imageNameList:
+                                  type: array
+                                  description: Image name list
+                                  example:
+                                  - oldest
+                                  - current
+                                  - newest
+                                  items:
+                                    type: string
+                                    description: Image name
+                                    example: small
+                                productSizeList:
+                                  type: array
+                                  description: Product size list
+                                  example:
+                                  - small
+                                  - medium
+                                  - large
+                                  items:
+                                    type: string
+                                    description: product size
+                                    example: small
+                              $$ref: '#/components/schemas/InterconnectLocationInfoMegaportMpMVEInfo'
+                            metroCode:
+                              type: string
+                              example: DT
+                            metroName:
+                              type: string
+                            networkRegion:
+                              type: string
+                              example: AMER
+                            siteCode:
+                              type: string
+                            status:
+                              type: string
+                          $$ref: '#/components/schemas/InterconnectLocationInfoAtt'
+                        edgeType:
+                          type: string
+                          enum:
+                          - MEGAPORT
+                          - EQUINIX
+                        eqLocationInfo:
+                          type: object
+                          properties:
+                            eqBillingAccountInfoList:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  edgeBillingAccountId:
+                                    type: string
+                                    description: Interconnect billing account Id
+                                    example: '12345'
+                                  edgeBillingAccountName:
+                                    type: string
+                                    description: Interconnect billing account name
+                                    example: Cisco IC
+                                description: Interconnect billing account Information
+                                $$ref: '#/components/schemas/InterconnectBillingAccountInfo'
+                            eqNEInfo:
+                              type: object
+                              properties:
+                                imageNameList:
+                                  type: array
+                                  description: Image name list
+                                  example:
+                                  - oldest
+                                  - current
+                                  - newest
+                                  items:
+                                    type: string
+                                    description: Image name
+                                    example: small
+                                productSizeList:
+                                  type: array
+                                  description: Product size list
+                                  example:
+                                  - small
+                                  - medium
+                                  - large
+                                  items:
+                                    type: string
+                                    description: product size
+                                    example: small
+                              $$ref: '#/components/schemas/InterconnectLocationInfoMegaportMpMVEInfo'
+                            metroCode:
+                              type: string
+                              example: DT
+                            metroName:
+                              type: string
+                            networkRegion:
+                              type: string
+                              example: AMER
+                            siteCode:
+                              type: string
+                            status:
+                              type: string
+                          $$ref: '#/components/schemas/InterconnectLocationInfoEquinix'
+                        locationId:
+                          type: string
+                        locationName:
+                          type: string
+                        mpLocationInfo:
+                          type: object
+                          properties:
+                            address:
+                              type: string
+                              example: 24700 Northwestern Highway, Southfield Michigan, Detroit, MI -24700, USA
+                            country:
+                              type: string
+                              example: USA
+                            liveDate:
+                              type: string
+                              example: '1589292000000'
+                            market:
+                              type: string
+                              example: US
+                            metroName:
+                              type: string
+                              example: Detroit
+                            mpMVEInfo:
+                              type: object
+                              properties:
+                                imageNameList:
+                                  type: array
+                                  description: Image name list
+                                  example:
+                                  - oldest
+                                  - current
+                                  - newest
+                                  items:
+                                    type: string
+                                    description: Image name
+                                    example: small
+                                productSizeList:
+                                  type: array
+                                  description: Product size list
+                                  example:
+                                  - small
+                                  - medium
+                                  - large
+                                  items:
+                                    type: string
+                                    description: product size
+                                    example: small
+                              $$ref: '#/components/schemas/InterconnectLocationInfoMegaportMpMVEInfo'
+                            networkRegion:
+                              type: string
+                              example: MP1
+                            siteCode:
+                              type: string
+                              example: det-on1
+                            status:
+                              type: string
+                              example: Active
+                          $$ref: '#/components/schemas/InterconnectLocationInfoMegaport'
+                      $$ref: '#/components/schemas/InterconnectLocationsEdgeLocationInfoList'
+                $$ref: '#/components/schemas/InterconnectLocations'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    get:
+      tags:
+      - Multicloud Interconnect - Accounts
+      summary: Get Interconnect provider available regions.
+      description: API to retrieve list of available regions for an Interconnect provider and account.
+      operationId: getInterconnectLocationInfo
+      parameters:
+      - name: interconnect-type
+        in: path
+        description: Interconnect provider type
+        required: true
+        schema:
+          type: string
+      - name: interconnect-account-id
+        in: path
+        description: Interconnect account id
+        required: true
+        schema:
+          type: string
+      - name: region
+        in: query
+        description: Interconnect provider location
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Interconnect Provider Location List.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  edgeLocationInfoList:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        attLocationInfo:
+                          type: object
+                          properties:
+                            attNEInfo:
+                              type: object
+                              properties:
+                                imageNameList:
+                                  type: array
+                                  description: Image name list
+                                  example:
+                                  - oldest
+                                  - current
+                                  - newest
+                                  items:
+                                    type: string
+                                    description: Image name
+                                    example: small
+                                productSizeList:
+                                  type: array
+                                  description: Product size list
+                                  example:
+                                  - small
+                                  - medium
+                                  - large
+                                  items:
+                                    type: string
+                                    description: product size
+                                    example: small
+                              $$ref: '#/components/schemas/InterconnectLocationInfoMegaportMpMVEInfo'
+                            metroCode:
+                              type: string
+                              example: DT
+                            metroName:
+                              type: string
+                            networkRegion:
+                              type: string
+                              example: AMER
+                            siteCode:
+                              type: string
+                            status:
+                              type: string
+                          $$ref: '#/components/schemas/InterconnectLocationInfoAtt'
+                        edgeType:
+                          type: string
+                          enum:
+                          - MEGAPORT
+                          - EQUINIX
+                        eqLocationInfo:
+                          type: object
+                          properties:
+                            eqBillingAccountInfoList:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  edgeBillingAccountId:
+                                    type: string
+                                    description: Interconnect billing account Id
+                                    example: '12345'
+                                  edgeBillingAccountName:
+                                    type: string
+                                    description: Interconnect billing account name
+                                    example: Cisco IC
+                                description: Interconnect billing account Information
+                                $$ref: '#/components/schemas/InterconnectBillingAccountInfo'
+                            eqNEInfo:
+                              type: object
+                              properties:
+                                imageNameList:
+                                  type: array
+                                  description: Image name list
+                                  example:
+                                  - oldest
+                                  - current
+                                  - newest
+                                  items:
+                                    type: string
+                                    description: Image name
+                                    example: small
+                                productSizeList:
+                                  type: array
+                                  description: Product size list
+                                  example:
+                                  - small
+                                  - medium
+                                  - large
+                                  items:
+                                    type: string
+                                    description: product size
+                                    example: small
+                              $$ref: '#/components/schemas/InterconnectLocationInfoMegaportMpMVEInfo'
+                            metroCode:
+                              type: string
+                              example: DT
+                            metroName:
+                              type: string
+                            networkRegion:
+                              type: string
+                              example: AMER
+                            siteCode:
+                              type: string
+                            status:
+                              type: string
+                          $$ref: '#/components/schemas/InterconnectLocationInfoEquinix'
+                        locationId:
+                          type: string
+                        locationName:
+                          type: string
+                        mpLocationInfo:
+                          type: object
+                          properties:
+                            address:
+                              type: string
+                              example: 24700 Northwestern Highway, Southfield Michigan, Detroit, MI -24700, USA
+                            country:
+                              type: string
+                              example: USA
+                            liveDate:
+                              type: string
+                              example: '1589292000000'
+                            market:
+                              type: string
+                              example: US
+                            metroName:
+                              type: string
+                              example: Detroit
+                            mpMVEInfo:
+                              type: object
+                              properties:
+                                imageNameList:
+                                  type: array
+                                  description: Image name list
+                                  example:
+                                  - oldest
+                                  - current
+                                  - newest
+                                  items:
+                                    type: string
+                                    description: Image name
+                                    example: small
+                                productSizeList:
+                                  type: array
+                                  description: Product size list
+                                  example:
+                                  - small
+                                  - medium
+                                  - large
+                                  items:
+                                    type: string
+                                    description: product size
+                                    example: small
+                              $$ref: '#/components/schemas/InterconnectLocationInfoMegaportMpMVEInfo'
+                            networkRegion:
+                              type: string
+                              example: MP1
+                            siteCode:
+                              type: string
+                              example: det-on1
+                            status:
+                              type: string
+                              example: Active
+                          $$ref: '#/components/schemas/InterconnectLocationInfoMegaport'
+                      $$ref: '#/components/schemas/InterconnectLocationsEdgeLocationInfoList'
+                $$ref: '#/components/schemas/InterconnectLocations'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+      - Multicloud Interconnect - Accounts
+      summary: Delete Interconnect provider stored regions.
+      description: API to delete the stored regions for an Interconnect provider and account from vManage.
+      operationId: deleteInterconnectLocationInfo
+      parameters:
+      - name: interconnect-type
+        in: path
+        description: Interconnect provider type
+        required: true
+        schema:
+          type: string
+      - name: interconnect-account-id
+        in: path
+        description: Interconnect account id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Accepted
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/interconnect/{interconnect-type}/locations:
+    delete:
+      tags:
+      - Multicloud Interconnect - Accounts
+      summary: Delete Interconnect provider type regions.
+      description: API to delete the stored regions for an Interconnect provider type from vManage.
+      operationId: deleteAllInterconnectLocationInfo
+      parameters:
+      - name: interconnect-type
+        in: path
+        description: Interconnect provider type
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Accepted
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

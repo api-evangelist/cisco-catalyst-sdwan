@@ -1,0 +1,119 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - Insecure Device Configuration API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - Insecure Device Configuration
+paths:
+  /device/insecure-config:
+    get:
+      tags:
+      - Real-Time Monitoring - Insecure Device Configuration
+      description: Get device insecure configuration
+      operationId: getDeviceInsecureConfiguration
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - System IP (retrieved from the system_ip field of the /health/devices API)
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 10.1.1.15
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                required:
+                - data
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      required:
+                      - description
+                      - insecure-cli
+                      - lastupdated
+                      - module
+                      - reason
+                      - remediation
+                      - vdevice-dataKey
+                      - vdevice-host-name
+                      - vdevice-name
+                      type: object
+                      properties:
+                        description:
+                          type: string
+                          description: Description for insecure CLI
+                          example: authentication protocol for the user.
+                        index:
+                          type: integer
+                          description: Insecure CLI index
+                          format: int64
+                          example: 1
+                        insecure-cli:
+                          type: string
+                          description: Insecure device CLI
+                          example: snmp user {user} auth-protocol {auth-protocol}
+                        lastupdated:
+                          type: integer
+                          description: Unix timestamp of the last update.
+                          format: int64
+                          example: 1756980504273
+                        module:
+                          type: string
+                          description: Module owning insecure configuration CLI
+                          example: SNMP_USER_AUTHENTICATION
+                        reason:
+                          type: string
+                          description: Reason for configuration CLI being marked insecure
+                          example: SHA-256 provides a more secure hashing algorithm compared to MD5 or SHA-1.
+                        remediation:
+                          type: string
+                          description: Remediation action for insecure configuration CLI
+                          example: Use SHA-256 for stronger authentication.
+                        vdevice-dataKey:
+                          type: string
+                          example: 172.16.255.30-SNMP_USER_AUTHENTICATION
+                        vdevice-host-name:
+                          type: string
+                          description: Device host name
+                          example: host_1721625530
+                        vdevice-name:
+                          type: string
+                          description: Device IP
+                          example: 172.16.255.30
+                      $$ref: '#/components/schemas/InsecureConfigItem'
+                $$ref: '#/components/schemas/DeviceInsecureConfigResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,Device Monitoring-read

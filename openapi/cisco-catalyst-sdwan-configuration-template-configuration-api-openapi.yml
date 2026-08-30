@@ -1,0 +1,420 @@
+openapi: 3.2.0
+info:
+  title: UX 1.0 Configuration Configuration - Template Configuration API
+  description: "Configuration of UX 1.0 device and policy.\nIncludes API operations for the following:\n  Managing original SD-WAN device configurations and policy configurations\n  Device templates and feature templates"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Configuration - Template Configuration
+paths:
+  /template/config/attach/{deviceId}:
+    put:
+      tags:
+      - Configuration - Template Configuration
+      description: Upload device config
+      operationId: uploadConfig
+      parameters:
+      - name: deviceId
+        in: path
+        description: Device Model ID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Template config
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Template config:
+                description: Template config
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Inventory-write,Template Deploy-write
+  /template/config/attached/{deviceId}:
+    get:
+      tags:
+      - Configuration - Template Configuration
+      description: Get local template attached config for given device
+      operationId: getAttachedConfig
+      parameters:
+      - name: deviceId
+        in: path
+        description: Device Model ID
+        required: true
+        schema:
+          type: string
+      - name: type
+        in: query
+        description: Config type
+        schema:
+          type: string
+          enum:
+          - CFS
+          - RFS
+          - DRAFT_RFS
+          - DRAFT_CFS
+          default: CFS
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Attached config:
+                  description: Attached config
+                  value:
+                    config: "no config \nconfig\n  system\n   host-name                       vm1\n   system-ip                       172.16.255.11\n   site-id                         100\n   port-offset                     1\n   admin-tech-on-failure\n   admin-tech-on-software-rollback\n   route-consistency-check\n   no vrrp-advt-with-phymac\n   organization-name               \"vIPtela Inc Regression\"\n   vbond vbond\n   aaa\n    auth-order      local radius tacacs\n    usergroup basic\n     task system read\n     task interface read\n    !\n    usergroup netadmin\n    !\n    usergroup operator\n     task system read\n     task interface read\n     task policy read\n     task routing read\n     task security read\n    !\n    usergroup tenantadmin\n    !\n    user admin\n     password $6$tebXK3g64oMdWjSp$kIbJ/qShDI4/eLQ0M8NLyCK7rlmsZAlnwGFqCVZc7rNlIE6f8O1Q6IuP4pHJinc8pSTNGAEYtoCAwDuAiGPF9/\n    !\n    ciscotacro-user true\n    ciscotacrw-user true\n   !\n   logging\n    disk\n     enable\n    !\n   !\n   ntp\n    parent\n     no enable\n     stratum 5\n    exit\n   !\n   support\n    zbfw-tcp-finwait-time 30\n    zbfw-tcp-idle-time    3600\n    zbfw-tcp-synwait-time 30\n    zbfw-udp-idle-time    30\n   !\n  !\n  omp\n   no shutdown\n   graceful-restart\n   timers\n    holdtime               15\n    graceful-restart-timer 120\n   exit\n   advertise ospf external\n   advertise connected\n   advertise static\n  !\n  security\n   ipsec\n    integrity-type ip-udp-esp esp\n   !\n  !\n  vpn 0\n   host vbond ip 10.0.12.26 2001:a0:c::1a\n   interface ge0/1\n    ip address 10.0.26.11/24\n    no ipv6 shutdown\n    no shutdown\n   !\n   interface ge0/2\n    ip address 10.0.5.11/24\n    no ipv6 shutdown\n    tunnel-interface\n     encapsulation ipsec\n     color lte\n     hello-tolerance 12\n     no allow-service bgp\n     allow-service dhcp\n     allow-service dns\n     allow-service icmp\n     no allow-service sshd\n     no allow-service netconf\n     no allow-service ntp\n     no allow-service ospf\n     no allow-service stun\n     allow-service https\n    !\n    no shutdown\n   !\n   interface ge0/4\n    ip address 10.0.7.11/24\n    no ipv6 shutdown\n    no shutdown\n   !\n   interface ge0/7\n    ip address 10.0.100.11/24\n    no ipv6 shutdown\n    no shutdown\n   !\n   ip route 0.0.0.0/0 10.0.5.13\n  !\n  vpn 1\n   router\n    ospf\n     router-id 172.16.255.11\n     timers spf 200 1000 10000\n     redistribute static\n     redistribute omp\n     area 0\n      interface ge0/0\n      exit\n     exit\n    !\n   !\n   interface ge0/0\n    ip address 10.2.2.11/24\n    no ipv6 shutdown\n    no shutdown\n   !\n  !\n  vpn 512\n   interface eth0\n    ip dhcp-client\n    no ipv6 shutdown\n    ipv6 dhcp-client\n    no shutdown\n   !\n  !\n !\n!"
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Inventory-read,Device Inventory-write,Device Inventory > Edge-read,Device Inventory > Controller-read,Device Inventory > Edge-write
+  /template/config/device/mode/cli:
+    get:
+      tags:
+      - Configuration - Template Configuration
+      description: Generates a JSON object that contains a list of valid devices in CLI mode
+      operationId: generateCLIModeDevices
+      parameters:
+      - name: type
+        in: query
+        description: Device type
+        required: true
+        schema:
+          type: string
+          enum:
+          - vedge
+          - controller
+          - vmanage
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Devices:
+                  description: Devices
+                  value:
+                    data:
+                    - deviceIP: 172.16.255.16
+                      uuid: C8K-0c9b3b23-bdcd-4162-8d4f-774e44e081ee
+                      host-name: vm6
+                      local-system-ip: 172.16.255.16
+                    - deviceIP: 172.16.255.21
+                      uuid: 76611d8b-dca9-47fd-b204-338af931f506
+                      host-name: vm11
+                      local-system-ip: 172.16.255.21
+                    - deviceIP: 172.16.255.11
+                      uuid: 9c8d59ec-e4ad-468a-8fb0-15a7747a9c30
+                      host-name: vm1
+                      local-system-ip: 172.16.255.11
+                    - deviceIP: 172.16.255.15
+                      uuid: C8K-ae0d5e97-4b0e-4a05-8582-9cc0d93c456c
+                      host-name: vm5
+                      local-system-ip: 172.16.255.15
+                    - deviceIP: 172.16.255.14
+                      uuid: 554b21bf-cad3-4efe-91fa-4c68549a6616
+                      host-name: vm4
+                      local-system-ip: 172.16.255.14
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Inventory-read,Device Inventory-write,Template Deploy-read,Template Deploy-write,Device Inventory > Edge-write
+    post:
+      tags:
+      - Configuration - Template Configuration
+      description: Given a JSON list of devices not managed by any third member partners, push to devices from a CLI template
+      operationId: updateDeviceToCLIMode
+      requestBody:
+        description: Device list
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Device list:
+                description: Device list
+                value:
+                  deviceType: vedge
+                  devices:
+                  - deviceId: 932f70dd-5815-4712-b9ed-3d34a238f2ca
+                    deviceIP: 172.16.255.21
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device template Id:
+                  description: Device template Id
+                  value:
+                    id: device_config_mode_cli-01242017T020647984
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Inventory-write,Template Deploy-write,Device Inventory > Edge-write
+  /template/config/device/mode/vmanage:
+    get:
+      tags:
+      - Configuration - Template Configuration
+      description: Get list of devices that are allowable for vmanage modes
+      operationId: generatevManageModeDevices
+      parameters:
+      - name: type
+        in: query
+        description: Device type
+        required: true
+        schema:
+          type: string
+          enum:
+          - vedge
+          - controller
+          - vmanage
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Devices:
+                  description: Devices
+                  value:
+                    data:
+                    - deviceIP: 169.254.10.1
+                      uuid: 8b669639-758b-4287-b07f-09b9d334ce24
+                      configCloudxMode: none
+                      host-name: vm200
+                      local-system-ip: 172.16.255.200
+                    - deviceIP: 169.254.10.2
+                      uuid: b0497670-2e62-404f-8136-21b226cd4c8b
+                      configCloudxMode: none
+                      host-name: vm201
+                      local-system-ip: 172.16.255.201
+                    - deviceIP: 169.254.10.3
+                      uuid: d22cafc2-a0d2-4f57-b0a3-d9147818084a
+                      configCloudxMode: none
+                      host-name: vm202
+                      local-system-ip: 172.16.255.202
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Inventory-read,Device Inventory-write,Template Deploy-read,Template Deploy-write
+  /template/config/diff/{deviceId}:
+    get:
+      tags:
+      - Configuration - Template Configuration
+      description: Generates a JSON object that contains the diff for a given device
+      operationId: getDeviceDiff
+      parameters:
+      - name: deviceId
+        in: path
+        description: Device Model ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Config diff:
+                  description: Config diff
+                  value:
+                    config: Config diff for device 9c8d59ec-e4ad-468a-8fb0-15a7747a9c30
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Inventory-read,Device Inventory-write,Template Deploy-read,Template Deploy-write
+  /template/config/rmalist/{oldDeviceId}:
+    get:
+      tags:
+      - Configuration - Template Configuration
+      description: Get compatible devices of model, chassis number, certificate serial number with the old device
+      operationId: getCompatibleDevices
+      parameters:
+      - name: oldDeviceId
+        in: path
+        description: Device Model ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Devices:
+                  description: Devices
+                  value:
+                    data:
+                    - deviceModel: vedge
+                      chasisNumber: 71001c48-fdcf-4ac0-aaf3-ca4a20386a18
+                      serialNumber: f0b1985ba82e4c4889c225c59ca9a878
+                      uuid: 67b2de20-0564-4ba6-837f-b24bc6a686ad
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Inventory-read,Device Inventory-write,Template Deploy-read,Template Deploy-write
+  /template/config/rmaupdate:
+    put:
+      tags:
+      - Configuration - Template Configuration
+      description: Update new device
+      operationId: rmaUpdate
+      requestBody:
+        description: Template config
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Template config:
+                description: Template config
+                value:
+                  oldDeviceUUID: C8K-075aaa13-0f11-4f76-a02e-fe3750080fcf
+                  newDeviceUUID: C8K-3bb1154f-ae09-48fb-9fe1-5ddc3b16089e
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Inventory-write,Template Deploy-write
+  /template/config/running/{deviceId}:
+    get:
+      tags:
+      - Configuration - Template Configuration
+      description: Get device running config
+      operationId: getRunningConfig
+      parameters:
+      - name: deviceId
+        in: path
+        description: Device Model ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Running config:
+                  description: Running config
+                  value:
+                    config: "system\nhost-name                       vm1\nsystem-ip                       172.16.255.11\nsite-id                         100\nport-offset                     1\nno daemon-restart\nadmin-tech-on-failure\nadmin-tech-on-software-rollback\nroute-consistency-check\nno vrrp-advt-with-phymac\norganization-name               \"vIPtela Inc Regression\"\nvbond vbond\naaa\n auth-order      local radius tacacs\n usergroup basic\n  task system read\n  task interface read\n !\n usergroup netadmin\n !\n usergroup operator\n  task system read\n  task interface read\n  task policy read\n  task routing read\n  task security read\n !\n usergroup tenantadmin\n !\n user admin\n  password $6$tebXK3g64oMdWjSp$kIbJ/qShDI4/eLQ0M8NLyCK7rlmsZAlnwGFqCVZc7rNlIE6f8O1Q6IuP4pHJinc8pSTNGAEYtoCAwDuAiGPF9/\n !\n ciscotacro-user true\n ciscotacrw-user true\n!\nlogging\n disk\n  enable\n !\n!\nntp\n parent\n  no enable\n  stratum 5\n exit\n!\nsupport\n zbfw-tcp-finwait-time 30\n zbfw-tcp-idle-time    3600\n zbfw-tcp-synwait-time 30\n zbfw-udp-idle-time    30\n!\n!\nomp\nno shutdown\ngraceful-restart\ntimers\n holdtime               15\n graceful-restart-timer 120\nexit\nadvertise ospf external\nadvertise connected\nadvertise static\n!\nsecurity\nipsec\n integrity-type ip-udp-esp esp\n!\n!\nvpn 0\nhost vbond ip 10.0.12.26 2001:a0:c::1a\ninterface ge0/1\n ip address 10.0.26.11/24\n no shutdown\n!\ninterface ge0/2\n ip address 10.0.5.11/24\n tunnel-interface\n  encapsulation ipsec\n  color lte\n  no allow-service bgp\n  allow-service dhcp\n  allow-service dns\n  allow-service icmp\n  no allow-service sshd\n  no allow-service netconf\n  no allow-service ntp\n  no allow-service ospf\n  no allow-service stun\n  allow-service https\n !\n no shutdown\n!\ninterface ge0/4\n ip address 10.0.7.11/24\n no shutdown\n!\ninterface ge0/7\n ip address 10.0.100.11/24\n no shutdown\n!\nip route 0.0.0.0/0 10.0.5.13\n!\nvpn 1\nrouter\n ospf\n  router-id 172.16.255.11\n  timers spf 200 1000 10000\n  redistribute static\n  redistribute omp\n  area 0\n   interface ge0/0\n   exit\n  exit\n !\n!\ninterface ge0/0\n ip address 10.2.2.11/24\n no shutdown\n!\n!\nvpn 512\ninterface eth0\n ip dhcp-client\n ipv6 dhcp-client\n no shutdown\n!\n!"
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Inventory-read,Device Inventory-write,Device Inventory > Edge-read,Device Inventory > Controller-read,Device Inventory > Edge-write
+  /template/config/vpn/{deviceId}:
+    get:
+      tags:
+      - Configuration - Template Configuration
+      description: Get list of configured VPN (excluding reserved VPN) for a device
+      operationId: getVpnForDevice
+      parameters:
+      - name: deviceId
+        in: path
+        description: Device Model ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                VPN:
+                  description: VPN
+                  value:
+                  - '1'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Inventory-read,Device Inventory-write,Template Deploy-read,Template Deploy-write

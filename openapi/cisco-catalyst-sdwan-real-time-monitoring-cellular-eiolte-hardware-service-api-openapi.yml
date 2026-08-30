@@ -1,0 +1,83 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - Cellular EIOLTE Hardware Service API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: 'Real-Time Monitoring - Cellular EIOLTE Hardware Service '
+paths:
+  /device/cellularEiolte/hardware:
+    get:
+      tags:
+      - 'Real-Time Monitoring - Cellular EIOLTE Hardware Service '
+      description: Get cellular hardware info from device
+      operationId: getEiolteHardwareInfo
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device Ip address, example:172.16.255.111
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                cellular hardware info:
+                  description: cellular hardware info
+                  value:
+                  - ICCID: '8952530306500032705'
+                    FSN: 4H0222009903AG
+                    host-manufacturer: Cisco Systems, Inc.
+                    vdevice-name: 172.16.255.111
+                    PRI-SKU-ID: '1104567'
+                    Modem-Status: MODEM_STATE_DNS_ACQUIRED
+                    cellular-interface-name: Cellular 1/0
+                    Firmware-Version: SWIX55C_03.07.00.00 fef145 jenkins
+                    host-software-version: N/A
+                    IMEI: '351735110100118'
+                    Model-ID: EM9190
+                    vdevice-host-name: CellularGateway
+                    vdevice-dataKey: 172.16.255.111-1-
+                    Modem-Temperature: 33
+                    PRI-Version: '030.018_000'
+                    IMSI: '001010123456063'
+                    OEM-PRI-Version: '001.021'
+                    modem-index: '1'
+                    Host-Firmware-Version: SWIX55C_03.07.00.00 fef145 jenkins
+                    lastupdated: 1649250029516
+                    Carrier: GENERIC
+                    host-id: N/A
+                    host-model: N/A
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,System-read

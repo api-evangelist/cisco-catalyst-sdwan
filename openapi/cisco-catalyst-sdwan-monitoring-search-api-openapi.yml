@@ -1,0 +1,229 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Monitoring - Search API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Monitoring - Search
+paths:
+  /v1/search:
+    get:
+      tags:
+      - Monitoring - Search
+      summary: Search a text
+      description: Search a text
+      operationId: search
+      parameters:
+      - name: q
+        in: query
+        description: Search text
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Limit number of results
+        schema:
+          type: integer
+          format: int32
+          default: 5
+      - name: category
+        in: query
+        description: Categories
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  required:
+                  - category
+                  - results
+                  type: object
+                  properties:
+                    category:
+                      required:
+                      - description
+                      - displayName
+                      - name
+                      type: object
+                      properties:
+                        description:
+                          type: string
+                          example: Search in config groups names
+                        displayName:
+                          type: string
+                          example: Config groups
+                        name:
+                          type: string
+                          example: ConfigGroup
+                      description: This is used to return the search categories.
+                      $$ref: '#/components/schemas/SearchCategory'
+                    results:
+                      type: array
+                      description: search results for the category
+                      items:
+                        required:
+                        - value
+                        type: object
+                        properties:
+                          details:
+                            type: array
+                            description: Name-Value pair to shown as details
+                            items:
+                              required:
+                              - name
+                              - value
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                  description: Name of the property
+                                value:
+                                  type: object
+                                  description: Value of the property
+                              description: Links to cross launch on UI
+                              $$ref: '#/components/schemas/SearchKeyValuePair'
+                          identifier:
+                            type: string
+                            description: Identifier for record
+                          links:
+                            type: array
+                            description: Links to cross launch on UI
+                            items:
+                              required:
+                              - name
+                              - value
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                  description: Name of the property
+                                value:
+                                  type: object
+                                  description: Value of the property
+                              description: Links to cross launch on UI
+                              $$ref: '#/components/schemas/SearchKeyValuePair'
+                          value:
+                            type: string
+                            description: This is the text vManage has searched
+                        description: search results for the category
+                        $$ref: '#/components/schemas/SearchCategoryResult'
+                  description: This is used to return the search results.
+                  $$ref: '#/components/schemas/SearchResponse'
+              examples:
+                Search:
+                  description: Search
+                  value:
+                  - category:
+                      name: Device
+                      displayName: Devices
+                      description: Search in system-ip, host-name of devices
+                    results:
+                    - value: vm1
+                      identifier: vm1
+                      details:
+                      - name: System IP
+                        value: 172.16.255.11
+                      - name: Host name
+                        value: vm1
+                      links:
+                      - name: View details
+                        value: /app/monitor/devices/dashboard/health?systemIp=172.16.255.11&localSystemIp=172.16.255.11&deviceModel=vedge-C8000V&deviceType=vedge&personality=vedge&uuid=C8K-a2742205-61ea-454c-ad02-c4a05382840c
+                  - category:
+                      name: Help
+                      displayName: Help
+                      description: Search in Help/Documentation
+                    results:
+                    - value: click vManage SLA
+                      identifier: null
+                      details:
+                      - name: Details
+                        value: For each of the traffic profiles, click vManage SLA Classes and choose an SLA class to map the application to.
+                      links:
+                      - name: View details
+                        value: /docs/htmls/ios-xe/config-policies-centralized-define-lists-cloud-discovered.html
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: default
+  /v1/search/categories:
+    get:
+      tags:
+      - Monitoring - Search
+      summary: List search categories
+      description: List search categories
+      operationId: listCategories
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  required:
+                  - description
+                  - displayName
+                  - name
+                  type: object
+                  properties:
+                    description:
+                      type: string
+                      example: Search in config groups names
+                    displayName:
+                      type: string
+                      example: Config groups
+                    name:
+                      type: string
+                      example: ConfigGroup
+                  description: This is used to return the search categories.
+                  $$ref: '#/components/schemas/SearchCategory'
+              examples:
+                Categories:
+                  description: Categories
+                  value:
+                  - name: ''
+                    displayName: All
+                    description: Search in all categories
+                  - name: Application
+                    displayName: Applications
+                    description: Search in application names
+                  - name: Device
+                    displayName: Devices
+                    description: Search in system-ip, host-name of devices
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: default

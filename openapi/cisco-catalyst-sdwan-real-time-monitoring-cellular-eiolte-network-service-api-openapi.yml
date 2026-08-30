@@ -1,0 +1,81 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - Cellular EIOLTE Network Service API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - Cellular EIOLTE Network Service
+paths:
+  /device/cellularEiolte/network:
+    get:
+      tags:
+      - Real-Time Monitoring - Cellular EIOLTE Network Service
+      description: Get cellular network  info from device
+      operationId: getEiolteNetworkInfo
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device Ip address, example:172.16.255.111
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                cellular network info:
+                  description: cellular network info
+                  value:
+                  - Network-Selection-Mode: Automatic
+                    MNC: 1
+                    vdevice-name: 172.16.255.111
+                    cellular-interface-name: Cellular 1/0
+                    MCC: 1
+                    vdevice-host-name: CellularGateway
+                    MTU: 1500
+                    System-Time: Thu Mar 24 3:6:0 2022
+                    PS-State: Attached
+                    Roaming-Status: Home
+                    RRC-Connection-State: RRC Connected
+                    vdevice-dataKey: 172.16.255.111-1-
+                    Network: Test PLMN 1-1
+                    EMM-State: Registered
+                    TAC: 1
+                    Cell-ID: 27447297
+                    modem-index: '1'
+                    lastupdated: 1649250149676
+                    Current-Service: Packet switched
+                    Current-Service-status: Normal
+                    EMM-Sub-State: Normal-Service
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,System-read

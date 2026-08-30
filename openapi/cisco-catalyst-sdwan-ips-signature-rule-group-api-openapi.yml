@@ -1,0 +1,231 @@
+openapi: 3.2.0
+info:
+  title: Others IPS Signature - Rule Group API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: IPS Signature - Rule Group
+paths:
+  /signature-set/rule-group:
+    post:
+      tags:
+      - IPS Signature - Rule Group
+      summary: create custom rule group
+      operationId: createRuleGroup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                  example: its not a fast browser
+                name:
+                  type: string
+                  example: IE
+              $$ref: '#/components/schemas/CreateRuleGroupRequestPayload'
+        required: true
+      responses:
+        '200':
+          description: success response message
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: c8a4164a-4778-4a7e-8d93-45f78f387010
+                  message:
+                    type: string
+                    example: request processed successfully
+                  success:
+                    type: boolean
+                    example: true
+                $$ref: '#/components/schemas/DefaultPostSuccessResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+    get:
+      tags:
+      - IPS Signature - Rule Group
+      summary: fetch all custom rule group
+      operationId: getAllCustomRuleGroup
+      responses:
+        '200':
+          description: success response message
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        category:
+                          type: string
+                          example: Local Groups
+                        description:
+                          type: string
+                          example: its not a fast browser
+                        displayName:
+                          type: string
+                          example: Internet Explorer
+                        id:
+                          type: string
+                          example: c8a4164a-4778-4a7e-8d93-45f78f387010
+                        name:
+                          type: string
+                          example: IE
+                      $$ref: '#/components/schemas/GetCustomRuleGroupObject'
+                $$ref: '#/components/schemas/GetCustomRuleGroupResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+  /signature-set/{signatureSetId}/rule-group/security-level:
+    put:
+      tags:
+      - IPS Signature - Rule Group
+      summary: Edit rule group security level.
+      operationId: editRuleGroupSeclevel
+      parameters:
+      - name: signatureSetId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      ruleGroupId:
+                        type: string
+                        example: browser
+                      seclevel:
+                        type: string
+                        example: balanced
+                    $$ref: '#/components/schemas/EditRuleGroupSeclevelObject'
+              $$ref: '#/components/schemas/EditRuleGroupSeclevelRequestPayload'
+        required: true
+      responses:
+        '200':
+          description: success response message
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: request processed successfully
+                  success:
+                    type: boolean
+                    example: true
+                $$ref: '#/components/schemas/DefaultPutSuccessResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+  /signature-set/{signatureSetId}/{type}/rule-group:
+    get:
+      tags:
+      - IPS Signature - Rule Group
+      summary: Fetch IPS profile rule group data.
+      description: fetch rule group data for a ips profile
+      operationId: getRuleGroup
+      parameters:
+      - name: signatureSetId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: type
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: category
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: list of ips rule groups
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        category:
+                          type: string
+                          example: browser
+                        createdOn:
+                          type: integer
+                          format: int32
+                          example: 4233672632786387
+                        defaultSeclevel:
+                          type: string
+                          example: security
+                        name:
+                          type: string
+                          example: chrome
+                        ruleCount:
+                          type: integer
+                          format: int32
+                          example: 406
+                        ruleGroupId:
+                          type: string
+                          example: c8a4164a-4778-4a7e-8d93-45f78f387010
+                        seclevel:
+                          type: string
+                          example: balanced
+                        updatedOn:
+                          type: integer
+                          format: int32
+                          example: 4233672632786387
+                      $$ref: '#/components/schemas/RuleGroupDetail'
+                $$ref: '#/components/schemas/GetRuleGroupResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden

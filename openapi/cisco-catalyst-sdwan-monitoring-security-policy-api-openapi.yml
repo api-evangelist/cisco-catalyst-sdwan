@@ -1,0 +1,586 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Monitoring - Security Policy API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Monitoring - Security Policy
+paths:
+  /security/device/health:
+    get:
+      tags:
+      - Monitoring - Security Policy
+      summary: security device health
+      description: 'Get security device health '
+      operationId: getSecurityDeviceHealth
+      parameters:
+      - name: deviceIp
+        in: query
+        description: deviceIp - Device IP
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  required:
+                  - amp_cloud_reachability
+                  - ips_cloud_reachability
+                  - ips_last_upload
+                  - ips_package_version
+                  - utd_container_health
+                  type: object
+                  properties:
+                    amp_cloud_reachability:
+                      type: string
+                      example: utd-file-repu-stat-connected
+                      enum:
+                      - utd-file-repu-stat-process-up
+                      - utd-file-repu-stat-process-down
+                      - utd-file-repu-stat-amp-module-load-fail
+                      - utd-file-repu-stat-connected
+                      - utd-file-repu-stat-not-connected
+                      - utd-file-repu-stat-process-unknown
+                    ips_cloud_reachability:
+                      type: string
+                      example: utd-con-up
+                      enum:
+                      - utd-con-up
+                      - utd-con-down
+                      - utd-con-unknown
+                    ips_last_upload:
+                      type: integer
+                      format: int64
+                      example: 1692065659984
+                    ips_package_version:
+                      type: string
+                      example: 31550.15.s
+                    utd_container_health:
+                      type: string
+                      example: utd-oper-status-green
+                      enum:
+                      - utd-oper-status-green
+                      - utd-oper-status-yellow
+                      - utd-oper-status-red
+                      - utd-oper-status-down
+                      - utd-oper-status-unknown
+                  $$ref: '#/components/schemas/SecurityDeviceHealth'
+        '400':
+          description: Bad Request
+  /security/policy/devicelist:
+    get:
+      tags:
+      - Monitoring - Security Policy
+      summary: security policy device list
+      description: 'Get security policy device list '
+      operationId: getSecurityPolicyDeviceList_MonitoringSecurityPolicy_2703
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  required:
+                  - amp_down
+                  - amp_up
+                  - ips_down
+                  - ips_up
+                  - urlf_down
+                  - urlf_up
+                  - zbfw_down
+                  - zbfw_up
+                  type: object
+                  properties:
+                    amp_down:
+                      type: array
+                      description: amp down values
+                      example:
+                      - 1.1.1.1
+                      - 2.2.2.2
+                      - 3.3.3.3
+                      items:
+                        type: string
+                        description: amp down
+                        example: 1.1.1.1
+                    amp_up:
+                      type: array
+                      description: amp up values
+                      example:
+                      - 1.1.1.1
+                      - 2.2.2.2
+                      - 3.3.3.3
+                      items:
+                        type: string
+                        description: amp up
+                        example: 1.1.1.1
+                    ips_down:
+                      type: array
+                      description: ips down values
+                      example:
+                      - 1.1.1.1
+                      - 2.2.2.2
+                      - 3.3.3.3
+                      items:
+                        type: string
+                        description: ips down
+                        example: 1.1.1.1
+                    ips_up:
+                      type: array
+                      description: ips up values
+                      example:
+                      - 1.1.1.1
+                      - 2.2.2.2
+                      - 3.3.3.3
+                      items:
+                        type: string
+                        description: ips up
+                        example: 1.1.1.1
+                    urlf_down:
+                      type: array
+                      description: urlf down values
+                      example:
+                      - 1.1.1.1
+                      - 2.2.2.2
+                      - 3.3.3.3
+                      items:
+                        type: string
+                        description: urlf down
+                        example: 1.1.1.1
+                    urlf_up:
+                      type: array
+                      description: urlf up values
+                      example:
+                      - 1.1.1.1
+                      - 2.2.2.2
+                      - 3.3.3.3
+                      items:
+                        type: string
+                        description: urlf up
+                        example: 1.1.1.1
+                    zbfw_down:
+                      type: array
+                      description: zbfw down values
+                      example:
+                      - 1.1.1.1
+                      - 2.2.2.2
+                      - 3.3.3.3
+                      items:
+                        type: string
+                        description: zbfw down
+                        example: 1.1.1.1
+                    zbfw_up:
+                      type: array
+                      description: zbfw up values
+                      example:
+                      - 1.1.1.1
+                      - 2.2.2.2
+                      - 3.3.3.3
+                      items:
+                        type: string
+                        description: zbfw up
+                        example: 1.1.1.1
+                  $$ref: '#/components/schemas/SecurityPolicyDeviceList'
+        '400':
+          description: Bad Request
+  /security/policy/fwall/device:
+    post:
+      tags:
+      - Monitoring - Security Policy
+      summary: firewall devices list
+      description: 'Get firewall devices list '
+      operationId: getPostFwallByQuery
+      requestBody:
+        description: Stats query string
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              firewall device query:
+                description: firewall device query
+                value:
+                  aggregation:
+                    field:
+                    - property: host_name
+                      sequence: 1
+                    - property: siteid
+                      sequence: 2
+                    metrics:
+                    - property: entry_time
+                      type: top_hits
+                      size: 1
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '24'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+                    - value:
+                      - class
+                      field: type
+                      type: string
+                      operator: in
+                    - value:
+                      - '39'
+                      field: action
+                      type: string
+                      operator: equal
+                    - value:
+                      - SELF_TO_UNTRUST-seq-1-cm_
+                      field: class_name
+                      type: string
+                      operator: equal
+                    - value:
+                      - SELF_TO_UNTRUST
+                      field: policy_name
+                      type: string
+                      operator: equal
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceSecuritySecurityapiParameterExampleFwalldevice'
+        required: true
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  required:
+                  - entry_time
+                  type: object
+                  properties:
+                    device_ip:
+                      type: string
+                      example: 1.1.1.1
+                    entry_time:
+                      type: integer
+                      format: int64
+                      example: 1639897200000
+                    host_name:
+                      type: string
+                      example: vm1
+                    site_name:
+                      type: string
+                      example: sjc
+                  $$ref: '#/components/schemas/DeviceLists'
+        '400':
+          description: Bad Request
+      x-roles-required: Security-read,Device Monitoring-read
+  /security/policy/ips/device:
+    post:
+      tags:
+      - Monitoring - Security Policy
+      summary: ips alert devices list
+      description: 'Get ips alert devices list '
+      operationId: getPostIPSAlertByQuery
+      requestBody:
+        description: Stats query string
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              ips alert device query:
+                description: ips alert device query
+                value:
+                  aggregation:
+                    field:
+                    - property: host_name
+                      sequence: 1
+                    - property: siteid
+                      sequence: 2
+                    - property: src_ip
+                      sequence: 3
+                    - property: dst_ip
+                      sequence: 4
+                    metrics:
+                    - property: entry_time
+                      type: top_hits
+                      size: 1
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '24'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+                    - value:
+                      - OS-OTHER Bash CGI environment variable injection attempt
+                      field: message
+                      type: string
+                      operator: equal
+                    - value:
+                      - Critical
+                      field: severity
+                      type: string
+                      operator: equal
+                    - value:
+                      - ips_alert
+                      field: type
+                      type: string
+                      operator: in
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceSecuritySecurityapiParameterExampleIpsalertdevice'
+        required: true
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  required:
+                  - entry_time
+                  type: object
+                  properties:
+                    device_ip:
+                      type: string
+                      example: 1.1.1.1
+                    entry_time:
+                      type: integer
+                      format: int64
+                      example: 1639897200000
+                    host_name:
+                      type: string
+                      example: vm1
+                    site_name:
+                      type: string
+                      example: sjc
+                  $$ref: '#/components/schemas/DeviceLists'
+        '400':
+          description: Bad Request
+      x-roles-required: Security-read,Device Monitoring-read
+  /security/policy/urlf/device:
+    post:
+      tags:
+      - Monitoring - Security Policy
+      summary: url filtering devices list
+      description: 'Get url filtering devices list '
+      operationId: getPostUrlFilteringByQuery
+      requestBody:
+        description: Stats query string
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              url filtering pass device query:
+                description: url filtering pass device query
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - field: entry_time
+                      type: date
+                      value:
+                      - '24'
+                      operator: last_n_hours
+                    - field: name
+                      type: string
+                      value:
+                      - Financial Services
+                      operator: equal
+                    - field: pass
+                      type: string
+                      value:
+                      - '0'
+                      operator: greater
+                    - field: type
+                      type: string
+                      value:
+                      - urlf_category
+                      operator: in
+                  aggregation:
+                    field:
+                    - property: host_name
+                      sequence: 1
+                    - property: siteid
+                      sequence: 2
+                    - property: src_ip
+                      sequence: 3
+                    - property: dst_ip
+                      sequence: 4
+                    metrics:
+                    - property: entry_time
+                      type: top_hits
+                      size: 1
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceSecuritySecurityapiParameterExampleUrlfilteringpassdevice'
+              url filtering block device query:
+                description: url filtering block device query
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - field: entry_time
+                      type: date
+                      value:
+                      - '24'
+                      operator: last_n_hours
+                    - field: name
+                      type: string
+                      value:
+                      - Gambling
+                      operator: equal
+                    - field: block
+                      type: string
+                      value:
+                      - '0'
+                      operator: greater
+                    - field: type
+                      type: string
+                      value:
+                      - urlf_category
+                      operator: in
+                  aggregation:
+                    field:
+                    - property: host_name
+                      sequence: 1
+                    - property: siteid
+                      sequence: 2
+                    - property: src_ip
+                      sequence: 3
+                    - property: dst_ip
+                      sequence: 4
+                    metrics:
+                    - property: entry_time
+                      type: top_hits
+                      size: 1
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceSecuritySecurityapiParameterExampleUrlfilteringblockdevice'
+              url filtering exempt white/black list device query:
+                description: url filtering exempt white/black list device query
+                value:
+                  aggregation:
+                    field:
+                    - property: host_name
+                      sequence: 1
+                    - property: siteid
+                      sequence: 2
+                    - property: src_ip
+                      sequence: 3
+                    - property: dst_ip
+                      sequence: 4
+                    metrics:
+                    - property: entry_time
+                      type: top_hits
+                      size: 1
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '24'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+                    - value:
+                      - '0'
+                      field: whiteblack_list_hit_cnt
+                      type: number
+                      operator: greater
+                    - value:
+                      - urlf
+                      field: type
+                      type: string
+                      operator: in
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceSecuritySecurityapiParameterExampleUrlfilteringexemptwitblklistdevice'
+              amp device query:
+                description: amp device query
+                value:
+                  aggregation:
+                    field:
+                    - property: host_name
+                      sequence: 1
+                    - property: siteid
+                      sequence: 2
+                    - property: src_ip
+                      sequence: 3
+                    - property: dst_ip
+                      sequence: 4
+                    metrics:
+                    - property: entry_time
+                      type: top_hits
+                      size: 1
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '48'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+                    - value:
+                      - pdf
+                      field: filename
+                      type: string
+                      operator: equal
+                    - value:
+                      - '0'
+                      field: disposition
+                      type: string
+                      operator: equal
+                    - value:
+                      - file_reputation_alert
+                      field: type
+                      type: string
+                      operator: in
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceSecuritySecurityapiParameterExampleAmpdevice'
+        required: true
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  required:
+                  - entry_time
+                  type: object
+                  properties:
+                    device_ip:
+                      type: string
+                      example: 1.1.1.1
+                    entry_time:
+                      type: integer
+                      format: int64
+                      example: 1639897200000
+                    host_name:
+                      type: string
+                      example: vm1
+                    site_name:
+                      type: string
+                      example: sjc
+                  $$ref: '#/components/schemas/DeviceLists'
+        '400':
+          description: Bad Request
+      x-roles-required: Security-read,Device Monitoring-read

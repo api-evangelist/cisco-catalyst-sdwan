@@ -1,0 +1,218 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Monitoring - Alarms Notification API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Monitoring - Alarms Notification
+paths:
+  /notifications/rule:
+    put:
+      tags:
+      - Monitoring - Alarms Notification
+      description: Update notification rule
+      operationId: updateNotificationRule
+      parameters:
+      - name: ruleId
+        in: query
+        description: Rule Id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: Notification rule
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Notification rule:
+                description: Notification rule
+                value: "{\n   \"notificationRuleName\":\"testwebhook\",\n   \"severity\":\"Medium\",\n   \"alarmName\":\"BFD_Node_Up\",\n   \"accountDetails\":\"noreply@cisco.com\",\n   \"webHookEnabled\":true,\n   \"webhookUsername\":\"admin\",\n   \"webhookPassword\":\"admin\",\n   \"webhookUrl\":\"https://localhost:8444\",\n   \"updatedBy\":\"admin\",\n   \"devicesAttached\":\"1712133e-0246-4281-8152-3317b796d2bc\",\n   \"emailThreshold\":5,\n   \"sourceVpn\":512\n   \"vpn\":10,\n   \"vpnIpSubnet\":\"192.168.1.0/24\",\n   \"accountDetailsArray\":[\n      \"noreply@cisco.com\"\n   ]\n}"
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Settings-write
+    post:
+      tags:
+      - Monitoring - Alarms Notification
+      description: Add notification rule
+      operationId: createNotificationRule
+      requestBody:
+        description: Notification rule
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Notification rule:
+                description: Notification rule
+                value:
+                  notificationRuleName: testwebhook
+                  severity: Medium
+                  alarmName: BFD_Node_Up
+                  accountDetails: noreply@cisco.com
+                  webHookEnabled: true
+                  webhookUsername: admin
+                  webhookPassword: admin
+                  webhookUrl: https://localhost:8444
+                  updatedBy: admin
+                  devicesAttached: 1712133e-0246-4281-8152-3317b796d2bc
+                  emailThreshold: 5
+                  sourceVpn: 512
+                  vpn: 10
+                  vpnIpSubnet: 192.168.1.0/24
+                  accountDetailsArray:
+                  - noreply@cisco.com
+        required: true
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Notification rule:
+                  description: Notification rule
+                  value: "{\n  \"accountDetails\": \"noreply@cisco.com\",\n  \"accountDetailsArray\": [\n    \"noreply@cisco.com\"\n  ]\n  \"alarmName\": \"BFD_Node_Up\",\n  \"devicesAttached\": \"1712133e-0246-4281-8152-3317b796d2bc\",\n  \"emailEnabled\": true,\n  \"emailThreshold\": 5,\n  \"notificationRuleName\": \"testwebhook\",\n  \"severity\": \"Medium\",\n  \"updatedBy\": \"admin\",\n  \"webHookEnabled\": true,\n  \"webhookPassword\": \"admin\",\n  \"webhookUrl\": \"https://localhost:8444\",\n  \"webhookUsername\": \"admin\",\n   \"sourceVpn\":512,\n   \"vpn\":10,\n   \"vpnIpSubnet\":\"192.168.1.0/24\",\n}"
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Settings-write
+  /notifications/rules:
+    get:
+      tags:
+      - Monitoring - Alarms Notification
+      description: 'Get all rules or specific notification rule by its Id  '
+      operationId: getNotificationRule
+      parameters:
+      - name: ruleId
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: site-id
+        in: query
+        schema:
+          pattern: ^[0-9]+$
+          type: string
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        '@rid':
+                          type: integer
+                          format: int64
+                          example: 1158
+                        accountDetails:
+                          type: string
+                          example: cqx@cisco.com
+                        alarmName:
+                          type: string
+                          example: BFD_Node_Up
+                        devicesAttached:
+                          type: string
+                          example: 1712133e-0246-4281-8152-3317b796d2bc
+                        emailThreshold:
+                          type: integer
+                          format: int64
+                          example: 5
+                        lastUpdated:
+                          type: integer
+                          format: int64
+                          example: 1588177200725
+                        notificationRuleId:
+                          type: string
+                          example: e947efc8-e86a-4eb4-b8ce-7ed0c2828f13
+                        notificationRuleName:
+                          type: string
+                          example: testwebhook
+                        severity:
+                          type: string
+                          example: Medium
+                        updatedBy:
+                          type: string
+                          example: admin
+                        webhookPassword:
+                          type: string
+                          example: $CRYPT$R21YRfP4HWOv+Z9nSi7zRw==$hEU/zplzA+IJlI/4LsNY/Q==
+                        webhookUrl:
+                          type: string
+                          example: https://localhost:8444
+                        webhookUsername:
+                          type: string
+                          example: admin
+                      $$ref: '#/components/schemas/NotificationsRuleData'
+                $$ref: '#/components/schemas/NotificationsRulesResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Alarms-read
+    delete:
+      tags:
+      - Monitoring - Alarms Notification
+      description: Delete notification rule
+      operationId: deleteNotificationRule
+      parameters:
+      - name: ruleId
+        in: query
+        description: Rule Id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Settings-write

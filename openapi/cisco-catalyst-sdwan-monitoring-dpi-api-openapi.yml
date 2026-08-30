@@ -1,0 +1,1816 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Monitoring - DPI API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Monitoring - DPI
+paths:
+  /statistics/dpi:
+    get:
+      tags:
+      - Monitoring - DPI
+      description: Get DPI stats raw data
+      operationId: getDPIStatsRawData
+      parameters:
+      - name: query
+        in: query
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '24'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+      - name: page
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+      - name: sortBy
+        in: query
+        schema:
+          pattern: ^[a-zA-Z-_]+$
+          type: string
+      - name: sortOrder
+        in: query
+        schema:
+          type: string
+          enum:
+          - asc
+          - ASC
+          - Asc
+          - desc
+          - DESC
+          - Desc
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        application:
+                          type: string
+                          example: icmp
+                        create_time:
+                          type: integer
+                          format: int64
+                          example: 1664150420729
+                        dest_ip:
+                          type: string
+                          example: 10.74.49.77
+                        dest_port:
+                          type: integer
+                          format: int32
+                          example: 771
+                        device_model:
+                          type: string
+                          example: vedge-C8000V
+                        entry_time:
+                          type: integer
+                          format: int64
+                          example: 1664150431860
+                        expire_time:
+                          type: integer
+                          format: int64
+                          example: 1664150421784
+                        family:
+                          type: string
+                          example: network-service
+                        host_name:
+                          type: string
+                          example: C8Kv-77
+                        ip_proto:
+                          type: integer
+                          format: int32
+                          example: 1
+                        octets:
+                          type: integer
+                          format: int32
+                          example: 4032
+                        packets:
+                          type: integer
+                          format: int32
+                          example: 7
+                        source_ip:
+                          type: string
+                          example: 10.124.10.249
+                        source_port:
+                          type: integer
+                          format: int32
+                          example: 0
+                        vdevice_name:
+                          type: string
+                          example: 1.1.70.7
+                        vip_idx:
+                          type: integer
+                          format: int32
+                          example: 172060
+                        vpn_id:
+                          type: integer
+                          format: int32
+                          example: 512
+                      $$ref: '#/components/schemas/DPIDataObject'
+                  pageInfo:
+                    type: object
+                    properties:
+                      count:
+                        type: integer
+                        format: int32
+                        example: 398
+                      endTime:
+                        type: string
+                        example: '1664148997536'
+                      startTime:
+                        type: string
+                        example: '1664159158463'
+                    $$ref: '#/components/schemas/DPIResponsePageInfo'
+                $$ref: '#/components/schemas/DPIResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+    post:
+      tags:
+      - Monitoring - DPI
+      description: Get DPI stats raw data
+      operationId: getDPIStatsRawDataPost
+      parameters:
+      - name: page
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+      - name: sortBy
+        in: query
+        schema:
+          pattern: ^[a-zA-Z-_]+$
+          type: string
+      - name: sortOrder
+        in: query
+        schema:
+          type: string
+          enum:
+          - asc
+          - ASC
+          - Asc
+          - desc
+          - DESC
+          - Desc
+      requestBody:
+        description: User
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Query filter:
+                description: Query filter
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '24'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        application:
+                          type: string
+                          example: icmp
+                        create_time:
+                          type: integer
+                          format: int64
+                          example: 1664150420729
+                        dest_ip:
+                          type: string
+                          example: 10.74.49.77
+                        dest_port:
+                          type: integer
+                          format: int32
+                          example: 771
+                        device_model:
+                          type: string
+                          example: vedge-C8000V
+                        entry_time:
+                          type: integer
+                          format: int64
+                          example: 1664150431860
+                        expire_time:
+                          type: integer
+                          format: int64
+                          example: 1664150421784
+                        family:
+                          type: string
+                          example: network-service
+                        host_name:
+                          type: string
+                          example: C8Kv-77
+                        ip_proto:
+                          type: integer
+                          format: int32
+                          example: 1
+                        octets:
+                          type: integer
+                          format: int32
+                          example: 4032
+                        packets:
+                          type: integer
+                          format: int32
+                          example: 7
+                        source_ip:
+                          type: string
+                          example: 10.124.10.249
+                        source_port:
+                          type: integer
+                          format: int32
+                          example: 0
+                        vdevice_name:
+                          type: string
+                          example: 1.1.70.7
+                        vip_idx:
+                          type: integer
+                          format: int32
+                          example: 172060
+                        vpn_id:
+                          type: integer
+                          format: int32
+                          example: 512
+                      $$ref: '#/components/schemas/DPIDataObject'
+                  pageInfo:
+                    type: object
+                    properties:
+                      count:
+                        type: integer
+                        format: int32
+                        example: 398
+                      endTime:
+                        type: string
+                        example: '1664148997536'
+                      startTime:
+                        type: string
+                        example: '1664159158463'
+                    $$ref: '#/components/schemas/DPIResponsePageInfo'
+                $$ref: '#/components/schemas/DPIResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /statistics/dpi/agg-app/aggregation:
+    post:
+      tags:
+      - Monitoring - DPI
+      description: Get raw aggregated data and display applications with the highest utilization for a device
+      operationId: getAggAppDataPost
+      parameters:
+      - name: site-id
+        in: query
+        schema:
+          pattern: ^[0-9]+$
+          type: string
+      requestBody:
+        description: Query filter
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Query filter:
+                description: Query filter
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '24'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+                    - value:
+                      - 1.1.60.7
+                      field: vdevice_name
+                      type: string
+                      operator: in
+                  aggregation:
+                    field:
+                    - property: family
+                      size: 200
+                      sequence: 1
+                    metrics:
+                    - property: octets
+                      type: sum
+                      order: desc
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        count:
+                          type: integer
+                          format: int32
+                          example: 398
+                        family:
+                          type: string
+                          example: network-service
+                        octets:
+                          type: integer
+                          format: int32
+                          example: 18768
+                      $$ref: '#/components/schemas/DPIAggregationResponseData'
+                  header:
+                    type: object
+                    properties:
+                      columns:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            dataType:
+                              type: string
+                              example: number
+                            isDisplay:
+                              type: boolean
+                            property:
+                              type: string
+                              example: octets
+                            title:
+                              type: string
+                              example: Octets
+                          $$ref: '#/components/schemas/DPIAggregationResponseHeaderColumns'
+                      fields:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            dataType:
+                              type: string
+                              example: number
+                            property:
+                              type: string
+                              example: octets
+                          $$ref: '#/components/schemas/DPIAggregationResponseHeaderFields'
+                      generatedOn:
+                        type: integer
+                        format: int64
+                        example: 1664160118911
+                    $$ref: '#/components/schemas/DPIAggregationResponseHeader'
+                $$ref: '#/components/schemas/DPIAggregationResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,RBAC VPN-read,RBAC VPN-write
+  /statistics/dpi/aggregation:
+    get:
+      tags:
+      - Monitoring - DPI
+      description: Get aggregated data based on input query and filters. The data can be filtered on time and other unique parameters based upon necessity and intended usage
+      operationId: getDPIStatsAggregationData
+      parameters:
+      - name: query
+        in: query
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '24'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+          aggregation:
+            field:
+            - property: family
+              size: 200
+              sequence: 1
+            metrics:
+            - property: octets
+              type: sum
+              order: desc
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        count:
+                          type: integer
+                          format: int32
+                          example: 398
+                        family:
+                          type: string
+                          example: network-service
+                        octets:
+                          type: integer
+                          format: int32
+                          example: 18768
+                      $$ref: '#/components/schemas/DPIAggregationResponseData'
+                  header:
+                    type: object
+                    properties:
+                      columns:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            dataType:
+                              type: string
+                              example: number
+                            isDisplay:
+                              type: boolean
+                            property:
+                              type: string
+                              example: octets
+                            title:
+                              type: string
+                              example: Octets
+                          $$ref: '#/components/schemas/DPIAggregationResponseHeaderColumns'
+                      fields:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            dataType:
+                              type: string
+                              example: number
+                            property:
+                              type: string
+                              example: octets
+                          $$ref: '#/components/schemas/DPIAggregationResponseHeaderFields'
+                      generatedOn:
+                        type: integer
+                        format: int64
+                        example: 1664160118911
+                    $$ref: '#/components/schemas/DPIAggregationResponseHeader'
+                $$ref: '#/components/schemas/DPIAggregationResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+    post:
+      tags:
+      - Monitoring - DPI
+      description: Get raw aggregated data and display applications with the highest utilization for a device
+      operationId: getDPIStatsAggregationDataPost
+      requestBody:
+        description: User
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Query filter:
+                description: Query filter
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '24'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+                    - value:
+                      - 1.1.60.7
+                      field: vdevice_name
+                      type: string
+                      operator: in
+                  aggregation:
+                    field:
+                    - property: family
+                      size: 200
+                      sequence: 1
+                    metrics:
+                    - property: octets
+                      type: sum
+                      order: desc
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        count:
+                          type: integer
+                          format: int32
+                          example: 398
+                        family:
+                          type: string
+                          example: network-service
+                        octets:
+                          type: integer
+                          format: int32
+                          example: 18768
+                      $$ref: '#/components/schemas/DPIAggregationResponseData'
+                  header:
+                    type: object
+                    properties:
+                      columns:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            dataType:
+                              type: string
+                              example: number
+                            isDisplay:
+                              type: boolean
+                            property:
+                              type: string
+                              example: octets
+                            title:
+                              type: string
+                              example: Octets
+                          $$ref: '#/components/schemas/DPIAggregationResponseHeaderColumns'
+                      fields:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            dataType:
+                              type: string
+                              example: number
+                            property:
+                              type: string
+                              example: octets
+                          $$ref: '#/components/schemas/DPIAggregationResponseHeaderFields'
+                      generatedOn:
+                        type: integer
+                        format: int64
+                        example: 1664160118911
+                    $$ref: '#/components/schemas/DPIAggregationResponseHeader'
+                $$ref: '#/components/schemas/DPIAggregationResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,RBAC VPN-read,RBAC VPN-write
+  /statistics/dpi/applications:
+    get:
+      tags:
+      - Monitoring - DPI
+      description: Get detailed DPI application flows list in a grid table
+      operationId: getAggAppFlows
+      parameters:
+      - name: query
+        in: query
+        required: true
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '24'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        application:
+                          type: string
+                          example: ipfix
+                        octets:
+                          type: number
+                          example: 72535008
+                      $$ref: '#/components/schemas/DPIAppResponseData'
+                  header:
+                    type: object
+                    properties:
+                      chart:
+                        type: object
+                        properties:
+                          series:
+                            type: array
+                            items:
+                              type: string
+                          title:
+                            type: string
+                            example: view.statistics.clientViewDpiApplication.dpiApplication
+                          xAxis:
+                            type: array
+                            items:
+                              type: string
+                          xAxisLabel:
+                            type: string
+                            example: view.statistics.clientViewDpiApplication.time
+                          yAxis:
+                            type: array
+                            items:
+                              type: string
+                          yAxisLabel:
+                            type: string
+                            example: view.statistics.clientViewDpiApplication.count
+                        $$ref: '#/components/schemas/DPIAppResponseHeaderChart'
+                      columns:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            dataType:
+                              type: string
+                              example: string
+                            hideable:
+                              type: boolean
+                            property:
+                              type: string
+                              example: application
+                            title:
+                              type: string
+                              example: Application
+                          $$ref: '#/components/schemas/DPIAppResponseHeaderColumns'
+                      fields:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            dataType:
+                              type: string
+                              example: string
+                            property:
+                              type: string
+                              example: application
+                          $$ref: '#/components/schemas/DPIAppResponseHeaderFields'
+                      generatedOn:
+                        type: number
+                        example: 1664506834428
+                      viewKeys:
+                        type: object
+                        properties:
+                          preferenceKey:
+                            type: string
+                            example: grid-dpi_applications
+                          uniqueKey:
+                            type: array
+                            items:
+                              type: string
+                        $$ref: '#/components/schemas/DPIAppResponseHeaderViewKeys'
+                    $$ref: '#/components/schemas/DPIAppResponseHeader'
+                $$ref: '#/components/schemas/DPIAppResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,RBAC VPN-read
+  /statistics/dpi/applications/summary:
+    get:
+      tags:
+      - Monitoring - DPI
+      description: Get detailed DPI application flows summary
+      operationId: getAggAppFlowsSummary
+      parameters:
+      - name: query
+        in: query
+        required: true
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '24'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: site-id
+        in: query
+        schema:
+          pattern: ^[0-9]+$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        application:
+                          type: string
+                          example: ipfix
+                        octets:
+                          type: number
+                          example: 72535008
+                      $$ref: '#/components/schemas/DPIAppResponseData'
+                  header:
+                    type: object
+                    properties:
+                      chart:
+                        type: object
+                        properties:
+                          series:
+                            type: array
+                            items:
+                              type: string
+                          title:
+                            type: string
+                            example: view.statistics.clientViewDpiApplication.dpiApplication
+                          xAxis:
+                            type: array
+                            items:
+                              type: string
+                          xAxisLabel:
+                            type: string
+                            example: view.statistics.clientViewDpiApplication.time
+                          yAxis:
+                            type: array
+                            items:
+                              type: string
+                          yAxisLabel:
+                            type: string
+                            example: view.statistics.clientViewDpiApplication.count
+                        $$ref: '#/components/schemas/DPIAppResponseHeaderChart'
+                      columns:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            dataType:
+                              type: string
+                              example: string
+                            hideable:
+                              type: boolean
+                            property:
+                              type: string
+                              example: application
+                            title:
+                              type: string
+                              example: Application
+                          $$ref: '#/components/schemas/DPIAppResponseHeaderColumns'
+                      fields:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            dataType:
+                              type: string
+                              example: string
+                            property:
+                              type: string
+                              example: application
+                          $$ref: '#/components/schemas/DPIAppResponseHeaderFields'
+                      generatedOn:
+                        type: number
+                        example: 1664506834428
+                      viewKeys:
+                        type: object
+                        properties:
+                          preferenceKey:
+                            type: string
+                            example: grid-dpi_applications
+                          uniqueKey:
+                            type: array
+                            items:
+                              type: string
+                        $$ref: '#/components/schemas/DPIAppResponseHeaderViewKeys'
+                    $$ref: '#/components/schemas/DPIAppResponseHeader'
+                $$ref: '#/components/schemas/DPIAppResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /statistics/dpi/csv:
+    get:
+      tags:
+      - Monitoring - DPI
+      description: Get raw data with optional query as CSV
+      operationId: getDPIStatsRawDataAsCSV
+      parameters:
+      - name: query
+        in: query
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '24'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+      responses:
+        '200':
+          description: Success
+          content:
+            text/csv:
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /statistics/dpi/device/application/flowcount:
+    get:
+      tags:
+      - Monitoring - DPI
+      description: Get application flow count per tunnel
+      operationId: getDPIDeviceAppUniqueFlowCount
+      parameters:
+      - name: deviceId
+        in: query
+        required: true
+        schema:
+          pattern: ^((([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\p{N}\p{L}]+)?)((\s)(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\p{N}\p{L}]+)?)?$
+          type: string
+      - name: interval
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: query
+        schema:
+          type: string
+      - name: window
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: family
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /statistics/dpi/device/applications:
+    get:
+      tags:
+      - Monitoring - DPI
+      description: Get DPI application flows device aggregation data
+      operationId: getDPIDeviceAppAggregationData
+      parameters:
+      - name: query
+        in: query
+        required: true
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '24'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        octets:
+                          type: number
+                          example: 25554477465
+                        vdevice_name:
+                          type: string
+                          example: 172.16.255.15
+                      $$ref: '#/components/schemas/DeviceAppResponseData'
+                  header:
+                    type: object
+                    properties:
+                      chart:
+                        type: object
+                        properties:
+                          series:
+                            type: array
+                            items:
+                              type: string
+                          title:
+                            type: string
+                            example: view.statistics.clientViewDpiDevices.dpiDevice
+                          xAxis:
+                            type: array
+                            items:
+                              type: string
+                          xAxisLabel:
+                            type: string
+                            example: view.statistics.clientViewDpiDevices.time
+                          yAxis:
+                            type: array
+                            items:
+                              type: string
+                          yAxisLabel:
+                            type: string
+                            example: view.statistics.clientViewDpiDevices.count
+                        $$ref: '#/components/schemas/DeviceAppResponseHeaderChart'
+                      columns:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            dataType:
+                              type: string
+                              example: string
+                            property:
+                              type: string
+                              example: vdevice_name
+                            title:
+                              type: string
+                              example: Devices
+                          $$ref: '#/components/schemas/DeviceAppResponseHeaderColumns'
+                      fields:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            dataType:
+                              type: string
+                              example: string
+                            property:
+                              type: string
+                              example: vdevice_name
+                          $$ref: '#/components/schemas/DeviceAppResponseHeaderFields'
+                      generatedOn:
+                        type: number
+                        example: 1664507953669
+                      viewKeys:
+                        type: object
+                        properties:
+                          preferenceKey:
+                            type: string
+                            example: grid-dpi_devices
+                          uniqueKey:
+                            type: array
+                            items:
+                              type: string
+                        $$ref: '#/components/schemas/DeviceAppResponseHeaderViewKeys'
+                    $$ref: '#/components/schemas/DeviceAppResponseHeader'
+                $$ref: '#/components/schemas/DeviceAppResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,RBAC VPN-read
+  /statistics/dpi/device/details/applications:
+    get:
+      tags:
+      - Monitoring - DPI
+      description: Get detailed DPI device and application list
+      operationId: getDPIDeviceAppDetails
+      parameters:
+      - name: query
+        in: query
+        required: true
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '24'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        application:
+                          type: string
+                          example: skydrive
+                        create_time:
+                          type: number
+                          example: 1664442429015
+                        dest_ip:
+                          type: string
+                          example: 13.75.134.18
+                        dest_port:
+                          type: number
+                          example: 8248
+                        device_model:
+                          type: string
+                          example: vedge-C8000V
+                        entry_time:
+                          type: number
+                          example: 1664442435015
+                        expire_time:
+                          type: number
+                          example: 1664442441015
+                        family:
+                          type: string
+                          example: web
+                        host_name:
+                          type: string
+                          example: vm5
+                        id:
+                          type: string
+                          example: 782FiIMBjBC8ScfIzJ8_
+                        ip_proto:
+                          type: number
+                          example: 17
+                        octets:
+                          type: number
+                          example: 1000000
+                        packets:
+                          type: number
+                          example: 10000
+                        source_ip:
+                          type: string
+                          example: 12.166.184.245
+                        source_port:
+                          type: number
+                          example: 2
+                        vdevice_name:
+                          type: string
+                          example: 172.16.255.15
+                        vip_idx:
+                          type: number
+                          example: 1
+                        vpn_id:
+                          type: number
+                          example: 1
+                      $$ref: '#/components/schemas/DeviceAppDetailResponseData'
+                  header:
+                    type: object
+                    properties:
+                      chart:
+                        type: object
+                        properties:
+                          series:
+                            type: array
+                            items:
+                              type: string
+                          title:
+                            type: string
+                            example: view.statistics.viewDpiDevicesDetails.dpiDeviceAppli
+                          xAxis:
+                            type: array
+                            items:
+                              type: string
+                          xAxisLabel:
+                            type: string
+                            example: view.statistics.viewDpiDevicesDetails.time
+                          yAxis:
+                            type: array
+                            items:
+                              type: string
+                          yAxisLabel:
+                            type: string
+                            example: view.statistics.viewDpiDevicesDetails.count
+                        $$ref: '#/components/schemas/DeviceAppDetailResponseHeaderChart'
+                      columns:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            dataType:
+                              type: string
+                              example: string
+                            property:
+                              type: string
+                              example: vdevice_name
+                            title:
+                              type: string
+                              example: Devices
+                          $$ref: '#/components/schemas/DeviceAppResponseHeaderColumns'
+                      fields:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            dataType:
+                              type: string
+                              example: string
+                            property:
+                              type: string
+                              example: vdevice_name
+                          $$ref: '#/components/schemas/DeviceAppResponseHeaderFields'
+                      generatedOn:
+                        type: number
+                        example: 1664508103301
+                      viewKeys:
+                        type: object
+                        properties:
+                          preferenceKey:
+                            type: string
+                            example: grid-dpi_devices_detials
+                          uniqueKey:
+                            type: array
+                            items:
+                              type: string
+                        $$ref: '#/components/schemas/DeviceAppDetailResponseHeaderViewKeys'
+                    $$ref: '#/components/schemas/DeviceAppDetailResponseHeader'
+                  pageInfo:
+                    type: object
+                    properties:
+                      count:
+                        type: number
+                        example: 10000
+                      endTime:
+                        type: string
+                        example: '1664435237739'
+                      startTime:
+                        type: string
+                        example: '1664442435015'
+                    $$ref: '#/components/schemas/DeviceAppDetailResponsePageInfo'
+                $$ref: '#/components/schemas/DeviceAppDetailResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /statistics/dpi/doccount:
+    get:
+      tags:
+      - Monitoring - DPI
+      description: Get response count of a query
+      operationId: getDPIStatsCount
+      parameters:
+      - name: query
+        in: query
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '24'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    format: int32
+                    example: 17193
+                $$ref: '#/components/schemas/CountResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+    post:
+      tags:
+      - Monitoring - DPI
+      description: Get response count of a query
+      operationId: getDPIStatsCountPost
+      requestBody:
+        description: User
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Query filter:
+                description: Query filter
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '24'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    format: int32
+                    example: 17193
+                $$ref: '#/components/schemas/CountResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /statistics/dpi/fields:
+    get:
+      tags:
+      - Monitoring - DPI
+      description: Get fields and type
+      operationId: getDPIFields
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                fields:
+                  description: fields
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /statistics/dpi/page:
+    post:
+      tags:
+      - Monitoring - DPI
+      description: Get DPI stats pagination raw data
+      operationId: getDPIStatsPaginationRawDataPost
+      parameters:
+      - name: scrollId
+        in: query
+        schema:
+          type: string
+      - name: count
+        in: query
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: User
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Query filter:
+                description: Query filter
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '24'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        application:
+                          type: string
+                          example: icmp
+                        create_time:
+                          type: integer
+                          format: int64
+                          example: 1664150420729
+                        dest_ip:
+                          type: string
+                          example: 10.74.49.77
+                        dest_port:
+                          type: integer
+                          format: int32
+                          example: 771
+                        device_model:
+                          type: string
+                          example: vedge-C8000V
+                        entry_time:
+                          type: integer
+                          format: int64
+                          example: 1664150431860
+                        expire_time:
+                          type: integer
+                          format: int64
+                          example: 1664150421784
+                        family:
+                          type: string
+                          example: network-service
+                        host_name:
+                          type: string
+                          example: C8Kv-77
+                        ip_proto:
+                          type: integer
+                          format: int32
+                          example: 1
+                        octets:
+                          type: integer
+                          format: int32
+                          example: 4032
+                        packets:
+                          type: integer
+                          format: int32
+                          example: 7
+                        source_ip:
+                          type: string
+                          example: 10.124.10.249
+                        source_port:
+                          type: integer
+                          format: int32
+                          example: 0
+                        vdevice_name:
+                          type: string
+                          example: 1.1.70.7
+                        vip_idx:
+                          type: integer
+                          format: int32
+                          example: 172060
+                        vpn_id:
+                          type: integer
+                          format: int32
+                          example: 512
+                      $$ref: '#/components/schemas/DPIDataObject'
+                  pageInfo:
+                    type: object
+                    properties:
+                      count:
+                        type: integer
+                        format: int32
+                        example: 100
+                      endTime:
+                        type: string
+                        example: '1664148997536'
+                      hasMoreData:
+                        type: string
+                        example: 'true'
+                      scrollId:
+                        type: string
+                        example: DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAf4WcUlydS1uYzlTdXFhR05GTlBpTFJ4QQ
+                      startTime:
+                        type: string
+                        example: '1664159158463'
+                      totalCount:
+                        type: integer
+                        format: int32
+                        example: 39802
+                    $$ref: '#/components/schemas/DPIPaginationResponsePageInfo'
+                $$ref: '#/components/schemas/DPIPaginationResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,RBAC VPN-read,RBAC VPN-write
+    get:
+      tags:
+      - Monitoring - DPI
+      description: Get DPI stats pagination raw data
+      operationId: getDPIStatsPaginationRawData
+      parameters:
+      - name: query
+        in: query
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '24'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+      - name: scrollId
+        in: query
+        schema:
+          type: string
+      - name: count
+        in: query
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        application:
+                          type: string
+                          example: icmp
+                        create_time:
+                          type: integer
+                          format: int64
+                          example: 1664150420729
+                        dest_ip:
+                          type: string
+                          example: 10.74.49.77
+                        dest_port:
+                          type: integer
+                          format: int32
+                          example: 771
+                        device_model:
+                          type: string
+                          example: vedge-C8000V
+                        entry_time:
+                          type: integer
+                          format: int64
+                          example: 1664150431860
+                        expire_time:
+                          type: integer
+                          format: int64
+                          example: 1664150421784
+                        family:
+                          type: string
+                          example: network-service
+                        host_name:
+                          type: string
+                          example: C8Kv-77
+                        ip_proto:
+                          type: integer
+                          format: int32
+                          example: 1
+                        octets:
+                          type: integer
+                          format: int32
+                          example: 4032
+                        packets:
+                          type: integer
+                          format: int32
+                          example: 7
+                        source_ip:
+                          type: string
+                          example: 10.124.10.249
+                        source_port:
+                          type: integer
+                          format: int32
+                          example: 0
+                        vdevice_name:
+                          type: string
+                          example: 1.1.70.7
+                        vip_idx:
+                          type: integer
+                          format: int32
+                          example: 172060
+                        vpn_id:
+                          type: integer
+                          format: int32
+                          example: 512
+                      $$ref: '#/components/schemas/DPIDataObject'
+                  pageInfo:
+                    type: object
+                    properties:
+                      count:
+                        type: integer
+                        format: int32
+                        example: 100
+                      endTime:
+                        type: string
+                        example: '1664148997536'
+                      hasMoreData:
+                        type: string
+                        example: 'true'
+                      scrollId:
+                        type: string
+                        example: DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAf4WcUlydS1uYzlTdXFhR05GTlBpTFJ4QQ
+                      startTime:
+                        type: string
+                        example: '1664159158463'
+                      totalCount:
+                        type: integer
+                        format: int32
+                        example: 39802
+                    $$ref: '#/components/schemas/DPIPaginationResponsePageInfo'
+                $$ref: '#/components/schemas/DPIPaginationResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /statistics/dpi/pktdup/aggregation:
+    post:
+      tags:
+      - Monitoring - DPI
+      description: Get time series aggregation data for packet duplication for an application over TLOCs if available
+      operationId: getDPIStatsAggregationDataForPacketDup
+      requestBody:
+        description: User
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Query filter:
+                description: Query filter
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '24'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: string
+                  header:
+                    type: object
+                    properties:
+                      columns:
+                        type: array
+                        items:
+                          type: string
+                      fields:
+                        type: array
+                        items:
+                          type: string
+                      generatedOn:
+                        type: number
+                        example: 1664508540280
+                    $$ref: '#/components/schemas/FecAndPktDupResponseHeader'
+                $$ref: '#/components/schemas/FecAndPktDupResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /statistics/dpi/query/fields:
+    get:
+      tags:
+      - Monitoring - DPI
+      description: Get query fields
+      operationId: getDPIQueryFields
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                fields:
+                  description: fields
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /statistics/dpi/recovery/aggregation:
+    post:
+      tags:
+      - Monitoring - DPI
+      description: Get aggregation data and fec recovery rate if available
+      operationId: getDPIStatsAggregationDataForFec
+      requestBody:
+        description: User
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Query filter:
+                description: Query filter
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '24'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: string
+                  header:
+                    type: object
+                    properties:
+                      columns:
+                        type: array
+                        items:
+                          type: string
+                      fields:
+                        type: array
+                        items:
+                          type: string
+                      generatedOn:
+                        type: number
+                        example: 1664508540280
+                    $$ref: '#/components/schemas/FecAndPktDupResponseHeader'
+                $$ref: '#/components/schemas/FecAndPktDupResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,RBAC VPN-read,RBAC VPN-write

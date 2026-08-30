@@ -1,0 +1,1782 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - Interface API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - Interface
+paths:
+  /device/interface:
+    get:
+      tags:
+      - Real-Time Monitoring - Interface
+      description: Get device interfaces
+      operationId: getDeviceInterface
+      parameters:
+      - name: vpn-id
+        in: query
+        description: VPN Id
+        schema:
+          type: string
+      - name: ifname
+        in: query
+        description: IF Name
+        schema:
+          type: string
+          enum:
+          - ge0/0
+          - ge0/1
+          - ge0/2
+          - ge0/3
+          - ge0/4
+          - ge0/5
+          - ge0/6
+          - ge0/7
+          - system
+          - eth0
+      - name: af-type
+        in: query
+        description: AF Type
+        schema:
+          type: string
+          enum:
+          - ipv4
+          - ipv6
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device interface:
+                  description: Device interface
+                  value:
+                    data:
+                    - vdevice-name: 169.254.10.10
+                      rx-errors: 0
+                      tx-kbps: 18
+                      if-admin-status: Up
+                      duplex: full
+                      tcp-mss-adjust: '1416'
+                      tx-errors: 0
+                      tx-pps: 13
+                      ifname: ge0/1
+                      rx-pps: 14
+                      af-type: ipv4
+                      shaping-rate: 0
+                      if-oper-status: Up
+                      auto-neg: 'false'
+                      ifindex: 2
+                      allow-service: dhcp dns icmp https
+                      if-tracker-status: NA
+                      num-flaps: '0'
+                      rx-packets: 6544375
+                      secondary-address: ''
+                      vpn-id: '0'
+                      vdevice-host-name: vm3
+                      mtu: '1500'
+                      rx-drops: 48131
+                      tx-drops: 2
+                      uptime: '4:20:14:13'
+                      ipv6-address: '-'
+                      secondary: 'false'
+                      ip-address: 10.101.3.3/16
+                      hwaddr: 52:54:00:a1:4f:47
+                      speed-mbps: '1000'
+                      vdevice-dataKey: 169.254.10.10-0-ge0/1-ipv4
+                      tx-octets: 1238809794
+                      tx-packets: 6404951
+                      rx-octets: 1209186254
+                      rx-kbps: 19
+                      lastupdated: 1643077714908
+                      port-type: transport
+                      uptime-date: 1642659240000
+                      encap-type: 'null'
+                    - vdevice-name: 169.254.10.10
+                      rx-errors: 0
+                      tx-kbps: 0
+                      if-admin-status: Up
+                      duplex: full
+                      tcp-mss-adjust: '1416'
+                      tx-errors: 0
+                      tx-pps: 0
+                      ifname: ge0/1
+                      rx-pps: 0
+                      af-type: ipv6
+                      shaping-rate: 0
+                      if-oper-status: Up
+                      auto-neg: 'false'
+                      ipv6-admin-status: Up
+                      ifindex: 2
+                      allow-service: dhcp dns icmp https
+                      if-tracker-status: NA
+                      num-flaps: '0'
+                      rx-packets: 3644
+                      vpn-id: '0'
+                      vdevice-host-name: vm3
+                      mtu: '1500'
+                      rx-drops: 0
+                      tx-drops: 0
+                      uptime: '4:20:14:13'
+                      ipv6-address: '-'
+                      hwaddr: 52:54:00:a1:4f:47
+                      speed-mbps: '1000'
+                      ip-address: '-'
+                      vdevice-dataKey: 169.254.10.10-0-ge0/1-ipv6
+                      tx-octets: 9140
+                      tx-packets: 128
+                      rx-octets: 405455
+                      rx-kbps: 0
+                      lastupdated: 1643077714908
+                      port-type: transport
+                      uptime-date: 1642659240000
+                      encap-type: 'null'
+                    - vdevice-name: 169.254.10.10
+                      rx-errors: 0
+                      tx-kbps: 0
+                      if-admin-status: Down
+                      tcp-mss-adjust: '1416'
+                      tx-errors: 0
+                      tx-pps: 0
+                      ifname: ge0/2
+                      rx-pps: 0
+                      af-type: ipv4
+                      shaping-rate: 0
+                      if-oper-status: Down
+                      ifindex: 3
+                      if-tracker-status: NA
+                      num-flaps: '0'
+                      rx-packets: 0
+                      vpn-id: '0'
+                      vdevice-host-name: vm3
+                      mtu: '1500'
+                      rx-drops: 0
+                      tx-drops: 0
+                      ipv6-address: '-'
+                      hwaddr: 52:54:00:39:5a:01
+                      ip-address: '-'
+                      vdevice-dataKey: 169.254.10.10-0-ge0/2-ipv4
+                      tx-octets: 0
+                      tx-packets: 0
+                      rx-octets: 0
+                      rx-kbps: 0
+                      lastupdated: 1643077714908
+                      port-type: service
+                      encap-type: 'null'
+                    - vdevice-name: 169.254.10.10
+                      rx-errors: 0
+                      tx-kbps: 0
+                      if-admin-status: Down
+                      tcp-mss-adjust: '1416'
+                      tx-errors: 0
+                      tx-pps: 0
+                      ifname: ge0/2
+                      rx-pps: 0
+                      af-type: ipv6
+                      shaping-rate: 0
+                      if-oper-status: Down
+                      ipv6-admin-status: Up
+                      ifindex: 3
+                      if-tracker-status: NA
+                      num-flaps: '0'
+                      rx-packets: 0
+                      vpn-id: '0'
+                      vdevice-host-name: vm3
+                      mtu: '1500'
+                      rx-drops: 0
+                      tx-drops: 0
+                      ipv6-address: '-'
+                      hwaddr: 52:54:00:39:5a:01
+                      ip-address: '-'
+                      vdevice-dataKey: 169.254.10.10-0-ge0/2-ipv6
+                      tx-octets: 0
+                      tx-packets: 0
+                      rx-octets: 0
+                      rx-kbps: 0
+                      lastupdated: 1643077714908
+                      port-type: service
+                      encap-type: 'null'
+                    - vdevice-name: 169.254.10.10
+                      rx-errors: 0
+                      tx-kbps: 0
+                      if-admin-status: Down
+                      tcp-mss-adjust: '1416'
+                      tx-errors: 0
+                      tx-pps: 0
+                      ifname: ge0/3
+                      rx-pps: 0
+                      af-type: ipv4
+                      shaping-rate: 0
+                      if-oper-status: Down
+                      ifindex: 4
+                      if-tracker-status: NA
+                      num-flaps: '0'
+                      rx-packets: 0
+                      vpn-id: '0'
+                      vdevice-host-name: vm3
+                      mtu: '1500'
+                      rx-drops: 0
+                      tx-drops: 0
+                      ipv6-address: '-'
+                      hwaddr: 52:54:00:2d:a0:f5
+                      ip-address: '-'
+                      vdevice-dataKey: 169.254.10.10-0-ge0/3-ipv4
+                      tx-octets: 0
+                      tx-packets: 0
+                      rx-octets: 0
+                      rx-kbps: 0
+                      lastupdated: 1643077714908
+                      port-type: service
+                      encap-type: 'null'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /device/interface/arp_stats:
+    get:
+      tags:
+      - Real-Time Monitoring - Interface
+      description: Get interface ARP statistics
+      operationId: getDeviceInterfaceARPStats
+      parameters:
+      - name: vpn-id
+        in: query
+        description: VPN Id
+        schema:
+          type: string
+      - name: ifname
+        in: query
+        description: IF Name
+        schema:
+          type: string
+          enum:
+          - ge0/0
+          - ge0/1
+          - ge0/2
+          - ge0/3
+          - ge0/4
+          - ge0/5
+          - ge0/6
+          - ge0/7
+          - system
+          - eth0
+      - name: af-type
+        in: query
+        description: AF Type
+        schema:
+          type: string
+          enum:
+          - ipv4
+          - ipv6
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                ARP statistics:
+                  description: ARP statistics
+                  value:
+                    data:
+                    - tx-arp-rate-limit-drops: '0'
+                      rx-arp-rate-limit-drops: '0'
+                      vdevice-name: 169.254.10.10
+                      rx-arp-non-local-drops: '45746'
+                      rx-arp-requests: '296'
+                      vpn-id: '0'
+                      vdevice-host-name: vm3
+                      rx-arp-reply-drops: '0'
+                      ipv6-address: '-'
+                      tx-arp-requests: '12281'
+                      ip-address: '-'
+                      tx-arp-replies: '304'
+                      tx-no-arp-drops: '2'
+                      vdevice-dataKey: 169.254.10.10-0-ge0/1-ipv4
+                      rx-arp-replies: '12281'
+                      ifname: ge0/1
+                      tx-arp-request-fail: '0'
+                      af-type: ipv4
+                      lastupdated: 1643077098782
+                      arp-add-fails: '1'
+                    - tx-arp-rate-limit-drops: '0'
+                      rx-arp-rate-limit-drops: '0'
+                      vdevice-name: 169.254.10.10
+                      rx-arp-non-local-drops: '0'
+                      rx-arp-requests: '0'
+                      vpn-id: '0'
+                      vdevice-host-name: vm3
+                      rx-arp-reply-drops: '0'
+                      ipv6-address: '-'
+                      tx-arp-requests: '0'
+                      ip-address: '-'
+                      tx-arp-replies: '1'
+                      tx-no-arp-drops: '0'
+                      vdevice-dataKey: 169.254.10.10-0-ge0/1-ipv6
+                      rx-arp-replies: '0'
+                      ifname: ge0/1
+                      tx-arp-request-fail: '0'
+                      af-type: ipv6
+                      lastupdated: 1643077098782
+                      arp-add-fails: '0'
+                    - tx-arp-rate-limit-drops: '0'
+                      rx-arp-rate-limit-drops: '0'
+                      vdevice-name: 169.254.10.10
+                      rx-arp-non-local-drops: '0'
+                      rx-arp-requests: '0'
+                      vpn-id: '0'
+                      vdevice-host-name: vm3
+                      rx-arp-reply-drops: '0'
+                      ipv6-address: '-'
+                      tx-arp-requests: '0'
+                      ip-address: '-'
+                      tx-arp-replies: '0'
+                      tx-no-arp-drops: '0'
+                      vdevice-dataKey: 169.254.10.10-0-ge0/2-ipv4
+                      rx-arp-replies: '0'
+                      ifname: ge0/2
+                      tx-arp-request-fail: '0'
+                      af-type: ipv4
+                      lastupdated: 1643077098782
+                      arp-add-fails: '0'
+                    - tx-arp-rate-limit-drops: '0'
+                      rx-arp-rate-limit-drops: '0'
+                      vdevice-name: 169.254.10.10
+                      rx-arp-non-local-drops: '0'
+                      rx-arp-requests: '0'
+                      vpn-id: '0'
+                      vdevice-host-name: vm3
+                      rx-arp-reply-drops: '0'
+                      ipv6-address: '-'
+                      tx-arp-requests: '0'
+                      ip-address: '-'
+                      tx-arp-replies: '0'
+                      tx-no-arp-drops: '0'
+                      vdevice-dataKey: 169.254.10.10-0-ge0/2-ipv6
+                      rx-arp-replies: '0'
+                      ifname: ge0/2
+                      tx-arp-request-fail: '0'
+                      af-type: ipv6
+                      lastupdated: 1643077098782
+                      arp-add-fails: '0'
+                    - tx-arp-rate-limit-drops: '0'
+                      rx-arp-rate-limit-drops: '0'
+                      vdevice-name: 169.254.10.10
+                      rx-arp-non-local-drops: '0'
+                      rx-arp-requests: '0'
+                      vpn-id: '0'
+                      vdevice-host-name: vm3
+                      rx-arp-reply-drops: '0'
+                      ipv6-address: '-'
+                      tx-arp-requests: '0'
+                      ip-address: '-'
+                      tx-arp-replies: '0'
+                      tx-no-arp-drops: '0'
+                      vdevice-dataKey: 169.254.10.10-0-ge0/3-ipv4
+                      rx-arp-replies: '0'
+                      ifname: ge0/3
+                      tx-arp-request-fail: '0'
+                      af-type: ipv4
+                      lastupdated: 1643077098782
+                      arp-add-fails: '0'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /device/interface/error_stats:
+    get:
+      tags:
+      - Real-Time Monitoring - Interface
+      description: Get interface error stats
+      operationId: getDeviceInterfaceErrorStats
+      parameters:
+      - name: vpn-id
+        in: query
+        description: VPN Id
+        schema:
+          type: string
+      - name: ifname
+        in: query
+        description: IF Name
+        schema:
+          type: string
+          enum:
+          - ge0/0
+          - ge0/1
+          - ge0/2
+          - ge0/3
+          - ge0/4
+          - ge0/5
+          - ge0/6
+          - ge0/7
+          - system
+          - eth0
+      - name: af-type
+        in: query
+        description: AF Type
+        schema:
+          type: string
+          enum:
+          - ipv4
+          - ipv6
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Error stats:
+                  description: Error stats
+                  value:
+                    data:
+                    - tx-icmp-policer-drops: '0'
+                      rx-arp-rate-limit-drops: '0'
+                      tx-icmp-mirrored-drops: '0'
+                      vdevice-name: 169.254.10.10
+                      cpu-policer-drops: '2078'
+                      interface-disabled: '0'
+                      rx-arp-reply-drops: '0'
+                      tx-no-arp-drops: '2'
+                      ifname: ge0/1
+                      split-horizon-drops: '0'
+                      tx-arp-request-fail: '0'
+                      af-type: ipv4
+                      arp-add-fails: '1'
+                      rx-policer-remark: '0'
+                      mirror-drops: '0'
+                      tx-arp-rate-limit-drops: '0'
+                      rx-ip-ttl-expired: '0'
+                      rx-arp-non-local-drops: '46027'
+                      vpn-id: '0'
+                      vdevice-host-name: vm3
+                      ipv6-address: '-'
+                      rx-policer-drops: '0'
+                      bad-label: '0'
+                      ip-address: '-'
+                      vdevice-dataKey: 169.254.10.10-0-ge0/1-ipv4
+                      route-lookup-fail: '0'
+                      lastupdated: 1643079662907
+                      rx-non-ip-drops: '0'
+                      filter-drops: '0'
+                    - tx-icmp-policer-drops: '0'
+                      rx-arp-rate-limit-drops: '0'
+                      tx-icmp-mirrored-drops: '0'
+                      vdevice-name: 169.254.10.10
+                      cpu-policer-drops: '0'
+                      interface-disabled: '0'
+                      rx-arp-reply-drops: '0'
+                      tx-no-arp-drops: '0'
+                      ifname: ge0/1
+                      split-horizon-drops: '0'
+                      tx-arp-request-fail: '0'
+                      af-type: ipv6
+                      arp-add-fails: '0'
+                      rx-policer-remark: '0'
+                      mirror-drops: '0'
+                      tx-arp-rate-limit-drops: '0'
+                      rx-ip-ttl-expired: '0'
+                      rx-arp-non-local-drops: '0'
+                      vpn-id: '0'
+                      vdevice-host-name: vm3
+                      ipv6-address: '-'
+                      rx-policer-drops: '0'
+                      bad-label: '0'
+                      ip-address: '-'
+                      vdevice-dataKey: 169.254.10.10-0-ge0/1-ipv6
+                      route-lookup-fail: '0'
+                      lastupdated: 1643079662907
+                      rx-non-ip-drops: '0'
+                      filter-drops: '0'
+                    - tx-icmp-policer-drops: '0'
+                      rx-arp-rate-limit-drops: '0'
+                      tx-icmp-mirrored-drops: '0'
+                      vdevice-name: 169.254.10.10
+                      cpu-policer-drops: '0'
+                      interface-disabled: '0'
+                      rx-arp-reply-drops: '0'
+                      tx-no-arp-drops: '0'
+                      ifname: ge0/2
+                      split-horizon-drops: '0'
+                      tx-arp-request-fail: '0'
+                      af-type: ipv4
+                      arp-add-fails: '0'
+                      rx-policer-remark: '0'
+                      mirror-drops: '0'
+                      tx-arp-rate-limit-drops: '0'
+                      rx-ip-ttl-expired: '0'
+                      rx-arp-non-local-drops: '0'
+                      vpn-id: '0'
+                      vdevice-host-name: vm3
+                      ipv6-address: '-'
+                      rx-policer-drops: '0'
+                      bad-label: '0'
+                      ip-address: '-'
+                      vdevice-dataKey: 169.254.10.10-0-ge0/2-ipv4
+                      route-lookup-fail: '0'
+                      lastupdated: 1643079662907
+                      rx-non-ip-drops: '0'
+                      filter-drops: '0'
+                    - tx-icmp-policer-drops: '0'
+                      rx-arp-rate-limit-drops: '0'
+                      tx-icmp-mirrored-drops: '0'
+                      vdevice-name: 169.254.10.10
+                      cpu-policer-drops: '0'
+                      interface-disabled: '0'
+                      rx-arp-reply-drops: '0'
+                      tx-no-arp-drops: '0'
+                      ifname: ge0/2
+                      split-horizon-drops: '0'
+                      tx-arp-request-fail: '0'
+                      af-type: ipv6
+                      arp-add-fails: '0'
+                      rx-policer-remark: '0'
+                      mirror-drops: '0'
+                      tx-arp-rate-limit-drops: '0'
+                      rx-ip-ttl-expired: '0'
+                      rx-arp-non-local-drops: '0'
+                      vpn-id: '0'
+                      vdevice-host-name: vm3
+                      ipv6-address: '-'
+                      rx-policer-drops: '0'
+                      bad-label: '0'
+                      ip-address: '-'
+                      vdevice-dataKey: 169.254.10.10-0-ge0/2-ipv6
+                      route-lookup-fail: '0'
+                      lastupdated: 1643079662907
+                      rx-non-ip-drops: '0'
+                      filter-drops: '0'
+                    - tx-icmp-policer-drops: '0'
+                      rx-arp-rate-limit-drops: '0'
+                      tx-icmp-mirrored-drops: '0'
+                      vdevice-name: 169.254.10.10
+                      cpu-policer-drops: '0'
+                      interface-disabled: '0'
+                      rx-arp-reply-drops: '0'
+                      tx-no-arp-drops: '0'
+                      ifname: ge0/3
+                      split-horizon-drops: '0'
+                      tx-arp-request-fail: '0'
+                      af-type: ipv4
+                      arp-add-fails: '0'
+                      rx-policer-remark: '0'
+                      mirror-drops: '0'
+                      tx-arp-rate-limit-drops: '0'
+                      rx-ip-ttl-expired: '0'
+                      rx-arp-non-local-drops: '0'
+                      vpn-id: '0'
+                      vdevice-host-name: vm3
+                      ipv6-address: '-'
+                      rx-policer-drops: '0'
+                      bad-label: '0'
+                      ip-address: '-'
+                      vdevice-dataKey: 169.254.10.10-0-ge0/3-ipv4
+                      route-lookup-fail: '0'
+                      lastupdated: 1643079662907
+                      rx-non-ip-drops: '0'
+                      filter-drops: '0'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /device/interface/ipv6Stats:
+    get:
+      tags:
+      - Real-Time Monitoring - Interface
+      description: Get interface IPv6 stats
+      operationId: getDeviceInterfaceIpv6Stats
+      parameters:
+      - name: vpn-id
+        in: query
+        description: VPN Id
+        schema:
+          type: string
+      - name: ifname
+        in: query
+        description: IF Name
+        schema:
+          type: string
+          enum:
+          - ge0/0
+          - ge0/1
+          - ge0/2
+          - ge0/3
+          - ge0/4
+          - ge0/5
+          - ge0/6
+          - ge0/7
+          - system
+          - eth0
+      - name: af-type
+        in: query
+        description: AF Type
+        schema:
+          type: string
+          enum:
+          - ipv4
+          - ipv6
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Interface IPv6 stats:
+                  description: Interface IPv6 stats
+                  value:
+                    data:
+                    - in-forwarded-pkts: '0'
+                      vdevice-name: 169.254.10.12
+                      out-pkts: '0'
+                      in-forwarded-octets: '0'
+                      in-discarded-pkts: '0'
+                      out-forwarded-octets: '0'
+                      in-error-pkts: '0'
+                      vdevice-host-name: vm5
+                      in-pkts: '0'
+                      out-forwarded-pkts: '0'
+                      out-octets: '0'
+                      out-discarded-pkts: '0'
+                      in-octets: '0'
+                      vdevice-dataKey: 169.254.10.12-
+                      name: GigabitEthernet1
+                      lastupdated: 1645602691945
+                      out-error-pkts: '0'
+                    - in-forwarded-pkts: '0'
+                      vdevice-name: 169.254.10.12
+                      out-pkts: '0'
+                      in-forwarded-octets: '0'
+                      in-discarded-pkts: '0'
+                      out-forwarded-octets: '0'
+                      in-error-pkts: '0'
+                      vdevice-host-name: vm5
+                      in-pkts: '0'
+                      out-forwarded-pkts: '0'
+                      out-octets: '0'
+                      out-discarded-pkts: '0'
+                      in-octets: '0'
+                      vdevice-dataKey: 169.254.10.12-
+                      name: GigabitEthernet2
+                      lastupdated: 1645602691945
+                      out-error-pkts: '0'
+                    - in-forwarded-pkts: '0'
+                      vdevice-name: 169.254.10.12
+                      out-pkts: '0'
+                      in-forwarded-octets: '0'
+                      in-discarded-pkts: '0'
+                      out-forwarded-octets: '0'
+                      in-error-pkts: '0'
+                      vdevice-host-name: vm5
+                      in-pkts: '0'
+                      out-forwarded-pkts: '0'
+                      out-octets: '0'
+                      out-discarded-pkts: '0'
+                      in-octets: '0'
+                      vdevice-dataKey: 169.254.10.12-
+                      name: GigabitEthernet3
+                      lastupdated: 1645602691946
+                      out-error-pkts: '0'
+                    - in-forwarded-pkts: '0'
+                      vdevice-name: 169.254.10.12
+                      out-pkts: '0'
+                      in-forwarded-octets: '0'
+                      in-discarded-pkts: '0'
+                      out-forwarded-octets: '0'
+                      in-error-pkts: '0'
+                      vdevice-host-name: vm5
+                      in-pkts: '0'
+                      out-forwarded-pkts: '0'
+                      out-octets: '0'
+                      out-discarded-pkts: '0'
+                      in-octets: '0'
+                      vdevice-dataKey: 169.254.10.12-
+                      name: GigabitEthernet4
+                      lastupdated: 1645602691946
+                      out-error-pkts: '0'
+                    - in-forwarded-pkts: '0'
+                      vdevice-name: 169.254.10.12
+                      out-pkts: '0'
+                      in-forwarded-octets: '0'
+                      in-discarded-pkts: '0'
+                      out-forwarded-octets: '0'
+                      in-error-pkts: '0'
+                      vdevice-host-name: vm5
+                      in-pkts: '0'
+                      out-forwarded-pkts: '0'
+                      out-octets: '0'
+                      out-discarded-pkts: '0'
+                      in-octets: '0'
+                      vdevice-dataKey: 169.254.10.12-
+                      name: GigabitEthernet5
+                      lastupdated: 1645602691946
+                      out-error-pkts: '0'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /device/interface/pkt_size:
+    get:
+      tags:
+      - Real-Time Monitoring - Interface
+      description: Get interface packet size
+      operationId: getDeviceInterfacePktSizes
+      parameters:
+      - name: vpn-id
+        in: query
+        description: VPN Id
+        schema:
+          type: string
+      - name: ifname
+        in: query
+        description: IF Name
+        schema:
+          type: string
+          enum:
+          - ge0/0
+          - ge0/1
+          - ge0/2
+          - ge0/3
+          - ge0/4
+          - ge0/5
+          - ge0/6
+          - ge0/7
+          - system
+          - eth0
+      - name: af-type
+        in: query
+        description: AF Type
+        schema:
+          type: string
+          enum:
+          - ipv4
+          - ipv6
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Interface packet size:
+                  description: Interface packet size
+                  value:
+                    data:
+                    - ip-address: '-'
+                      vdevice-dataKey: 169.254.10.10-0-ge0/1-ipv4
+                      vdevice-name: 169.254.10.10
+                      ifname: ge0/1
+                      num-flaps: '0'
+                      af-type: ipv4
+                      lastupdated: 1643080426479
+                      vpn-id: '0'
+                      vdevice-host-name: vm3
+                      ipv6-address: '-'
+                    - ip-address: '-'
+                      vdevice-dataKey: 169.254.10.10-0-ge0/1-ipv6
+                      vdevice-name: 169.254.10.10
+                      ifname: ge0/1
+                      num-flaps: '0'
+                      af-type: ipv6
+                      lastupdated: 1643080426479
+                      vpn-id: '0'
+                      vdevice-host-name: vm3
+                      ipv6-address: '-'
+                    - ip-address: '-'
+                      vdevice-dataKey: 169.254.10.10-0-ge0/2-ipv4
+                      vdevice-name: 169.254.10.10
+                      ifname: ge0/2
+                      num-flaps: '0'
+                      af-type: ipv4
+                      lastupdated: 1643080426479
+                      vpn-id: '0'
+                      vdevice-host-name: vm3
+                      ipv6-address: '-'
+                    - ip-address: '-'
+                      vdevice-dataKey: 169.254.10.10-0-ge0/2-ipv6
+                      vdevice-name: 169.254.10.10
+                      ifname: ge0/2
+                      num-flaps: '0'
+                      af-type: ipv6
+                      lastupdated: 1643080426479
+                      vpn-id: '0'
+                      vdevice-host-name: vm3
+                      ipv6-address: '-'
+                    - ip-address: '-'
+                      vdevice-dataKey: 169.254.10.10-0-ge0/3-ipv4
+                      vdevice-name: 169.254.10.10
+                      ifname: ge0/3
+                      num-flaps: '0'
+                      af-type: ipv4
+                      lastupdated: 1643080426479
+                      vpn-id: '0'
+                      vdevice-host-name: vm3
+                      ipv6-address: '-'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /device/interface/port_stats:
+    get:
+      tags:
+      - Real-Time Monitoring - Interface
+      description: Get interface port stats
+      operationId: getDeviceInterfacePortStats
+      parameters:
+      - name: vpn-id
+        in: query
+        description: VPN Id
+        schema:
+          type: string
+      - name: ifname
+        in: query
+        description: IF Name
+        schema:
+          type: string
+          enum:
+          - ge0/0
+          - ge0/1
+          - ge0/2
+          - ge0/3
+          - ge0/4
+          - ge0/5
+          - ge0/6
+          - ge0/7
+          - system
+          - eth0
+      - name: af-type
+        in: query
+        description: AF Type
+        schema:
+          type: string
+          enum:
+          - ipv4
+          - ipv6
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Interface port stats:
+                  description: Interface port stats
+                  value:
+                    data:
+                    - ip-address: '-'
+                      vdevice-dataKey: 169.254.10.10-0-ge0/1-ipv4
+                      vdevice-name: 169.254.10.10
+                      ifname: ge0/1
+                      af-type: ipv4
+                      lastupdated: 1643080839352
+                      vpn-id: '0'
+                      vdevice-host-name: vm3
+                      ipv6-address: '-'
+                    - ip-address: '-'
+                      vdevice-dataKey: 169.254.10.10-0-ge0/1-ipv6
+                      vdevice-name: 169.254.10.10
+                      ifname: ge0/1
+                      af-type: ipv6
+                      lastupdated: 1643080839352
+                      vpn-id: '0'
+                      vdevice-host-name: vm3
+                      ipv6-address: '-'
+                    - ip-address: '-'
+                      vdevice-dataKey: 169.254.10.10-0-ge0/2-ipv4
+                      vdevice-name: 169.254.10.10
+                      ifname: ge0/2
+                      af-type: ipv4
+                      lastupdated: 1643080839352
+                      vpn-id: '0'
+                      vdevice-host-name: vm3
+                      ipv6-address: '-'
+                    - ip-address: '-'
+                      vdevice-dataKey: 169.254.10.10-0-ge0/2-ipv6
+                      vdevice-name: 169.254.10.10
+                      ifname: ge0/2
+                      af-type: ipv6
+                      lastupdated: 1643080839352
+                      vpn-id: '0'
+                      vdevice-host-name: vm3
+                      ipv6-address: '-'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /device/interface/qosStats:
+    get:
+      tags:
+      - Real-Time Monitoring - Interface
+      description: Get interface QOS stats
+      operationId: getDeviceInterfaceQosStats
+      parameters:
+      - name: vpn-id
+        in: query
+        description: VPN Id
+        schema:
+          type: string
+      - name: ifname
+        in: query
+        description: IF Name
+        schema:
+          type: string
+          enum:
+          - ge0/0
+          - ge0/1
+          - ge0/2
+          - ge0/3
+          - ge0/4
+          - ge0/5
+          - ge0/6
+          - ge0/7
+          - system
+          - eth0
+      - name: af-type
+        in: query
+        description: AF Type
+        schema:
+          type: string
+          enum:
+          - ipv4
+          - ipv6
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Interface QOS stats:
+                  description: Interface QOS stats
+                  value:
+                    data:
+                    - drop-bytes: '0'
+                      vdevice-name: 169.254.10.13
+                      early-drop-bytes: '0'
+                      early-drop-pkts: '0'
+                      classified-bytes: '771'
+                      vdevice-host-name: vm6
+                      has-child: 'false'
+                      vdevice-dataKey: 169.254.10.13-GigabitEthernet2-vpn10_qos_policy-Queue0
+                      classified-pkts: '3'
+                      classifier-entry-name: Queue0
+                      policy-name: vpn10_qos_policy
+                      output-bytes: '771'
+                      name: GigabitEthernet2
+                      lastupdated: 1654656462183
+                      drop-pkts: '0'
+                      output-pkts: '3'
+                    - drop-bytes: '0'
+                      vdevice-name: 169.254.10.13
+                      early-drop-bytes: '0'
+                      early-drop-pkts: '0'
+                      classified-bytes: '0'
+                      vdevice-host-name: vm6
+                      has-child: 'false'
+                      vdevice-dataKey: 169.254.10.13-GigabitEthernet2-vpn10_qos_policy-class-default
+                      classified-pkts: '0'
+                      classifier-entry-name: class-default
+                      output-bytes: '0'
+                      policy-name: vpn10_qos_policy
+                      name: GigabitEthernet2
+                      lastupdated: 1654656462183
+                      drop-pkts: '0'
+                      output-pkts: '0'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /device/interface/queue_stats:
+    get:
+      tags:
+      - Real-Time Monitoring - Interface
+      description: Get interface queue stats
+      operationId: getDeviceInterfaceQueueStats
+      parameters:
+      - name: vpn-id
+        in: query
+        description: VPN Id
+        schema:
+          type: string
+      - name: ifname
+        in: query
+        description: IF Name
+        schema:
+          type: string
+          enum:
+          - ge0/0
+          - ge0/1
+          - ge0/2
+          - ge0/3
+          - ge0/4
+          - ge0/5
+          - ge0/6
+          - ge0/7
+          - system
+          - eth0
+      - name: af-type
+        in: query
+        description: AF Type
+        schema:
+          type: string
+          enum:
+          - ipv4
+          - ipv6
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Interface queue stats:
+                  description: Interface queue stats
+                  value:
+                    data:
+                    - qnum: '0'
+                      max-depth: '0'
+                      queued-packets: '0'
+                      vdevice-name: 169.254.10.10
+                      avg-queue: '0'
+                      red-drop-packets: '0'
+                      vpn-id: '0'
+                      queued-bytes: '0'
+                      tail-drop-bytes: '0'
+                      vdevice-host-name: vm3
+                      red-drop-bytes: '0'
+                      vdevice-dataKey: 169.254.10.10-0-ge0/1-ipv4-0
+                      ifname: ge0/1
+                      tx-packets: '0'
+                      queue-pps: '0'
+                      af-type: ipv4
+                      tx-bytes: '0'
+                      lastupdated: 1643081385319
+                      queue-depth: '0'
+                      queue-drop-pps: '0'
+                      tail-drop-packets: '0'
+                    - qnum: '2'
+                      max-depth: '0'
+                      queued-packets: '0'
+                      vdevice-name: 169.254.10.10
+                      avg-queue: '0'
+                      red-drop-packets: '0'
+                      queued-bytes: '0'
+                      tail-drop-bytes: '0'
+                      vpn-id: '0'
+                      vdevice-host-name: vm3
+                      red-drop-bytes: '0'
+                      vdevice-dataKey: 169.254.10.10-0-ge0/1-ipv4-2
+                      ifname: ge0/1
+                      tx-packets: '0'
+                      queue-pps: '0'
+                      tx-bytes: '0'
+                      af-type: ipv4
+                      lastupdated: 1643081385319
+                      queue-depth: '0'
+                      queue-drop-pps: '0'
+                      tail-drop-packets: '0'
+                    - qnum: '3'
+                      max-depth: '0'
+                      queued-packets: '0'
+                      vdevice-name: 169.254.10.10
+                      avg-queue: '0'
+                      red-drop-packets: '0'
+                      queued-bytes: '0'
+                      tail-drop-bytes: '0'
+                      vpn-id: '0'
+                      vdevice-host-name: vm3
+                      red-drop-bytes: '0'
+                      vdevice-dataKey: 169.254.10.10-0-ge0/1-ipv4-3
+                      ifname: ge0/1
+                      tx-packets: '0'
+                      queue-pps: '0'
+                      tx-bytes: '0'
+                      af-type: ipv4
+                      lastupdated: 1643081385319
+                      queue-depth: '0'
+                      queue-drop-pps: '0'
+                      tail-drop-packets: '0'
+                    - qnum: '4'
+                      max-depth: '0'
+                      queued-packets: '0'
+                      vdevice-name: 169.254.10.10
+                      avg-queue: '0'
+                      red-drop-packets: '0'
+                      queued-bytes: '0'
+                      tail-drop-bytes: '0'
+                      vpn-id: '0'
+                      vdevice-host-name: vm3
+                      red-drop-bytes: '0'
+                      vdevice-dataKey: 169.254.10.10-0-ge0/1-ipv4-4
+                      ifname: ge0/1
+                      tx-packets: '0'
+                      queue-pps: '0'
+                      tx-bytes: '0'
+                      af-type: ipv4
+                      lastupdated: 1643081385319
+                      queue-depth: '0'
+                      queue-drop-pps: '0'
+                      tail-drop-packets: '0'
+                    - qnum: '5'
+                      max-depth: '0'
+                      queued-packets: '0'
+                      vdevice-name: 169.254.10.10
+                      avg-queue: '0'
+                      red-drop-packets: '0'
+                      queued-bytes: '0'
+                      tail-drop-bytes: '0'
+                      vpn-id: '0'
+                      vdevice-host-name: vm3
+                      red-drop-bytes: '0'
+                      vdevice-dataKey: 169.254.10.10-0-ge0/1-ipv4-5
+                      ifname: ge0/1
+                      tx-packets: '0'
+                      queue-pps: '0'
+                      tx-bytes: '0'
+                      af-type: ipv4
+                      lastupdated: 1643081385319
+                      queue-depth: '0'
+                      queue-drop-pps: '0'
+                      tail-drop-packets: '0'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /device/interface/serial:
+    get:
+      tags:
+      - Real-Time Monitoring - Interface
+      description: Get serial interface
+      operationId: getDeviceSerialInterface
+      parameters:
+      - name: vpn-id
+        in: query
+        description: VPN Id
+        schema:
+          type: string
+      - name: ifname
+        in: query
+        description: IF Name
+        schema:
+          type: string
+          enum:
+          - ge0/0
+          - ge0/1
+          - ge0/2
+          - ge0/3
+          - ge0/4
+          - ge0/5
+          - ge0/6
+          - ge0/7
+          - system
+          - eth0
+      - name: af-type
+        in: query
+        description: AF Type
+        schema:
+          type: string
+          enum:
+          - ipv4
+          - ipv6
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Serial interface:
+                  description: Serial interface
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.15
+                      vdevice-host-name: vm5
+                      ifname: eth0
+                      crc-type: '32'
+                      loopback: Green
+                      keepalive: '3'
+                      timeslot: '10'
+                      vdevice-dataKey: 172.16.255.15
+                      subrate: '100000'
+                      lastupdated: '1661309393233'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /device/interface/stats:
+    get:
+      tags:
+      - Real-Time Monitoring - Interface
+      description: Get interface stats
+      operationId: getDeviceInterfaceStats
+      parameters:
+      - name: vpn-id
+        in: query
+        description: VPN Id
+        schema:
+          type: string
+      - name: ifname
+        in: query
+        description: IF Name
+        schema:
+          type: string
+          enum:
+          - ge0/0
+          - ge0/1
+          - ge0/2
+          - ge0/3
+          - ge0/4
+          - ge0/5
+          - ge0/6
+          - ge0/7
+          - system
+          - eth0
+      - name: af-type
+        in: query
+        description: AF Type
+        schema:
+          type: string
+          enum:
+          - ipv4
+          - ipv6
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Interface stats:
+                  description: Interface stats
+                  value:
+                    data:
+                    - vdevice-name: 169.254.10.10
+                      rx-packets: '6634251'
+                      rx-errors: '0'
+                      tx-kbps: '18'
+                      tx-errors: '0'
+                      tx-pps: '13'
+                      vpn-id: '0'
+                      dot1x-rx-pkts: '0'
+                      vdevice-host-name: vm3
+                      rx-drops: '48776'
+                      tx-drops: '2'
+                      ipv6-address: '-'
+                      dot1x-tx-pkts: '0'
+                      ip-address: '-'
+                      vdevice-dataKey: 169.254.10.10-0-ge0/1-ipv4
+                      ifname: ge0/1
+                      rx-pps: '13'
+                      tx-octets: '1255701145'
+                      tx-packets: '6493413'
+                      af-type: ipv4
+                      rx-octets: '1225652937'
+                      rx-kbps: '19'
+                      lastupdated: 1643083561267
+                    - vdevice-name: 169.254.10.10
+                      rx-packets: '3694'
+                      rx-errors: '0'
+                      tx-kbps: '0'
+                      tx-errors: '0'
+                      tx-pps: '0'
+                      vpn-id: '0'
+                      dot1x-rx-pkts: '0'
+                      vdevice-host-name: vm3
+                      rx-drops: '0'
+                      tx-drops: '0'
+                      ipv6-address: '-'
+                      dot1x-tx-pkts: '0'
+                      ip-address: '-'
+                      vdevice-dataKey: 169.254.10.10-0-ge0/1-ipv6
+                      ifname: ge0/1
+                      rx-pps: '0'
+                      tx-octets: '9280'
+                      tx-packets: '130'
+                      af-type: ipv6
+                      rx-octets: '411008'
+                      rx-kbps: '0'
+                      lastupdated: 1643083561267
+                    - vdevice-name: 169.254.10.10
+                      rx-packets: '0'
+                      rx-errors: '0'
+                      tx-kbps: '0'
+                      tx-errors: '0'
+                      tx-pps: '0'
+                      vpn-id: '0'
+                      dot1x-rx-pkts: '0'
+                      vdevice-host-name: vm3
+                      rx-drops: '0'
+                      tx-drops: '0'
+                      ipv6-address: '-'
+                      dot1x-tx-pkts: '0'
+                      ip-address: '-'
+                      vdevice-dataKey: 169.254.10.10-0-ge0/2-ipv4
+                      ifname: ge0/2
+                      rx-pps: '0'
+                      tx-octets: '0'
+                      tx-packets: '0'
+                      af-type: ipv4
+                      rx-octets: '0'
+                      rx-kbps: '0'
+                      lastupdated: 1643083561267
+                    - vdevice-name: 169.254.10.10
+                      rx-packets: '0'
+                      rx-errors: '0'
+                      tx-kbps: '0'
+                      tx-errors: '0'
+                      tx-pps: '0'
+                      vpn-id: '0'
+                      dot1x-rx-pkts: '0'
+                      vdevice-host-name: vm3
+                      rx-drops: '0'
+                      tx-drops: '0'
+                      ipv6-address: '-'
+                      dot1x-tx-pkts: '0'
+                      ip-address: '-'
+                      vdevice-dataKey: 169.254.10.10-0-ge0/2-ipv6
+                      ifname: ge0/2
+                      rx-pps: '0'
+                      tx-octets: '0'
+                      tx-packets: '0'
+                      af-type: ipv6
+                      rx-octets: '0'
+                      rx-kbps: '0'
+                      lastupdated: 1643083561267
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /device/interface/synced:
+    get:
+      tags:
+      - Real-Time Monitoring - Interface
+      description: Get device interfaces synchronously
+      operationId: getSyncedDeviceInterface
+      parameters:
+      - name: vpn-id
+        in: query
+        description: VPN Id
+        schema:
+          type: string
+      - name: ifname
+        in: query
+        description: IF Name
+        schema:
+          type: string
+          enum:
+          - ge0/0
+          - ge0/1
+          - ge0/2
+          - ge0/3
+          - ge0/4
+          - ge0/5
+          - ge0/6
+          - ge0/7
+          - system
+          - eth0
+      - name: af-type
+        in: query
+        description: AF Type
+        schema:
+          type: string
+          enum:
+          - ipv4
+          - ipv6
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device interface:
+                  description: Device interface
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.11
+                      if-admin-status: Up
+                      duplex: full
+                      tcp-mss-adjust: '1416'
+                      '@rid': 855
+                      ifname: ge0/1
+                      af-type: ipv4
+                      shaping-rate: 0
+                      if-oper-status: Up
+                      auto-neg: 'false'
+                      ifindex: 2
+                      if-tracker-status: NA
+                      createTimeStamp: 1647315879734
+                      secondary-address: ''
+                      vpn-id: '0'
+                      vdevice-host-name: vm1
+                      mtu: '1500'
+                      ipv6-address: '-'
+                      secondary: 'false'
+                      ip-address: 10.0.26.11/24
+                      hwaddr: 52:54:00:db:d9:1b
+                      speed-mbps: '1000'
+                      vdevice-dataKey: 172.16.255.11-0-ge0/1-ipv4
+                      vmanage-system-ip: 172.16.255.11
+                      lastupdated: 1647315879722
+                      port-type: service
+                      encap-type: 'null'
+                    - vdevice-name: 172.16.255.11
+                      if-admin-status: Up
+                      duplex: full
+                      tcp-mss-adjust: '1416'
+                      '@rid': 869
+                      ifname: ge0/2
+                      af-type: ipv4
+                      shaping-rate: 0
+                      if-oper-status: Up
+                      auto-neg: 'false'
+                      ifindex: 3
+                      allow-service: dhcpdnsicmphttps
+                      if-tracker-status: NA
+                      createTimeStamp: 1647315880679
+                      secondary-address: ''
+                      vpn-id: '0'
+                      vdevice-host-name: vm1
+                      mtu: '1500'
+                      ipv6-address: '-'
+                      secondary: 'false'
+                      ip-address: 10.0.5.11/24
+                      hwaddr: 52:54:00:5b:92:ab
+                      speed-mbps: '1000'
+                      vdevice-dataKey: 172.16.255.11-0-ge0/2-ipv4
+                      vmanage-system-ip: 172.16.255.11
+                      lastupdated: 1647315879722
+                      port-type: transport
+                      encap-type: 'null'
+                    - ifindex: 4
+                      vdevice-name: 172.16.255.11
+                      if-tracker-status: NA
+                      if-admin-status: Down
+                      createTimeStamp: 1647315881312
+                      tcp-mss-adjust: '1416'
+                      vpn-id: '0'
+                      vdevice-host-name: vm1
+                      mtu: '1500'
+                      ipv6-address: '-'
+                      hwaddr: 52:54:00:36:5b:37
+                      ip-address: '-'
+                      vdevice-dataKey: 172.16.255.11-0-ge0/3-ipv4
+                      '@rid': 883
+                      ifname: ge0/3
+                      vmanage-system-ip: 172.16.255.11
+                      af-type: ipv4
+                      lastupdated: 1647315879722
+                      shaping-rate: 0
+                      port-type: service
+                      if-oper-status: Down
+                      encap-type: 'null'
+                    - vdevice-name: 172.16.255.11
+                      if-admin-status: Up
+                      duplex: full
+                      tcp-mss-adjust: '1416'
+                      '@rid': 897
+                      ifname: ge0/4
+                      af-type: ipv4
+                      shaping-rate: 0
+                      if-oper-status: Up
+                      auto-neg: 'false'
+                      ifindex: 5
+                      if-tracker-status: NA
+                      createTimeStamp: 1647315882880
+                      secondary-address: ''
+                      vpn-id: '0'
+                      vdevice-host-name: vm1
+                      mtu: '1500'
+                      ipv6-address: '-'
+                      secondary: 'false'
+                      ip-address: 10.0.7.11/24
+                      hwaddr: 52:54:00:67:74:f1
+                      speed-mbps: '1000'
+                      vdevice-dataKey: 172.16.255.11-0-ge0/4-ipv4
+                      vmanage-system-ip: 172.16.255.11
+                      lastupdated: 1647315879722
+                      port-type: service
+                      encap-type: 'null'
+                    - ifindex: 6
+                      vdevice-name: 172.16.255.11
+                      if-tracker-status: NA
+                      if-admin-status: Down
+                      createTimeStamp: 1647315883461
+                      tcp-mss-adjust: '1416'
+                      vpn-id: '0'
+                      vdevice-host-name: vm1
+                      mtu: '1500'
+                      ipv6-address: '-'
+                      hwaddr: 52:54:00:0f:c2:a7
+                      ip-address: '-'
+                      vdevice-dataKey: 172.16.255.11-0-ge0/5-ipv4
+                      '@rid': 908
+                      ifname: ge0/5
+                      vmanage-system-ip: 172.16.255.11
+                      af-type: ipv4
+                      lastupdated: 1647315879722
+                      shaping-rate: 0
+                      port-type: service
+                      if-oper-status: Down
+                      encap-type: 'null'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /device/interface/trustsec:
+    get:
+      tags:
+      - Real-Time Monitoring - Interface
+      description: Get policy filter memory usage from device
+      operationId: trustsec
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Policy filter memory usage:
+                  description: Policy filter memory usage
+                  value:
+                    data:
+                    - mode: cts-ndac-mode-manual
+                      if-name: GigabitEthernet2
+                      sgt-propagate: cts-sgt-propagate-enabled
+                      vdevice-dataKey: 169.254.10.13-vm6-GigabitEthernet2
+                      vdevice-name: 169.254.10.13
+                      trusted: cts-manual-untrusted
+                      lastupdated: 1654654895429
+                      peer-sgt: 0
+                      vdevice-host-name: vm6
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,Device Monitoring-write
+  /device/interface/vpn:
+    get:
+      tags:
+      - Real-Time Monitoring - Interface
+      description: Get device interfaces per VPN
+      operationId: generateDeviceInterfaceVPN
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device interface:
+                  description: Device interface
+                  value:
+                    data:
+                    - index: 0
+                      vpnId: '0'
+                      ifname: ge0/1
+                    - index: 1
+                      vpnId: '0'
+                      ifname: ge0/2
+                    - index: 2
+                      vpnId: '0'
+                      ifname: ge0/3
+                    - index: 3
+                      vpnId: '0'
+                      ifname: ge0/4
+                    - index: 4
+                      vpnId: '0'
+                      ifname: ge0/5
+                    - index: 5
+                      vpnId: '0'
+                      ifname: ge0/6
+                    - index: 6
+                      vpnId: '0'
+                      ifname: ge0/7
+                    - index: 7
+                      vpnId: '0'
+                      ifname: system
+                    - index: 8
+                      vpnId: '1'
+                      ifname: ge0/0
+                    - index: 9
+                      vpnId: '512'
+                      ifname: eth0
+                    - index: 10
+                      vpnId: '65528'
+                      ifname: loopback65528
+                    - index: 11
+                      vpnId: '65530'
+                      ifname: loopback65530
+                    - index: 12
+                      vpnId: '65530'
+                      ifname: loopback65531
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read

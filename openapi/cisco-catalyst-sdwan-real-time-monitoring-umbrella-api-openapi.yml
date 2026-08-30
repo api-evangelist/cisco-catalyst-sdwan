@@ -1,0 +1,268 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - Umbrella API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - Umbrella
+paths:
+  /device/umbrella/device-registration:
+    get:
+      tags:
+      - Real-Time Monitoring - Umbrella
+      description: Get Umbrella device registration from device
+      operationId: getUmbrellaDevReg
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Umbrella device registration:
+                  description: Umbrella device registration
+                  value:
+                    data:
+                    - vdevice-name: 169.254.10.9
+                      vdevice-host-name: vm2
+                      vdevice-dataKey: 169.254.10.9
+                      vpn-id: '1'
+                      intf-name: GigabitEthernet1/0/1
+                      state: SUCCESS
+                      deviceID: 010a9b2b0d5cb21f
+                      org-id: 1892929
+                      retry-count: 10
+                      tag: vpn29
+                      label: '-'
+                      http-response-code: 200
+                      http-response-text: SUCCESS
+                      last-error: '-'
+                      last-code: '-'
+                      last-code-text: '-'
+                      lastupdated: 1659327030348
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/umbrella/dnscrypt:
+    get:
+      tags:
+      - Real-Time Monitoring - Umbrella
+      description: Get Umbrella DNScrypt information from device
+      operationId: getUmbrellaDNSCrypt
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Umbrella DNScrypt information:
+                  description: Umbrella DNScrypt information
+                  value:
+                    data:
+                    - vdevice-name: 169.254.10.10
+                      index: 0
+                      serial-num: 0
+                      vdevice-host-name: vm3
+                      certificate-valid-from: Jan 01 00:00:00 1970 GMT
+                      client-magic: 0:0:0:0
+                      vdevice-dataKey: 169.254.10.10-0
+                      certificate-validity: Invalid
+                      client-public-key: B40F:FA9A:31BB:690:C9F:7FEF:60A6:7FF5:286A:F519:64B2:586B:E35E:E4F0:E496:7FEE
+                      certificate-state: Init
+                      resolver-public-key: 0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0
+                      certificate-valid-till: Jan 01 00:00:00 1970 GMT
+                      lastupdated: 1644823735329
+                      certificate-last-refresh-time: Jan 01 00:00:00 1970 GMT
+                      resolver-address: 208.67.222.222
+                    - vdevice-name: 169.254.10.10
+                      index: 1
+                      serial-num: 0
+                      vdevice-host-name: vm3
+                      certificate-valid-from: Jan 01 00:00:00 1970 GMT
+                      client-magic: 0:0:0:0
+                      vdevice-dataKey: 169.254.10.10-1
+                      certificate-validity: Invalid
+                      client-public-key: 97A1:BCCD:92FE:7FCE:2EC7:CEBC:B6CB:7589:9E63:D830:5D56:FEFD:301E:56C3:D9EF:1851
+                      certificate-state: Init
+                      resolver-public-key: 0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0
+                      certificate-valid-till: Jan 01 00:00:00 1970 GMT
+                      lastupdated: 1644823735329
+                      certificate-last-refresh-time: Jan 01 00:00:00 1970 GMT
+                      resolver-address: 208.67.220.220
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/umbrella/dp-stats:
+    get:
+      tags:
+      - Real-Time Monitoring - Umbrella
+      description: Get Umbrella dp-stats from device
+      operationId: getUmbrellaDpStats
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Umbrella dp-stats:
+                  description: Umbrella dp-stats
+                  value:
+                    data:
+                    - vdevice-name: 169.254.10.9
+                      vdevice-host-name: vm2
+                      vpn-id: '1'
+                      local-domain-bypass-pkts: '0'
+                      dnscrypt-dec-rcvd: '0'
+                      redirect-pkts: '0'
+                      dnscrypt-enc-sent: '0'
+                      dnscrypt-errors: '0'
+                      parser-errors: '0'
+                      lastupdated: 1659327030348
+                      vdevice-dataKey: 169.254.10.9
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/umbrella/overview:
+    get:
+      tags:
+      - Real-Time Monitoring - Umbrella
+      description: Get Umbrella overview from device
+      operationId: getUmbrellaOverview
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Umbrella overview:
+                  description: Umbrella overview
+                  value:
+                    data:
+                    - vdevice-dataKey: 169.254.10.10
+                      vdevice-name: 169.254.10.10
+                      registrations-requested: '0'
+                      registrations-completed: '0'
+                      lastupdated: 1644823908956
+                      dnscrypt: 'true'
+                      vdevice-host-name: vm3
+                      last-success-attempt: '0000-00-00T00:00:00+00:00'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/umbrella/umbrella-config:
+    get:
+      tags:
+      - Real-Time Monitoring - Umbrella
+      description: Get Umbrella configuration from device
+      operationId: getUmbrellaConfig
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Umbrella configuration:
+                  description: Umbrella configuration
+                  value:
+                    data:
+                    - vdevice-dataKey: 169.254.10.10
+                      vdevice-name: 169.254.10.10
+                      ldb-status: -N/A-
+                      public-key: B0E1:6D15:C32D:4E8C:996B:635A:FA90:05B9
+                      lastupdated: 1644823464208
+                      DNSCrypt: Enabled
+                      vdevice-host-name: vm3
+                      resolver-address: 208.67.222.222, 208.67.220.220
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write

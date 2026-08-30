@@ -1,0 +1,431 @@
+openapi: 3.2.0
+info:
+  title: Others Configuration - Device Firmware Update API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Configuration - Device Firmware Update
+paths:
+  /device/action/firmware:
+    post:
+      tags:
+      - Configuration - Device Firmware Update
+      description: Upload firmware image package
+      operationId: processFirmwareImage
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: admin,Software Upgrade-write,Software Upgrade > Controller-write,Software Upgrade > Edge-write
+    get:
+      tags:
+      - Configuration - Device Firmware Update
+      description: Get list of firmware images in the repository
+      operationId: getFirmwareImages
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Software Upgrade-read,Software Upgrade > Edge-read,Software Upgrade > Controller-read
+  /device/action/firmware-upgrade:
+    post:
+      tags:
+      - Configuration - Device Firmware Update
+      description: Eemote firmware on device
+      operationId: remoteFirmwareImageUpgrade
+      requestBody:
+        description: Request body
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Example Value:
+                description: Example Value
+                value:
+                  action: firmwareupgrade
+                  actionName: firmware_upgrade
+                  actionStart: Tue Apr 02 2024 09:10:13 UTC
+                  actionStartMillis: 1712029213
+                  actionEnd: Tue Apr 02 2024 12:10:13 UTC
+                  actionEndMillis: 1712040013
+                  timeZone: UTC
+                  input:
+                    data:
+                    - family: Teleworker
+                      version: 875d4845-df12-4fdf-91f6-b73c601b2c3f
+                      remoteServerId: 192448a2-36bd-4f50-af04-03b428cd5a8f
+                    versionType: remote
+                  devices:
+                  - deviceIP: 172.16.255.15
+                    deviceId: C8K-5c2ed42c-b47e-4155-8000-11c2ddd1f63d
+                  deviceType: vedge
+                  firmwareType: cellular
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionSoftwarepackageFirmwareFirmwareupgradeapiRequestExamplePostfirmwareupgradereq'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  action:
+                    type: string
+                    example: firmwareupgrade
+                  actionEnd:
+                    type: string
+                    example: Wed Jan 12 03:00:00 IST 2023
+                  actionEndMillis:
+                    type: integer
+                    format: int32
+                    example: 1641936600000
+                  actionName:
+                    type: string
+                    example: firmware_upgrade
+                  actionStart:
+                    type: string
+                    example: Tue Jan 11 23:00:00 IST 2023
+                  actionStartMillis:
+                    type: integer
+                    format: int32
+                    example: 1641922200000
+                  deviceType:
+                    type: string
+                    example: vedge
+                  devices:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        deviceIP:
+                          type: string
+                          example: 40.1.1.1
+                        deviceId:
+                          type: string
+                          example: CG113-4GW6B-KWC254402PM
+                      $$ref: '#/components/schemas/FirmwareImageRemoteUpgradeDevices'
+                  firmwareType:
+                    type: string
+                    description: 'Type of firmware. Supported values: cellular, cellular_lte_450, wifi'
+                    example: cellular
+                  input:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            family:
+                              type: string
+                              example: Teleworker
+                            remoteServerId:
+                              type: string
+                              example: 192448a2-36bd-4f50-af04-03b428cd5a8f
+                            version:
+                              type: string
+                              example: 875d4845-df12-4fdf-91f6-b73c601b2c3f
+                          $$ref: '#/components/schemas/FirmwareImageRemoteUpgradeInputData'
+                      versionType:
+                        type: string
+                        example: remote
+                    $$ref: '#/components/schemas/FirmwareImageRemoteUpgradeInput'
+                  timeZone:
+                    type: string
+                    example: Asia/Kolkata
+                $$ref: '#/components/schemas/FirmwareImageRemoteUpgrade'
+              examples:
+                Example:
+                  description: Example
+                  value:
+                    id: firmware_upgrade-e841dbae-13c2-49b9-9d0f-d5415eaed7f7
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionSoftwarepackageFirmwareFirmwareupgradeapiResponseExamplePostfirmwareupgraderesp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/action/firmware-upgrade/devices:
+    get:
+      tags:
+      - Configuration - Device Firmware Update
+      description: firmware supported devices
+      operationId: getFirmwareDevices
+      parameters:
+      - name: firmwareType
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  description:
+                    type: string
+                    example: Firmware Image Path
+                  filePath:
+                    type: string
+                    example: /home/admin/
+                  remoteServerId:
+                    type: string
+                    example: f7ae1f4b-9900-424f-92ca-22d2231f55dc
+                  versionId:
+                    type: string
+                    example: 9917f2ad-c152-406b-87cc-a3b251d0e1a8
+                $$ref: '#/components/schemas/ProcessGetFirmwareRemoteImageReq'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/action/firmware-upgrade/remote:
+    get:
+      tags:
+      - Configuration - Device Firmware Update
+      description: firmware remote image package
+      operationId: getFirmwareRemoteImage
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  description:
+                    type: string
+                    example: Firmware Image Path
+                  filePath:
+                    type: string
+                    example: /home/admin/
+                  remoteServerId:
+                    type: string
+                    example: f7ae1f4b-9900-424f-92ca-22d2231f55dc
+                  versionId:
+                    type: string
+                    example: 9917f2ad-c152-406b-87cc-a3b251d0e1a8
+                $$ref: '#/components/schemas/ProcessGetFirmwareRemoteImageReq'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+      - Configuration - Device Firmware Update
+      description: firmware remote image package
+      operationId: processFirmwareRemoteImage
+      requestBody:
+        description: Request body
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Example Value:
+                description: Example Value
+                value:
+                  data:
+                  - remoteServers:
+                    - 9d72ca05-f2dc-4816-b612-bff3ce1b81f6
+                    filePath: /home/admin/testdummynew
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionSoftwarepackageFirmwareFirmwareupgradeapiRequestExamplePostfirmwareupgraderemotereq'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  filePath:
+                    type: string
+                    example: /home/admin/
+                  remoteServerId:
+                    type: string
+                    example: f7ae1f4b-9900-424f-92ca-22d2231f55dc
+                $$ref: '#/components/schemas/ProcessFirmwareRemoteImageReq'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/action/firmware/activate:
+    post:
+      tags:
+      - Configuration - Device Firmware Update
+      description: Activate firmware on device
+      operationId: activateFirmwareImage
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: admin,Software Upgrade-write,Software Upgrade > Controller-write,Software Upgrade > Edge-write
+  /device/action/firmware/devices:
+    get:
+      tags:
+      - Configuration - Device Firmware Update
+      description: Get list of devices that support firmware upgrade
+      operationId: getDevicesFWUpgrade
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Software Upgrade-read,Software Upgrade > Edge-read,Software Upgrade > Controller-read
+  /device/action/firmware/install:
+    post:
+      tags:
+      - Configuration - Device Firmware Update
+      description: Install firmware on device
+      operationId: installFirmwareImage
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: admin,Software Upgrade-write,Software Upgrade > Controller-write,Software Upgrade > Edge-write
+  /device/action/firmware/remove:
+    post:
+      tags:
+      - Configuration - Device Firmware Update
+      description: Remove firmware on device
+      operationId: removeFirmwareImage
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: admin,Software Upgrade-write,Software Upgrade > Controller-write,Software Upgrade > Edge-write
+  /device/action/firmware/{versionId}:
+    get:
+      tags:
+      - Configuration - Device Firmware Update
+      description: Get firmware image details for a given version
+      operationId: getFirmwareImageDetails
+      parameters:
+      - name: versionId
+        in: path
+        description: Firmware image version
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Software Upgrade-read,Software Upgrade > Edge-read,Software Upgrade > Controller-read
+    delete:
+      tags:
+      - Configuration - Device Firmware Update
+      description: Delete firmware image package
+      operationId: deleteFirmwareImage
+      parameters:
+      - name: versionId
+        in: path
+        description: Firmware image version
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: admin,Software Upgrade-write,Software Upgrade > Controller-write,Software Upgrade > Edge-write

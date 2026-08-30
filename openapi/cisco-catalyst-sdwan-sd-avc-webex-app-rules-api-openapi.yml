@@ -1,0 +1,128 @@
+openapi: 3.2.0
+info:
+  title: Others SD AVC Webex App Rules API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: SD AVC Webex App Rules
+paths:
+  /monitor/sdavccloudconnector/webex:
+    get:
+      tags:
+      - SD AVC Webex App Rules
+      description: Get SD AVC App Rules for Webex
+      operationId: getWebexAppData
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                SD AVC App Rules for Webex:
+                  description: SD AVC App Rules for Webex
+                  value:
+                    header:
+                      generatedOn: '1717197352724'
+                      viewKeys:
+                        uniqueKey: []
+                        preferenceKey: grid-Webex
+                      columns:
+                      - title: Application Name
+                        property: appName
+                        dataType: string
+                      - title: Service Area
+                        property: serviceArea
+                        dataType: string
+                      - title: IP Address
+                        property: ip
+                        dataType: string
+                      - title: Port
+                        property: port
+                        dataType: string
+                      - title: L4 Protocol
+                        property: l4Protocol
+                        dataType: string
+                      - title: Quality of Service
+                        property: qos
+                        dataType: string
+                      - title: Primary or Fallback
+                        property: primaryOrFallback
+                        dataType: string
+                      - title: Region
+                        property: region
+                        dataType: string
+                      - title: Updated By
+                        property: updatedBy
+                        dataType: string
+                      - title: Last Updated
+                        property: lastUpdated
+                        displayFormat: DD MMM YYYY h:mm:ss A z
+                        inputFormat: unix-time
+                        dataType: date
+                      fields:
+                      - property: appName
+                        dataType: string
+                      - property: serviceArea
+                        dataType: string
+                      - property: ip
+                        dataType: string
+                      - property: port
+                        dataType: string
+                      - property: l4Protocol
+                        dataType: string
+                      - property: qos
+                        dataType: string
+                      - property: primaryOrFallback
+                        dataType: string
+                      - property: region
+                        dataType: string
+                      - property: updatedBy
+                        dataType: string
+                      - property: lastUpdated
+                        dataType: date
+                    data:
+                    - appName: webex-meeting
+                      ip: 114.29.192.0/19
+                      port: N/A
+                      l4Protocol: TCP
+                      serviceArea: meetings
+                      qos: default
+                      primaryOrFallback: default
+                    - appName: webex-meeting
+                      ip: 128.177.36.0/24
+                      port: 19560-65535
+                      l4Protocol: UDP
+                      serviceArea: calling
+                      qos: optimizemedia
+                      primaryOrFallback: default
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

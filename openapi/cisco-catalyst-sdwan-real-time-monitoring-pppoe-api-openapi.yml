@@ -1,0 +1,132 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - PPPoE API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - PPPoE
+paths:
+  /device/pppoe/session:
+    get:
+      tags:
+      - Real-Time Monitoring - PPPoE
+      description: Get PPPoE session list from device
+      operationId: createPPPoEInterfaceList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: object
+          properties:
+            deviceIp:
+              type: string
+          description: This is the valid DeviceIP
+          $$ref: '#/components/schemas/DeviceIP'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                PPPoE session list:
+                  description: PPPoE session list
+                  value:
+                    data:
+                    - vdevice-name: 169.254.10.9
+                      vdevice-host-name: vm2
+                      vpn-id: '0'
+                      ifname: ge0/1
+                      session-id: '1'
+                      server-mac: 00:0c:29:2e:20:1a
+                      local-mac: 00:0c:29:be:27:f5
+                      ppp-interface: ppp1
+                      ac-name: branch100
+                      service-name: '-'
+                      vdevice-dataKey: 169.254.10.9
+                      lastupdated: 1658198416779
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Interface-read,Interface-write
+  /device/pppoe/statistic:
+    get:
+      tags:
+      - Real-Time Monitoring - PPPoE
+      description: Get PPPoE statistics from device
+      operationId: createPPPoENeighborList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: object
+          properties:
+            deviceIp:
+              type: string
+          description: This is the valid DeviceIP
+          $$ref: '#/components/schemas/DeviceIP'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                PPPoE statistics:
+                  description: PPPoE statistics
+                  value:
+                    data:
+                    - pppoe-pads-pkts: '0'
+                      pppoe-ipcp-pkts: '0'
+                      vdevice-name: 169.254.10.10
+                      pppoe-lcp-pkts: '0'
+                      pppoe-tx-session-drops: '0'
+                      pppoe-pado-pkts: '0'
+                      pppoe-padt-pkts: '0'
+                      pppoe-padr-pkts: '0'
+                      vdevice-host-name: vm3
+                      pppoe-tx-pkts: '0'
+                      pppoe-inv-discovery-pkts: '0'
+                      pppoe-rx-session-drops: '0'
+                      vdevice-dataKey: 169.254.10.10
+                      pppoe-ccp-pkts: '0'
+                      lastupdated: 1643355873158
+                      pppoe-rx-pkts: '0'
+                      pppoe-padi-pkts: '0'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Interface-read,Interface-write

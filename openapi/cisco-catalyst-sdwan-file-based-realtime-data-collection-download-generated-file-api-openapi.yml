@@ -1,0 +1,101 @@
+openapi: 3.2.0
+info:
+  title: Others File based RealTime Data Collection - Download Generated File API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: File based RealTime Data Collection - Download Generated File
+paths:
+  /device/file-based/data-collection/download/{requestUUID}:
+    get:
+      tags:
+      - File based RealTime Data Collection - Download Generated File
+      description: Download generated file
+      operationId: downloadGeneratedFile
+      parameters:
+      - name: requestUUID
+        in: path
+        description: request UUID
+        required: true
+        schema:
+          type: string
+        example: c04aadac-6efb-4cfd-8cbd-0fc47e00e931
+      responses:
+        '200':
+          description: Generates file
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorMessage:
+                    type: string
+                    description: Message about bad request or parameters errors
+                  errorType:
+                    type: string
+                    description: Type of error
+                  operation:
+                    type: string
+                    description: Operation title
+                $$ref: '#/components/schemas/HttpError'
+              examples:
+                400 - Bad Requests:
+                  description: 400 - Bad Requests
+                  value:
+                    operation: Inititate file generation
+                    errorType: Invalid Payload or Parameter(s)
+                    errorMessage: Empty/Invalid Device IP
+                  $$ref: '#/components/examples/ComViptelaVmanageServerFilebasedRealtimeDatacollectionDatacollectionapiResponseExampleDownload'
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorMessage:
+                    type: string
+                    description: Message about bad request or parameters errors
+                  errorType:
+                    type: string
+                    description: Type of error
+                  operation:
+                    type: string
+                    description: Operation title
+                $$ref: '#/components/schemas/HttpError'
+              examples:
+                500 - Internal Server Error:
+                  description: 500 - Internal Server Error
+                  value:
+                    operation: 'Download generated file for UUID : b81467bb-9827-46a0-8db8-f742d4d91c0a'
+                    errorType: General or Internal Error
+                    errorMessage: Data Collection state is in-progress, Cannot download file at this moment
+                  $$ref: '#/components/examples/ComViptelaVmanageServerFilebasedRealtimeDatacollectionDatacollectionapiResponseExampleDownload500'
+      x-roles-required: System-read,System-write

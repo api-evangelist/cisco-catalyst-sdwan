@@ -1,0 +1,140 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Monitoring - SDRA API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Monitoring - SDRA
+paths:
+  /statistics/sdra/headends:
+    get:
+      tags:
+      - Monitoring - SDRA
+      description: Get SD-WAN Remote Access Head-end summary
+      operationId: getSdraHeadendSummary
+      parameters:
+      - name: site
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ipsec_enabled:
+                    type: integer
+                    format: int64
+                  sslvpn_enabled:
+                    type: integer
+                    format: int64
+                $$ref: '#/components/schemas/SdraHeadendSummary'
+              examples:
+                SDRA Head-end Summary:
+                  description: SDRA Head-end Summary
+                  value: "{\n  \"ipsec_enabled\": 5,\n  \"sslvpn_enabled\": 2,\n}"
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/sdra/sessions:
+    get:
+      tags:
+      - Monitoring - SDRA
+      description: Get SD-WAN Remote Access session summary
+      operationId: getSdraSessionSummary
+      parameters:
+      - name: site
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  top:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        host_name:
+                          type: string
+                        ipsec_anyconnect:
+                          type: integer
+                          format: int64
+                        ipsec_soho:
+                          type: integer
+                          format: int64
+                        ipsec_unknown:
+                          type: integer
+                          format: int64
+                        site_id:
+                          type: integer
+                          format: int64
+                        sslvpn_anyconnect:
+                          type: integer
+                          format: int64
+                        system_ip:
+                          type: string
+                      $$ref: '#/components/schemas/SdraDeviceStatsShort'
+                  total:
+                    type: object
+                    properties:
+                      ipsec_anyconnect:
+                        type: integer
+                        format: int64
+                      ipsec_soho:
+                        type: integer
+                        format: int64
+                      ipsec_unknown:
+                        type: integer
+                        format: int64
+                      sslvpn_anyconnect:
+                        type: integer
+                        format: int64
+                    $$ref: '#/components/schemas/SdraSessionCount'
+                $$ref: '#/components/schemas/SdraSessionSummary'
+              examples:
+                SDRA Session Summary:
+                  description: SDRA Session Summary
+                  value: "{\n  \"total\": {\n      \"ipsec_anyconnect\": 50,\n      \"ipsec_soho\": 20,\n      \"ipsec_unknown\": 25,\n      \"sslvpn_anyconnect\": 200,\n  }, \"top\": [\n      {\n          \"system_ip\": \"1.1.1.1\",\n          \"site_id\": 10,\n          \"host_name\": vm10,\n          \"ipsec_anyconnect\": 3,\n          \"ipsec_soho\": 5,\n          \"ipsec_unknown\": 11,\n          \"sslvpn_anyconnect\": 0,\n      },\n      {\n          \"system_ip\": \"2.2.2.2\",\n          \"site_id\": 20,\n          \"host_name\": vm20,\n          \"ipsec_anyconnect\": 0,\n          \"ipsec_soho\": 0,\n          \"ipsec_unknown\": 0,\n          \"sslvpn_anyconnect\": 85,\n      }\n  ]\n}"
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

@@ -1,0 +1,197 @@
+openapi: 3.2.0
+info:
+  title: Others Colocation API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Colocation
+paths:
+  /colocation/monitor/device/vnf:
+    get:
+      tags:
+      - Colocation
+      description: List all VNF attached with Device
+      operationId: getvnfByDeviceId
+      parameters:
+      - name: deviceId
+        in: query
+        required: true
+        schema:
+          type: object
+          properties:
+            deviceUuid:
+              type: string
+              example: C8K-f9f4a977-be6c-47f7-b3b2-10e916bb24db
+          description: This is valid DeviceUuid
+          $$ref: '#/components/schemas/DeviceUuid'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /colocation/monitor/vnf/action:
+    post:
+      tags:
+      - Colocation
+      description: To do VNF actions such as start, stop and restart
+      operationId: vnfActions
+      parameters:
+      - name: vmName
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: deviceId
+        in: query
+        schema:
+          type: object
+          properties:
+            deviceUuid:
+              type: string
+              example: C8K-f9f4a977-be6c-47f7-b3b2-10e916bb24db
+          description: This is valid DeviceUuid
+          $$ref: '#/components/schemas/DeviceUuid'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /colocation/monitor/vnf/alarms:
+    get:
+      tags:
+      - Colocation
+      description: Get event detail of VNF
+      operationId: getVNFEventsCountDetail
+      parameters:
+      - name: user_group
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /colocation/monitor/vnf/alarms/count:
+    get:
+      tags:
+      - Colocation
+      description: Get alarm count of VNF
+      operationId: getVNFAlarmCount
+      parameters:
+      - name: user_group
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /colocation/monitor/vnf/events:
+    get:
+      tags:
+      - Colocation
+      description: Get event detail of VNF
+      operationId: getVNFEventsDetail
+      parameters:
+      - name: vnfName
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /colocation/monitor/vnf/interface:
+    get:
+      tags:
+      - Colocation
+      description: Get interface detail of VNF
+      operationId: getVNFInterfaceDetail
+      parameters:
+      - name: vnfName
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: deviceIp
+        in: query
+        schema:
+          type: object
+          properties:
+            deviceIp:
+              type: string
+          description: This is the valid DeviceIP
+          $$ref: '#/components/schemas/DeviceIP'
+      - name: deviceClass
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true

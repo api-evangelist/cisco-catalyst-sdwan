@@ -1,0 +1,221 @@
+openapi: 3.2.0
+info:
+  title: Partner Integrations Configuration - Cloud On Ramp SaaS API
+  description: Includes API operations for partner integrations, such as Webex, Identity Services Engine (ISE), Secure Access, and more
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Configuration - Cloud On Ramp SaaS
+paths:
+  /v1/cloudonramp/saas:
+    get:
+      tags:
+      - Configuration - Cloud On Ramp SaaS
+      description: Get Cloud On Ramp For Saas apps status
+      operationId: getCloudOnRampSaasStatus
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Cloud OnRamp-read
+  /v1/cloudonramp/saas/appSettingsStatus:
+    get:
+      tags:
+      - Configuration - Cloud On Ramp SaaS
+      description: Get Cloud On Ramp Settings for apps, contains traffic steering
+      operationId: getCorSaasAppSettingsStatus
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Cloud OnRamp-read
+    put:
+      tags:
+      - Configuration - Cloud On Ramp SaaS
+      description: Put Cloud On Ramp Settings for apps, contains traffic steering
+      operationId: putCorSaasAppSettingsStatus
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  valueType:
+                    type: string
+                    enum:
+                    - ARRAY
+                    - OBJECT
+                    - STRING
+                    - NUMBER
+                    - 'TRUE'
+                    - 'FALSE'
+                    - 'NULL'
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Cloud OnRamp-read
+  /v1/cloudonramp/saas/cloud_tunnels:
+    get:
+      tags:
+      - Configuration - Cloud On Ramp SaaS
+      description: Get Secure Internet Gateway Tunnel List
+      operationId: getCloudTunnelList
+      parameters:
+      - name: deviceIp
+        in: query
+        description: DeviceIp/SystemIp
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Cloud OnRamp-read
+  /v1/cloudonramp/saas/configuration:
+    get:
+      tags:
+      - Configuration - Cloud On Ramp SaaS
+      description: Get Policy Groups that are deployed with Cloud on Ramp for Saas intent
+      operationId: getPolicyGroupsWithCorSaasApps
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Cloud OnRamp-read
+  /v1/cloudonramp/saas/devices:
+    get:
+      tags:
+      - Configuration - Cloud On Ramp SaaS
+      description: Get site, apps and device role information for cloud on ramp devices
+      operationId: getCorSitesPerDevice
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Cloud OnRamp-read
+  /v1/cloudonramp/saas/inactivesites:
+    get:
+      tags:
+      - Configuration - Cloud On Ramp SaaS
+      description: Get inactive sites
+      operationId: getInactiveCorSaasSites
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Cloud OnRamp-read
+  /v1/cloudonramp/saas/legacydevicelist:
+    get:
+      tags:
+      - Configuration - Cloud On Ramp SaaS
+      description: Get Legacy Devices List
+      operationId: getLegacyDeviceList
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Cloud OnRamp-read
+  /v1/cloudonramp/saas/status:
+    get:
+      tags:
+      - Configuration - Cloud On Ramp SaaS
+      description: Get Cloud On Ramp App details per device
+      operationId: getCorSaasStatusPerDevice
+      parameters:
+      - name: deviceIp
+        in: query
+        description: DeviceIp/SystemIp
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Cloud OnRamp-read
+  /v1/cloudonramp/saas/webexsyncstatus:
+    get:
+      tags:
+      - Configuration - Cloud On Ramp SaaS
+      description: Get Webex's sync Status for devices with COR Saas enabled via config group or device template
+      operationId: getWebexSyncStatus
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Cloud OnRamp-read

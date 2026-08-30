@@ -1,0 +1,392 @@
+openapi: 3.2.0
+info:
+  title: Others IPS Signature - Rule API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: IPS Signature - Rule
+paths:
+  /signature-set/{signatureSetId}/base/rule:
+    get:
+      tags:
+      - IPS Signature - Rule
+      summary: Fetch all Base Rules
+      operationId: getAllBaseRules
+      parameters:
+      - name: signatureSetId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: limit
+        in: query
+        schema:
+          maximum: 100
+          minimum: 0
+          type: integer
+          format: int32
+      - name: category
+        in: query
+        schema:
+          type: string
+      - name: group
+        in: query
+        schema:
+          type: string
+      - name: search
+        in: query
+        schema:
+          type: string
+      - name: action
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: list of ips rules
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    format: int32
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        baseRuleAction:
+                          type: string
+                        groups:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              groupCategory:
+                                type: string
+                              groupDisplayName:
+                                type: string
+                              groupId:
+                                type: string
+                              groupName:
+                                type: string
+                            $$ref: '#/components/schemas/RuleGroupObject'
+                        overriddenRuleAction:
+                          type: string
+                        overriddenRuleGroupAction:
+                          type: string
+                        ruleAction:
+                          type: string
+                        ruleData:
+                          type: string
+                        ruleGid:
+                          type: string
+                        ruleId:
+                          type: string
+                        ruleInfo:
+                          type: string
+                        ruleReplace:
+                          type: boolean
+                        ruleSid:
+                          type: string
+                        securityLevel:
+                          type: string
+                      $$ref: '#/components/schemas/RuleResponse'
+                  metadata:
+                    type: object
+                    properties:
+                      alert:
+                        type: integer
+                        format: int32
+                      disabled:
+                        type: integer
+                        format: int32
+                      drop:
+                        type: integer
+                        format: int32
+                      overridden:
+                        type: integer
+                        format: int32
+                      rewrite:
+                        type: integer
+                        format: int32
+                    $$ref: '#/components/schemas/RuleMetadata'
+                $$ref: '#/components/schemas/RulesResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+  /signature-set/{signatureSetId}/metadata:
+    get:
+      tags:
+      - IPS Signature - Rule
+      summary: Fetch Rule Action count
+      operationId: getRuleMetadata
+      parameters:
+      - name: signatureSetId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: category
+        in: query
+        schema:
+          type: string
+      - name: group
+        in: query
+        schema:
+          type: string
+      - name: type
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ips rule related metadata
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  alert:
+                    type: integer
+                    format: int32
+                  disabled:
+                    type: integer
+                    format: int32
+                  drop:
+                    type: integer
+                    format: int32
+                  overridden:
+                    type: integer
+                    format: int32
+                  rewrite:
+                    type: integer
+                    format: int32
+                $$ref: '#/components/schemas/RuleMetadata'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+  /signature-set/{signatureSetId}/overridden/rule:
+    get:
+      tags:
+      - IPS Signature - Rule
+      summary: Fetch all overridden Rules
+      operationId: getAllOverriddenRules
+      parameters:
+      - name: signatureSetId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: limit
+        in: query
+        schema:
+          maximum: 100
+          minimum: 0
+          type: integer
+          format: int32
+      - name: onlyOverriddenRules
+        in: query
+        required: true
+        schema:
+          type: boolean
+          default: false
+      - name: category
+        in: query
+        schema:
+          type: string
+      - name: group
+        in: query
+        schema:
+          type: string
+      - name: search
+        in: query
+        schema:
+          type: string
+      - name: action
+        in: query
+        schema:
+          type: string
+      - name: onlyBaseRules
+        in: query
+        required: true
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: list of ips rules
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    format: int32
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        baseRuleAction:
+                          type: string
+                        groups:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              groupCategory:
+                                type: string
+                              groupDisplayName:
+                                type: string
+                              groupId:
+                                type: string
+                              groupName:
+                                type: string
+                            $$ref: '#/components/schemas/RuleGroupObject'
+                        overriddenRuleAction:
+                          type: string
+                        overriddenRuleGroupAction:
+                          type: string
+                        ruleAction:
+                          type: string
+                        ruleData:
+                          type: string
+                        ruleGid:
+                          type: string
+                        ruleId:
+                          type: string
+                        ruleInfo:
+                          type: string
+                        ruleReplace:
+                          type: boolean
+                        ruleSid:
+                          type: string
+                        securityLevel:
+                          type: string
+                      $$ref: '#/components/schemas/RuleResponse'
+                  metadata:
+                    type: object
+                    properties:
+                      alert:
+                        type: integer
+                        format: int32
+                      disabled:
+                        type: integer
+                        format: int32
+                      drop:
+                        type: integer
+                        format: int32
+                      overridden:
+                        type: integer
+                        format: int32
+                      rewrite:
+                        type: integer
+                        format: int32
+                    $$ref: '#/components/schemas/RuleMetadata'
+                $$ref: '#/components/schemas/RulesResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+  /signature-set/{signatureSetId}/rule/action:
+    put:
+      tags:
+      - IPS Signature - Rule
+      summary: edit action of a rule
+      operationId: editRuleAction
+      parameters:
+      - name: signatureSetId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      action:
+                        type: string
+                      ruleId:
+                        type: string
+                    $$ref: '#/components/schemas/RuleActionOverride'
+              $$ref: '#/components/schemas/RuleActionOverrideRequest'
+        required: true
+      responses:
+        '200':
+          description: success response message
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  failure-list:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        message:
+                          type: string
+                      $$ref: '#/components/schemas/ResponseMessage'
+                  success-list:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        message:
+                          type: string
+                      $$ref: '#/components/schemas/ResponseMessage'
+                $$ref: '#/components/schemas/RuleActionOverrideResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden

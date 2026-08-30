@@ -1,0 +1,576 @@
+openapi: 3.2.0
+info:
+  title: Cisco Catalyst Sdwan Configuration - CloudExpress API
+  version: 26.1.0+2026-01-06
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  description: 'Operations tagged Configuration - CloudExpress across 2 of this provider''s published API definitions: cisco-catalyst-sdwan-others-openapi.json, cisco-catalyst-sdwan-ux-1-0-configuration-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /dataservice
+tags:
+- name: Configuration - CloudExpress
+paths:
+  /cloudservices/app/webex:
+    put:
+      tags:
+      - Configuration - CloudExpress
+      description: Day N- Update Webex App
+      operationId: enableWebex_ConfigurationCloudexpress_2403
+      requestBody:
+        description: Cloudx apps and vpns
+        content:
+          application/json:
+            schema:
+              type: object
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                CloudX apps and vpns:
+                  description: CloudX apps and vpns
+                  value:
+                    pushRequired: false
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Configuration-write,Template Deploy-write,Cloud OnRamp-write
+    delete:
+      tags:
+      - Configuration - CloudExpress
+      description: deleteWebexPrefixLists
+      operationId: deleteWebexPrefixLists
+      requestBody:
+        description: TMP-Cloudx apps and vpns
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                CloudX apps and vpns:
+                  description: CloudX apps and vpns
+                  value:
+                    pushRequired: false
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Configuration-write,Template Deploy-write,Cloud OnRamp-write
+    post:
+      tags:
+      - Configuration - CloudExpress
+      description: Add Webex App
+      operationId: enableWebex_ConfigurationCloudexpress_2404
+      requestBody:
+        description: Cloudx apps and vpns
+        content:
+          application/json:
+            schema:
+              type: object
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                CloudX apps and vpns:
+                  description: CloudX apps and vpns
+                  value:
+                    pushRequired: false
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Configuration-write,Template Deploy-write,Cloud OnRamp-write
+    servers:
+    - url: /dataservice
+  /template/cloudx:
+    get:
+      tags:
+      - Configuration - CloudExpress
+      description: Get CloudX feature list
+      operationId: getCloudXStatus
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                CloudX status:
+                  description: CloudX status
+                  value:
+                    data:
+                    - appType: amazon_aws
+                      longName: Amazon AWS
+                      totalSites: 2
+                      goodSites: 0
+                      badSites: 0
+                      averageSites: 0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Inventory-read,Cloud OnRamp-read,Cloud OnRamp-write
+    servers:
+    - url: /dataservice
+  /template/cloudx/addcloudx/{type}:
+    post:
+      tags:
+      - Configuration - CloudExpress
+      description: Add cloudx gateway
+      operationId: addCloudxType
+      parameters:
+      - name: type
+        in: path
+        description: Cloudx type
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Cloudx
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Cloudx:
+                description: Cloudx
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Template Configuration-write,Template Deploy-write,Cloud OnRamp-write
+    servers:
+    - url: /dataservice
+  /template/cloudx/attachedclient:
+    get:
+      tags:
+      - Configuration - CloudExpress
+      description: Get attached client site list
+      operationId: getAttachedClientList
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                CloudX attached client site:
+                  description: CloudX attached client site
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Configuration-read,Template Deploy-read,Template Deploy-write,Cloud OnRamp-read,Cloud OnRamp-write
+    servers:
+    - url: /dataservice
+  /template/cloudx/attacheddia:
+    get:
+      tags:
+      - Configuration - CloudExpress
+      description: Get attached Dia site list
+      operationId: getAttachedDiaList
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                CloudX attached Dia site:
+                  description: CloudX attached Dia site
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Configuration-read,Template Deploy-read,Template Deploy-write,Cloud OnRamp-read,Cloud OnRamp-write
+    servers:
+    - url: /dataservice
+  /template/cloudx/attachedgateway:
+    get:
+      tags:
+      - Configuration - CloudExpress
+      description: Get attached gateway list
+      operationId: getAttachedGatewayList
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                CloudX attached gateway:
+                  description: CloudX attached gateway
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Configuration-read,Template Deploy-read,Template Deploy-write,Cloud OnRamp-read,Cloud OnRamp-write
+    servers:
+    - url: /dataservice
+  /template/cloudx/availableapps:
+    get:
+      tags:
+      - Configuration - CloudExpress
+      description: Get CloudX available apps list
+      operationId: getCloudXAvailableApps
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                CloudX app list:
+                  description: CloudX app list
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Inventory-read,Cloud OnRamp-read,Cloud OnRamp-write
+    servers:
+    - url: /dataservice
+  /template/cloudx/clientlist:
+    get:
+      tags:
+      - Configuration - CloudExpress
+      description: Get site list
+      operationId: getSiteList
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                CloudX site:
+                  description: CloudX site
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Configuration-read,Template Deploy-read,Template Deploy-write,Cloud OnRamp-read,Cloud OnRamp-write
+    servers:
+    - url: /dataservice
+  /template/cloudx/dialist:
+    get:
+      tags:
+      - Configuration - CloudExpress
+      description: Get Dia site list
+      operationId: getDiaList
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                CloudX Dia site:
+                  description: CloudX Dia site
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Configuration-read,Template Deploy-read,Template Deploy-write,Cloud OnRamp-read,Cloud OnRamp-write
+    servers:
+    - url: /dataservice
+  /template/cloudx/gatewaylist:
+    get:
+      tags:
+      - Configuration - CloudExpress
+      description: Get gateway list
+      operationId: getGatewayList
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                CloudX gateway:
+                  description: CloudX gateway
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Configuration-read,Template Deploy-read,Template Deploy-write,Cloud OnRamp-read,Cloud OnRamp-write
+    servers:
+    - url: /dataservice
+  /template/cloudx/interfaces:
+    post:
+      tags:
+      - Configuration - CloudExpress
+      description: Enable cloudx gateway
+      operationId: addCloudxInterfaces
+      requestBody:
+        description: Cloudx
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Cloudx:
+                description: Cloudx
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Configuration-write,Template Deploy-write,Cloud OnRamp-write
+    servers:
+    - url: /dataservice
+  /template/cloudx/manage/apps:
+    get:
+      tags:
+      - Configuration - CloudExpress
+      description: Get apps and vpns
+      operationId: getApps
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                CloudX apps and vpns:
+                  description: CloudX apps and vpns
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Configuration-read,Template Deploy-read,Template Deploy-write,Cloud OnRamp-read,Cloud OnRamp-write
+    put:
+      tags:
+      - Configuration - CloudExpress
+      description: Edit apps and vpns
+      operationId: editApps
+      requestBody:
+        description: Cloudx apps and vpns
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Cloudx apps and vpns:
+                description: Cloudx apps and vpns
+                value:
+                  appList:
+                  - appType: amazon_aws
+                    longName: Amazon AWS
+                    appVpnList: 1,10
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Change required:
+                  description: Change required
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Configuration-write,Template Deploy-write,Cloud OnRamp-write
+    post:
+      tags:
+      - Configuration - CloudExpress
+      description: Add apps and vpns
+      operationId: addApps
+      requestBody:
+        description: Cloudx apps and vpns
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Cloudx apps and vpns:
+                description: Cloudx apps and vpns
+                value:
+                  appList:
+                  - appType: amazon_aws
+                    longName: Amazon AWS
+                    appVpnList: 1,5
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                CloudX apps and vpns:
+                  description: CloudX apps and vpns
+                  value:
+                    pushRequired: false
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Configuration-write,Template Deploy-write,Cloud OnRamp-write
+    servers:
+    - url: /dataservice
+  /template/cloudx/status:
+    get:
+      tags:
+      - Configuration - CloudExpress
+      description: Get sites per application per vpn
+      operationId: sitePerApp
+      parameters:
+      - name: appName
+        in: query
+        description: App name
+        required: true
+        schema:
+          type: string
+      - name: vpnId
+        in: query
+        description: VPN Id
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                CloudX site:
+                  description: CloudX site
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Inventory-read,Cloud OnRamp-read,Cloud OnRamp-write
+    servers:
+    - url: /dataservice
+x-refined-from:
+- cisco-catalyst-sdwan-others-openapi.json
+- cisco-catalyst-sdwan-ux-1-0-configuration-openapi.json

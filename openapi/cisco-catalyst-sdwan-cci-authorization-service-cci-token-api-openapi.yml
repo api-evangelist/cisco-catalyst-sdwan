@@ -1,0 +1,77 @@
+openapi: 3.2.0
+info:
+  title: Others CCI Authorization Service - CCI Token API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: CCI Authorization Service - CCI Token
+paths:
+  /cci/token:
+    post:
+      tags:
+      - CCI Authorization Service - CCI Token
+      summary: Get CCI token after Complete CCI Login
+      description: 'Get CCI token after Complete CCI Login '
+      operationId: cciToken
+      parameters:
+      - name: device_code
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    example: eyJraWQiOiJKYlVHQ0luVkk1Y2lDY1NUeTBLdlF0QVZoZVRwaV9FME9HUGg2ZkR6Szl3IiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULk1EMzFJWndLOEJXSGxweHpiSzU0MXhtQ3gzakllTGZvY1pGZ2Ntb1BxcDgub2FyMjZ3bGQ0NjVsa0JuV0E1ZDciLCJpc3MiOiJodHRwczovL2lkLmNpc2NvLmNvbS9vYXV0aDIvZGVmYXVsdCIsImF1ZCI6ImFwaTovL2RlZmF1bHQiLCJpYXQiOjE3MjA5NjYzMjQsImV4cCI6MTcyMDk2OTkyNCwiY2lkIjoiYTAzNjZmODYtMWRkMi00NmVlLWI1ZmQtZTE4MTgwYWJjYWUyIiwidWlkIjoiMDB1ZHo5MjV4T2VuMm54WVk1ZDYiLCJzY3AiOlsib2ZmbGluZV9hY2Nlc3MiLCJwcm9maWxlIiwib3BlbmlkIl0sImF1dGhfdGltZSI6MTcyMDk2NjI5MSwic3ViIjoic2hpcGh1YW5AY2lzY28uY29tIiwidGVuYW50X25hbWUiOiJjaXNjbyIsImxhc3RfbmFtZSI6Ikh1YW5nIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiZWNiMDQ3NmMtZjNlYi00ODYyLWI3ZmUtODM2NDRlNmNhOGFmIiwiY2NvaWQiOiJzaGlwaHVhbiIsImdpdmVuX25hbWUiOiJTaGlwaW5nIiwiYWNjZXNzX2xldmVsIjo0LCJmdWxsX25hbWUiOiJTaGlwaW5nIEh1YW5nIiwiZW1haWxfYWRkcmVzcyI6InNoaXBodWFuQGNpc2NvLmNvbSIsImZlZGVyYXRlZF9pZCI6InNoaXBodWFuIiwiYXpwIjoiYTAzNjZmODYtMWRkMi00NmVlLWI1ZmQtZTE4MTgwYWJjYWUyIiwiZmFtaWx5X25hbWUiOiJIdWFuZyIsImZpcnN0X25hbWUiOiJTaGlwaW5nIn0.NksdwO3YQflT-6bd53oQ6Rpxqzkbbkw5y9Ooc4xfUMn2KdlJON_5t_Ve336zUBlmxhcyioNwBiAMe09VnBFQr9ROkNw2omfngqQIAZH9QmvKs0YdJr63e4f8l0b1HU6YnB7WaGHnbfIN_s-Y3PfzOyTTVofgsNqLcVdAsB5pqfPn_Ze3sHtZuLqo8xdtau5_aQ4utaVQF13r1ir2mBqag-BD8JjheranncJv28BaYaMG8EeX3bnQUAj3mZbA0Mu8coO83sAdK3RkpnCXXMemq8QQbScYphExMGTF5U-_DtUtn9-XaI7sLOS6AC0-b9mREg9oV2hceemGwoaQYtKp5Q
+                  expires_in:
+                    type: integer
+                    format: int32
+                    example: 3600
+                  id_token:
+                    type: string
+                    example: eyJraWQiOiJKYlVHQ0luVkk1Y2lDY1NUeTBLdlF0QVZoZVRwaV9FME9HUGg2ZkR6Szl3IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIwMHVkejkyNXhPZW4ybnhZWTVkNiIsIm5hbWUiOiJTaGlwaW5nIEh1YW5nIiwidmVyIjoxLCJpc3MiOiJodHRwczovL2lkLmNpc2NvLmNvbS9vYXV0aDIvZGVmYXVsdCIsImF1ZCI6ImEwMzY2Zjg2LTFkZDItNDZlZS1iNWZkLWUxODE4MGFiY2FlMiIsImlhdCI6MTcyMDk2NjMyNCwiZXhwIjoxNzIwOTY5OTI0LCJqdGkiOiJJRC5sbEJlZXBKRWFCR3h4b25UOVMtcC1TNG1xWnY4TWVNRnhWa2hqX1RkWjJvIiwiYW1yIjpbInB3ZCJdLCJpZHAiOiIwb2Fqb3Fkd2pZRjFDZEdKdjVkNiIsInByZWZlcnJlZF91c2VybmFtZSI6InNoaXBodWFuQGNpc2NvLmNvbSIsImF1dGhfdGltZSI6MTcyMDk2NjI5MSwiYXRfaGFzaCI6IkRMT0FELXpLb3lZTlNOdGRXTHlkalEiLCJhY2Nlc3NfbGV2ZWwiOjQsImNvdW50cnkiOiJVUyIsInRlbmFudF9uYW1lIjoiY2lzY28iLCJmZWRlcmF0ZWRfaWQiOiJzaGlwaHVhbiIsImVtYWlsX2FkZHJlc3MiOiJzaGlwaHVhbkBjaXNjby5jb20iLCJmdWxsX25hbWUiOiJTaGlwaW5nIEh1YW5nIiwiUGVybWlzc2lvbk5hbWUiOiJPdGhlcnMiLCJsYXN0X25hbWUiOiJIdWFuZyIsImNvbXBhbnkiOiJDaXNjbyBTeXN0ZW1zLCBJbmMuIiwiY2NvaWQiOiJzaGlwaHVhbiIsInRpdGxlIjoiU29mdHdhcmUgRW5naW5lZXJpbmcgVGVjaG5pY2FsIExlYWRlciIsImZpcnN0X25hbWUiOiJTaGlwaW5nIn0.Eo5vNGYbFlSdbBiAwrXhfFoYmxaNwv_2huFXuhdzUzG22gVFQYYjlQbzpQ0-CYYNUBLDH7Dpz424bPHtGSoeNhUwjrtIoSPwl2vFS2Rt6AFo8-hRXROINlqLCrTdfn61PIAolWjCBjseBZNIiVg8oFwxLqtg8HDJ7ipt2UwHCexPIDrlZc_mftT7ElRboIjEs2ypcaePvWfEJkRyhf-GHoDDZs-csDNpyjMS4Y5t9RgOVe5Cp23KCU6sSI5Olw18rrkD3S1mQMmjMD3MM6G2YVgAa1AENdeYQuhBe_Zq8qS3qJGAQ0W7otAQZyyLrXPso0WFrgn0eBn7fG26R7ZsMA
+                  refresh_token:
+                    type: string
+                    example: GIUCKHBb2AtkT2qW1IerD3yZm8uQdXsPawdBIAKOyVI
+                  scope:
+                    type: string
+                    example: offline_access profile openid
+                  token_type:
+                    type: string
+                    example: Bearer
+                $$ref: '#/components/schemas/CciToken'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

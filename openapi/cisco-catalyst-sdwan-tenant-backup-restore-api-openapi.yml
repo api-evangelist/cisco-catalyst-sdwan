@@ -1,0 +1,205 @@
+openapi: 3.2.0
+info:
+  title: Others Tenant Backup Restore API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Tenant Backup Restore
+paths:
+  /tenantbackup/delete:
+    delete:
+      tags:
+      - Tenant Backup Restore
+      description: 'Delete all or a specific backup file stored in vManage<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: deleteTenantBackup
+      parameters:
+      - name: VSessionId
+        in: header
+        description: Tenant VSessionId (required only for provider user)
+        schema:
+          type: string
+      - name: fileName
+        in: query
+        description: File name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Deleted file list:
+                  description: Deleted file list
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Tenant Management-write,Tenant Status-write
+  /tenantbackup/download/{path}:
+    get:
+      tags:
+      - Tenant Backup Restore
+      description: Download a Backup File that is already stored in vManage
+      operationId: downloadExistingBackupFile
+      parameters:
+      - name: VSessionId
+        in: header
+        description: Tenant VSessionId (required only for provider user)
+        schema:
+          type: string
+      - name: path
+        in: path
+        description: File path
+        required: true
+        schema:
+          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\/bkup_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}_[0-9]{6}-[0-9]{6}_[0-9a-fA-F]{32}\.tar\.gz$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/octet-stream:
+              schema:
+                type: object
+              examples:
+                Backup file stream:
+                  description: Backup file stream
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Tenant Management-read,Tenant Management-write,Tenant Status-read,Tenant Status-write
+  /tenantbackup/export:
+    get:
+      tags:
+      - Tenant Backup Restore
+      description: Trigger a backup of configuration database and store it in vManage
+      operationId: exportTenantBackup
+      parameters:
+      - name: VSessionId
+        in: header
+        description: Tenant VSessionId (required only for provider user)
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task status:
+                  description: Task status
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Tenant Management-read,Tenant Management-write,Tenant Status-read,Tenant Status-write
+  /tenantbackup/import:
+    post:
+      tags:
+      - Tenant Backup Restore
+      description: 'Submit a previously backed up file and import the data and apply it to the configuraion database<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: importTenantBackup
+      parameters:
+      - name: VSessionId
+        in: header
+        description: Tenant VSessionId (required only for provider user)
+        schema:
+          type: string
+      requestBody:
+        description: Tenant data tar.gz file
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+              $$ref: '#/components/schemas/ImportTenantData'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task status:
+                  description: Task status
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Tenant Management-write,Tenant Status-write
+  /tenantbackup/list:
+    get:
+      tags:
+      - Tenant Backup Restore
+      description: List all backup files of a tenant stored in vManage
+      operationId: listTenantBackup
+      parameters:
+      - name: VSessionId
+        in: header
+        description: Tenant VSessionId (required only for provider user)
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Backup file list:
+                  description: Backup file list
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Tenant Management-read,Tenant Management-write,Tenant Status-read,Tenant Status-write

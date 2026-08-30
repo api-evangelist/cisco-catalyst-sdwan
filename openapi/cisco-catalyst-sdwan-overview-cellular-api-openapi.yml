@@ -1,0 +1,880 @@
+openapi: 3.2.0
+info:
+  title: Others Overview - Cellular API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Overview - Cellular
+paths:
+  /device/cellular/counter:
+    get:
+      tags:
+      - Overview - Cellular
+      description: Cellular count dashlet
+      operationId: cellularCountDashlet
+      parameters:
+      - name: type
+        in: query
+        description: type
+        schema:
+          type: string
+          enum:
+          - rat
+          - product
+          - carrier
+      - name: lastNHours
+        in: query
+        description: last N Hours
+        schema:
+          type: string
+          enum:
+          - '1'
+          - '3'
+          - '6'
+          - '12'
+          - '24'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    active:
+                      type: integer
+                      format: int32
+                      example: 1
+                    carrier:
+                      type: string
+                      example: ATT
+                    product:
+                      type: string
+                      example: NIMs
+                    rat:
+                      type: string
+                      example: 4G
+                    standby:
+                      type: integer
+                      format: int32
+                      example: 2
+                  $$ref: '#/components/schemas/CellularCount'
+              examples:
+                count by rat:
+                  description: count by rat
+                  value:
+                  - rat: 4G
+                    standby: 0
+                    active: 2
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceCellularCellularrestfulresourceResponseExampleCellularcountbyrat'
+                count by carrier:
+                  description: count by carrier
+                  value:
+                  - carrier: ATT
+                    standby: 0
+                    active: 1
+                  - carrier: Verizon
+                    standby: 0
+                    active: 1
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceCellularCellularrestfulresourceResponseExampleCellularcountbycarrier'
+                count by product:
+                  description: count by product
+                  value:
+                  - product: Network Interface Modules (NIMs)
+                    standby: 0
+                    active: 2
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceCellularCellularrestfulresourceResponseExampleCellularcountbyproduct'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,Device Monitoring-write
+  /device/cellular/dataUsage:
+    get:
+      tags:
+      - Overview - Cellular
+      description: Cellular DataUsage Dashlet
+      operationId: dataUsage
+      parameters:
+      - name: lastNHours
+        in: query
+        description: last N hours
+        schema:
+          type: string
+          enum:
+          - '1'
+          - '3'
+          - '6'
+          - '12'
+          - '24'
+      - name: drillDown
+        in: query
+        description: drill down
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    CARRIER_NAME:
+                      type: object
+                      properties:
+                        carrierName:
+                          type: string
+                          example: Verizon
+                        deviceList:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              activeSim:
+                                type: string
+                                example: '0'
+                              carrier:
+                                type: string
+                                example: vedge
+                              deviceType:
+                                type: string
+                                example: vedge
+                              hostName:
+                                type: string
+                                example: vedge
+                              ifName:
+                                type: string
+                                example: vedge
+                              linkUpTime:
+                                type: string
+                                example: '0'
+                              localSystemIp:
+                                type: string
+                                example: '0'
+                              model:
+                                type: string
+                                example: vedge
+                              product:
+                                type: string
+                                example: '0'
+                              rat:
+                                type: string
+                                example: vedge
+                              slot:
+                                type: string
+                                example: '0'
+                              systemIp:
+                                type: string
+                                example: '0'
+                              totalKbs:
+                                type: integer
+                                format: int32
+                                example: 0
+                              uuid:
+                                type: string
+                                example: vedge
+                            $$ref: '#/components/schemas/CellularDeviceDetail'
+                        monthUsage:
+                          type: object
+                          properties:
+                            carrierName:
+                              type: string
+                              example: Verizon
+                            deviceList:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  activeSim:
+                                    type: string
+                                    example: '0'
+                                  carrier:
+                                    type: string
+                                    example: vedge
+                                  deviceType:
+                                    type: string
+                                    example: vedge
+                                  hostName:
+                                    type: string
+                                    example: vedge
+                                  ifName:
+                                    type: string
+                                    example: vedge
+                                  linkUpTime:
+                                    type: string
+                                    example: '0'
+                                  localSystemIp:
+                                    type: string
+                                    example: '0'
+                                  model:
+                                    type: string
+                                    example: vedge
+                                  product:
+                                    type: string
+                                    example: '0'
+                                  rat:
+                                    type: string
+                                    example: vedge
+                                  slot:
+                                    type: string
+                                    example: '0'
+                                  systemIp:
+                                    type: string
+                                    example: '0'
+                                  totalKbs:
+                                    type: integer
+                                    format: int32
+                                    example: 0
+                                  uuid:
+                                    type: string
+                                    example: vedge
+                                $$ref: '#/components/schemas/CellularDeviceDetail'
+                            totalUsage:
+                              type: integer
+                              format: int32
+                              example: 2262628
+                          $$ref: '#/components/schemas/CellularDataUsageDetailsItem'
+                        oneDayUsage:
+                          type: object
+                          properties:
+                            carrierName:
+                              type: string
+                              example: Verizon
+                            deviceList:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  activeSim:
+                                    type: string
+                                    example: '0'
+                                  carrier:
+                                    type: string
+                                    example: vedge
+                                  deviceType:
+                                    type: string
+                                    example: vedge
+                                  hostName:
+                                    type: string
+                                    example: vedge
+                                  ifName:
+                                    type: string
+                                    example: vedge
+                                  linkUpTime:
+                                    type: string
+                                    example: '0'
+                                  localSystemIp:
+                                    type: string
+                                    example: '0'
+                                  model:
+                                    type: string
+                                    example: vedge
+                                  product:
+                                    type: string
+                                    example: '0'
+                                  rat:
+                                    type: string
+                                    example: vedge
+                                  slot:
+                                    type: string
+                                    example: '0'
+                                  systemIp:
+                                    type: string
+                                    example: '0'
+                                  totalKbs:
+                                    type: integer
+                                    format: int32
+                                    example: 0
+                                  uuid:
+                                    type: string
+                                    example: vedge
+                                $$ref: '#/components/schemas/CellularDeviceDetail'
+                            totalUsage:
+                              type: integer
+                              format: int32
+                              example: 2262628
+                          $$ref: '#/components/schemas/CellularDataUsageDetailsItem'
+                        threeMonthUsage:
+                          type: object
+                          properties:
+                            carrierName:
+                              type: string
+                              example: Verizon
+                            deviceList:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  activeSim:
+                                    type: string
+                                    example: '0'
+                                  carrier:
+                                    type: string
+                                    example: vedge
+                                  deviceType:
+                                    type: string
+                                    example: vedge
+                                  hostName:
+                                    type: string
+                                    example: vedge
+                                  ifName:
+                                    type: string
+                                    example: vedge
+                                  linkUpTime:
+                                    type: string
+                                    example: '0'
+                                  localSystemIp:
+                                    type: string
+                                    example: '0'
+                                  model:
+                                    type: string
+                                    example: vedge
+                                  product:
+                                    type: string
+                                    example: '0'
+                                  rat:
+                                    type: string
+                                    example: vedge
+                                  slot:
+                                    type: string
+                                    example: '0'
+                                  systemIp:
+                                    type: string
+                                    example: '0'
+                                  totalKbs:
+                                    type: integer
+                                    format: int32
+                                    example: 0
+                                  uuid:
+                                    type: string
+                                    example: vedge
+                                $$ref: '#/components/schemas/CellularDeviceDetail'
+                            totalUsage:
+                              type: integer
+                              format: int32
+                              example: 2262628
+                          $$ref: '#/components/schemas/CellularDataUsageDetailsItem'
+                        totalUsage:
+                          type: integer
+                          format: int32
+                          example: 2262627
+                        weekUsage:
+                          type: object
+                          properties:
+                            carrierName:
+                              type: string
+                              example: Verizon
+                            deviceList:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  activeSim:
+                                    type: string
+                                    example: '0'
+                                  carrier:
+                                    type: string
+                                    example: vedge
+                                  deviceType:
+                                    type: string
+                                    example: vedge
+                                  hostName:
+                                    type: string
+                                    example: vedge
+                                  ifName:
+                                    type: string
+                                    example: vedge
+                                  linkUpTime:
+                                    type: string
+                                    example: '0'
+                                  localSystemIp:
+                                    type: string
+                                    example: '0'
+                                  model:
+                                    type: string
+                                    example: vedge
+                                  product:
+                                    type: string
+                                    example: '0'
+                                  rat:
+                                    type: string
+                                    example: vedge
+                                  slot:
+                                    type: string
+                                    example: '0'
+                                  systemIp:
+                                    type: string
+                                    example: '0'
+                                  totalKbs:
+                                    type: integer
+                                    format: int32
+                                    example: 0
+                                  uuid:
+                                    type: string
+                                    example: vedge
+                                $$ref: '#/components/schemas/CellularDeviceDetail'
+                            totalUsage:
+                              type: integer
+                              format: int32
+                              example: 2262628
+                          $$ref: '#/components/schemas/CellularDataUsageDetailsItem'
+                      $$ref: '#/components/schemas/CellularDataUsageDetails'
+                    details:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          carrierName:
+                            type: string
+                            example: Verizon
+                          totalUsage:
+                            type: integer
+                            format: int32
+                            example: 2262627
+                        $$ref: '#/components/schemas/CellularDataUsageBasicItem'
+                  $$ref: '#/components/schemas/CellularDataUsage'
+              examples:
+                Cellular dataUsage basic:
+                  description: Cellular dataUsage basic
+                  value:
+                    details:
+                    - carrierName: ATT
+                      totalUsage: 0
+                    - carrierName: Verizon
+                      totalUsage: 60
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceCellularCellularrestfulresourceResponseExampleCellulardatausagebasic'
+                Cellular dataUsage detail:
+                  description: Cellular dataUsage detail
+                  value:
+                    ATT:
+                      monthUsage:
+                        carrierName: ATT
+                        deviceList:
+                        - deviceType: vedge
+                          activeSim: '0'
+                          hostName: C8300-Vivek1-Slot1
+                          product: Network Interface Modules (NIMs)
+                          rat: 4G
+                          linkUpTime: '4679'
+                          ifName: Cellular0/1/0
+                          slot: '1'
+                          uuid: C8300-1N1S-6T-FDO2402A01W
+                          totalKbs: 0
+                          carrier: ATT
+                          localSystemIp: 1.1.1.218
+                          model: C8300-1N1S-6T
+                          systemIp: 1.1.1.218
+                        totalUsage: 0
+                      carrierName: ATT
+                      weekUsage:
+                        carrierName: ATT
+                        deviceList:
+                        - deviceType: vedge
+                          activeSim: '0'
+                          hostName: C8300-Vivek1-Slot1
+                          product: Network Interface Modules (NIMs)
+                          rat: 4G
+                          linkUpTime: '4679'
+                          ifName: Cellular0/1/0
+                          slot: '1'
+                          uuid: C8300-1N1S-6T-FDO2402A01W
+                          totalKbs: 0
+                          carrier: ATT
+                          localSystemIp: 1.1.1.218
+                          model: C8300-1N1S-6T
+                          systemIp: 1.1.1.218
+                        totalUsage: 0
+                      deviceList:
+                      - deviceType: vedge
+                        activeSim: '0'
+                        hostName: C8300-Vivek1-Slot1
+                        product: Network Interface Modules (NIMs)
+                        rat: 4G
+                        linkUpTime: '4679'
+                        ifName: Cellular0/1/0
+                        slot: '1'
+                        uuid: C8300-1N1S-6T-FDO2402A01W
+                        totalKbs: 0
+                        carrier: ATT
+                        localSystemIp: 1.1.1.218
+                        model: C8300-1N1S-6T
+                        systemIp: 1.1.1.218
+                      oneDayUsage:
+                        carrierName: ATT
+                        deviceList:
+                        - deviceType: vedge
+                          activeSim: '0'
+                          hostName: C8300-Vivek1-Slot1
+                          product: Network Interface Modules (NIMs)
+                          rat: 4G
+                          linkUpTime: '4679'
+                          ifName: Cellular0/1/0
+                          slot: '1'
+                          uuid: C8300-1N1S-6T-FDO2402A01W
+                          totalKbs: 0
+                          carrier: ATT
+                          localSystemIp: 1.1.1.218
+                          model: C8300-1N1S-6T
+                          systemIp: 1.1.1.218
+                        totalUsage: 0
+                      totalUsage: 0
+                      threeMonthUsage:
+                        carrierName: ATT
+                        deviceList:
+                        - deviceType: vedge
+                          activeSim: '0'
+                          hostName: C8300-Vivek1-Slot1
+                          product: Network Interface Modules (NIMs)
+                          rat: 4G
+                          linkUpTime: '4679'
+                          ifName: Cellular0/1/0
+                          slot: '1'
+                          uuid: C8300-1N1S-6T-FDO2402A01W
+                          totalKbs: 0
+                          carrier: ATT
+                          localSystemIp: 1.1.1.218
+                          model: C8300-1N1S-6T
+                          systemIp: 1.1.1.218
+                        totalUsage: 0
+                    Verizon:
+                      monthUsage:
+                        carrierName: Verizon
+                        deviceList:
+                        - deviceType: vedge
+                          activeSim: '0'
+                          hostName: C8300-Vivek1-Slot2
+                          product: Network Interface Modules (NIMs)
+                          rat: 4G
+                          linkUpTime: '9530'
+                          ifName: Cellular0/2/0
+                          slot: '2'
+                          uuid: C8300-1N1S-6T-FDO2402A01W
+                          totalKbs: 65811
+                          carrier: Verizon
+                          localSystemIp: 1.1.1.218
+                          model: C8300-1N1S-6T
+                          systemIp: 1.1.1.218
+                        totalUsage: 65811
+                      carrierName: Verizon
+                      weekUsage:
+                        carrierName: Verizon
+                        deviceList:
+                        - deviceType: vedge
+                          activeSim: '0'
+                          hostName: C8300-Vivek1-Slot2
+                          product: Network Interface Modules (NIMs)
+                          rat: 4G
+                          linkUpTime: '9530'
+                          ifName: Cellular0/2/0
+                          slot: '2'
+                          uuid: C8300-1N1S-6T-FDO2402A01W
+                          totalKbs: 15244
+                          carrier: Verizon
+                          localSystemIp: 1.1.1.218
+                          model: C8300-1N1S-6T
+                          systemIp: 1.1.1.218
+                        totalUsage: 15244
+                      deviceList:
+                      - deviceType: vedge
+                        activeSim: '0'
+                        hostName: C8300-Vivek1-Slot2
+                        product: Network Interface Modules (NIMs)
+                        rat: 4G
+                        linkUpTime: '14210'
+                        ifName: Cellular0/2/0
+                        slot: '2'
+                        uuid: C8300-1N1S-6T-FDO2402A01W
+                        totalKbs: 62
+                        carrier: Verizon
+                        localSystemIp: 1.1.1.218
+                        model: C8300-1N1S-6T
+                        systemIp: 1.1.1.218
+                      oneDayUsage:
+                        carrierName: Verizon
+                        deviceList:
+                        - deviceType: vedge
+                          activeSim: '0'
+                          hostName: C8300-Vivek1-Slot2
+                          product: Network Interface Modules (NIMs)
+                          rat: 4G
+                          linkUpTime: '14210'
+                          ifName: Cellular0/2/0
+                          slot: '2'
+                          uuid: C8300-1N1S-6T-FDO2402A01W
+                          totalKbs: 1855
+                          carrier: Verizon
+                          localSystemIp: 1.1.1.218
+                          model: C8300-1N1S-6T
+                          systemIp: 1.1.1.218
+                        totalUsage: 1855
+                      totalUsage: 62
+                      threeMonthUsage:
+                        carrierName: Verizon
+                        deviceList:
+                        - deviceType: vedge
+                          activeSim: '0'
+                          hostName: C8300-Vivek1-Slot2
+                          product: Network Interface Modules (NIMs)
+                          rat: 4G
+                          linkUpTime: '9530'
+                          ifName: Cellular0/2/0
+                          slot: '2'
+                          uuid: C8300-1N1S-6T-FDO2402A01W
+                          totalKbs: 187349
+                          carrier: Verizon
+                          localSystemIp: 1.1.1.218
+                          model: C8300-1N1S-6T
+                          systemIp: 1.1.1.218
+                        totalUsage: 187349
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceCellularCellularrestfulresourceResponseExampleCellulardatausagedrilldown'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,Device Monitoring-write
+  /device/cellular/details:
+    get:
+      tags:
+      - Overview - Cellular
+      description: Cellular count dashlet details
+      operationId: cellularCountDashletDetails
+      parameters:
+      - name: lastNHours
+        in: query
+        description: last N hours
+        schema:
+          type: string
+          enum:
+          - '1'
+          - '3'
+          - '6'
+          - '12'
+          - '24'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    pageInfo:
+                      type: object
+                      properties:
+                        details:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              activeSim:
+                                type: string
+                                example: '0'
+                              carrier:
+                                type: string
+                                example: vedge
+                              deviceType:
+                                type: string
+                                example: vedge
+                              hostName:
+                                type: string
+                                example: vedge
+                              ifName:
+                                type: string
+                                example: vedge
+                              linkUpTime:
+                                type: string
+                                example: '0'
+                              localSystemIp:
+                                type: string
+                                example: '0'
+                              model:
+                                type: string
+                                example: vedge
+                              product:
+                                type: string
+                                example: '0'
+                              rat:
+                                type: string
+                                example: vedge
+                              slot:
+                                type: string
+                                example: '0'
+                              systemIp:
+                                type: string
+                                example: '0'
+                              totalKbs:
+                                type: integer
+                                format: int32
+                                example: 0
+                              uuid:
+                                type: string
+                                example: vedge
+                            $$ref: '#/components/schemas/CellularDeviceDetail'
+                      $$ref: '#/components/schemas/CellularPageInfo'
+                  $$ref: '#/components/schemas/CellularDetail'
+              examples:
+                Cellular details list:
+                  description: Cellular details list
+                  value:
+                    pageInfo:
+                      details:
+                      - deviceType: vedge
+                        hostName: C8300-Vivek1-Slot2
+                        activeSim: '0'
+                        product: Network Interface Modules (NIMs)
+                        rat: 4G
+                        linkUpTime: '14453'
+                        ifName: Cellular0/2/0
+                        slot: '2'
+                        uuid: C8300-1N1S-6T-FDO2402A01W
+                        totalKbs: 74
+                        carrier: Verizon
+                        localSystemIp: 1.1.1.218
+                        model: C8300-1N1S-6T
+                        systemIp: 1.1.1.218
+                      - deviceType: vedge
+                        hostName: C8300-Vivek1-Slot1
+                        activeSim: '0'
+                        product: Network Interface Modules (NIMs)
+                        rat: 4G
+                        linkUpTime: '4922'
+                        ifName: Cellular0/1/0
+                        slot: '1'
+                        uuid: C8300-1N1S-6T-FDO2402A01W
+                        totalKbs: 0
+                        carrier: ATT
+                        localSystemIp: 1.1.1.218
+                        model: C8300-1N1S-6T
+                        systemIp: 1.1.1.218
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceCellularCellularrestfulresourceResponseExampleCellulardetails'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,Device Monitoring-write
+  /device/cellular/health:
+    get:
+      tags:
+      - Overview - Cellular
+      description: Cellular Health Dashlet
+      operationId: cellularHealthDashlet
+      parameters:
+      - name: type
+        in: query
+        description: type
+        schema:
+          type: string
+          enum:
+          - rat
+          - carrier
+      - name: lastNHours
+        in: query
+        description: last N hours
+        schema:
+          type: string
+          enum:
+          - '1'
+          - '3'
+          - '6'
+          - '12'
+          - '24'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    carrier:
+                      type: string
+                      example: ATT
+                    excellent:
+                      type: integer
+                      format: int32
+                      example: 2
+                    fair:
+                      type: integer
+                      format: int32
+                      example: 1
+                    good:
+                      type: integer
+                      format: int32
+                      example: 3
+                    poor:
+                      type: integer
+                      format: int32
+                      example: 0
+                    rat:
+                      type: string
+                      example: 4G
+                  $$ref: '#/components/schemas/CellularHealth'
+              examples:
+                Carrier health:
+                  description: Carrier health
+                  value:
+                  - carrier: ATT
+                    excellent: 0
+                    poor: 0
+                    fair: 1
+                    good: 0
+                  - carrier: Verizon
+                    excellent: 0
+                    poor: 0
+                    fair: 0
+                    good: 1
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceCellularCellularrestfulresourceResponseExampleCellularhealthbycarrier'
+                Rat health:
+                  description: Rat health
+                  value:
+                  - rat: LTE
+                    excellent: 0
+                    poor: 0
+                    fair: 1
+                    good: 1
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceCellularCellularrestfulresourceResponseExampleCellularhealthbyrat'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,Device Monitoring-write

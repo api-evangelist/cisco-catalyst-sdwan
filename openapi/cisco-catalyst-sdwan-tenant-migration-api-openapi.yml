@@ -1,0 +1,239 @@
+openapi: 3.2.0
+info:
+  title: Others Tenant Migration API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Tenant Migration
+paths:
+  /tenantmigration/download/{path}:
+    get:
+      tags:
+      - Tenant Migration
+      description: Download tenant data
+      operationId: downloadTenantData
+      parameters:
+      - name: path
+        in: path
+        description: File path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/octet-stream:
+              schema:
+                type: object
+              examples:
+                Tenant data:
+                  description: Tenant data
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: admin
+  /tenantmigration/export:
+    post:
+      tags:
+      - Tenant Migration
+      description: Export tenant data
+      operationId: exportTenantData
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                desc:
+                  type: string
+                isDestinationOverlayMT:
+                  type: boolean
+                migrationKey:
+                  type: string
+                name:
+                  type: string
+                orgName:
+                  type: string
+                subDomain:
+                  type: string
+                wanEdgeForecast:
+                  type: string
+              $$ref: '#/components/schemas/MigrateTenantModel'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: admin
+  /tenantmigration/import/{migrationKey}:
+    post:
+      tags:
+      - Tenant Migration
+      description: Import tenant data
+      operationId: importTenantData
+      parameters:
+      - name: migrationKey
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Tenant data tar.gz file
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+              $$ref: '#/components/schemas/ImportTenantData'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: admin
+  /tenantmigration/migrationToken:
+    get:
+      tags:
+      - Tenant Migration
+      description: Get migration token
+      operationId: getMigrationToken
+      parameters:
+      - name: migrationId
+        in: query
+        description: Migration Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Migration token:
+                  description: Migration token
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: admin
+  /tenantmigration/networkMigration:
+    get:
+      tags:
+      - Tenant Migration
+      description: Re-trigger network migration
+      operationId: reTriggerNetworkMigration
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: admin
+    post:
+      tags:
+      - Tenant Migration
+      description: Migrate network
+      operationId: migrateNetwork
+      requestBody:
+        description: Network migration
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Network migration:
+                description: Network migration
+                value: {}
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: admin

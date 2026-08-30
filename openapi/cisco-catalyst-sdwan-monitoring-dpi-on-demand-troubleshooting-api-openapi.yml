@@ -1,0 +1,257 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Monitoring - DPI - On-demand troubleshooting API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Monitoring - DPI - On-demand troubleshooting
+paths:
+  /statistics/on-demand/queue:
+    get:
+      tags:
+      - Monitoring - DPI - On-demand troubleshooting
+      description: gets current on-demand queue entries
+      operationId: getQueueEntries
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Queue Entries:
+                  description: Queue Entries
+                  value:
+                    entries:
+                    - status: COMPLETED
+                      complete: true
+                      data_type: ConnectionEvents
+                      tenant_id: default
+                      start_time: 0
+                      creationTime: 1640765713644
+                      value: 48
+                      completionTime: 1640765718372
+                      end_time: 0
+                      startProcessingTime: 1640765717682
+                      time_period: LAST_N_HOURS
+                      id: 0a43d31b-fde9-400a-b0ed-319f72115323
+                      device_id: 172.16.255.11
+                    - status: QUEUED
+                      complete: false
+                      data_type: DPI
+                      tenant_id: default
+                      start_time: 0
+                      creationTime: 1640764758920
+                      value: 24
+                      completionTime: 0
+                      end_time: 0
+                      startProcessingTime: 0
+                      time_period: LAST_N_HOURS
+                      id: 93629fed-ec81-4f37-9c85-24b577191c9c
+                      device_id: 10.0.1.17
+                    - status: COMPLETED
+                      complete: true
+                      data_type: DPI
+                      tenant_id: default
+                      start_time: 0
+                      creationTime: 1640765915038
+                      value: 48
+                      completionTime: 1640765918258
+                      end_time: 0
+                      startProcessingTime: 1640765917678
+                      time_period: LAST_N_HOURS
+                      id: d9111cd6-59ab-482c-bd95-41fdaba9fc5b
+                      device_id: 172.16.255.11
+                    - status: QUEUED
+                      complete: false
+                      data_type: ConnectionEvents
+                      tenant_id: default
+                      start_time: 0
+                      creationTime: 1640767377708
+                      value: 24
+                      completionTime: 0
+                      end_time: 0
+                      startProcessingTime: 0
+                      time_period: LAST_N_HOURS
+                      id: 544ce0e1-9f57-4266-b789-ed50d043761c
+                      device_id: 10.0.1.17
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,RBAC VPN-read,RBAC VPN-write
+    post:
+      tags:
+      - Monitoring - DPI - On-demand troubleshooting
+      description: Create on-demand troubleshooting queue entry
+      operationId: createQueueEntry
+      requestBody:
+        description: On-demand queue entry
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              OnDemandQueueEntry:
+                description: OnDemandQueueEntry
+                value:
+                  device_id: 10.0.1.17
+                  data_type: DPI
+                  time_period: LAST_N_HOURS
+                  value: 24
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                OnDemandQueueEntry:
+                  description: OnDemandQueueEntry
+                  value:
+                    complete: false
+                    creationTime: 1641373054019
+                    startProcessingTime: 0
+                    completionTime: 0
+                    id: bc4e2dbe-a226-4a01-aa1a-1859978014d3
+                    device_id: 169.254.10.10
+                    data_type: DPI
+                    time_period: LAST_N_HOURS
+                    tenant_id: a200c754-22bc-4a99-b0b9-a2957755e3ba
+                    value: 3
+                    start_time: 0
+                    end_time: 0
+                    status: QUEUED
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,RBAC VPN-read
+  /statistics/on-demand/queue/properties:
+    get:
+      tags:
+      - Monitoring - DPI - On-demand troubleshooting
+      description: gets current size of on-demand queue
+      operationId: getQueueProperties
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Queue size is 2:
+                  description: Queue size is 2
+                  value:
+                    tenant_current_size: 2
+                    max_size: 20
+                    tenant_max_size: 5
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,RBAC VPN-read,RBAC VPN-write
+  /statistics/on-demand/queue/{entryId}:
+    delete:
+      tags:
+      - Monitoring - DPI - On-demand troubleshooting
+      description: removes on-demand queue entry
+      operationId: deleteQueueEntry
+      parameters:
+      - name: entryId
+        in: path
+        description: Entry Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,RBAC VPN-read
+    put:
+      tags:
+      - Monitoring - DPI - On-demand troubleshooting
+      description: Updates on-demand troubleshooting queue entry
+      operationId: updateQueueEntry
+      parameters:
+      - name: entryId
+        in: path
+        description: Entry Id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: On-demand queue entry
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              OnDemandQueueEntry:
+                description: OnDemandQueueEntry
+                value:
+                  device_id: 10.0.1.17
+                  data_type: DPI
+                  time_period: LAST_N_HOURS
+                  value: 24
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                OnDemandQueueEntry:
+                  description: OnDemandQueueEntry
+                  value:
+                    id: ac031e7b-9c6e-4375-8589-ad503f9d52d2
+                    device_id: 10.0.1.17
+                    data_type: DPI
+                    time_period: LAST_N_HOURS
+                    value: 24
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,RBAC VPN-read

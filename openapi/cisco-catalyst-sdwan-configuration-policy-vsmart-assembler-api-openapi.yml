@@ -1,0 +1,106 @@
+openapi: 3.2.0
+info:
+  title: UX 1.0 Configuration Configuration - Policy vSmart Assembler API
+  description: "Configuration of UX 1.0 device and policy.\nIncludes API operations for the following:\n  Managing original SD-WAN device configurations and policy configurations\n  Device templates and feature templates"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Configuration - Policy vSmart Assembler
+paths:
+  /template/policy/assembly/vsmart:
+    post:
+      tags:
+      - Configuration - Policy vSmart Assembler
+      description: Get policy assembly preview
+      operationId: preview_ConfigurationPolicyVsmartAssembler_3204
+      requestBody:
+        description: Policy assembly
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Policy assembly:
+                description: Policy assembly
+                value:
+                  assembly:
+                  - definitionId: aee2adc2-7b10-437e-8d74-fc52557f7cb7
+                    type: appRoute
+                    entries:
+                    - siteLists:
+                      - cf4bbb13-0a3f-4302-adfa-6cfce6b3950c
+                      vpnLists:
+                      - ab2b3ffa-b390-4143-95f3-14d084efc85f
+                  - definitionId: 605fabbd-4c99-4be4-8842-aebb256f7010
+                    type: hubAndSpoke
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Policy assembly preview:
+                  description: Policy assembly preview
+                  value: "{\n   \"preview\":\"viptela-policy:policy\n  sla-class VoiceVideoSLA\n   latency 100\n  !\n  sla-class WebSLA\n   latency 150\n  !\n control-policy control_-1240443936\n \"\n}"
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write,Security Policy Configuration-read,Security Policy Configuration-write
+  /template/policy/assembly/vsmart/{id}:
+    get:
+      tags:
+      - Configuration - Policy vSmart Assembler
+      description: Get policy assembly preview for feature policy
+      operationId: previewById_ConfigurationPolicyVsmartAssembler_3703
+      parameters:
+      - name: id
+        in: path
+        description: Policy Id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Policy assembly preview:
+                  description: Policy assembly preview
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write,Security Policy Configuration-read,Security Policy Configuration-write

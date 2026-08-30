@@ -1,0 +1,137 @@
+openapi: 3.2.0
+info:
+  title: Others File based RealTime Data Collection - Device notification - File generation status API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: File based RealTime Data Collection - Device notification - File generation status
+paths:
+  /device/file-based/data-collection/file-generation-status:
+    post:
+      tags:
+      - File based RealTime Data Collection - Device notification - File generation status
+      description: Device notify when file is ready and vManage has to download them
+      operationId: handleFileGenerationStatusResponseFromDevice
+      requestBody:
+        description: File generation status notification payload
+        content:
+          application/json:
+            schema:
+              required:
+              - detailedMessage
+              - status
+              - transactionId
+              type: object
+              properties:
+                checksum:
+                  type: string
+                  description: MD5 checksum value of the file
+                detailedMessage:
+                  type: string
+                  description: Success or Failure reason in detail
+                fileName:
+                  type: string
+                  description: Full path of the generated file
+                status:
+                  type: string
+                transactionId:
+                  type: string
+                  description: Transaction Id sent in the file generation RPC
+              $$ref: '#/components/schemas/HandleFileGenerationStatusNotificationRequest'
+            examples:
+              Successful file generation status payload:
+                description: Successful file generation status payload
+                value:
+                  transactionId: 94e2a016-6b21-83d2-b6163c55ccd3%3cd2a8f8-8fce-63a6894ea555
+                  status: success
+                  fileName: /tmp/json/audit/audit_advertised_2022-09-19_13:54:34.csv
+                  checksum: '3534534563454532788799807'
+                  detailedMessage: Successfully generated file
+                $$ref: '#/components/examples/ComViptelaVmanageServerFilebasedRealtimeDatacollectionDatacollectionapiRequestExampleFilegenerationsuccessreq'
+              Failed file generation status payload:
+                description: Failed file generation status payload
+                value:
+                  transactionId: 94e2a016-6b21-83d2-b6163c55ccd3%3cd2a8f8-8fce-63a6894ea555
+                  status: failed
+                  detailedMessage: File generation failed due to no space left
+                $$ref: '#/components/examples/ComViptelaVmanageServerFilebasedRealtimeDatacollectionDatacollectionapiRequestExampleFilegenerationfailurereq'
+        required: true
+      responses:
+        '200':
+          description: File generation status accepted
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorMessage:
+                    type: string
+                    description: Message about bad request or parameters errors
+                  errorType:
+                    type: string
+                    description: Type of error
+                  operation:
+                    type: string
+                    description: Operation title
+                $$ref: '#/components/schemas/HttpError'
+              examples:
+                400 - Bad Request or Parameters:
+                  description: 400 - Bad Request or Parameters
+                  value:
+                    operation: Inititate file generation
+                    errorType: Invalid Payload or Parameter(s)
+                    errorMessage: Empty/Invalid Device IP
+                  $$ref: '#/components/examples/ComViptelaVmanageServerFilebasedRealtimeDatacollectionDatacollectionapiResponseExampleFilegeneration400'
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorMessage:
+                    type: string
+                    description: Message about bad request or parameters errors
+                  errorType:
+                    type: string
+                    description: Type of error
+                  operation:
+                    type: string
+                    description: Operation title
+                $$ref: '#/components/schemas/HttpError'
+              examples:
+                500 - Internal Server Error:
+                  description: 500 - Internal Server Error
+                  value:
+                    operation: 'Download generated file for UUID : b81467bb-9827-46a0-8db8-f742d4d91c0a'
+                    errorType: General or Internal Error
+                    errorMessage: Data Collection state is in-progress, Cannot download file at this momemnt
+                  $$ref: '#/components/examples/ComViptelaVmanageServerFilebasedRealtimeDatacollectionDatacollectionapiResponseExampleFilegeneration500'
+      x-roles-required: vmanage-http-stream,System-read,System-write

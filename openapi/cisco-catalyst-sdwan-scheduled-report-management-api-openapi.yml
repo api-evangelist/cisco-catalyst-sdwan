@@ -1,0 +1,1708 @@
+openapi: 3.2.0
+info:
+  title: Others Scheduled Report Management API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Scheduled Report Management
+paths:
+  /v1/reports:
+    get:
+      tags:
+      - Scheduled Report Management
+      summary: Get all report templates information
+      description: Get all reports information
+      operationId: getAllReportTemplates
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                required:
+                - reports
+                type: object
+                properties:
+                  header:
+                    type: object
+                    additionalProperties:
+                      type: object
+                  reports:
+                    type: array
+                    description: Report List
+                    items:
+                      required:
+                      - businessHours
+                      - fileType
+                      - hasTask
+                      - nextRunTime
+                      - onVmanage
+                      - reportId
+                      - reportName
+                      - reportStatus
+                      - schedule
+                      - taskNum
+                      - templateType
+                      - timeFrame
+                      type: object
+                      properties:
+                        businessHours:
+                          type: string
+                        emailRecipient:
+                          type: array
+                          description: Email address list to receive the report files
+                          example:
+                          - alice@cisco.com
+                          - bob@google.com
+                          items:
+                            type: string
+                            description: Email address list to receive the report files
+                            example:
+                            - alice@cisco.com
+                            - bob@google.com
+                        fileType:
+                          type: string
+                        hasTask:
+                          type: boolean
+                          description: If the report template has running task records or not
+                          example: true
+                        nextRunTime:
+                          type: integer
+                          description: Report next running timestamp
+                          format: int64
+                          example: 1655991420000
+                        onVmanage:
+                          type: string
+                          description: vManage which scheduled report generating tasks
+                          example: 10.1.1.100
+                        reportId:
+                          type: string
+                          description: The report UUID for report template
+                          format: uuid
+                          example: 50671437-c88e-4514-aafa-103e58c4d9cc
+                        reportName:
+                          type: string
+                          description: The report template name
+                          example: Daily-report
+                        reportStatus:
+                          type: string
+                          description: Report schedule status(not_scheduled/scheduled/in_progress/completed/failed))
+                          example: in_progress
+                          enum:
+                          - not_scheduled
+                          - scheduled
+                          - in_progress
+                          - completed
+                          - failed
+                        schedule:
+                          type: string
+                          description: Report schedule information
+                          example: Daily
+                        taskNum:
+                          type: integer
+                          description: The number of scheduled tasks for report template
+                          format: int64
+                          example: 10
+                        templateType:
+                          type: string
+                        timeFrame:
+                          type: string
+                          description: Report time frame(7 Days/30 Days)
+                          example: 7 Days
+                      description: Report summary information
+                      $$ref: '#/components/schemas/ReportSummaryInfo'
+                description: Query all reports summary information response
+                $$ref: '#/components/schemas/ReportSummaryResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - details
+                    - message
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        description: Error code associated with the error event
+                      details:
+                        type: string
+                        description: Error message details
+                      message:
+                        type: string
+                        description: Error message title
+                    description: error message
+                    $$ref: '#/components/schemas/Model400ErrorError'
+                $$ref: '#/components/schemas/Model400Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - details
+                    - message
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        description: Error code associated with the error event
+                      details:
+                        type: string
+                        description: Error message details
+                      message:
+                        type: string
+                        description: Error message title
+                    description: error message
+                    $$ref: '#/components/schemas/Model400ErrorError'
+                $$ref: '#/components/schemas/Model400Error'
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+      - Scheduled Report Management
+      summary: Create a new report template
+      description: create a new report template
+      operationId: createReportTemplate
+      requestBody:
+        description: Report Template Config
+        content:
+          application/json:
+            schema:
+              required:
+              - emailRecipient
+              - reportName
+              - scheduleConfig
+              type: object
+              properties:
+                analyticsReport:
+                  type: boolean
+                analyticsScope:
+                  type: string
+                analyticsTemplateName:
+                  type: string
+                analyticsTemplateType:
+                  type: string
+                businessHours:
+                  required:
+                  - endTime
+                  - startTime
+                  type: object
+                  properties:
+                    endTime:
+                      pattern: ^(20|21|22|23|[0-1]?\d):[0-5]?\d:[0-5]?\d$
+                      type: string
+                    startTime:
+                      pattern: ^(20|21|22|23|[0-1]?\d):[0-5]?\d:[0-5]?\d$
+                      type: string
+                  description: Report business hours for data generating
+                  $$ref: '#/components/schemas/ReportBusinessHours'
+                emailRecipient:
+                  maxItems: 5
+                  minItems: 0
+                  type: array
+                  description: Email address list to receive the report files
+                  example:
+                  - alice@cisco.com
+                  - bob@google.com
+                  items:
+                    type: string
+                    description: Email address list to receive the report files
+                    example:
+                    - alice@cisco.com
+                    - bob@google.com
+                fileType:
+                  type: string
+                  enum:
+                  - pdf
+                  - csv
+                reportName:
+                  maxLength: 32
+                  minLength: 1
+                  pattern: (?=^.{1,32}$)[^&<>! "]+$
+                  type: string
+                  description: Report Name
+                  example: ExecutiveSummaryReport
+                scheduleConfig:
+                  required:
+                  - scheduleType
+                  type: object
+                  properties:
+                    scheduleType:
+                      type: string
+                      description: Schedule type
+                      example: on_demand
+                      enum:
+                      - on_demand
+                      - reoccur_onetime
+                      - reoccur_daily
+                      - reoccur_weekly
+                      - reoccur_monthly
+                  description: schedule config
+                  discriminator:
+                    propertyName: scheduleType
+                  oneOf:
+                  - $ref: '#/components/schemas/ScheduleConfig'
+                    required:
+                    - scheduleType
+                    type: object
+                    description: On-demand schedule
+                    $$ref: '#/components/schemas/OnDemandSchedule'
+                  - $ref: '#/components/schemas/ScheduleConfig'
+                    properties:
+                      startTime:
+                        pattern: ^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01]) (20|21|22|23|[0-1]?\d):[0-5]?\d:[0-5]?\d$
+                        type: string
+                        description: startTime string format is yyyy-MM-dd HH:mm:ss,UTC timezone
+                        example: '2022-07-01 14:30:00'
+                    required:
+                    - scheduleType
+                    - startTime
+                    type: object
+                    description: One time schedule time config
+                    $$ref: '#/components/schemas/OneTimeSchedule'
+                  - $ref: '#/components/schemas/ScheduleConfig'
+                    properties:
+                      startTime:
+                        pattern: ^(20|21|22|23|[0-1]?\d):[0-5]?\d:[0-5]?\d$
+                        type: string
+                        description: startTime string format is HH:mm:ss
+                    required:
+                    - scheduleType
+                    - startTime
+                    type: object
+                    description: Daily schedule time config
+                    $$ref: '#/components/schemas/ReoccurDailySchedule'
+                  - $ref: '#/components/schemas/ScheduleConfig'
+                    properties:
+                      startTime:
+                        pattern: ^(20|21|22|23|[0-1]?\d):[0-5]?\d:[0-5]?\d$
+                        type: string
+                        description: startTime string format is HH:mm:ss
+                        example: '20:30:10'
+                      dayOfWeek:
+                        maximum: 7
+                        minimum: 1
+                        type: integer
+                        description: The day number of a week, mapping is as 1 - Sun, 2 - Mon, 3 - Tus, 4 - Wed, 5 - Thu, 6 - Fri, 7 - Sat
+                        format: int32
+                        example: 1
+                    required:
+                    - dayOfWeek
+                    - scheduleType
+                    - startTime
+                    type: object
+                    description: Weekly schedule time config
+                    $$ref: '#/components/schemas/ReoccurWeeklySchedule'
+                  - $ref: '#/components/schemas/ScheduleConfig'
+                    properties:
+                      startTime:
+                        pattern: ^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01]) (20|21|22|23|[0-1]?\d):[0-5]?\d:[0-5]?\d$
+                        type: string
+                        description: startTime string format is (yyyy-MM-dd HH:mm:ss), time zone is UTC
+                        example: '2022-07-01 20:30:10'
+                    required:
+                    - scheduleType
+                    - startTime
+                    type: object
+                    description: Monthly schedule time config
+                    $$ref: '#/components/schemas/ReoccurMonthlySchedule'
+                  $$ref: '#/components/schemas/ScheduleConfig'
+                siteIds:
+                  type: array
+                  description: Filtering by Site ID list is optional, if no site Id is included, all site ID will be used for report generating.
+                  example:
+                  - 100
+                  - 200
+                  items:
+                    type: integer
+                    format: int64
+                templateType:
+                  type: string
+                  enum:
+                  - executive_summary
+                  - site_availability
+                  - link_availability
+                  - link_utilization
+                  - link_sla
+                  - app_usage
+                  - ips_events_collected
+                  - firewall_enforcement
+                  - malware_files_collected
+                  - internet_browsing
+                  - license_management
+                  - cpu_memory_energy
+                  - energy_management
+                timeRange:
+                  type: string
+                  description: Time range for report(one_week/one_month)
+                  example: one_week
+                  enum:
+                  - one_day
+                  - one_week
+                  - one_month
+              description: Executive summary report template
+              $$ref: '#/components/schemas/ExecutiveSummaryReport'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                required:
+                - activeStatus
+                - createdBy
+                - hasTask
+                - lastUpdateTime
+                - nextRunTime
+                - onVmanage
+                - reportConfig
+                - reportId
+                - reportStatus
+                type: object
+                properties:
+                  activeStatus:
+                    type: string
+                    description: Report active status(active,cancelled)
+                    example: active
+                    enum:
+                    - active
+                    - cancelled
+                  createdBy:
+                    maxLength: 64
+                    minLength: 0
+                    type: string
+                    description: user name for who created the report template.
+                    example: admin
+                  debugInfo:
+                    type: string
+                  fileType:
+                    type: string
+                    enum:
+                    - pdf
+                    - csv
+                  hasTask:
+                    type: boolean
+                    description: If the report template has running task records or not
+                    example: true
+                  lastUpdateTime:
+                    type: integer
+                    description: Report template last update timestamp
+                    format: int64
+                    example: 1655968207288
+                  needRunImmediately:
+                    type: boolean
+                  nextRunTime:
+                    type: integer
+                    description: Report next running timestamp
+                    format: int64
+                    example: 1655991420000
+                  onVmanage:
+                    type: string
+                    description: vManage which scheduled report generating tasks
+                    example: 10.1.1.100
+                  reportConfig:
+                    required:
+                    - emailRecipient
+                    - reportName
+                    - scheduleConfig
+                    type: object
+                    properties:
+                      analyticsReport:
+                        type: boolean
+                      analyticsScope:
+                        type: string
+                      analyticsTemplateName:
+                        type: string
+                      analyticsTemplateType:
+                        type: string
+                      businessHours:
+                        required:
+                        - endTime
+                        - startTime
+                        type: object
+                        properties:
+                          endTime:
+                            pattern: ^(20|21|22|23|[0-1]?\d):[0-5]?\d:[0-5]?\d$
+                            type: string
+                          startTime:
+                            pattern: ^(20|21|22|23|[0-1]?\d):[0-5]?\d:[0-5]?\d$
+                            type: string
+                        description: Report business hours for data generating
+                        $$ref: '#/components/schemas/ReportBusinessHours'
+                      emailRecipient:
+                        maxItems: 5
+                        minItems: 0
+                        type: array
+                        description: Email address list to receive the report files
+                        example:
+                        - alice@cisco.com
+                        - bob@google.com
+                        items:
+                          type: string
+                          description: Email address list to receive the report files
+                          example:
+                          - alice@cisco.com
+                          - bob@google.com
+                      fileType:
+                        type: string
+                        enum:
+                        - pdf
+                        - csv
+                      reportName:
+                        maxLength: 32
+                        minLength: 1
+                        pattern: (?=^.{1,32}$)[^&<>! "]+$
+                        type: string
+                        description: Report Name
+                        example: ExecutiveSummaryReport
+                      scheduleConfig:
+                        required:
+                        - scheduleType
+                        type: object
+                        properties:
+                          scheduleType:
+                            type: string
+                            description: Schedule type
+                            example: on_demand
+                            enum:
+                            - on_demand
+                            - reoccur_onetime
+                            - reoccur_daily
+                            - reoccur_weekly
+                            - reoccur_monthly
+                        description: schedule config
+                        discriminator:
+                          propertyName: scheduleType
+                        oneOf:
+                        - $ref: '#/components/schemas/OnDemandSchedule'
+                        - $ref: '#/components/schemas/OneTimeSchedule'
+                        - $ref: '#/components/schemas/ReoccurDailySchedule'
+                        - $ref: '#/components/schemas/ReoccurWeeklySchedule'
+                        - $ref: '#/components/schemas/ReoccurMonthlySchedule'
+                        $$ref: '#/components/schemas/ScheduleConfig'
+                      siteIds:
+                        type: array
+                        description: Filtering by Site ID list is optional, if no site Id is included, all site ID will be used for report generating.
+                        example:
+                        - 100
+                        - 200
+                        items:
+                          type: integer
+                          format: int64
+                      templateType:
+                        type: string
+                        enum:
+                        - executive_summary
+                        - site_availability
+                        - link_availability
+                        - link_utilization
+                        - link_sla
+                        - app_usage
+                        - ips_events_collected
+                        - firewall_enforcement
+                        - malware_files_collected
+                        - internet_browsing
+                        - license_management
+                        - cpu_memory_energy
+                        - energy_management
+                      timeRange:
+                        type: string
+                        description: Time range for report(one_week/one_month)
+                        example: one_week
+                        enum:
+                        - one_day
+                        - one_week
+                        - one_month
+                    description: Executive summary report template
+                    $$ref: '#/components/schemas/ExecutiveSummaryReport'
+                  reportId:
+                    type: string
+                    description: The report UUID for report template
+                    format: uuid
+                    example: 50671437-c88e-4514-aafa-103e58c4d9cc
+                  reportStatus:
+                    type: string
+                    description: Report schedule status(not_scheduled/scheduled/in_progress/completed/failed))
+                    example: in_progress
+                    enum:
+                    - not_scheduled
+                    - scheduled
+                    - in_progress
+                    - completed
+                    - failed
+                  taskNum:
+                    type: integer
+                    format: int64
+                  templateType:
+                    type: string
+                    enum:
+                    - executive_summary
+                    - site_availability
+                    - link_availability
+                    - link_utilization
+                    - link_sla
+                    - app_usage
+                    - ips_events_collected
+                    - firewall_enforcement
+                    - malware_files_collected
+                    - internet_browsing
+                    - license_management
+                    - cpu_memory_energy
+                    - energy_management
+                description: Report Template detail info
+                $$ref: '#/components/schemas/ReportInfo'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - details
+                    - message
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        description: Error code associated with the error event
+                      details:
+                        type: string
+                        description: Error message details
+                      message:
+                        type: string
+                        description: Error message title
+                    description: error message
+                    $$ref: '#/components/schemas/Model400ErrorError'
+                $$ref: '#/components/schemas/Model400Error'
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /v1/reports/preview/download:
+    get:
+      tags:
+      - Scheduled Report Management
+      summary: Download a report preview file
+      description: Download a report preview file
+      operationId: downloadReportPreviewFile
+      parameters:
+      - name: templateType
+        in: query
+        schema:
+          type: string
+          enum:
+          - executive_summary
+          - site_availability
+          - link_availability
+          - link_utilization
+          - link_sla
+          - app_usage
+          - ips_events_collected
+          - firewall_enforcement
+          - malware_files_collected
+          - internet_browsing
+          - license_management
+          - cpu_memory_energy
+          - energy_management
+      responses:
+        '200':
+          description: Success
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /v1/reports/{reportId}:
+    get:
+      tags:
+      - Scheduled Report Management
+      summary: Get report template by ID.
+      description: Get the report template information by report ID
+      operationId: getReportTemplateById
+      parameters:
+      - name: reportId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                required:
+                - reports
+                type: object
+                properties:
+                  header:
+                    type: object
+                    additionalProperties:
+                      type: object
+                  reports:
+                    type: array
+                    description: Report List
+                    items:
+                      required:
+                      - businessHours
+                      - fileType
+                      - hasTask
+                      - nextRunTime
+                      - onVmanage
+                      - reportId
+                      - reportName
+                      - reportStatus
+                      - schedule
+                      - taskNum
+                      - templateType
+                      - timeFrame
+                      type: object
+                      properties:
+                        businessHours:
+                          type: string
+                        emailRecipient:
+                          type: array
+                          description: Email address list to receive the report files
+                          example:
+                          - alice@cisco.com
+                          - bob@google.com
+                          items:
+                            type: string
+                            description: Email address list to receive the report files
+                            example:
+                            - alice@cisco.com
+                            - bob@google.com
+                        fileType:
+                          type: string
+                        hasTask:
+                          type: boolean
+                          description: If the report template has running task records or not
+                          example: true
+                        nextRunTime:
+                          type: integer
+                          description: Report next running timestamp
+                          format: int64
+                          example: 1655991420000
+                        onVmanage:
+                          type: string
+                          description: vManage which scheduled report generating tasks
+                          example: 10.1.1.100
+                        reportId:
+                          type: string
+                          description: The report UUID for report template
+                          format: uuid
+                          example: 50671437-c88e-4514-aafa-103e58c4d9cc
+                        reportName:
+                          type: string
+                          description: The report template name
+                          example: Daily-report
+                        reportStatus:
+                          type: string
+                          description: Report schedule status(not_scheduled/scheduled/in_progress/completed/failed))
+                          example: in_progress
+                          enum:
+                          - not_scheduled
+                          - scheduled
+                          - in_progress
+                          - completed
+                          - failed
+                        schedule:
+                          type: string
+                          description: Report schedule information
+                          example: Daily
+                        taskNum:
+                          type: integer
+                          description: The number of scheduled tasks for report template
+                          format: int64
+                          example: 10
+                        templateType:
+                          type: string
+                        timeFrame:
+                          type: string
+                          description: Report time frame(7 Days/30 Days)
+                          example: 7 Days
+                      description: Report summary information
+                      $$ref: '#/components/schemas/ReportSummaryInfo'
+                description: Query all reports summary information response
+                $$ref: '#/components/schemas/ReportSummaryResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - details
+                    - message
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        description: Error code associated with the error event
+                      details:
+                        type: string
+                        description: Error message details
+                      message:
+                        type: string
+                        description: Error message title
+                    description: error message
+                    $$ref: '#/components/schemas/Model400ErrorError'
+                $$ref: '#/components/schemas/Model400Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - details
+                    - message
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        description: Error code associated with the error event
+                      details:
+                        type: string
+                        description: Error message details
+                      message:
+                        type: string
+                        description: Error message title
+                    description: error message
+                    $$ref: '#/components/schemas/Model400ErrorError'
+                $$ref: '#/components/schemas/Model400Error'
+        '500':
+          description: Internal Server Error
+    put:
+      tags:
+      - Scheduled Report Management
+      summary: Modify the report template configuration
+      description: Update the report template by report ID
+      operationId: updateReportTemplate
+      parameters:
+      - name: reportId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: updated report config
+        content:
+          application/json:
+            schema:
+              required:
+              - emailRecipient
+              - reportName
+              - scheduleConfig
+              type: object
+              properties:
+                analyticsReport:
+                  type: boolean
+                analyticsScope:
+                  type: string
+                analyticsTemplateName:
+                  type: string
+                analyticsTemplateType:
+                  type: string
+                businessHours:
+                  required:
+                  - endTime
+                  - startTime
+                  type: object
+                  properties:
+                    endTime:
+                      pattern: ^(20|21|22|23|[0-1]?\d):[0-5]?\d:[0-5]?\d$
+                      type: string
+                    startTime:
+                      pattern: ^(20|21|22|23|[0-1]?\d):[0-5]?\d:[0-5]?\d$
+                      type: string
+                  description: Report business hours for data generating
+                  $$ref: '#/components/schemas/ReportBusinessHours'
+                emailRecipient:
+                  maxItems: 5
+                  minItems: 0
+                  type: array
+                  description: Email address list to receive the report files
+                  example:
+                  - alice@cisco.com
+                  - bob@google.com
+                  items:
+                    type: string
+                    description: Email address list to receive the report files
+                    example:
+                    - alice@cisco.com
+                    - bob@google.com
+                fileType:
+                  type: string
+                  enum:
+                  - pdf
+                  - csv
+                reportName:
+                  maxLength: 32
+                  minLength: 1
+                  pattern: (?=^.{1,32}$)[^&<>! "]+$
+                  type: string
+                  description: Report Name
+                  example: ExecutiveSummaryReport
+                scheduleConfig:
+                  required:
+                  - scheduleType
+                  type: object
+                  properties:
+                    scheduleType:
+                      type: string
+                      description: Schedule type
+                      example: on_demand
+                      enum:
+                      - on_demand
+                      - reoccur_onetime
+                      - reoccur_daily
+                      - reoccur_weekly
+                      - reoccur_monthly
+                  description: schedule config
+                  discriminator:
+                    propertyName: scheduleType
+                  oneOf:
+                  - $ref: '#/components/schemas/ScheduleConfig'
+                    required:
+                    - scheduleType
+                    type: object
+                    description: On-demand schedule
+                    $$ref: '#/components/schemas/OnDemandSchedule'
+                  - $ref: '#/components/schemas/ScheduleConfig'
+                    properties:
+                      startTime:
+                        pattern: ^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01]) (20|21|22|23|[0-1]?\d):[0-5]?\d:[0-5]?\d$
+                        type: string
+                        description: startTime string format is yyyy-MM-dd HH:mm:ss,UTC timezone
+                        example: '2022-07-01 14:30:00'
+                    required:
+                    - scheduleType
+                    - startTime
+                    type: object
+                    description: One time schedule time config
+                    $$ref: '#/components/schemas/OneTimeSchedule'
+                  - $ref: '#/components/schemas/ScheduleConfig'
+                    properties:
+                      startTime:
+                        pattern: ^(20|21|22|23|[0-1]?\d):[0-5]?\d:[0-5]?\d$
+                        type: string
+                        description: startTime string format is HH:mm:ss
+                    required:
+                    - scheduleType
+                    - startTime
+                    type: object
+                    description: Daily schedule time config
+                    $$ref: '#/components/schemas/ReoccurDailySchedule'
+                  - $ref: '#/components/schemas/ScheduleConfig'
+                    properties:
+                      startTime:
+                        pattern: ^(20|21|22|23|[0-1]?\d):[0-5]?\d:[0-5]?\d$
+                        type: string
+                        description: startTime string format is HH:mm:ss
+                        example: '20:30:10'
+                      dayOfWeek:
+                        maximum: 7
+                        minimum: 1
+                        type: integer
+                        description: The day number of a week, mapping is as 1 - Sun, 2 - Mon, 3 - Tus, 4 - Wed, 5 - Thu, 6 - Fri, 7 - Sat
+                        format: int32
+                        example: 1
+                    required:
+                    - dayOfWeek
+                    - scheduleType
+                    - startTime
+                    type: object
+                    description: Weekly schedule time config
+                    $$ref: '#/components/schemas/ReoccurWeeklySchedule'
+                  - $ref: '#/components/schemas/ScheduleConfig'
+                    properties:
+                      startTime:
+                        pattern: ^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01]) (20|21|22|23|[0-1]?\d):[0-5]?\d:[0-5]?\d$
+                        type: string
+                        description: startTime string format is (yyyy-MM-dd HH:mm:ss), time zone is UTC
+                        example: '2022-07-01 20:30:10'
+                    required:
+                    - scheduleType
+                    - startTime
+                    type: object
+                    description: Monthly schedule time config
+                    $$ref: '#/components/schemas/ReoccurMonthlySchedule'
+                  $$ref: '#/components/schemas/ScheduleConfig'
+                siteIds:
+                  type: array
+                  description: Filtering by Site ID list is optional, if no site Id is included, all site ID will be used for report generating.
+                  example:
+                  - 100
+                  - 200
+                  items:
+                    type: integer
+                    format: int64
+                templateType:
+                  type: string
+                  enum:
+                  - executive_summary
+                  - site_availability
+                  - link_availability
+                  - link_utilization
+                  - link_sla
+                  - app_usage
+                  - ips_events_collected
+                  - firewall_enforcement
+                  - malware_files_collected
+                  - internet_browsing
+                  - license_management
+                  - cpu_memory_energy
+                  - energy_management
+                timeRange:
+                  type: string
+                  description: Time range for report(one_week/one_month)
+                  example: one_week
+                  enum:
+                  - one_day
+                  - one_week
+                  - one_month
+              description: Executive summary report template
+              $$ref: '#/components/schemas/ExecutiveSummaryReport'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                required:
+                - activeStatus
+                - createdBy
+                - hasTask
+                - lastUpdateTime
+                - nextRunTime
+                - onVmanage
+                - reportConfig
+                - reportId
+                - reportStatus
+                type: object
+                properties:
+                  activeStatus:
+                    type: string
+                    description: Report active status(active,cancelled)
+                    example: active
+                    enum:
+                    - active
+                    - cancelled
+                  createdBy:
+                    maxLength: 64
+                    minLength: 0
+                    type: string
+                    description: user name for who created the report template.
+                    example: admin
+                  debugInfo:
+                    type: string
+                  fileType:
+                    type: string
+                    enum:
+                    - pdf
+                    - csv
+                  hasTask:
+                    type: boolean
+                    description: If the report template has running task records or not
+                    example: true
+                  lastUpdateTime:
+                    type: integer
+                    description: Report template last update timestamp
+                    format: int64
+                    example: 1655968207288
+                  needRunImmediately:
+                    type: boolean
+                  nextRunTime:
+                    type: integer
+                    description: Report next running timestamp
+                    format: int64
+                    example: 1655991420000
+                  onVmanage:
+                    type: string
+                    description: vManage which scheduled report generating tasks
+                    example: 10.1.1.100
+                  reportConfig:
+                    required:
+                    - emailRecipient
+                    - reportName
+                    - scheduleConfig
+                    type: object
+                    properties:
+                      analyticsReport:
+                        type: boolean
+                      analyticsScope:
+                        type: string
+                      analyticsTemplateName:
+                        type: string
+                      analyticsTemplateType:
+                        type: string
+                      businessHours:
+                        required:
+                        - endTime
+                        - startTime
+                        type: object
+                        properties:
+                          endTime:
+                            pattern: ^(20|21|22|23|[0-1]?\d):[0-5]?\d:[0-5]?\d$
+                            type: string
+                          startTime:
+                            pattern: ^(20|21|22|23|[0-1]?\d):[0-5]?\d:[0-5]?\d$
+                            type: string
+                        description: Report business hours for data generating
+                        $$ref: '#/components/schemas/ReportBusinessHours'
+                      emailRecipient:
+                        maxItems: 5
+                        minItems: 0
+                        type: array
+                        description: Email address list to receive the report files
+                        example:
+                        - alice@cisco.com
+                        - bob@google.com
+                        items:
+                          type: string
+                          description: Email address list to receive the report files
+                          example:
+                          - alice@cisco.com
+                          - bob@google.com
+                      fileType:
+                        type: string
+                        enum:
+                        - pdf
+                        - csv
+                      reportName:
+                        maxLength: 32
+                        minLength: 1
+                        pattern: (?=^.{1,32}$)[^&<>! "]+$
+                        type: string
+                        description: Report Name
+                        example: ExecutiveSummaryReport
+                      scheduleConfig:
+                        required:
+                        - scheduleType
+                        type: object
+                        properties:
+                          scheduleType:
+                            type: string
+                            description: Schedule type
+                            example: on_demand
+                            enum:
+                            - on_demand
+                            - reoccur_onetime
+                            - reoccur_daily
+                            - reoccur_weekly
+                            - reoccur_monthly
+                        description: schedule config
+                        discriminator:
+                          propertyName: scheduleType
+                        oneOf:
+                        - $ref: '#/components/schemas/OnDemandSchedule'
+                        - $ref: '#/components/schemas/OneTimeSchedule'
+                        - $ref: '#/components/schemas/ReoccurDailySchedule'
+                        - $ref: '#/components/schemas/ReoccurWeeklySchedule'
+                        - $ref: '#/components/schemas/ReoccurMonthlySchedule'
+                        $$ref: '#/components/schemas/ScheduleConfig'
+                      siteIds:
+                        type: array
+                        description: Filtering by Site ID list is optional, if no site Id is included, all site ID will be used for report generating.
+                        example:
+                        - 100
+                        - 200
+                        items:
+                          type: integer
+                          format: int64
+                      templateType:
+                        type: string
+                        enum:
+                        - executive_summary
+                        - site_availability
+                        - link_availability
+                        - link_utilization
+                        - link_sla
+                        - app_usage
+                        - ips_events_collected
+                        - firewall_enforcement
+                        - malware_files_collected
+                        - internet_browsing
+                        - license_management
+                        - cpu_memory_energy
+                        - energy_management
+                      timeRange:
+                        type: string
+                        description: Time range for report(one_week/one_month)
+                        example: one_week
+                        enum:
+                        - one_day
+                        - one_week
+                        - one_month
+                    description: Executive summary report template
+                    $$ref: '#/components/schemas/ExecutiveSummaryReport'
+                  reportId:
+                    type: string
+                    description: The report UUID for report template
+                    format: uuid
+                    example: 50671437-c88e-4514-aafa-103e58c4d9cc
+                  reportStatus:
+                    type: string
+                    description: Report schedule status(not_scheduled/scheduled/in_progress/completed/failed))
+                    example: in_progress
+                    enum:
+                    - not_scheduled
+                    - scheduled
+                    - in_progress
+                    - completed
+                    - failed
+                  taskNum:
+                    type: integer
+                    format: int64
+                  templateType:
+                    type: string
+                    enum:
+                    - executive_summary
+                    - site_availability
+                    - link_availability
+                    - link_utilization
+                    - link_sla
+                    - app_usage
+                    - ips_events_collected
+                    - firewall_enforcement
+                    - malware_files_collected
+                    - internet_browsing
+                    - license_management
+                    - cpu_memory_energy
+                    - energy_management
+                description: Report Template detail info
+                $$ref: '#/components/schemas/ReportInfo'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - details
+                    - message
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        description: Error code associated with the error event
+                      details:
+                        type: string
+                        description: Error message details
+                      message:
+                        type: string
+                        description: Error message title
+                    description: error message
+                    $$ref: '#/components/schemas/Model400ErrorError'
+                $$ref: '#/components/schemas/Model400Error'
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+      - Scheduled Report Management
+      summary: Delete the report template by report ID
+      description: Delete the report template and all report files associated with it
+      operationId: deleteReportTemplate
+      parameters:
+      - name: reportId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                required:
+                - reportId
+                type: object
+                properties:
+                  reportId:
+                    type: string
+                    description: Report ID
+                    format: uuid
+                    example: e2e28c40-cb1e-45d7-9637-98e145a70174
+                $$ref: '#/components/schemas/UpdateReportTemplateResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - details
+                    - message
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        description: Error code associated with the error event
+                      details:
+                        type: string
+                        description: Error message details
+                      message:
+                        type: string
+                        description: Error message title
+                    description: error message
+                    $$ref: '#/components/schemas/Model400ErrorError'
+                $$ref: '#/components/schemas/Model400Error'
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /v1/reports/{reportId}/action/{action}:
+    put:
+      tags:
+      - Scheduled Report Management
+      summary: User operations for report template
+      description: User operations for specific report template, which includes activate,deactivate and run immediately
+      operationId: ReportAction
+      parameters:
+      - name: reportId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: action
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - start
+          - stop
+          - runnow
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                required:
+                - reportId
+                type: object
+                properties:
+                  reportId:
+                    type: string
+                    description: Report ID
+                    format: uuid
+                    example: e2e28c40-cb1e-45d7-9637-98e145a70174
+                $$ref: '#/components/schemas/UpdateReportTemplateResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - details
+                    - message
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        description: Error code associated with the error event
+                      details:
+                        type: string
+                        description: Error message details
+                      message:
+                        type: string
+                        description: Error message title
+                    description: error message
+                    $$ref: '#/components/schemas/Model400ErrorError'
+                $$ref: '#/components/schemas/Model400Error'
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /v1/reports/{reportId}/tasks:
+    get:
+      tags:
+      - Scheduled Report Management
+      summary: Get report tasks by ID.
+      description: Get all report task detail information by report ID
+      operationId: getAllReportTasksByReportId
+      parameters:
+      - name: reportId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                required:
+                - taskList
+                type: object
+                properties:
+                  header:
+                    type: object
+                    additionalProperties:
+                      type: object
+                  taskList:
+                    type: array
+                    description: Report Task list for specific report ID
+                    items:
+                      required:
+                      - reportId
+                      - reportName
+                      - schedule
+                      - startTime
+                      - taskId
+                      - taskStatus
+                      - taskStepDetail
+                      - timeFrame
+                      type: object
+                      properties:
+                        emailRecipient:
+                          type: array
+                          description: Email address to receive the report files
+                          example:
+                          - alice@cisco.com
+                          items:
+                            type: string
+                            description: Email address to receive the report files
+                            example:
+                            - alice@cisco.com
+                        endTime:
+                          type: integer
+                          description: Report task end timestamp
+                          format: int64
+                          example: 1656677563859
+                        fileType:
+                          type: string
+                          description: Report file type
+                          example: pdf
+                        followerVmanages:
+                          type: array
+                          description: In Cluster deployment, the follower vManage IP address which needs to replicate the report file from source vManage which generated the report file.
+                          example:
+                          - 10.0.105.38
+                          - 10.0.105.39
+                          items:
+                            type: string
+                            description: In Cluster deployment, the follower vManage IP address which needs to replicate the report file from source vManage which generated the report file.
+                            example:
+                            - 10.0.105.38
+                            - 10.0.105.39
+                        onVmanage:
+                          type: string
+                          description: IP address of the source vManage which is scheduled to generate report file. Default value is "localhost" for single node vManage deployment.
+                          example: 10.0.105.32
+                        reportDownloadUrl:
+                          type: string
+                          description: Report file download URL
+                          example: /reports/6f4464a5-f656-4407-acac-4c273e143a0a/tasks/c3855560-462b-46d6-8c2e-82cc9cfc105a/download
+                        reportId:
+                          type: string
+                          description: Report Template UUID
+                          format: uuid
+                          example: 3fa85f64-5717-4562-b3fc-2c963f66af26
+                        reportName:
+                          type: string
+                          description: Report name for task
+                          example: SJC site summary report-20220916-123123
+                        schedule:
+                          type: string
+                          description: Report schedule information
+                          example: Daily
+                        startTime:
+                          type: integer
+                          description: Report task start timestamp
+                          format: int64
+                          example: 1656677463859
+                        taskId:
+                          type: string
+                          description: Task UUID
+                          format: uuid
+                          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                        taskStatus:
+                          type: string
+                          description: Report Task status
+                          example: in_progress
+                          enum:
+                          - failure
+                          - in_progress
+                          - success
+                        taskStepDetail:
+                          required:
+                          - fileGenerated
+                          - reportDataQuery
+                          type: object
+                          properties:
+                            emailSent:
+                              type: boolean
+                              description: Email sent or not, if sending report via email is enabled
+                              example: true
+                            fileGenerated:
+                              type: boolean
+                              description: Report file is generated or not
+                              example: true
+                            fileReplicated:
+                              type: boolean
+                              description: Report file is all replicated or not when vManage is a cluster deployment
+                              example: true
+                            reportDataQuery:
+                              type: boolean
+                              description: Report data query success or not
+                              example: true
+                          description: The detail status for each step of report generating task
+                          $$ref: '#/components/schemas/ReportTaskProcessStepInfo'
+                        timeFrame:
+                          type: string
+                          description: Report time frame (7 Days or 30 Days)
+                          example: 7 Days
+                      description: Report Task list for specific report ID
+                      $$ref: '#/components/schemas/ReportTaskUIInfo'
+                description: Report task query response
+                $$ref: '#/components/schemas/ReportTaskQueryResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - details
+                    - message
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        description: Error code associated with the error event
+                      details:
+                        type: string
+                        description: Error message details
+                      message:
+                        type: string
+                        description: Error message title
+                    description: error message
+                    $$ref: '#/components/schemas/Model400ErrorError'
+                $$ref: '#/components/schemas/Model400Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - details
+                    - message
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        description: Error code associated with the error event
+                      details:
+                        type: string
+                        description: Error message details
+                      message:
+                        type: string
+                        description: Error message title
+                    description: error message
+                    $$ref: '#/components/schemas/Model400ErrorError'
+                $$ref: '#/components/schemas/Model400Error'
+        '500':
+          description: Internal Server Error
+  /v1/reports/{reportId}/tasks/{taskId}:
+    delete:
+      tags:
+      - Scheduled Report Management
+      summary: Delete report task file by ID.
+      description: Delete the report task file by task ID
+      operationId: deleteReportTaskByTaskId
+      parameters:
+      - name: reportId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: taskId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                required:
+                - taskId
+                type: object
+                properties:
+                  taskId:
+                    type: string
+                    description: Task ID
+                    format: uuid
+                    example: e2e28c40-cb1e-45d7-9637-98e145a70174
+                $$ref: '#/components/schemas/TaskIdResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - details
+                    - message
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        description: Error code associated with the error event
+                      details:
+                        type: string
+                        description: Error message details
+                      message:
+                        type: string
+                        description: Error message title
+                    description: error message
+                    $$ref: '#/components/schemas/Model400ErrorError'
+                $$ref: '#/components/schemas/Model400Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    required:
+                    - code
+                    - details
+                    - message
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        description: Error code associated with the error event
+                      details:
+                        type: string
+                        description: Error message details
+                      message:
+                        type: string
+                        description: Error message title
+                    description: error message
+                    $$ref: '#/components/schemas/Model400ErrorError'
+                $$ref: '#/components/schemas/Model400Error'
+        '500':
+          description: Internal Server Error
+  /v1/reports/{reportId}/tasks/{taskId}/download:
+    get:
+      tags:
+      - Scheduled Report Management
+      summary: Download a report file
+      description: Download a report file
+      operationId: downloadReportDataFile
+      parameters:
+      - name: reportId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: taskId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

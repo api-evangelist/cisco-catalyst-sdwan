@@ -1,0 +1,1319 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - IPsec API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - IPsec
+paths:
+  /device/ipsec/identity:
+    get:
+      tags:
+      - Real-Time Monitoring - IPsec
+      description: Get Crypto IPSEC identity entry from device
+      operationId: createCryptoIpsecIdentity
+      parameters:
+      - name: remote-tloc-address
+        in: query
+        description: Remote TLOC address
+        schema:
+          type: string
+      - name: remote-tloc-color
+        in: query
+        description: Remote tloc color
+        schema:
+          type: string
+          enum:
+          - default
+          - mpls
+          - metro-ethernet
+          - biz-internet
+          - public-internet
+          - lte
+          - 3g
+          - red
+          - green
+          - blue
+          - gold
+          - silver
+          - bronze
+          - custom1
+          - custom2
+          - custom3
+          - private1
+          - private2
+          - private3
+          - private4
+          - private5
+          - private6
+      - name: local-tloc-color
+        in: query
+        description: Local tloc color
+        schema:
+          type: string
+          enum:
+          - default
+          - mpls
+          - metro-ethernet
+          - biz-internet
+          - public-internet
+          - lte
+          - 3g
+          - red
+          - green
+          - blue
+          - gold
+          - silver
+          - bronze
+          - custom1
+          - custom2
+          - custom3
+          - private1
+          - private2
+          - private3
+          - private4
+          - private5
+          - private6
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Crypto IPSEC identity entry:
+                  description: Crypto IPSEC identity entry
+                  value:
+                    data:
+                    - vdevice-name: 169.254.10.12
+                      local-ident-addr: 10.102.5.5
+                      local-endpt-addr: 10.102.5.5
+                      remote-ident-protocol: '0'
+                      interface: Tunnel5
+                      vpn-id: '0'
+                      vdevice-host-name: vm5
+                      local-ident-mask: 255.255.255.255
+                      local-ident-protocol: '0'
+                      vdevice-dataKey: 169.254.10.12
+                      plaintext-mtu: '1438'
+                      lastupdated: 1644890148156
+                      remote-ident-addr: 10.101.3.3
+                      remote-endpt-addr: 10.101.3.3
+                      remote-ident-mask: 255.255.255.255
+                      dh-group: crypto-dh-grouptype-none
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Security-read,Security-write
+  /device/ipsec/ike/inbound:
+    get:
+      tags:
+      - Real-Time Monitoring - IPsec
+      description: Get IPsec IKE inbound connection list from device
+      operationId: createIkeInboundList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                IPsec IKE local inbound connection list:
+                  description: IPsec IKE local inbound connection list
+                  value:
+                    data:
+                    - vdevice-name: 169.254.10.9
+                      vdevice-host-name: vm2
+                      source-ip: 2.2.2.2
+                      source-port: '4500'
+                      dest-ip: 3.3.3.3
+                      dest-port: '4500'
+                      new-spi: '257'
+                      old-spi: '256'
+                      cipher-suite: aes256-cbc-sha1
+                      new-key-hash: '****01be'
+                      old-key-hash: '****a0df'
+                      ext-seq: '11'
+                      lastupdated: '1654066322656'
+                      vdevice-dataKey: 169.254.10.9-10-ipsec1
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Security-read,Security-write
+  /device/ipsec/ike/outbound:
+    get:
+      tags:
+      - Real-Time Monitoring - IPsec
+      description: Get IPsec IKE outbound connection list from device
+      operationId: createIkeOutboundList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                IPsec IKE outbound connection list:
+                  description: IPsec IKE outbound connection list
+                  value:
+                    data:
+                    - vdevice-name: 169.254.10.9
+                      vdevice-host-name: vm2
+                      source-ip: 2.2.2.2
+                      source-port: '4500'
+                      dest-ip: 3.3.3.3
+                      dest-port: '4500'
+                      spi: '257'
+                      cipher-suite: aes256-cbc-sha1
+                      keyhash: '****55b5'
+                      tunnel-mtu: '1418'
+                      ext-seq: '11'
+                      lastupdated: '1654066322656'
+                      vdevice-dataKey: 169.254.10.9-10-ipsec1
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Security-read,Security-write
+  /device/ipsec/ike/sessions:
+    get:
+      tags:
+      - Real-Time Monitoring - IPsec
+      description: Get IPsec IKE sessions from device
+      operationId: createIkeSessions
+      parameters:
+      - name: remote-tloc-address
+        in: query
+        description: Remote TLOC address
+        schema:
+          type: string
+      - name: remote-tloc-color
+        in: query
+        description: Remote tloc color
+        schema:
+          type: string
+          enum:
+          - default
+          - mpls
+          - metro-ethernet
+          - biz-internet
+          - public-internet
+          - lte
+          - 3g
+          - red
+          - green
+          - blue
+          - gold
+          - silver
+          - bronze
+          - custom1
+          - custom2
+          - custom3
+          - private1
+          - private2
+          - private3
+          - private4
+          - private5
+          - private6
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                IPsec IKE sessions:
+                  description: IPsec IKE sessions
+                  value:
+                    data:
+                    - dest-ip: 3.3.3.3
+                      source-port: 4500
+                      vdevice-name: 169.254.10.9
+                      vpn-id: '10'
+                      version: '1'
+                      vdevice-host-name: vm2
+                      uptime: 0:00:00:00
+                      if-name: ipsec1
+                      dest-port: 4500
+                      vdevice-dataKey: 169.254.10.9-10-ipsec1
+                      cipher-suite: aes256-cbc-sha1
+                      lastupdated: 1654066322656
+                      source-ip: 2.2.2.2
+                      state: INTF_CREATED
+                      uptime-date: 1654066320000
+                      dh-group: 16 (MODP-4096)
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Security-read,Security-write
+  /device/ipsec/ikev1:
+    get:
+      tags:
+      - Real-Time Monitoring - IPsec
+      description: Get Crypto IKEv1 SA entry from device
+      operationId: createCryptov1LocalSAList
+      parameters:
+      - name: remote-tloc-address
+        in: query
+        description: Remote TLOC address
+        schema:
+          type: string
+      - name: remote-tloc-color
+        in: query
+        description: Remote tloc color
+        schema:
+          type: string
+          enum:
+          - default
+          - mpls
+          - metro-ethernet
+          - biz-internet
+          - public-internet
+          - lte
+          - 3g
+          - red
+          - green
+          - blue
+          - gold
+          - silver
+          - bronze
+          - custom1
+          - custom2
+          - custom3
+          - private1
+          - private2
+          - private3
+          - private4
+          - private5
+          - private6
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Crypto IKEv1 SA entry:
+                  description: Crypto IKEv1 SA entry
+                  value:
+                    data:
+                    - init-spi: NzA4MjczNjM1RTYwOUE0MQ==
+                      remote-ip-addr: 10.1.16.16
+                      vdevice-name: 172.16.255.15
+                      sa-status: crypto-sa-status-active
+                      lifetime: 84025
+                      vdevice-host-name: vm5
+                      local-ip-addr: 10.1.15.15
+                      my-auth-method: crypto-ikev2-auth-psk
+                      ivrf: none
+                      local-port: 500
+                      peer-auth-method: crypto-ikev2-auth-psk
+                      vdevice-dataKey: 172.16.255.15
+                      fvrf: none
+                      resp-spi: MDkzRDYwQ0YwQzUxMDcxMg==
+                      encr-alg: crypto-encr-alg-aes-cbc
+                      remote-port: 500
+                      hash-algo: crypto-hash-alg-auth-hmac-sha256
+                      lastupdated: 1657094847813
+                      sa-id: '1002'
+                      dh-group: crypto-dh-grouptype-group16
+                    - init-spi: NTlCQjQyNzVEOURCMEExNg==
+                      remote-ip-addr: 10.1.16.16
+                      vdevice-name: 172.16.255.15
+                      sa-status: crypto-sa-status-active
+                      lifetime: 84026
+                      vdevice-host-name: vm5
+                      local-ip-addr: 10.1.15.15
+                      my-auth-method: crypto-ikev2-auth-psk
+                      ivrf: none
+                      local-port: 500
+                      peer-auth-method: crypto-ikev2-auth-psk
+                      vdevice-dataKey: 172.16.255.15
+                      fvrf: none
+                      resp-spi: RTlFMUZEN0VCQUZGNDNGQQ==
+                      encr-alg: crypto-encr-alg-aes-cbc
+                      remote-port: 500
+                      hash-algo: crypto-hash-alg-auth-hmac-sha256
+                      lastupdated: 1657094847813
+                      sa-id: '1003'
+                      dh-group: crypto-dh-grouptype-group16
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Security-read,Security-write
+  /device/ipsec/ikev2:
+    get:
+      tags:
+      - Real-Time Monitoring - IPsec
+      description: Get Crypto IKEv2 SA entry from device
+      operationId: createCryptov2LocalSAList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Crypto IKEv2 SA entry:
+                  description: Crypto IKEv2 SA entry
+                  value:
+                    data:
+                    - init-spi: MkVENzFDRUMxODUyNDVDNA==
+                      remote-ip-addr: 10.1.16.16
+                      vdevice-name: 172.16.255.15
+                      sa-status: crypto-sa-status-active
+                      lifetime: 86400
+                      vdevice-host-name: vm5
+                      local-ip-addr: 10.1.15.15
+                      my-auth-method: crypto-ikev2-auth-psk
+                      ivrf: '1'
+                      local-port: 500
+                      peer-auth-method: crypto-ikev2-auth-psk
+                      vdevice-dataKey: 172.16.255.15
+                      fvrf: none
+                      resp-spi: MzY1RjFGMUMxODgxNTY5Qg==
+                      encr-alg: crypto-encr-alg-aes-cbc
+                      remote-port: 500
+                      hash-algo: crypto-hash-alg-auth-hmac-sha512
+                      lastupdated: 1657274365619
+                      sa-id: '1'
+                      dh-group: crypto-dh-grouptype-group24
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Security-read,Security-write
+  /device/ipsec/inbound:
+    get:
+      tags:
+      - Real-Time Monitoring - IPsec
+      description: Get IPsec inbound connection list from device (Real Time)
+      operationId: createInBoundList
+      parameters:
+      - name: remote-tloc-address
+        in: query
+        description: Remote TLOC address
+        schema:
+          type: string
+      - name: remote-tloc-color
+        in: query
+        description: Remote tloc color
+        schema:
+          type: string
+          enum:
+          - default
+          - mpls
+          - metro-ethernet
+          - biz-internet
+          - public-internet
+          - lte
+          - 3g
+          - red
+          - green
+          - blue
+          - gold
+          - silver
+          - bronze
+          - custom1
+          - custom2
+          - custom3
+          - private1
+          - private2
+          - private3
+          - private4
+          - private5
+          - private6
+      - name: local-tloc-color
+        in: query
+        description: Local tloc color
+        schema:
+          type: string
+          enum:
+          - default
+          - mpls
+          - metro-ethernet
+          - biz-internet
+          - public-internet
+          - lte
+          - 3g
+          - red
+          - green
+          - blue
+          - gold
+          - silver
+          - bronze
+          - custom1
+          - custom2
+          - custom3
+          - private1
+          - private2
+          - private3
+          - private4
+          - private5
+          - private6
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                IPsec inbound connection list:
+                  description: IPsec inbound connection list
+                  value:
+                    data:
+                    - dest-ip: 10.101.3.3
+                      source-port: 12386
+                      vdevice-name: 169.254.10.10
+                      vdevice-host-name: vm3
+                      remote-tloc-address: 172.16.254.1
+                      negotiated-encryption-algo: AES-GCM-256
+                      dest-port: 12406
+                      vdevice-dataKey: 169.254.10.10-172.16.254.2
+                      local-tloc-address: 172.16.254.2
+                      lastupdated: 1643163071849
+                      source-ip: 10.101.2.2
+                      remote-tloc-color: default
+                      local-tloc-color: default
+                    - dest-ip: 10.101.3.3
+                      source-port: 12406
+                      vdevice-name: 169.254.10.10
+                      vdevice-host-name: vm3
+                      remote-tloc-address: 172.16.254.3
+                      negotiated-encryption-algo: AES-GCM-256
+                      dest-port: 12406
+                      vdevice-dataKey: 169.254.10.10-172.16.254.2
+                      local-tloc-address: 172.16.254.2
+                      lastupdated: 1643163071849
+                      source-ip: 10.101.4.4
+                      remote-tloc-color: default
+                      local-tloc-color: default
+                    - dest-ip: 10.101.3.3
+                      source-port: 12406
+                      vdevice-name: 169.254.10.10
+                      vdevice-host-name: vm3
+                      remote-tloc-address: 172.16.254.4
+                      negotiated-encryption-algo: AES-GCM-256
+                      dest-port: 12406
+                      vdevice-dataKey: 169.254.10.10-172.16.254.2
+                      local-tloc-address: 172.16.254.2
+                      lastupdated: 1643163071849
+                      source-ip: 10.102.5.5
+                      remote-tloc-color: default
+                      local-tloc-color: default
+                    - dest-ip: 10.101.3.3
+                      source-port: 12406
+                      vdevice-name: 169.254.10.10
+                      vdevice-host-name: vm3
+                      remote-tloc-address: 172.16.254.5
+                      negotiated-encryption-algo: AES-GCM-256
+                      dest-port: 12406
+                      vdevice-dataKey: 169.254.10.10-172.16.254.2
+                      local-tloc-address: 172.16.254.2
+                      lastupdated: 1643163071849
+                      source-ip: 10.102.6.6
+                      remote-tloc-color: default
+                      local-tloc-color: default
+                    - dest-ip: 10.101.3.3
+                      source-port: 12406
+                      vdevice-name: 169.254.10.10
+                      vdevice-host-name: vm3
+                      remote-tloc-address: 172.16.254.16
+                      negotiated-encryption-algo: AES-GCM-256
+                      dest-port: 12406
+                      vdevice-dataKey: 169.254.10.10-172.16.254.2
+                      local-tloc-address: 172.16.254.2
+                      lastupdated: 1643163071849
+                      source-ip: 10.102.16.16
+                      remote-tloc-color: default
+                      local-tloc-color: default
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Security-read,Security-write
+  /device/ipsec/localsa:
+    get:
+      tags:
+      - Real-Time Monitoring - IPsec
+      description: Get IPsec local SA list from device
+      operationId: createLocalSAList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                IPsec local SA list:
+                  description: IPsec local SA list
+                  value:
+                    data:
+                    - tloc-color: default
+                      vdevice-dataKey: 169.254.10.10-172.16.254.2
+                      vdevice-name: 169.254.10.10
+                      port: 12406
+                      tloc-address: 172.16.254.2
+                      ipv6: '::'
+                      ip: 10.101.3.3
+                      lastupdated: 1643166514716
+                      encrypt-key-hash: '*****386b'
+                      spi: '286'
+                      auth-key-hash: '*****386b'
+                      vdevice-host-name: vm3
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Security-read,Security-write
+  /device/ipsec/outbound:
+    get:
+      tags:
+      - Real-Time Monitoring - IPsec
+      description: Get IPsec outbound connection list from device (Real Time)
+      operationId: createOutBoundList
+      parameters:
+      - name: remote-tloc-address
+        in: query
+        description: Remote TLOC address
+        schema:
+          type: string
+      - name: remote-tloc-color
+        in: query
+        description: Remote tloc color
+        schema:
+          type: string
+          enum:
+          - default
+          - mpls
+          - metro-ethernet
+          - biz-internet
+          - public-internet
+          - lte
+          - 3g
+          - red
+          - green
+          - blue
+          - gold
+          - silver
+          - bronze
+          - custom1
+          - custom2
+          - custom3
+          - private1
+          - private2
+          - private3
+          - private4
+          - private5
+          - private6
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                IPsec outbound connection list:
+                  description: IPsec outbound connection list
+                  value:
+                    data:
+                    - dest-ip: 10.101.2.2
+                      integrity-used: ip-udp-esp
+                      source-port: 12426
+                      vdevice-name: 169.254.10.10
+                      spi: 262
+                      auth-key-hash: '*****2450'
+                      vdevice-host-name: vm3
+                      remote-tloc-address: 172.16.254.1
+                      dest-port: 12386
+                      vdevice-dataKey: 169.254.10.10-10.101.3.3
+                      tunnel-mtu: 1441
+                      lastupdated: 1643334538276
+                      source-ip: 10.101.3.3
+                      remote-tloc-color: default
+                      encrypt-key-hash: '*****2450'
+                    - dest-ip: 10.101.4.4
+                      integrity-used: ip-udp-esp
+                      source-port: 12426
+                      vdevice-name: 169.254.10.10
+                      spi: 289
+                      auth-key-hash: '*****3b7e'
+                      vdevice-host-name: vm3
+                      remote-tloc-address: 172.16.254.3
+                      dest-port: 12366
+                      vdevice-dataKey: 169.254.10.10-10.101.3.3
+                      tunnel-mtu: 1441
+                      lastupdated: 1643334538276
+                      source-ip: 10.101.3.3
+                      remote-tloc-color: default
+                      encrypt-key-hash: '*****3b7e'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Security-read,Security-write
+  /device/ipsec/pwk/inbound:
+    get:
+      tags:
+      - Real-Time Monitoring - IPsec
+      description: Get IPSEC pairwise key inbound entry from device
+      operationId: createIPsecPWKInboundConnections
+      parameters:
+      - name: remote-tloc-address
+        in: query
+        description: Remote TLOC address
+        schema:
+          type: string
+      - name: remote-tloc-color
+        in: query
+        description: Remote tloc color
+        schema:
+          type: string
+          enum:
+          - default
+          - mpls
+          - metro-ethernet
+          - biz-internet
+          - public-internet
+          - lte
+          - 3g
+          - red
+          - green
+          - blue
+          - gold
+          - silver
+          - bronze
+          - custom1
+          - custom2
+          - custom3
+          - private1
+          - private2
+          - private3
+          - private4
+          - private5
+          - private6
+      - name: local-tloc-color
+        in: query
+        description: Local tloc color
+        schema:
+          type: string
+          enum:
+          - default
+          - mpls
+          - metro-ethernet
+          - biz-internet
+          - public-internet
+          - lte
+          - 3g
+          - red
+          - green
+          - blue
+          - gold
+          - silver
+          - bronze
+          - custom1
+          - custom2
+          - custom3
+          - private1
+          - private2
+          - private3
+          - private4
+          - private5
+          - private6
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                IPSEC pairwise key inbound entry:
+                  description: IPSEC pairwise key inbound entry
+                  value:
+                    data:
+                    - dest-ip: 10.101.5.5
+                      local-tloc-index: '32770'
+                      source-port: '12366'
+                      pkey-hash: '    '
+                      vdevice-name: 169.254.10.12
+                      nonce-hash: '    '
+                      is-ah-auth: 'true'
+                      pwk-spi: '0'
+                      vdevice-host-name: vm5
+                      pkey-id: '0'
+                      ss-hash: '    '
+                      remote-tloc-address: 172.16.254.1
+                      dest-port: '12346'
+                      vdevice-dataKey: 169.254.10.12
+                      d-key-hash: '    '
+                      local-tloc-address: 172.16.254.4
+                      lastupdated: 1645154066644
+                      remote-tloc-color: lte
+                      source-ip: 10.102.2.2
+                      local-tloc-color: default
+                      sa-index: '7'
+                      remote-tloc-index: '32775'
+                    - dest-ip: 10.101.5.5
+                      local-tloc-index: '32770'
+                      source-port: '12366'
+                      pkey-hash: '    '
+                      vdevice-name: 169.254.10.12
+                      nonce-hash: '    '
+                      is-ah-auth: 'true'
+                      pwk-spi: '0'
+                      vdevice-host-name: vm5
+                      pkey-id: '0'
+                      ss-hash: '    '
+                      remote-tloc-address: 172.16.254.1
+                      dest-port: '12346'
+                      vdevice-dataKey: 169.254.10.12
+                      d-key-hash: '    '
+                      local-tloc-address: 172.16.254.4
+                      lastupdated: 1645154066644
+                      remote-tloc-color: 3g
+                      source-ip: 10.101.2.2
+                      local-tloc-color: default
+                      sa-index: '19'
+                      remote-tloc-index: '32781'
+                    - dest-ip: 10.101.5.5
+                      local-tloc-index: '32770'
+                      source-port: '12366'
+                      pkey-hash: '    '
+                      vdevice-name: 169.254.10.12
+                      nonce-hash: '    '
+                      is-ah-auth: 'true'
+                      pwk-spi: '0'
+                      vdevice-host-name: vm5
+                      pkey-id: '0'
+                      ss-hash: '    '
+                      remote-tloc-address: 172.16.254.2
+                      dest-port: '12346'
+                      vdevice-dataKey: 169.254.10.12
+                      d-key-hash: '    '
+                      local-tloc-address: 172.16.254.4
+                      lastupdated: 1645154066644
+                      remote-tloc-color: lte
+                      source-ip: 10.102.3.3
+                      local-tloc-color: default
+                      sa-index: '11'
+                      remote-tloc-index: '32777'
+                    - dest-ip: 10.101.5.5
+                      local-tloc-index: '32770'
+                      source-port: '12366'
+                      pkey-hash: '    '
+                      vdevice-name: 169.254.10.12
+                      nonce-hash: '    '
+                      is-ah-auth: 'true'
+                      pwk-spi: '0'
+                      vdevice-host-name: vm5
+                      pkey-id: '0'
+                      ss-hash: '    '
+                      remote-tloc-address: 172.16.254.2
+                      dest-port: '12346'
+                      vdevice-dataKey: 169.254.10.12
+                      d-key-hash: '    '
+                      local-tloc-address: 172.16.254.4
+                      lastupdated: 1645154066645
+                      remote-tloc-color: 3g
+                      source-ip: 10.101.3.3
+                      local-tloc-color: default
+                      sa-index: '9'
+                      remote-tloc-index: '32776'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Security-read,Security-write
+  /device/ipsec/pwk/localsa:
+    get:
+      tags:
+      - Real-Time Monitoring - IPsec
+      description: Get IPSEC pairwise key local SA entry from device
+      operationId: createIPsecPWKLocalSA
+      parameters:
+      - name: remote-tloc-address
+        in: query
+        description: Remote TLOC address
+        schema:
+          type: string
+      - name: remote-tloc-color
+        in: query
+        description: Remote tloc color
+        schema:
+          type: string
+          enum:
+          - default
+          - mpls
+          - metro-ethernet
+          - biz-internet
+          - public-internet
+          - lte
+          - 3g
+          - red
+          - green
+          - blue
+          - gold
+          - silver
+          - bronze
+          - custom1
+          - custom2
+          - custom3
+          - private1
+          - private2
+          - private3
+          - private4
+          - private5
+          - private6
+      - name: local-tloc-color
+        in: query
+        description: Local tloc color
+        schema:
+          type: string
+          enum:
+          - default
+          - mpls
+          - metro-ethernet
+          - biz-internet
+          - public-internet
+          - lte
+          - 3g
+          - red
+          - green
+          - blue
+          - gold
+          - silver
+          - bronze
+          - custom1
+          - custom2
+          - custom3
+          - private1
+          - private2
+          - private3
+          - private4
+          - private5
+          - private6
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                IPSEC pairwise key local SA entry:
+                  description: IPSEC pairwise key local SA entry
+                  value:
+                    data:
+                    - tloc-color: default
+                      pkey-hash: '    '
+                      vdevice-name: 169.254.10.12
+                      nonce-hash: '    '
+                      tloc-address: 172.16.254.4
+                      tloc-index: '32770'
+                      ip: 10.101.5.5
+                      spi: '262'
+                      vdevice-host-name: vm5
+                      pkey-id: '0'
+                      vdevice-dataKey: 169.254.10.12
+                      port: '12346'
+                      lastupdated: 1645153823323
+                      sa-index: '9'
+                    - tloc-color: default
+                      pkey-hash: '    '
+                      vdevice-name: 169.254.10.12
+                      nonce-hash: '    '
+                      tloc-address: 172.16.254.4
+                      tloc-index: '32770'
+                      ip: 10.101.5.5
+                      spi: '263'
+                      vdevice-host-name: vm5
+                      pkey-id: '0'
+                      vdevice-dataKey: 169.254.10.12
+                      port: '12346'
+                      lastupdated: 1645153823323
+                      sa-index: '11'
+                    - tloc-color: 3g
+                      pkey-hash: '    '
+                      vdevice-name: 169.254.10.12
+                      nonce-hash: '    '
+                      tloc-address: 172.16.254.4
+                      tloc-index: '32771'
+                      ip: 10.102.5.5
+                      spi: '262'
+                      vdevice-host-name: vm5
+                      pkey-id: '0'
+                      vdevice-dataKey: 169.254.10.12
+                      port: '12346'
+                      lastupdated: 1645153823323
+                      sa-index: '10'
+                    - tloc-color: 3g
+                      pkey-hash: '    '
+                      vdevice-name: 169.254.10.12
+                      nonce-hash: '    '
+                      tloc-address: 172.16.254.4
+                      tloc-index: '32771'
+                      ip: 10.102.5.5
+                      spi: '263'
+                      vdevice-host-name: vm5
+                      pkey-id: '0'
+                      vdevice-dataKey: 169.254.10.12
+                      port: '12346'
+                      lastupdated: 1645153823323
+                      sa-index: '12'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Security-read,Security-write
+  /device/ipsec/pwk/outbound:
+    get:
+      tags:
+      - Real-Time Monitoring - IPsec
+      description: Get IPSEC pairwise key outbound entry from device
+      operationId: createIPsecPWKOutboundConnections
+      parameters:
+      - name: remote-tloc-address
+        in: query
+        description: Remote TLOC address
+        schema:
+          type: string
+      - name: remote-tloc-color
+        in: query
+        description: Remote tloc color
+        schema:
+          type: string
+          enum:
+          - default
+          - mpls
+          - metro-ethernet
+          - biz-internet
+          - public-internet
+          - lte
+          - 3g
+          - red
+          - green
+          - blue
+          - gold
+          - silver
+          - bronze
+          - custom1
+          - custom2
+          - custom3
+          - private1
+          - private2
+          - private3
+          - private4
+          - private5
+          - private6
+      - name: local-tloc-color
+        in: query
+        description: Local tloc color
+        schema:
+          type: string
+          enum:
+          - default
+          - mpls
+          - metro-ethernet
+          - biz-internet
+          - public-internet
+          - lte
+          - 3g
+          - red
+          - green
+          - blue
+          - gold
+          - silver
+          - bronze
+          - custom1
+          - custom2
+          - custom3
+          - private1
+          - private2
+          - private3
+          - private4
+          - private5
+          - private6
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                IPSEC pairwise key outbound entry:
+                  description: IPSEC pairwise key outbound entry
+                  value:
+                    data:
+                    - pkey-id: '0'
+                      vdevice-dataKey: 172.16.255.15
+                      nonce-hash: '    '
+                      pkey-hash: '    '
+                      vdevice-host-name: vm5
+                      e-key-hash: a600
+                      local-tloc-color: lte
+                      dest-ip: 10.0.5.11
+                      source-ip: 10.1.15.15
+                      remote-tloc-index: '32772'
+                      lastupdated: 1645156239932
+                      sa-index: '183'
+                      remote-tloc-address: 172.16.255.11
+                      tloc-index: '32772'
+                      dest-port: '12367'
+                      source-port: '12346'
+                      local-tloc-index: '32770'
+                      vdevice-name: 172.16.255.15
+                      remote-tloc-color: lte
+                      ss-hash: '    '
+                      spi: '302'
+                      local-tloc-address: 172.16.255.15
+                      is-ah-auth: 'true'
+                      pwk-spi: '0'
+                    - pkey-id: '0'
+                      vdevice-dataKey: 172.16.255.15
+                      nonce-hash: '    '
+                      pkey-hash: '    '
+                      vdevice-host-name: vm5
+                      e-key-hash: b13e
+                      local-tloc-color: lte
+                      dest-ip: 10.0.5.21
+                      source-ip: 10.1.15.15
+                      remote-tloc-index: '32771'
+                      lastupdated: 1645156239933
+                      sa-index: '182'
+                      remote-tloc-address: 172.16.255.21
+                      tloc-index: '32771'
+                      dest-port: '12377'
+                      source-port: '12346'
+                      local-tloc-index: '32770'
+                      vdevice-name: 172.16.255.15
+                      remote-tloc-color: lte
+                      ss-hash: '    '
+                      spi: '302'
+                      local-tloc-address: 172.16.255.15
+                      is-ah-auth: 'true'
+                      pwk-spi: '0'
+                    - pkey-id: '0'
+                      vdevice-dataKey: 172.16.255.15
+                      nonce-hash: '    '
+                      pkey-hash: '    '
+                      vdevice-host-name: vm5
+                      e-key-hash: 59f1
+                      local-tloc-color: lte
+                      dest-ip: 10.1.14.14
+                      source-ip: 10.1.15.15
+                      remote-tloc-index: '32774'
+                      lastupdated: 1645156239933
+                      sa-index: '184'
+                      remote-tloc-address: 172.16.255.14
+                      tloc-index: '32774'
+                      dest-port: '12366'
+                      source-port: '12346'
+                      local-tloc-index: '32770'
+                      vdevice-name: 172.16.255.15
+                      remote-tloc-color: lte
+                      ss-hash: '    '
+                      spi: '302'
+                      local-tloc-address: 172.16.255.15
+                      is-ah-auth: 'true'
+                      pwk-spi: '0'
+                    - pkey-id: '0'
+                      vdevice-dataKey: 172.16.255.15
+                      nonce-hash: '    '
+                      pkey-hash: '    '
+                      vdevice-host-name: vm5
+                      e-key-hash: 61b6
+                      local-tloc-color: lte
+                      dest-ip: 10.1.16.16
+                      source-ip: 10.1.15.15
+                      remote-tloc-index: '32773'
+                      lastupdated: 1645156239933
+                      sa-index: '181'
+                      remote-tloc-address: 172.16.255.16
+                      tloc-index: '32773'
+                      dest-port: '12366'
+                      source-port: '12346'
+                      local-tloc-index: '32770'
+                      vdevice-name: 172.16.255.15
+                      remote-tloc-color: lte
+                      ss-hash: '    '
+                      spi: '302'
+                      local-tloc-address: 172.16.255.15
+                      is-ah-auth: 'true'
+                      pwk-spi: '0'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Security-read,Security-write

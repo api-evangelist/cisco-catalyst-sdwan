@@ -1,0 +1,530 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - Voice API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - Voice
+paths:
+  /device/voice/dspActive:
+    get:
+      tags:
+      - Real-Time Monitoring - Voice
+      description: Get DSPFarm Active DSP info from device
+      operationId: getDspActive
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DSPFarm Active DSP info:
+                  description: DSPFarm Active DSP info
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.15
+                      vdevice-host-name: vm5
+                      dsp-num: 2
+                      dsp-status: up
+                      rsc-id: 1
+                      bridge-id: 9
+                      pkts-txed: 228
+                      pkts-rxed: 119
+                      lastupdated: 1660244459596
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,Device Monitoring-write
+  /device/voice/phoneInfo:
+    get:
+      tags:
+      - Real-Time Monitoring - Voice
+      description: Get phone registration info from device
+      operationId: getPhoneInfo
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                VOIP call info:
+                  description: VOIP call info
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.15
+                      vdevice-host-name: vm5
+                      pool-tag: '1'
+                      id-network: 10.1.10.217
+                      reg-state: 'yes'
+                      dialpeer-tag: '100'
+                      address: 10.64.86.70
+                      dir-number: '5550111'
+                      lastupdated: 1660244459596
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,Device Monitoring-write
+  /device/voice/profiles:
+    get:
+      tags:
+      - Real-Time Monitoring - Voice
+      description: Get DSPFarm Profiles info from device
+      operationId: getDSPFarmProfiles
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DSPFarm Profiles info:
+                  description: DSPFarm Profiles info
+                  value:
+                    data:
+                    - prof-oper-state: prof-oper-state-active-in-prog
+                      service-id: profile-mtp
+                      app-id: app-id-sccp
+                      vdevice-name: 32.32.32.17
+                      prof-admin-state: prof-admin-state-up
+                      vdevice-host-name: isr4331-prakuma3-2
+                      resource-id: '1'
+                      rsc-status: rsc-group-state-none
+                      app-assoc-status: app-assoc-active-in-prog
+                      vdevice-dataKey: 32.32.32.17-9
+                      rsc-provider: rsc-prov-none
+                      profile-id: '9'
+                      lastupdated: 1660244459596
+                      secure-mode: srvc-mode-non-secure
+                    - prof-oper-state: prof-oper-state-active-in-prog
+                      service-id: profile-mtp
+                      app-id: app-id-sccp
+                      vdevice-name: 32.32.32.17
+                      prof-admin-state: prof-admin-state-up
+                      vdevice-host-name: isr4331-prakuma3-2
+                      resource-id: '2'
+                      rsc-status: rsc-group-state-none
+                      app-assoc-status: app-assoc-active-in-prog
+                      vdevice-dataKey: 32.32.32.17-52
+                      rsc-provider: rsc-prov-none
+                      profile-id: '52'
+                      lastupdated: 1660244459596
+                      secure-mode: srvc-mode-non-secure
+                    - prof-oper-state: prof-oper-state-active-in-prog
+                      service-id: profile-mtp
+                      app-id: app-id-sccp
+                      vdevice-name: 32.32.32.17
+                      prof-admin-state: prof-admin-state-up
+                      vdevice-host-name: isr4331-prakuma3-2
+                      resource-id: '3'
+                      rsc-status: rsc-group-state-none
+                      app-assoc-status: app-assoc-active-in-prog
+                      vdevice-dataKey: 32.32.32.17-183
+                      rsc-provider: rsc-prov-none
+                      profile-id: '183'
+                      lastupdated: 1660244459596
+                      secure-mode: srvc-mode-non-secure
+                    - prof-oper-state: prof-oper-state-active-in-prog
+                      service-id: profile-transcode
+                      app-id: app-id-sccp
+                      vdevice-name: 32.32.32.17
+                      prof-admin-state: prof-admin-state-up
+                      vdevice-host-name: isr4331-prakuma3-2
+                      resource-id: '4'
+                      rsc-status: rsc-group-state-up
+                      app-assoc-status: app-assoc-active-in-prog
+                      vdevice-dataKey: 32.32.32.17-711
+                      rsc-provider: rsc-prov-flex-dsprm
+                      profile-id: '711'
+                      lastupdated: 1660244459596
+                      secure-mode: srvc-mode-non-secure
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,Device Monitoring-write
+  /device/voice/sccpCcmGroups:
+    get:
+      tags:
+      - Real-Time Monitoring - Voice
+      description: Get DSPFarm SCCP CCM Groups info from device
+      operationId: getSccpCcmGroups
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DSPFarm SCCP CCM Groups info:
+                  description: DSPFarm SCCP CCM Groups info
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.15
+                      vdevice-host-name: vm5
+                      ccm-group-id: 5
+                      description: boston office
+                      switchover-method: GRACEFUL
+                      switchback-method: GRACEFUL_GUARD
+                      ccm-id: 1
+                      ccm-priority: 1
+                      profile-id: 6
+                      reg-name: MTP123456789988
+                      lastupdated: 1642581869106
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,Device Monitoring-write
+  /device/voice/sccpConnections:
+    get:
+      tags:
+      - Real-Time Monitoring - Voice
+      description: Get DSPFarm SCCP Connections info from device
+      operationId: getSccpConnections
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DSPFarm SCCP Connections info:
+                  description: DSPFarm SCCP Connections info
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.15
+                      vdevice-host-name: vm5
+                      conn-id: 16777409
+                      sess-id: 16777222
+                      stype: secure-xcode
+                      mode: sendrecv
+                      codec: g729b
+                      rmt-ipaddr: 10.3.56.120
+                      rmt-port: '16772'
+                      src-port: '19354'
+                      dtmf-method: enabled
+                      lastupdated: 1642581869106
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,Device Monitoring-write
+  /device/voice/voiceCalls:
+    get:
+      tags:
+      - Real-Time Monitoring - Voice
+      description: Get voice call info from device
+      operationId: getVoiceCalls
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Voice call info:
+                  description: Voice call info
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.15
+                      vdevice-host-name: vm5
+                      key-id: '0312341111'
+                      call-id: '24'
+                      voice-port-id: 1/015
+                      codec-type: g729r8
+                      vad: disabled
+                      dsp-id: '010'
+                      dsp-type: C549
+                      dsp-abort-packet-cnt: 0
+                      dsp-tx-packet-cnt: 67400
+                      dsp-rx-packet-cnt: 67400
+                      lastupdated: 1660244459596
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,Device Monitoring-write
+  /device/voice/voipCalls:
+    get:
+      tags:
+      - Real-Time Monitoring - Voice
+      description: Get VOIP call info from device
+      operationId: getVoipCalls
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                VOIP call info:
+                  description: VOIP call info
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.15
+                      vdevice-host-name: vm5
+                      call-index: 3917844
+                      call-setuptime: 126640
+                      call-id: 5554071
+                      codec: g711ulaw
+                      remote-ip-address: 10.128.136.58
+                      remote-media-port: 17602
+                      transmit-packets: 2246
+                      receive-packets: 2246
+                      call-duration: 00:00:50
+                      lastupdated: 1660727547133
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,Device Monitoring-write
+  /device/voiceisdninfo/isdnstatus:
+    get:
+      tags:
+      - Real-Time Monitoring - Voice
+      description: Retrieve Voice ISDN Status from device
+      operationId: getT1e1IsdnStatus
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device voice ISDN status:
+                  description: Device voice ISDN status
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.15
+                      vdevice-host-name: vm5
+                      key-id: 0
+                      intf-name: Serial0:23
+                      switch-type: primary-5ess
+                      l1-status: ACTIVE
+                      l2-status: MULTIPLE_FRAME_ESTABLISHED
+                      num-active-calls: 1
+                      lastupdated: 1660727547133
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,Device Monitoring-write
+  /device/voicet1e1controllerinfo/current15minstats:
+    get:
+      tags:
+      - Real-Time Monitoring - Voice
+      description: Retrieve T1E1 controller last 15 min stats from device (Real Time)
+      operationId: getControllerT1e1InfoCurrent15MinStats
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                T1E1 controller status:
+                  description: T1E1 controller status
+                  value:
+                    data:
+                    - vdevice-name: 32.32.32.17
+                      vdevice-host-name: vm5
+                      slot-num: '6'
+                      subslot-num: '3'
+                      port-num: '0'
+                      state: up
+                      type: t1
+                      clocking: internal
+                      vdevice-dataKey: 32.32.32.17-711
+                      lcvs: 136
+                      pcvs: 63
+                      csss: 0
+                      sefss: 6
+                      less: 4
+                      dms: 0
+                      ess: 7
+                      bess: 1
+                      sess: 6
+                      uass: 458
+                      lastupdated: 1660727547133
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,Device Monitoring-write
+  /device/voicet1e1controllerinfo/totalstats:
+    get:
+      tags:
+      - Real-Time Monitoring - Voice
+      description: Retrieve T1E1 controller total stats from device (Real Time)
+      operationId: getControllerT1e1InfoTotalStats
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                T1E1 controller status:
+                  description: T1E1 controller status
+                  value:
+                    data:
+                    - vdevice-name: 32.32.32.17
+                      vdevice-host-name: vm5
+                      slot-num: '6'
+                      subslot-num: '3'
+                      port-num: '0'
+                      state: up
+                      type: t1
+                      clocking: internal
+                      vdevice-dataKey: 32.32.32.17-711
+                      lcvs: 136
+                      pcvs: 63
+                      csss: 0
+                      sefss: 6
+                      less: 4
+                      dms: 0
+                      ess: 7
+                      bess: 1
+                      sess: 6
+                      uass: 458
+                      lastupdated: 1660727547133
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,Device Monitoring-write

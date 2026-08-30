@@ -1,0 +1,438 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - VDSL Service API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - VDSL Service
+paths:
+  /device/vdslService/coLineSpecificStats:
+    get:
+      tags:
+      - Real-Time Monitoring - VDSL Service
+      description: Get VDSL service line bonding stats from device
+      operationId: getCoLineSpecificStats
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                VDSL service line bonding stats:
+                  description: VDSL service line bonding stats
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.15
+                      vdevice-host-name: vm5
+                      slot-num: '0'
+                      line-num: '4'
+                      trellis-state: 'ON'
+                      sra-enabled: disabled
+                      sra-count: '0'
+                      bit-swap-enabled: enabled
+                      bit-swap-count: '0'
+                      line-attenuation: 0.9dB
+                      signal-attenuation: 1.8dB
+                      noise-margin: 18.6dB
+                      attainable-rate: 138139 kbits/s
+                      actual-power: 14.1dBm
+                      total-fecc: '302690'
+                      total-es: '295'
+                      total-ses: '161'
+                      total-loss: '14'
+                      total-uas: '87189'
+                      total-lprs: '0'
+                      total-lofs: '80'
+                      total-lols: '0'
+                      speed: '27547'
+                      sra-previous-speed: '0'
+                      previous-speed: '128857'
+                      reed-solomon-ec: '0'
+                      crc-errors: '24722'
+                      header-errors: '8'
+                      interleave: '7.00'
+                      actual-inp: '1.00'
+                      gfast-fra-count: '57'
+                      gfast-rpa-count: '45'
+                      gfast-tiga-count: '76'
+                      gfast-rtx-uc: '0'
+                      gfast-rtx-tx: '0'
+                      gfast-attainable-exp-thru: '0'
+                      gfast-error-free-thru: '0'
+                      atm-total-cells: '11338923'
+                      atm-user-cells: '0'
+                      vdsl2-la-band-d1: '0.2'
+                      vdsl2-la-band-d2: '0.9'
+                      vdsl2-la-band-d3: '1.7'
+                      vdsl2-sa-band-d1: '0.2'
+                      vdsl2-sa-band-d2: '0.9'
+                      vdsl2-sa-band-d3: '1.7'
+                      vdsl2-snr-band-d1: '27.7'
+                      vdsl2-snr-band-d2: '16.9'
+                      vdsl2-snr-band-d3: '10.9'
+                      vdevice-dataKey: 172.16.255.15
+                      lastupdated: 1642581869106
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/vdslService/coStats:
+    get:
+      tags:
+      - Real-Time Monitoring - VDSL Service
+      description: Get CO stats from device
+      operationId: getCoStats
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                CO stats:
+                  description: CO stats
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.15
+                      vdevice-host-name: vm5
+                      chip-vendor: BDCM
+                      line-attenuation: 0.9dB
+                      noise-margin: 18.6dB
+                      attainable-rate: 138139kbits/s
+                      actual-power: 14.1dBm
+                      speed: '128857'
+                      slot-num: '0'
+                      subslot-num: '0'
+                      modem-serial: FCH2234TH6R C927-4P 15.8(3)M1
+                      chip-vendor-specific: '0xB11F'
+                      chip-vendor-country: '0xB500'
+                      modem-vendor-id: CSCO
+                      modem-vendor-specific: '0x4602'
+                      modem-vendor-country: '0xB500'
+                      modem-version: 15.8(3)M1
+                      lastupdated: 1642581869106
+                      vdevice-dataKey: 172.16.255.15
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/vdslService/cpeLineSpecificStats:
+    get:
+      tags:
+      - Real-Time Monitoring - VDSL Service
+      description: Get VDSL service CPE line specific stats from device
+      operationId: getCpeLineSpecificStats
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                VDSL service CPE line specific stats:
+                  description: VDSL service CPE line specific stats
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.15
+                      vdevice-host-name: vm5
+                      slot-num: '0'
+                      line-num: '4'
+                      trellis-state: 'ON'
+                      sra-enabled: disabled
+                      sra-count: '0'
+                      bit-swap-enabled: enabled
+                      bit-swap-count: '0'
+                      line-attenuation: 0.9dB
+                      signal-attenuation: 1.8dB
+                      noise-margin: 18.6dB
+                      attainable-rate: 138139 kbits/s
+                      actual-power: 14.1dBm
+                      total-fecc: '302690'
+                      total-es: '295'
+                      total-ses: '161'
+                      total-loss: '14'
+                      total-uas: '87189'
+                      total-lprs: '0'
+                      total-lofs: '80'
+                      total-lols: '0'
+                      speed: '27547'
+                      sra-previous-speed: '0'
+                      previous-speed: '128857'
+                      reed-solomon-ec: '0'
+                      crc-errors: '24722'
+                      header-errors: '8'
+                      interleave: '7.00'
+                      actual-inp: '1.00'
+                      gfast-fra-count: '57'
+                      gfast-rpa-count: '45'
+                      gfast-tiga-count: '76'
+                      gfast-rtx-uc: '0'
+                      gfast-rtx-tx: '0'
+                      gfast-attainable-exp-thru: '0'
+                      gfast-error-free-thru: '0'
+                      atm-total-cells: '11338923'
+                      atm-user-cells: '0'
+                      vdsl2-la-band-d1: '0.2'
+                      vdsl2-la-band-d2: '0.9'
+                      vdsl2-la-band-d3: '1.7'
+                      vdsl2-sa-band-d1: '0.2'
+                      vdsl2-sa-band-d2: '0.9'
+                      vdsl2-sa-band-d3: '1.7'
+                      vdsl2-snr-band-d1: '27.7'
+                      vdsl2-snr-band-d2: '16.9'
+                      vdsl2-snr-band-d3: '10.9'
+                      vdevice-dataKey: 172.16.255.15
+                      lastupdated: 1642581869106
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/vdslService/cpeStats:
+    get:
+      tags:
+      - Real-Time Monitoring - VDSL Service
+      description: Get CPE stats from device
+      operationId: getCpeStats
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                CPE stats:
+                  description: CPE stats
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.15
+                      vdevice-host-name: vm5
+                      chip-vendor: BDCM
+                      line-attenuation: 0.9dB
+                      noise-margin: 18.6dB
+                      attainable-rate: 138139kbits/s
+                      actual-power: 14.1dBm
+                      speed: '128857'
+                      slot-num: '0'
+                      subslot-num: '0'
+                      modem-serial: ''
+                      chip-vendor-specific: FCH2234TH6R C927-4P 15.8(3)M1
+                      chip-vendor-country: '0xB500'
+                      modem-vendor-id: CSCO
+                      modem-vendor-specific: '0x4602'
+                      modem-vendor-country: '0xB500'
+                      modem-version: 15.8(3)M1
+                      lastupdated: 1642581869106
+                      vdevice-dataKey: 172.16.255.15
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/vdslService/lineBondingStats:
+    get:
+      tags:
+      - Real-Time Monitoring - VDSL Service
+      description: Get VDSL service line bonding stats from device
+      operationId: getLineBondingStats
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                VDSL service line bonding stats:
+                  description: VDSL service line bonding stats
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.15
+                      vdevice-host-name: vm5
+                      slot-num: '0'
+                      ports-supported: '0'
+                      port-0-link-status: up
+                      port-1-link-status: down
+                      aggregate-us-rate: 87957 kbits/s
+                      aggregate-ds-rate: 138139 kbits/s
+                      lastupdated: 0
+                      vdevice-dataKey: 172.16.255.15
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/vdslService/lineSpecificStats:
+    get:
+      tags:
+      - Real-Time Monitoring - VDSL Service
+      description: Get VDSL service line specific stats from device
+      operationId: getLineSpecificStats
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                VDSL service line specific stats:
+                  description: VDSL service line specific stats
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.15
+                      vdevice-host-name: vm5
+                      vdevice-dataKey: 172.16.255.15
+                      slot-num: '0'
+                      line-number: '4'
+                      modem-status: TC Sync (Showtime!)
+                      trained-mode: G.992.5 (ADSL2+) Annex A
+                      profile-30a-enabled: enabled
+                      lastupdated: 1642581869106
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/vdslService/vdslInfo:
+    get:
+      tags:
+      - Real-Time Monitoring - VDSL Service
+      description: Get VDSL info from device
+      operationId: getVdslInfo
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                VDSL info:
+                  description: VDSL info
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.15
+                      vdevice-host-name: vm5
+                      state: UP
+                      mode: AUTO
+                      modem-status: TC Sync (Showtime!)
+                      trained-mode: G.993.2 (VDSL2) Profile 17a
+                      firmware-version: 4.14L.04
+                      phy-version: A2pv6F039x8.d26d
+                      slot-num: '0'
+                      subslot-num: '0'
+                      dsl-config-mode: AUTO
+                      delt-configuration-enabled: disabled
+                      delt-state: not running
+                      failed-full-inits: '15'
+                      short-inits: '8'
+                      failed-short-inits: '7'
+                      modem-phy-source: embedded
+                      training-log-state: Stopped
+                      training-log-filename: flash:vdsllog.bin
+                      lastupdated: 1642581869106
+                      vdevice-dataKey: 172.16.255.15
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write

@@ -1,0 +1,309 @@
+openapi: 3.2.0
+info:
+  title: Others HSEC API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: HSEC
+paths:
+  /hsec/devices:
+    get:
+      tags:
+      - HSEC
+      description: Retrieve list of devices which are valid for fetch of HSEC license
+      operationId: fetchDeviceDetails
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                properties:
+                  empty:
+                    type: boolean
+                items:
+                  type: object
+                  properties:
+                    configuredSystemIP:
+                      type: string
+                      example: 172.16.255.15
+                    deviceModel:
+                      type: string
+                      example: vedge-C8000V
+                    hostName:
+                      type: string
+                      example: hostname
+                    hsecLicenseStatus:
+                      type: string
+                      example: assigned
+                    isHsecSupported:
+                      type: boolean
+                      example: true
+                    reachability:
+                      type: string
+                      example: reachability
+                    tag:
+                      type: string
+                      example: regid.2020-10.com.cisco.DSTACK_T2_A,1.0_b072e613-aa2c-4ed0-ab46-ae91ddc7dfb5
+                    uuid:
+                      type: string
+                      example: C8K-a9d1a657-790a-40d6-a9bd-a55751e73340
+                  $$ref: '#/components/schemas/GetHSECDevicesPayloadInner'
+                $$ref: '#/components/schemas/GetHSECInstallDevicesPayload'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /hsec/devices/install:
+    get:
+      tags:
+      - HSEC
+      description: Retrieve list of devices which has HSEC fetched
+      operationId: InstallDeviceDetails
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                properties:
+                  empty:
+                    type: boolean
+                items:
+                  type: object
+                  properties:
+                    configuredSystemIP:
+                      type: string
+                      example: 172.16.255.15
+                    deviceModel:
+                      type: string
+                      example: vedge-C8000V
+                    hostName:
+                      type: string
+                      example: hostname
+                    hsecLicenseStatus:
+                      type: string
+                      example: assigned
+                    isHsecSupported:
+                      type: boolean
+                      example: true
+                    reachability:
+                      type: string
+                      example: reachability
+                    tag:
+                      type: string
+                      example: regid.2020-10.com.cisco.DSTACK_T2_A,1.0_b072e613-aa2c-4ed0-ab46-ae91ddc7dfb5
+                    uuid:
+                      type: string
+                      example: C8K-a9d1a657-790a-40d6-a9bd-a55751e73340
+                  $$ref: '#/components/schemas/GetHSECDevicesPayloadInner'
+                $$ref: '#/components/schemas/GetHSECInstallDevicesPayload'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /hsec/download:
+    post:
+      tags:
+      - HSEC
+      description: Download SLAC Request file for CSSM
+      operationId: downloadSlacRequestFile
+      requestBody:
+        description: Device List
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Device:
+                description: Device
+                value: {}
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device:
+                  description: Device
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: admin,Software Upgrade-write
+  /hsec/fetchaccounts:
+    get:
+      tags:
+      - HSEC
+      description: Authenticate User and Sync Licenses
+      operationId: fetchSAVAAccounts
+      parameters:
+      - name: username
+        in: query
+        schema:
+          type: string
+      - name: pwd
+        in: query
+        schema:
+          type: string
+      - name: mode
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  account_id:
+                    type: string
+                    example: '276200'
+                  name:
+                    type: string
+                    example: testaccount3.viptela.com
+                  virtual_accounts:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        default:
+                          type: boolean
+                          example: false
+                        name:
+                          type: string
+                          example: '703805'
+                        virtual_account_id:
+                          type: string
+                          example: '713850'
+                      $$ref: '#/components/schemas/SmartLicensingfetchAccountsRespVirtualAccounts'
+                $$ref: '#/components/schemas/SmartLicensingfetchAccountsResp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+    post:
+      tags:
+      - HSEC
+      description: Authenticate User and Sync Licenses
+      operationId: fetchAccounts_Hsec_1904
+      requestBody:
+        description: Hsec License sync request payload
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties:
+                type: object
+                properties:
+                  valueType:
+                    type: string
+                    enum:
+                    - ARRAY
+                    - OBJECT
+                    - STRING
+                    - NUMBER
+                    - 'TRUE'
+                    - 'FALSE'
+                    - 'NULL'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  account_id:
+                    type: string
+                    example: '276200'
+                  name:
+                    type: string
+                    example: testaccount3.viptela.com
+                  virtual_accounts:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        default:
+                          type: boolean
+                          example: false
+                        name:
+                          type: string
+                          example: '703805'
+                        virtual_account_id:
+                          type: string
+                          example: '713850'
+                      $$ref: '#/components/schemas/SmartLicensingfetchAccountsRespVirtualAccounts'
+                $$ref: '#/components/schemas/SmartLicensingfetchAccountsResp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /hsec/testbedMode:
+    get:
+      tags:
+      - HSEC
+      description: Return testbed mode information staging or production
+      operationId: testbedMode
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  isStaging:
+                    type: boolean
+                    example: false
+                $$ref: '#/components/schemas/TestbedMode'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

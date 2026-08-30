@@ -1,0 +1,343 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - SFP API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - SFP
+paths:
+  /device/sfp/detail:
+    get:
+      tags:
+      - Real-Time Monitoring - SFP
+      description: Get SFP detail
+      operationId: getDetail
+      parameters:
+      - name: ifname
+        in: query
+        description: IF Name
+        schema:
+          type: string
+          enum:
+          - ge0/0
+          - ge0/1
+          - ge0/2
+          - ge0/3
+          - ge0/4
+          - ge0/5
+          - ge0/6
+          - ge0/7
+          - system
+          - eth0
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Serial interface:
+                  description: Serial interface
+                  value:
+                    data:
+                    - vdevice-dataKey: 169.254.10.10-ge0/0
+                      vdevice-name: 169.254.10.10
+                      ifname: ge0/0
+                      lastupdated: 1643091761770
+                      present: 'No'
+                      vdevice-host-name: vm3
+                    - vdevice-dataKey: 169.254.10.10-ge0/1
+                      vdevice-name: 169.254.10.10
+                      ifname: ge0/1
+                      lastupdated: 1643091761770
+                      present: 'No'
+                      vdevice-host-name: vm3
+                    - vdevice-dataKey: 169.254.10.10-ge0/2
+                      vdevice-name: 169.254.10.10
+                      ifname: ge0/2
+                      lastupdated: 1643091761770
+                      present: 'No'
+                      vdevice-host-name: vm3
+                    - vdevice-dataKey: 169.254.10.10-ge0/3
+                      vdevice-name: 169.254.10.10
+                      ifname: ge0/3
+                      lastupdated: 1643091761770
+                      present: 'No'
+                      vdevice-host-name: vm3
+                    - vdevice-dataKey: 169.254.10.10-ge0/4
+                      vdevice-name: 169.254.10.10
+                      ifname: ge0/4
+                      lastupdated: 1643091761770
+                      present: 'No'
+                      vdevice-host-name: vm3
+                    - vdevice-dataKey: 169.254.10.10-ge0/5
+                      vdevice-name: 169.254.10.10
+                      ifname: ge0/5
+                      lastupdated: 1643091761770
+                      present: 'No'
+                      vdevice-host-name: vm3
+                    - vdevice-dataKey: 169.254.10.10-ge0/6
+                      vdevice-name: 169.254.10.10
+                      ifname: ge0/6
+                      lastupdated: 1643091761770
+                      present: 'No'
+                      vdevice-host-name: vm3
+                    - vdevice-dataKey: 169.254.10.10-ge0/7
+                      vdevice-name: 169.254.10.10
+                      ifname: ge0/7
+                      lastupdated: 1643091761770
+                      present: 'No'
+                      vdevice-host-name: vm3
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /device/sfp/diagnostic:
+    get:
+      tags:
+      - Real-Time Monitoring - SFP
+      description: Get SFP diagnostic
+      operationId: getDiagnostic
+      parameters:
+      - name: ifname
+        in: query
+        description: IF Name
+        schema:
+          type: string
+          enum:
+          - ge0/0
+          - ge0/1
+          - ge0/2
+          - ge0/3
+          - ge0/4
+          - ge0/5
+          - ge0/6
+          - ge0/7
+          - system
+          - eth0
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Serial interface:
+                  description: Serial interface
+                  value:
+                    data:
+                    - vdevice-dataKey: 169.254.10.10-ge0/0
+                      vdevice-name: 169.254.10.10
+                      ifname: ge0/0
+                      lastupdated: 1643093876343
+                      present: 'No'
+                      vdevice-host-name: vm3
+                    - vdevice-dataKey: 169.254.10.10-ge0/1
+                      vdevice-name: 169.254.10.10
+                      ifname: ge0/1
+                      lastupdated: 1643093876343
+                      present: 'No'
+                      vdevice-host-name: vm3
+                    - vdevice-dataKey: 169.254.10.10-ge0/2
+                      vdevice-name: 169.254.10.10
+                      ifname: ge0/2
+                      lastupdated: 1643093876343
+                      present: 'No'
+                      vdevice-host-name: vm3
+                    - vdevice-dataKey: 169.254.10.10-ge0/3
+                      vdevice-name: 169.254.10.10
+                      ifname: ge0/3
+                      lastupdated: 1643093876343
+                      present: 'No'
+                      vdevice-host-name: vm3
+                    - vdevice-dataKey: 169.254.10.10-ge0/4
+                      vdevice-name: 169.254.10.10
+                      ifname: ge0/4
+                      lastupdated: 1643093876343
+                      present: 'No'
+                      vdevice-host-name: vm3
+                    - vdevice-dataKey: 169.254.10.10-ge0/5
+                      vdevice-name: 169.254.10.10
+                      ifname: ge0/5
+                      lastupdated: 1643093876343
+                      present: 'No'
+                      vdevice-host-name: vm3
+                    - vdevice-dataKey: 169.254.10.10-ge0/6
+                      vdevice-name: 169.254.10.10
+                      ifname: ge0/6
+                      lastupdated: 1643093876343
+                      present: 'No'
+                      vdevice-host-name: vm3
+                    - vdevice-dataKey: 169.254.10.10-ge0/7
+                      vdevice-name: 169.254.10.10
+                      ifname: ge0/7
+                      lastupdated: 1643093876343
+                      present: 'No'
+                      vdevice-host-name: vm3
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /device/sfp/diagnosticMeasurementAlarm:
+    get:
+      tags:
+      - Real-Time Monitoring - SFP
+      description: Get SFP diagnostic measurement alarm
+      operationId: getDiagnosticMeasurementAlarm
+      parameters:
+      - name: ifname
+        in: query
+        description: IF Name
+        schema:
+          type: string
+          enum:
+          - ge0/0
+          - ge0/1
+          - ge0/2
+          - ge0/3
+          - ge0/4
+          - ge0/5
+          - ge0/6
+          - ge0/7
+          - system
+          - eth0
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Serial interface:
+                  description: Serial interface
+                  value:
+                    data:
+                    - vdevice-name: 169.254.10.10
+                      vdevice-host-name: vm1
+                      ifname: ge0/3
+                      measurement: Rx power
+                      low-alarm-alarm: Y
+                      low-warning-alarm: Y
+                      high-warning-alarm: N
+                      high-alarm-alarm: N
+                      lastupdated: 1661322671947
+                      vdevice-dataKey: 169.254.10.10-ge0/3
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /device/sfp/diagnosticMeasurementValue:
+    get:
+      tags:
+      - Real-Time Monitoring - SFP
+      description: Get SFP diagnostic measurement value
+      operationId: getDiagnosticMeasurementValue
+      parameters:
+      - name: ifname
+        in: query
+        description: IF Name
+        schema:
+          type: string
+          enum:
+          - ge0/0
+          - ge0/1
+          - ge0/2
+          - ge0/3
+          - ge0/4
+          - ge0/5
+          - ge0/6
+          - ge0/7
+          - system
+          - eth0
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Serial interface:
+                  description: Serial interface
+                  value:
+                    data:
+                    - vdevice-name: 169.254.10.10
+                      vdevice-host-name: vm1
+                      ifname: ge0/3
+                      measurement: Rx power
+                      unit-value: mW
+                      low-alarm-value: '0.010'
+                      low-warning-value: '0.016'
+                      high-warning-value: '1.585'
+                      high-alarm-value: '1.778'
+                      current-value: '0.000'
+                      lastupdated: 1661324101365
+                      vdevice-dataKey: 169.254.10.10-ge0/3
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read

@@ -1,0 +1,139 @@
+openapi: 3.2.0
+info:
+  title: Others Client - UI API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Client - UI
+paths:
+  /client/server:
+    get:
+      tags:
+      - Client - UI
+      summary: Get vManage server information
+      description: Get vManage server information
+      operationId: createServerInfo_ClientUi_1403
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      CSRFToken:
+                        type: string
+                        example: 1BCE77AF0B88D97E3B922CE81315D61982FA5D5EC37874116320B4FDE43D9E8BA561E2907718618A1E75BF0E29B247101E11
+                      VsessionId:
+                        type: string
+                        example: ZGVmYXVsdA==
+                      capabilities:
+                        type: array
+                        items:
+                          type: string
+                      cloudx:
+                        type: string
+                        example: 'off'
+                      description:
+                        type: string
+                      disableFullConfigPush:
+                        type: boolean
+                        example: false
+                      enableServerEvents:
+                        type: boolean
+                        example: true
+                      externalUser:
+                        type: boolean
+                        example: false
+                      generalTemplate:
+                        type: boolean
+                        example: true
+                      isRbacVpnUser:
+                        type: boolean
+                        example: false
+                      isSamlUser:
+                        type: boolean
+                        example: false
+                      isUiAllowed:
+                        type: boolean
+                        example: false
+                      locale:
+                        type: string
+                        example: en_US
+                      platformVersion:
+                        type: string
+                        example: 20.13.999-2952
+                      reverseproxy:
+                        type: string
+                        example: 'off'
+                      roles:
+                        type: array
+                        items:
+                          type: string
+                      server:
+                        type: string
+                        example: vm12
+                      tenancyMode:
+                        type: string
+                        example: SingleTenant
+                      tenantId:
+                        type: string
+                        example: default
+                      user:
+                        type: string
+                        example: admin
+                      userMode:
+                        type: string
+                        example: tenant
+                      viewMode:
+                        type: string
+                        example: tenant
+                      vmanageMode:
+                        type: string
+                        example: default
+                      vpns:
+                        type: array
+                        items:
+                          type: string
+                    $$ref: '#/components/schemas/ClientServerResponseData'
+                  header:
+                    type: object
+                    properties:
+                      generatedOn:
+                        type: integer
+                        format: int32
+                        example: 1689221609561
+                    $$ref: '#/components/schemas/ClientServerResponseHeader'
+                $$ref: '#/components/schemas/ClientServerInfoResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

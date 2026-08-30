@@ -1,0 +1,301 @@
+openapi: 3.2.0
+info:
+  title: Others Real Time Monitoring - Raw Socket API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real Time Monitoring - Raw Socket
+paths:
+  /device/rawsocket/tcp-session:
+    get:
+      tags:
+      - Real Time Monitoring - Raw Socket
+      summary: Get TCP session
+      description: Get TCP session
+      operationId: getTcpSession
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                TCP Session:
+                  description: TCP Session
+                  value:
+                    data:
+                    - async-line: 0/2/0
+                      destination-ip: 192.168.1.1
+                      destination-port: 8080
+                      tty: '50'
+                      vrf: vrf1
+                      idle-timeout: 300
+                      mode: active
+                      local-ip: 10.0.0.1
+                      local-port: 12345
+                      socket: socket1
+                      start-time: '2023-10-05T14:48:00Z'
+                      last-active-time: '2023-10-05T15:00:00Z'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write
+  /device/rawsocket/tcp-session-local:
+    get:
+      tags:
+      - Real Time Monitoring - Raw Socket
+      summary: Get TCP session local
+      description: Get TCP session local
+      operationId: getTcpSessionLocal
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                TCP Session Local:
+                  description: TCP Session Local
+                  value:
+                    data:
+                    - async-line: 0/2/0
+                      destination-ip: 192.168.1.1
+                      destination-port: 8080
+                      tty: '50'
+                      local-ip: 10.0.0.1
+                      local-port: 12345
+                      state: active
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write
+  /device/rawsocket/tcp-statistics:
+    get:
+      tags:
+      - Real Time Monitoring - Raw Socket
+      summary: Get TCP statistics
+      description: Get TCP statistics
+      operationId: getTcpStatistics
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                TCP Statistics:
+                  description: TCP Statistics
+                  value:
+                    data:
+                    - async-line: 0/2/0
+                      tty: '50'
+                      vrf: vrf1
+                      num-sessions: 4
+                      tcp-in-bytes: 1500
+                      tcp-out-bytes: 1600
+                      tcp-to-tty-frames: 50
+                      tty-to-tcp-frames: 45
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write
+  /device/rawsocket/udp-session:
+    get:
+      tags:
+      - Real Time Monitoring - Raw Socket
+      summary: Get UDP session
+      description: Get UDP session
+      operationId: getUdpSession
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                UDP Session:
+                  description: UDP Session
+                  value:
+                    data:
+                    - async-line: 0/2/0
+                      destination-ip: 192.168.1.1
+                      destination-port: 8080
+                      tty: '50'
+                      vrf: vrf1
+                      idle-timeout: 300
+                      mode: active
+                      local-ip: 10.0.0.1
+                      local-port: 12345
+                      socket: socket1
+                      start-time: '2023-10-05T14:48:00Z'
+                      last-active-time: '2023-10-05T15:00:00Z'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write
+  /device/rawsocket/udp-session-local:
+    get:
+      tags:
+      - Real Time Monitoring - Raw Socket
+      summary: Get UDP session local
+      description: Get UDP session local
+      operationId: getUdpSessionLocal
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                UDP Session Local:
+                  description: UDP Session Local
+                  value:
+                    data:
+                    - async-line: 0/2/0
+                      destination-ip: 192.168.1.1
+                      destination-port: 8080
+                      tty: '50'
+                      local-ip: 10.0.0.1
+                      local-port: 12345
+                      state: active
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write
+  /device/rawsocket/udp-statistics:
+    get:
+      tags:
+      - Real Time Monitoring - Raw Socket
+      summary: Get UDP statistics
+      description: Get UDP statistics
+      operationId: getUdpStatistics
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                UDP Statistics:
+                  description: UDP Statistics
+                  value:
+                    data:
+                    - async-line: 0/2/0
+                      tty: '50'
+                      vrf: vrf1
+                      num-sessions: 5
+                      udp-in-bytes: 1024
+                      udp-out-bytes: 2048
+                      udp-to-tty-frames: 30
+                      tty-to-udp-frames: 25
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write

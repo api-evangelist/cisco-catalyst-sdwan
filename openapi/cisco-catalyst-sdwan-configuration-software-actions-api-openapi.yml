@@ -1,0 +1,860 @@
+openapi: 3.2.0
+info:
+  title: Others Configuration - Software Actions API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Configuration - Software Actions
+paths:
+  /device/action/remote-server:
+    get:
+      tags:
+      - Configuration - Software Actions
+      description: Get list of remote servers
+      operationId: getRemoteServerList
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+      - Configuration - Software Actions
+      description: Add a new remote server entry.
+      operationId: addRemoteServer
+      requestBody:
+        description: Request body for Add a new remote server entry.
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Example Value:
+                description: Example Value
+                value:
+                  remoteServerName: test
+                  remoteServerUrl: 1.1.1.1
+                  remoteServerProtocol: SCP
+                  remoteServerPort: 22
+                  remoteServerVPN: 0
+                  remoteServerUser: vtest
+                  imageLocationPrefix: /
+                  remoteServerPassword: v1ptela0212
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionremoteserverapiRequestExamplePostremoteserver'
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/action/remote-server/{id}:
+    get:
+      tags:
+      - Configuration - Software Actions
+      description: Get remote server for the specified ID
+      operationId: getRemoteServerById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+      - Configuration - Software Actions
+      description: Delete remote server for the specified ID
+      operationId: deleteRemoteServer
+      parameters:
+      - name: id
+        in: path
+        description: remoteServerId
+        required: true
+        schema:
+          type: string
+        example: f7ae1f4b-9900-424f-92ca-22d2231f55dc
+      requestBody:
+        description: Request body for Add a new remote server entry.
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Example Value:
+                description: Example Value
+                value: {}
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionDeviceactionremoteserverapiRequestExampleDeleteremoteserver'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    put:
+      tags:
+      - Configuration - Software Actions
+      description: Update remote server for the specified ID
+      operationId: updateRemoteServer
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/action/software:
+    get:
+      tags:
+      - Configuration - Software Actions
+      description: Get software images
+      operationId: findSoftwareImages
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Example:
+                  description: Example
+                  value:
+                    data:
+                    - availableFiles: '[isr4200-universalk9_ias.17.09.01.0.155356_V17_9_0_8.SSA.bin]'
+                      versionType: vmanage
+                      versionTypeName: software
+                      imagePropertiesJson: ''
+                      networkFunctionType: ROUTER
+                      updatedOn: 1653647407050
+                      versionName: 17.09.01.0.155356.1646904830
+                      platformFamily:
+                      - isr4200
+                      smuCompatibleVersion: 17.09.01.0.155356
+                      versionIdMap: '{isr4200-universalk9_ias.17.09.01.0.155356_V17_9_0_8.SSA.bin=39db1b51-7b82-4616-8767-404b5b9a197a}'
+                      versionId: a6a9ce11-e23d-4c88-88f4-e166b69e1493
+                      systemPropertiesXml: ''
+                      '@rid': 615
+                      availableSmuVersions:
+                      - ''
+                      vnfPropertiesJson: ''
+                      cwVersion: 17.09.01
+                      vendor: Cisco
+                      controllerVersionName: 20.9.x
+                      fileNameMap: '{isr4200-ucmk9.17.09.01.0.155356.1646904830.SSA.bin=isr4200-universalk9_ias.17.09.01.0.155356_V17_9_0_8.SSA.bin}'
+                      arch: x86_64
+                      imageType: software
+                      versionURL: http://<VMANAGE_HOST>:8080/software/package/
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionInstallpackageurlapiResponseExampleGetsoftware'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+      - Configuration - Software Actions
+      description: Create software image URL
+      operationId: createImageURL
+      requestBody:
+        description: Request body
+        content:
+          application/json:
+            schema:
+              required:
+              - fileName
+              - remoteServerId
+              type: object
+              properties:
+                cwVersion:
+                  type: string
+                  description: Software image version.
+                  example: 17.17.01.0.210058
+                fileName:
+                  type: string
+                  description: Software image file name.
+                  example: abc.bin
+                isPatch:
+                  type: boolean
+                  example: false
+                platformfamily:
+                  type: string
+                  description: Software image platform family.
+                  example: c8000v
+                remoteServerId:
+                  type: string
+                  description: 'Remote server id to fetch the image from. '
+                  example: 9ef53f4a-388d-4b3d-90b6-d94038ecb9ed
+              $$ref: '#/components/schemas/CreateImageURL'
+            examples:
+              Example Value:
+                description: Example Value
+                value:
+                  remoteServerId: 9ef53f4a-388d-4b3d-90b6-d94038ecb9ed
+                  fileName: abc.bin
+                  platformFamily: c8000v
+                  cwVersion: 17.17.01.0.210058
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionInstallpackageurlapiRequestExamplePostsoftware'
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/action/software/imageProperties/{versionId}:
+    get:
+      tags:
+      - Configuration - Software Actions
+      description: Get Image Properties
+      operationId: getImageProperties
+      parameters:
+      - name: versionId
+        in: path
+        required: true
+        schema:
+          type: string
+        example: 08d56e2f-10ee-452d-bd41-c375915cf7d7
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        imagePropertiesJson:
+                          type: object
+                          properties:
+                            image_properties:
+                              type: object
+                              properties:
+                                applicationDescription:
+                                  type: string
+                                  example: Unified Threat Defense
+                                applicationMaxInstances:
+                                  type: number
+                                  example: 1
+                                applicationVendor:
+                                  type: string
+                                  example: Cisco Systems, Inc.
+                                arch:
+                                  type: string
+                                  example: aarch64
+                                imageType:
+                                  type: string
+                                  example: lxc
+                                name:
+                                  type: string
+                                  example: UTD-Snort-Feature
+                                version:
+                                  type: string
+                                  example: 1.13.5_SV3.1.55.0_XEmain
+                                vnf_type:
+                                  type: string
+                                  example: app-hosting
+                              $$ref: '#/components/schemas/GetImagePropertiesImagePropertiesJsonImageProperties'
+                          $$ref: '#/components/schemas/GetImagePropertiesImagePropertiesJson'
+                      $$ref: '#/components/schemas/GetImagePropertiesData'
+                $$ref: '#/components/schemas/GetImageProperties'
+              examples:
+                Image properties:
+                  description: Image properties
+                  value:
+                    data:
+                    - imagePropertiesJson:
+                        image_properties:
+                          applicationMaxInstances: 1
+                          applicationDescription: Unified Threat Defense
+                          name: UTD-Snort-Feature
+                          applicationVendor: Cisco Systems, Inc.
+                          arch: aarch64
+                          vnf_type: app-hosting
+                          version: 1.13.5_SV3.1.55.0_XEmain
+                          imageType: lxc
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionInstallpackageurlapiResponseExampleGetimageproperties'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/action/software/images:
+    get:
+      tags:
+      - Configuration - Software Actions
+      description: Get software images
+      operationId: findSoftwareImagesWithFilters
+      parameters:
+      - name: imageType
+        in: query
+        description: imageType
+        required: true
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              image:
+                type: string
+            description: 'This is the valid Image type '
+            $$ref: '#/components/schemas/Image'
+        example:
+        - software
+      - name: vnfType
+        in: query
+        description: vnfType
+        schema:
+          type: string
+        example: ROUTER
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Example:
+                  description: Example
+                  value:
+                    data:
+                    - availableFiles: isr4200-universalk9_ias.17.09.01.0.155356_V17_9_0_8.SSA.bin
+                      versionTypeName: software
+                      versionName: 17.09.01.0.155356.1646904830
+                      platformFamily:
+                      - isr4200
+                      smuCompatibleVersion: 17.09.01.0.155356
+                      vendor: Cisco
+                      imageType: software
+                      versionType: vmanage
+                      networkFunctionType: ROUTER
+                      updatedOn: 1653647407050
+                      versionIdMap: '{isr4200-universalk9_ias.17.09.01.0.155356_V17_9_0_8.SSA.bin=39db1b51-7b82-4616-8767-404b5b9a197a}'
+                      versionId: 39db1b51-7b82-4616-8767-404b5b9a197a
+                      availableSmuVersions:
+                      - string
+                      controllerVersionName: 20.9.x
+                      fileNameMap: '{isr4200-ucmk9.17.09.01.0.155356.1646904830.SSA.bin=isr4200-universalk9_ias.17.09.01.0.155356_V17_9_0_8.SSA.bin}'
+                      arch: x86_64
+                      versionURL: http://<VMANAGE_HOST>:8080/software/package/
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionInstallpackageurlapiResponseExampleGetsoftwareimages'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/action/software/platformfamily:
+    get:
+      tags:
+      - Configuration - Software Actions
+      description: Get Supported platform Family
+      operationId: findSupportedPlatformFamily
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                ' Supported platform Family':
+                  description: ' Supported platform Family'
+                  value:
+                  - ir1101
+                  - c8000aes
+                  - isr4400
+                  - c8000aep
+                  - Teleworker
+                  - asr1000
+                  - asr1001x
+                  - c1100
+                  - isr4200
+                  - isr4300
+                  - c8000be
+                  - isr1100be
+                  - c8100
+                  - c8k30aes
+                  - asr1000rpx86
+                  - c1100tg
+                  - ir1800
+                  - isrv
+                  - c8000v
+                  - c8k30be
+                  - cg
+                  - asr1002x
+                  - csr1000v
+                  - isr4400v2
+                  - NFVIS-SDWAN-BRANCH
+                  - c6300
+                  - ir8340
+                  - ir8100
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionInstallpackageurlapiResponseExampleGetplatformfamily'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/action/software/remoteserver/{versionId}:
+    get:
+      tags:
+      - Configuration - Software Actions
+      description: Get Image Remote Server Details
+      operationId: getImageRemoteServer
+      parameters:
+      - name: versionId
+        in: path
+        description: Version
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Remote Server Details:
+                  description: Remote Server Details
+                  value:
+                    remoteServers:
+                    - remoteServerId: 6d22e7fb-335c-4f93-a756-f2d5fa815e03
+                      ImageRelativePath: /images
+                    - remoteServerId: 6d22e7fb-335c-4f93-a756-f2d5fa815e14
+                      ImageRelativePath: /images/virtualImages
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Software Upgrade-read,Software Upgrade-write,Software Upgrade > Edge-write,Software Upgrade > Edge-read,Software Upgrade > Controller-write,Software Upgrade > Controller-read
+    put:
+      tags:
+      - Configuration - Software Actions
+      description: Update Image Remote Server Details
+      operationId: editImageRemoteServer
+      parameters:
+      - name: versionId
+        in: path
+        description: Image ID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Update image remote server details
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Update image remote server details:
+                description: Update image remote server details
+                value:
+                  remoteServers:
+                  - remoteServerId: 6d22e7fb-335c-4f93-a756-f2d5fa815e03
+                    ImageRelativePath: /images
+                  - remoteServerId: 6d22e7fb-335c-4f93-a756-f2d5fa815e14
+                    ImageRelativePath: /images/virtualImages
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: admin,Software Upgrade-write,Software Upgrade > Edge-write,Software Upgrade > Controller-write
+  /device/action/software/vedge/version:
+    get:
+      tags:
+      - Configuration - Software Actions
+      description: Get vEdge software version
+      operationId: findVEdgeSoftwareVersion
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        version:
+                          type: string
+                          example: 17.12.01.0.177566.1681743991
+                        versionId:
+                          type: string
+                          example: a35a640d-2414-4923-a2c4-02bbd37bf2ad
+                      $$ref: '#/components/schemas/FindVEdgeSoftwareVersionData'
+                $$ref: '#/components/schemas/FindVEdgeSoftwareVersion'
+              examples:
+                vEdge software version:
+                  description: vEdge software version
+                  value:
+                    data:
+                    - versionId: a35a640d-2414-4923-a2c4-02bbd37bf2ad
+                      version: 17.12.01.0.177566.1681743991
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionInstallpackageurlapiResponseExampleVedgeversion'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/action/software/version:
+    get:
+      tags:
+      - Configuration - Software Actions
+      description: Get software version
+      operationId: findSoftwareVersion
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        version:
+                          type: string
+                          example: 17.12.01.0.177566.1681743991
+                      $$ref: '#/components/schemas/FindSoftwareVersionData'
+                $$ref: '#/components/schemas/FindSoftwareVersion'
+              examples:
+                Software version:
+                  description: Software version
+                  value:
+                    data:
+                    - version: 17.12.01.0.177566.1681743991
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionInstallpackageurlapiResponseExampleVersion'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/action/software/vnfproperties/{versionId}:
+    get:
+      tags:
+      - Configuration - Software Actions
+      description: Get VNF Properties
+      operationId: getVnfProperties
+      parameters:
+      - name: versionId
+        in: path
+        required: true
+        schema:
+          type: string
+        example: c9a1bf09-1060-4c82-a9e8-745159ddfc1d
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        vnfPropertiesJson:
+                          type: object
+                          properties:
+                            vnfProperties:
+                              type: object
+                              properties:
+                                applicationDescription:
+                                  type: string
+                                  example: Unified Threat Defense
+                                applicationMaxInstances:
+                                  type: number
+                                  example: 1
+                                applicationVendor:
+                                  type: string
+                                  example: Cisco Systems, Inc.
+                                arch:
+                                  type: string
+                                  example: x86_64
+                                imageType:
+                                  type: string
+                                  example: lxc
+                                name:
+                                  type: string
+                                  example: UTD-Snort-Feature
+                                version:
+                                  type: string
+                                  example: 1.13.1_SV3.1.55.0_XEmain
+                                vnf_type:
+                                  type: string
+                                  example: app-hosting
+                              $$ref: '#/components/schemas/GetVnfPropertiesVnfPropertiesJsonVnfProperties'
+                          $$ref: '#/components/schemas/GetVnfPropertiesVnfPropertiesJson'
+                      $$ref: '#/components/schemas/GetVnfPropertiesData'
+                $$ref: '#/components/schemas/GetVnfProperties'
+              examples:
+                VNF properties:
+                  description: VNF properties
+                  value:
+                    data:
+                    - vnfPropertiesJson:
+                        vnfProperties:
+                          applicationMaxInstances: 1
+                          applicationDescription: Unified Threat Defense
+                          name: UTD-Snort-Feature
+                          applicationVendor: Cisco Systems, Inc.
+                          arch: x86_64
+                          vnf_type: app-hosting
+                          version: 1.13.1_SV3.1.55.0_XEmain
+                          imageType: lxc
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionInstallpackageurlapiResponseExampleVnfproperties'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/action/software/ztp/version:
+    get:
+      tags:
+      - Configuration - Software Actions
+      description: Get ZTP software version
+      operationId: findZtpSoftwareVersion
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                vEdge software version:
+                  description: vEdge software version
+                  value:
+                    data:
+                    - platformFamily: ir1101
+                      versions:
+                      - remoteServerId: 213577b2-ee6f-47b3-8c19-e6ebdf6dc8f1
+                        imageLocationPrefix: /
+                        remoteServerName: local_ftp
+                        remoteServerVPN: '0'
+                        remoteServerPort: '21'
+                        remoteServerProtocol: FTP
+                        remoteServerUrl: 1.1.1.1
+                        name: cba.bin
+                        versionId: 831bfa08-d7f8-447f-8919-c9ccda5e1e8c
+                        versionType: remote
+                    - platformFamily: vedge-mips
+                      versions: []
+                    - platformFamily: c8000aes
+                      versions: []
+                    - platformFamily: isr4400
+                      versions: []
+                    - platformFamily: c8000aep
+                      versions: []
+                    - platformFamily: Teleworker
+                      versions: []
+                    - platformFamily: asr1001x
+                      versions: []
+                    - platformFamily: asr1000
+                      versions: []
+                    - platformFamily: c1100
+                      versions: []
+                    - platformFamily: isr4200
+                      versions:
+                      - versionId: a6a9ce11-e23d-4c88-88f4-e166b69e1493
+                        version: 17.09.01.0.155356.1646904830
+                        versionType: vmanage
+                    - platformFamily: c8000be
+                      versions: []
+                    - platformFamily: isr4300
+                      versions: []
+                    - platformFamily: isr1100be
+                      versions: []
+                    - platformFamily: asr1000rpx86
+                      versions: []
+                    - platformFamily: ir1800
+                      versions: []
+                    - platformFamily: isrv
+                      versions:
+                      - versionId: 56ffdd15-414d-4d8a-b76a-8b242e8983d0
+                        version: 17.09.01.0.153019.1643527674
+                    - platformFamily: c8000v
+                      versions:
+                      - versionId: 56ffdd15-414d-4d8a-b76a-8b242e8983d0
+                        version: 17.09.01.0.153019.1643527674
+                    - platformFamily: cg
+                      versions: []
+                    - platformFamily: vedge-x86
+                      versions: []
+                    - platformFamily: csr1000v
+                      versions:
+                      - versionId: 56ffdd15-414d-4d8a-b76a-8b242e8983d0
+                        version: 17.09.01.0.153019.1643527674
+                    - platformFamily: asr1002x
+                      versions: []
+                    - platformFamily: isr4400v2
+                      versions: []
+                    - platformFamily: c6300
+                      versions: []
+                    - platformFamily: ir8340
+                      versions: []
+                    - platformFamily: ir8100
+                      versions: []
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionInstallpackageurlapiResponseExampleZtpversion'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/action/software/{versionId}:
+    delete:
+      tags:
+      - Configuration - Software Actions
+      description: Delete software image URL
+      operationId: deleteImageURL
+      parameters:
+      - name: versionId
+        in: path
+        description: Version
+        required: true
+        schema:
+          type: string
+        example: 08d56e2f-10ee-452d-bd41-c375915cf7d7
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    put:
+      tags:
+      - Configuration - Software Actions
+      description: Update software image URL
+      operationId: updateImageURL
+      parameters:
+      - name: versionId
+        in: path
+        description: Version
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Update software image request payload
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Update software image request:
+                description: Update software image request
+                value: {}
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: admin,Software Upgrade-write,Software Upgrade > Edge-write,Software Upgrade > Controller-write

@@ -1,0 +1,276 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - CFM API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - CFM
+paths:
+  /device/cfm/mp/database:
+    get:
+      tags:
+      - Real-Time Monitoring - CFM
+      description: Get mp database from device
+      operationId: getMpDatabase
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Mp database:
+                  description: Mp database
+                  value:
+                    data:
+                    - defect: defect-none
+                      flag: rmep-flag-none
+                      vdevice-dataKey: 172.16.255.11
+                      vdevice-name: 172.16.255.11
+                      level: '7'
+                      service: UNINET_VERLEANDROVALLE-17_5005
+                      domain: UNINET
+                      local-mep-id: '1562'
+                      lastupdated: 1648692601592
+                      remote-mep-id: '1561'
+                      vdevice-host-name: vm1
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write,System-read,System-write
+  /device/cfm/mp/local/mep:
+    get:
+      tags:
+      - Real-Time Monitoring - CFM
+      description: Get mp local mep from device
+      operationId: getMpLocalMep
+      parameters:
+      - name: domain
+        in: query
+        description: Domain Name
+        schema:
+          type: string
+      - name: service
+        in: query
+        description: Service Name
+        schema:
+          type: string
+      - name: mep-id
+        in: query
+        description: MEP ID
+        schema:
+          type: number
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Mp local mep:
+                  description: Mp local mep
+                  value:
+                    data:
+                    - svc-type: cfm-svc-bd-vlan
+                      offload-success: 'false'
+                      vdevice-name: 172.16.255.11
+                      level: '7'
+                      offload: 'false'
+                      ccm-mode: ccm-mode-multicast
+                      dir: mep-direction-down
+                      vdevice-host-name: vm1
+                      svc-inst: '0'
+                      mep-id: '1562'
+                      vdevice-dataKey: 172.16.255.11-UNINET-UNINET_VERLEANDROVALLE-17_5005-1562
+                      vlan: '112'
+                      port: GigabitEthernet3
+                      evc-name: UNINET_VERLEANDROVALLE-17_5005
+                      service: UNINET_VERLEANDROVALLE-17_5005
+                      ccm-state: ccm-enabled
+                      domain: UNINET
+                      lastupdated: 1648692897652
+                      mac-addr: 52:54:00:fb:57:42
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write,System-read,System-write
+  /device/cfm/mp/local/mip:
+    get:
+      tags:
+      - Real-Time Monitoring - CFM
+      description: Get mp local mip from device
+      operationId: getMpLocalMip
+      parameters:
+      - name: level
+        in: query
+        description: Level
+        schema:
+          type: number
+      - name: port
+        in: query
+        description: Port
+        schema:
+          type: string
+      - name: svc-inst
+        in: query
+        description: Service Instance
+        schema:
+          type: number
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Mp local mip:
+                  description: Mp local mip
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.11
+                      vdevice-host-name: vm1
+                      level: '7'
+                      port: GigabitEthernet3
+                      svc-inst: '0'
+                      mac-addr: 52:54:00:fb:57:42
+                      bd-id: '1562'
+                      svc-type: cfm-svc-bd-vlan
+                      source-static: Dynamic
+                      manual: '*'
+                      vdevice-dataKey: 172.16.255.11-UNINET-UNINET_VERLEANDROVALLE-17_5005-1562
+                      lastupdated: 1648692897652
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write,System-read,System-write
+  /device/cfm/mp/remotemep:
+    get:
+      tags:
+      - Real-Time Monitoring - CFM
+      description: Get mp remote mep from device
+      operationId: getMpRemoteMep
+      parameters:
+      - name: domain
+        in: query
+        description: Domain Name
+        schema:
+          type: string
+      - name: service
+        in: query
+        description: Service Name
+        schema:
+          type: string
+      - name: local-mep-id
+        in: query
+        description: Local MEP ID
+        schema:
+          type: number
+      - name: remote-mep-id
+        in: query
+        description: Remote MEP ID
+        schema:
+          type: number
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Mp remote mep:
+                  description: Mp remote mep
+                  value:
+                    data:
+                    - svc-type: cfm-svc-bd-vlan
+                      vdevice-name: 172.16.255.11
+                      level: '7'
+                      remote-mep-id: '1561'
+                      if-status: if-status-up
+                      vdevice-host-name: vm1
+                      port-status: port-status-up
+                      svc-inst: '0'
+                      vdevice-dataKey: 172.16.255.11-UNINET-UNINET_VERLEANDROVALLE-17_5005-1562-1561
+                      vlan: '112'
+                      evc-name: UNINET_VERLEANDROVALLE-17_5005
+                      service: UNINET_VERLEANDROVALLE-17_5005
+                      rdi: 'false'
+                      domain: UNINET
+                      up-time: '2022-03-31T02:24:16.459+00:00'
+                      local-mep-id: '1562'
+                      lastupdated: 1648693001718
+                      mac-addr: 52:54:00:aa:65:ba
+                      ingress-if: GigabitEthernet3
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write,System-read,System-write

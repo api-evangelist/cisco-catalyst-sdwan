@@ -1,0 +1,375 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - Bridge API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - Bridge
+paths:
+  /device/bridge/interface:
+    get:
+      tags:
+      - Real-Time Monitoring - Bridge
+      description: Get device bridge interface list (Real Time)
+      operationId: getBridgeInterfaceList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device bridge interface:
+                  description: Device bridge interface
+                  value:
+                    data:
+                    - ifindex: '13'
+                      vdevice-name: 10.0.0.121
+                      oper-status: up
+                      vdevice-host-name: ISR4451-X
+                      mtu: '1500'
+                      if-name: GigabitEthernet0/3/0
+                      admin-status: up
+                      vdevice-dataKey: 10.0.0.121-1-GigabitEthernet0/3/0
+                      vlan: '1'
+                      native-vlan: 'true'
+                      lastupdated: 1650883014316
+                      bridge-id: '1'
+                      encap-type: vlan
+                    - ifindex: '14'
+                      vdevice-name: 10.0.0.121
+                      oper-status: down
+                      vdevice-host-name: ISR4451-X
+                      mtu: '1500'
+                      if-name: GigabitEthernet0/3/1
+                      admin-status: down
+                      vdevice-dataKey: 10.0.0.121-1-GigabitEthernet0/3/1
+                      vlan: '1'
+                      native-vlan: 'true'
+                      lastupdated: 1650883014316
+                      bridge-id: '1'
+                      encap-type: vlan
+                    - ifindex: '15'
+                      vdevice-name: 10.0.0.121
+                      oper-status: down
+                      vdevice-host-name: ISR4451-X
+                      mtu: '1500'
+                      if-name: GigabitEthernet0/3/2
+                      admin-status: down
+                      vdevice-dataKey: 10.0.0.121-1-GigabitEthernet0/3/2
+                      vlan: '1'
+                      native-vlan: 'true'
+                      lastupdated: 1650883014316
+                      bridge-id: '1'
+                      encap-type: vlan
+                    - ifindex: '16'
+                      vdevice-name: 10.0.0.121
+                      oper-status: down
+                      vdevice-host-name: ISR4451-X
+                      mtu: '1500'
+                      if-name: GigabitEthernet0/3/3
+                      admin-status: down
+                      vdevice-dataKey: 10.0.0.121-1-GigabitEthernet0/3/3
+                      vlan: '1'
+                      native-vlan: 'true'
+                      lastupdated: 1650883014316
+                      bridge-id: '1'
+                      encap-type: vlan
+                    - ifindex: '17'
+                      vdevice-name: 10.0.0.121
+                      oper-status: down
+                      vdevice-host-name: ISR4451-X
+                      mtu: '1500'
+                      if-name: GigabitEthernet0/3/4
+                      admin-status: down
+                      vdevice-dataKey: 10.0.0.121-1-GigabitEthernet0/3/4
+                      vlan: '1'
+                      native-vlan: 'true'
+                      lastupdated: 1650883014316
+                      bridge-id: '1'
+                      encap-type: vlan
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Interface-read,Interface-write
+  /device/bridge/mac:
+    get:
+      tags:
+      - Real-Time Monitoring - Bridge
+      description: Get device bridge interface MAC (Real Time)
+      operationId: getBridgeInterfaceMac
+      parameters:
+      - name: bridge-id
+        in: query
+        description: Bridge ID
+        schema:
+          type: string
+      - name: if-name
+        in: query
+        description: Interface name
+        schema:
+          type: string
+          enum:
+          - ge0/0
+          - ge0/1
+          - ge0/2
+          - ge0/3
+          - ge0/4
+          - ge0/5
+          - ge0/6
+          - ge0/7
+          - system
+          - eth0
+      - name: mac-address
+        in: query
+        description: MAC address
+        schema:
+          type: string
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device bridge interface MAC:
+                  description: Device bridge interface MAC
+                  value:
+                    data:
+                    - if-name: Ethernet-Internal2/0/0
+                      mac-address: 58:bc:27:6d:c3:09
+                      vdevice-dataKey: 10.0.0.121-1-Ethernet-Internal2/0/0-58:bc:27:6d:c3:09
+                      vlan: '1'
+                      vdevice-name: 10.0.0.121
+                      lastupdated: 1650882797794
+                      bridge-id: '1'
+                      interface: GigabitEthernet0/3/0
+                      type: bridge-mac-type-dynamic
+                      vdevice-host-name: ISR4451-X
+                    - if-name: Ethernet-Internal2/0/0
+                      mac-address: a4:4c:11:9e:03:d7
+                      vdevice-dataKey: 10.0.0.121-1-Ethernet-Internal2/0/0-a4:4c:11:9e:03:d7
+                      vlan: '1'
+                      vdevice-name: 10.0.0.121
+                      lastupdated: 1650882797794
+                      bridge-id: '1'
+                      interface: GigabitEthernet0/3/0
+                      type: bridge-mac-type-dynamic
+                      vdevice-host-name: ISR4451-X
+                    - if-name: Ethernet-Internal2/0/0
+                      mac-address: a4:4c:11:9e:1d:cc
+                      vdevice-dataKey: 10.0.0.121-1-Ethernet-Internal2/0/0-a4:4c:11:9e:1d:cc
+                      vlan: '1'
+                      vdevice-name: 10.0.0.121
+                      lastupdated: 1650882797794
+                      bridge-id: '1'
+                      type: bridge-mac-type-static
+                      vdevice-host-name: ISR4451-X
+                    - if-name: Ethernet-Internal2/0/0
+                      vdevice-dataKey: 10.0.0.121-1002-Ethernet-Internal2/0/0-
+                      vlan: '1002'
+                      vdevice-name: 10.0.0.121
+                      lastupdated: 1650882797794
+                      bridge-id: '1002'
+                      vdevice-host-name: ISR4451-X
+                    - if-name: Ethernet-Internal2/0/0
+                      vdevice-dataKey: 10.0.0.121-1003-Ethernet-Internal2/0/0-
+                      vlan: '1003'
+                      vdevice-name: 10.0.0.121
+                      lastupdated: 1650882797794
+                      bridge-id: '1003'
+                      vdevice-host-name: ISR4451-X
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Interface-read,Interface-write
+  /device/bridge/table:
+    get:
+      tags:
+      - Real-Time Monitoring - Bridge
+      description: Get device bridge interface table (Real Time)
+      operationId: getBridgeInterfaceTable
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device bridge interface:
+                  description: Device bridge interface
+                  value:
+                    data:
+                    - flood-packets: '0'
+                      max-macs: 1024
+                      move: 0
+                      vdevice-name: 10.0.0.121
+                      learn: 0
+                      age-time: 300
+                      rx-packets: '0'
+                      rx-routed-packets: '0'
+                      num-macs: 4
+                      routing-interface: Vlan1
+                      vdevice-host-name: ISR4451-X
+                      vdevice-dataKey: 10.0.0.121-1
+                      vlan: '1'
+                      tx-octets: '0'
+                      tx-packets: '0'
+                      name: default
+                      rx-octets: '0'
+                      lastupdated: 1650882963285
+                      bridge-id: '1'
+                      flood-octets: '0'
+                      tx-routed-packets: '0'
+                      age: 0
+                    - flood-packets: '0'
+                      max-macs: 1024
+                      move: 0
+                      vdevice-name: 10.0.0.121
+                      learn: 0
+                      age-time: 300
+                      rx-packets: '0'
+                      rx-routed-packets: '0'
+                      num-macs: 0
+                      routing-interface: 'null'
+                      vdevice-host-name: ISR4451-X
+                      vdevice-dataKey: 10.0.0.121-1002
+                      vlan: '1002'
+                      tx-octets: '0'
+                      tx-packets: '0'
+                      name: fddi-default
+                      rx-octets: '0'
+                      lastupdated: 1650882963285
+                      bridge-id: '1002'
+                      flood-octets: '0'
+                      tx-routed-packets: '0'
+                      age: 0
+                    - flood-packets: '0'
+                      max-macs: 1024
+                      move: 0
+                      vdevice-name: 10.0.0.121
+                      learn: 0
+                      age-time: 300
+                      rx-packets: '0'
+                      rx-routed-packets: '0'
+                      num-macs: 0
+                      routing-interface: 'null'
+                      vdevice-host-name: ISR4451-X
+                      vdevice-dataKey: 10.0.0.121-1003
+                      vlan: '1003'
+                      tx-octets: '0'
+                      tx-packets: '0'
+                      name: token-ring-default
+                      rx-octets: '0'
+                      lastupdated: 1650882963285
+                      bridge-id: '1003'
+                      flood-octets: '0'
+                      tx-routed-packets: '0'
+                      age: 0
+                    - flood-packets: '0'
+                      max-macs: 1024
+                      move: 0
+                      vdevice-name: 10.0.0.121
+                      learn: 0
+                      age-time: 300
+                      rx-packets: '0'
+                      rx-routed-packets: '0'
+                      num-macs: 0
+                      routing-interface: 'null'
+                      vdevice-host-name: ISR4451-X
+                      vdevice-dataKey: 10.0.0.121-1004
+                      vlan: '1004'
+                      tx-octets: '0'
+                      tx-packets: '0'
+                      name: fddinet-default
+                      rx-octets: '0'
+                      lastupdated: 1650882963285
+                      bridge-id: '1004'
+                      flood-octets: '0'
+                      tx-routed-packets: '0'
+                      age: 0
+                    - flood-packets: '0'
+                      max-macs: 1024
+                      move: 0
+                      vdevice-name: 10.0.0.121
+                      learn: 0
+                      age-time: 300
+                      rx-packets: '0'
+                      rx-routed-packets: '0'
+                      num-macs: 0
+                      routing-interface: 'null'
+                      vdevice-host-name: ISR4451-X
+                      vdevice-dataKey: 10.0.0.121-1005
+                      vlan: '1005'
+                      tx-octets: '0'
+                      tx-packets: '0'
+                      name: trnet-default
+                      rx-octets: '0'
+                      lastupdated: 1650882963285
+                      bridge-id: '1005'
+                      flood-octets: '0'
+                      tx-routed-packets: '0'
+                      age: 0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Interface-read,Interface-write

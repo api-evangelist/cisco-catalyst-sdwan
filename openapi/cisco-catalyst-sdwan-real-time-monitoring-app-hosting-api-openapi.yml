@@ -1,0 +1,456 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - App Hosting API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - App Hosting
+paths:
+  /device/app-hosting/attached-devices:
+    get:
+      tags:
+      - Real-Time Monitoring - App Hosting
+      description: Get App hosting attached device from device
+      operationId: getAppHostingAttachedDevices
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                App hosting attached device:
+                  description: App hosting attached device
+                  value:
+                    data:
+                    - vdevice-dataKey: 172.16.255.15-utd-null
+                      attached-device-type: Serial/Trace
+                      vdevice-name: 172.16.255.15
+                      lastupdated: 1659432314427
+                      vdevice-host-name: vm5
+                      attached-device-alias: serial3
+                      app-name: utd
+                    - attached-device-name: dp_1_0
+                      vdevice-dataKey: 172.16.255.15-utd-dp_1_0
+                      attached-device-type: NIC
+                      vdevice-name: 172.16.255.15
+                      lastupdated: 1659432314427
+                      vdevice-host-name: vm5
+                      attached-device-alias: net2
+                      app-name: utd
+                    - attached-device-name: dp_1_1
+                      vdevice-dataKey: 172.16.255.15-utd-dp_1_1
+                      attached-device-type: NIC
+                      vdevice-name: 172.16.255.15
+                      lastupdated: 1659432314427
+                      vdevice-host-name: vm5
+                      attached-device-alias: net3
+                      app-name: utd
+                    - attached-device-name: _rootfs
+                      vdevice-dataKey: 172.16.255.15-utd-_rootfs
+                      attached-device-type: Disk
+                      vdevice-name: 172.16.255.15
+                      lastupdated: 1659432314427
+                      vdevice-host-name: vm5
+                      app-name: utd
+                    - attached-device-name: ieobc_1
+                      vdevice-dataKey: 172.16.255.15-utd-ieobc_1
+                      attached-device-type: NIC
+                      vdevice-name: 172.16.255.15
+                      lastupdated: 1659432314427
+                      vdevice-host-name: vm5
+                      attached-device-alias: ieobc
+                      app-name: utd
+                    - attached-device-name: /opt/var
+                      vdevice-dataKey: 172.16.255.15-utd-/opt/var
+                      attached-device-type: Disk
+                      vdevice-name: 172.16.255.15
+                      lastupdated: 1659432314427
+                      vdevice-host-name: vm5
+                      app-name: utd
+                    - attached-device-name: /tmp/HTX-IOX
+                      vdevice-dataKey: 172.16.255.15-utd-/tmp/HTX-IOX
+                      attached-device-type: Disk
+                      vdevice-name: 172.16.255.15
+                      lastupdated: 1659432314427
+                      vdevice-host-name: vm5
+                      app-name: utd
+                    - attached-device-name: /opt/var/core
+                      vdevice-dataKey: 172.16.255.15-utd-/opt/var/core
+                      attached-device-type: Disk
+                      vdevice-name: 172.16.255.15
+                      lastupdated: 1659432314428
+                      vdevice-host-name: vm5
+                      app-name: utd
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/app-hosting/details:
+    get:
+      tags:
+      - Real-Time Monitoring - App Hosting
+      description: Get App hosting details from device
+      operationId: getAppHostingDetails
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                App hosting details:
+                  description: App hosting details
+                  value:
+                    data:
+                    - application-name: utd
+                      activated-profile-name: cloud-low
+                      application-installed-version: 1.0.6_SV2.9.18.1_XE17.9
+                      vdevice-name: 172.16.255.15
+                      package-info-name: UTD-Snort-Feature
+                      application-owner: ioxm
+                      vdevice-host-name: vm5
+                      resource-admission-cpu: '0'
+                      resource-reservation-disk: '861'
+                      package-info-path: /bootflash/111.tar
+                      vdevice-dataKey: 172.16.255.15-utd
+                      resource-reservation-cpu: '0'
+                      resource-reservation-memory: '2048'
+                      name: utd
+                      application-description: Unified Threat Defense
+                      lastupdated: 1659432542156
+                      state: RUNNING
+                      application-type: LXC
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/app-hosting/guest-routes:
+    get:
+      tags:
+      - Real-Time Monitoring - App Hosting
+      description: Get App hosting guest routes from device
+      operationId: getAppHostingGuestRoutes
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                App hosting guest routes:
+                  description: App hosting guest routes
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.15
+                      vdevice-host-name: vm5
+                      app-name: utd
+                      vdevice-dataKey: 172.16.255.15-utd
+                      guest-route-route: 192.168.0.1
+                      lastupdated: '1660244459596'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/app-hosting/network-interfaces:
+    get:
+      tags:
+      - Real-Time Monitoring - App Hosting
+      description: Get App hosting network interface from device
+      operationId: getAppHostingNetworkDevices
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                App hosting network interface:
+                  description: App hosting network interface
+                  value:
+                    data:
+                    - network-interface-ipv4-address: 0.0.0.0
+                      vdevice-dataKey: 172.16.255.15-utd-54:0e:00:0b:0c:02
+                      vdevice-name: 172.16.255.15
+                      network-interface-mac-address: 54:0e:00:0b:0c:02
+                      lastupdated: 1659432268936
+                      network-interface-attached-interface: eth0
+                      vdevice-host-name: vm5
+                      app-name: utd
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/app-hosting/network-utilization:
+    get:
+      tags:
+      - Real-Time Monitoring - App Hosting
+      description: Get App hosting network utilization from device
+      operationId: getAppHostingNetworkUtils
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                App hosting network utilization:
+                  description: App hosting network utilization
+                  value:
+                    data:
+                    - network-util-alias: net2
+                      network-util-rx-bytes: '0'
+                      vdevice-name: 172.16.255.15
+                      network-util-name: dp_1_0
+                      network-util-tx-errors: '0'
+                      vdevice-host-name: vm5
+                      app-name: utd
+                      network-util-rx-packets: '0'
+                      vdevice-dataKey: 172.16.255.15-utd-dp_1_0
+                      network-util-tx-packets: '0'
+                      lastupdated: 1659432057682
+                      network-util-tx-bytes: '0'
+                      network-util-rx-errors: '0'
+                    - network-util-alias: net3
+                      network-util-rx-bytes: '0'
+                      vdevice-name: 172.16.255.15
+                      network-util-name: dp_1_1
+                      network-util-tx-errors: '0'
+                      vdevice-host-name: vm5
+                      app-name: utd
+                      network-util-rx-packets: '0'
+                      vdevice-dataKey: 172.16.255.15-utd-dp_1_1
+                      network-util-tx-packets: '0'
+                      lastupdated: 1659432057683
+                      network-util-tx-bytes: '0'
+                      network-util-rx-errors: '0'
+                    - network-util-alias: ieobc
+                      network-util-rx-bytes: '11138'
+                      vdevice-name: 172.16.255.15
+                      network-util-name: ieobc_1
+                      network-util-tx-errors: '0'
+                      vdevice-host-name: vm5
+                      app-name: utd
+                      network-util-rx-packets: '189'
+                      vdevice-dataKey: 172.16.255.15-utd-ieobc_1
+                      network-util-tx-packets: '189'
+                      lastupdated: 1659432057683
+                      network-util-tx-bytes: '12243'
+                      network-util-rx-errors: '0'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/app-hosting/processes:
+    get:
+      tags:
+      - Real-Time Monitoring - App Hosting
+      description: Get App hosting processes from device
+      operationId: getAppHostingProcesses
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                App hosting processes utilization:
+                  description: App hosting processes utilization
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.15
+                      vdevice-host-name: vm5
+                      app-name: utd
+                      process-name: process01
+                      process-status: Running
+                      process-pid: '10'
+                      process-uptime: '3600'
+                      process-memory: '2048'
+                      lastupdated: 1660244459596
+                      vdevice-dataKey: 172.16.255.15-utd
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/app-hosting/storage-utilization:
+    get:
+      tags:
+      - Real-Time Monitoring - App Hosting
+      description: Get App hosting storage utilization from device
+      operationId: getAppHostingStorageUtils
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                App hosting storage utilization:
+                  description: App hosting storage utilization
+                  value:
+                    data:
+                    - storage-util-name: disk
+                      storage-util-rd-bytes: '0'
+                      storage-util-wr-requests: '0'
+                      vdevice-name: 172.16.255.15
+                      vdevice-host-name: vm5
+                      app-name: utd
+                      storage-util-capacity: '881664'
+                      storage-util-errors: '0'
+                      vdevice-dataKey: 172.16.255.15-utd-disk
+                      storage-util-available: '35990'
+                      lastupdated: 1659432204521
+                      storage-util-wr-bytes: '0'
+                      storage-util-rd-requests: '0'
+                      storage-util-used: '845674'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/app-hosting/utilization:
+    get:
+      tags:
+      - Real-Time Monitoring - App Hosting
+      description: Get App hosting utilization from device
+      operationId: getAppHostingUtilization
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                App hosting utilization:
+                  description: App hosting utilization
+                  value:
+                    data:
+                    - utilization-name: utd
+                      memory-allocation: '0'
+                      vdevice-dataKey: 172.16.255.15-utd
+                      actual-application-util: '0'
+                      vdevice-name: 172.16.255.15
+                      requested-application-util: '0'
+                      name: utd
+                      lastupdated: 1659353382195
+                      vdevice-host-name: vm5
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write

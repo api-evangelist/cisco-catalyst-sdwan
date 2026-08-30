@@ -1,0 +1,220 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - IGMP API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - IGMP
+paths:
+  /device/igmp/groups:
+    get:
+      tags:
+      - Real-Time Monitoring - IGMP
+      description: Get IGMP neighbor list from device
+      operationId: createIGMPGroupsList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                IGMP neighbor:
+                  description: IGMP neighbor
+                  value:
+                    data:
+                    - if-name: ge0/0
+                      v1-members-present: 'false'
+                      vdevice-dataKey: 169.254.10.10
+                      vdevice-name: 169.254.10.10
+                      lastupdated: 1643076514019
+                      state: members-present
+                      vpn-id: '10'
+                      event: init-event
+                      vdevice-host-name: vm3
+                      group: 225.225.0.1
+                      uptime: 0:06:38:43
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/igmp/interface:
+    get:
+      tags:
+      - Real-Time Monitoring - IGMP
+      description: Get IGMP interface list from device
+      operationId: createIGMPInterfaceList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                IGMP interface:
+                  description: IGMP interface
+                  value:
+                    data:
+                    - vdevice-name: 169.254.10.10
+                      if-addr: 100.100.3.101/24
+                      vpn-id: '10'
+                      vdevice-host-name: vm3
+                      querier: 'true'
+                      querier-ip: 100.100.3.101
+                      if-name: ge0/0
+                      vdevice-dataKey: 169.254.10.10-10-ge0/0
+                      group-count: 1
+                      query-interval: 0:00:00:51
+                      lastupdated: 1643076670382
+                      state: querier
+                      event: init-event
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/igmp/statistics:
+    get:
+      tags:
+      - Real-Time Monitoring - IGMP
+      description: Get IGMP statistics list from device
+      operationId: createIGMPStatisticsList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                IGMP statistics:
+                  description: IGMP statistics
+                  value:
+                    data:
+                    - rx_group_query: 0
+                      vdevice-name: 169.254.10.10
+                      tx_group_query: 0
+                      vpn-id: '10'
+                      rx_v2_report: 0
+                      rx_unknown: 0
+                      vdevice-host-name: vm3
+                      rx_v1_report: 0
+                      rx_leave: 0
+                      tx_general_query: 194
+                      vdevice-dataKey: 169.254.10.10
+                      rx_general_query: 0
+                      tx_error: 0
+                      lastupdated: 1643076824172
+                      rx_error: 0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/igmp/summary:
+    get:
+      tags:
+      - Real-Time Monitoring - IGMP
+      description: Get IGMP summary from device
+      operationId: createIGMPSummary
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                IGMP summary:
+                  description: IGMP summary
+                  value:
+                    data:
+                    - last-member-query-response-time: '3'
+                      querier-timeout: '255'
+                      vdevice-dataKey: 169.254.10.10
+                      vdevice-name: 169.254.10.10
+                      query-interval: '125'
+                      query-response-time: '10'
+                      lastupdated: 1643076984762
+                      version: '2'
+                      last-member-query-count: '2'
+                      vdevice-host-name: vm3
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write

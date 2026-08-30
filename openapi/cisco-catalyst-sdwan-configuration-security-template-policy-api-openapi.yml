@@ -1,0 +1,366 @@
+openapi: 3.2.0
+info:
+  title: UX 1.0 Configuration Configuration - Security Template Policy API
+  description: "Configuration of UX 1.0 device and policy.\nIncludes API operations for the following:\n  Managing original SD-WAN device configurations and policy configurations\n  Device templates and feature templates"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Configuration - Security Template Policy
+paths:
+  /template/policy/security:
+    get:
+      tags:
+      - Configuration - Security Template Policy
+      description: Generate template list
+      operationId: generateSecurityTemplateList
+      parameters:
+      - name: mode
+        in: query
+        description: Mode
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Template list:
+                  description: Template list
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+      - Configuration - Security Template Policy
+      description: Create Template
+      operationId: createSecurityTemplate
+      requestBody:
+        description: Policy template
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Policy template:
+                description: Policy template
+                value:
+                  policyDescription: Security Policy
+                  policyType: feature
+                  policyName: securitypolicy
+                  policyUseCase: guestAccess
+                  policyDefinition:
+                    assembly:
+                    - definitionId: 840f9d3e-b31d-48b6-8365-79b75ba206a9
+                      type: urlFiltering
+                    settings:
+                      logging:
+                      - vpn: '512'
+                        serverIP: 10.0.0.1
+                      failureMode: open
+                  isPolicyActivated: false
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/policy/security/definition/{policyId}:
+    get:
+      tags:
+      - Configuration - Security Template Policy
+      description: Get Template
+      operationId: getSecurityTemplate
+      parameters:
+      - name: policyId
+        in: path
+        description: Policy Id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Policy template:
+                  description: Policy template
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/policy/security/devices:
+    get:
+      tags:
+      - Configuration - Security Template Policy
+      description: Get device list
+      operationId: getSecurityPolicyDeviceList_ConfigurationSecurityTemplatePolicy_3303
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Device list:
+                  description: Device list
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/policy/security/devices/{policyId}:
+    get:
+      tags:
+      - Configuration - Security Template Policy
+      description: Get device list by Id
+      operationId: getDeviceListById
+      parameters:
+      - name: policyId
+        in: path
+        description: Policy Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Device list:
+                  description: Device list
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/policy/security/staging/{policyId}:
+    put:
+      tags:
+      - Configuration - Security Template Policy
+      description: Edit Template
+      operationId: editTemplateWithLenientLock
+      parameters:
+      - name: policyId
+        in: path
+        description: Policy Id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: Policy template
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Policy template:
+                description: Policy template
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Template:
+                  description: Template
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/policy/security/summary:
+    get:
+      tags:
+      - Configuration - Security Template Policy
+      description: Generate security policy summary
+      operationId: generateSecurityPolicySummary
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Security policy summary:
+                  description: Security policy summary
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/policy/security/{deviceModel}:
+    get:
+      tags:
+      - Configuration - Security Template Policy
+      description: Get templates that map a device model
+      operationId: getSecurityTemplatesForDevice
+      parameters:
+      - name: deviceModel
+        in: path
+        description: Device model
+        required: true
+        schema:
+          type: object
+          properties:
+            deviceModel:
+              type: string
+          description: 'This is the valid DeviceModel '
+          $$ref: '#/components/schemas/DeviceModel'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Template:
+                  description: Template
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/policy/security/{policyId}:
+    put:
+      tags:
+      - Configuration - Security Template Policy
+      description: Edit Template
+      operationId: editSecurityTemplate
+      parameters:
+      - name: policyId
+        in: path
+        description: Policy Id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Policy template
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Policy template:
+                description: Policy template
+                value:
+                  policyDescription: Security Policy
+                  policyType: feature
+                  policyName: securitypolicy
+                  policyUseCase: guestAccess
+                  policyDefinition:
+                    assembly:
+                    - definitionId: f41167bd-6948-42ff-bc06-94f450e43999
+                      type: zoneBasedFW
+                    - definitionId: 840f9d3e-b31d-48b6-8365-79b75ba206a9
+                      type: urlFiltering
+                    settings:
+                      zoneToNozoneInternet: deny
+                      logging:
+                      - vpn: '512'
+                        serverIP: 10.0.0.1
+                      failureMode: open
+                  isPolicyActivated: false
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Template:
+                  description: Template
+                  value:
+                    masterTemplatesAffected: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+      - Configuration - Security Template Policy
+      description: Delete Template
+      operationId: deleteSecurityTemplate
+      parameters:
+      - name: policyId
+        in: path
+        description: Policy Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

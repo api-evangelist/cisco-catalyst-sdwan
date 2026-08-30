@@ -1,0 +1,811 @@
+openapi: 3.2.0
+info:
+  title: Partner Integrations Partner - Registration API
+  description: Includes API operations for partner integrations, such as Webex, Identity Services Engine (ISE), Secure Access, and more
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Partner - Registration
+paths:
+  /partner:
+    get:
+      tags:
+      - Partner - Registration
+      description: Get all NMS partners
+      operationId: getPartners
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    description:
+                      type: string
+                      example: dnac-test
+                    devicesAttached:
+                      type: integer
+                      format: int32
+                      example: 0
+                    id:
+                      type: string
+                      example: f54a0f0e-734b-4c31-a539-9dc5e0fd67a5
+                    name:
+                      type: string
+                      example: DNAC-test
+                    owner:
+                      type: string
+                      example: admin
+                    partnerId:
+                      type: string
+                      example: dnac-test
+                    registrationDate:
+                      type: integer
+                      format: int64
+                      example: 1632900123277
+                    type:
+                      type: string
+                      example: dnac
+                      enum:
+                      - aci
+                      - dnac
+                      - wcm
+                      - mdp
+                  $$ref: '#/components/schemas/PartnerRes'
+              examples:
+                Partners:
+                  description: Partners
+                  value:
+                  - name: DNAC-test
+                    partnerId: dnac-test
+                    type: dnac
+                    id: f54a0f0e-734b-4c31-a539-9dc5e0fd67a5
+                    description: dnac-test
+                    owner: admin
+                    registrationDate: 1632900123277
+                    devicesAttached: 0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Integration Management-read,Integration Management-write
+  /partner/vpn:
+    get:
+      tags:
+      - Partner - Registration
+      description: Get all VPNs
+      operationId: getVPNList
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        vpnId:
+                          type: string
+                          example: '33'
+                        vpnType:
+                          type: string
+                          example: configuredVPN
+                      $$ref: '#/components/schemas/Vpn'
+                  header:
+                    type: object
+                    properties:
+                      generatedOn:
+                        type: integer
+                        format: int64
+                        example: 1649645769219
+                    $$ref: '#/components/schemas/VpnListResHeader'
+                $$ref: '#/components/schemas/VpnListRes'
+              examples:
+                VPN list:
+                  description: VPN list
+                  value:
+                    header:
+                      generatedOn: 1649645769219
+                    data:
+                    - vpnId: '1'
+                      vpnType: configuredVPN
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Integration Management-read,Integration Management-write
+  /partner/{partnerType}:
+    post:
+      tags:
+      - Partner - Registration
+      description: Register NMS partner
+      operationId: registerPartner
+      parameters:
+      - name: partnerType
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Partner
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                  example: dnac-test
+                name:
+                  type: string
+                  example: DNAC-test
+                partnerId:
+                  type: string
+                  example: dnac-test
+              $$ref: '#/components/schemas/RegisterPartnerRequest'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: f54a0f0e-734b-4c31-a539-9dc5e0fd67a5
+                $$ref: '#/components/schemas/RegisterPartnerRes'
+              examples:
+                Partner Id:
+                  description: Partner Id
+                  value:
+                    id: f54a0f0e-734b-4c31-a539-9dc5e0fd67a5
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Integration Management-write
+    get:
+      tags:
+      - Partner - Registration
+      description: Get NMS partners by partner type
+      operationId: getPartnersByPartnerType
+      parameters:
+      - name: partnerType
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                properties:
+                  empty:
+                    type: boolean
+                items:
+                  type: object
+                  properties:
+                    description:
+                      type: string
+                      example: dnac-test
+                    devicesAttached:
+                      type: integer
+                      format: int32
+                      example: 0
+                    id:
+                      type: string
+                      example: f54a0f0e-734b-4c31-a539-9dc5e0fd67a5
+                    name:
+                      type: string
+                      example: DNAC-test
+                    owner:
+                      type: string
+                      example: admin
+                    partnerId:
+                      type: string
+                      example: dnac-test
+                    registrationDate:
+                      type: integer
+                      format: int64
+                      example: 1632900123277
+                    type:
+                      type: string
+                      example: dnac
+                      enum:
+                      - aci
+                      - dnac
+                      - wcm
+                      - mdp
+                  $$ref: '#/components/schemas/PartnerRes'
+                $$ref: '#/components/schemas/PartnerListRes'
+              examples:
+                Partners:
+                  description: Partners
+                  value:
+                  - name: DNAC-test
+                    partnerId: dnac-test
+                    type: dnac
+                    id: f54a0f0e-734b-4c31-a539-9dc5e0fd67a5
+                    description: dnac-test
+                    owner: admin
+                    registrationDate: 1632900123277
+                    devicesAttached: 0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Integration Management-read,Integration Management-write
+  /partner/{partnerType}/map/{nmsId}:
+    post:
+      tags:
+      - Partner - Registration
+      description: Map devices for the partner
+      operationId: mapDevices
+      parameters:
+      - name: partnerType
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: nmsId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: List of devices
+        content:
+          application/json:
+            schema:
+              required:
+              - devices
+              type: object
+              properties:
+                devices:
+                  type: array
+                  items:
+                    type: string
+              $$ref: '#/components/schemas/MapDevicesRequest'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                $$ref: '#/components/schemas/StatusResponse'
+              examples:
+                Status:
+                  description: Status
+                  value:
+                    status: success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Integration Management-write
+    get:
+      tags:
+      - Partner - Registration
+      description: List mapped devices for the partner
+      operationId: getPartnerDevices
+      parameters:
+      - name: partnerType
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: nmsId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  devices:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        chassis-serial-number:
+                          type: string
+                          example: SSI130300YK
+                        configuredAaaUser:
+                          type: array
+                          items:
+                            type: string
+                        device-model:
+                          type: string
+                          example: C8000v
+                        device-os:
+                          type: string
+                          example: next
+                        device-type:
+                          type: string
+                          example: vedge
+                        deviceId:
+                          type: string
+                          example: C8K-cfb84064-12e9-4f7c-b9d9-bf78ce4dfb5f
+                        devicesAttached:
+                          type: integer
+                          format: int32
+                          example: 0
+                        discoveredDeviceInterfaces:
+                          type: array
+                          items:
+                            type: string
+                        host-name:
+                          type: string
+                          example: vm5
+                        loopback:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              interfaceIP:
+                                type: string
+                                example: 127.0.0.1
+                              interfaceName:
+                                type: string
+                                example: Loopback0
+                            $$ref: '#/components/schemas/Loopback'
+                        personality:
+                          type: string
+                          example: vedge
+                        platform:
+                          type: string
+                          example: x86_64
+                        reachability:
+                          type: string
+                          example: reachable
+                          enum:
+                          - reachable
+                          - unreachable
+                        registrationDate:
+                          type: integer
+                          format: int64
+                          example: 1590186370340
+                        serialNumber:
+                          type: string
+                          example: '12345712'
+                        site-id:
+                          type: string
+                          example: '500'
+                        state:
+                          type: string
+                          example: green
+                        status:
+                          type: string
+                          example: normal
+                          enum:
+                          - error
+                          - warning
+                          - normal
+                          - new
+                        system-ip:
+                          type: string
+                          example: 172.16.255.15
+                        templateStatus:
+                          type: string
+                          example: Success
+                        uuid:
+                          type: string
+                          example: C8K-cfb84064-12e9-4f7c-b9d9-bf78ce4dfb5f
+                        validity:
+                          type: string
+                          example: valid
+                          enum:
+                          - invalid
+                          - staging
+                          - valid
+                          - prestaging
+                        version:
+                          type: string
+                          example: 17.06.01.0.1422
+                        wanInterfaces:
+                          type: array
+                          items:
+                            type: string
+                      $$ref: '#/components/schemas/PartnerDevice'
+                $$ref: '#/components/schemas/PartnerDevicesRes'
+              examples:
+                Devices:
+                  description: Devices
+                  value:
+                    devices:
+                    - uuid: C8K-cfb84064-12e9-4f7c-b9d9-bf78ce4dfb5f
+                      deviceId: C8K-cfb84064-12e9-4f7c-b9d9-bf78ce4dfb5f
+                      reachability: reachable
+                      status: normal
+                      personality: vedge
+                      device-type: normal
+                      device-model: C8000v
+                      version: 17.06.01.0.1422
+                      site-id: '500'
+                      platform: x86_64
+                      device-os: next
+                      state: green
+                      chassis-serial-number: SSI130300YK
+                      host-name: vm5
+                      system-ip: 172.16.255.15
+                      serialNumber: '12345712'
+                      templateStatus: Success
+                      validity: valid
+                      configuredAaaUser:
+                      - admin
+                      wanInterfaces:
+                      - GigabitEthernet1
+                      discoveredDeviceInterfaces:
+                      - GigabitEthernet8
+                      - GigabitEthernet1
+                      - GigabitEthernet2
+                      registrationDate: 1632900123277
+                      devicesAttached: 0
+                      loopback: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Integration Management-read,Integration Management-write,Policy Configuration-write
+    delete:
+      tags:
+      - Partner - Registration
+      description: Unmap all devices for the partner
+      operationId: unmapDevices
+      parameters:
+      - name: partnerType
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: nmsId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                $$ref: '#/components/schemas/StatusResponse'
+              examples:
+                Status:
+                  description: Status
+                  value:
+                    status: success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Integration Management-write
+  /partner/{partnerType}/unmap/{nmsId}:
+    post:
+      tags:
+      - Partner - Registration
+      description: Unmap a set of devices for the partner
+      operationId: deleteDeviceMapping
+      parameters:
+      - name: partnerType
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: nmsId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: List of devices
+        content:
+          application/json:
+            schema:
+              required:
+              - devices
+              type: object
+              properties:
+                devices:
+                  type: array
+                  items:
+                    type: string
+              $$ref: '#/components/schemas/MapDevicesRequest'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                $$ref: '#/components/schemas/StatusResponse'
+              examples:
+                Status:
+                  description: Status
+                  value:
+                    status: success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Integration Management-write
+  /partner/{partnerType}/{nmsId}:
+    delete:
+      tags:
+      - Partner - Registration
+      description: Delete NMS partner
+      operationId: deletePartner
+      parameters:
+      - name: partnerType
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: nmsId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                $$ref: '#/components/schemas/StatusResponse'
+              examples:
+                Status:
+                  description: Status
+                  value:
+                    status: success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Integration Management-write
+    get:
+      tags:
+      - Partner - Registration
+      description: Get NMS partners by partner type and Id
+      operationId: getPartner
+      parameters:
+      - name: partnerType
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: nmsId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  description:
+                    type: string
+                    example: dnac-test
+                  devicesAttached:
+                    type: integer
+                    format: int32
+                    example: 0
+                  id:
+                    type: string
+                    example: f54a0f0e-734b-4c31-a539-9dc5e0fd67a5
+                  name:
+                    type: string
+                    example: DNAC-test
+                  owner:
+                    type: string
+                    example: admin
+                  partnerId:
+                    type: string
+                    example: dnac-test
+                  registrationDate:
+                    type: integer
+                    format: int64
+                    example: 1632900123277
+                  type:
+                    type: string
+                    example: dnac
+                    enum:
+                    - aci
+                    - dnac
+                    - wcm
+                    - mdp
+                $$ref: '#/components/schemas/PartnerRes'
+              examples:
+                Partner:
+                  description: Partner
+                  value:
+                    name: DNAC-test
+                    partnerId: dnac-test
+                    type: dnac
+                    id: f54a0f0e-734b-4c31-a539-9dc5e0fd67a5
+                    description: dnac-test
+                    owner: admin
+                    registrationDate: 1632900123277
+                    devicesAttached: 0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Integration Management-read,Integration Management-write
+    put:
+      tags:
+      - Partner - Registration
+      description: Update NMS partner details
+      operationId: updatePartner
+      parameters:
+      - name: partnerType
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: nmsId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: Partner
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                  example: dnac-test-new
+                name:
+                  type: string
+                  example: DNAC-test-new
+              $$ref: '#/components/schemas/UpdatePartnerRequest'
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Integration Management-write
+  /serverlongpoll/event/poll/{partnerId}:
+    get:
+      tags:
+      - Partner - Registration
+      description: Retrieve registration change information
+      operationId: getDataChangeInfo
+      parameters:
+      - name: partnerId
+        in: path
+        description: Partner Id
+        required: true
+        schema:
+          type: string
+      - name: event_id
+        in: query
+        description: Continuation token of ongoing event-polling session
+        schema:
+          type: string
+      - name: eventNames
+        in: query
+        description: Names of type of events to filter on
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              eventName:
+                type: string
+            description: This is valid eventName
+            $$ref: '#/components/schemas/EventName'
+      - name: wait_time
+        in: query
+        description: Maximum polling wait time in seconds
+        schema:
+          type: integer
+          format: int64
+          default: 0
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: default

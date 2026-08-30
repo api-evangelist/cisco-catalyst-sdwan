@@ -1,0 +1,274 @@
+openapi: 3.2.0
+info:
+  title: Others Smart License API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Smart License
+paths:
+  /smartLicensing/authenticate:
+    post:
+      tags:
+      - Smart License
+      description: authenticate user for sle
+      operationId: sleauthenticate
+      requestBody:
+        description: Partner
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Partner:
+                description: Partner
+                value: {}
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                data:
+                  description: data
+                  value: '{{"accessToken":"3QTD4madnNiu4q4c6YTmrprhAkvM"}}'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /smartLicensing/fetchAccounts:
+    get:
+      tags:
+      - Smart License
+      description: fetch sava for sle
+      operationId: fetchAccounts_SmartLicense_2903
+      parameters:
+      - name: mode
+        in: query
+        description: mode
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Partner
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Partner:
+                description: Partner
+                value: {}
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  account_id:
+                    type: string
+                    example: '276200'
+                  name:
+                    type: string
+                    example: testaccount3.viptela.com
+                  virtual_accounts:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        default:
+                          type: boolean
+                          example: false
+                        name:
+                          type: string
+                          example: '703805'
+                        virtual_account_id:
+                          type: string
+                          example: '713850'
+                      $$ref: '#/components/schemas/SmartLicensingfetchAccountsRespVirtualAccounts'
+                $$ref: '#/components/schemas/SmartLicensingfetchAccountsResp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /smartLicensing/fetchAllSa:
+    get:
+      tags:
+      - Smart License
+      description: fetch reports offline for sle
+      operationId: fetchReports_SmartLicense_2603
+      requestBody:
+        description: Partner
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              SLE:
+                description: SLE
+                value: {}
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Partner Id:
+                  description: Partner Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /smartLicensing/fetchReportsForSa:
+    get:
+      tags:
+      - Smart License
+      description: fetch reports offline for sle
+      operationId: fetchReports_SmartLicense_3303
+      parameters:
+      - name: saDomain
+        in: query
+        description: saDomain
+        required: true
+        schema:
+          maxLength: 200
+          minLength: 0
+          pattern: ^[a-zA-Z0-9-.]+$
+          type: string
+      - name: saId
+        in: query
+        description: saId
+        required: true
+        schema:
+          maxLength: 20
+          minLength: 0
+          pattern: ^[0-9]+$
+          type: string
+      requestBody:
+        description: Partner
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              SLE:
+                description: SLE
+                value: {}
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Partner Id:
+                  description: Partner Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /smartLicensing/getUserSettings:
+    get:
+      tags:
+      - Smart License
+      description: get settings
+      operationId: getuserSettings
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Devices:
+                  description: Devices
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /smartLicensing/syncLicenses:
+    post:
+      tags:
+      - Smart License
+      description: get all licenses for sa/va
+      operationId: syncLicenses_SmartLicense_2804
+      requestBody:
+        description: Partner
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: string
+                name:
+                  type: string
+                  format: binary
+              $$ref: '#/components/schemas/LicenseUplodFile'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                license:
+                  description: license
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: admin,Software Upgrade-write

@@ -1,0 +1,2616 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Monitoring - Application Aware Routing API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Monitoring - Application Aware Routing
+paths:
+  /statistics/approute:
+    get:
+      tags:
+      - Monitoring - Application Aware Routing
+      description: Get stats raw data
+      operationId: getStatDataRawData_MonitoringApplicationAwareRouting_2003
+      parameters:
+      - name: query
+        in: query
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '24'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+            - value:
+              - 172.16.255.11
+              field: vdevice_name
+              type: string
+              operator: in
+            - value:
+              - 3g
+              - lte
+              field: local_color
+              type: string
+              operator: in
+      - name: page
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+      - name: sortBy
+        in: query
+        schema:
+          pattern: ^[a-zA-Z-_]+$
+          type: string
+      - name: sortOrder
+        in: query
+        schema:
+          type: string
+          enum:
+          - asc
+          - ASC
+          - Asc
+          - desc
+          - DESC
+          - Desc
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+              - remote_color: 3g
+                fec_re: 0
+                vqoe_score: 10
+                device_model: vedge-cloud
+                latency: 1
+                tx_octets: 0
+                dst_ip: 10.0.101.2
+                local_color: lte
+                src_ip: 10.1.14.14
+                sla_class_names: None
+                loss: 0
+                total: 600
+                tx_pkts: 0
+                fec_tx: 0
+                rx_octets: 0
+                statcycletime: 1589075400056
+                state: Up
+                local_system_ip: 172.16.255.14
+                tenant: default
+                entry_time: 1589073792008
+                loss_percentage: 0
+                rx_pkts: 0
+                vmanage_system_ip: 172.16.255.14
+                fec_rx: 0
+                src_port: 12380
+                jitter: 1
+                remote_system_ip: 172.16.255.11
+                vdevice_name: 172.16.255.14
+                proto: IPSEC
+                vip_idx: 190
+                dst_port: 12366
+                name: 172.16.255.14:lte-172.16.255.11:3g
+                sla_class_list: '0'
+                tunnel_color: 3g:lte
+                host_name: vm4
+                id: 4OBG_HEB_JLsavezVUfr
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+      - Monitoring - Application Aware Routing
+      description: Get stats raw data
+      operationId: getStatsRawData_MonitoringApplicationAwareRouting_2004
+      parameters:
+      - name: page
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+      - name: sortBy
+        in: query
+        schema:
+          pattern: ^[a-zA-Z-_]+$
+          type: string
+      - name: sortOrder
+        in: query
+        schema:
+          type: string
+          enum:
+          - asc
+          - ASC
+          - Asc
+          - desc
+          - DESC
+          - Desc
+      requestBody:
+        description: Query filter
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Query filter:
+                description: Query filter
+                value: "{\n  \"query\": {\n    \"condition\": \"AND\",\n    \"rules\": [\n      {\n        \"value\": [\n          \"24\"\n        ],\n        \"field\": \"entry_time\",\n        \"type\": \"date\",\n        \"operator\": \"last_n_hours\"\n      },\n      {\n        \"value\": [\n          \"172.16.255.11\"\n        ],\n        \"field\": \"vdevice_name\",\n        \"type\": \"string\",\n        \"operator\": \"in\"\n      },\n      {\n        \"value\": [\n          \"3g\",\n          \"lte\"\n        ],\n        \"field\": \"local_color\",\n        \"type\": \"string\",\n        \"operator\": \"in\"\n      }\n    ]\n  }\n}\n}"
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          device_model:
+                            type: string
+                          dst_ip:
+                            type: string
+                          dst_port:
+                            type: integer
+                            format: int32
+                          entry_time:
+                            type: string
+                          fec_re:
+                            type: integer
+                            format: int32
+                          fec_rx:
+                            type: integer
+                            format: int64
+                          fec_tx:
+                            type: integer
+                            format: int64
+                          host_name:
+                            type: string
+                          id:
+                            type: string
+                          jitter:
+                            type: integer
+                            format: int32
+                          latency:
+                            type: number
+                          local_color:
+                            type: string
+                          local_system_ip:
+                            type: string
+                          loss:
+                            type: integer
+                            format: int32
+                          loss_percentage:
+                            type: integer
+                            format: int32
+                          name:
+                            type: string
+                          proto:
+                            type: string
+                          remote_color:
+                            type: string
+                          remote_system_ip:
+                            type: string
+                          rx_octets:
+                            type: integer
+                            format: int64
+                          rx_pkts:
+                            type: integer
+                            format: int64
+                          sla_class_list:
+                            type: string
+                          sla_class_names:
+                            type: string
+                          src_ip:
+                            type: string
+                          src_port:
+                            type: integer
+                            format: int32
+                          statcycletime:
+                            type: string
+                          state:
+                            type: string
+                          tenant:
+                            type: string
+                          total:
+                            type: integer
+                            format: int32
+                          tunnel_color:
+                            type: string
+                          tx_octets:
+                            type: number
+                          tx_pkts:
+                            type: integer
+                            format: int64
+                          vdevice_name:
+                            type: string
+                          vip_idx:
+                            type: integer
+                            format: int32
+                          vmanage_system_ip:
+                            type: string
+                          vqoe_score:
+                            type: integer
+                            format: int32
+                        description: app route specific response
+                        $$ref: '#/components/schemas/AppRouteResp'
+                    pageInfo:
+                      type: object
+                      properties:
+                        count:
+                          type: integer
+                          description: number of alarms to be fetched
+                          format: int64
+                        endTime:
+                          type: integer
+                          description: end time of alarms to be fetched
+                          format: int64
+                        startTime:
+                          type: integer
+                          description: start time of alarms to be fetched
+                          format: int64
+                      $$ref: '#/components/schemas/PageInfo'
+                  description: app route response with page info
+                  $$ref: '#/components/schemas/AppRouteRespWithPageInfo'
+              example:
+              - remote_color: 3g
+                fec_re: 0
+                vqoe_score: 10
+                device_model: vedge-cloud
+                latency: 1
+                tx_octets: 0
+                dst_ip: 10.0.101.2
+                local_color: lte
+                src_ip: 10.1.14.14
+                sla_class_names: None
+                loss: 0
+                total: 600
+                tx_pkts: 0
+                fec_tx: 0
+                rx_octets: 0
+                statcycletime: 1589075400056
+                state: Up
+                local_system_ip: 172.16.255.14
+                tenant: default
+                entry_time: 1589073792008
+                loss_percentage: 0
+                rx_pkts: 0
+                vmanage_system_ip: 172.16.255.14
+                fec_rx: 0
+                src_port: 12380
+                jitter: 1
+                remote_system_ip: 172.16.255.11
+                vdevice_name: 172.16.255.14
+                proto: IPSEC
+                vip_idx: 190
+                dst_port: 12366
+                name: 172.16.255.14:lte-172.16.255.11:3g
+                sla_class_list: '0'
+                tunnel_color: 3g:lte
+                host_name: vm4
+                id: 4OBG_HEB_JLsavezVUfr
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/approute/aggregation:
+    get:
+      tags:
+      - Monitoring - Application Aware Routing
+      description: Get aggregated data based on input query and filters. The data can be filtered on time and other unique parameters based upon necessity and intended usage
+      operationId: getAggregationDataByQuery_MonitoringApplicationAwareRouting_3203
+      parameters:
+      - name: query
+        in: query
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '24'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+            - value:
+              - 172.16.255.16
+              field: vdevice_name
+              type: string
+              operator: in
+            - value:
+              - '100'
+              field: loss_percentage
+              type: number
+              operator: less
+          aggregation:
+            field:
+            - property: local_color
+              sequence: 1
+              order: asc
+            metrics:
+            - property: loss_percentage
+              type: avg
+            - property: latency
+              type: avg
+            - property: jitter
+              type: avg
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    count:
+                      type: integer
+                      format: int32
+                      example: 5
+                    entry_time:
+                      type: string
+                      example: '1674813600000'
+                    local_color:
+                      type: string
+                      example: 3g
+                    loss_percentage:
+                      type: integer
+                      format: int32
+                      example: 0
+                  $$ref: '#/components/schemas/AppRouteAggResp'
+              examples:
+                Aggregated search result:
+                  description: Aggregated search result
+                  value: "[\n {\n   \"count\": 5,\n   \"local_color\": \"3g\",\n   \"loss_percentage\": 0\n   \"jitter\": 0\n   \"latency\": 0\n }\n ]"
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+      - Monitoring - Application Aware Routing
+      description: Get aggregated data based on input query and filters. The data can be filtered on time and other unique parameters based upon necessity and intended usage
+      operationId: getPostAggregationDataByQuery_MonitoringApplicationAwareRouting_3204
+      requestBody:
+        description: Stats query string
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Stats query string:
+                description: Stats query string
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '24'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+                    - value:
+                      - 172.16.255.16
+                      field: vdevice_name
+                      type: string
+                      operator: in
+                    - value:
+                      - '100'
+                      field: loss_percentage
+                      type: number
+                      operator: less
+                  aggregation:
+                    field:
+                    - property: local_color
+                      sequence: 1
+                      order: asc
+                    metrics:
+                    - property: loss_percentage
+                      type: avg
+                    - property: latency
+                      type: avg
+                    - property: jitter
+                      type: avg
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    count:
+                      type: integer
+                      format: int32
+                      example: 5
+                    entry_time:
+                      type: string
+                      example: '1674813600000'
+                    local_color:
+                      type: string
+                      example: 3g
+                    loss_percentage:
+                      type: integer
+                      format: int32
+                      example: 0
+                  $$ref: '#/components/schemas/AppRouteAggResp'
+              examples:
+                Aggregated search result:
+                  description: Aggregated search result
+                  value: "[\n  {\n   \"count\": 5,\n   \"local_color\": \"3g\",\n   \"loss_percentage\": 0\n   \"jitter\": 0\n   \"latency\": 0\n }\n ]"
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/approute/app-agg/aggregation:
+    post:
+      tags:
+      - Monitoring - Application Aware Routing
+      description: Get aggregated data based on input query and filters. The data can be filtered on time and other unique parameters based upon necessity and intended usage
+      operationId: getPostAggregationAppDataByQuery9
+      requestBody:
+        description: Stats query string
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Stats query string:
+                description: Stats query string
+                value:
+                  query:
+                    field: latency
+                    type: long
+                    value:
+                    - '1'
+                    operator: greater
+                  fields:
+                  - latency
+                  aggregation:
+                    metrics:
+                    - property: latency
+                      type: avg
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: array
+                  properties:
+                    empty:
+                      type: boolean
+                  items:
+                    type: object
+                    properties:
+                      latency:
+                        type: string
+                    $$ref: '#/components/schemas/AppRouteAppAggRespInner'
+                  $$ref: '#/components/schemas/AppRouteAppAggResp'
+              examples:
+                Aggregated search result:
+                  description: Aggregated search result
+                  value:
+                  - latency: 0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/approute/csv:
+    get:
+      tags:
+      - Monitoring - Application Aware Routing
+      description: Get raw data with optional query as CSV
+      operationId: getStatDataRawDataAsCSV_MonitoringApplicationAwareRouting_2403
+      parameters:
+      - name: query
+        in: query
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '24'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+            - value:
+              - 172.16.255.11
+              field: vdevice_name
+              type: string
+              operator: in
+            - value:
+              - 3g
+              - lte
+              field: local_color
+              type: string
+              operator: in
+      responses:
+        '200':
+          description: Success
+          content:
+            text/csv:
+              schema:
+                type: string
+              examples:
+                Search result in csv format:
+                  description: Search result in csv format
+                  value: ' blob:https://<vmanageIP>/82c972bc-f9b3-4cce-bb70-1e1b033ef1cd'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/approute/device/tunnel/summary:
+    get:
+      tags:
+      - Monitoring - Application Aware Routing
+      description: Get statistics for top applications per tunnel in a grid table
+      operationId: getStatsAppRouteDeviceTunnelSummary
+      parameters:
+      - name: query
+        in: query
+        description: Query filter
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '24'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+            - value:
+              - 172.16.255.11
+              field: vdevice_name
+              type: string
+              operator: in
+            - value:
+              - 3g
+              - lte
+              field: local_color
+              type: string
+              operator: in
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          app_probe_class:
+                            type: string
+                          entry_time:
+                            type: string
+                          jitter:
+                            type: integer
+                            format: int32
+                            example: 0
+                          latency:
+                            type: number
+                          loss_percentage:
+                            type: number
+                          name:
+                            type: string
+                            example: 172.16.255.11:lte-172.16.255.16:3g
+                          rx_octets:
+                            type: integer
+                            format: int32
+                          tx_octets:
+                            type: integer
+                            format: int32
+                        $$ref: '#/components/schemas/AppRouteTunnelSummary'
+                  $$ref: '#/components/schemas/AppRouteTunnenSummarResp'
+              examples:
+                Statistics for top application:
+                  description: Statistics for top application
+                  value:
+                  - name: 172.16.255.11:lte-172.16.255.15:3g
+                    jitter: 0
+                    rx_octets: 0
+                    tx_octets: 0
+                    loss_percentage: 0
+                    latency: 0
+                    entry_time: ''
+                    app_probe_class: ''
+                  - name: 172.16.255.11:lte-172.16.255.15:lte
+                    jitter: 0
+                    rx_octets: 0
+                    tx_octets: 0
+                    loss_percentage: 0
+                    latency: 0
+                    entry_time: ''
+                    app_probe_class: ''
+                  - name: 172.16.255.11:lte-172.16.255.16:3g
+                    jitter: 0
+                    rx_octets: 0
+                    tx_octets: 0
+                    loss_percentage: 0
+                    latency: 0
+                    entry_time: ''
+                    app_probe_class: ''
+                  - name: 172.16.255.11:lte-172.16.255.16:lte
+                    jitter: 0
+                    rx_octets: 0
+                    tx_octets: 0
+                    loss_percentage: 0
+                    latency: 0
+                    entry_time: ''
+                    app_probe_class: ''
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/approute/device/tunnels:
+    get:
+      tags:
+      - Monitoring - Application Aware Routing
+      description: Get statistics for top applications per tunnel in a grid table
+      operationId: getStatsAppRouteDeviceTunnels
+      parameters:
+      - name: query
+        in: query
+        description: Query filter
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '24'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+            - value:
+              - 172.16.255.11
+              field: vdevice_name
+              type: string
+              operator: in
+            - value:
+              - 3g
+              - lte
+              field: local_color
+              type: string
+              operator: in
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          device_model:
+                            type: string
+                          dst_ip:
+                            type: string
+                          dst_port:
+                            type: integer
+                            format: int32
+                          entry_time:
+                            type: string
+                          fec_re:
+                            type: integer
+                            format: int32
+                          fec_rx:
+                            type: integer
+                            format: int64
+                          fec_tx:
+                            type: integer
+                            format: int64
+                          host_name:
+                            type: string
+                          id:
+                            type: string
+                          jitter:
+                            type: integer
+                            format: int32
+                          latency:
+                            type: number
+                          local_color:
+                            type: string
+                          local_system_ip:
+                            type: string
+                          loss:
+                            type: integer
+                            format: int32
+                          loss_percentage:
+                            type: integer
+                            format: int32
+                          name:
+                            type: string
+                          proto:
+                            type: string
+                          remote_color:
+                            type: string
+                          remote_system_ip:
+                            type: string
+                          rx_octets:
+                            type: integer
+                            format: int64
+                          rx_pkts:
+                            type: integer
+                            format: int64
+                          sla_class_list:
+                            type: string
+                          sla_class_names:
+                            type: string
+                          src_ip:
+                            type: string
+                          src_port:
+                            type: integer
+                            format: int32
+                          statcycletime:
+                            type: string
+                          state:
+                            type: string
+                          tenant:
+                            type: string
+                          total:
+                            type: integer
+                            format: int32
+                          tunnel_color:
+                            type: string
+                          tx_octets:
+                            type: number
+                          tx_pkts:
+                            type: integer
+                            format: int64
+                          vdevice_name:
+                            type: string
+                          vip_idx:
+                            type: integer
+                            format: int32
+                          vmanage_system_ip:
+                            type: string
+                          vqoe_score:
+                            type: integer
+                            format: int32
+                        description: app route specific response
+                        $$ref: '#/components/schemas/AppRouteResp'
+                    pageInfo:
+                      type: object
+                      properties:
+                        count:
+                          type: integer
+                          description: number of alarms to be fetched
+                          format: int64
+                        endTime:
+                          type: integer
+                          description: end time of alarms to be fetched
+                          format: int64
+                        startTime:
+                          type: integer
+                          description: start time of alarms to be fetched
+                          format: int64
+                      $$ref: '#/components/schemas/PageInfo'
+                  description: app route response with page info
+                  $$ref: '#/components/schemas/AppRouteRespWithPageInfo'
+              examples:
+                Tunnel top statistics:
+                  description: Tunnel top statistics
+                  value:
+                  - remote_color: lte
+                    fec_re: 0
+                    vqoe_score: 10
+                    device_model: vedge-cloud
+                    latency: 0
+                    tx_octets: 0
+                    dst_ip: 10.0.106.1
+                    local_color: 3g
+                    src_ip: 10.0.101.2
+                    sla_class_names: None
+                    loss: 0
+                    total: 600
+                    tx_pkts: 0
+                    fec_tx: 0
+                    rx_octets: 0
+                    statcycletime: 1677160200123
+                    siteid: 100
+                    state: Up
+                    local_system_ip: 172.16.255.11
+                    tenant: default
+                    entry_time: 1677159336845
+                    loss_percentage: 0
+                    app_probe_class: None
+                    rx_pkts: 0
+                    vmanage_system_ip: 172.16.255.11
+                    fec_rx: 0
+                    src_port: 12366
+                    jitter: 0
+                    remote_system_ip: 172.16.255.16
+                    vdevice_name: 172.16.255.11
+                    proto: IPSEC
+                    vip_idx: 3718
+                    dst_port: 12366
+                    name: 172.16.255.11:3g-172.16.255.16:lte
+                    sla_class_list: '0'
+                    tunnel_color: 3g:lte
+                    host_name: vm1
+                    id: 0q-JfoYB04cEz_Q-t9i_
+                  - remote_color: 3g
+                    fec_re: 0
+                    vqoe_score: 10
+                    device_model: vedge-cloud
+                    latency: 0
+                    tx_octets: 0
+                    dst_ip: 10.0.106.2
+                    local_color: lte
+                    src_ip: 10.0.101.1
+                    sla_class_names: None
+                    loss: 0
+                    total: 600
+                    tx_pkts: 0
+                    fec_tx: 0
+                    rx_octets: 0
+                    statcycletime: 1677160200123
+                    siteid: 100
+                    state: Up
+                    local_system_ip: 172.16.255.11
+                    tenant: default
+                    entry_time: 1677159336845
+                    loss_percentage: 0
+                    app_probe_class: None
+                    rx_pkts: 0
+                    vmanage_system_ip: 172.16.255.11
+                    fec_rx: 0
+                    src_port: 12366
+                    jitter: 0
+                    remote_system_ip: 172.16.255.16
+                    vdevice_name: 172.16.255.11
+                    proto: IPSEC
+                    vip_idx: 3713
+                    dst_port: 12366
+                    name: 172.16.255.11:lte-172.16.255.16:3g
+                    sla_class_list: '0'
+                    tunnel_color: 3g:lte
+                    host_name: vm1
+                    id: za-JfoYB04cEz_Q-t9i_
+                  - remote_color: 3g
+                    fec_re: 0
+                    vqoe_score: 10
+                    device_model: vedge-cloud
+                    latency: 0
+                    tx_octets: 0
+                    dst_ip: 10.0.106.2
+                    local_color: 3g
+                    src_ip: 10.0.101.2
+                    sla_class_names: None
+                    loss: 0
+                    total: 600
+                    tx_pkts: 0
+                    fec_tx: 0
+                    rx_octets: 0
+                    statcycletime: 1677160200123
+                    siteid: 100
+                    state: Up
+                    local_system_ip: 172.16.255.11
+                    tenant: default
+                    entry_time: 1677159336845
+                    loss_percentage: 0
+                    app_probe_class: None
+                    rx_pkts: 0
+                    vmanage_system_ip: 172.16.255.11
+                    fec_rx: 0
+                    src_port: 12366
+                    jitter: 0
+                    remote_system_ip: 172.16.255.16
+                    vdevice_name: 172.16.255.11
+                    proto: IPSEC
+                    vip_idx: 3714
+                    dst_port: 12366
+                    name: 172.16.255.11:3g-172.16.255.16:3g
+                    sla_class_list: '0'
+                    tunnel_color: 3g:3g
+                    host_name: vm1
+                    id: zq-JfoYB04cEz_Q-t9i_
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/approute/doccount:
+    get:
+      tags:
+      - Monitoring - Application Aware Routing
+      description: Get response count of a query
+      operationId: getDocCount_MonitoringApplicationAwareRouting_2903
+      parameters:
+      - name: query
+        in: query
+        required: true
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '24'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+            - value:
+              - 172.16.255.11
+              field: vdevice_name
+              type: string
+              operator: in
+            - value:
+              - 3g
+              - lte
+              field: local_color
+              type: string
+              operator: in
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Query result count:
+                  description: Query result count
+                  value:
+                    count: 17193
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+      - Monitoring - Application Aware Routing
+      description: Get response count of a query
+      operationId: getDocCountPost
+      requestBody:
+        description: Query
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Query:
+                description: Query
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '24'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+                    - value:
+                      - 172.16.255.11
+                      field: vdevice_name
+                      type: string
+                      operator: in
+                    - value:
+                      - 3g
+                      - lte
+                      field: local_color
+                      type: string
+                      operator: in
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Query result count:
+                  description: Query result count
+                  value:
+                    count: 9642
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/approute/fec/aggregation:
+    post:
+      tags:
+      - Monitoring - Application Aware Routing
+      description: Get aggregation data and fec recovery rate
+      operationId: getAppRouteFecAgg
+      parameters:
+      - name: site-id
+        in: query
+        schema:
+          pattern: ^[0-9]+$
+          type: string
+      requestBody:
+        description: Query filter
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Query filter:
+                description: Query filter
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '24'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+                    - value:
+                      - 172.16.255.11
+                      field: vdevice_name
+                      type: string
+                      operator: in
+                    - value:
+                      - 172.16.255.11:lte-172.16.255.14:lte
+                      - 172.16.255.11:lte-172.16.255.15:3g
+                      field: name
+                      type: string
+                      operator: in
+                    - value:
+                      - '100'
+                      field: loss_percentage
+                      type: number
+                      operator: less
+                  aggregation:
+                    field:
+                    - property: name
+                      sequence: 1
+                    - property: state
+                      sequence: 1
+                    - property: proto
+                      sequence: 2
+                    histogram:
+                      property: entry_time
+                      type: minute
+                      interval: 30
+                      order: asc
+                    metrics:
+                    - property: loss_percentage
+                      type: avg
+                    - property: fecLossRecovery
+                      type: avg
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: array
+                  properties:
+                    empty:
+                      type: boolean
+                  items:
+                    type: object
+                    properties:
+                      count:
+                        type: number
+                      entry_time:
+                        type: string
+                      fecLossRecovery:
+                        type: string
+                      loss_percentage:
+                        type: number
+                      name:
+                        type: string
+                      proto:
+                        type: string
+                      state:
+                        type: string
+                    $$ref: '#/components/schemas/AppRouteFECAggRespInner'
+                  $$ref: '#/components/schemas/AppRouteFECAggResp'
+              examples:
+                Aggregation data and fec recovery rate:
+                  description: Aggregation data and fec recovery rate
+                  value: "[\n   {\n     \"loss_percentage\": 0.1066624445851805,\n     \"entry_time\": 1676892600000,\n     \"count\": 1578,\n     \"proto\": \"IPSEC\",\n     \"name\": \"172.16.254.16:default-172.16.254.2:default\",\n     \"state\": \"Up\",\n     \"fecLossRecovery\": \"-\",\n   },\n   {\n     \"loss_percentage\": 0.1266624445851805,\n     \"entry_time\": 1676892600000,\n     \"count\": 1579,\n     \"proto\": \"IPSEC\",\n     \"name\": \"172.16.254.16:default-172.16.254.3:default\",\n     \"state\": \"Up\",\n     \"fecLossRecovery\": \"-\",\n   }\n ]"
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/approute/fields:
+    get:
+      tags:
+      - Monitoring - Application Aware Routing
+      description: Get fields and type
+      operationId: getStatDataFields_MonitoringApplicationAwareRouting_2703
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    dataType:
+                      type: string
+                    property:
+                      type: string
+                  $$ref: '#/components/schemas/AppRouteDocCountResponse'
+              example:
+              - property: vdevice_name
+                dataType: string
+              - property: host_name
+                dataType: string
+              - property: device_model
+                dataType: string
+              - property: statcycletime
+                dataType: date
+              - property: entry_time
+                dataType: date
+              - property: vip_idx
+                dataType: number
+              - property: local_system_ip
+                dataType: string
+              - property: remote_system_ip
+                dataType: string
+              - property: local_color
+                dataType: string
+              - property: remote_color
+                dataType: string
+              - property: proto
+                dataType: string
+              - property: window
+                dataType: number
+              - property: src_ip
+                dataType: string
+              - property: dst_ip
+                dataType: string
+              - property: src_port
+                dataType: number
+              - property: dst_port
+                dataType: number
+              - property: total
+                dataType: number
+              - property: latency
+                dataType: number
+              - property: loss_percentage
+                dataType: number
+              - property: jitter
+                dataType: number
+              - property: tx_pkts
+                dataType: number
+              - property: rx_pkts
+                dataType: number
+              - property: tx_octets
+                dataType: number
+              - property: rx_octets
+                dataType: number
+              - property: name
+                dataType: string
+              - property: loss
+                dataType: number
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/approute/page:
+    get:
+      tags:
+      - Monitoring - Application Aware Routing
+      description: Get stats raw data
+      operationId: getStatBulkRawData_MonitoringApplicationAwareRouting_2503
+      parameters:
+      - name: query
+        in: query
+        description: Query string
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '24'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+            - value:
+              - 172.16.255.11
+              field: vdevice_name
+              type: string
+              operator: in
+            - value:
+              - 3g
+              - lte
+              field: local_color
+              type: string
+              operator: in
+      - name: scrollId
+        in: query
+        schema:
+          type: string
+      - name: count
+        in: query
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        count:
+                          type: integer
+                          format: int32
+                          example: 5
+                        entry_time:
+                          type: string
+                          example: '1674813600000'
+                        local_color:
+                          type: string
+                          example: 3g
+                        loss_percentage:
+                          type: integer
+                          format: int32
+                          example: 0
+                      $$ref: '#/components/schemas/AppRouteAggResp'
+                  pageInfo:
+                    type: object
+                    properties:
+                      count:
+                        type: integer
+                        description: number of alarms to be fetched
+                        format: int64
+                      endTime:
+                        type: integer
+                        description: end time of alarms to be fetched
+                        format: int64
+                      startTime:
+                        type: integer
+                        description: start time of alarms to be fetched
+                        format: int64
+                    $$ref: '#/components/schemas/PageInfo'
+                description: interface aggregation response with page info
+                $$ref: '#/components/schemas/AppRouteAggRespWithPageInfo'
+              examples:
+                Search result:
+                  description: Search result
+                  value:
+                    data:
+                    - remote_color: 3g
+                      fec_re: 0
+                      vqoe_score: 10
+                      device_model: vedge-cloud
+                      latency: 0
+                      tx_octets: 0
+                      dst_ip: 10.0.106.2
+                      local_color: 3g
+                      src_ip: 10.0.101.2
+                      sla_class_names: None
+                      loss: 0
+                      total: 600
+                      tx_pkts: 0
+                      fec_tx: 0
+                      rx_octets: 0
+                      statcycletime: 1677076800077
+                      siteid: 100
+                      state: Up
+                      local_system_ip: 172.16.255.11
+                      tenant: default
+                      entry_time: 1677075936838
+                      loss_percentage: 0
+                      app_probe_class: None
+                      rx_pkts: 0
+                      vmanage_system_ip: 172.16.255.11
+                      fec_rx: 0
+                      src_port: 12366
+                      jitter: 0
+                      remote_system_ip: 172.16.255.16
+                      vdevice_name: 172.16.255.11
+                      proto: IPSEC
+                      vip_idx: 934
+                      dst_port: 12366
+                      name: 172.16.255.11:3g-172.16.255.16:3g
+                      sla_class_list: '0'
+                      tunnel_color: 3g:3g
+                      host_name: vm1
+                      id: -auReYYB04cEz_Q-IvdV
+                    - remote_color: lte
+                      fec_re: 0
+                      vqoe_score: 10
+                      device_model: vedge-cloud
+                      latency: 0
+                      tx_octets: 0
+                      dst_ip: 10.0.106.1
+                      local_color: lte
+                      src_ip: 10.0.101.1
+                      sla_class_names: None
+                      loss: 0
+                      total: 600
+                      tx_pkts: 0
+                      fec_tx: 0
+                      rx_octets: 0
+                      statcycletime: 1677076800077
+                      siteid: 100
+                      state: Up
+                      local_system_ip: 172.16.255.11
+                      tenant: default
+                      entry_time: 1677075936838
+                      loss_percentage: 0
+                      app_probe_class: None
+                      rx_pkts: 0
+                      vmanage_system_ip: 172.16.255.11
+                      fec_rx: 0
+                      src_port: 12366
+                      jitter: 0
+                      remote_system_ip: 172.16.255.16
+                      vdevice_name: 172.16.255.11
+                      proto: IPSEC
+                      vip_idx: 937
+                      dst_port: 12366
+                      name: 172.16.255.11:lte-172.16.255.16:lte
+                      sla_class_list: '0'
+                      tunnel_color: lte:lte
+                      host_name: vm1
+                      id: _KuReYYB04cEz_Q-IvdV
+                    - remote_color: lte
+                      fec_re: 0
+                      vqoe_score: 10
+                      device_model: vedge-cloud
+                      latency: 0
+                      tx_octets: 0
+                      dst_ip: 10.0.106.1
+                      local_color: 3g
+                      src_ip: 10.0.101.2
+                      sla_class_names: None
+                      loss: 0
+                      total: 600
+                      tx_pkts: 0
+                      fec_tx: 0
+                      rx_octets: 0
+                      statcycletime: 1677076800077
+                      siteid: 100
+                      state: Up
+                      local_system_ip: 172.16.255.11
+                      tenant: default
+                      entry_time: 1677075936838
+                      loss_percentage: 0
+                      app_probe_class: None
+                      rx_pkts: 0
+                      vmanage_system_ip: 172.16.255.11
+                      fec_rx: 0
+                      src_port: 12366
+                      jitter: 0
+                      remote_system_ip: 172.16.255.16
+                      vdevice_name: 172.16.255.11
+                      proto: IPSEC
+                      vip_idx: 938
+                      dst_port: 12366
+                      name: 172.16.255.11:3g-172.16.255.16:lte
+                      sla_class_list: '0'
+                      tunnel_color: 3g:lte
+                      host_name: vm1
+                      id: _auReYYB04cEz_Q-IvdV
+                    pageInfo:
+                      startTime: '1677076800076'
+                      endTime: '1677076800077'
+                      scrollId: FGluY2x1ZGVfY29udGV4dF91dWlkDXF1ZXJ5QW5kRmV0Y2gBFnRpX1duVm1rUmhpMVJUdGk1R05PWHcAAAAAAAAkbhZVMG9reER2Y1NtT1ZwM2lBYmpEWVZ3_10
+                      hasMoreData: true
+                      count: 10
+                      totalCount: 1430
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+      - Monitoring - Application Aware Routing
+      description: Get stats raw data
+      operationId: getPostStatBulkRawData_MonitoringApplicationAwareRouting_2504
+      parameters:
+      - name: scrollId
+        in: query
+        schema:
+          type: string
+      - name: count
+        in: query
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: Stats query string
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Stats query string:
+                description: Stats query string
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '24'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+                    - value:
+                      - 172.16.255.11
+                      field: vdevice_name
+                      type: string
+                      operator: in
+                    - value:
+                      - 3g
+                      - lte
+                      field: local_color
+                      type: string
+                      operator: in
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        count:
+                          type: integer
+                          format: int32
+                          example: 5
+                        entry_time:
+                          type: string
+                          example: '1674813600000'
+                        local_color:
+                          type: string
+                          example: 3g
+                        loss_percentage:
+                          type: integer
+                          format: int32
+                          example: 0
+                      $$ref: '#/components/schemas/AppRouteAggResp'
+                  pageInfo:
+                    type: object
+                    properties:
+                      count:
+                        type: integer
+                        description: number of alarms to be fetched
+                        format: int64
+                      endTime:
+                        type: integer
+                        description: end time of alarms to be fetched
+                        format: int64
+                      startTime:
+                        type: integer
+                        description: start time of alarms to be fetched
+                        format: int64
+                    $$ref: '#/components/schemas/PageInfo'
+                description: interface aggregation response with page info
+                $$ref: '#/components/schemas/AppRouteAggRespWithPageInfo'
+              example:
+                data:
+                - remote_color: lte
+                  fec_re: 0
+                  vqoe_score: 10
+                  device_model: vedge-cloud
+                  latency: 1
+                  tx_octets: 0
+                  dst_ip: 10.0.106.1
+                  local_color: lte
+                  src_ip: 10.1.15.15
+                  sla_class_names: test_sla_class
+                  loss: 0
+                  total: 600
+                  tx_pkts: 0
+                  fec_tx: 0
+                  rx_octets: 0
+                  statcycletime: 1589075400052
+                  state: Up
+                  local_system_ip: 172.16.255.15
+                  tenant: default
+                  entry_time: 1589073783045
+                  loss_percentage: 0
+                  rx_pkts: 0
+                  vmanage_system_ip: 172.16.255.15
+                  fec_rx: 0
+                  src_port: 12366
+                  jitter: 1
+                  remote_system_ip: 172.16.255.16
+                  vdevice_name: 172.16.255.15
+                  proto: IPSEC
+                  vip_idx: 351
+                  dst_port: 12386
+                  name: 172.16.255.15:lte-172.16.255.16:lte
+                  sla_class_list: 0,1
+                  tunnel_color: lte:lte
+                  host_name: vm5
+                  id: IuBG_HEB_JLsavezVkiZ
+                pageInfo:
+                  startTime: '1666941702257'
+                  endTime: '1666941699172'
+                  count: 1000
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/approute/query/fields:
+    get:
+      tags:
+      - Monitoring - Application Aware Routing
+      description: Get query fields
+      operationId: getStatQueryFields_MonitoringApplicationAwareRouting_3303
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Query fields:
+                  description: Query fields
+                  value:
+                  - property: entry_time
+                    name: Event Time
+                    isRequired: true
+                    dataType: date
+                    fieldData:
+                      type: dateList
+                    options:
+                    - key: last_1_hour
+                      value: Last 1 hour
+                      number: '1'
+                      enableDateFields: false
+                    - key: last_3_hours
+                      value: Last 3 hours
+                      number: '3'
+                      enableDateFields: false
+                    - key: last_6_hours
+                      value: Last 6 hours
+                      number: '6'
+                      enableDateFields: false
+                    - key: last_12_hours
+                      value: Last 12 hours
+                      number: '12'
+                      enableDateFields: false
+                    - key: last_24_hours
+                      value: Last 24 hours
+                      number: '24'
+                      enableDateFields: false
+                      isSelected: true
+                    - key: last_168_hours
+                      value: Last 7 days
+                      number: '168'
+                      enableDateFields: false
+                    - key: custom
+                      value: Custom
+                      enableDateFields: true
+                  - property: vdevice_name
+                    name: Device name
+                    isRequired: true
+                    multiSelect: false
+                    dataType: string
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/approute/tloc:
+    post:
+      tags:
+      - Monitoring - Application Aware Routing
+      description: Get tloc
+      operationId: getApprouteTloc
+      requestBody:
+        description: Query filter
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Query filter:
+                description: Query filter
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '24'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+                  aggregation:
+                    field:
+                    - property: local_tloc
+                      sequence: 1
+                      size: 20
+                    - property: siteid
+                      sequence: 2
+                    metrics:
+                    - property: rx_octets
+                      type: sum
+                      order: desc
+                    - property: tx_octets
+                      type: sum
+                      order: desc
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: array
+                  properties:
+                    empty:
+                      type: boolean
+                  items:
+                    type: object
+                    properties:
+                      count:
+                        type: number
+                      local_tloc:
+                        type: string
+                      rx_octets:
+                        type: number
+                      siteid:
+                        type: string
+                      tx_octets:
+                        type: number
+                    $$ref: '#/components/schemas/AppRouteTlocRespInner'
+                  $$ref: '#/components/schemas/AppRouteTlocResp'
+              example:
+              - rx_octets: 0
+                tx_octets: 0
+                count: 1401
+                local_tloc: 172.1.1.1:mpls
+                siteid: 607
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/approute/transport/summary/{type}:
+    get:
+      tags:
+      - Monitoring - Application Aware Routing
+      description: Get application-aware routing statistics summary from device
+      operationId: getAppRouteTransportSummaryType
+      parameters:
+      - name: type
+        in: path
+        required: true
+        schema:
+          type: string
+        example: loss
+      - name: limit
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+          default: 5
+      - name: query
+        in: query
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '24'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+            - value:
+              - 172.16.255.11
+              field: vdevice_name
+              type: string
+              operator: in
+            - value:
+              - 3g
+              - lte
+              field: local_color
+              type: string
+              operator: in
+      - name: site-id
+        in: query
+        schema:
+          pattern: ^[0-9]+$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: array
+                  properties:
+                    empty:
+                      type: boolean
+                  items:
+                    type: object
+                    properties:
+                      count:
+                        type: number
+                      entry_time:
+                        type: string
+                      fecLossRecovery:
+                        type: string
+                      loss_percentage:
+                        type: number
+                      name:
+                        type: string
+                      proto:
+                        type: string
+                      state:
+                        type: string
+                    $$ref: '#/components/schemas/AppRouteFECAggRespInner'
+                  $$ref: '#/components/schemas/AppRouteFECAggResp'
+              examples:
+                Application-aware routing statistics summary:
+                  description: Application-aware routing statistics summary
+                  value:
+                  - entry_time: 1676892600000
+                    loss_percentage: 0
+                    color: 3g:3g
+                    jitter: 0
+                    latency: 0
+                    app_probe_class: ''
+                  - entry_time: 1676818800000
+                    loss_percentage: 0
+                    color: 3g:lte
+                    jitter: 0
+                    latency: 0
+                    app_probe_class: ''
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/approute/transport/{type}:
+    get:
+      tags:
+      - Monitoring - Application Aware Routing
+      description: Get application-aware routing statistics from device
+      operationId: getAppRouteTransportType
+      parameters:
+      - name: type
+        in: path
+        required: true
+        schema:
+          type: string
+        example: loss
+      - name: query
+        in: query
+        description: Query filter
+        schema:
+          type: string
+        example:
+          query:
+            field: latency
+            type: long
+            value:
+            - '1'
+            operator: greater
+          fields:
+          - latency
+          aggregation:
+            metrics:
+            - property: latency
+              type: avg
+      - name: limit
+        in: query
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  app_probe_class:
+                    type: string
+                  color:
+                    type: string
+                    example: 3g
+                  entry_time:
+                    type: string
+                    example: '1674813600000'
+                  jitter:
+                    type: string
+                    example: '0'
+                  latency:
+                    type: integer
+                    format: int32
+                    example: 5
+                  loss_percentage:
+                    type: integer
+                    format: int32
+                    example: 0
+                $$ref: '#/components/schemas/AppRouteTransportResp'
+              example:
+              - latency: 0
+                entry_time: 1673524800000
+                jitter: 0
+                color: lte
+                loss_percentage: 0
+                app_probe_class: None
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/approute/tunnel/{type}/summary:
+    get:
+      tags:
+      - Monitoring - Application Aware Routing
+      description: Get tunnel top statistics in as chart
+      operationId: getAppRouteTunnelSummaryType
+      parameters:
+      - name: type
+        in: path
+        required: true
+        schema:
+          type: string
+        example: loss
+      - name: query
+        in: query
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '24'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+            - value:
+              - 172.16.255.11
+              field: vdevice_name
+              type: string
+              operator: in
+            - value:
+              - 3g
+              - lte
+              field: local_color
+              type: string
+              operator: in
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          device_model:
+                            type: string
+                          dst_ip:
+                            type: string
+                          dst_port:
+                            type: integer
+                            format: int32
+                          entry_time:
+                            type: string
+                          fec_re:
+                            type: integer
+                            format: int32
+                          fec_rx:
+                            type: integer
+                            format: int64
+                          fec_tx:
+                            type: integer
+                            format: int64
+                          host_name:
+                            type: string
+                          id:
+                            type: string
+                          jitter:
+                            type: integer
+                            format: int32
+                          latency:
+                            type: number
+                          local_color:
+                            type: string
+                          local_system_ip:
+                            type: string
+                          loss:
+                            type: integer
+                            format: int32
+                          loss_percentage:
+                            type: integer
+                            format: int32
+                          name:
+                            type: string
+                          proto:
+                            type: string
+                          remote_color:
+                            type: string
+                          remote_system_ip:
+                            type: string
+                          rx_octets:
+                            type: integer
+                            format: int64
+                          rx_pkts:
+                            type: integer
+                            format: int64
+                          sla_class_list:
+                            type: string
+                          sla_class_names:
+                            type: string
+                          src_ip:
+                            type: string
+                          src_port:
+                            type: integer
+                            format: int32
+                          statcycletime:
+                            type: string
+                          state:
+                            type: string
+                          tenant:
+                            type: string
+                          total:
+                            type: integer
+                            format: int32
+                          tunnel_color:
+                            type: string
+                          tx_octets:
+                            type: number
+                          tx_pkts:
+                            type: integer
+                            format: int64
+                          vdevice_name:
+                            type: string
+                          vip_idx:
+                            type: integer
+                            format: int32
+                          vmanage_system_ip:
+                            type: string
+                          vqoe_score:
+                            type: integer
+                            format: int32
+                        description: app route specific response
+                        $$ref: '#/components/schemas/AppRouteResp'
+                    pageInfo:
+                      type: object
+                      properties:
+                        count:
+                          type: integer
+                          description: number of alarms to be fetched
+                          format: int64
+                        endTime:
+                          type: integer
+                          description: end time of alarms to be fetched
+                          format: int64
+                        startTime:
+                          type: integer
+                          description: start time of alarms to be fetched
+                          format: int64
+                      $$ref: '#/components/schemas/PageInfo'
+                  description: app route response with page info
+                  $$ref: '#/components/schemas/AppRouteRespWithPageInfo'
+              examples:
+                Tunnel top statistics:
+                  description: Tunnel top statistics
+                  value:
+                    value:
+                      data:
+                      - remote_color: lte
+                        fec_re: 0
+                        vqoe_score: 10
+                        device_model: vedge-cloud
+                        latency: 1
+                        tx_octets: 0
+                        dst_ip: 10.0.106.1
+                        local_color: lte
+                        src_ip: 10.1.15.15
+                        sla_class_names: test_sla_class
+                        loss: 0
+                        total: 600
+                        tx_pkts: 0
+                        fec_tx: 0
+                        rx_octets: 0
+                        statcycletime: 1589075400052
+                        state: Up
+                        local_system_ip: 172.16.255.15
+                        tenant: default
+                        entry_time: 1589073783045
+                        loss_percentage: 0
+                        rx_pkts: 0
+                        vmanage_system_ip: 172.16.255.15
+                        fec_rx: 0
+                        src_port: 12366
+                        jitter: 1
+                        remote_system_ip: 172.16.255.16
+                        vdevice_name: 172.16.255.15
+                        proto: IPSEC
+                        vip_idx: 351
+                        dst_port: 12386
+                        name: 172.16.255.15:lte-172.16.255.16:lte
+                        sla_class_list: 0,1
+                        tunnel_color: lte:lte
+                        host_name: vm5
+                        id: IuBG_HEB_JLsavezVkiZ
+                      pageInfo:
+                        startTime: '1589073783045'
+                        endTime: '1589072535795'
+                        count: 15
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/approute/tunnels/health/{type}:
+    get:
+      tags:
+      - Monitoring - Application Aware Routing
+      description: Get tunnel health
+      operationId: getAppRouteTunnelHealth
+      parameters:
+      - name: type
+        in: path
+        required: true
+        schema:
+          type: string
+        example: loss
+      - name: limit
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+          default: 10
+      - name: last_n_hours
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+          default: 3
+      - name: last_n_minutes
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+      - name: start_time
+        in: query
+        schema:
+          type: integer
+          format: int64
+      - name: end_time
+        in: query
+        schema:
+          type: integer
+          format: int64
+      - name: deviceIP
+        in: query
+        schema:
+          type: string
+        example: 172.16.255.11
+      - name: site-id
+        in: query
+        schema:
+          pattern: ^[0-9]+$
+          type: string
+      - name: regionName
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          app_probe_class:
+                            type: string
+                          entry_time:
+                            type: string
+                          jitter:
+                            type: integer
+                            format: int32
+                            example: 0
+                          latency:
+                            type: number
+                          loss_percentage:
+                            type: number
+                          name:
+                            type: string
+                            example: 172.16.255.11:lte-172.16.255.16:3g
+                          rx_octets:
+                            type: integer
+                            format: int32
+                          tx_octets:
+                            type: integer
+                            format: int32
+                        $$ref: '#/components/schemas/AppRouteTunnelSummary'
+                  $$ref: '#/components/schemas/AppRouteTunnenSummarResp'
+              examples:
+                Tunnel top statistics:
+                  description: Tunnel top statistics
+                  value:
+                  - name: 172.16.255.11:lte-172.16.255.16:lte
+                    remote_system_ip: 172.16.255.16,
+                    remote_color: lte
+                    remote-host-name: vm6,
+                    remote_site_id: 600,
+                    remote_latitude: 32.0,
+                    remote_longitude: -88.0,
+                    local_color: gold,
+                    local_system_ip: 172.16.255.11,
+                    device-type: vedge,
+                    deviceClass: viptela-router,
+                    state: Up,
+                    vqoe_score: 10,
+                    jitter: 0,
+                    rx_octets: 0,
+                    loss_percentage: 0,
+                    latency: 0,
+                    tx_octets: 0,
+                    health: green
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/approute/tunnels/summary/{type}:
+    get:
+      tags:
+      - Monitoring - Application Aware Routing
+      description: Get tunnel top statistics from device
+      operationId: getAppRouteTunnelsSummaryType
+      parameters:
+      - name: type
+        in: path
+        required: true
+        schema:
+          type: string
+        example: loss
+      - name: query
+        in: query
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '24'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+            - value:
+              - 172.16.255.11
+              field: vdevice_name
+              type: string
+              operator: in
+            - value:
+              - 3g
+              - lte
+              field: local_color
+              type: string
+              operator: in
+      - name: limit
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+          default: 10
+      - name: site-id
+        in: query
+        schema:
+          pattern: ^[0-9]+$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  app_probe_class:
+                    type: string
+                  color:
+                    type: string
+                    example: 3g
+                  entry_time:
+                    type: string
+                    example: '1674813600000'
+                  jitter:
+                    type: string
+                    example: '0'
+                  latency:
+                    type: integer
+                    format: int32
+                    example: 5
+                  loss_percentage:
+                    type: integer
+                    format: int32
+                    example: 0
+                $$ref: '#/components/schemas/AppRouteTransportResp'
+              example:
+              - name: 172.16.255.11:lte-172.16.255.16:3g
+                jitter: 0
+                rx_octets: 0
+                tx_octets: 0
+                loss_percentage: 0
+                latency: 0
+                app_probe_class: ''
+              - name: 172.16.255.11:lte-172.16.255.16:lte
+                jitter: 0
+                rx_octets: 0
+                tx_octets: 0
+                loss_percentage: 0
+                latency: 0
+                app_probe_class: ''
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/approute/tunnels/{type}:
+    get:
+      tags:
+      - Monitoring - Application Aware Routing
+      description: Get tunnel top statistics from device
+      operationId: getAppRouteTunnelType
+      parameters:
+      - name: type
+        in: path
+        required: true
+        schema:
+          type: string
+        example: loss
+      - name: query
+        in: query
+        description: Query filter
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '24'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+            - value:
+              - 172.16.255.11
+              field: vdevice_name
+              type: string
+              operator: in
+            - value:
+              - 3g
+              - lte
+              field: local_color
+              type: string
+              operator: in
+      - name: limit
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          device_model:
+                            type: string
+                          dst_ip:
+                            type: string
+                          dst_port:
+                            type: integer
+                            format: int32
+                          entry_time:
+                            type: string
+                          fec_re:
+                            type: integer
+                            format: int32
+                          fec_rx:
+                            type: integer
+                            format: int64
+                          fec_tx:
+                            type: integer
+                            format: int64
+                          host_name:
+                            type: string
+                          id:
+                            type: string
+                          jitter:
+                            type: integer
+                            format: int32
+                          latency:
+                            type: number
+                          local_color:
+                            type: string
+                          local_system_ip:
+                            type: string
+                          loss:
+                            type: integer
+                            format: int32
+                          loss_percentage:
+                            type: integer
+                            format: int32
+                          name:
+                            type: string
+                          proto:
+                            type: string
+                          remote_color:
+                            type: string
+                          remote_system_ip:
+                            type: string
+                          rx_octets:
+                            type: integer
+                            format: int64
+                          rx_pkts:
+                            type: integer
+                            format: int64
+                          sla_class_list:
+                            type: string
+                          sla_class_names:
+                            type: string
+                          src_ip:
+                            type: string
+                          src_port:
+                            type: integer
+                            format: int32
+                          statcycletime:
+                            type: string
+                          state:
+                            type: string
+                          tenant:
+                            type: string
+                          total:
+                            type: integer
+                            format: int32
+                          tunnel_color:
+                            type: string
+                          tx_octets:
+                            type: number
+                          tx_pkts:
+                            type: integer
+                            format: int64
+                          vdevice_name:
+                            type: string
+                          vip_idx:
+                            type: integer
+                            format: int32
+                          vmanage_system_ip:
+                            type: string
+                          vqoe_score:
+                            type: integer
+                            format: int32
+                        description: app route specific response
+                        $$ref: '#/components/schemas/AppRouteResp'
+                    pageInfo:
+                      type: object
+                      properties:
+                        count:
+                          type: integer
+                          description: number of alarms to be fetched
+                          format: int64
+                        endTime:
+                          type: integer
+                          description: end time of alarms to be fetched
+                          format: int64
+                        startTime:
+                          type: integer
+                          description: start time of alarms to be fetched
+                          format: int64
+                      $$ref: '#/components/schemas/PageInfo'
+                  description: app route response with page info
+                  $$ref: '#/components/schemas/AppRouteRespWithPageInfo'
+              example:
+                value:
+                  data:
+                  - remote_color: lte
+                    fec_re: 0
+                    vqoe_score: 10
+                    device_model: vedge-cloud
+                    latency: 1
+                    tx_octets: 0
+                    dst_ip: 10.0.106.1
+                    local_color: lte
+                    src_ip: 10.1.15.15
+                    sla_class_names: test_sla_class
+                    loss: 0
+                    total: 600
+                    tx_pkts: 0
+                    fec_tx: 0
+                    rx_octets: 0
+                    statcycletime: 1589075400052
+                    state: Up
+                    local_system_ip: 172.16.255.15
+                    tenant: default
+                    entry_time: 1589073783045
+                    loss_percentage: 0
+                    rx_pkts: 0
+                    vmanage_system_ip: 172.16.255.15
+                    fec_rx: 0
+                    src_port: 12366
+                    jitter: 1
+                    remote_system_ip: 172.16.255.16
+                    vdevice_name: 172.16.255.15
+                    proto: IPSEC
+                    vip_idx: 351
+                    dst_port: 12386
+                    name: 172.16.255.15:lte-172.16.255.16:lte
+                    sla_class_list: 0,1
+                    tunnel_color: lte:lte
+                    host_name: vm5
+                    id: IuBG_HEB_JLsavezVkiZ
+                  pageInfo:
+                    startTime: '1589073783045'
+                    endTime: '1589072535795'
+                    count: 15
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

@@ -1,0 +1,3442 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - QFP API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - QFP
+paths:
+  /device/qfp/cpustat:
+    get:
+      tags:
+      - Real-Time Monitoring - QFP
+      description: Get QFP cpu status
+      operationId: cpustat
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cpp-num:
+                    type: string
+                    example: '0'
+                  dp-stats-load:
+                    type: string
+                    example: '1'
+                  lastupdated:
+                    type: integer
+                    format: int32
+                    example: 170151880
+                  period:
+                    type: string
+                    example: cpp-period-1min
+                  total-input-bytes:
+                    type: string
+                    example: '28992'
+                  total-input-pkts:
+                    type: string
+                    example: '30'
+                  total-output-bytes:
+                    type: string
+                    example: '48896'
+                  total-output-pkts:
+                    type: string
+                    example: '25'
+                  vdevice-dataKey:
+                    type: string
+                    example: 172.16.255.15-cpp-period-1min
+                  vdevice-host-name:
+                    type: string
+                    example: vm5
+                  vdevice-name:
+                    type: string
+                    example: 172.16.255.15
+                $$ref: '#/components/schemas/QfpCpuState'
+              examples:
+                QFP cpu status:
+                  description: QFP cpu status
+                  value:
+                  - total-input-bytes: '28992'
+                    period: cpp-period-1min
+                    vdevice-dataKey: 172.16.255.15-cpp-period-1min
+                    cpp-num: '0'
+                    vdevice-name: 172.16.255.15
+                    total-output-pkts: '25'
+                    total-output-bytes: '48896'
+                    lastupdated: 1701518800889
+                    total-input-pkts: '30'
+                    dp-stats-load: '1'
+                    vdevice-host-name: vm5
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write,Security-read,Security-write
+  /device/qfp/memstat:
+    get:
+      tags:
+      - Real-Time Monitoring - QFP
+      description: Get QFP memory status
+      operationId: memstat
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  dramFree:
+                    type: integer
+                    format: int32
+                    example: 135600128
+                  dramInUse:
+                    type: integer
+                    format: int32
+                    example: 132835328
+                  dramLowestFreeWaterMark:
+                    type: integer
+                    format: int32
+                    example: 135600128
+                  dramTotal:
+                    type: integer
+                    format: int32
+                    example: 268435456
+                  iramFree:
+                    type: integer
+                    format: int32
+                    example: 1885184
+                  iramInUse:
+                    type: integer
+                    format: int32
+                    example: 211968
+                  iramLowestFreeWaterMark:
+                    type: integer
+                    format: int32
+                    example: 1885184
+                  iramTotal:
+                    type: integer
+                    format: int32
+                    example: 2097152
+                  lastupdated:
+                    type: integer
+                    format: int32
+                    example: 170151880
+                  sramFree:
+                    type: integer
+                    format: int32
+                    example: 0
+                  sramInUse:
+                    type: integer
+                    format: int32
+                    example: 0
+                  sramLowestFreeWaterMark:
+                    type: integer
+                    format: int32
+                    example: 0
+                  sramTotal:
+                    type: integer
+                    format: int32
+                    example: 0
+                  vdevice-dataKey:
+                    type: string
+                    example: 172.16.255.15-cpp-period-1min
+                  vdevice-host-name:
+                    type: string
+                    example: vm5
+                  vdevice-name:
+                    type: string
+                    example: 172.16.255.15
+                $$ref: '#/components/schemas/QfpMemoryState'
+              examples:
+                QFP memory status:
+                  description: QFP memory status
+                  value:
+                  - iramInUse: 211968
+                    sramFree: 0
+                    vdevice-name: 172.16.255.15
+                    dramFree: 135600128
+                    iramTotal: 2097152
+                    iramFree: 1885184
+                    iramLowestFreeWaterMark: 1885184
+                    dramLowestFreeWaterMark: 135600128
+                    sramTotal: 0
+                    vdevice-host-name: vm5
+                    sramInUse: 0
+                    sramLowestFreeWaterMark: 0
+                    vdevice-dataKey: 172.16.255.15
+                    lastupdated: 1701517192456
+                    dramTotal: 268435456
+                    dramInUse: 132835328
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write
+  /device/qfp/qfpdrop:
+    get:
+      tags:
+      - Real-Time Monitoring - QFP
+      description: Get Qfp Drop Info
+      operationId: getQfpDrop
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  appnav-acgreloaddelay-octets:
+                    type: number
+                    example: 0
+                  appnav-acgreloaddelay-pkts:
+                    type: number
+                    example: 0
+                  appnav-badroute-octets:
+                    type: number
+                    example: 0
+                  appnav-badroute-pkts:
+                    type: number
+                    example: 0
+                  appnav-internal-err-octets:
+                    type: number
+                    example: 0
+                  appnav-internal-err-pkts:
+                    type: number
+                    example: 0
+                  appnav-inv-flow-state-octets:
+                    type: number
+                    example: 0
+                  appnav-inv-flow-state-pkts:
+                    type: number
+                    example: 0
+                  appnav-nosvcctx-octets:
+                    type: number
+                    example: 0
+                  appnav-nosvcctx-pkts:
+                    type: number
+                    example: 0
+                  appnav-notunnel-octets:
+                    type: number
+                    example: 0
+                  appnav-notunnel-pkts:
+                    type: number
+                    example: 0
+                  appnav-sn-pkt-invalid-octets:
+                    type: number
+                    example: 0
+                  appnav-sn-pkt-invalid-pkts:
+                    type: number
+                    example: 0
+                  appnav-unexpected-pkt-octets:
+                    type: number
+                    example: 0
+                  appnav-unexpected-pkt-pkts:
+                    type: number
+                    example: 0
+                  ar-fnf-clnup-octets:
+                    type: number
+                    example: 0
+                  ar-fnf-clnup-pkts:
+                    type: number
+                    example: 0
+                  ar-rx-octets:
+                    type: number
+                    example: 0
+                  ar-rx-pkts:
+                    type: number
+                    example: 0
+                  ar-standby-octets:
+                    type: number
+                    example: 0
+                  ar-standby-pkts:
+                    type: number
+                    example: 0
+                  ar-tx-octets:
+                    type: number
+                    example: 0
+                  ar-tx-pkts:
+                    type: number
+                    example: 0
+                  attn-invalid-spid-octets:
+                    type: number
+                    example: 0
+                  attn-invalid-spid-pkts:
+                    type: number
+                    example: 0
+                  bad-adj-octets:
+                    type: number
+                    example: 0
+                  bad-adj-pkts:
+                    type: number
+                    example: 0
+                  bad-coff-buffer-octets:
+                    type: number
+                    example: 0
+                  bad-coff-buffer-pkts:
+                    type: number
+                    example: 0
+                  bad-dist-fifo-octets:
+                    type: number
+                    example: 0
+                  bad-dist-fifo-pkts:
+                    type: number
+                    example: 0
+                  bad-ip-checksum-octets:
+                    type: number
+                    example: 0
+                  bad-ip-checksum-pkts:
+                    type: number
+                    example: 0
+                  bad-len-octets:
+                    type: number
+                    example: 0
+                  bad-len-pkts:
+                    type: number
+                    example: 0
+                  bad-uidb-idx-octets:
+                    type: number
+                    example: 0
+                  bad-uidb-idx-pkts:
+                    type: number
+                    example: 0
+                  bad-uidb-sub-idx-octets:
+                    type: number
+                    example: 0
+                  bad-uidb-sub-idx-pkts:
+                    type: number
+                    example: 0
+                  bad-us-jib-hdr-octets:
+                    type: number
+                    example: 0
+                  bad-us-jib-hdr-pkts:
+                    type: number
+                    example: 0
+                  bfd-octets:
+                    type: number
+                    example: 0
+                  bfd-pkts:
+                    type: number
+                    example: 0
+                  bier-invalid-replica-record-octets:
+                    type: number
+                    example: 0
+                  bier-invalid-replica-record-pkts:
+                    type: number
+                    example: 0
+                  bier-snaity-octets:
+                    type: number
+                    example: 0
+                  bier-snaity-pkts:
+                    type: number
+                    example: 0
+                  bqs-oor-octets:
+                    type: number
+                    example: 0
+                  bqs-oor-pak-pri-octets:
+                    type: number
+                    example: 0
+                  bqs-oor-pak-pri-pkts:
+                    type: number
+                    example: 0
+                  bqs-oor-pkts:
+                    type: number
+                    example: 0
+                  bqs-oor-pri-octets:
+                    type: number
+                    example: 0
+                  bqs-oor-pri-pkts:
+                    type: number
+                    example: 0
+                  bqs-oor-vital-octets:
+                    type: number
+                    example: 0
+                  bqs-oor-vital-pkts:
+                    type: number
+                    example: 0
+                  bundle-oce-octets:
+                    type: number
+                    example: 0
+                  bundle-oce-pkts:
+                    type: number
+                    example: 0
+                  cable-arp-autoreply-octets:
+                    type: number
+                    example: 0
+                  cable-arp-autoreply-pkts:
+                    type: number
+                    example: 0
+                  cable-dhcp-bad-len-octets:
+                    type: number
+                    example: 0
+                  cable-dhcp-bad-len-pkts:
+                    type: number
+                    example: 0
+                  cable-lc2sup-punt-octets:
+                    type: number
+                    example: 0
+                  cable-lc2sup-punt-pkts:
+                    type: number
+                    example: 0
+                  cable-mc-invalid-replica-record-octets:
+                    type: number
+                    example: 0
+                  cable-mc-invalid-replica-record-pkts:
+                    type: number
+                    example: 0
+                  cable-oob-us-pkt-invalid-octets:
+                    type: number
+                    example: 0
+                  cable-oob-us-pkt-invalid-pkts:
+                    type: number
+                    example: 0
+                  cable-oob-us-sess-invalid-octets:
+                    type: number
+                    example: 0
+                  cable-oob-us-sess-invalid-pkts:
+                    type: number
+                    example: 0
+                  cable-oob-us-src-id-invalid-octets:
+                    type: number
+                    example: 0
+                  cable-oob-us-src-id-invalid-pkts:
+                    type: number
+                    example: 0
+                  cable-p2pl-oce-ptr-null-octets:
+                    type: number
+                    example: 0
+                  cable-p2pl-oce-ptr-null-pkts:
+                    type: number
+                    example: 0
+                  cable-prereg-not-cm-octets:
+                    type: number
+                    example: 0
+                  cable-prereg-not-cm-pkts:
+                    type: number
+                    example: 0
+                  cable-prng-exp-octets:
+                    type: number
+                    example: 0
+                  cable-prng-exp-pkts:
+                    type: number
+                    example: 0
+                  cable-recycle-queue-octets:
+                    type: number
+                    example: 0
+                  cable-recycle-queue-pkts:
+                    type: number
+                    example: 0
+                  capwap-err-octets:
+                    type: number
+                    example: 0
+                  capwap-err-pkts:
+                    type: number
+                    example: 0
+                  capwap-no-uidb-octets:
+                    type: number
+                    example: 0
+                  capwap-no-uidb-pkts:
+                    type: number
+                    example: 0
+                  capwap-reass-alloc-err-octets:
+                    type: number
+                    example: 0
+                  capwap-reass-alloc-err-pkts:
+                    type: number
+                    example: 0
+                  capwap-reass-frag-consm-octets:
+                    type: number
+                    example: 0
+                  capwap-reass-frag-consm-pkts:
+                    type: number
+                    example: 0
+                  capwap-reass-frag-err-octets:
+                    type: number
+                    example: 0
+                  capwap-reass-frag-err-pkts:
+                    type: number
+                    example: 0
+                  cbl-oob-add-hdr-fail-octets:
+                    type: number
+                    example: 0
+                  cbl-oob-add-hdr-fail-pkts:
+                    type: number
+                    example: 0
+                  cbl-oob-null-repl-info-octets:
+                    type: number
+                    example: 0
+                  cbl-oob-null-repl-info-pkts:
+                    type: number
+                    example: 0
+                  cbl-oob-null-repllist-octets:
+                    type: number
+                    example: 0
+                  cbl-oob-null-repllist-pkts:
+                    type: number
+                    example: 0
+                  cbl-oob-recycle-tail-octets:
+                    type: number
+                    example: 0
+                  cbl-oob-recycle-tail-pkts:
+                    type: number
+                    example: 0
+                  cbl-oob-repl-end-octets:
+                    type: number
+                    example: 0
+                  cbl-oob-repl-end-pkts:
+                    type: number
+                    example: 0
+                  cbl-oob-repl-fail-octets:
+                    type: number
+                    example: 0
+                  cbl-oob-repl-fail-pkts:
+                    type: number
+                    example: 0
+                  cbl-oob-repl-sess-invalid-octets:
+                    type: number
+                    example: 0
+                  cbl-oob-repl-sess-invalid-pkts:
+                    type: number
+                    example: 0
+                  cbl-oob-repl-uidb-invalid-octets:
+                    type: number
+                    example: 0
+                  cbl-oob-repl-uidb-invalid-pkts:
+                    type: number
+                    example: 0
+                  cbl-rep-arl-drop-octets:
+                    type: number
+                    example: 0
+                  cbl-rep-arl-drop-pkts:
+                    type: number
+                    example: 0
+                  cbl-req-arl-drop-octets:
+                    type: number
+                    example: 0
+                  cbl-req-arl-drop-pkts:
+                    type: number
+                    example: 0
+                  cbl-sid-exceed-octets:
+                    type: number
+                    example: 0
+                  cbl-sid-exceed-pkts:
+                    type: number
+                    example: 0
+                  cblbf-fwdint-down-octets:
+                    type: number
+                    example: 0
+                  cblbf-fwdint-down-pkts:
+                    type: number
+                    example: 0
+                  cblbf-null-repllist-octets:
+                    type: number
+                    example: 0
+                  cblbf-null-repllist-pkts:
+                    type: number
+                    example: 0
+                  cblbf-recycle-tail-octets:
+                    type: number
+                    example: 0
+                  cblbf-recycle-tail-pkts:
+                    type: number
+                    example: 0
+                  cblbf-repl-end-octets:
+                    type: number
+                    example: 0
+                  cblbf-repl-end-pkts:
+                    type: number
+                    example: 0
+                  cblbf-repl-fail-octets:
+                    type: number
+                    example: 0
+                  cblbf-repl-fail-pkts:
+                    type: number
+                    example: 0
+                  cblbf-repl-start-octets:
+                    type: number
+                    example: 0
+                  cblbf-repl-start-pkts:
+                    type: number
+                    example: 0
+                  ccm-tx-octets:
+                    type: number
+                    example: 0
+                  ccm-tx-pkts:
+                    type: number
+                    example: 0
+                  cgacl-action-octets:
+                    type: number
+                    example: 0
+                  cgacl-action-pkts:
+                    type: number
+                    example: 0
+                  cgacl-err-octets:
+                    type: number
+                    example: 0
+                  cgacl-err-pkts:
+                    type: number
+                    example: 0
+                  cgacl-inv-stats-octets:
+                    type: number
+                    example: 0
+                  cgacl-inv-stats-pkts:
+                    type: number
+                    example: 0
+                  cgacl-lookup-miss-octets:
+                    type: number
+                    example: 0
+                  cgacl-lookup-miss-pkts:
+                    type: number
+                    example: 0
+                  cgacl-match-octets:
+                    type: number
+                    example: 0
+                  cgacl-match-pkts:
+                    type: number
+                    example: 0
+                  cgacl-pkt-type-octets:
+                    type: number
+                    example: 0
+                  cgacl-pkt-type-pkts:
+                    type: number
+                    example: 0
+                  choice-oce-octets:
+                    type: number
+                    example: 0
+                  choice-oce-pkts:
+                    type: number
+                    example: 0
+                  cmd-format-octets:
+                    type: number
+                    example: 0
+                  cmd-format-pkts:
+                    type: number
+                    example: 0
+                  coff-output-octets:
+                    type: number
+                    example: 0
+                  coff-output-pkts:
+                    type: number
+                    example: 0
+                  conf-sw-sess-octets:
+                    type: number
+                    example: 0
+                  conf-sw-sess-pkts:
+                    type: number
+                    example: 0
+                  cstp-cdtp-inv-frame-octets:
+                    type: number
+                    example: 0
+                  cstp-cdtp-inv-frame-pkts:
+                    type: number
+                    example: 0
+                  cstp-cdtp-no-tunnel-octets:
+                    type: number
+                    example: 0
+                  cstp-cdtp-no-tunnel-pkts:
+                    type: number
+                    example: 0
+                  cstp-cdtp-unsup-frame-octets:
+                    type: number
+                    example: 0
+                  cstp-cdtp-unsup-frame-pkts:
+                    type: number
+                    example: 0
+                  cts-format-octets:
+                    type: number
+                    example: 0
+                  cts-format-pkts:
+                    type: number
+                    example: 0
+                  cts-not-enable-octets:
+                    type: number
+                    example: 0
+                  cts-not-enable-pkts:
+                    type: number
+                    example: 0
+                  cwfrag-err-octets:
+                    type: number
+                    example: 0
+                  cwfrag-err-pkts:
+                    type: number
+                    example: 0
+                  cws-ctx-id-not-found-conn-octets:
+                    type: number
+                    example: 0
+                  cws-ctx-id-not-found-conn-pkts:
+                    type: number
+                    example: 0
+                  cws-ctx-id-not-found-mob-octets:
+                    type: number
+                    example: 0
+                  cws-ctx-id-not-found-mob-pkts:
+                    type: number
+                    example: 0
+                  cws-inter-error-octets:
+                    type: number
+                    example: 0
+                  cws-inter-error-pkts:
+                    type: number
+                    example: 0
+                  dapr-noroute-octets:
+                    type: number
+                    example: 0
+                  dapr-noroute-pkts:
+                    type: number
+                    example: 0
+                  dca-drop-octets:
+                    type: number
+                    example: 0
+                  dca-drop-pkts:
+                    type: number
+                    example: 0
+                  dialer-list-octets:
+                    type: number
+                    example: 0
+                  dialer-list-pkts:
+                    type: number
+                    example: 0
+                  disabled-octets:
+                    type: number
+                    example: 0
+                  disabled-pkts:
+                    type: number
+                    example: 0
+                  discard-octets:
+                    type: number
+                    example: 0
+                  discard-pkts:
+                    type: number
+                    example: 0
+                  discontinuity-time:
+                    type: string
+                    format: date-time
+                    example: '2025-02-19T00:00:00Z'
+                  discontinuity-time-date:
+                    type: integer
+                    format: int64
+                    example: 1739771335000
+                  dlep-mcast-inv-enc-octets:
+                    type: number
+                    example: 0
+                  dlep-mcast-inv-enc-pkts:
+                    type: number
+                    example: 0
+                  dlep-mcast-phy2vmi-octets:
+                    type: number
+                    example: 0
+                  dlep-mcast-phy2vmi-pkts:
+                    type: number
+                    example: 0
+                  dlep-mcast-vmi2phy-octets:
+                    type: number
+                    example: 0
+                  dlep-mcast-vmi2phy-pkts:
+                    type: number
+                    example: 0
+                  dlep-uncfgd-octets:
+                    type: number
+                    example: 0
+                  dlep-uncfgd-pkts:
+                    type: number
+                    example: 0
+                  dpss-octets:
+                    type: number
+                    example: 0
+                  dpss-pkts:
+                    type: number
+                    example: 0
+                  dsa-no-ip-octets:
+                    type: number
+                    example: 0
+                  dsa-no-ip-pkts:
+                    type: number
+                    example: 0
+                  dsp-octets:
+                    type: number
+                    example: 0
+                  dsp-pkts:
+                    type: number
+                    example: 0
+                  dtls-err-octets:
+                    type: number
+                    example: 0
+                  dtls-err-pkts:
+                    type: number
+                    example: 0
+                  ec-bundle-enq-octets:
+                    type: number
+                    example: 0
+                  ec-bundle-enq-pkts:
+                    type: number
+                    example: 0
+                  ec-link-tx-octets:
+                    type: number
+                    example: 0
+                  ec-link-tx-pkts:
+                    type: number
+                    example: 0
+                  ecfm-octets:
+                    type: number
+                    example: 0
+                  ecfm-pkts:
+                    type: number
+                    example: 0
+                  epbr-octets:
+                    type: number
+                    example: 0
+                  epbr-pkts:
+                    type: number
+                    example: 0
+                  epc-octets:
+                    type: number
+                    example: 0
+                  epc-pkts:
+                    type: number
+                    example: 0
+                  erspan-octets:
+                    type: number
+                    example: 0
+                  erspan-pkts:
+                    type: number
+                    example: 0
+                  esf-acct-exceed-drop-octets:
+                    type: number
+                    example: 0
+                  esf-acct-exceed-drop-pkts:
+                    type: number
+                    example: 0
+                  esf-drl-drop-octets:
+                    type: number
+                    example: 0
+                  esf-drl-drop-pkts:
+                    type: number
+                    example: 0
+                  esf-ffr-drop-octets:
+                    type: number
+                    example: 0
+                  esf-ffr-drop-pkts:
+                    type: number
+                    example: 0
+                  esf-l4r-bad-config-octets:
+                    type: number
+                    example: 0
+                  esf-l4r-bad-config-pkts:
+                    type: number
+                    example: 0
+                  esf-l4r-trans-sess-limit-octets:
+                    type: number
+                    example: 0
+                  esf-l4r-trans-sess-limit-pkts:
+                    type: number
+                    example: 0
+                  esf-l4r-trans-unavail-octets:
+                    type: number
+                    example: 0
+                  esf-l4r-trans-unavail-pkts:
+                    type: number
+                    example: 0
+                  esf-pbhk-bad-config-octets:
+                    type: number
+                    example: 0
+                  esf-pbhk-bad-config-pkts:
+                    type: number
+                    example: 0
+                  esf-pbhk-port-notfound-octets:
+                    type: number
+                    example: 0
+                  esf-pbhk-port-notfound-pkts:
+                    type: number
+                    example: 0
+                  esf-pbhk-port-removed-octets:
+                    type: number
+                    example: 0
+                  esf-pbhk-port-removed-pkts:
+                    type: number
+                    example: 0
+                  esf-pbhk-port-unavail-octets:
+                    type: number
+                    example: 0
+                  esf-pbhk-port-unavail-pkts:
+                    type: number
+                    example: 0
+                  esf-pbhk-unalloc-octets:
+                    type: number
+                    example: 0
+                  esf-pbhk-unalloc-pkts:
+                    type: number
+                    example: 0
+                  esf-tc-drop-octets:
+                    type: number
+                    example: 0
+                  esf-tc-drop-pkts:
+                    type: number
+                    example: 0
+                  ess-bad-sess-uidb-octets:
+                    type: number
+                    example: 0
+                  ess-bad-sess-uidb-pkts:
+                    type: number
+                    example: 0
+                  ess-cac-octets:
+                    type: number
+                    example: 0
+                  ess-cac-pkts:
+                    type: number
+                    example: 0
+                  ess-inject-bad-hdr-octets:
+                    type: number
+                    example: 0
+                  ess-inject-bad-hdr-pkts:
+                    type: number
+                    example: 0
+                  ess-inv-switch-mode-octets:
+                    type: number
+                    example: 0
+                  ess-inv-switch-mode-pkts:
+                    type: number
+                    example: 0
+                  ess-ipsub-classifier-drop-octets:
+                    type: number
+                    example: 0
+                  ess-ipsub-classifier-drop-pkts:
+                    type: number
+                    example: 0
+                  ess-ipsub-drop-octets:
+                    type: number
+                    example: 0
+                  ess-ipsub-drop-pkts:
+                    type: number
+                    example: 0
+                  ess-ipsub-fsol-drop-octets:
+                    type: number
+                    example: 0
+                  ess-ipsub-fsol-drop-pkts:
+                    type: number
+                    example: 0
+                  ess-ipsub-ka-drop-octets:
+                    type: number
+                    example: 0
+                  ess-ipsub-ka-drop-pkts:
+                    type: number
+                    example: 0
+                  ess-l2-hdr-too-big-octets:
+                    type: number
+                    example: 0
+                  ess-l2-hdr-too-big-pkts:
+                    type: number
+                    example: 0
+                  ess-no-encap-info-octets:
+                    type: number
+                    example: 0
+                  ess-no-encap-info-pkts:
+                    type: number
+                    example: 0
+                  ess-pi-inv-subtype-octets:
+                    type: number
+                    example: 0
+                  ess-pi-inv-subtype-pkts:
+                    type: number
+                    example: 0
+                  ess-pi-state-err-octets:
+                    type: number
+                    example: 0
+                  ess-pi-state-err-pkts:
+                    type: number
+                    example: 0
+                  ess-pktsb-missed-octets:
+                    type: number
+                    example: 0
+                  ess-pktsb-missed-pkts:
+                    type: number
+                    example: 0
+                  ess-unbound-session-octets:
+                    type: number
+                    example: 0
+                  ess-unbound-session-pkts:
+                    type: number
+                    example: 0
+                  ess-unprov-session-octets:
+                    type: number
+                    example: 0
+                  ess-unprov-session-pkts:
+                    type: number
+                    example: 0
+                  ess-unsup-pkt-type-octets:
+                    type: number
+                    example: 0
+                  ess-unsup-pkt-type-pkts:
+                    type: number
+                    example: 0
+                  evc-efp-egress-filter-octets:
+                    type: number
+                    example: 0
+                  evc-efp-egress-filter-pkts:
+                    type: number
+                    example: 0
+                  ext-drop-path-octets:
+                    type: number
+                    example: 0
+                  ext-drop-path-pkts:
+                    type: number
+                    example: 0
+                  fbd-oom-err-octets:
+                    type: number
+                    example: 0
+                  fbd-oom-err-pkts:
+                    type: number
+                    example: 0
+                  fhs-pkt-dropped-octets:
+                    type: number
+                    example: 0
+                  fhs-pkt-dropped-pkts:
+                    type: number
+                    example: 0
+                  fhs-pkt-invalid-octets:
+                    type: number
+                    example: 0
+                  fhs-pkt-invalid-pkts:
+                    type: number
+                    example: 0
+                  fia-error-octets:
+                    type: number
+                    example: 0
+                  fia-error-pkts:
+                    type: number
+                    example: 0
+                  firewall-backpressure-octets:
+                    type: number
+                    example: 0
+                  firewall-backpressure-pkts:
+                    type: number
+                    example: 0
+                  firewall-invalid-zone-octets:
+                    type: number
+                    example: 0
+                  firewall-invalid-zone-pkts:
+                    type: number
+                    example: 0
+                  firewall-l4-insp-octets:
+                    type: number
+                    example: 0
+                  firewall-l4-insp-pkts:
+                    type: number
+                    example: 0
+                  firewall-l4-octets:
+                    type: number
+                    example: 0
+                  firewall-l4-pkts:
+                    type: number
+                    example: 0
+                  firewall-l7-octets:
+                    type: number
+                    example: 0
+                  firewall-l7-pkts:
+                    type: number
+                    example: 0
+                  firewall-no-forwarding-octets:
+                    type: number
+                    example: 0
+                  firewall-no-forwarding-pkts:
+                    type: number
+                    example: 0
+                  firewall-no-new-sessions-octets:
+                    type: number
+                    example: 0
+                  firewall-no-new-sessions-pkts:
+                    type: number
+                    example: 0
+                  firewall-nonsession-octets:
+                    type: number
+                    example: 0
+                  firewall-nonsession-pkts:
+                    type: number
+                    example: 0
+                  firewall-not-from-init-octets:
+                    type: number
+                    example: 0
+                  firewall-not-from-init-pkts:
+                    type: number
+                    example: 0
+                  firewall-not-initiator-octets:
+                    type: number
+                    example: 0
+                  firewall-not-initiator-pkts:
+                    type: number
+                    example: 0
+                  firewall-policy-octets:
+                    type: number
+                    example: 0
+                  firewall-policy-pkts:
+                    type: number
+                    example: 0
+                  firewall-syncookie-max-dst-octets:
+                    type: number
+                    example: 0
+                  firewall-syncookie-max-dst-pkts:
+                    type: number
+                    example: 0
+                  firewall-syncookie-octets:
+                    type: number
+                    example: 0
+                  firewall-syncookie-pkts:
+                    type: number
+                    example: 0
+                  flow-queue-failure-id-octets:
+                    type: number
+                    example: 0
+                  flow-queue-failure-id-pkts:
+                    type: number
+                    example: 0
+                  flowspec-octets:
+                    type: number
+                    example: 0
+                  flowspec-pkts:
+                    type: number
+                    example: 0
+                  for-us-octets:
+                    type: number
+                    example: 0
+                  for-us-pkts:
+                    type: number
+                    example: 0
+                  frag-inv-ipv6-octets:
+                    type: number
+                    example: 0
+                  frag-inv-ipv6-pkts:
+                    type: number
+                    example: 0
+                  frag-inv-octets:
+                    type: number
+                    example: 0
+                  frag-inv-pkts:
+                    type: number
+                    example: 0
+                  frag-tail-drop-octets:
+                    type: number
+                    example: 0
+                  frag-tail-drop-pkts:
+                    type: number
+                    example: 0
+                  frfab-wred-drop-octets:
+                    type: number
+                    example: 0
+                  frfab-wred-drop-pkts:
+                    type: number
+                    example: 0
+                  frr-oce-invalid-state-octets:
+                    type: number
+                    example: 0
+                  frr-oce-invalid-state-pkts:
+                    type: number
+                    example: 0
+                  frr-oce-no-backup-octets:
+                    type: number
+                    example: 0
+                  frr-oce-no-backup-pkts:
+                    type: number
+                    example: 0
+                  gen-pkt-replication-octets:
+                    type: number
+                    example: 0
+                  gen-pkt-replication-pkts:
+                    type: number
+                    example: 0
+                  glean-adj-unsupport-linktype-octets:
+                    type: number
+                    example: 0
+                  glean-adj-unsupport-linktype-pkts:
+                    type: number
+                    example: 0
+                  gpm-tx-len-exceed-octets:
+                    type: number
+                    example: 0
+                  gpm-tx-len-exceed-pkts:
+                    type: number
+                    example: 0
+                  gre-bad-options-octets:
+                    type: number
+                    example: 0
+                  gre-bad-options-pkts:
+                    type: number
+                    example: 0
+                  host-name:
+                    type: string
+                    example: vm5
+                  hqf-tx-error-octets:
+                    type: number
+                    example: 0
+                  hqf-tx-error-pkts:
+                    type: number
+                    example: 0
+                  icmp-octets:
+                    type: number
+                    example: 0
+                  icmp-pkts:
+                    type: number
+                    example: 0
+                  identity-cft-error-octets:
+                    type: number
+                    example: 0
+                  identity-cft-error-pkts:
+                    type: number
+                    example: 0
+                  idle-packet-octets:
+                    type: number
+                    example: 0
+                  idle-packet-pkts:
+                    type: number
+                    example: 0
+                  illegal-obj-octets:
+                    type: number
+                    example: 0
+                  illegal-obj-pkts:
+                    type: number
+                    example: 0
+                  inject-err-octets:
+                    type: number
+                    example: 0
+                  inject-err-pkts:
+                    type: number
+                    example: 0
+                  internal-ctl-octets:
+                    type: number
+                    example: 0
+                  internal-ctl-pkts:
+                    type: number
+                    example: 0
+                  internal-intf-err-octets:
+                    type: number
+                    example: 0
+                  internal-intf-err-pkts:
+                    type: number
+                    example: 0
+                  internal-no-channel-mem-octets:
+                    type: number
+                    example: 0
+                  internal-no-channel-mem-pkts:
+                    type: number
+                    example: 0
+                  internal-no-gpm-octets:
+                    type: number
+                    example: 0
+                  internal-no-gpm-pkts:
+                    type: number
+                    example: 0
+                  internal-octets:
+                    type: number
+                    example: 0
+                  internal-pkts:
+                    type: number
+                    example: 0
+                  internal-recycle-tail-octets:
+                    type: number
+                    example: 0
+                  internal-recycle-tail-pkts:
+                    type: number
+                    example: 0
+                  internal-replication-octets:
+                    type: number
+                    example: 0
+                  internal-replication-pkts:
+                    type: number
+                    example: 0
+                  inv-common-preamble-octets:
+                    type: number
+                    example: 0
+                  inv-common-preamble-pkts:
+                    type: number
+                    example: 0
+                  inv-hdr-err-octets:
+                    type: number
+                    example: 0
+                  inv-hdr-err-pkts:
+                    type: number
+                    example: 0
+                  inv-l2-hdr-octets:
+                    type: number
+                    example: 0
+                  inv-l2-hdr-pkts:
+                    type: number
+                    example: 0
+                  inv-ppp-cp-pkt-octets:
+                    type: number
+                    example: 0
+                  inv-ppp-cp-pkt-pkts:
+                    type: number
+                    example: 0
+                  inv-spa-hdr-octets:
+                    type: number
+                    example: 0
+                  inv-spa-hdr-pkts:
+                    type: number
+                    example: 0
+                  invalid-encap-octets:
+                    type: number
+                    example: 0
+                  invalid-encap-pkts:
+                    type: number
+                    example: 0
+                  invalid-queue-octets:
+                    type: number
+                    example: 0
+                  invalid-queue-pkts:
+                    type: number
+                    example: 0
+                  invalid-virtual-id-octets:
+                    type: number
+                    example: 0
+                  invalid-virtual-id-pkts:
+                    type: number
+                    example: 0
+                  invalid-wred-octets:
+                    type: number
+                    example: 0
+                  invalid-wred-pkts:
+                    type: number
+                    example: 0
+                  ip-acl-err-octets:
+                    type: number
+                    example: 0
+                  ip-acl-err-pkts:
+                    type: number
+                    example: 0
+                  ip-bad-options-octets:
+                    type: number
+                    example: 0
+                  ip-bad-options-pkts:
+                    type: number
+                    example: 0
+                  ip-format-err-octets:
+                    type: number
+                    example: 0
+                  ip-format-err-pkts:
+                    type: number
+                    example: 0
+                  ip-frag-err-octets:
+                    type: number
+                    example: 0
+                  ip-frag-err-pkts:
+                    type: number
+                    example: 0
+                  ip-sia-hdr-err-octets:
+                    type: number
+                    example: 0
+                  ip-sia-hdr-err-pkts:
+                    type: number
+                    example: 0
+                  ip-sia-hop-limit-exceeded-octets:
+                    type: number
+                    example: 0
+                  ip-sia-hop-limit-exceeded-pkts:
+                    type: number
+                    example: 0
+                  ip-sia-processing-err-octets:
+                    type: number
+                    example: 0
+                  ip-sia-processing-err-pkts:
+                    type: number
+                    example: 0
+                  ip-ttl-exceeded-octets:
+                    type: number
+                    example: 0
+                  ip-ttl-exceeded-pkts:
+                    type: number
+                    example: 0
+                  iphc-octets:
+                    type: number
+                    example: 0
+                  iphc-pkts:
+                    type: number
+                    example: 0
+                  ipsec-deny-drop-octets:
+                    type: number
+                    example: 0
+                  ipsec-deny-drop-pkts:
+                    type: number
+                    example: 0
+                  ipsec-ike-indicate-octets:
+                    type: number
+                    example: 0
+                  ipsec-ike-indicate-pkts:
+                    type: number
+                    example: 0
+                  ipsec-input-octets:
+                    type: number
+                    example: 0
+                  ipsec-input-pkts:
+                    type: number
+                    example: 0
+                  ipsec-invalid-sa-octets:
+                    type: number
+                    example: 0
+                  ipsec-invalid-sa-pkts:
+                    type: number
+                    example: 0
+                  ipsec-output-octets:
+                    type: number
+                    example: 0
+                  ipsec-output-pkts:
+                    type: number
+                    example: 0
+                  ipsec-tail-drop-octets:
+                    type: number
+                    example: 0
+                  ipsec-tail-drop-pkts:
+                    type: number
+                    example: 0
+                  ipsec-ted-indicate-octets:
+                    type: number
+                    example: 0
+                  ipsec-ted-indicate-pkts:
+                    type: number
+                    example: 0
+                  ipv4-acl-lookup-miss-octets:
+                    type: number
+                    example: 0
+                  ipv4-acl-lookup-miss-pkts:
+                    type: number
+                    example: 0
+                  ipv4-acl-octets:
+                    type: number
+                    example: 0
+                  ipv4-acl-pkts:
+                    type: number
+                    example: 0
+                  ipv4-adj-drop-octets:
+                    type: number
+                    example: 0
+                  ipv4-adj-drop-pkts:
+                    type: number
+                    example: 0
+                  ipv4-egr-intf-enf-octets:
+                    type: number
+                    example: 0
+                  ipv4-egr-intf-enf-pkts:
+                    type: number
+                    example: 0
+                  ipv4-fpm-octets:
+                    type: number
+                    example: 0
+                  ipv4-fpm-pkts:
+                    type: number
+                    example: 0
+                  ipv4-martian-octets:
+                    type: number
+                    example: 0
+                  ipv4-martian-pkts:
+                    type: number
+                    example: 0
+                  ipv4-mcast-acl-octets:
+                    type: number
+                    example: 0
+                  ipv4-mcast-acl-pkts:
+                    type: number
+                    example: 0
+                  ipv4-mtr-octets:
+                    type: number
+                    example: 0
+                  ipv4-mtr-pkts:
+                    type: number
+                    example: 0
+                  ipv4-no-adj-octets:
+                    type: number
+                    example: 0
+                  ipv4-no-adj-pkts:
+                    type: number
+                    example: 0
+                  ipv4-no-route-octets:
+                    type: number
+                    example: 0
+                  ipv4-no-route-pkts:
+                    type: number
+                    example: 0
+                  ipv4-null0-octets:
+                    type: number
+                    example: 0
+                  ipv4-null0-pkts:
+                    type: number
+                    example: 0
+                  ipv4-pbr-octets:
+                    type: number
+                    example: 0
+                  ipv4-pbr-pkts:
+                    type: number
+                    example: 0
+                  ipv4-pop-pipe-php-ttl-expire-octets:
+                    type: number
+                    example: 0
+                  ipv4-pop-pipe-php-ttl-expire-pkts:
+                    type: number
+                    example: 0
+                  ipv4-pop-unf-php-ttl-expire-octets:
+                    type: number
+                    example: 0
+                  ipv4-pop-unf-php-ttl-expire-pkts:
+                    type: number
+                    example: 0
+                  ipv4-pop-unf-uhp-ttl-expire-octets:
+                    type: number
+                    example: 0
+                  ipv4-pop-unf-uhp-ttl-expire-pkts:
+                    type: number
+                    example: 0
+                  ipv4-reass-tail-drop-octets:
+                    type: number
+                    example: 0
+                  ipv4-reass-tail-drop-pkts:
+                    type: number
+                    example: 0
+                  ipv4-routing-err-octets:
+                    type: number
+                    example: 0
+                  ipv4-routing-err-pkts:
+                    type: number
+                    example: 0
+                  ipv4-unclassified-octets:
+                    type: number
+                    example: 0
+                  ipv4-unclassified-pkts:
+                    type: number
+                    example: 0
+                  ipv4-urpf-loose-failed-octets:
+                    type: number
+                    example: 0
+                  ipv4-urpf-loose-failed-pkts:
+                    type: number
+                    example: 0
+                  ipv4-urpf-null-path-list-octets:
+                    type: number
+                    example: 0
+                  ipv4-urpf-null-path-list-pkts:
+                    type: number
+                    example: 0
+                  ipv4-urpf-strict-failed-octets:
+                    type: number
+                    example: 0
+                  ipv4-urpf-strict-failed-pkts:
+                    type: number
+                    example: 0
+                  ipv4mc-extra-replicae-octets:
+                    type: number
+                    example: 0
+                  ipv4mc-extra-replicae-pkts:
+                    type: number
+                    example: 0
+                  ipv4mc-invalid-replica-record-octets:
+                    type: number
+                    example: 0
+                  ipv4mc-invalid-replica-record-pkts:
+                    type: number
+                    example: 0
+                  ipv4mc-nat-in2out-octets:
+                    type: number
+                    example: 0
+                  ipv4mc-nat-in2out-pkts:
+                    type: number
+                    example: 0
+                  ipv4mc-nat-out2in-octets:
+                    type: number
+                    example: 0
+                  ipv4mc-nat-out2in-pkts:
+                    type: number
+                    example: 0
+                  ipv4mc-no-route-octets:
+                    type: number
+                    example: 0
+                  ipv4mc-no-route-pkts:
+                    type: number
+                    example: 0
+                  ipv4mc-oif-rpf-failed-octets:
+                    type: number
+                    example: 0
+                  ipv4mc-oif-rpf-failed-pkts:
+                    type: number
+                    example: 0
+                  ipv4mc-rpf-failed-octets:
+                    type: number
+                    example: 0
+                  ipv4mc-rpf-failed-pkts:
+                    type: number
+                    example: 0
+                  ipv4mc-ttl-threshold-chk-failed-octets:
+                    type: number
+                    example: 0
+                  ipv4mc-ttl-threshold-chk-failed-pkts:
+                    type: number
+                    example: 0
+                  ipv6-acl-lookup-miss-octets:
+                    type: number
+                    example: 0
+                  ipv6-acl-lookup-miss-pkts:
+                    type: number
+                    example: 0
+                  ipv6-acl-octets:
+                    type: number
+                    example: 0
+                  ipv6-acl-pkts:
+                    type: number
+                    example: 0
+                  ipv6-adj-drop-octets:
+                    type: number
+                    example: 0
+                  ipv6-adj-drop-pkts:
+                    type: number
+                    example: 0
+                  ipv6-badhop-octets:
+                    type: number
+                    example: 0
+                  ipv6-badhop-pkts:
+                    type: number
+                    example: 0
+                  ipv6-badsource-octets:
+                    type: number
+                    example: 0
+                  ipv6-badsource-pkts:
+                    type: number
+                    example: 0
+                  ipv6-egr-intf-enf-octets:
+                    type: number
+                    example: 0
+                  ipv6-egr-intf-enf-pkts:
+                    type: number
+                    example: 0
+                  ipv6-formaterr-octets:
+                    type: number
+                    example: 0
+                  ipv6-formaterr-pkts:
+                    type: number
+                    example: 0
+                  ipv6-mcast-acl-octets:
+                    type: number
+                    example: 0
+                  ipv6-mcast-acl-pkts:
+                    type: number
+                    example: 0
+                  ipv6-no-adj-octets:
+                    type: number
+                    example: 0
+                  ipv6-no-adj-pkts:
+                    type: number
+                    example: 0
+                  ipv6-no-route-octets:
+                    type: number
+                    example: 0
+                  ipv6-no-route-pkts:
+                    type: number
+                    example: 0
+                  ipv6-null0-octets:
+                    type: number
+                    example: 0
+                  ipv6-null0-pkts:
+                    type: number
+                    example: 0
+                  ipv6-pbr-octets:
+                    type: number
+                    example: 0
+                  ipv6-pbr-pkts:
+                    type: number
+                    example: 0
+                  ipv6-reass-tail-drop-octets:
+                    type: number
+                    example: 0
+                  ipv6-reass-tail-drop-pkts:
+                    type: number
+                    example: 0
+                  ipv6-routing-err-octets:
+                    type: number
+                    example: 0
+                  ipv6-routing-err-pkts:
+                    type: number
+                    example: 0
+                  ipv6-toobigpacket-octets:
+                    type: number
+                    example: 0
+                  ipv6-toobigpacket-pkts:
+                    type: number
+                    example: 0
+                  ipv6-truncatedpkts-octets:
+                    type: number
+                    example: 0
+                  ipv6-truncatedpkts-pkts:
+                    type: number
+                    example: 0
+                  ipv6-unclassified-octets:
+                    type: number
+                    example: 0
+                  ipv6-unclassified-pkts:
+                    type: number
+                    example: 0
+                  ipv6-urpf-loose-failed-octets:
+                    type: number
+                    example: 0
+                  ipv6-urpf-loose-failed-pkts:
+                    type: number
+                    example: 0
+                  ipv6-urpf-no-fib-octets:
+                    type: number
+                    example: 0
+                  ipv6-urpf-no-fib-pkts:
+                    type: number
+                    example: 0
+                  ipv6-urpf-null-path-list-octets:
+                    type: number
+                    example: 0
+                  ipv6-urpf-null-path-list-pkts:
+                    type: number
+                    example: 0
+                  ipv6-urpf-strict-failed-octets:
+                    type: number
+                    example: 0
+                  ipv6-urpf-strict-failed-pkts:
+                    type: number
+                    example: 0
+                  ipv6mc-extra-replica-octets:
+                    type: number
+                    example: 0
+                  ipv6mc-extra-replica-pkts:
+                    type: number
+                    example: 0
+                  ipv6mc-invalid-replica-record-octets:
+                    type: number
+                    example: 0
+                  ipv6mc-invalid-replica-record-pkts:
+                    type: number
+                    example: 0
+                  ipv6mc-no-route-octets:
+                    type: number
+                    example: 0
+                  ipv6mc-no-route-pkts:
+                    type: number
+                    example: 0
+                  ipv6mc-oif-rpf-failed-octets:
+                    type: number
+                    example: 0
+                  ipv6mc-oif-rpf-failed-pkts:
+                    type: number
+                    example: 0
+                  ipv6mc-rpf-failed-octets:
+                    type: number
+                    example: 0
+                  ipv6mc-rpf-failed-pkts:
+                    type: number
+                    example: 0
+                  ipv6mc-ttl-threshold-chk-failed-octets:
+                    type: number
+                    example: 0
+                  ipv6mc-ttl-threshold-chk-failed-pkts:
+                    type: number
+                    example: 0
+                  l2bd-bd-disabled-octets:
+                    type: number
+                    example: 0
+                  l2bd-bd-disabled-pkts:
+                    type: number
+                    example: 0
+                  l2bd-inject-invalid-octets:
+                    type: number
+                    example: 0
+                  l2bd-inject-invalid-pkts:
+                    type: number
+                    example: 0
+                  l2bd-inject-no-sb-octets:
+                    type: number
+                    example: 0
+                  l2bd-inject-no-sb-pkts:
+                    type: number
+                    example: 0
+                  l2bd-mac-security-move-octets:
+                    type: number
+                    example: 0
+                  l2bd-mac-security-move-pkts:
+                    type: number
+                    example: 0
+                  l2bd-mac-security-unknown-octets:
+                    type: number
+                    example: 0
+                  l2bd-mac-security-unknown-pkts:
+                    type: number
+                    example: 0
+                  l2bd-mac-security-violation-octets:
+                    type: number
+                    example: 0
+                  l2bd-mac-security-violation-pkts:
+                    type: number
+                    example: 0
+                  l2bd-octets:
+                    type: number
+                    example: 0
+                  l2bd-pkts:
+                    type: number
+                    example: 0
+                  l2bd-policy-octets:
+                    type: number
+                    example: 0
+                  l2bd-policy-pkts:
+                    type: number
+                    example: 0
+                  l2bd-recycle-tail-octets:
+                    type: number
+                    example: 0
+                  l2bd-recycle-tail-pkts:
+                    type: number
+                    example: 0
+                  l2bd-repl-end-octets:
+                    type: number
+                    example: 0
+                  l2bd-repl-end-pkts:
+                    type: number
+                    example: 0
+                  l2bd-repl-start-octets:
+                    type: number
+                    example: 0
+                  l2bd-repl-start-pkts:
+                    type: number
+                    example: 0
+                  l2bd-sisf-ctrl-octets:
+                    type: number
+                    example: 0
+                  l2bd-sisf-ctrl-pkts:
+                    type: number
+                    example: 0
+                  l2bd-src-filter-octets:
+                    type: number
+                    example: 0
+                  l2bd-src-filter-pkts:
+                    type: number
+                    example: 0
+                  l2bd-static-mac-move-octets:
+                    type: number
+                    example: 0
+                  l2bd-static-mac-move-pkts:
+                    type: number
+                    example: 0
+                  l2bd-storm-ctrl-octets:
+                    type: number
+                    example: 0
+                  l2bd-storm-ctrl-pkts:
+                    type: number
+                    example: 0
+                  l2bd-stp-state-octets:
+                    type: number
+                    example: 0
+                  l2bd-stp-state-pkts:
+                    type: number
+                    example: 0
+                  l2bd-uuf-suppr-octets:
+                    type: number
+                    example: 0
+                  l2bd-uuf-suppr-pkts:
+                    type: number
+                    example: 0
+                  l2cp-cfg-action-octets:
+                    type: number
+                    example: 0
+                  l2cp-cfg-action-pkts:
+                    type: number
+                    example: 0
+                  l2es-input-invalid-svi-octets:
+                    type: number
+                    example: 0
+                  l2es-input-invalid-svi-pkts:
+                    type: number
+                    example: 0
+                  l2es-input-invalid-tag-octets:
+                    type: number
+                    example: 0
+                  l2es-input-invalid-tag-pkts:
+                    type: number
+                    example: 0
+                  l2mc-invalid-replica-record-octets:
+                    type: number
+                    example: 0
+                  l2mc-invalid-replica-record-pkts:
+                    type: number
+                    example: 0
+                  l2tp-bad-udp-chksum-octets:
+                    type: number
+                    example: 0
+                  l2tp-bad-udp-chksum-pkts:
+                    type: number
+                    example: 0
+                  l2tp-cxt-missed-octets:
+                    type: number
+                    example: 0
+                  l2tp-cxt-missed-pkts:
+                    type: number
+                    example: 0
+                  l2tp-exceed-tx-mtu-octets:
+                    type: number
+                    example: 0
+                  l2tp-exceed-tx-mtu-pkts:
+                    type: number
+                    example: 0
+                  l2tp-no-session-octets:
+                    type: number
+                    example: 0
+                  l2tp-no-session-pkts:
+                    type: number
+                    example: 0
+                  l2tp-ooo-rx-pkt-octets:
+                    type: number
+                    example: 0
+                  l2tp-ooo-rx-pkt-pkts:
+                    type: number
+                    example: 0
+                  l2tp-pkt-bad-len-octets:
+                    type: number
+                    example: 0
+                  l2tp-pkt-bad-len-pkts:
+                    type: number
+                    example: 0
+                  l2tp-pkt-inv-hdr-octets:
+                    type: number
+                    example: 0
+                  l2tp-pkt-inv-hdr-pkts:
+                    type: number
+                    example: 0
+                  l2tp-pktsb-missed-octets:
+                    type: number
+                    example: 0
+                  l2tp-pktsb-missed-pkts:
+                    type: number
+                    example: 0
+                  l2tp-security-check-octets:
+                    type: number
+                    example: 0
+                  l2tp-security-check-pkts:
+                    type: number
+                    example: 0
+                  l2tp-tx-seq-missed-octets:
+                    type: number
+                    example: 0
+                  l2tp-tx-seq-missed-pkts:
+                    type: number
+                    example: 0
+                  l2tp-unconfigured-octets:
+                    type: number
+                    example: 0
+                  l2tp-unconfigured-pkts:
+                    type: number
+                    example: 0
+                  l2v4mc-invalid-replica-record-octets:
+                    type: number
+                    example: 0
+                  l2v4mc-invalid-replica-record-pkts:
+                    type: number
+                    example: 0
+                  l2v6mc-invalid-replica-record-octets:
+                    type: number
+                    example: 0
+                  l2v6mc-invalid-replica-record-pkts:
+                    type: number
+                    example: 0
+                  label-pop-unsupport-linktype-octets:
+                    type: number
+                    example: 0
+                  label-pop-unsupport-linktype-pkts:
+                    type: number
+                    example: 0
+                  layer2-no-route-octets:
+                    type: number
+                    example: 0
+                  layer2-no-route-pkts:
+                    type: number
+                    example: 0
+                  layer2-switching-octets:
+                    type: number
+                    example: 0
+                  layer2-switching-pkts:
+                    type: number
+                    example: 0
+                  lisp-decap-failed-octets:
+                    type: number
+                    example: 0
+                  lisp-decap-failed-pkts:
+                    type: number
+                    example: 0
+                  lisp-disabled-octets:
+                    type: number
+                    example: 0
+                  lisp-disabled-pkts:
+                    type: number
+                    example: 0
+                  lisp-elig-oce-octets:
+                    type: number
+                    example: 0
+                  lisp-elig-oce-pkts:
+                    type: number
+                    example: 0
+                  lisp-failed-to-punt-dynmaic-eid-config-octets:
+                    type: number
+                    example: 0
+                  lisp-failed-to-punt-dynmaic-eid-config-pkts:
+                    type: number
+                    example: 0
+                  lisp-failed-to-punt-gsmr-enabled-octets:
+                    type: number
+                    example: 0
+                  lisp-failed-to-punt-gsmr-enabled-pkts:
+                    type: number
+                    example: 0
+                  lisp-failed-to-punt-lsb-mismatch-octets:
+                    type: number
+                    example: 0
+                  lisp-failed-to-punt-lsb-mismatch-pkts:
+                    type: number
+                    example: 0
+                  lisp-hash-lkup-failed-octets:
+                    type: number
+                    example: 0
+                  lisp-hash-lkup-failed-pkts:
+                    type: number
+                    example: 0
+                  lisp-misconfiguration-octets:
+                    type: number
+                    example: 0
+                  lisp-misconfiguration-pkts:
+                    type: number
+                    example: 0
+                  lisp-sfltr-octets:
+                    type: number
+                    example: 0
+                  lisp-sfltr-pkts:
+                    type: number
+                    example: 0
+                  loadbalance-null0-octets:
+                    type: number
+                    example: 0
+                  loadbalance-null0-pkts:
+                    type: number
+                    example: 0
+                  lookup-oce-should-drop-octets:
+                    type: number
+                    example: 0
+                  lookup-oce-should-drop-pkts:
+                    type: number
+                    example: 0
+                  lookup-oce-unsupport-linktype-octets:
+                    type: number
+                    example: 0
+                  lookup-oce-unsupport-linktype-pkts:
+                    type: number
+                    example: 0
+                  lsm-invalid-replica-record-octets:
+                    type: number
+                    example: 0
+                  lsm-invalid-replica-record-pkts:
+                    type: number
+                    example: 0
+                  mac-acl-lookup-miss-octets:
+                    type: number
+                    example: 0
+                  mac-acl-lookup-miss-pkts:
+                    type: number
+                    example: 0
+                  mac-acl-octets:
+                    type: number
+                    example: 0
+                  mac-acl-pkts:
+                    type: number
+                    example: 0
+                  mac-mcast-ip-nonmcast-octets:
+                    type: number
+                    example: 0
+                  mac-mcast-ip-nonmcast-pkts:
+                    type: number
+                    example: 0
+                  max-indirect-exceeded-octets:
+                    type: number
+                    example: 0
+                  max-indirect-exceeded-pkts:
+                    type: number
+                    example: 0
+                  max-tu-octets:
+                    type: number
+                    example: 0
+                  max-tu-pkts:
+                    type: number
+                    example: 0
+                  memory-intf-octets:
+                    type: number
+                    example: 0
+                  memory-intf-pkts:
+                    type: number
+                    example: 0
+                  mfr-octets:
+                    type: number
+                    example: 0
+                  mfr-pkts:
+                    type: number
+                    example: 0
+                  min-tu-octets:
+                    type: number
+                    example: 0
+                  min-tu-pkts:
+                    type: number
+                    example: 0
+                  mlp-octets:
+                    type: number
+                    example: 0
+                  mlp-pkts:
+                    type: number
+                    example: 0
+                  mpass-err-octets:
+                    type: number
+                    example: 0
+                  mpass-err-pkts:
+                    type: number
+                    example: 0
+                  mpass-invalid-fs-vector-octets:
+                    type: number
+                    example: 0
+                  mpass-invalid-fs-vector-pkts:
+                    type: number
+                    example: 0
+                  mpls-adj-drop-octets:
+                    type: number
+                    example: 0
+                  mpls-adj-drop-pkts:
+                    type: number
+                    example: 0
+                  mpls-csc-drop-octets:
+                    type: number
+                    example: 0
+                  mpls-csc-drop-pkts:
+                    type: number
+                    example: 0
+                  mpls-el-invalid-tag-octets:
+                    type: number
+                    example: 0
+                  mpls-el-invalid-tag-pkts:
+                    type: number
+                    example: 0
+                  mpls-eos-invalid-octets:
+                    type: number
+                    example: 0
+                  mpls-eos-invalid-pkts:
+                    type: number
+                    example: 0
+                  mpls-frag-req-octets:
+                    type: number
+                    example: 0
+                  mpls-frag-req-pkts:
+                    type: number
+                    example: 0
+                  mpls-gal-check-invalid-octets:
+                    type: number
+                    example: 0
+                  mpls-gal-check-invalid-pkts:
+                    type: number
+                    example: 0
+                  mpls-gal-check-non-eos-dropped-octets:
+                    type: number
+                    example: 0
+                  mpls-gal-check-non-eos-dropped-pkts:
+                    type: number
+                    example: 0
+                  mpls-gal-check-non-gal-dropped-octets:
+                    type: number
+                    example: 0
+                  mpls-gal-check-non-gal-dropped-pkts:
+                    type: number
+                    example: 0
+                  mpls-gal-exception-non-eos-dropped-octets:
+                    type: number
+                    example: 0
+                  mpls-gal-exception-non-eos-dropped-pkts:
+                    type: number
+                    example: 0
+                  mpls-gal-exception-non-gach-dropped-octets:
+                    type: number
+                    example: 0
+                  mpls-gal-exception-non-gach-dropped-pkts:
+                    type: number
+                    example: 0
+                  mpls-icmp-invalid-hdr-octets:
+                    type: number
+                    example: 0
+                  mpls-icmp-invalid-hdr-pkts:
+                    type: number
+                    example: 0
+                  mpls-ipv6-frag-req-octets:
+                    type: number
+                    example: 0
+                  mpls-ipv6-frag-req-pkts:
+                    type: number
+                    example: 0
+                  mpls-label-oce-invalid-label-octets:
+                    type: number
+                    example: 0
+                  mpls-label-oce-invalid-label-pkts:
+                    type: number
+                    example: 0
+                  mpls-label-oce-ptr-null-octets:
+                    type: number
+                    example: 0
+                  mpls-label-oce-ptr-null-pkts:
+                    type: number
+                    example: 0
+                  mpls-label-oce-unsupport-linktype-octets:
+                    type: number
+                    example: 0
+                  mpls-label-oce-unsupport-linktype-pkts:
+                    type: number
+                    example: 0
+                  mpls-mismatch-linktype-octets:
+                    type: number
+                    example: 0
+                  mpls-mismatch-linktype-pkts:
+                    type: number
+                    example: 0
+                  mpls-no-adj-octets:
+                    type: number
+                    example: 0
+                  mpls-no-adj-pkts:
+                    type: number
+                    example: 0
+                  mpls-no-route-octets:
+                    type: number
+                    example: 0
+                  mpls-no-route-pkts:
+                    type: number
+                    example: 0
+                  mpls-octets:
+                    type: number
+                    example: 0
+                  mpls-pkts:
+                    type: number
+                    example: 0
+                  mpls-pop-pipe-ttl-expire-octets:
+                    type: number
+                    example: 0
+                  mpls-pop-pipe-ttl-expire-pkts:
+                    type: number
+                    example: 0
+                  mpls-pop-unf-php-ttl-expire-octets:
+                    type: number
+                    example: 0
+                  mpls-pop-unf-php-ttl-expire-pkts:
+                    type: number
+                    example: 0
+                  mpls-pop-unf-uhp-ttl-expire-octets:
+                    type: number
+                    example: 0
+                  mpls-pop-unf-uhp-ttl-expire-pkts:
+                    type: number
+                    example: 0
+                  mpls-sanity-drop-octets:
+                    type: number
+                    example: 0
+                  mpls-sanity-drop-pkts:
+                    type: number
+                    example: 0
+                  mpls-sanity-echo-req-octets:
+                    type: number
+                    example: 0
+                  mpls-sanity-echo-req-pkts:
+                    type: number
+                    example: 0
+                  mpls-unclassified-octets:
+                    type: number
+                    example: 0
+                  mpls-unclassified-pkts:
+                    type: number
+                    example: 0
+                  multilink-cfg-octets:
+                    type: number
+                    example: 0
+                  multilink-cfg-pkts:
+                    type: number
+                    example: 0
+                  nat-in2out-octets:
+                    type: number
+                    example: 0
+                  nat-in2out-pkts:
+                    type: number
+                    example: 0
+                  nat-out2in-octets:
+                    type: number
+                    example: 0
+                  nat-out2in-pkts:
+                    type: number
+                    example: 0
+                  nat64-v4tov6-octets:
+                    type: number
+                    example: 0
+                  nat64-v4tov6-pkts:
+                    type: number
+                    example: 0
+                  nat64-v6tov4-octets:
+                    type: number
+                    example: 0
+                  nat64-v6tov4-pkts:
+                    type: number
+                    example: 0
+                  nat66-in2out-octets:
+                    type: number
+                    example: 0
+                  nat66-in2out-pkts:
+                    type: number
+                    example: 0
+                  nat66-out2in-octets:
+                    type: number
+                    example: 0
+                  nat66-out2in-pkts:
+                    type: number
+                    example: 0
+                  ngfw-divert-octets:
+                    type: number
+                    example: 0
+                  ngfw-divert-pkts:
+                    type: number
+                    example: 0
+                  ngfw-policy-octets:
+                    type: number
+                    example: 0
+                  ngfw-policy-pkts:
+                    type: number
+                    example: 0
+                  nid-vlan-mismatch-octets:
+                    type: number
+                    example: 0
+                  nid-vlan-mismatch-pkts:
+                    type: number
+                    example: 0
+                  no-def-jib-octets:
+                    type: number
+                    example: 0
+                  no-def-jib-pkts:
+                    type: number
+                    example: 0
+                  no-gpm-memory-err-octets:
+                    type: number
+                    example: 0
+                  no-gpm-memory-err-pkts:
+                    type: number
+                    example: 0
+                  no-inj-jib-octets:
+                    type: number
+                    example: 0
+                  no-inj-jib-pkts:
+                    type: number
+                    example: 0
+                  no-intf-res-octets:
+                    type: number
+                    example: 0
+                  no-intf-res-pkts:
+                    type: number
+                    example: 0
+                  no-mem-octets:
+                    type: number
+                    example: 0
+                  no-mem-pkts:
+                    type: number
+                    example: 0
+                  not-enabled-octets:
+                    type: number
+                    example: 0
+                  not-enabled-pkts:
+                    type: number
+                    example: 0
+                  null-jib-hdr-tbl-octets:
+                    type: number
+                    example: 0
+                  null-jib-hdr-tbl-pkts:
+                    type: number
+                    example: 0
+                  oam-loopback-octets:
+                    type: number
+                    example: 0
+                  oam-loopback-pkts:
+                    type: number
+                    example: 0
+                  oce-drop-adj-octets:
+                    type: number
+                    example: 0
+                  oce-drop-adj-pkts:
+                    type: number
+                    example: 0
+                  onefw-octets:
+                    type: number
+                    example: 0
+                  onefw-pkts:
+                    type: number
+                    example: 0
+                  opendns-octets:
+                    type: number
+                    example: 0
+                  opendns-pkts:
+                    type: number
+                    example: 0
+                  ovl-bad-pkt-octets:
+                    type: number
+                    example: 0
+                  ovl-bad-pkt-pkts:
+                    type: number
+                    example: 0
+                  ovl-l2-filter-octets:
+                    type: number
+                    example: 0
+                  ovl-l2-filter-pkts:
+                    type: number
+                    example: 0
+                  pa-pkt-not-suppt-octets:
+                    type: number
+                    example: 0
+                  pa-pkt-not-suppt-pkts:
+                    type: number
+                    example: 0
+                  pa-walk-err-octets:
+                    type: number
+                    example: 0
+                  pa-walk-err-pkts:
+                    type: number
+                    example: 0
+                  pathmgr-measurement-err-octets:
+                    type: number
+                    example: 0
+                  pathmgr-measurement-err-pkts:
+                    type: number
+                    example: 0
+                  pathmgr-select-err-octets:
+                    type: number
+                    example: 0
+                  pathmgr-select-err-pkts:
+                    type: number
+                    example: 0
+                  pcacl-octets:
+                    type: number
+                    example: 0
+                  pcacl-pkts:
+                    type: number
+                    example: 0
+                  pcgw-gtpu-err-octets:
+                    type: number
+                    example: 0
+                  pcgw-gtpu-err-pkts:
+                    type: number
+                    example: 0
+                  pcgw-pdu-sess-err-octets:
+                    type: number
+                    example: 0
+                  pcgw-pdu-sess-err-pkts:
+                    type: number
+                    example: 0
+                  pcgw-punt-inj-err-octets:
+                    type: number
+                    example: 0
+                  pcgw-punt-inj-err-pkts:
+                    type: number
+                    example: 0
+                  perf-lic-policer-hi-octets:
+                    type: number
+                    example: 0
+                  perf-lic-policer-hi-pkts:
+                    type: number
+                    example: 0
+                  perf-lic-policer-lo-octets:
+                    type: number
+                    example: 0
+                  perf-lic-policer-lo-pkts:
+                    type: number
+                    example: 0
+                  pfrv3-at-failure-octets:
+                    type: number
+                    example: 0
+                  pfrv3-at-failure-pkts:
+                    type: number
+                    example: 0
+                  pfrv3-blackhole-octets:
+                    type: number
+                    example: 0
+                  pfrv3-blackhole-pkts:
+                    type: number
+                    example: 0
+                  pfrv3-loop-octets:
+                    type: number
+                    example: 0
+                  pfrv3-loop-pkts:
+                    type: number
+                    example: 0
+                  pfrv3-probe-err-octets:
+                    type: number
+                    example: 0
+                  pfrv3-probe-err-pkts:
+                    type: number
+                    example: 0
+                  pfrv3-stickiness-octets:
+                    type: number
+                    example: 0
+                  pfrv3-stickiness-pkts:
+                    type: number
+                    example: 0
+                  ppe-exception-octets:
+                    type: number
+                    example: 0
+                  ppe-exception-pkts:
+                    type: number
+                    example: 0
+                  ppp-cxt-missed-octets:
+                    type: number
+                    example: 0
+                  ppp-cxt-missed-pkts:
+                    type: number
+                    example: 0
+                  pppoe-fctl-octets:
+                    type: number
+                    example: 0
+                  pppoe-fctl-pkts:
+                    type: number
+                    example: 0
+                  pppoe-inv-encap-info-octets:
+                    type: number
+                    example: 0
+                  pppoe-inv-encap-info-pkts:
+                    type: number
+                    example: 0
+                  pppoe-no-session-octets:
+                    type: number
+                    example: 0
+                  pppoe-no-session-pkts:
+                    type: number
+                    example: 0
+                  pppoe-pkt-bad-len-octets:
+                    type: number
+                    example: 0
+                  pppoe-pkt-bad-len-pkts:
+                    type: number
+                    example: 0
+                  pppoe-pkt-inv-hdr-octets:
+                    type: number
+                    example: 0
+                  pppoe-pkt-inv-hdr-pkts:
+                    type: number
+                    example: 0
+                  pppox-unconfigured-octets:
+                    type: number
+                    example: 0
+                  pppox-unconfigured-pkts:
+                    type: number
+                    example: 0
+                  pprl-sbrl-drop-octets:
+                    type: number
+                    example: 0
+                  pprl-sbrl-drop-pkts:
+                    type: number
+                    example: 0
+                  punt-err-octets:
+                    type: number
+                    example: 0
+                  punt-err-pkts:
+                    type: number
+                    example: 0
+                  punt-global-policer-drop-octets:
+                    type: number
+                    example: 0
+                  punt-global-policer-drop-pkts:
+                    type: number
+                    example: 0
+                  punt-intf-drop-octets:
+                    type: number
+                    example: 0
+                  punt-intf-drop-pkts:
+                    type: number
+                    example: 0
+                  punt-policer-drop-octets:
+                    type: number
+                    example: 0
+                  punt-policer-drop-pkts:
+                    type: number
+                    example: 0
+                  qos-actions-octets:
+                    type: number
+                    example: 0
+                  qos-actions-pkts:
+                    type: number
+                    example: 0
+                  qos-policing-octets:
+                    type: number
+                    example: 0
+                  qos-policing-pkts:
+                    type: number
+                    example: 0
+                  reass-bad-len-octets:
+                    type: number
+                    example: 0
+                  reass-bad-len-pkts:
+                    type: number
+                    example: 0
+                  reass-drop-octets:
+                    type: number
+                    example: 0
+                  reass-drop-pkts:
+                    type: number
+                    example: 0
+                  reass-frag-too-big-octets:
+                    type: number
+                    example: 0
+                  reass-frag-too-big-pkts:
+                    type: number
+                    example: 0
+                  reass-no-frag-info-low-octets:
+                    type: number
+                    example: 0
+                  reass-no-frag-info-low-pkts:
+                    type: number
+                    example: 0
+                  reass-no-frag-info-octets:
+                    type: number
+                    example: 0
+                  reass-no-frag-info-pkts:
+                    type: number
+                    example: 0
+                  reass-no-frags-left-octets:
+                    type: number
+                    example: 0
+                  reass-no-frags-left-pkts:
+                    type: number
+                    example: 0
+                  reass-overlap-octets:
+                    type: number
+                    example: 0
+                  reass-overlap-pkts:
+                    type: number
+                    example: 0
+                  reass-timeout-octets:
+                    type: number
+                    example: 0
+                  reass-timeout-pkts:
+                    type: number
+                    example: 0
+                  reass-too-many-frags-octets:
+                    type: number
+                    example: 0
+                  reass-too-many-frags-pkts:
+                    type: number
+                    example: 0
+                  redistrib-err-bad-dst-octets:
+                    type: number
+                    example: 0
+                  redistrib-err-bad-dst-pkts:
+                    type: number
+                    example: 0
+                  redistrib-err-not-sup-octets:
+                    type: number
+                    example: 0
+                  redistrib-err-not-sup-pkts:
+                    type: number
+                    example: 0
+                  redistrib-err-ph-alc-fail-octets:
+                    type: number
+                    example: 0
+                  redistrib-err-ph-alc-fail-pkts:
+                    type: number
+                    example: 0
+                  redistrib-err-sb-trans-fail-octets:
+                    type: number
+                    example: 0
+                  redistrib-err-sb-trans-fail-pkts:
+                    type: number
+                    example: 0
+                  redistrib-fifo-tail-drop-octets:
+                    type: number
+                    example: 0
+                  redistrib-fifo-tail-drop-pkts:
+                    type: number
+                    example: 0
+                  redistrib-no-credits-octets:
+                    type: number
+                    example: 0
+                  redistrib-no-credits-pkts:
+                    type: number
+                    example: 0
+                  rl2gp-non-tcb-octets:
+                    type: number
+                    example: 0
+                  rl2gp-non-tcb-pkts:
+                    type: number
+                    example: 0
+                  sbc-mmoh-invalid-replica-record-octets:
+                    type: number
+                    example: 0
+                  sbc-mmoh-invalid-replica-record-pkts:
+                    type: number
+                    example: 0
+                  sbc-police-punt-octets:
+                    type: number
+                    example: 0
+                  sbc-police-punt-pkts:
+                    type: number
+                    example: 0
+                  sbc-sess-octets:
+                    type: number
+                    example: 0
+                  sbc-sess-pkts:
+                    type: number
+                    example: 0
+                  sbc-uidb-octets:
+                    type: number
+                    example: 0
+                  sbc-uidb-pkts:
+                    type: number
+                    example: 0
+                  schain-flow-action-octets:
+                    type: number
+                    example: 0
+                  schain-flow-action-pkts:
+                    type: number
+                    example: 0
+                  sdvt-octets:
+                    type: number
+                    example: 0
+                  sdvt-pkts:
+                    type: number
+                    example: 0
+                  sdvt-sn-octets:
+                    type: number
+                    example: 0
+                  sdvt-sn-pkts:
+                    type: number
+                    example: 0
+                  sdwan-acl-octets:
+                    type: number
+                    example: 0
+                  sdwan-acl-pkts:
+                    type: number
+                    example: 0
+                  sdwan-app-route-policy-octets:
+                    type: number
+                    example: 0
+                  sdwan-app-route-policy-pkts:
+                    type: number
+                    example: 0
+                  sdwan-bfd-octets:
+                    type: number
+                    example: 0
+                  sdwan-bfd-pkts:
+                    type: number
+                    example: 0
+                  sdwan-data-policy-octets:
+                    type: number
+                    example: 0
+                  sdwan-data-policy-pkts:
+                    type: number
+                    example: 0
+                  sdwan-generic-octets:
+                    type: number
+                    example: 0
+                  sdwan-generic-pkts:
+                    type: number
+                    example: 0
+                  sdwan-implicit-acl-octets:
+                    type: number
+                    example: 0
+                  sdwan-implicit-acl-pkts:
+                    type: number
+                    example: 0
+                  sdwan-interface-policy-octets:
+                    type: number
+                    example: 0
+                  sdwan-interface-policy-pkts:
+                    type: number
+                    example: 0
+                  sdwan-octets:
+                    type: number
+                    example: 0
+                  sdwan-pkts:
+                    type: number
+                    example: 0
+                  sdwan-tloc-ext-octets:
+                    type: number
+                    example: 0
+                  sdwan-tloc-ext-pkts:
+                    type: number
+                    example: 0
+                  sdwan-tunnel-lkup-octets:
+                    type: number
+                    example: 0
+                  sdwan-tunnel-lkup-pkts:
+                    type: number
+                    example: 0
+                  servicewire-hdr-err-octets:
+                    type: number
+                    example: 0
+                  servicewire-hdr-err-pkts:
+                    type: number
+                    example: 0
+                  servicewire-hop-limit-exceeded-octets:
+                    type: number
+                    example: 0
+                  servicewire-hop-limit-exceeded-pkts:
+                    type: number
+                    example: 0
+                  servicewire-processing-err-octets:
+                    type: number
+                    example: 0
+                  servicewire-processing-err-pkts:
+                    type: number
+                    example: 0
+                  smi-disabled-octets:
+                    type: number
+                    example: 0
+                  smi-disabled-pkts:
+                    type: number
+                    example: 0
+                  special-multicast-obj-octets:
+                    type: number
+                    example: 0
+                  special-multicast-obj-pkts:
+                    type: number
+                    example: 0
+                  sr-te-remote-error-octets:
+                    type: number
+                    example: 0
+                  sr-te-remote-error-pkts:
+                    type: number
+                    example: 0
+                  srh-invalid-extension-octets:
+                    type: number
+                    example: 0
+                  srh-invalid-extension-pkts:
+                    type: number
+                    example: 0
+                  srh-pkt-truncated-in-gpm-octets:
+                    type: number
+                    example: 0
+                  srh-pkt-truncated-in-gpm-pkts:
+                    type: number
+                    example: 0
+                  sslvpn-add-ssl-rec-hdr-err-octets:
+                    type: number
+                    example: 0
+                  sslvpn-add-ssl-rec-hdr-err-pkts:
+                    type: number
+                    example: 0
+                  sslvpn-coprocessor-err-octets:
+                    type: number
+                    example: 0
+                  sslvpn-coprocessor-err-pkts:
+                    type: number
+                    example: 0
+                  sslvpn-coprocessor-state-not-set-octets:
+                    type: number
+                    example: 0
+                  sslvpn-coprocessor-state-not-set-pkts:
+                    type: number
+                    example: 0
+                  sslvpn-coprocessor-state-reply-not-set-octets:
+                    type: number
+                    example: 0
+                  sslvpn-coprocessor-state-reply-not-set-pkts:
+                    type: number
+                    example: 0
+                  sslvpn-ctx-not-alive-octets:
+                    type: number
+                    example: 0
+                  sslvpn-ctx-not-alive-pkts:
+                    type: number
+                    example: 0
+                  sslvpn-ctx-null-octets:
+                    type: number
+                    example: 0
+                  sslvpn-ctx-null-pkts:
+                    type: number
+                    example: 0
+                  sslvpn-empty-pkt-octets:
+                    type: number
+                    example: 0
+                  sslvpn-empty-pkt-pkts:
+                    type: number
+                    example: 0
+                  sslvpn-inv-ssl-rec-octets:
+                    type: number
+                    example: 0
+                  sslvpn-inv-ssl-rec-pkts:
+                    type: number
+                    example: 0
+                  sslvpn-invalid-pkt-octets:
+                    type: number
+                    example: 0
+                  sslvpn-invalid-pkt-pkts:
+                    type: number
+                    example: 0
+                  sslvpn-invalid-session-octets:
+                    type: number
+                    example: 0
+                  sslvpn-invalid-session-pkts:
+                    type: number
+                    example: 0
+                  sslvpn-neg-ssl-rec-pad-len-octets:
+                    type: number
+                    example: 0
+                  sslvpn-neg-ssl-rec-pad-len-pkts:
+                    type: number
+                    example: 0
+                  sslvpn-not-ssl-rec-rc-octets:
+                    type: number
+                    example: 0
+                  sslvpn-not-ssl-rec-rc-pkts:
+                    type: number
+                    example: 0
+                  sslvpn-not-ssl-record-octets:
+                    type: number
+                    example: 0
+                  sslvpn-not-ssl-record-pkts:
+                    type: number
+                    example: 0
+                  sslvpn-null-rc-octets:
+                    type: number
+                    example: 0
+                  sslvpn-null-rc-pkts:
+                    type: number
+                    example: 0
+                  sslvpn-null-session-octets:
+                    type: number
+                    example: 0
+                  sslvpn-null-session-pkts:
+                    type: number
+                    example: 0
+                  sslvpn-pkt-rc-err-octets:
+                    type: number
+                    example: 0
+                  sslvpn-pkt-rc-err-pkts:
+                    type: number
+                    example: 0
+                  sslvpn-socket-wr-err-octets:
+                    type: number
+                    example: 0
+                  sslvpn-socket-wr-err-pkts:
+                    type: number
+                    example: 0
+                  sslvpn-ssl-rec-not-pkt-octets:
+                    type: number
+                    example: 0
+                  sslvpn-ssl-rec-not-pkt-pkts:
+                    type: number
+                    example: 0
+                  sslvpn-svi-if-err-octets:
+                    type: number
+                    example: 0
+                  sslvpn-svi-if-err-pkts:
+                    type: number
+                    example: 0
+                  sslvpn-svi-invalid-h-octets:
+                    type: number
+                    example: 0
+                  sslvpn-svi-invalid-h-pkts:
+                    type: number
+                    example: 0
+                  sslvpn-tail-drop-octets:
+                    type: number
+                    example: 0
+                  sslvpn-tail-drop-pkts:
+                    type: number
+                    example: 0
+                  sslvpn-wrong-pkt-type-octets:
+                    type: number
+                    example: 0
+                  sslvpn-wrong-pkt-type-pkts:
+                    type: number
+                    example: 0
+                  sv-match-fail-octets:
+                    type: number
+                    example: 0
+                  sv-match-fail-pkts:
+                    type: number
+                    example: 0
+                  svi-input-invalid-mac-octets:
+                    type: number
+                    example: 0
+                  svi-input-invalid-mac-pkts:
+                    type: number
+                    example: 0
+                  svi-output-invalid-l2sb-octets:
+                    type: number
+                    example: 0
+                  svi-output-invalid-l2sb-pkts:
+                    type: number
+                    example: 0
+                  svi-output-recycle-tail-octets:
+                    type: number
+                    example: 0
+                  svi-output-recycle-tail-pkts:
+                    type: number
+                    example: 0
+                  svi-output-repl-octets:
+                    type: number
+                    example: 0
+                  svi-output-repl-pkts:
+                    type: number
+                    example: 0
+                  svi-repl-end-octets:
+                    type: number
+                    example: 0
+                  svi-repl-end-pkts:
+                    type: number
+                    example: 0
+                  sw-mac-filter-octets:
+                    type: number
+                    example: 0
+                  sw-mac-filter-pkts:
+                    type: number
+                    example: 0
+                  switch-l2m-igmp-octets:
+                    type: number
+                    example: 0
+                  switch-l2m-igmp-pkts:
+                    type: number
+                    example: 0
+                  switch-l2m-lookup-miss-octets:
+                    type: number
+                    example: 0
+                  switch-l2m-lookup-miss-pkts:
+                    type: number
+                    example: 0
+                  switch-l2m-mld-octets:
+                    type: number
+                    example: 0
+                  switch-l2m-mld-pkts:
+                    type: number
+                    example: 0
+                  switch-l2m-octets:
+                    type: number
+                    example: 0
+                  switch-l2m-pkts:
+                    type: number
+                    example: 0
+                  switch-l2m-sanity-check-octets:
+                    type: number
+                    example: 0
+                  switch-l2m-sanity-check-pkts:
+                    type: number
+                    example: 0
+                  swport-disabled-octets:
+                    type: number
+                    example: 0
+                  swport-disabled-pkts:
+                    type: number
+                    example: 0
+                  swport-mac-conflict-octets:
+                    type: number
+                    example: 0
+                  swport-mac-conflict-pkts:
+                    type: number
+                    example: 0
+                  swport-octets:
+                    type: number
+                    example: 0
+                  swport-pkts:
+                    type: number
+                    example: 0
+                  swport-sanity-check-octets:
+                    type: number
+                    example: 0
+                  swport-sanity-check-pkts:
+                    type: number
+                    example: 0
+                  swport-stby-octets:
+                    type: number
+                    example: 0
+                  swport-stby-pkts:
+                    type: number
+                    example: 0
+                  swport-tx-stby-octets:
+                    type: number
+                    example: 0
+                  swport-tx-stby-pkts:
+                    type: number
+                    example: 0
+                  swport-vp-state-octets:
+                    type: number
+                    example: 0
+                  swport-vp-state-pkts:
+                    type: number
+                    example: 0
+                  tail-drop-octets:
+                    type: number
+                    example: 0
+                  tail-drop-pkts:
+                    type: number
+                    example: 0
+                  tcp-badfrag-octets:
+                    type: number
+                    example: 0
+                  tcp-badfrag-pkts:
+                    type: number
+                    example: 0
+                  tcp-bp-sslvpn-octets:
+                    type: number
+                    example: 0
+                  tcp-bp-sslvpn-pkts:
+                    type: number
+                    example: 0
+                  tcp-octets:
+                    type: number
+                    example: 0
+                  tcp-pkts:
+                    type: number
+                    example: 0
+                  too-many-mpls-lookup-oce-octets:
+                    type: number
+                    example: 0
+                  too-many-mpls-lookup-oce-pkts:
+                    type: number
+                    example: 0
+                  tunnel-bad-gre-checksum-octets:
+                    type: number
+                    example: 0
+                  tunnel-bad-gre-checksum-pkts:
+                    type: number
+                    example: 0
+                  tunnel-bad-pim-checksum-octets:
+                    type: number
+                    example: 0
+                  tunnel-bad-pim-checksum-pkts:
+                    type: number
+                    example: 0
+                  tunnel-decap-too-many-times-octets:
+                    type: number
+                    example: 0
+                  tunnel-decap-too-many-times-pkts:
+                    type: number
+                    example: 0
+                  tunnel-invalid-protocol-octets:
+                    type: number
+                    example: 0
+                  tunnel-invalid-protocol-pkts:
+                    type: number
+                    example: 0
+                  tunnel-l2tpv3oipv6-cookie-mismatch-octets:
+                    type: number
+                    example: 0
+                  tunnel-l2tpv3oipv6-cookie-mismatch-pkts:
+                    type: number
+                    example: 0
+                  tunnel-l2tpv3oipv6-cookieflag-error-octets:
+                    type: number
+                    example: 0
+                  tunnel-l2tpv3oipv6-cookieflag-error-pkts:
+                    type: number
+                    example: 0
+                  tunnel-l2tpv3oipv6-mac-mismatch-octets:
+                    type: number
+                    example: 0
+                  tunnel-l2tpv3oipv6-mac-mismatch-pkts:
+                    type: number
+                    example: 0
+                  tunnel-l2tpv3oipv6-minmtu-error-octets:
+                    type: number
+                    example: 0
+                  tunnel-l2tpv3oipv6-minmtu-error-pkts:
+                    type: number
+                    example: 0
+                  tunnel-l2tpv3oipv6-unsupported-proto-octets:
+                    type: number
+                    example: 0
+                  tunnel-l2tpv3oipv6-unsupported-proto-pkts:
+                    type: number
+                    example: 0
+                  tunnel-l2tpv3oipv6-vlanid-mismatch-octets:
+                    type: number
+                    example: 0
+                  tunnel-l2tpv3oipv6-vlanid-mismatch-pkts:
+                    type: number
+                    example: 0
+                  tunnel-misconfiguration-octets:
+                    type: number
+                    example: 0
+                  tunnel-misconfiguration-pkts:
+                    type: number
+                    example: 0
+                  tunnel-pkt-sb-missed-octets:
+                    type: number
+                    example: 0
+                  tunnel-pkt-sb-missed-pkts:
+                    type: number
+                    example: 0
+                  tunnel-sec-chk-fail-octets:
+                    type: number
+                    example: 0
+                  tunnel-sec-chk-fail-pkts:
+                    type: number
+                    example: 0
+                  tunnel-sgre-unsupported-proto-octets:
+                    type: number
+                    example: 0
+                  tunnel-sgre-unsupported-proto-pkts:
+                    type: number
+                    example: 0
+                  tunnel-sgre-virtual-mac-mismatch-octets:
+                    type: number
+                    example: 0
+                  tunnel-sgre-virtual-mac-mismatch-pkts:
+                    type: number
+                    example: 0
+                  tunnel-unsupported-config-octets:
+                    type: number
+                    example: 0
+                  tunnel-unsupported-config-pkts:
+                    type: number
+                    example: 0
+                  tunnel-vrf-demux-octets:
+                    type: number
+                    example: 0
+                  tunnel-vrf-demux-pkts:
+                    type: number
+                    example: 0
+                  tunnel-vrf-mux-octets:
+                    type: number
+                    example: 0
+                  tunnel-vrf-mux-pkts:
+                    type: number
+                    example: 0
+                  tunnel-vxlan-mismatch-octets:
+                    type: number
+                    example: 0
+                  tunnel-vxlan-mismatch-pkts:
+                    type: number
+                    example: 0
+                  tunnel-vxlan-policer-octets:
+                    type: number
+                    example: 0
+                  tunnel-vxlan-policer-pkts:
+                    type: number
+                    example: 0
+                  udp-octets:
+                    type: number
+                    example: 0
+                  udp-pkts:
+                    type: number
+                    example: 0
+                  uidb-not-cfgd-octets:
+                    type: number
+                    example: 0
+                  uidb-not-cfgd-pkts:
+                    type: number
+                    example: 0
+                  unconfigured-fia-octets:
+                    type: number
+                    example: 0
+                  unconfigured-fia-pkts:
+                    type: number
+                    example: 0
+                  unconfigured-ipv4-fia-octets:
+                    type: number
+                    example: 0
+                  unconfigured-ipv4-fia-pkts:
+                    type: number
+                    example: 0
+                  unconfigured-ipv6-fia-octets:
+                    type: number
+                    example: 0
+                  unconfigured-ipv6-fia-pkts:
+                    type: number
+                    example: 0
+                  unconfigured-mpls-fia-octets:
+                    type: number
+                    example: 0
+                  unconfigured-mpls-fia-pkts:
+                    type: number
+                    example: 0
+                  unisr-no-match-octets:
+                    type: number
+                    example: 0
+                  unisr-no-match-pkts:
+                    type: number
+                    example: 0
+                  unisr-src-fltrd-octets:
+                    type: number
+                    example: 0
+                  unisr-src-fltrd-pkts:
+                    type: number
+                    example: 0
+                  unknown-encap-octets:
+                    type: number
+                    example: 0
+                  unknown-encap-pkts:
+                    type: number
+                    example: 0
+                  unknown-ext-header-octets:
+                    type: number
+                    example: 0
+                  unknown-ext-header-pkts:
+                    type: number
+                    example: 0
+                  unknown-mcast-pkt-type-octets:
+                    type: number
+                    example: 0
+                  unknown-mcast-pkt-type-pkts:
+                    type: number
+                    example: 0
+                  unresolved-octets:
+                    type: number
+                    example: 0
+                  unresolved-pkts:
+                    type: number
+                    example: 0
+                  unsupport-linktype-no-route-octets:
+                    type: number
+                    example: 0
+                  unsupport-linktype-no-route-pkts:
+                    type: number
+                    example: 0
+                  unsupport-linktype-null0-octets:
+                    type: number
+                    example: 0
+                  unsupport-linktype-null0-pkts:
+                    type: number
+                    example: 0
+                  unsupported-oce-octets:
+                    type: number
+                    example: 0
+                  unsupported-oce-pkts:
+                    type: number
+                    example: 0
+                  utd-octets:
+                    type: number
+                    example: 0
+                  utd-pkts:
+                    type: number
+                    example: 0
+                  utd-sn-octets:
+                    type: number
+                    example: 0
+                  utd-sn-pkts:
+                    type: number
+                    example: 0
+                  vdevice-name:
+                    type: string
+                    example: 172.16.255.15
+                  vfr-err-octets:
+                    type: number
+                    example: 0
+                  vfr-err-pkts:
+                    type: number
+                    example: 0
+                  vfr-tail-drop-octets:
+                    type: number
+                    example: 0
+                  vfr-tail-drop-pkts:
+                    type: number
+                    example: 0
+                  vtcp-err-octets:
+                    type: number
+                    example: 0
+                  vtcp-err-pkts:
+                    type: number
+                    example: 0
+                  vtcp-inv-tx-octets:
+                    type: number
+                    example: 0
+                  vtcp-inv-tx-pkts:
+                    type: number
+                    example: 0
+                  vtcp-mem-err-octets:
+                    type: number
+                    example: 0
+                  vtcp-mem-err-pkts:
+                    type: number
+                    example: 0
+                  vtcp-pa-err-octets:
+                    type: number
+                    example: 0
+                  vtcp-pa-err-pkts:
+                    type: number
+                    example: 0
+                  vtcp-punt-err-octets:
+                    type: number
+                    example: 0
+                  vtcp-punt-err-pkts:
+                    type: number
+                    example: 0
+                  wlclnt-err-octets:
+                    type: number
+                    example: 0
+                  wlclnt-err-pkts:
+                    type: number
+                    example: 0
+                  wlclnt-fnf-v9-err-octets:
+                    type: number
+                    example: 0
+                  wlclnt-fnf-v9-err-pkts:
+                    type: number
+                    example: 0
+                  wlclnt-fnf-v9-report-octets:
+                    type: number
+                    example: 0
+                  wlclnt-fnf-v9-report-pkts:
+                    type: number
+                    example: 0
+                  wpan-octets:
+                    type: number
+                    example: 0
+                  wpan-pkts:
+                    type: number
+                    example: 0
+                  wred-octets:
+                    type: number
+                    example: 0
+                  wred-pkts:
+                    type: number
+                    example: 0
+                $$ref: '#/components/schemas/QfpDropResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

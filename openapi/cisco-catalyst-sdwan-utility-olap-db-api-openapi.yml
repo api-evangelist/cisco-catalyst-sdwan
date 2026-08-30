@@ -1,0 +1,303 @@
+openapi: 3.2.0
+info:
+  title: Others Utility - OLAP DB API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Utility - OLAP DB
+paths:
+  /util/olapdb/migration/action/{action}:
+    post:
+      tags:
+      - Utility - OLAP DB
+      description: Migration actions - start pause or restart migration
+      operationId: postStatsMigrationAction
+      parameters:
+      - name: action
+        in: path
+        description: Migration action
+        required: true
+        schema:
+          type: string
+          enum:
+          - WIPE-DATA
+      responses:
+        '200':
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                Successful response of WIPE-DATA:
+                  description: Successful response of WIPE-DATA
+                  value:
+                    type: ok
+                    message: Clean up statistics-db data request sent successfully.
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+  /util/olapdb/migration/rangefrom:
+    post:
+      tags:
+      - Utility - OLAP DB
+      description: Config migration historical data range from upgrade time in seconds. -1 to keep all.
+      operationId: postStatsMigrationRangeConfig
+      requestBody:
+        description: Range from config
+        content:
+          application/json:
+            schema:
+              type: string
+            examples:
+              Configuration of rangefrom:
+                description: Configuration of rangefrom
+                value:
+                  default: -1
+                  sitehealth: 1000001
+                  perfmon: 1000008
+                  interface: 1000005
+                  qos: 1000006
+                  sleofflinereport: 1000027
+                  alarm: 1000012
+                  tracker: 1000026
+                  deviceevent: 1000003
+                  ulogging: 1000017
+                  devicehealth: 1000000
+                  dpi: 1000015
+                  aggregatedapp: 1000007
+                  umts: 1000009
+                  art: 1000013
+                  auditlog: 1000011
+                  utd: 1000016
+                  fwall: 1000018
+                  umbrella: 1000019
+                  deviceconfiguration: 1000029
+                  eiolte: 1000022
+                  vnf: 1000020
+                  nwpi: 1000014
+                  devicesystemstatus: 1000004
+                  wlan: 1000021
+                  sdra: 1000024
+                  cloudx: 1000025
+                  approutestats: 1000002
+                  bridge: 1000010
+                  apphosting: 1000028
+                  speedtest: 1000023
+        required: true
+      responses:
+        '200':
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+    get:
+      tags:
+      - Utility - OLAP DB
+      description: Get migration historical data range configuration from upgrade time
+      operationId: getStatsMigrationRangeConfig
+      responses:
+        '200':
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Configuration of rangefrom:
+                  description: Configuration of rangefrom
+                  value:
+                    default: -1
+                    sitehealth: 1000001
+                    perfmon: 1000008
+                    interface: 1000005
+                    qos: 1000006
+                    sleofflinereport: 1000027
+                    alarm: 1000012
+                    tracker: 1000026
+                    deviceevent: 1000003
+                    ulogging: 1000017
+                    devicehealth: 1000000
+                    dpi: 1000015
+                    aggregatedapp: 1000007
+                    umts: 1000009
+                    art: 1000013
+                    auditlog: 1000011
+                    utd: 1000016
+                    fwall: 1000018
+                    umbrella: 1000019
+                    deviceconfiguration: 1000029
+                    eiolte: 1000022
+                    vnf: 1000020
+                    nwpi: 1000014
+                    devicesystemstatus: 1000004
+                    wlan: 1000021
+                    sdra: 1000024
+                    cloudx: 1000025
+                    approutestats: 1000002
+                    bridge: 1000010
+                    apphosting: 1000028
+                    speedtest: 1000023
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /util/olapdb/migration/settings:
+    post:
+      tags:
+      - Utility - OLAP DB
+      description: Config generic settings
+      operationId: postStatsMigrationSettings
+      requestBody:
+        description: generic settings
+        content:
+          application/json:
+            schema:
+              type: string
+            examples:
+              Settings example:
+                description: Settings example
+                value:
+                  vol_threshold_start: 80
+                  vol_threshold_pause: 85
+                  max_auto_retry_count: 20
+                  stage1_max_threads_count_percentage_to_cpu_core: 65
+        required: true
+      responses:
+        '200':
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+    get:
+      tags:
+      - Utility - OLAP DB
+      description: Get migration generic settings
+      operationId: getStatsMigrationSettings
+      responses:
+        '200':
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Settings example:
+                  description: Settings example
+                  value:
+                    vol_threshold_start: 80
+                    vol_threshold_pause: 85
+                    max_auto_retry_count: 20
+                    stage1_max_threads_count_percentage_to_cpu_core: 65
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /util/olapdb/migration/statsdbinfo:
+    get:
+      tags:
+      - Utility - OLAP DB
+      description: Get stats db table information
+      operationId: getStatsMigrationStatsDbInfo
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /util/olapdb/migration/status:
+    get:
+      tags:
+      - Utility - OLAP DB
+      description: Get migration status
+      operationId: getStatsMigrationStatus
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Status example:
+                  description: Status example
+                  value:
+                    running_state: false
+                    cur_stage_info:
+                      stage: DONE
+                      retries: 0
+                    migrate_exception_indices: []
+                    cleanup_exception_indices: []
+                    migrated_indices:
+                    - approutestatsstatistics_2023_10_17t12_22_42
+                    - devicehealthstatistics_2023_10_17t12_24_14
+                    stats_db_info:
+                      total_count: 2884
+                      total_bytes: 1461800
+                    migrated_stats_docs: 2884
+                    vmanage_upgraded_timestamp: 1697547496112
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true

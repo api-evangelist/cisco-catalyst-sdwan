@@ -1,0 +1,280 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - WLAN API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - WLAN
+paths:
+  /device/wlan/clients:
+    get:
+      tags:
+      - Real-Time Monitoring - WLAN
+      description: Get WLAN client from device
+      operationId: getWLANClients
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                WLAN client:
+                  description: WLAN client
+                  value:
+                    data:
+                    - vdevice-name: vm2
+                      vdevice-host-name: 169.254.10.9
+                      vap: vap0
+                      client-id: '0'
+                      mac: '50:50:50:50:50:50'
+                      mode: 802.11ac
+                      band: 5 GHz
+                      channel: '36'
+                      channel-bandwidth: '80'
+                      data-security: none
+                      rx-rate: '175'
+                      rssi: '11'
+                      assoc-time: 00:11:43
+                      lastupdated: 1658194642863
+                      vdevice-dataKey: 169.254.10.9
+                    - vdevice-name: vm2
+                      vdevice-host-name: 169.254.10.9
+                      vap: vap0
+                      client-id: '1'
+                      mac: '50:50:50:50:50:53'
+                      mode: 802.11ac
+                      band: 5 GHz
+                      channel: '36'
+                      channel-bandwidth: '80'
+                      data-security: none
+                      rx-rate: '175'
+                      rssi: '11'
+                      assoc-time: 00:11:43
+                      lastupdated: 1658194642863
+                      vdevice-dataKey: 169.254.10.9
+                    - vdevice-name: vm2
+                      vdevice-host-name: 169.254.10.9
+                      vap: vap0
+                      client-id: '2'
+                      mac: '50:50:50:50:50:56'
+                      mode: 802.11ac
+                      band: 5 GHz
+                      channel: '36'
+                      channel-bandwidth: '80'
+                      data-security: none
+                      rx-rate: '175'
+                      rssi: '11'
+                      assoc-time: 00:11:43
+                      lastupdated: 1658194642863
+                      vdevice-dataKey: 169.254.10.9
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write
+  /device/wlan/interfaces:
+    get:
+      tags:
+      - Real-Time Monitoring - WLAN
+      description: Get WLAN interface from device
+      operationId: getWLANInterfaces
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                WLAN interface:
+                  description: WLAN interface
+                  value:
+                    data:
+                    - vdevice-name: vm2
+                      vdevice-host-name: 169.254.10.9
+                      vap: vap0
+                      ssid: tb31_pm6_5ghz_vap0
+                      bssid: 80:b7:09:08:b7:6a
+                      data-security: wpa/wpa2-enterprise
+                      mgmt-security: optional
+                      band: 5 GHz
+                      mode: 802.11ac
+                      description: '-'
+                      bit-rate: '1300'
+                      tx-power: '25'
+                      admin-status: Up
+                      oper-status: Up
+                      max-clients: '50'
+                      num-clients: '8'
+                      lastupdated: 0
+                      vdevice-dataKey: 169.254.10.9
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write
+  /device/wlan/radios:
+    get:
+      tags:
+      - Real-Time Monitoring - WLAN
+      description: Get WLAN Radios from device
+      operationId: getWLANRadios
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                WLAN Radios:
+                  description: WLAN Radios
+                  value:
+                    data:
+                    - vdevice-name: 169.254.10.9
+                      vdevice-host-name: vm2
+                      vdevice-dataKey: 169.254.10.9
+                      radio-name: wifi0
+                      mode: 802.11ac
+                      band: 5 GHz
+                      mac: 80:b7:09:08:b7:6a
+                      country: United States
+                      channel: '36'
+                      channel-bandwidth: '80'
+                      frequency: '5180'
+                      guard-interval: '400'
+                      vaps: '4'
+                      lastupdated: 1658194642863
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write
+  /device/wlan/radius:
+    get:
+      tags:
+      - Real-Time Monitoring - WLAN
+      description: Get WLAN RADIUS authentication from device
+      operationId: getWLANRadius
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                WLAN RADIUS authentication:
+                  description: WLAN RADIUS authentication
+                  value:
+                    data:
+                    - vdevice-name: 169.254.10.9
+                      vdevice-host-name: vm2
+                      vap-ifname: vap1
+                      preference: '-'
+                      ip-address: 10.20.24.15
+                      vpn-id: '1'
+                      priority: '0'
+                      source-interface: '-'
+                      source-address: '-'
+                      tag: tag_dummy1
+                      vdevice-dataKey: 169.254.10.9
+                      auth-port: '1812'
+                      auth-active: 'true'
+                      auth-rtt: '0'
+                      auth-requests: '0'
+                      auth-retrans: '0'
+                      auth-accepts: '0'
+                      auth-rejects: '0'
+                      auth-challenges: '0'
+                      auth-mal-resp: '0'
+                      auth-bad-auth: '0'
+                      auth-pend-reqs: '0'
+                      auth-timeouts: '0'
+                      auth-unk-types: '0'
+                      auth-pkts-drop: '0'
+                      acct-port: '0'
+                      acct-active: 'false'
+                      acct-rtt: '0'
+                      acct-requests: '0'
+                      acct-retrans: '0'
+                      acct-responses: '0'
+                      acct-mal-resp: '0'
+                      acct-bad-auth: '0'
+                      acct-pend-reqs: '0'
+                      acct-timeouts: '0'
+                      acct-unk-types: '0'
+                      acct-pkts-drop: '0'
+                      lastupdated: 1658194642863
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write

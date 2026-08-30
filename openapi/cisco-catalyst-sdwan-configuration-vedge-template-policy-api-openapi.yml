@@ -1,0 +1,341 @@
+openapi: 3.2.0
+info:
+  title: UX 1.0 Configuration Configuration - vEdge Template Policy API
+  description: "Configuration of UX 1.0 device and policy.\nIncludes API operations for the following:\n  Managing original SD-WAN device configurations and policy configurations\n  Device templates and feature templates"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Configuration - vEdge Template Policy
+paths:
+  /template/policy/vedge:
+    post:
+      tags:
+      - Configuration - vEdge Template Policy
+      description: Create template
+      operationId: createVEdgeTemplate
+      requestBody:
+        description: Template policy
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Template policy:
+                description: Template policy
+                value:
+                  policyDescription: Demo
+                  policyType: feature
+                  policyName: demo-policy
+                  policyDefinition:
+                    assembly:
+                    - definitionId: b628d664-d4ec-428f-831c-aff2b688c54c
+                      type: vedgeRoute
+                    - definitionId: e4b25c74-f594-49db-b78b-61bbb41464ba
+                      type: acl
+                    settings:
+                      appVisibility: true
+                      logFrequency: 60
+                  isPolicyActivated: false
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Policy Id:
+                  description: Policy Id
+                  value:
+                    policyId: f8efb9ed-7524-41ff-aa12-1b6635087ce1
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    get:
+      tags:
+      - Configuration - vEdge Template Policy
+      description: Get policy details
+      operationId: generatePolicyTemplateList
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Policy template:
+                  description: Policy template
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/policy/vedge/definition/{policyId}:
+    get:
+      tags:
+      - Configuration - vEdge Template Policy
+      description: Get template
+      operationId: getVEdgeTemplate
+      parameters:
+      - name: policyId
+        in: path
+        description: Policy Id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Policy template:
+                  description: Policy template
+                  value:
+                    data:
+                    - mastersAttached: 0
+                      lastUpdatedBy: admin
+                      policyName: AppVisibility
+                      policyDefinition: "policy\n app-visibility\n flow-visibility\n!"
+                      policyDefinitionEdit: "policy\n app-visibility\n flow-visibility\n!"
+                      createdOn: 1505676829880
+                      policyDescription: Application Visibility Only
+                      '@rid': 481
+                      policyId: 0b860b3a-9446-4c19-86f4-49699f4ed2c7
+                      createdBy: admin
+                      devicesAttached: 0
+                      lastUpdatedOn: 1505676829880
+                      policyType: cli
+                    - mastersAttached: 1
+                      lastUpdatedBy: admin
+                      policyName: BaselinePolicy
+                      policyDefinition:
+                        assembly:
+                        - definitionId: 48a7a27a-54e9-443b-a254-cc87ef13f3f5
+                          type: qosMap
+                        - definitionId: dfe3891d-ee1f-44e1-ba84-caa2e5e9f128
+                          type: acl
+                        - definitionId: 7bdedee2-f87d-4f26-855b-4338b14716a1
+                          type: acl
+                        - definitionId: e4b25c74-f594-49db-b78b-61bbb41464ba
+                          type: acl
+                        - definitionId: b628d664-d4ec-428f-831c-aff2b688c54c
+                          type: vedgeRoute
+                        settings:
+                          appVisibility: true
+                          cloudQos: true
+                          cloudQosServiceSide: true
+                          flowVisibility: true
+                          logFrequency: 10
+                      policyDefinitionEdit:
+                        assembly:
+                        - definitionId: 48a7a27a-54e9-443b-a254-cc87ef13f3f5
+                          type: qosMap
+                        - definitionId: dfe3891d-ee1f-44e1-ba84-caa2e5e9f128
+                          type: acl
+                        - definitionId: 7bdedee2-f87d-4f26-855b-4338b14716a1
+                          type: acl
+                        - definitionId: e4b25c74-f594-49db-b78b-61bbb41464ba
+                          type: acl
+                        - definitionId: b628d664-d4ec-428f-831c-aff2b688c54c
+                          type: vedgeRoute
+                        settings:
+                          appVisibility: true
+                          cloudQos: true
+                          cloudQosServiceSide: true
+                          flowVisibility: true
+                          logFrequency: 10
+                      createdOn: 1548341101877
+                      policyDescription: Baseline dCloud Policy for all WAN Edge
+                      '@rid': 2095
+                      policyId: f73b285f-72eb-4f6d-865f-eae0e453bd8e
+                      createdBy: admin
+                      devicesAttached: 2
+                      policyType: feature
+                      lastUpdatedOn: 1548341101877
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/policy/vedge/devices:
+    get:
+      tags:
+      - Configuration - vEdge Template Policy
+      description: Get device list
+      operationId: getVEdgePolicyDeviceList
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Device list:
+                  description: Device list
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/policy/vedge/devices/{policyId}:
+    get:
+      tags:
+      - Configuration - vEdge Template Policy
+      description: Get device list by policy
+      operationId: getDeviceListByPolicy
+      parameters:
+      - name: policyId
+        in: path
+        description: Policy Id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Device list:
+                  description: Device list
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/policy/vedge/{policyId}:
+    put:
+      tags:
+      - Configuration - vEdge Template Policy
+      description: Edit template
+      operationId: editVEdgeTemplate
+      parameters:
+      - name: policyId
+        in: path
+        description: Policy Id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Template policy
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Template policy:
+                description: Template policy
+                value: "{\n   \"policyId\":\"8715a21d-9367-47ea-9bc6-e25163ed9513\",\n   \"policyState\":\"edit\",\n   \"mastersAttached\":2,\n   \"lastUpdatedBy\":\"admin\",\n   \"policyName\":\"LocalizedPolicyBaseline\",\n   \"policyDefinition\": \"\"\n   \"policyDefinitionEdit\":\"\"\n   \"createdOn\":1548015105326,\n   \"policyDescription\":\"Baseline Localized Policiy for dcloud\",\n   \"@rid\":483,\n   \"createdBy\":\"admin\",\n   \"devicesAttached\":2,\n   \"policyType\":\"cli\",\n   \"lastUpdatedOn\":1548015105326\n}"
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Template policy:
+                  description: Template policy
+                  value:
+                    masterTemplatesAffected: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+      - Configuration - vEdge Template Policy
+      description: Delete template
+      operationId: deleteVEdgeTemplate
+      parameters:
+      - name: policyId
+        in: path
+        description: Policy Id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/policy/vedge/{resourceGroupName}/{policyId}:
+    post:
+      tags:
+      - Configuration - vEdge Template Policy
+      description: Change policy resource group
+      operationId: changePolicyResourceGroup
+      parameters:
+      - name: policyId
+        in: path
+        description: Policy Id
+        required: true
+        schema:
+          type: string
+      - name: resourceGroupName
+        in: path
+        description: Resrouce group name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

@@ -1,0 +1,309 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - Sslproxy API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - Sslproxy
+paths:
+  /device/sslproxy/statistics:
+    get:
+      tags:
+      - Real-Time Monitoring - Sslproxy
+      description: Get ssl proxy statistics from device
+      operationId: getSslProxyStatistics
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Ssl proxy statistics:
+                  description: Ssl proxy statistics
+                  value:
+                    data:
+                    - exception: '0'
+                      app-ocsp-req-int-error: '0'
+                      decrypt-fail-mode: '0'
+                      ps-pkt-rec-from-client: '0'
+                      tot-client-cert-val-req: '0'
+                      c2s-fin-rec-from-sc: '0'
+                      tot-req-tls1-1-flows: '0'
+                      ocsp-stap-unknown-resp: '0'
+                      tot-failed-renego: '0'
+                      s2c-fin-rec: '0'
+                      pc-pkt-rec-from-server: '0'
+                      s2c-cn-rec: '0'
+                      c2s-fin-rec: '0'
+                      tot-client-cert-untrusted: '0'
+                      c2s-cn-rec-from-sc: '0'
+                      s2c-cn-rec-from-sc: '0'
+                      tot-ssl-renego: '0'
+                      s2c-fin-rec-from-sc: '0'
+                      drop-mempool-get-fail: '0'
+                      drop-load-key-packet-fail: '0'
+                      nodecrypt-unsup-cipher: '0'
+                      max-conc-non-proxied-conn: '0'
+                      pc-clr-pkt-rec-from-sc: '0'
+                      c2s-rst-generated: '0'
+                      pc-pkt-sent-to-server: '0'
+                      che-bypass: '0'
+                      s2c-rst-rec: '0'
+                      c2s-rst-rec: '0'
+                      che-pushdown: '0'
+                      client-ocsp-res: '0'
+                      ocsp-stap-reqs: '0'
+                      tot-server-cert-untrusted: '0'
+                      alert-genrtd-c2s: '0'
+                      vdevice-name: 169.254.10.12
+                      alert-genrtd-s2c: '0'
+                      pc-rst-rec-from-sc: '0'
+                      c2s-cn-sent-to-sc: '0'
+                      lwssl-send-msg-toism-fail: '0'
+                      c2s-rst-rec-from-sc: '0'
+                      c2s-fin-sent: '0'
+                      ps-clr-pkt-to-client: '0'
+                      s2c-rst-rec-from-sc: '0'
+                      client-ocsp-reqs: '0'
+                      tot-ssl-resump-ses-tkt: '0'
+                      s2c-rst-sent: '0'
+                      drop-null-ch-buf: '0'
+                      non-proxied-conn: '0'
+                      hs-unsupported: '0'
+                      app-ocsp-good: '0'
+                      s2c-fin-rec-during-hs: '0'
+                      drop-inv-evt-in-fsm-state: '0'
+                      drop-unable-to-get-pr-cert: '0'
+                      lastupdated: 1645776582193
+                      ism-sem-post-failed: '0'
+                      s2c-fin-rec-after-hs: '0'
+                      app-ocsp-res: '0'
+                      c2s-rst-sent-to-sc: '0'
+                      s2c-rst-sent-to-sc: '0'
+                      app-ocsp-unknown: '0'
+                      c2s-cn-rec: '0'
+                      ism-flow-create-fail: '0'
+                      c2s-cn-sent: '0'
+                      s2c-cn-sent: '0'
+                      ps-clr-pkt-rec-from-sc: '0'
+                      tot-client-cert-val-succes: '0'
+                      pc-pkt-rec-from-sc: '0'
+                      rm-session-alloc-success: '0'
+                      unsup-ssl-version: '0'
+                      ps-pkt-sent-to-sc: '0'
+                      alert-recvd-c2s: '0'
+                      alert-recvd-s2c: '0'
+                      endpoint-alert: '0'
+                      mem-alloc-fail: '0'
+                      ocsp-stap-valid-resp: '0'
+                      client-ocsp-revoked: '0'
+                      min-tls-version: '0'
+                      ssl-parse-failure: '0'
+                      s2c-fin-rec-non-ssl: '0'
+                      ism-flow-create: '0'
+                      rm-session-alloc-failures: '0'
+                      ps-lwssl-flow-delete: '0'
+                      drop-ssl-parse-abort: '0'
+                      drop-unsup-prot-vers: '0'
+                      tot-select-tls1-1-flows: '0'
+                      client-ocsp-failures: '0'
+                      pc-clr-pkt-rec-from-server: '0'
+                      pc-clr-pkt-sent-to-sc: '0'
+                      c2s-pkt-drop-deny-verdict: '0'
+                      decrypt-untrusted-cert: '0'
+                      peer-pd: '0'
+                      tot-server-cert-expired: '0'
+                      vdevice-dataKey: 169.254.10.12
+                      pc-fin-rec-from-sc: '0'
+                      drop-untrusted-cert: '0'
+                      ocsp-stap-resp: '0'
+                      tcp-close-before-hs: '0'
+                      nodecrypt-unsup-prot-vers: '0'
+                      c2s-fin-rec-non-ssl: '0'
+                      tot-select-tls1-0-flows: '0'
+                      s2c-pkt-drop-deny-verdict: '0'
+                      c2s-fin-sent-to-sc: '0'
+                      s2c-fin-sent-to-sc: '0'
+                      client-ocsp-req-int-error: '0'
+                      client-ocsp-unknown: '0'
+                      app-ocsp-timeout: '0'
+                      tot-full-ssl-hs: '0'
+                      rm-session-free-success: '0'
+                      tot-req-sslv2-flows: '0'
+                      ps-cn-sent: '0'
+                      tot-ssl-hs-completed: '0'
+                      ps-clr-pkt-sent-to-sc: '0'
+                      ism-flow-delete: '0'
+                      tot-client-cert-expired: '0'
+                      drop-unknown-status: '0'
+                      clear-conn: '0'
+                      active-non-proxied-conn: '0'
+                      pc-lwssl-flow-create: '0'
+                      che-process: '0'
+                      client-ocsp-good: '0'
+                      tot-select-tls1-2-flows: '0'
+                      tot-ssl-hs-started: '0'
+                      drop-mem-access-issue: '0'
+                      app-ocsp-failures: '0'
+                      unknown-reasons: '0'
+                      tot-ssl-resump-ses-id: '0'
+                      app-ocsp-reqs: '0'
+                      tot-conn: '0'
+                      drop-null-ssl-rec: '0'
+                      drop-ocsp-cert-verify-fail: '0'
+                      drop-de-handle-data-fail: '0'
+                      ism-fifo-enqueue-failed: '0'
+                      unsup-cipher: '0'
+                      drop-fail-mode: '0'
+                      drop-invalid-fsm-evt: '0'
+                      drop-invalid-fs-type: '0'
+                      pc-fs-mem-alloc-fail: '0'
+                      error-state: '0'
+                      tot-server-cert-val-req: '0'
+                      vdevice-host-name: vm5
+                      s2c-cn-sent-to-sc: '0'
+                      drop-invalid-ssl-rec: '0'
+                      ps-clr-pkt-rec-from-client: '0'
+                      pc-lwssl-flow-delete: '0'
+                      tot-server-cert-val-succes: '0'
+                      c2s-fin-rec-during-hs: '0'
+                      drop-ism-flow-create-fail: '0'
+                      pc-cn-sent: '0'
+                      ps-lwssl-flow-create: '0'
+                      c2s-fin-rec-after-hs: '0'
+                      drop-expired-cert: '0'
+                      drop-key-pkt-snd-fail: '0'
+                      proxied-conn: '0'
+                      drop-other-side-key-pend: '0'
+                      active-proxied-conn: '0'
+                      max-conc-proxied-conn: '0'
+                      mem-access-issue: '0'
+                      unexpected-packet: '0'
+                      tot-ssl-resump: '0'
+                      ssl-error: '0'
+                      decrypt-exp-cert: '0'
+                      ps-pkt-sent-to-client: '0'
+                      rm-session-free-failures: '0'
+                      pc-clr-pkt-to-server: '0'
+                      drop-send-ism-hs-msg-fail: '0'
+                      ocsp-stap-revoked-resp: '0'
+                      client-ocsp-timeout: '0'
+                      ps-fin-rec-from-sc: '0'
+                      tot-req-sslv3-flows: '0'
+                      drop-invalid-msg-type: '0'
+                      che-strip: '0'
+                      active-clear-conn: '0'
+                      non-ssl-traffic: '0'
+                      drop-hs-unsupported: '0'
+                      max-conc-clear-conn: '0'
+                      ps-fs-mem-alloc-fail: '0'
+                      tot-req-tls1-0-flows: '0'
+                      pc-pkt-sent-to-sc: '0'
+                      s2c-rst-generated: '0'
+                      drop-unsup-cipher: '0'
+                      ocsp-stap-resp-val-fail: '0'
+                      tot-req-tls1-3-flows: '0'
+                      decrypt-unknown-status: '0'
+                      app-ocsp-revoked: '0'
+                      s2c-fin-sent: '0'
+                      tot-ssl-fb-full-hs: '0'
+                      drop-exp-cert: '0'
+                      drop-tcp-close-before-hs: '0'
+                      ps-pkt-rec-from-sc: '0'
+                      ism-msg-mem-alloc-failed: '0'
+                      tot-req-tls1-2-flows: '0'
+                      drop-endpoint-alert: '0'
+                      drop-mem-alloc-fail: '0'
+                      tot-closed-conn: '0'
+                      c2s-rst-sent: '0'
+                      drop-nop-read-fn: '0'
+                      ps-rst-rec-from-sc: '0'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/sslproxy/status:
+    get:
+      tags:
+      - Real-Time Monitoring - Sslproxy
+      description: Get ssl proxy status from device
+      operationId: getSslProxyStatus
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Ssl proxy status:
+                  description: Ssl proxy status
+                  value:
+                    data:
+                    - failure-mode: failure-mode-action-close
+                      minimum-tls-version: tls-ver-1
+                      vdevice-name: 169.254.10.12
+                      cert-lifetime-in-days: '730'
+                      unsup-cipher-suite: unsup-mode-action-drop
+                      expired-cert: cert-valid-action-decrypt
+                      untrusted-cert: cert-valid-action-decrypt
+                      ca-tp-label: PROXY-SIGNING-CA
+                      unknown-status: cert-valid-action-drop
+                      rsa-key-mod: '2048'
+                      clear-mode: 'false'
+                      vdevice-host-name: vm5
+                      ec-key-type: ec-key-p256
+                      cert-revocation: cert-rev-none
+                      vdevice-dataKey: 169.254.10.12
+                      ca-cert-bundle: /bootflash/vmanage-admin/sslProxyDefaultCAbundle.pem
+                      lastupdated: 1645776060286
+                      unsup-protocol-version: unsup-mode-action-drop
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write

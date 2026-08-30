@@ -1,0 +1,127 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - IPv6 Neighbours API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - IPv6 Neighbours
+paths:
+  /device/ndv6:
+    get:
+      tags:
+      - Real-Time Monitoring - IPv6 Neighbours
+      description: Get IPv6 Neighbors from device (Real Time)
+      operationId: getIpv6Interface
+      parameters:
+      - name: vpn-id
+        in: query
+        description: VPN Id
+        schema:
+          type: string
+          enum:
+          - '0'
+          - '512'
+      - name: if-name
+        in: query
+        description: Interface name
+        schema:
+          type: string
+          enum:
+          - ge0/0
+          - ge0/1
+          - ge0/2
+          - ge0/3
+          - ge0/4
+          - ge0/5
+          - ge0/6
+          - ge0/7
+          - system
+          - eth0
+      - name: mac
+        in: query
+        description: Mac address
+        schema:
+          type: string
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                IPv6 Neighbors:
+                  description: IPv6 Neighbors
+                  value:
+                    data:
+                    - if-name: ge0/1
+                      vdevice-dataKey: 169.254.10.10-0-ge0/1
+                      vdevice-name: 169.254.10.10
+                      ip: fe80::5054:ff:fea1:4f47
+                      lastupdated: 1643172402186
+                      state: static
+                      vpn-id: '0'
+                      uptime-date: 1642659240000
+                      vdevice-host-name: vm3
+                      mac: 52:54:00:a1:4f:47
+                      uptime: '5:22:32:19'
+                    - if-name: ge0/1
+                      idle-timer: 0:00:00:00
+                      vdevice-dataKey: 169.254.10.10-0-ge0/1
+                      vdevice-name: 169.254.10.10
+                      ip: fe80::5054:ff:fecf:dad8
+                      lastupdated: 1643172402186
+                      state: dynamic
+                      vpn-id: '0'
+                      uptime-date: 1643048160000
+                      vdevice-host-name: vm3
+                      mac: 52:54:00:cf:da:d8
+                      uptime: '1:10:30:01'
+                    - if-name: ge0/1
+                      idle-timer: 0:00:00:00
+                      vdevice-dataKey: 169.254.10.10-0-ge0/1
+                      vdevice-name: 169.254.10.10
+                      ip: fe80::fc54:ff:fea1:4f47
+                      lastupdated: 1643172402186
+                      state: dynamic
+                      vpn-id: '0'
+                      uptime-date: 1642670640000
+                      vdevice-host-name: vm3
+                      mac: fe:54:00:a1:4f:47
+                      uptime: '5:19:21:53'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Interface-read,Interface-write

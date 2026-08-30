@@ -1,0 +1,174 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - TCP Optimization API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - TCP Optimization
+paths:
+  /device/tcpopt/activeflows:
+    get:
+      tags:
+      - Real-Time Monitoring - TCP Optimization
+      description: Get TCP optimized active flows from device (Real Time)
+      operationId: getActiveTCPFlows
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                TCP optimized active flow:
+                  description: TCP optimized active flow
+                  value:
+                    data:
+                    - vdevice-name: 172.16.254.1
+                      vdevice-host-name: vm2
+                      vpn-id: '1'
+                      src-ip: 10.20.24.17
+                      dest-ip: 10.20.25.18
+                      src-port: 53723
+                      dest-port: 22
+                      start-time: Fri Mar 17 13:21:02 2022
+                      egress-intf-name: loop0.3
+                      ingress-intf-name: ge0_4
+                      tx-bytes: '153'
+                      rx-bytes: '64'
+                      tcp-state: In progress
+                      unopt-reason: '-'
+                      delete-reason: '-'
+                      proxy-identity: Client-Proxy
+                      lastupdated: 0
+                      vdevice-dataKey: 172.16.254.1
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write
+  /device/tcpopt/expiredflows:
+    get:
+      tags:
+      - Real-Time Monitoring - TCP Optimization
+      description: Get TCP optimized expired flows from device (Real Time)
+      operationId: getExpiredTCPFlows
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                TCP optimized expired flow:
+                  description: TCP optimized expired flow
+                  value:
+                    data:
+                    - vdevice-name: 169.254.10.9
+                      vdevice-host-name: vm2
+                      vpn-id: '1'
+                      src-ip: 10.20.24.17
+                      dest-ip: 10.20.25.18
+                      src-port: 53722
+                      dest-port: 22
+                      start-time: Fri Mar 17 13:16:26 2022
+                      end-time: Fri Mar 17 13:17:51 2022
+                      tx-bytes: '4113'
+                      rx-bytes: '4333'
+                      tcp-state: Optimized
+                      unopt-reason: '-'
+                      proxy-identity: Client-Proxy
+                      delete-reason: Closed
+                      vdevice-dataKey: 169.254.10.9
+                      lastupdated: 1659327030348
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write
+  /device/tcpopt/summary:
+    get:
+      tags:
+      - Real-Time Monitoring - TCP Optimization
+      description: Get TCP optimization summary from device (Real Time)
+      operationId: getTCPSummary
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                TCP optimization summary:
+                  description: TCP optimization summary
+                  value:
+                    data:
+                    - flows-expired: '0'
+                      vdevice-dataKey: 169.254.10.10
+                      vdevice-name: 169.254.10.10
+                      flows-optimized: '0'
+                      lastupdated: 1644816147644
+                      flows-passthrough: '0'
+                      vdevice-host-name: vm3
+                      flows-in-progress: '0'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write

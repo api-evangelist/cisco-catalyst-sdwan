@@ -1,0 +1,283 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - QoS API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - QoS
+paths:
+  /device/qos/session/details:
+    get:
+      tags:
+      - Real-Time Monitoring - QoS
+      description: Get per-tunnel QoS session detailed info
+      operationId: getPerTunnelQosDetailedInfo
+      parameters:
+      - name: deviceId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: local-system-ip
+        in: query
+        schema:
+          type: string
+      - name: local-color
+        in: query
+        schema:
+          type: string
+      - name: remote-system-ip
+        in: query
+        schema:
+          type: string
+      - name: remote-color
+        in: query
+        schema:
+          type: string
+      - name: proto
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        classifier-entry-name:
+                          type: string
+                          example: Queue1
+                        drop-bytes:
+                          type: number
+                          example: 0
+                        drop-pkts:
+                          type: number
+                          example: 0
+                        lastupdated:
+                          type: number
+                          example: 1728710934571
+                        local-color:
+                          type: string
+                          example: lte
+                        local-system-ip:
+                          type: string
+                          example: 172.16.255.15
+                        post-policy-bytes:
+                          type: number
+                          example: 0
+                        post-policy-pkts:
+                          type: number
+                          example: 0
+                        pre-policy-bytes:
+                          type: number
+                          example: 0
+                        pre-policy-pkts:
+                          type: number
+                          example: 0
+                        proto:
+                          type: string
+                          example: ipsec
+                        remote-color:
+                          type: string
+                          example: lte
+                        remote-system-ip:
+                          type: string
+                          example: 172.16.255.16
+                        tunnel-endpoint:
+                          type: string
+                          example: 172.16.255.15_lte_172.16.255.16_lte_ipsec
+                        vdevice-dataKey:
+                          type: string
+                          example: 172.16.255.15-172.16.255.15_lte_172.16.255.16_lte_ipsec-Queue1
+                        vdevice-host-name:
+                          type: string
+                          example: vm5
+                        vdevice-name:
+                          type: string
+                          example: 172.16.255.15
+                      $$ref: '#/components/schemas/QosDetailedObject'
+                $$ref: '#/components/schemas/QosDetailedResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /device/qos/session/summary:
+    get:
+      tags:
+      - Real-Time Monitoring - QoS
+      description: Get per-tunnel QoS sessions summary info
+      operationId: getPerTunnelQosSummary
+      parameters:
+      - name: deviceId
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        drop-bytes:
+                          type: number
+                          example: 0
+                        drop-pkts:
+                          type: number
+                          example: 0
+                        lastupdated:
+                          type: number
+                          example: 1728710934571
+                        post-policy-bytes:
+                          type: number
+                          example: 1133915
+                        post-policy-pkts:
+                          type: number
+                          example: 3159
+                        pre-policy-bytes:
+                          type: number
+                          example: 1133915
+                        pre-policy-pkts:
+                          type: number
+                          example: 3159
+                        tunnel-endpoint:
+                          type: string
+                          example: 172.16.255.15_lte_172.16.255.16_lte_ipsec
+                        vdevice-dataKey:
+                          type: string
+                          example: 172.16.255.15-172.16.255.15_lte_172.16.255.16_lte_ipsec
+                        vdevice-host-name:
+                          type: string
+                          example: vm5
+                        vdevice-name:
+                          type: string
+                          example: 172.16.255.15
+                      $$ref: '#/components/schemas/QosSummaryObject'
+                $$ref: '#/components/schemas/QosSummaryResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+    post:
+      tags:
+      - Real-Time Monitoring - QoS
+      description: Get per-tunnel QoS filtered sessions summary info
+      operationId: getPerTunnelQosSummaryPost
+      parameters:
+      - name: deviceId
+        in: query
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Required sessions
+        content:
+          application/json:
+            schema:
+              type: array
+            examples:
+              Sessions:
+                description: Sessions
+                value:
+                - local-system-ip: 172.16.255.15
+                  local-color: lte
+                  remote-system-ip: 10.2.1.83
+                  remote-color: gold
+                  proto: ipsec
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        drop-bytes:
+                          type: number
+                          example: 0
+                        drop-pkts:
+                          type: number
+                          example: 0
+                        lastupdated:
+                          type: number
+                          example: 1728710934571
+                        post-policy-bytes:
+                          type: number
+                          example: 1133915
+                        post-policy-pkts:
+                          type: number
+                          example: 3159
+                        pre-policy-bytes:
+                          type: number
+                          example: 1133915
+                        pre-policy-pkts:
+                          type: number
+                          example: 3159
+                        tunnel-endpoint:
+                          type: string
+                          example: 172.16.255.15_lte_172.16.255.16_lte_ipsec
+                        vdevice-dataKey:
+                          type: string
+                          example: 172.16.255.15-172.16.255.15_lte_172.16.255.16_lte_ipsec
+                        vdevice-host-name:
+                          type: string
+                          example: vm5
+                        vdevice-name:
+                          type: string
+                          example: 172.16.255.15
+                      $$ref: '#/components/schemas/QosSummaryObject'
+                $$ref: '#/components/schemas/QosSummaryResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,RBAC VPN-read,RBAC VPN-write

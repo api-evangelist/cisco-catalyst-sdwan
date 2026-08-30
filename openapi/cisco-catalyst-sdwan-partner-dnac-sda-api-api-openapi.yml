@@ -1,0 +1,636 @@
+openapi: 3.2.0
+info:
+  title: Partner Integrations Partner - DNAC SDA API
+  description: Includes API operations for partner integrations, such as Webex, Identity Services Engine (ISE), Secure Access, and more
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Partner - DNAC SDA API
+paths:
+  /partner/dnac/sda/config/{partnerId}:
+    post:
+      tags:
+      - Partner - DNAC SDA API
+      description: Create SDA enabled device
+      operationId: createSDAConfig
+      parameters:
+      - name: partnerId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Device SDA configuration
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      deviceConfig:
+                        type: string
+                        example: PHJwYyBtZXNzYWdlLWlkPSIxMDEiIHhtbG5zPSJ1cm46aWV0ZjpwYXJhbXM6eG1sOm5zOm5ldGNvbmY6YmFzZToxLjAiPg0KPGVkaXQtY29uZmlnPg0KPHRhcmdldD4NCjxjYW5kaWRhdGUvPg0KPC90YXJnZXQ+DQo8Y29uZmlnPjxuYXRpdmUgeG1sbnM9Imh0dHA6Ly9jaXNjby5jb20vbnMveWFuZy9DaXNjby1JT1MtWEUtbmF0aXZlIj4KICAgIDxzbm1wLXNlcnZlcj4KCQkJICAgICAgICAgIDxjb21tdW5pdHkgeG1sbnM9Imh0dHA6Ly9jaXNjby5jb20vbnMveWFuZy9DaXNjby1JT1MtWEUtc25tcCI+CiAgICAgICAgICAgIDxuYW1lPnByaXZhdGU8L25hbWU+CiAgICAgICAgICAgIDxSVy8+CiAgICAgICAgICA8L2NvbW11bml0eT4KICAgICAgICAgIDxjb21tdW5pdHktY29uZmlnIHhtbG5zPSJodHRwOi8vY2lzY28uY29tL25zL3lhbmcvQ2lzY28tSU9TLVhFLXNubXAiPgogICAgICAgICAgICA8bmFtZT5wcml2YXRlPC9uYW1lPgoJCQk8cGVybWlzc2lvbj5ydzwvcGVybWlzc2lvbj4KICAgICAgICAgIDwvY29tbXVuaXR5LWNvbmZpZz4KICAgICAgICAJCSAgICAgICAgICA8Y29tbXVuaXR5IHhtbG5zPSJodHRwOi8vY2lzY28uY29tL25zL3lhbmcvQ2lzY28tSU9TLVhFLXNubXAiPgogICAgICAgICAgICA8bmFtZT5wdWJsaWM8L25hbWU+CiAgICAgICAgICAgIDxSTy8+CiAgICAgICAgICA8L2NvbW11bml0eT4KICAgICAgICAgIDxjb21tdW5pdHktY29uZmlnIHhtbG5zPSJodHRwOi8vY2lzY28uY29tL25zL3lhbmcvQ2lzY28tSU9TLVhFLXNubXAiPgogICAgICAgICAgICA8bmFtZT5wdWJsaWM8L25hbWU+CiAgICAgICAgICAgIDxwZXJtaXNzaW9uPnJvPC9wZXJtaXNzaW9uPgogICAgICAgICAgPC9jb21tdW5pdHktY29uZmlnPgoJCQkJPC9zbm1wLXNlcnZlcj4KCTwvbmF0aXZlPjwvY29uZmlnPg0KPC9lZGl0LWNvbmZpZz4NCjwvcnBjPg==
+                      deviceId:
+                        type: string
+                        example: C8K-cfb84064-12e9-4f7c-b9d9-bf78ce4dfb5f
+                    $$ref: '#/components/schemas/DeviceConfig'
+                header:
+                  type: object
+                  properties:
+                    generatedOn:
+                      type: integer
+                      format: int64
+                      example: 1649645769219
+                  $$ref: '#/components/schemas/VpnListResHeader'
+              $$ref: '#/components/schemas/SdaConfigRequest'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: push_template_configuration-640b1326-b96e-11ec-8422-0242ac120002
+                $$ref: '#/components/schemas/SdaDeviceConfigRes'
+              examples:
+                Device template push Id:
+                  description: Device template push Id
+                  value:
+                    id: push_template_configuration-640b1326-b96e-11ec-8422-0242ac120002
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy Configuration-write,Integration Management-write
+  /partner/dnac/sda/device/{partnerId}:
+    get:
+      tags:
+      - Partner - DNAC SDA API
+      description: Get SDA enabled devices
+      operationId: getSDAEnabledDevices
+      parameters:
+      - name: partnerId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        chassis-serial-number:
+                          type: string
+                          example: SSI130300YK
+                        configuredAaaUser:
+                          type: array
+                          items:
+                            type: string
+                        device-model:
+                          type: string
+                          example: C8000v
+                        device-os:
+                          type: string
+                          example: next
+                        device-type:
+                          type: string
+                          example: vedge
+                        deviceId:
+                          type: string
+                          example: C8K-cfb84064-12e9-4f7c-b9d9-bf78ce4dfb5f
+                        devicesAttached:
+                          type: integer
+                          format: int32
+                          example: 0
+                        discoveredDeviceInterfaces:
+                          type: array
+                          items:
+                            type: string
+                        host-name:
+                          type: string
+                          example: vm5
+                        loopback:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              interfaceIP:
+                                type: string
+                                example: 127.0.0.1
+                              interfaceName:
+                                type: string
+                                example: Loopback0
+                            $$ref: '#/components/schemas/Loopback'
+                        personality:
+                          type: string
+                          example: vedge
+                        platform:
+                          type: string
+                          example: x86_64
+                        reachability:
+                          type: string
+                          example: reachable
+                          enum:
+                          - reachable
+                          - unreachable
+                        registrationDate:
+                          type: integer
+                          format: int64
+                          example: 1590186370340
+                        serialNumber:
+                          type: string
+                          example: '12345712'
+                        site-id:
+                          type: string
+                          example: '500'
+                        state:
+                          type: string
+                          example: green
+                        status:
+                          type: string
+                          example: normal
+                          enum:
+                          - error
+                          - warning
+                          - normal
+                          - new
+                        system-ip:
+                          type: string
+                          example: 172.16.255.15
+                        templateStatus:
+                          type: string
+                          example: Success
+                        uuid:
+                          type: string
+                          example: C8K-cfb84064-12e9-4f7c-b9d9-bf78ce4dfb5f
+                        validity:
+                          type: string
+                          example: valid
+                          enum:
+                          - invalid
+                          - staging
+                          - valid
+                          - prestaging
+                        version:
+                          type: string
+                          example: 17.06.01.0.1422
+                        wanInterfaces:
+                          type: array
+                          items:
+                            type: string
+                      $$ref: '#/components/schemas/Device'
+                  header:
+                    type: object
+                    properties:
+                      generatedOn:
+                        type: integer
+                        format: int64
+                        example: 1649645769219
+                    $$ref: '#/components/schemas/VpnListResHeader'
+                $$ref: '#/components/schemas/SdaDevicesRes'
+              examples:
+                Devices list:
+                  description: Devices list
+                  value:
+                    header:
+                      generatedOn: 1649645769219
+                    data:
+                    - uuid: C8K-cfb84064-12e9-4f7c-b9d9-bf78ce4dfb5f
+                      deviceId: C8K-cfb84064-12e9-4f7c-b9d9-bf78ce4dfb5f
+                      reachability: reachable
+                      status: normal
+                      personality: vedge
+                      device-type: normal
+                      device-model: C8000v
+                      version: 17.06.01.0.1422
+                      site-id: '500'
+                      platform: x86_64
+                      device-os: next
+                      state: green
+                      chassis-serial-number: SSI130300YK
+                      host-name: vm5
+                      system-ip: 172.16.255.15
+                      serialNumber: '12345712'
+                      templateStatus: Success
+                      validity: valid
+                      configuredAaaUser:
+                      - admin
+                      wanInterfaces:
+                      - GigabitEthernet1
+                      discoveredDeviceInterfaces:
+                      - GigabitEthernet8
+                      - GigabitEthernet1
+                      - GigabitEthernet2
+                      registrationDate: 1632900123277
+                      devicesAttached: 0
+                      loopback: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Deploy-read,Template Deploy-write,Policy Configuration-read,Policy Configuration-write,Policy Deploy-read,Policy Deploy-write,Integration Management-read,Integration Management-write
+  /partner/dnac/sda/device/{partnerId}/{uuid}:
+    get:
+      tags:
+      - Partner - DNAC SDA API
+      description: Get SDA enabled devices detail
+      operationId: getDeviceDetails
+      parameters:
+      - name: partnerId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        chassis-serial-number:
+                          type: string
+                          example: SSI130300YK
+                        configuredAaaUser:
+                          type: array
+                          items:
+                            type: string
+                        device-model:
+                          type: string
+                          example: C8000v
+                        device-os:
+                          type: string
+                          example: next
+                        device-type:
+                          type: string
+                          example: vedge
+                        deviceId:
+                          type: string
+                          example: C8K-cfb84064-12e9-4f7c-b9d9-bf78ce4dfb5f
+                        devicesAttached:
+                          type: integer
+                          format: int32
+                          example: 0
+                        discoveredDeviceInterfaces:
+                          type: array
+                          items:
+                            type: string
+                        host-name:
+                          type: string
+                          example: vm5
+                        loopback:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              interfaceIP:
+                                type: string
+                                example: 127.0.0.1
+                              interfaceName:
+                                type: string
+                                example: Loopback0
+                            $$ref: '#/components/schemas/Loopback'
+                        personality:
+                          type: string
+                          example: vedge
+                        platform:
+                          type: string
+                          example: x86_64
+                        reachability:
+                          type: string
+                          example: reachable
+                          enum:
+                          - reachable
+                          - unreachable
+                        registrationDate:
+                          type: integer
+                          format: int64
+                          example: 1590186370340
+                        serialNumber:
+                          type: string
+                          example: '12345712'
+                        site-id:
+                          type: string
+                          example: '500'
+                        state:
+                          type: string
+                          example: green
+                        status:
+                          type: string
+                          example: normal
+                          enum:
+                          - error
+                          - warning
+                          - normal
+                          - new
+                        system-ip:
+                          type: string
+                          example: 172.16.255.15
+                        templateStatus:
+                          type: string
+                          example: Success
+                        uuid:
+                          type: string
+                          example: C8K-cfb84064-12e9-4f7c-b9d9-bf78ce4dfb5f
+                        validity:
+                          type: string
+                          example: valid
+                          enum:
+                          - invalid
+                          - staging
+                          - valid
+                          - prestaging
+                        version:
+                          type: string
+                          example: 17.06.01.0.1422
+                        wanInterfaces:
+                          type: array
+                          items:
+                            type: string
+                      $$ref: '#/components/schemas/Device'
+                  header:
+                    type: object
+                    properties:
+                      generatedOn:
+                        type: integer
+                        format: int64
+                        example: 1649645769219
+                    $$ref: '#/components/schemas/VpnListResHeader'
+                $$ref: '#/components/schemas/SdaDevicesRes'
+              examples:
+                Device detail list:
+                  description: Device detail list
+                  value:
+                    header:
+                      generatedOn: 1649645769219
+                    data:
+                    - uuid: C8K-cfb84064-12e9-4f7c-b9d9-bf78ce4dfb5f
+                      deviceId: C8K-cfb84064-12e9-4f7c-b9d9-bf78ce4dfb5f
+                      reachability: reachable
+                      status: normal
+                      personality: vedge
+                      device-type: normal
+                      device-model: C8000v
+                      version: 17.06.01.0.1422
+                      site-id: '500'
+                      platform: x86_64
+                      device-os: next
+                      state: green
+                      chassis-serial-number: SSI130300YK
+                      host-name: vm5
+                      system-ip: 172.16.255.15
+                      serialNumber: '12345712'
+                      templateStatus: Success
+                      validity: valid
+                      configuredAaaUser:
+                      - admin
+                      wanInterfaces:
+                      - GigabitEthernet1
+                      discoveredDeviceInterfaces:
+                      - GigabitEthernet8
+                      - GigabitEthernet1
+                      - GigabitEthernet2
+                      registrationDate: 1632900123277
+                      devicesAttached: 0
+                      loopback: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Deploy-read,Template Deploy-write,Policy Configuration-read,Policy Configuration-write,Policy Deploy-read,Policy Deploy-write,Integration Management-read,Integration Management-write
+  /partner/dnac/sda/netconfconfig/{partnerId}:
+    post:
+      tags:
+      - Partner - DNAC SDA API
+      description: Create SDA enabled device from Netconf
+      operationId: createSDAConfigFromNetconf
+      parameters:
+      - name: partnerId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Device SDA configuration
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      deviceConfig:
+                        type: string
+                        example: PHJwYyBtZXNzYWdlLWlkPSIxMDEiIHhtbG5zPSJ1cm46aWV0ZjpwYXJhbXM6eG1sOm5zOm5ldGNvbmY6YmFzZToxLjAiPg0KPGVkaXQtY29uZmlnPg0KPHRhcmdldD4NCjxjYW5kaWRhdGUvPg0KPC90YXJnZXQ+DQo8Y29uZmlnPjxuYXRpdmUgeG1sbnM9Imh0dHA6Ly9jaXNjby5jb20vbnMveWFuZy9DaXNjby1JT1MtWEUtbmF0aXZlIj4KICAgIDxzbm1wLXNlcnZlcj4KCQkJICAgICAgICAgIDxjb21tdW5pdHkgeG1sbnM9Imh0dHA6Ly9jaXNjby5jb20vbnMveWFuZy9DaXNjby1JT1MtWEUtc25tcCI+CiAgICAgICAgICAgIDxuYW1lPnByaXZhdGU8L25hbWU+CiAgICAgICAgICAgIDxSVy8+CiAgICAgICAgICA8L2NvbW11bml0eT4KICAgICAgICAgIDxjb21tdW5pdHktY29uZmlnIHhtbG5zPSJodHRwOi8vY2lzY28uY29tL25zL3lhbmcvQ2lzY28tSU9TLVhFLXNubXAiPgogICAgICAgICAgICA8bmFtZT5wcml2YXRlPC9uYW1lPgoJCQk8cGVybWlzc2lvbj5ydzwvcGVybWlzc2lvbj4KICAgICAgICAgIDwvY29tbXVuaXR5LWNvbmZpZz4KICAgICAgICAJCSAgICAgICAgICA8Y29tbXVuaXR5IHhtbG5zPSJodHRwOi8vY2lzY28uY29tL25zL3lhbmcvQ2lzY28tSU9TLVhFLXNubXAiPgogICAgICAgICAgICA8bmFtZT5wdWJsaWM8L25hbWU+CiAgICAgICAgICAgIDxSTy8+CiAgICAgICAgICA8L2NvbW11bml0eT4KICAgICAgICAgIDxjb21tdW5pdHktY29uZmlnIHhtbG5zPSJodHRwOi8vY2lzY28uY29tL25zL3lhbmcvQ2lzY28tSU9TLVhFLXNubXAiPgogICAgICAgICAgICA8bmFtZT5wdWJsaWM8L25hbWU+CiAgICAgICAgICAgIDxwZXJtaXNzaW9uPnJvPC9wZXJtaXNzaW9uPgogICAgICAgICAgPC9jb21tdW5pdHktY29uZmlnPgoJCQkJPC9zbm1wLXNlcnZlcj4KCTwvbmF0aXZlPjwvY29uZmlnPg0KPC9lZGl0LWNvbmZpZz4NCjwvcnBjPg==
+                      deviceId:
+                        type: string
+                        example: C8K-cfb84064-12e9-4f7c-b9d9-bf78ce4dfb5f
+                    $$ref: '#/components/schemas/DeviceConfig'
+                header:
+                  type: object
+                  properties:
+                    generatedOn:
+                      type: integer
+                      format: int64
+                      example: 1649645769219
+                  $$ref: '#/components/schemas/VpnListResHeader'
+              $$ref: '#/components/schemas/SdaConfigRequest'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: push_template_configuration-640b1326-b96e-11ec-8422-0242ac120002
+                $$ref: '#/components/schemas/SdaDeviceConfigRes'
+              examples:
+                Device template push Id:
+                  description: Device template push Id
+                  value:
+                    id: push_template_configuration-640b1326-b96e-11ec-8422-0242ac120002
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy Configuration-write,Integration Management-write
+  /partner/dnac/sda/site/{partnerId}:
+    get:
+      tags:
+      - Partner - DNAC SDA API
+      description: Get SDA Sites for Partner
+      operationId: getSitesForPartner
+      parameters:
+      - name: partnerId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        partnerId:
+                          type: string
+                          example: dnac-test
+                        sites:
+                          type: array
+                          items:
+                            type: string
+                      $$ref: '#/components/schemas/PartnerSite'
+                  header:
+                    type: object
+                    properties:
+                      generatedOn:
+                        type: integer
+                        format: int64
+                        example: 1649645769219
+                    $$ref: '#/components/schemas/VpnListResHeader'
+                $$ref: '#/components/schemas/SdaSitesRes'
+              examples:
+                Sites:
+                  description: Sites
+                  value:
+                    header:
+                      generatedOn: 1649645769219
+                    data:
+                    - partnerId: dnac-test
+                      sites:
+                      - '400'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Deploy-read,Template Deploy-write,Policy Configuration-read,Policy Configuration-write,Policy Deploy-read,Policy Deploy-write,Integration Management-read,Integration Management-write
+  /partner/dnac/sda/vpn:
+    get:
+      tags:
+      - Partner - DNAC SDA API
+      description: Get Overlay VPN list
+      operationId: getOverlayVPNList
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        vpnId:
+                          type: string
+                          example: '33'
+                        vpnType:
+                          type: string
+                          example: configuredVPN
+                      $$ref: '#/components/schemas/Vpn'
+                  header:
+                    type: object
+                    properties:
+                      generatedOn:
+                        type: integer
+                        format: int64
+                        example: 1649645769219
+                    $$ref: '#/components/schemas/VpnListResHeader'
+                $$ref: '#/components/schemas/VpnListRes'
+              examples:
+                VPN list:
+                  description: VPN list
+                  value:
+                    header:
+                      generatedOn: 1649645769219
+                    data:
+                    - vpnId: '33'
+                      vpnType: configuredVPN
+                    - vpnId: '0'
+                      vpnType: vmanageVPN
+                    - vpnId: '512'
+                      vpnType: vmanageVPN
+                    - vpnId: '65528'
+                      vpnType: vmanageVPN
+                    - vpnId: Mgmt-intf
+                      vpnType: vmanageVPN
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: DNAC SDA-read,DNAC SDA-write,Integration Management-read,Integration Management-write

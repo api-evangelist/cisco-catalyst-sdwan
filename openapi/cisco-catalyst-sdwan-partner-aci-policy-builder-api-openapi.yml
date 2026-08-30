@@ -1,0 +1,298 @@
+openapi: 3.2.0
+info:
+  title: Partner Integrations Partner - ACI Policy Builder API
+  description: Includes API operations for partner integrations, such as Webex, Identity Services Engine (ISE), Secure Access, and more
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Partner - ACI Policy Builder
+paths:
+  /partner/aci/policy:
+    get:
+      tags:
+      - Partner - ACI Policy Builder
+      description: Get ACI definitions
+      operationId: getACIDefinitions
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                ACI policy:
+                  description: ACI policy
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Deploy-read,Template Deploy-write,Policy Configuration-read,Policy Configuration-write,Policy Deploy-read,Policy Deploy-write,AppRoute Policy-read,AppRoute Policy-write,Traffic Data Policy-read,Traffic Data Policy-write
+  /partner/aci/policy/dscpmapping/{partnerId}:
+    post:
+      tags:
+      - Partner - ACI Policy Builder
+      description: Create an ACI definition entry
+      operationId: createDscpMappings
+      parameters:
+      - name: partnerId
+        in: path
+        description: Partner Id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: ACI definition
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              ACI definition:
+                description: ACI definition
+                value: {}
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Action Id:
+                  description: Action Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy Configuration-write,AppRoute Policy-write,Traffic Data Policy-write
+    delete:
+      tags:
+      - Partner - ACI Policy Builder
+      description: Delete DSCP mapping
+      operationId: deleteDscpMappings
+      parameters:
+      - name: partnerId
+        in: path
+        description: Partner Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Action Id:
+                  description: Action Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy Configuration-write,AppRoute Policy-write,Traffic Data Policy-write
+    get:
+      tags:
+      - Partner - ACI Policy Builder
+      description: Get DSCP policy
+      operationId: getDscpMappings
+      parameters:
+      - name: partnerId
+        in: path
+        description: Partner Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DSCP policy:
+                  description: DSCP policy
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Deploy-read,Template Deploy-write,Policy Configuration-read,Policy Configuration-write,Policy Deploy-read,Policy Deploy-writeAppRoute Policy-read,AppRoute Policy-write,Traffic Data Policy-read,Traffic Data Policy-write
+  /partner/aci/policy/events/{partnerId}:
+    get:
+      tags:
+      - Partner - ACI Policy Builder
+      description: Get ACI events
+      operationId: getEvents_PartnerAciPolicyBuilder_3803
+      parameters:
+      - name: partnerId
+        in: path
+        description: Partner Id
+        required: true
+        schema:
+          type: string
+      - name: starttime
+        in: query
+        description: Start time
+        schema:
+          type: integer
+          format: int64
+      - name: endtime
+        in: query
+        description: End time
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                ACI events:
+                  description: ACI events
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy Configuration-read,Policy Configuration-write,AppRoute Policy-read,AppRoute Policy-write,Traffic Data Policy-read,Traffic Data Policy-write
+  /partner/aci/policy/prefixmapping/{partnerId}:
+    get:
+      tags:
+      - Partner - ACI Policy Builder
+      description: Get prefix mapping
+      operationId: getDataPrefixMappings
+      parameters:
+      - name: partnerId
+        in: path
+        description: Partner Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Prefix mapping:
+                  description: Prefix mapping
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Deploy-read,Template Deploy-write,Policy Configuration-read,Policy Configuration-write,Policy Deploy-read,Policy Deploy-writeAppRoute Policy-read,AppRoute Policy-write,Traffic Data Policy-read,Traffic Data Policy-write
+    post:
+      tags:
+      - Partner - ACI Policy Builder
+      description: Create data prefix mapping
+      operationId: setDataPrefixMappings
+      parameters:
+      - name: partnerId
+        in: path
+        description: Partner Id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Prefix definition
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Prefix definition:
+                description: Prefix definition
+                value: {}
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Action Id:
+                  description: Action Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy Configuration-write,AppRoute Policy-write,Traffic Data Policy-write
+  /partner/aci/policy/sequences:
+    get:
+      tags:
+      - Partner - ACI Policy Builder
+      description: Get data prefix sequence
+      operationId: getDataPrefixSequences
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Data prefix sequence:
+                  description: Data prefix sequence
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy Configuration-read,Policy Configuration-write,AppRoute Policy-read,AppRoute Policy-write,Traffic Data Policy-read,Traffic Data Policy-write

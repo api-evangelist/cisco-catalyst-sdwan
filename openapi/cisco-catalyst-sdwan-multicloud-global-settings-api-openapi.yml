@@ -1,0 +1,821 @@
+openapi: 3.2.0
+info:
+  title: Others MultiCloud - Global Settings API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: MultiCloud - Global Settings
+paths:
+  /multicloud/instancesize:
+    get:
+      tags:
+      - MultiCloud - Global Settings
+      description: Get Transit VPC supported size
+      operationId: getSupportedInstanceSize
+      parameters:
+      - name: cloudType
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - AWS
+          - AWS_GOVCLOUD
+          - AZURE
+          - AZURE_GOVCLOUD
+          - GCP
+      - name: accountId
+        in: query
+        schema:
+          type: string
+      - name: cloudRegion
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    size:
+                      type: string
+                      example: n1-standard-4
+                    spec:
+                      type: string
+                      example: n1-standard-4 (4 vCPU)
+                  $$ref: '#/components/schemas/InstanceSizeResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/settings/global:
+    get:
+      tags:
+      - MultiCloud - Global Settings
+      description: Get global settings
+      operationId: getGlobalSettings
+      parameters:
+      - name: cloudType
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - AWS
+          - AWS_GOVCLOUD
+          - AZURE
+          - AZURE_GOVCLOUD
+          - GCP
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                required:
+                - cgwBgpAsnOffset
+                - cloudGatewaySolution
+                - cloudType
+                - instanceSize
+                - ipSubnetPool
+                - orgBgpAsn
+                - skuScaleUnit
+                - softwareImageId
+                type: object
+                properties:
+                  accountId:
+                    type: string
+                    description: Used for AWS/AWS GovCloud Global settings
+                  cgwBgpAsnOffset:
+                    pattern: ^[0-9]+$
+                    type: string
+                    description: Used for GCP, AWS and AWS GovCloud Global settings
+                  cloudGatewaySolution:
+                    pattern: ^[a-zA-Z_]+$
+                    type: string
+                  cloudType:
+                    type: string
+                  enableAutoCorrect:
+                    pattern: ^(true|false)$
+                    type: string
+                  enableDefRouteAdvertize:
+                    pattern: ^(true|false)$
+                    type: string
+                    description: Used for Azure Global settings
+                  enableMonitoring:
+                    pattern: ^(true|false)$
+                    type: string
+                    description: Used for Azure Global settings
+                  enablePeriodicAudit:
+                    pattern: ^(true|false)$
+                    type: string
+                  instanceSize:
+                    pattern: ^[a-zA-Z0-9_./\-]+$
+                    type: string
+                    description: Used for GCP, AWS and AWS GovCloud Global settings
+                  intraTagComm:
+                    pattern: ^(true|false)$
+                    type: string
+                  ipSubnetPool:
+                    pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}\/(?:3[0-2]|[0-2]?[0-9]))(?:\s*,\s*(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}\/(?:3[0-2]|[0-2]?[0-9]))*$
+                    type: string
+                  mapTvpc:
+                    pattern: ^(true|false)$
+                    type: string
+                    description: Used for GCP, AWS and AWS GovCloud Global settings
+                  multicloudSystemSettings:
+                    type: object
+                    properties:
+                      enableMonitoring:
+                        type: boolean
+                        writeOnly: true
+                      useConfigurationGroup:
+                        pattern: ^(true|false)$
+                        type: string
+                        description: Enable or disable Configuration Group for Gateways
+                    $$ref: '#/components/schemas/MulticloudSystemSettings'
+                  name:
+                    pattern: ^[a-zA-Z_]+$
+                    type: string
+                  networkTier:
+                    pattern: ^[a-zA-Z0-9_./\-]+$
+                    type: string
+                    description: Used for GCP Global settings
+                  orgBgpAsn:
+                    pattern: ^[0-9]+$
+                    type: string
+                    description: Used for GCP, Azure and Azure GovCloud Global settings
+                  policyManagement:
+                    pattern: ^(true|false)$
+                    type: string
+                    description: Used for GCP Global settings
+                  programDefaultRoute:
+                    pattern: ^(true|false)$
+                    type: string
+                    description: Used for AWS/AWS GovCloud Global settings
+                  region:
+                    pattern: ^[a-zA-Z0-9_./\-]+$
+                    type: string
+                    description: Used for AWS/AWS GovCloud Global settings
+                  serviceDirPollTimer:
+                    pattern: ^[0-9]+$
+                    type: string
+                    description: Used for GCP Global settings
+                  skuScaleUnit:
+                    pattern: ^[0-9]+$
+                    type: string
+                    description: Used for Azure/Azure GovCloud Global settings
+                  softwareImageId:
+                    pattern: ^[a-zA-Z0-9_./\-\s]+$
+                    type: string
+                  tunnelCount:
+                    pattern: ^[0-9]+$
+                    type: string
+                    description: Used for AWS/AWS GovCloud Global settings
+                  tunnelType:
+                    pattern: ^(ipsec|gre)$
+                    type: string
+                    description: Used for GCP, AWS and AWS GovCloud Global settings
+                $$ref: '#/components/schemas/GlobalSettings'
+              examples:
+                GCP Global settings:
+                  description: GCP Global settings
+                  value:
+                    cloudGatewaySolution: gcp
+                    cloudType: GCP
+                    name: GCP_GLOBAL_SETTING
+                    enableAutoCorrect: true
+                    enablePeriodicAudit: true
+                    softwareImageId: cisco-c8k-17-07-01a-cisco-public
+                    instanceSize: n1-standard-4
+                    intraTagComm: true
+                    ipSubnetPool: 10.0.0.0/16
+                    cgwBgpAsnOffset: 64520
+                    mapTvpc: true
+                    networkTier: STANDARD
+                    orgBgpAsn: 64530
+                    policyManagement: false
+                    serviceDirPollTimer: 1200
+                    tunnelType: ipsec
+                    multicloudSystemSettings:
+                      useConfigurationGroup: true
+                Aws Global settings:
+                  description: Aws Global settings
+                  value:
+                    cloudGatewaySolution: tgw_tvpc
+                    cloudType: AWS
+                    name: AWS_GLOBAL_SETTING
+                    enableAutoCorrect: true
+                    enablePeriodicAudit: true
+                    softwareImageId: Cisco-C8K-17.05.01a-42cb6e93-8d9d-490b-a73c-e3e56077ffd1
+                    instanceSize: c5.xlarge
+                    intraTagComm: true
+                    ipSubnetPool: 10.0.0.0/16
+                    accountId: '999293417507'
+                    cgwBgpAsnOffset: 64520
+                    mapTvpc: true
+                    programDefaultRoute: true
+                    region: us-west-1
+                    tunnelType: ipsec
+                    tunnelCount: 1
+                    multicloudSystemSettings:
+                      useConfigurationGroup: true
+                Aws GovCloud Global settings:
+                  description: Aws GovCloud Global settings
+                  value:
+                    cloudGatewaySolution: tgw_tvpc
+                    cloudType: AWS_GOVCLOUD
+                    name: AWS__GOVCLOUD_GLOBAL_SETTING
+                    enableAutoCorrect: true
+                    enablePeriodicAudit: true
+                    softwareImageId: Cisco-C8K-17.05.01a-42cb6e93-8d9d-490b-a73c-e3e56077ffd1
+                    instanceSize: c5.large
+                    intraTagComm: true
+                    ipSubnetPool: 10.0.0.0/16
+                    accountId: not available
+                    cgwBgpAsnOffset: 64520
+                    mapTvpc: true
+                    programDefaultRoute: true
+                    region: us-gov-west-1
+                    tunnelType: ipsec
+                    tunnelCount: 1
+                    multicloudSystemSettings:
+                      useConfigurationGroup: true
+                Azure Global settings:
+                  description: Azure Global settings
+                  value:
+                    cloudGatewaySolution: vhub
+                    cloudType: AZURE
+                    name: AZURE_GLOBAL_SETTING
+                    enableAutoCorrect: true
+                    enablePeriodicAudit: false
+                    intraTagComm: false
+                    ipSubnetPool: 21.0.0.0/16
+                    softwareImageId: 17.7.01
+                    orgBgpAsn: 64512
+                    skuScaleUnit: 2
+                    enableDefRouteAdvertize: false
+                    enableMonitoring: false
+                    multicloudSystemSettings:
+                      useConfigurationGroup: true
+                Azure GovCloud Global settings:
+                  description: Azure GovCloud Global settings
+                  value:
+                    cloudGatewaySolution: vhub
+                    cloudType: AZURE_GOVCLOUD
+                    name: AZURE__GOVCLOUD_GLOBAL_SETTING
+                    enableAutoCorrect: true
+                    enablePeriodicAudit: false
+                    intraTagComm: false
+                    ipSubnetPool: 21.0.0.0/16
+                    softwareImageId: 17.7.01
+                    orgBgpAsn: 64512
+                    skuScaleUnit: 4
+                    multicloudSystemSettings:
+                      useConfigurationGroup: true
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    put:
+      tags:
+      - MultiCloud - Global Settings
+      description: Update global settings
+      operationId: updateGlobalSettings
+      requestBody:
+        description: Payload for updating Global Settings based on CloudType
+        content:
+          application/json:
+            schema:
+              required:
+              - cgwBgpAsnOffset
+              - cloudGatewaySolution
+              - cloudType
+              - instanceSize
+              - ipSubnetPool
+              - orgBgpAsn
+              - skuScaleUnit
+              - softwareImageId
+              type: object
+              properties:
+                accountId:
+                  type: string
+                  description: Used for AWS/AWS GovCloud Global settings
+                cgwBgpAsnOffset:
+                  pattern: ^[0-9]+$
+                  type: string
+                  description: Used for GCP, AWS and AWS GovCloud Global settings
+                cloudGatewaySolution:
+                  pattern: ^[a-zA-Z_]+$
+                  type: string
+                cloudType:
+                  type: string
+                enableAutoCorrect:
+                  pattern: ^(true|false)$
+                  type: string
+                enableDefRouteAdvertize:
+                  pattern: ^(true|false)$
+                  type: string
+                  description: Used for Azure Global settings
+                enableMonitoring:
+                  pattern: ^(true|false)$
+                  type: string
+                  description: Used for Azure Global settings
+                enablePeriodicAudit:
+                  pattern: ^(true|false)$
+                  type: string
+                instanceSize:
+                  pattern: ^[a-zA-Z0-9_./\-]+$
+                  type: string
+                  description: Used for GCP, AWS and AWS GovCloud Global settings
+                intraTagComm:
+                  pattern: ^(true|false)$
+                  type: string
+                ipSubnetPool:
+                  pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}\/(?:3[0-2]|[0-2]?[0-9]))(?:\s*,\s*(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}\/(?:3[0-2]|[0-2]?[0-9]))*$
+                  type: string
+                mapTvpc:
+                  pattern: ^(true|false)$
+                  type: string
+                  description: Used for GCP, AWS and AWS GovCloud Global settings
+                multicloudSystemSettings:
+                  type: object
+                  properties:
+                    enableMonitoring:
+                      type: boolean
+                      writeOnly: true
+                    useConfigurationGroup:
+                      pattern: ^(true|false)$
+                      type: string
+                      description: Enable or disable Configuration Group for Gateways
+                  $$ref: '#/components/schemas/MulticloudSystemSettings'
+                name:
+                  pattern: ^[a-zA-Z_]+$
+                  type: string
+                networkTier:
+                  pattern: ^[a-zA-Z0-9_./\-]+$
+                  type: string
+                  description: Used for GCP Global settings
+                orgBgpAsn:
+                  pattern: ^[0-9]+$
+                  type: string
+                  description: Used for GCP, Azure and Azure GovCloud Global settings
+                policyManagement:
+                  pattern: ^(true|false)$
+                  type: string
+                  description: Used for GCP Global settings
+                programDefaultRoute:
+                  pattern: ^(true|false)$
+                  type: string
+                  description: Used for AWS/AWS GovCloud Global settings
+                region:
+                  pattern: ^[a-zA-Z0-9_./\-]+$
+                  type: string
+                  description: Used for AWS/AWS GovCloud Global settings
+                serviceDirPollTimer:
+                  pattern: ^[0-9]+$
+                  type: string
+                  description: Used for GCP Global settings
+                skuScaleUnit:
+                  pattern: ^[0-9]+$
+                  type: string
+                  description: Used for Azure/Azure GovCloud Global settings
+                softwareImageId:
+                  pattern: ^[a-zA-Z0-9_./\-\s]+$
+                  type: string
+                tunnelCount:
+                  pattern: ^[0-9]+$
+                  type: string
+                  description: Used for AWS/AWS GovCloud Global settings
+                tunnelType:
+                  pattern: ^(ipsec|gre)$
+                  type: string
+                  description: Used for GCP, AWS and AWS GovCloud Global settings
+              $$ref: '#/components/schemas/GlobalSettings'
+            examples:
+              GCP Global settings:
+                description: GCP Global settings
+                value:
+                  cloudGatewaySolution: gcp
+                  cloudType: GCP
+                  name: GCP_GLOBAL_SETTING
+                  enableAutoCorrect: true
+                  enablePeriodicAudit: true
+                  softwareImageId: cisco-c8k-17-07-01a-cisco-public
+                  instanceSize: n1-standard-4
+                  intraTagComm: true
+                  ipSubnetPool: 10.0.0.0/16
+                  cgwBgpAsnOffset: 64520
+                  mapTvpc: true
+                  networkTier: STANDARD
+                  orgBgpAsn: 64530
+                  policyManagement: false
+                  serviceDirPollTimer: 1200
+                  tunnelType: ipsec
+                  multicloudSystemSettings:
+                    useConfigurationGroup: true
+              Aws Global settings:
+                description: Aws Global settings
+                value:
+                  cloudGatewaySolution: tgw_tvpc
+                  cloudType: AWS
+                  name: AWS_GLOBAL_SETTING
+                  enableAutoCorrect: true
+                  enablePeriodicAudit: true
+                  softwareImageId: Cisco-C8K-17.05.01a-42cb6e93-8d9d-490b-a73c-e3e56077ffd1
+                  instanceSize: c5.xlarge
+                  intraTagComm: true
+                  ipSubnetPool: 10.0.0.0/16
+                  accountId: '999293417507'
+                  cgwBgpAsnOffset: 64520
+                  mapTvpc: true
+                  programDefaultRoute: true
+                  region: us-west-1
+                  tunnelType: ipsec
+                  tunnelCount: 1
+                  multicloudSystemSettings:
+                    useConfigurationGroup: true
+              Aws GovCloud Global settings:
+                description: Aws GovCloud Global settings
+                value:
+                  cloudGatewaySolution: tgw_tvpc
+                  cloudType: AWS_GOVCLOUD
+                  name: AWS__GOVCLOUD_GLOBAL_SETTING
+                  enableAutoCorrect: true
+                  enablePeriodicAudit: true
+                  softwareImageId: Cisco-C8K-17.05.01a-42cb6e93-8d9d-490b-a73c-e3e56077ffd1
+                  instanceSize: c5.large
+                  intraTagComm: true
+                  ipSubnetPool: 10.0.0.0/16
+                  accountId: not available
+                  cgwBgpAsnOffset: 64520
+                  mapTvpc: true
+                  programDefaultRoute: true
+                  region: us-gov-west-1
+                  tunnelType: ipsec
+                  tunnelCount: 1
+                  multicloudSystemSettings:
+                    useConfigurationGroup: true
+              Azure Global settings:
+                description: Azure Global settings
+                value:
+                  cloudGatewaySolution: vhub
+                  cloudType: AZURE
+                  name: AZURE_GLOBAL_SETTING
+                  enableAutoCorrect: true
+                  enablePeriodicAudit: false
+                  intraTagComm: false
+                  ipSubnetPool: 21.0.0.0/16
+                  softwareImageId: 17.7.01
+                  orgBgpAsn: 64512
+                  skuScaleUnit: 2
+                  enableDefRouteAdvertize: false
+                  enableMonitoring: false
+                  multicloudSystemSettings:
+                    useConfigurationGroup: true
+              Azure GovCloud Global settings:
+                description: Azure GovCloud Global settings
+                value:
+                  cloudGatewaySolution: vhub
+                  cloudType: AZURE_GOVCLOUD
+                  name: AZURE__GOVCLOUD_GLOBAL_SETTING
+                  enableAutoCorrect: true
+                  enablePeriodicAudit: false
+                  intraTagComm: false
+                  ipSubnetPool: 21.0.0.0/16
+                  softwareImageId: 17.7.01
+                  orgBgpAsn: 64512
+                  skuScaleUnit: 4
+                  multicloudSystemSettings:
+                    useConfigurationGroup: true
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+      - MultiCloud - Global Settings
+      description: Add global settings
+      operationId: addGlobalSettings
+      requestBody:
+        description: Responses for get Global Settings based CloudType
+        content:
+          application/json:
+            schema:
+              required:
+              - cgwBgpAsnOffset
+              - cloudGatewaySolution
+              - cloudType
+              - instanceSize
+              - ipSubnetPool
+              - orgBgpAsn
+              - skuScaleUnit
+              - softwareImageId
+              type: object
+              properties:
+                accountId:
+                  type: string
+                  description: Used for AWS/AWS GovCloud Global settings
+                cgwBgpAsnOffset:
+                  pattern: ^[0-9]+$
+                  type: string
+                  description: Used for GCP, AWS and AWS GovCloud Global settings
+                cloudGatewaySolution:
+                  pattern: ^[a-zA-Z_]+$
+                  type: string
+                cloudType:
+                  type: string
+                enableAutoCorrect:
+                  pattern: ^(true|false)$
+                  type: string
+                enableDefRouteAdvertize:
+                  pattern: ^(true|false)$
+                  type: string
+                  description: Used for Azure Global settings
+                enableMonitoring:
+                  pattern: ^(true|false)$
+                  type: string
+                  description: Used for Azure Global settings
+                enablePeriodicAudit:
+                  pattern: ^(true|false)$
+                  type: string
+                instanceSize:
+                  pattern: ^[a-zA-Z0-9_./\-]+$
+                  type: string
+                  description: Used for GCP, AWS and AWS GovCloud Global settings
+                intraTagComm:
+                  pattern: ^(true|false)$
+                  type: string
+                ipSubnetPool:
+                  pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}\/(?:3[0-2]|[0-2]?[0-9]))(?:\s*,\s*(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}\/(?:3[0-2]|[0-2]?[0-9]))*$
+                  type: string
+                mapTvpc:
+                  pattern: ^(true|false)$
+                  type: string
+                  description: Used for GCP, AWS and AWS GovCloud Global settings
+                multicloudSystemSettings:
+                  type: object
+                  properties:
+                    enableMonitoring:
+                      type: boolean
+                      writeOnly: true
+                    useConfigurationGroup:
+                      pattern: ^(true|false)$
+                      type: string
+                      description: Enable or disable Configuration Group for Gateways
+                  $$ref: '#/components/schemas/MulticloudSystemSettings'
+                name:
+                  pattern: ^[a-zA-Z_]+$
+                  type: string
+                networkTier:
+                  pattern: ^[a-zA-Z0-9_./\-]+$
+                  type: string
+                  description: Used for GCP Global settings
+                orgBgpAsn:
+                  pattern: ^[0-9]+$
+                  type: string
+                  description: Used for GCP, Azure and Azure GovCloud Global settings
+                policyManagement:
+                  pattern: ^(true|false)$
+                  type: string
+                  description: Used for GCP Global settings
+                programDefaultRoute:
+                  pattern: ^(true|false)$
+                  type: string
+                  description: Used for AWS/AWS GovCloud Global settings
+                region:
+                  pattern: ^[a-zA-Z0-9_./\-]+$
+                  type: string
+                  description: Used for AWS/AWS GovCloud Global settings
+                serviceDirPollTimer:
+                  pattern: ^[0-9]+$
+                  type: string
+                  description: Used for GCP Global settings
+                skuScaleUnit:
+                  pattern: ^[0-9]+$
+                  type: string
+                  description: Used for Azure/Azure GovCloud Global settings
+                softwareImageId:
+                  pattern: ^[a-zA-Z0-9_./\-\s]+$
+                  type: string
+                tunnelCount:
+                  pattern: ^[0-9]+$
+                  type: string
+                  description: Used for AWS/AWS GovCloud Global settings
+                tunnelType:
+                  pattern: ^(ipsec|gre)$
+                  type: string
+                  description: Used for GCP, AWS and AWS GovCloud Global settings
+              $$ref: '#/components/schemas/GlobalSettings'
+            examples:
+              GCP Global settings:
+                description: GCP Global settings
+                value:
+                  cloudGatewaySolution: gcp
+                  cloudType: GCP
+                  name: GCP_GLOBAL_SETTING
+                  enableAutoCorrect: true
+                  enablePeriodicAudit: true
+                  softwareImageId: cisco-c8k-17-07-01a-cisco-public
+                  instanceSize: n1-standard-4
+                  intraTagComm: true
+                  ipSubnetPool: 10.0.0.0/16
+                  cgwBgpAsnOffset: 64520
+                  mapTvpc: true
+                  networkTier: STANDARD
+                  orgBgpAsn: 64530
+                  policyManagement: false
+                  serviceDirPollTimer: 1200
+                  tunnelType: ipsec
+                  multicloudSystemSettings:
+                    useConfigurationGroup: true
+              Aws Global settings:
+                description: Aws Global settings
+                value:
+                  cloudGatewaySolution: tgw_tvpc
+                  cloudType: AWS
+                  name: AWS_GLOBAL_SETTING
+                  enableAutoCorrect: true
+                  enablePeriodicAudit: true
+                  softwareImageId: Cisco-C8K-17.05.01a-42cb6e93-8d9d-490b-a73c-e3e56077ffd1
+                  instanceSize: c5.xlarge
+                  intraTagComm: true
+                  ipSubnetPool: 10.0.0.0/16
+                  accountId: '999293417507'
+                  cgwBgpAsnOffset: 64520
+                  mapTvpc: true
+                  programDefaultRoute: true
+                  region: us-west-1
+                  tunnelType: ipsec
+                  tunnelCount: 1
+                  multicloudSystemSettings:
+                    useConfigurationGroup: true
+              Aws GovCloud Global settings:
+                description: Aws GovCloud Global settings
+                value:
+                  cloudGatewaySolution: tgw_tvpc
+                  cloudType: AWS_GOVCLOUD
+                  name: AWS__GOVCLOUD_GLOBAL_SETTING
+                  enableAutoCorrect: true
+                  enablePeriodicAudit: true
+                  softwareImageId: Cisco-C8K-17.05.01a-42cb6e93-8d9d-490b-a73c-e3e56077ffd1
+                  instanceSize: c5.large
+                  intraTagComm: true
+                  ipSubnetPool: 10.0.0.0/16
+                  accountId: not available
+                  cgwBgpAsnOffset: 64520
+                  mapTvpc: true
+                  programDefaultRoute: true
+                  region: us-gov-west-1
+                  tunnelType: ipsec
+                  tunnelCount: 1
+                  multicloudSystemSettings:
+                    useConfigurationGroup: true
+              Azure Global settings:
+                description: Azure Global settings
+                value:
+                  cloudGatewaySolution: vhub
+                  cloudType: AZURE
+                  name: AZURE_GLOBAL_SETTING
+                  enableAutoCorrect: true
+                  enablePeriodicAudit: false
+                  intraTagComm: false
+                  ipSubnetPool: 21.0.0.0/16
+                  softwareImageId: 17.7.01
+                  orgBgpAsn: 64512
+                  skuScaleUnit: 2
+                  enableDefRouteAdvertize: false
+                  enableMonitoring: false
+                  multicloudSystemSettings:
+                    useConfigurationGroup: true
+              Azure GovCloud Global settings:
+                description: Azure GovCloud Global settings
+                value:
+                  cloudGatewaySolution: vhub
+                  cloudType: AZURE_GOVCLOUD
+                  name: AZURE__GOVCLOUD_GLOBAL_SETTING
+                  enableAutoCorrect: true
+                  enablePeriodicAudit: false
+                  intraTagComm: false
+                  ipSubnetPool: 21.0.0.0/16
+                  softwareImageId: 17.7.01
+                  orgBgpAsn: 64512
+                  skuScaleUnit: 4
+                  multicloudSystemSettings:
+                    useConfigurationGroup: true
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: 6c723f65-9106-4f43-9d2b-a033a39353b3
+                description: Task id for polling status
+                $$ref: '#/components/schemas/Taskid'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/swimages:
+    get:
+      tags:
+      - MultiCloud - Global Settings
+      description: Get software image list
+      operationId: getSupportedSoftwareImageList
+      parameters:
+      - name: cloudType
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - AWS
+          - AWS_GOVCLOUD
+          - AZURE
+          - AZURE_GOVCLOUD
+          - GCP
+      - name: accountId
+        in: query
+        schema:
+          type: string
+      - name: cloudRegion
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    deviceModel:
+                      type: string
+                      example: vedge-C8000V
+                    displayName:
+                      type: string
+                      example: C8000v 17.04.01b
+                    isPaygImage:
+                      type: boolean
+                      example: false
+                    softwareImageId:
+                      type: string
+                      example: Cisco-C8k-17.04.01b-42cb6e93-8d9d-490b-a73c-e3e56077ffd1
+                    version:
+                      type: string
+                      example: 17.04.01b
+                  $$ref: '#/components/schemas/SwImagesResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

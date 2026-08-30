@@ -1,0 +1,58 @@
+openapi: 3.2.0
+info:
+  title: SD-WAN Services Service Chain Mapping API
+  description: Includes API operations for managing SD-WAN services such as Cloud OnRamp for SaaS and MultiCloud
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Service Chain Mapping
+paths:
+  /v1/service-insertion/service-chain-mapping:
+    get:
+      tags:
+      - Service Chain Mapping
+      description: Gets all the Service Chain Mapping with service chain definition name and service chain number.
+      operationId: serviceChainMapping
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                serviceChainMapping:
+                  description: serviceChainMapping
+                  value:
+                  - serviceChainName: SC-Firewall
+                    serviceChainNumber: SC1
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '405':
+          description: Method not Supported
+        '500':
+          description: Internal Server Error

@@ -1,0 +1,2236 @@
+openapi: 3.2.0
+info:
+  title: Others Configuration - Device Inventory API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Configuration - Device Inventory
+paths:
+  /system/device:
+    post:
+      tags:
+      - Configuration - Device Inventory
+      description: 'Create new device<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view 123.'
+      operationId: createDevice
+      requestBody:
+        description: Create device request
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Create device request:
+                description: Create device request
+                value:
+                  deviceIP: 1.1.1.1
+                  username: cisco
+                  password: cisco
+                  personality: vbond
+                  generateCSR: true
+                  genCsrParams:
+                    schedule: true
+                    scheduleAt: 1729495932
+                    autoRenew: false
+                    keyLength: '2048'
+                    resetRSA: true
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceconfigSystemDeviceSystemdeviceapiRequestExampleSystemdevicegencsrparams'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Example Value:
+                  description: Example Value
+                  value:
+                    uuid: 2250234c-5305-41f7-a0fe-b52fcbd92833
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceconfigSystemDeviceSystemdeviceapiResponseExampleDeviceaddresponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /system/device/bootstrap/device/{uuid}:
+    get:
+      tags:
+      - Configuration - Device Inventory
+      description: Create vEdge device config
+      operationId: generateBootstrapConfigForVedge
+      parameters:
+      - name: uuid
+        in: path
+        description: Device UUID
+        required: true
+        schema:
+          type: string
+        example: ESR-6300-LIC-K9-FAUSTEST126
+      - name: configtype
+        in: query
+        description: configtype
+        required: true
+        schema:
+          type: string
+        example: cloudinit
+      - name: inclDefRootCert
+        in: query
+        required: true
+        schema:
+          type: boolean
+          default: true
+      - name: version
+        in: query
+        schema:
+          type: string
+          default: v1
+      - name: wanif
+        in: query
+        description: wanif
+        schema:
+          type: string
+        example: GigabitEthernet1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  bootstrapConfig:
+                    type: string
+                    example: '#cloud-config\nvinitparam:\n - uuid : ESR-6300-LIC-K9-FAUSTEST126\n - vbond : 10.0.12.26\n - org : vIPtela Inc Regression\n'
+                $$ref: '#/components/schemas/GenerateBootstrapConfigForVedge'
+              examples:
+                Device bootstrap configuration:
+                  description: Device bootstrap configuration
+                  value:
+                    bootstrapConfig: '#cloud-config\ninitparam:\n - uuid : ESR-6300-LIC-K9-FAUSTEST126\n - vbond : 10.0.12.26\n - org : vIPtela Inc Regression\n'
+                  $$ref: '#/components/examples/ComViptelaVmanageServerBootstrapDevicelifecycleapiResponseExampleGetbootstrapdevice'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /system/device/bootstrap/devices:
+    post:
+      tags:
+      - Configuration - Device Inventory
+      description: Create bootstrap config for software vEdges
+      operationId: generateBootstrapConfigForVedges
+      requestBody:
+        description: Request body for Device bootstrap configuration
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                bootstrapConfigType:
+                  type: string
+                uuid:
+                  type: array
+                  items:
+                    type: string
+              $$ref: '#/components/schemas/VEdgeBootstrapConfig'
+            examples:
+              Example Value:
+                description: Example Value
+                value:
+                  bootstrapConfig: '#cloud-config\ninitparam:\n - uuid : ESR-6300-LIC-K9-FAUSTEST126\n - vbond : 10.0.12.26\n - org : vIPtela Inc Regression\n'
+                $$ref: '#/components/examples/ComViptelaVmanageServerBootstrapDevicelifecycleapiRequestExamplePostbootstrapdevices'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: b1af2563-cfa0-4ebb-989b-4d5e87f92d45
+                $$ref: '#/components/schemas/GenerateBootstrapConfigForVedgesResponse'
+              examples:
+                Device bootstrap configuration:
+                  description: Device bootstrap configuration
+                  value:
+                    id: b1af2563-cfa0-4ebb-989b-4d5e87f92d45
+                  $$ref: '#/components/examples/ComViptelaVmanageServerBootstrapDevicelifecycleapiResponseExamplePostbootstrapdevicesresp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /system/device/bootstrap/download/{id}:
+    get:
+      tags:
+      - Configuration - Device Inventory
+      description: Download vEdge device config
+      operationId: getBootstrapConfigZip
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+        example: b4d93025-cf37-41a5-a2a6-d9113ede034c
+      responses:
+        '200':
+          description: Success
+          content:
+            application/octet-stream:
+              schema:
+                type: object
+                properties:
+                  file:
+                    type: string
+                    example: binary
+                $$ref: '#/components/schemas/GetBootstrapConfigZip'
+              examples:
+                Device bootstrap configuration:
+                  description: Device bootstrap configuration
+                  value:
+                    file: binary
+                  $$ref: '#/components/examples/ComViptelaVmanageServerBootstrapDevicelifecycleapiResponseExampleBootstrapdownloadid'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /system/device/bootstrap/generic/devices:
+    get:
+      tags:
+      - Configuration - Device Inventory
+      description: Create bootstrap config for software vEdges
+      operationId: generateGenericBootstrapConfigForVedges
+      parameters:
+      - name: wanif
+        in: query
+        description: Device WAN interface
+        schema:
+          type: string
+        example: GigabitEthernet1
+      - name: sdRoutingDevice
+        in: query
+        description: Flag indicating if this is SD-Routing device
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: b4d93025-cf37-41a5-a2a6-d9113ede034c
+                $$ref: '#/components/schemas/GenerateGenericBootstrapConfigForVedges'
+              examples:
+                Task Id:
+                  description: Task Id
+                  value:
+                    id: 236c21b2-4f1d-4961-82a9-9ac05df1c1c1
+                  $$ref: '#/components/examples/ComViptelaVmanageServerBootstrapDevicelifecycleapiResponseExampleBootstrapgenericdevices'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /system/device/claimDevices:
+    post:
+      tags:
+      - Configuration - Device Inventory
+      description: Claim the selected unclaimed devices
+      operationId: claimDevices
+      requestBody:
+        description: Claim device request
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                chassis_list:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      chassis-serial-number:
+                        type: string
+                        example: SSI130300YK
+                      configuredAaaUser:
+                        type: array
+                        items:
+                          type: string
+                      device-model:
+                        type: string
+                        example: C8000v
+                      device-os:
+                        type: string
+                        example: next
+                      device-type:
+                        type: string
+                        example: vedge
+                      deviceId:
+                        type: string
+                        example: C8K-cfb84064-12e9-4f7c-b9d9-bf78ce4dfb5f
+                      devicesAttached:
+                        type: integer
+                        format: int32
+                        example: 0
+                      discoveredDeviceInterfaces:
+                        type: array
+                        items:
+                          type: string
+                      host-name:
+                        type: string
+                        example: vm5
+                      loopback:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            interfaceIP:
+                              type: string
+                              example: 127.0.0.1
+                            interfaceName:
+                              type: string
+                              example: Loopback0
+                          $$ref: '#/components/schemas/Loopback'
+                      personality:
+                        type: string
+                        example: vedge
+                      platform:
+                        type: string
+                        example: x86_64
+                      reachability:
+                        type: string
+                        example: reachable
+                        enum:
+                        - reachable
+                        - unreachable
+                      registrationDate:
+                        type: integer
+                        format: int64
+                        example: 1590186370340
+                      serialNumber:
+                        type: string
+                        example: '12345712'
+                      site-id:
+                        type: string
+                        example: '500'
+                      state:
+                        type: string
+                        example: green
+                      status:
+                        type: string
+                        example: normal
+                        enum:
+                        - error
+                        - warning
+                        - normal
+                        - new
+                      system-ip:
+                        type: string
+                        example: 172.16.255.15
+                      templateStatus:
+                        type: string
+                        example: Success
+                      uuid:
+                        type: string
+                        example: C8K-cfb84064-12e9-4f7c-b9d9-bf78ce4dfb5f
+                      validity:
+                        type: string
+                        example: valid
+                        enum:
+                        - invalid
+                        - staging
+                        - valid
+                        - prestaging
+                      version:
+                        type: string
+                        example: 17.06.01.0.1422
+                      wanInterfaces:
+                        type: array
+                        items:
+                          type: string
+                    $$ref: '#/components/schemas/Device'
+                organization:
+                  type: string
+                validityString:
+                  type: string
+              $$ref: '#/components/schemas/ClaimDevicesRequest'
+            examples:
+              Claim device request:
+                description: Claim device request
+                value:
+                  organization: srikann-viptela
+                  validityString: valid
+                  chassis_list:
+                  - chassis-number: ISR4351/K9-FDO23070Y63
+                    serial-number: 383CB73
+                    subject-serial-number: FDO23070Y63
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceconfigSystemDeviceSystemdeviceapiRequestExampleClaimdevices'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  activityList:
+                    type: string
+                    example: '[Number of vEdges uploaded successfully: 1, Uploaded vEdges (chassis Id, serial number): ,  - ISR4351/K9-FDO23070Y63, 383CB73]'
+                  id:
+                    type: string
+                    example: 7d77139d-5bed-4e82-8ea5-411a588a522e
+                  vedgeListUploadMsg:
+                    type: string
+                    example: ' of vEdges uploaded successfully: 1'
+                  vedgeListUploadStatus:
+                    type: string
+                    example: vEdge list uploaded successfully
+                $$ref: '#/components/schemas/ClaimDevicesResponse'
+              examples:
+                Claimed device info:
+                  description: Claimed device info
+                  value:
+                    vedgeListUploadMsg: ' of vEdges uploaded successfully: 1'
+                    vedgeListUploadStatus: vEdge list uploaded successfully
+                    id: 7d77139d-5bed-4e82-8ea5-411a588a522e
+                    activityList: '[Number of vEdges uploaded successfully: 1, Uploaded vEdges (chassis Id, serial number): ,  - ISR4351/K9-FDO23070Y63, 383CB73]'
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceconfigSystemDeviceSystemdeviceapiResponseExampleClaimdevicesresp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /system/device/controllers/vedge/status:
+    get:
+      tags:
+      - Configuration - Device Inventory
+      description: Get controllers vEdge sync status
+      operationId: getControllerVEdgeSyncStatus_ConfigurationDeviceInventory_3903
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                vEdge status:
+                  description: vEdge status
+                  value:
+                    data:
+                      totalControllers: 4
+                      ControllersOutOfSync: 1
+                      tenantList:
+                      - tenant: tenantName
+                        deviceType: vedge
+                        chasisNumber: 71001c48-fdcf-4ac0-aaf3-ca4a20386a18
+                        serialNumber: f0b1985ba82e4c4889c225c59ca9a878
+                        managementSystemIP: 172.18.47.115
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceconfigSystemDeviceSystemdeviceapiResponseExampleControllersvedgestatus'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /system/device/decommission/{uuid}:
+    put:
+      tags:
+      - Configuration - Device Inventory
+      description: Decomission vEdge device
+      operationId: decommissionVedgeCloud
+      parameters:
+      - name: uuid
+        in: path
+        description: Device uuid
+        required: true
+        schema:
+          type: string
+        example: C8K-f9f4a977-be6c-47f7-b3b2-10e916bb24db
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: b2afb474-f943-45b6-b673-f51b393ff924
+                $$ref: '#/components/schemas/DecommissionVedgeCloud'
+              examples:
+                Task id:
+                  description: Task id
+                  value:
+                    id: b2afb474-f943-45b6-b673-f51b393ff924
+                  $$ref: '#/components/examples/ComViptelaVmanageServerBootstrapDevicelifecycleapiResponseExampleDecommissionuuid'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /system/device/devicesWithoutSubjectSudi:
+    get:
+      tags:
+      - Configuration - Device Inventory
+      description: retrieve devices without subject sudi
+      operationId: devicesWithoutSubjectSudi
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Devices:
+                  description: Devices
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /system/device/fileupload:
+    post:
+      tags:
+      - Configuration - Device Inventory
+      description: Upload file to vEdge
+      operationId: formPost
+      requestBody:
+        description: Request body for Upload file to vEdge
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+            examples:
+              Example Value:
+                description: Example Value
+                value:
+                  data:
+                    validity: valid
+                    upload: true
+                  file: binary
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceconfigSystemDeviceSystemdeviceapiRequestExampleFileupload'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  activityList:
+                    type: string
+                    example: '[Number of vEdges uploaded successfully: 1, Uploaded vEdges (chassisId, serial number): ,  - ESR-6300-LIC-K9-FAUSTEST126, 030557201979336385BE]'
+                  id:
+                    type: string
+                    example: b5091b8e-e5ea-4096-8e4c-f17d0d60f2dd
+                  vedgeListUploadMsg:
+                    type: string
+                    example: 'Number of vEdges uploaded successfully: 1'
+                  vedgeListUploadStatus:
+                    type: string
+                    example: vEdge list uploaded successfully
+                $$ref: '#/components/schemas/FormPostResp'
+              examples:
+                Example:
+                  description: Example
+                  value:
+                    vedgeListUploadMsg: 'Number of vEdges uploaded successfully: 1'
+                    vedgeListUploadStatus: vEdge list uploaded successfully
+                    id: b5091b8e-e5ea-4096-8e4c-f17d0d60f2dd
+                    activityList: '[Number of vEdges uploaded successfully: 1, Uploaded vEdges (chassisId, serial number): ,  - ESR-6300-LIC-K9-FAUSTEST126, 030557201979336385BE]'
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceconfigSystemDeviceSystemdeviceapiResponseExampleFileuploadresp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /system/device/generate-payg:
+    post:
+      tags:
+      - Configuration - Device Inventory
+      description: Authenticate vSmart user account
+      operationId: validateUser
+      requestBody:
+        description: Request body
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+            examples:
+              Example Value:
+                description: Example Value
+                value:
+                  numPaygDevices: 2
+                  validity: invalid
+                  organization: vIPtela Inc Regression
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceconfigSystemDeviceSystemdeviceapiRequestExampleGeneratepayg'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Example:
+                  description: Example
+                  value:
+                    vedgeListAddMsg: 'Number of PAYG vEdges added successfully: 2'
+                    vedgeListAddStatus: PAYG vEdge list added successfully
+                    id: 42ce4e4e-aaea-4dcd-9507-037ee42a06e5
+                    activityList: '[Number of PAYG vEdges added successfully: 2, Added PAYG vEdges (chassis Id, serial number): ,  - C8K-PAYG-b44-e6aa-4d42-a637-82fd74ec523b, 6573ef62902e447db063dab76613b2c3,  - C8K-PAYG-083-f30e-40b5-80fe-55f401a4839b, aa82b3bb8cda48b7b3693bc70fd1a0bb]'
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceconfigSystemDeviceSystemdeviceapiResponseExampleGeneratepaygresp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Inventory-write,Device Inventory > Edge-write
+  /system/device/lifecycle/management/{uuid}:
+    post:
+      tags:
+      - Configuration - Device Inventory
+      description: Set device lifecycle needed flag
+      operationId: setLifeCycle
+      parameters:
+      - name: uuid
+        in: path
+        description: Device uuid
+        required: true
+        schema:
+          type: string
+        example: 0cee8b1d-1d2c-4c8b-a111-4b17ce9dd473
+      - name: enable
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  DeviceLifeCycleNeeded:
+                    type: boolean
+                    example: false
+                $$ref: '#/components/schemas/SetLifeCycle'
+              examples:
+                Device lifecycle needed value:
+                  description: Device lifecycle needed value
+                  value:
+                    DeviceLifeCycleNeeded: false
+                  $$ref: '#/components/examples/ComViptelaVmanageServerBootstrapDevicelifecycleapiResponseExampleLifecyclemanagement'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /system/device/management/systemip:
+    get:
+      tags:
+      - Configuration - Device Inventory
+      description: Get management system IP mapping
+      operationId: getManagementSystemIPInfo_ConfigurationDeviceInventory_3403
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                System IP mapping:
+                  description: System IP mapping
+                  value:
+                    data:
+                    - deviceType: vbond
+                      serialNumber: '12345712'
+                      managementSystemIP: 172.16.255.26
+                      chasisNumber: b679806c-d107-4c2b-bc80-4665f1ab87a8
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceconfigSystemDeviceSystemdeviceapiResponseExampleManagementsystemip'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /system/device/migrateDevice/{uuid}:
+    put:
+      tags:
+      - Configuration - Device Inventory
+      description: Migrate device software to vedge/cedge
+      operationId: migrateDevice
+      parameters:
+      - name: uuid
+        in: path
+        description: Device uuid
+        required: true
+        schema:
+          type: string
+        example: cad0e65b-86b5-48af-8c26-5a470ea68166
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device migration result:
+                  description: Device migration result
+                  value: {}
+                  $$ref: '#/components/examples/ComViptelaVmanageServerBootstrapDevicelifecycleapiResponseExampleMigratedevice'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /system/device/quickconnect/smartaccount/sync:
+    post:
+      tags:
+      - Configuration - Device Inventory
+      description: Sync devices from Smart-Account
+      operationId: getSmartAccountDevices
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                accessToken:
+                  type: string
+                clientCredentials:
+                  type: boolean
+                env:
+                  type: string
+                organization_name:
+                  type: string
+                password:
+                  type: string
+                username:
+                  type: string
+                validity_string:
+                  type: string
+              $$ref: '#/components/schemas/SmartAccountModel'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  processId:
+                    type: string
+                    example: c82d4877-dc04-4580-aedc-3a10166dab4d
+                $$ref: '#/components/schemas/SyncDevicesResp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /system/device/reset/{uuid}:
+    put:
+      tags:
+      - Configuration - Device Inventory
+      description: Reset vEdge device
+      operationId: resetVedgeCloud
+      parameters:
+      - name: uuid
+        in: path
+        description: Device uuid
+        required: true
+        schema:
+          type: string
+        example: cad0e65b-86b5-48af-8c26-5a470ea68166
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: 36023ff2-42e9-4074-88d9-75bb995b1411
+                $$ref: '#/components/schemas/ResetVedgeCloud'
+              examples:
+                Task id:
+                  description: Task id
+                  value:
+                    id: 36023ff2-42e9-4074-88d9-75bb995b1411
+                  $$ref: '#/components/examples/ComViptelaVmanageServerBootstrapDevicelifecycleapiResponseExampleReset'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /system/device/rma/candidates/{deviceType}:
+    get:
+      tags:
+      - Configuration - Device Inventory
+      description: Get RMA candidates by device type
+      operationId: getRMACandidates
+      parameters:
+      - name: deviceType
+        in: path
+        description: deviceType
+        required: true
+        schema:
+          type: string
+        example: controller
+      - name: uuid
+        in: query
+        description: uuid
+        schema:
+          type: string
+        example: ec7af44a-8731-442d-9b5e-62f3dc407454
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  deviceIP:
+                    type: string
+                    example: 172.16.255.19
+                  host-name:
+                    type: string
+                    example: vm-9
+                  managementSystemIP:
+                    type: string
+                    example: 172.16.255.19
+                  uuid:
+                    type: string
+                    example: ec7af44a-8731-442d-9b5e-62f3dc407454
+                  validity:
+                    type: string
+                    example: valid
+                $$ref: '#/components/schemas/GetRMACandidates'
+              examples:
+                Device type:
+                  description: Device type
+                  value:
+                    uuid: ec7af44a-8731-442d-9b5e-62f3dc407454
+                    deviceIP: 172.16.255.19
+                    validity: valid
+                    managementSystemIP: 172.16.255.19
+                    host-name: vm-9
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceconfigSystemDeviceSystemdeviceapiResponseExampleRmacandidates'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /system/device/rootcertchain/status:
+    get:
+      tags:
+      - Configuration - Device Inventory
+      description: Get controllers vEdge sync status
+      operationId: getRootCertStatusAll
+      parameters:
+      - name: state
+        in: query
+        description: state
+        required: true
+        schema:
+          type: string
+        example: pending/done
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        lastUpdateTime:
+                          type: string
+                          example: '2023-05-02 07:41:34'
+                        rootCertMd5:
+                          type: string
+                          example: 8b147197d6dbde1f89db5909c594d88b13a5c8bc
+                        rootCertStatus:
+                          type: string
+                          example: done
+                      $$ref: '#/components/schemas/GetRootCertStatusAllData'
+                $$ref: '#/components/schemas/GetRootCertStatusAll'
+              examples:
+                vEdge sync status:
+                  description: vEdge sync status
+                  value:
+                    data:
+                    - rootCertStatus: done
+                      rootCertMd5: 8b147197d6dbde1f89db5909c594d88b13a5c8bc
+                      lastUpdateTime: '2023-05-02 07:41:34'
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceconfigSystemDeviceSystemdeviceapiResponseExampleRootcertchainstatus'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /system/device/selfsignedcert/iscreated:
+    get:
+      tags:
+      - Configuration - Device Inventory
+      description: Whether self signed certificate created
+      operationId: checkSelfSignedCert_ConfigurationDeviceInventory_3903
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Self signed certificate created:
+                  description: Self signed certificate created
+                  value:
+                    vedgeListUploadMsg: 'Number of vEdges uploaded successfully: 1'
+                    vedgeListUploadStatus: vEdge list uploaded successfully
+                    id: b5091b8e-e5ea-4096-8e4c-f17d0d60f2dd
+                    activityList: '[Number of vEdges uploaded successfully: 1, Uploaded vEdges (chassisId, serial number): ,  - ESR-6300-LIC-K9-FAUSTEST126, 030557201979336385BE]'
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceconfigSystemDeviceSystemdeviceapiResponseExampleSelfsignedcertiscreated'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: admin
+  /system/device/smartaccount/authenticate:
+    post:
+      tags:
+      - Configuration - Device Inventory
+      description: Authenticate vSmart user account
+      operationId: smartAccountAuthenticate
+      requestBody:
+        description: Claim device request
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Smartaccount Authenticate Request:
+                description: Smartaccount Authenticate Request
+                value:
+                  env: staging
+                  organization_name: srikann-viptela
+                  username: srikann
+                  password: '******'
+                  validity_string: invalid
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceconfigSystemDeviceSystemdeviceapiRequestExampleSmartaccountauthenticate'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+                    example: V6tBFRhpCQkng5Ng7nTxn8WBiJRj
+                $$ref: '#/components/schemas/SmartAccountAuthenticateResponse'
+              examples:
+                Access token:
+                  description: Access token
+                  value:
+                    accessToken: V6tBFRhpCQkng5Ng7nTxn8WBiJRj
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceconfigSystemDeviceSystemdeviceapiResponseExampleSmartaccountauthenticateresp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /system/device/smartaccount/sync:
+    post:
+      tags:
+      - Configuration - Device Inventory
+      description: Sync devices from Smart-Account
+      operationId: syncDevices
+      requestBody:
+        description: Request body for Sync devices from Smart-Account
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Example Value:
+                description: Example Value
+                value:
+                  username: aryagarw@cisco.com
+                  password: password
+                  validity_string: invalid
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceconfigSystemDeviceSystemdeviceapiRequestExampleSmartaccountsync'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  processId:
+                    type: string
+                    example: c82d4877-dc04-4580-aedc-3a10166dab4d
+                $$ref: '#/components/schemas/SyncDevicesResp'
+              examples:
+                Example Value:
+                  description: Example Value
+                  value:
+                    processId: c82d4877-dc04-4580-aedc-3a10166dab4d
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceconfigSystemDeviceSystemdeviceapiResponseExampleSmartaccountsyncresp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /system/device/sync/rootcertchain:
+    get:
+      tags:
+      - Configuration - Device Inventory
+      description: Sync root certificate
+      operationId: syncRootCertChain
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  syncRootCertChain:
+                    type: string
+                    example: done
+                $$ref: '#/components/schemas/SyncRootCertChain'
+              examples:
+                Example:
+                  description: Example
+                  value:
+                    syncRootCertChain: done
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceconfigSystemDeviceSystemdeviceapiResponseExampleSyncrootcertchain'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /system/device/tenant/management/systemip:
+    get:
+      tags:
+      - Configuration - Device Inventory
+      description: 'Get management system IP<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: getTenantManagementSystemIPs
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                properties:
+                  empty:
+                    type: boolean
+                items:
+                  type: object
+                  properties:
+                    chasisNumber:
+                      type: string
+                      example: 6a417181-11ba-4753-a68b-0e72440ebb49
+                    deviceType:
+                      type: string
+                      example: vsmart
+                    managementSystemIP:
+                      type: string
+                      example: 169.254.10.6
+                    serialNumber:
+                      type: string
+                      example: 12445B57
+                  $$ref: '#/components/schemas/GetTenantManagementSystemIPsInner'
+                $$ref: '#/components/schemas/GetTenantManagementSystemIPs'
+              examples:
+                System IP:
+                  description: System IP
+                  value:
+                  - deviceType: vsmart
+                    serialNumber: 12445B57
+                    managementSystemIP: 169.254.10.6
+                    chasisNumber: 6a417181-11ba-4753-a68b-0e72440ebb49
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceconfigSystemDeviceSystemdeviceapiResponseExampleTenantmanagementsystemip'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /system/device/type/{deviceCategory}:
+    get:
+      tags:
+      - Configuration - Device Inventory
+      description: Get devices details
+      operationId: getCloudDockDataBasedOnDeviceType
+      parameters:
+      - name: deviceCategory
+        in: path
+        description: Device category
+        required: true
+        schema:
+          type: string
+          enum:
+          - vedges
+          - controllers
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Device info:
+                  description: Device info
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Device Monitoring-read,dca
+  /system/device/type/{deviceCategory}/defaultConfig:
+    get:
+      tags:
+      - Configuration - Device Inventory
+      description: Get devices default config
+      operationId: getCloudDockDefaultConfigBasedOnDeviceType
+      parameters:
+      - name: deviceCategory
+        in: path
+        description: Device category
+        required: true
+        schema:
+          type: string
+          enum:
+          - vedges
+          - controllers
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Device default config:
+                  description: Device default config
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Device Monitoring-read,dca
+  /system/device/unclaimedDevices:
+    get:
+      tags:
+      - Configuration - Device Inventory
+      description: Get list of all unclaimed devices
+      operationId: getAllUnclaimedDevices
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  '@rid':
+                    type: number
+                    example: 8168
+                  chassis-number:
+                    type: string
+                    example: ISR4351/K9-FDO23070Y63
+                  createTimeStamp:
+                    type: number
+                    example: 1693223805135
+                  lastupdated:
+                    type: number
+                    example: 1693223805106
+                  org:
+                    type: string
+                    example: srikann-viptela
+                  serial-number:
+                    type: string
+                    example: 383CB73
+                  status:
+                    type: string
+                  subject-serial-number:
+                    type: string
+                    example: FDO23070Y63
+                  vdevice-dataKey:
+                    type: string
+                    example: 1.1.1.2-ISR4351/K9-FDO23070Y63
+                  vdevice-host-name:
+                    type: string
+                    example: vbond-ztp
+                  vdevice-name:
+                    type: string
+                    example: 1.1.1.2
+                  vmanage-system-ip:
+                    type: string
+                    example: 1.1.1.2
+                $$ref: '#/components/schemas/GetAllUnclaimedDevices'
+              examples:
+                Device info:
+                  description: Device info
+                  value:
+                    chassis-number: ISR4351/K9-FDO23070Y63
+                    vdevice-name: 1.1.1.2
+                    serial-number: 383CB73
+                    org: srikann-viptela
+                    createTimeStamp: 1693223805135
+                    subject-serial-number: FDO23070Y63
+                    vdevice-host-name: vbond-ztp
+                    vdevice-dataKey: 1.1.1.2-ISR4351/K9-FDO23070Y63
+                    '@rid': 8168
+                    vmanage-system-ip: 1.1.1.2
+                    lastupdated: 1693223805106
+                    status: null
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceconfigSystemDeviceSystemdeviceapiResponseExampleUnclaimeddevices'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /system/device/updateDeviceSubjectSUDI/{uuid}:
+    put:
+      tags:
+      - Configuration - Device Inventory
+      description: update subject sudi value of given device uuid
+      operationId: updateDeviceSubjectSUDI
+      parameters:
+      - name: uuid
+        in: path
+        description: Device uuid
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /system/device/vedgedetection:
+    get:
+      tags:
+      - Configuration - Device Inventory
+      description: Check for Vedge Device Presence
+      operationId: checkvEdgeDevicePresence
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      vEdgeDevicePresent:
+                        type: boolean
+                    description: data field
+                    $$ref: '#/components/schemas/VedgeCheckResponseData'
+                  header:
+                    type: object
+                    properties:
+                      columns:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            actionColumn:
+                              type: boolean
+                            arrayDataType:
+                              type: string
+                            color:
+                              type: object
+                              properties:
+                                key:
+                                  type: string
+                                property:
+                                  type: string
+                                value:
+                                  type: string
+                              $$ref: '#/components/schemas/VedgeCheckResponseHeaderColumnsColor'
+                            colorProperty:
+                              type: string
+                            dataType:
+                              type: string
+                            defaultPropertyKey:
+                              type: string
+                            defaultPropertyValue:
+                              type: string
+                            display:
+                              type: string
+                            displayFormat:
+                              type: string
+                            editable:
+                              type: boolean
+                            hideable:
+                              type: boolean
+                            hostValueType:
+                              type: string
+                            icon:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  key:
+                                    type: string
+                                  value:
+                                    type: string
+                                $$ref: '#/components/schemas/VedgeCheckResponseHeaderColumnsKeyvalue'
+                            iconProperty:
+                              type: string
+                            inputFormat:
+                              type: string
+                            isLeftPinned:
+                              type: boolean
+                            isPinned:
+                              type: boolean
+                            keyvalue:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  key:
+                                    type: string
+                                  value:
+                                    type: string
+                                $$ref: '#/components/schemas/VedgeCheckResponseHeaderColumnsKeyvalue'
+                            keyvalueProperty:
+                              type: string
+                            maxWidth:
+                              type: integer
+                              format: int32
+                            minWidth:
+                              type: integer
+                              format: int32
+                            prependedString:
+                              type: boolean
+                            property:
+                              type: string
+                            sort:
+                              type: object
+                              properties:
+                                direction:
+                                  type: string
+                                priority:
+                                  type: integer
+                                  format: int32
+                              $$ref: '#/components/schemas/VedgeCheckResponseHeaderColumnsSort'
+                            title:
+                              type: string
+                            toolTipProperty:
+                              type: string
+                            visible:
+                              type: boolean
+                            width:
+                              type: integer
+                              format: int32
+                          $$ref: '#/components/schemas/VedgeCheckResponseHeaderColumns'
+                      fields:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            dataType:
+                              type: string
+                              description: dataType field
+                            display:
+                              type: string
+                              description: display field
+                            property:
+                              type: string
+                              description: property field
+                          $$ref: '#/components/schemas/VedgeCheckResponseHeaderFields'
+                      generatedOn:
+                        type: integer
+                        format: int64
+                      viewKeys:
+                        type: object
+                        properties:
+                          uniqueKey:
+                            type: array
+                            items:
+                              type: string
+                        $$ref: '#/components/schemas/VedgeCheckResponseHeaderViewKeys'
+                    description: header field
+                    $$ref: '#/components/schemas/VedgeCheckResponseHeader'
+                $$ref: '#/components/schemas/VedgeCheckResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /system/device/vmanagerootca/{uuid}:
+    delete:
+      tags:
+      - Configuration - Device Inventory
+      description: Invalidate vManage root CA
+      operationId: invalidateVmanageRootCA
+      parameters:
+      - name: uuid
+        in: path
+        description: Device UUID
+        required: true
+        schema:
+          type: string
+        example: 930633aa-f843-4dff-a2f0-664ca97df5ae
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  VmanageRootCAInvalidated:
+                    type: string
+                    example: 'true'
+                $$ref: '#/components/schemas/InvalidateVmanageRootCA'
+              examples:
+                Device info:
+                  description: Device info
+                  value:
+                    VmanageRootCAInvalidated: true
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceconfigSystemDeviceSystemdeviceapiResponseExampleVmanagerootca'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /system/device/{deviceCategory}:
+    get:
+      tags:
+      - Configuration - Device Inventory
+      description: Get devices details. When {deviceCategory = controllers}, it returns vEdge sync status, vBond, vManage and vSmart. When {deviceCategory = vedges}, it returns all available vEdge routers
+      operationId: getDevicesDetails
+      parameters:
+      - name: deviceCategory
+        in: path
+        description: Device category
+        required: true
+        schema:
+          type: string
+        example: vedges
+      - name: model
+        in: query
+        description: Device model
+        schema:
+          type: string
+          enum:
+          - vedge-cloud
+          - vedge-1000
+          - vedge-2000
+          - vedge-100
+          - vedge-ISR1100-4G
+          - vedge-ISR1100-4GLTE
+          - vedge-ISR1100X-4G
+          - vedge-ISR1100-6G
+          - vedge-ISR1100X-6G
+          - vedge-100-B
+          - vedge-100-WM
+          - vedge-100-M
+          - vEdge-5000
+          - vedge-CSR-1000v
+          - vedge-IR-1101
+          - vedge-IR-1821
+          - vedge-IR-1831
+          - vedge-IR-1833
+          - vedge-IR-1835
+          - vedge-IR-8140H
+          - vedge-IR8140H-P
+          - vedge-IR-8340
+          - vedge-ESR-6300
+          - vedge-ISR-4331
+          - vedge-ISR-4321
+          - vedge-ISR-4351
+          - vedge-ISR-4221
+          - vedge-ISR-4221X
+          - vedge-ISR-4431
+          - vedge-ISR-4451-X
+          - vedge-ASR-1001-HX
+          - vedge-ASR-1002-X
+          - vedge-ASR-1002-HX
+          - vedge-ASR-1006-X
+          - vedge-C1111-8P
+          - vedge-C1121X-8P
+          - vedge-C1111X-8P
+          - vedge-C1111-8PLTELAW
+          - vedge-C1111-8PLTEEA
+          - vedge-C1121-8PLTEPW
+          - vedge-C1111-8PLTELA
+          - vedge-C1117-4PLTEEA
+          - vedge-C1126X-8PLTEP
+          - vedge-C1127X-8PLTEP
+          - vedge-C1127X-8PMLTEP
+          - vedge-C1127-8PMLTEP
+          - vedge-C1117-4PLTELA
+          - vedge-ISRv
+          - vedge-C8000V
+          - vedge-ASR-1001-X
+          - vedge-C1111-4P
+          - vedge-C1101-4P
+          - vedge-C1101-4PLTEP
+          - vedge-C8500-12X4QC
+          - vedge-C8530-12X4QC
+          - vedge-C8570-G2
+          - vedge-C8500-12X
+          - vedge-C8530-12X
+          - vedge-C8550-G2
+          - vedge-C8530L-8S8X4Y
+          - vedge-C8475-G2
+          - vedge-C8530L-8S2X2Y
+          - vedge-C8455-G2
+          - vedge-C8330-1N1S-4M2X
+          - vedge-C8375-E-G2
+          - vedge-C8330-6TM4SX
+          - vedge-C8330-6TM4X
+          - vedge-C8351-G2
+          - vedge-C8330X-6TM4SX
+          - vedge-C8330X-6TM4X
+          - vedge-C8355-G2
+          - vedge-C8500L-8S4X
+          - vedge-C1111-8PW
+          - vedge-C1111-8PLTEEAW
+          - vedge-C1111-4PLTEEA
+          - vedge-C1101-4PLTEPW
+          - vedge-C1109-4PLTE2PW
+          - vedge-C1109-4PLTE2P
+          - vedge-C1121X-8PLTEP
+          - vedge-C1161X-8PLTEP
+          - vedge-C1113-8PMLTEEA
+          - vedge-C1111-4PLTELA,vedge-C1116-4P
+          - vedge-C1116-4PLTEEA
+          - vedge-C8151-CVAP-G2
+          - vedge-C8151-CVAI-G2
+          - vedge-C1117-4P
+          - vedge-C1117-4PM
+          - vedge-C1117-4PMLTEEA
+          - vsmart
+          - vmanage
+          - vbond
+          - vedge-ISR-4461
+          - vedge-C8300-1N1S-4T2X
+          - vedge-C8300-1N1S-6T
+          - vedge-C1100TG-1N24P32A
+          - vedge-C1100TGX-1N24P32A
+          - vedge-C1161X-8P
+          - vedge-C8300-2N2S-4T2X
+          - vedge-C8300-2N2S-6T
+          - vedge-C8200-1N-4T
+          - vedge-C8200L-1N-4T
+          - vedge-C1161-8P
+          - vedge-C8230X-1N-2M2X
+          - vedge-C8235-E-G2
+          - vedge-C8230-1N-2M2X
+          - vedge-C8231-E-G2
+          - vedge-C8230E-8TM2X
+          - vedge-C8231-G2
+          - vedge-C8230X-8M2X
+          - vedge-C8235-G2
+          - vedge-C8221-G2
+          - vedge-C8225-G2
+          - vedge-C1126-8PLTEP
+          - vedge-C1127-8PLTEP
+          - vedge-C1121-4P
+          - vedge-C1121-4PLTEP
+          - vedge-C1128-8PLTEP
+          - vedge-C1121X-8PLTEPW
+          - vedge-C1121-8PLTEP
+          - vedge-C1121-8P
+          - vedge-C1161-8PLTEP
+          - vedge-C1113-8PLTEEA
+          - vedge-C1131-8PW
+          - vedge-C1131X-8PW
+          - vedge-C1131-8PLTEPW
+          - vedge-C1131X-8PLTEPW
+          - vedge-C1113-8PLTEW
+          - vedge-C1111-4PW
+          - vedge-C1112-8P
+          - vedge-C1112-8PLTEEA
+          - vedge-C1112-8PLTEEAWE
+          - vedge-C1112-8PWE
+          - vedge-C1113-8P
+          - vedge-C1113-8PLTEEAW
+          - vedge-C1113-8PLTELA
+          - vedge-C1113-8PLTELAWZ
+          - vedge-C1113-8PM
+          - vedge-C1113-8PMWE
+          - vedge-C1113-8PW
+          - vedge-C1116-4PLTEEAWE
+          - vedge-C1116-4PWE
+          - vedge-C1117-4PLTEEAW
+          - vedge-C1117-4PLTELAWZ
+          - vedge-C1117-4PMLTEEAWE
+          - vedge-C1117-4PMWE
+          - vedge-C1117-4PW
+          - vedge-C1118-8P
+          - vedge-C1109-2PLTEGB
+          - vedge-C1109-2PLTEUS
+          - vedge-C1109-2PLTEVZ
+        example: vedge-cloud
+      - name: state
+        in: query
+        description: List of states
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              certificateTypes:
+                type: string
+            description: 'This is valid Certificate States '
+            enum:
+            - tokengenerated
+            - bootstrapconfiggenerated
+            - csrgenerated
+            - csrfailed
+            - certinstalled
+            - certinstallfailed
+            $$ref: '#/components/schemas/CertificateStates'
+          enum:
+          - tokengenerated
+          - bootstrapconfiggenerated
+          - csrgenerated
+          - csrfailed
+          - certinstalled
+          - certinstallfailed
+        example:
+        - certinstalled
+      - name: uuid
+        in: query
+        description: List of device uuid
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              deviceUuid:
+                type: string
+                example: C8K-f9f4a977-be6c-47f7-b3b2-10e916bb24db
+            description: This is valid DeviceUuid
+            $$ref: '#/components/schemas/DeviceUuid'
+        example:
+        - C8K-5e87e5c3-0923-4364-a729-d65d40298d76
+      - name: deviceIP
+        in: query
+        description: List of device system IP
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              deviceIp:
+                type: string
+            description: This is the valid DeviceIP
+            $$ref: '#/components/schemas/DeviceIP'
+        example:
+        - 172.16.255.21
+      - name: validity
+        in: query
+        description: List of device validity
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              certificateValidity:
+                type: string
+            description: 'This is Certificate Validity '
+            enum:
+            - valid
+            - invalid
+            - staging
+            $$ref: '#/components/schemas/CertificateValidity'
+          enum:
+          - valid
+          - invalid
+          - staging
+        example:
+        - valid
+        - invalid
+        - staging
+      - name: family
+        in: query
+        description: The platform family to filter for
+        schema:
+          type: string
+          enum:
+          - aon
+          - cedge
+      - name: siteId
+        in: query
+        description: The Site Id to filter for
+        schema:
+          type: integer
+          format: int64
+        example: 400
+      - name: topology
+        in: query
+        description: The device topology to filter for
+        schema:
+          type: string
+          enum:
+          - hub
+          - spoke
+      - name: tag
+        in: query
+        description: The tag name to filter for
+        schema:
+          pattern: ^[^&<>! "]{1,128}$
+          type: string
+        example: Tag1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Example:
+                  description: Example
+                  value:
+                    header:
+                      generatedOn: 1719777080038
+                      viewKeys:
+                        uniqueKey: []
+                        preferenceKey: grid-vEdgeList
+                      columns:
+                      - title: Chassis Number
+                        property: chasisNumber
+                        hideable: false
+                        visible: true
+                        width: 250
+                        dataType: string
+                      - title: Site Name
+                        property: site-name
+                        visible: true
+                        width: 80
+                        dataType: string
+                      - title: Hostname
+                        property: host-name
+                        hideable: true
+                        visible: true
+                        width: 150
+                        dataType: string
+                      - title: Tags
+                        property: tags
+                        display: toggle
+                        actionColumn: true
+                        visible: true
+                        minWidth: 100
+                        dataType: string
+                      - title: Config Locked
+                        property: device-lock
+                        visible: true
+                        width: 80
+                        dataType: boolean
+                      - title: Managed By
+                        property: managed-by
+                        visible: true
+                        headerTooltip: 'This field indicates whether device is being managed by a Configuration-Group, Template, or it is Unmanaged i.e. not managed by either of them. Note: A device that is Unlocked but, managed by a Configuration-Group  will become locked again when the Configuration-Group is deployed back to the device.'
+                        width: 160
+                        dataType: string
+                      - title: Device Status
+                        property: configStatusMessage
+                        display: syncDiffChecker
+                        visible: true
+                        minWidth: 150
+                        dataType: string
+                      - title: Version
+                        property: version
+                        visible: true
+                        width: 150
+                        dataType: string
+                      - title: Reachability
+                        property: reachability
+                        hideable: true
+                        visible: true
+                        dataType: string
+                      - title: Site ID
+                        property: site-id
+                        visible: false
+                        width: 70
+                        dataType: numberStr
+                      - title: Region ID
+                        property: region-id
+                        visible: false
+                        width: 120
+                        dataType: string
+                      - title: Region Name
+                        property: region-name
+                        visible: false
+                        width: 120
+                        dataType: string
+                      - title: Mode
+                        property: configOperationMode
+                        display: keyvalue
+                        keyvalueProperty: configOperationMode
+                        visible: false
+                        keyvalue:
+                        - key: cli
+                          value: CLI
+                        - key: vmanage
+                          value: vManage
+                        width: 80
+                        dataType: string
+                      - title: view.certificate.clientViewVedgeList.assignedConfigGroup
+                        property: name
+                        visible: false
+                        width: 150
+                        dataType: string
+                      - title: Assigned Template
+                        property: template
+                        visible: false
+                        width: 150
+                        dataType: string
+                      - title: Device Model
+                        property: deviceModel
+                        display: keyvalue
+                        keyvalueProperty: deviceModel
+                        visible: false
+                        minWidth: 120
+                        dataType: string
+                      - title: Draft Mode
+                        property: draftMode
+                        visible: false
+                        width: 80
+                        dataType: string
+                      - title: Serial No./Token
+                        property: serialNumber
+                        visible: false
+                        width: 150
+                        dataType: string
+                      - title: State
+                        property: vedgeCertificateState
+                        display: iconAndToolTip
+                        iconProperty: vedgeCertificateState
+                        toolTipProperty: vedgeCertificateState
+                        visible: false
+                        icon:
+                        - key: tokengenerated
+                          value: images/certStates/token-generated.png
+                          displayKey: Token Generated
+                        - key: bootstrapconfiggenerated
+                          value: images/certStates/bootstrap-config-generated.png
+                          displayKey: Bootstrap Configuration Generated
+                        - key: csrgenerated
+                          value: images/certStates/csr-generated.png
+                          displayKey: CSR Generated
+                        - key: csrfailed
+                          value: images/certStates/csr-failed.png
+                          displayKey: CSR Failed
+                        - key: certinstallfailed
+                          value: images/certStates/cert-install-failed.png
+                          displayKey: Certificate Installation Failed
+                        - key: certinstalled
+                          value: images/certStates/cert-installed.png
+                          displayKey: Certificate Installed
+                        width: 40
+                        dataType: string
+                      - title: Enterprise Cert Serial No
+                        property: hardwareCertSerialNumber
+                        visible: false
+                        width: 100
+                        dataType: string
+                      - title: Certificate Expiration Date
+                        property: expirationDate
+                        visible: false
+                        width: 100
+                        dataType: string
+                      - title: 'Subject SUDI serial #'
+                        property: subjectSerialNumber
+                        visible: false
+                        width: 100
+                        dataType: string
+                      - title: Validity
+                        property: validity
+                        display: toggle
+                        actionColumn: true
+                        visible: false
+                        minWidth: 100
+                        dataType: string
+                      - title: 'System IP    '
+                        property: local-system-ip
+                        hideable: true
+                        visible: false
+                        minWidth: 120
+                        dataType: ipv4
+                      - title: Configured System IP
+                        property: configuredSystemIP
+                        hideable: true
+                        visible: false
+                        minWidth: 120
+                        dataType: ipv4
+                      - title: Upload Source
+                        property: uploadSource
+                        display: toggle
+                        actionColumn: true
+                        visible: false
+                        minWidth: 150
+                        dataType: string
+                      - title: Solution
+                        property: solution
+                        visible: false
+                        minWidth: 150
+                        dataType: string
+                      fields:
+                      - property: chasisNumber
+                        dataType: string
+                      - property: site-name
+                        dataType: string
+                      - property: host-name
+                        dataType: string
+                      - property: tags
+                        dataType: string
+                        display: toggle
+                      - property: device-lock
+                        dataType: boolean
+                      - property: managed-by
+                        dataType: string
+                      - property: configStatusMessage
+                        dataType: string
+                        display: syncDiffChecker
+                      - property: version
+                        dataType: string
+                      - property: reachability
+                        dataType: string
+                      - property: deviceIP
+                        dataType: ipv4
+                      - property: site-id
+                        dataType: numberStr
+                      - property: region-id
+                        dataType: string
+                      - property: region-name
+                        dataType: string
+                      - property: configOperationMode
+                        dataType: string
+                        display: keyvalue
+                      - property: name
+                        dataType: string
+                      - property: template
+                        dataType: string
+                      - property: deviceModel
+                        dataType: string
+                        display: keyvalue
+                      - property: draftMode
+                        dataType: string
+                      - property: serialNumber
+                        dataType: string
+                      - property: vedgeCertificateState
+                        dataType: string
+                        display: iconAndToolTip
+                      - property: hardwareCertSerialNumber
+                        dataType: string
+                      - property: expirationDate
+                        dataType: string
+                      - property: subjectSerialNumber
+                        dataType: string
+                      - property: validity
+                        dataType: string
+                        display: toggle
+                      - property: local-system-ip
+                        dataType: ipv4
+                      - property: configuredSystemIP
+                        dataType: ipv4
+                      - property: vbond
+                        dataType: ipv4
+                      - property: uploadSource
+                        dataType: string
+                        display: toggle
+                      - property: solution
+                        dataType: string
+                    data:
+                    - configuredHostname: vm11
+                      configuredSiteId: '100'
+                      configuredSystemIP: 172.16.255.21
+                      deviceType: vedge
+                      serialNumber: '12345712'
+                      ncsDeviceName: vedge-C8K-7676a621-a5e9-41ef-a9dd-d01782ff5834
+                      configStatusMessage: In Sync
+                      templateApplyLog:
+                      - '[14-Jun-2024 9:19:47 UTC] Deploying device with Config Group vm11_ConfigGroup'
+                      - '[14-Jun-2024 9:19:47 UTC] Generating configuration'
+                      - '[14-Jun-2024 9:19:49 UTC] Checking and creating device in Manager'
+                      - '[14-Jun-2024 9:19:56 UTC] Device is online'
+                      - '[14-Jun-2024 9:19:56 UTC] Updating device configuration in Manager'
+                      - '[14-Jun-2024 9:19:56 UTC] Sending configuration to device'
+                      - '[14-Jun-2024 9:20:01 UTC] Successfully notified device to pull configuration'
+                      - '[14-Jun-2024 9:20:02 UTC] Device has pulled the configuration'
+                      - '[14-Jun-2024 9:20:17 UTC] Device: Config applied successfully'
+                      - '[14-Jun-2024 9:20:17 UTC] Config Group successfully deployed to device'
+                      uuid: C8K-7676a621-a5e9-41ef-a9dd-d01782ff5834
+                      managementSystemIP: 172.16.255.21
+                      templateStatus: Success
+                      chasisNumber: C8K-7676a621-a5e9-41ef-a9dd-d01782ff5834
+                      configStatusMessageDetails: ''
+                      configOperationMode: vmanage
+                      deviceModel: vedge-C8000V
+                      deviceState: READY
+                      validity: valid
+                      platformFamily: c8000v
+                      hardwareVedge: false
+                      username: --
+                      rootCertHash: 4b31480c781ebc512ac3a3b6fd671f44d5b1f087
+                      deviceIP: 172.16.255.21
+                      personality: vedge
+                      uploadSource: Auto Discovered
+                      region-id: []
+                      addedByRule: false
+                      solution: sdwan
+                      site-id: '100'
+                      host-name: vm11
+                      system-ip: 172.16.255.21
+                      vbond: 10.0.12.26
+                      vmanageConnectionState: connected
+                      local-system-ip: 172.16.255.21
+                      availableVersions: []
+                      defaultVersion: 17.16.01.0.202649
+                      reachability: reachable
+                      version: 17.16.01.0.202649
+                      uptime-date: 1718354640000
+                      model_sku: None
+                      lastupdated: 1719751312724
+                      vmanage-system-ip: 172.16.255.21
+                      domain-id: '1'
+                      sp-organization-name: vIPtela Inc Regression
+                      organization-name: vIPtela Inc Regression
+                      id: 9b7c6a63-e659-4192-a2a7-8a743cb3b878
+                      name: vm11_ConfigGroup
+                      lifeCycleRequired: true
+                      vedgeCertificateState: certinstalled
+                      expirationDate: NA
+                      hardwareCertSerialNumber: NA
+                      subjectSerialNumber: NA
+                      resourceGroup: global
+                      tags: []
+                      draftMode: Disabled
+                      site-name: SITE_100
+                      device-lock: 'Yes'
+                      managed-by: Config-Group vm11_ConfigGroup
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceconfigSystemDeviceSystemdeviceapiResponseExampleDevicecategoryresp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: default,dca,Device Inventory > Edge-read,Device Inventory > Controller-read
+  /system/device/{uuid}:
+    put:
+      tags:
+      - Configuration - Device Inventory
+      description: Edit device
+      operationId: editDevice
+      parameters:
+      - name: uuid
+        in: path
+        description: Device UUID
+        required: true
+        schema:
+          type: string
+        example: 5dfa7d1e-201e-4506-83d6-667a56d17a10
+      requestBody:
+        description: Edit device request
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Edit Device:
+                description: Edit Device
+                value:
+                  deviceIP: 1.1.1.1
+                  username: cisco
+                  password: cisco
+                  personality: vbond
+                  generateCSR: true
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceconfigSystemDeviceSystemdeviceapiRequestExampleSystemdevice'
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+      - Configuration - Device Inventory
+      description: Delete vEdges
+      operationId: deleteDevice_ConfigurationDeviceInventory_2106
+      parameters:
+      - name: uuid
+        in: path
+        description: Device uuid
+        required: true
+        schema:
+          type: string
+        example: 930633aa-f843-4dff-a2f0-664ca97df5ae
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                $$ref: '#/components/schemas/DeleteDevice'
+              examples:
+                Example Value:
+                  description: Example Value
+                  value:
+                    status: success
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceconfigSystemDeviceSystemdeviceapiResponseExampleSystemdevicedeleteresp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Inventory-write,Device Inventory > Edge-write
+  /system/device/{uuid}/unlock:
+    post:
+      tags:
+      - Configuration - Device Inventory
+      description: Unlock device
+      operationId: unlockDevice
+      parameters:
+      - name: uuid
+        in: path
+        description: Device uuid
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Device config
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Device config:
+                description: Device config
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Inventory-write

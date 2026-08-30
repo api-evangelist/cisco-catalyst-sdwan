@@ -1,0 +1,149 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Monitoring - Stats Download API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Monitoring - Stats Download
+paths:
+  /statistics/download/{processType}/fetchvManageList:
+    get:
+      tags:
+      - Monitoring - Stats Download
+      operationId: fetchList
+      parameters:
+      - name: processType
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /statistics/download/{processType}/file/{fileType}/{queue}/{deviceIp}/{token}/{fileName}:
+    get:
+      tags:
+      - Monitoring - Stats Download
+      description: Downloading stats file
+      operationId: download
+      parameters:
+      - name: processType
+        in: path
+        description: Process type
+        required: true
+        schema:
+          pattern: ^[a-zA-Z-_]+$
+          type: string
+      - name: fileType
+        in: path
+        description: File type
+        required: true
+        schema:
+          pattern: ^[a-zA-Z-_]+$
+          type: string
+      - name: queue
+        in: path
+        description: Queue name
+        required: true
+        schema:
+          pattern: ^[0-9]+$
+          type: string
+      - name: deviceIp
+        in: path
+        description: Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+      - name: token
+        in: path
+        description: Token
+        required: true
+        schema:
+          type: string
+      - name: fileName
+        in: path
+        description: File name
+        required: true
+        schema:
+          pattern: ^[a-zA-Z0-9\-_./\\\s]+$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              example: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/download/{processType}/filelist:
+    post:
+      tags:
+      - Monitoring - Stats Download
+      description: Downloading list of stats file
+      operationId: downloadList
+      parameters:
+      - name: processType
+        in: path
+        description: 'Possible types are: remoteprocessing, dr'
+        required: true
+        schema:
+          pattern: ^[a-zA-Z-_]+$
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties:
+                type: object
+                properties:
+                  valueType:
+                    type: string
+                    enum:
+                    - ARRAY
+                    - OBJECT
+                    - STRING
+                    - NUMBER
+                    - 'TRUE'
+                    - 'FALSE'
+                    - 'NULL'
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

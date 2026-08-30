@@ -1,0 +1,76 @@
+openapi: 3.2.0
+info:
+  title: UX 1.0 Configuration Configuration - Template Lock API
+  description: "Configuration of UX 1.0 device and policy.\nIncludes API operations for the following:\n  Managing original SD-WAN device configurations and policy configurations\n  Device templates and feature templates"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Configuration - Template Lock
+paths:
+  /template/lock/{processId}:
+    delete:
+      tags:
+      - Configuration - Template Lock
+      description: Remove lock
+      operationId: removeLock
+      parameters:
+      - name: processId
+        in: path
+        description: Process Id
+        required: true
+        schema:
+          type: string
+          example: push_feature_template_configuration-ea4fe240-520c-4aaf-b674-7dfb46b0105e
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Configuration-write,Template Deploy-write,Policy Configuration-write
+    put:
+      tags:
+      - Configuration - Template Lock
+      description: Update lease
+      operationId: updateLeaseTime
+      parameters:
+      - name: processId
+        in: path
+        description: Process Id
+        required: true
+        schema:
+          type: string
+          example: push_feature_template_configuration-ea4fe240-520c-4aaf-b674-7dfb46b0105e
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Configuration-write,Template Deploy-write,Policy Configuration-write

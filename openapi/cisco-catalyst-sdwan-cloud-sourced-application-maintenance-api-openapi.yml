@@ -1,0 +1,338 @@
+openapi: 3.2.0
+info:
+  title: Others Cloud Sourced Application Maintenance API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Cloud Sourced Application Maintenance
+paths:
+  /sdavc/cloud-sourced:
+    get:
+      tags:
+      - Cloud Sourced Application Maintenance
+      description: returns all cloud sourced application
+      operationId: getExtendedApplications
+      parameters:
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sortBy
+        in: query
+        schema:
+          type: string
+      - name: orderBy
+        in: query
+        schema:
+          type: string
+      - name: applicationFamily
+        in: query
+        schema:
+          type: string
+      - name: applicationGroup
+        in: query
+        schema:
+          type: string
+      - name: trafficClass
+        in: query
+        schema:
+          type: string
+      - name: businessRelevance
+        in: query
+        schema:
+          type: string
+      - name: status
+        in: query
+        schema:
+          type: string
+      - name: appName
+        in: query
+        schema:
+          type: string
+      - name: source
+        in: query
+        schema:
+          type: string
+      - name: searchKeyword
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: All cloud sourced applications
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    format: int32
+                    example: 1
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        L3L4:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              clearIndex:
+                                type: integer
+                                format: int32
+                                example: 0
+                              ipAddresses:
+                                type: array
+                                example: 10.1.1.1
+                                items:
+                                  type: string
+                                  example: 10.1.1.1
+                              l4Protocol:
+                                type: string
+                                example: TCP
+                              ports:
+                                type: array
+                                example: 80
+                                items:
+                                  type: integer
+                                  format: int32
+                                  example: 80
+                            $$ref: '#/components/schemas/L3L4'
+                        appName:
+                          type: string
+                          example: nordvpn
+                        applicationFamily:
+                          type: string
+                          example: other
+                        applicationGroup:
+                          type: string
+                          example: other
+                        businessRelevance:
+                          type: string
+                          example: business-irrelevant
+                        cloud-sourced:
+                          type: string
+                        commonName:
+                          type: string
+                          example: nordvpn
+                        id:
+                          type: string
+                          example: '6567'
+                        serverNames:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                                example: nord-apps.com
+                            $$ref: '#/components/schemas/ServerName'
+                        sourceCategory:
+                          type: string
+                          example: SaaS
+                        status:
+                          type: string
+                          example: new
+                        trafficClass:
+                          type: string
+                          example: transactional-data
+                        uuid:
+                          type: string
+                          example: 16e37dfb-2538-4f19-be5b-88fe99ae4c4e
+                      $$ref: '#/components/schemas/ApplicationDetails'
+                  lastUpdateOn:
+                    type: integer
+                    format: int64
+                    example: 4233672632786387
+                $$ref: '#/components/schemas/GetExtendedApplicationResponse'
+        '403':
+          description: Forbidden
+    post:
+      tags:
+      - Cloud Sourced Application Maintenance
+      operationId: saveExtendedApplications
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      appName:
+                        type: string
+                        example: nordvpn
+                    $$ref: '#/components/schemas/ApplicationRequestDetails'
+                selectAll:
+                  type: boolean
+                  example: false
+                updateNetwork:
+                  type: boolean
+                  example: false
+              $$ref: '#/components/schemas/SaveExtendedApplicationRequest'
+        required: true
+      responses:
+        '200':
+          description: success response message
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: request processed successfully
+                  success:
+                    type: boolean
+                    example: true
+                $$ref: '#/components/schemas/DefaultSuccessResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+  /sdavc/cloud-sourced/apply/status/{uuid}:
+    get:
+      tags:
+      - Cloud Sourced Application Maintenance
+      description: Get cloud sourced apply task status
+      operationId: getDeviceComplianceStatus_CloudSourcedApplicationMaintenance_4003
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Scheduled Response:
+                  description: Scheduled Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: scheduled
+                    message: Task scheduled
+                In Progress Response:
+                  description: In Progress Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: in_progress
+                    message: Task is in progress
+                Success Response:
+                  description: Success Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: success
+                    message: Success
+                Failure Response:
+                  description: Failure Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: failure
+                    message: Task Failed
+                Not Started Response:
+                  description: Not Started Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: not_started
+                    message: The task has not started yet
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                500 - Internal Server Error:
+                  description: 500 - Internal Server Error
+                  value:
+                    error:
+                      message: <Short Message>
+                      code: PP0018
+                      details: <Detailed Message>
+  /sdavc/cloud-sourced/approve:
+    post:
+      tags:
+      - Cloud Sourced Application Maintenance
+      operationId: approveExtendedApplications
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      appName:
+                        type: string
+                        example: nordvpn
+                    $$ref: '#/components/schemas/ApplicationRequestDetails'
+                selectAll:
+                  type: boolean
+                  example: false
+              $$ref: '#/components/schemas/ExtendedApplicationRequestData'
+        required: true
+      responses:
+        '200':
+          description: success response message
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: request processed successfully
+                  success:
+                    type: boolean
+                    example: true
+                $$ref: '#/components/schemas/DefaultSuccessResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden

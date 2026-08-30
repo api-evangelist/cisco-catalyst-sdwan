@@ -1,0 +1,162 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - NetworkHub Resources API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - NetworkHub Resources
+paths:
+  /device/csp/resources/cpu-info/allocation:
+    get:
+      tags:
+      - Real-Time Monitoring - NetworkHub Resources
+      description: Get NetworkHub CPU allocation info from device
+      operationId: getAllocationInfo
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                NetworkHub CPU allocation info:
+                  description: NetworkHub CPU allocation info
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.11
+                      vdevice-host-name: vm1
+                      total-sockets: '1'
+                      cores-per-socket: '8'
+                      total-logical-cpus: '16'
+                      logical-cpus-used-by-system: '2'
+                      logical-cpus-used-by-vnfs: '4'
+                      logical-cpus-used-dedicated: '12'
+                      logical-cpus-used-sharable: '2'
+                      lastupdated: 1661501479353
+                      vdevice-dataKey: 172.16.255.11
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write
+  /device/csp/resources/cpu-info/cpus:
+    get:
+      tags:
+      - Real-Time Monitoring - NetworkHub Resources
+      description: Get NetworkHub CPU info from device
+      operationId: getCPUInfo
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                NetworkHub CPU info:
+                  description: NetworkHub CPU info
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.11
+                      vdevice-host-name: vm1
+                      cpu-id: '7'
+                      socket-id: '0'
+                      vdevice-dataKey: 172.16.255.11
+                      core-id: '7'
+                      system-use: false
+                      name: ROUTER3
+                      vcpus: '4'
+                      low-latency: true
+                      vcpu-id: '0'
+                      lastupdated: 1661501479353
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write
+  /device/csp/resources/cpu-info/vnfs:
+    get:
+      tags:
+      - Real-Time Monitoring - NetworkHub Resources
+      description: Get NetworkHub CPU VNF info from device
+      operationId: getVNFInfo
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                NetworkHub CPU VNF info:
+                  description: NetworkHub CPU VNF info
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.11
+                      vdevice-host-name: vm1
+                      name: ROUTER3
+                      vcpus: '4'
+                      low-latency: true
+                      vcpu-id: '0'
+                      socket-id: '0'
+                      core-id: '7'
+                      cpu-id: '7'
+                      vdevice-dataKey: 172.16.255.11
+                      lastupdated: 1661501479353
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write

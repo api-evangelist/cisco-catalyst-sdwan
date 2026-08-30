@@ -1,0 +1,457 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - Trustsec API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - Trustsec
+paths:
+  /device/ctsPac:
+    get:
+      tags:
+      - Real-Time Monitoring - Trustsec
+      description: get Cisco TrustSec PAC information from device
+      operationId: getCtsPac
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                TrustSec PAC information:
+                  description: TrustSec PAC information
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.15
+                      vdevice-host-name: vm5
+                      pac-type: Cisco Trustse
+                      authority-id: 'Authority '
+                      initiator-id: device1
+                      vdevice-dataKey: 172.16.255.15-vm5
+                      authority-id-info: acs1
+                      pac-life-time: 13:59:27 PDT Jun 5 2022
+                      pac-refresh-time: 00:01:24
+                      pac-opaque: 000200B000030001000400101100E046659D4275B644BF946EFA49CD00060094000301008285A14CB259CA096487096D68D5F34D000000014C09A6AA00093A808ACA80B39EB656AF0BCA91F3564DF540447A11F9ECDFA4AEC3A193769B80066832495B8C40F6B5B46B685A68411B7DF049A32F2B03F89ECF948AC4BB85CF855CA186BEF8E2A8C69A7C0BE1BDF6EC27D826896A31821A7BA523C8BD90072CB8A8D0334F004D4B627D33001B0519D41738F7EDDF3A
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,Device Monitoring-write
+  /device/environmentData:
+    get:
+      tags:
+      - Real-Time Monitoring - Trustsec
+      description: get Cisco TrustSec Environment Data information from device
+      operationId: getEnvironmentData
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                TrustSec environment data information:
+                  description: TrustSec environment data information
+                  value:
+                    data:
+                    - status: env-download-in-progress
+                      device-sgt: 0
+                      last-updated-time: '1970-01-01T00:00:00+00:00'
+                      lastupdated: 1652325611225
+                      vdevice-dataKey: 172.16.255.15-vm5
+                      next-refresh-time: '1970-01-01T00:00:00+00:00'
+                      vdevice-host-name: vm5
+                      vdevice-name: 172.16.255.15
+                      life-time: '0'
+                      total-num-servers: 0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,Device Monitoring-write
+  /device/environmentData/radiusServer:
+    get:
+      tags:
+      - Real-Time Monitoring - Trustsec
+      description: get Cisco TrustSec Environment Data Radius Server list from device
+      operationId: getRadiusServer
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                TrustSec environment data radius server list information:
+                  description: TrustSec environment data radius server list information
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.15
+                      vdevice-host-name: vm5
+                      ip-addr: 0.0.0.0
+                      port-num: '1812'
+                      is-alive: 'TRUE'
+                      auto-test: 'TRUE'
+                      keywrap: '-'
+                      idle-time: '3600'
+                      dead-time: '60'
+                      lastupdated: 1652325611225
+                      vdevice-dataKey: 172.16.255.15-vm5
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,Device Monitoring-write
+  /device/roleBasedCounters:
+    get:
+      tags:
+      - Real-Time Monitoring - Trustsec
+      description: get Cisco TrustSec Role Based Counters information from device
+      operationId: getRoleBasedCounters
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                TrustSec role based counters information:
+                  description: TrustSec role based counters information
+                  value:
+                    data:
+                    - software-permit-count: '0'
+                      software-monitor-count: '0'
+                      software-deny-count: '0'
+                      vdevice-name: 172.16.255.15
+                      total-permit-count: '0'
+                      src-sgt: 55
+                      total-deny-count: '0'
+                      vdevice-host-name: vm5
+                      hardware-deny-count: '0'
+                      vdevice-dataKey: 172.16.255.15-vm5-55-66
+                      hardware-permit-count: '0'
+                      lastupdated: 1654768097970
+                      dst-sgt: 66
+                      hardware-monitor-count: '0'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,Device Monitoring-write
+  /device/roleBasedIpv6Counters:
+    get:
+      tags:
+      - Real-Time Monitoring - Trustsec
+      description: get Cisco TrustSec Role Based Ipv6 Counters information from device
+      operationId: getRoleBasedIpv6Counters
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                TrustSec role based counters information:
+                  description: TrustSec role based counters information
+                  value:
+                    data:
+                    - software-permit-count: '0'
+                      software-monitor-count: '0'
+                      software-deny-count: '0'
+                      vdevice-name: 172.16.255.16
+                      total-permit-count: '0'
+                      src-sgt: 3
+                      total-deny-count: '0'
+                      vdevice-host-name: vm6
+                      hardware-deny-count: '0'
+                      vdevice-dataKey: 172.16.255.16-vm6-3-5
+                      hardware-permit-count: '0'
+                      lastupdated: 1654823680867
+                      dst-sgt: 5
+                      hardware-monitor-count: '0'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/roleBasedIpv6Permissions:
+    get:
+      tags:
+      - Real-Time Monitoring - Trustsec
+      description: get Cisco TrustSec Role Based ipv6 Permissions information from device
+      operationId: getRoleBasedIpv6Permissions
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                TrustSec role based permissions information:
+                  description: TrustSec role based permissions information
+                  value:
+                    data:
+                    - last-updated-time: '2036-02-07T06:28:16+00:00'
+                      num-of-sgacl: 1
+                      vdevice-dataKey: 172.16.255.16-vm6-3-5
+                      vdevice-name: 172.16.255.16
+                      policy-life-time: '0'
+                      sgacl-name: zhanglist2
+                      monitor-mode: 'false'
+                      src-sgt: 3
+                      lastupdated: 1654823603240
+                      dst-sgt: 5
+                      vdevice-host-name: vm6
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/roleBasedPermissions:
+    get:
+      tags:
+      - Real-Time Monitoring - Trustsec
+      description: get Cisco TrustSec Role Based Permissions information from device
+      operationId: getRoleBasedPermissions
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                TrustSec role based permissions information:
+                  description: TrustSec role based permissions information
+                  value:
+                    data:
+                    - last-updated-time: '2036-02-07T06:28:16+00:00'
+                      num-of-sgacl: 1
+                      vdevice-dataKey: 172.16.255.15-vm5-55-66
+                      vdevice-name: 172.16.255.15
+                      policy-life-time: '0'
+                      sgacl-name: acl1
+                      monitor-mode: 'false'
+                      src-sgt: 55
+                      lastupdated: 1654767424577
+                      dst-sgt: 66
+                      vdevice-host-name: vm5
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,Device Monitoring-write
+  /device/roleBasedSgtMap:
+    get:
+      tags:
+      - Real-Time Monitoring - Trustsec
+      description: get Cisco TrustSec Role Based SGT Map information from device
+      operationId: getRoleBasedSgtMap
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                TrustSec role based SGT map information:
+                  description: TrustSec role based SGT map information
+                  value:
+                    data:
+                    - vdevice-dataKey: 172.16.255.15-vm5-10.0.1.15/32-Default
+                      ip: 10.0.1.15/32
+                      sgt: 10
+                      lastupdated: 1652322326243
+                      source: from-cli-hi
+                      vrf-name: Default
+                      vdevice-host-name: vm5
+                      vdevice-name: 172.16.255.15
+                    - vdevice-dataKey: 172.16.255.15-vm5-10.0.20.15/32-Default
+                      ip: 10.0.20.15/32
+                      sgt: 10
+                      lastupdated: 1652322326243
+                      source: from-cli-hi
+                      vrf-name: Default
+                      vdevice-host-name: vm5
+                      vdevice-name: 172.16.255.15
+                    - vdevice-dataKey: 172.16.255.15-vm5-10.0.100.15/32-Default
+                      ip: 10.0.100.15/32
+                      sgt: 10
+                      lastupdated: 1652322326243
+                      source: from-cli-hi
+                      vrf-name: Default
+                      vdevice-host-name: vm5
+                      vdevice-name: 172.16.255.15
+                    - vdevice-dataKey: 172.16.255.15-vm5-10.1.15.15/32-Default
+                      ip: 10.1.15.15/32
+                      sgt: 10
+                      lastupdated: 1652322326243
+                      source: from-cli-hi
+                      vrf-name: Default
+                      vdevice-host-name: vm5
+                      vdevice-name: 172.16.255.15
+                    - vdevice-dataKey: 172.16.255.15-vm5-10.1.17.15/32-Default
+                      ip: 10.1.17.15/32
+                      sgt: 10
+                      lastupdated: 1652322326243
+                      source: from-cli-hi
+                      vrf-name: Default
+                      vdevice-host-name: vm5
+                      vdevice-name: 172.16.255.15
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,Device Monitoring-write
+  /device/sxpConnections:
+    get:
+      tags:
+      - Real-Time Monitoring - Trustsec
+      description: get Cisco TrustSec SXP Connections information from device
+      operationId: getSxpConnections
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                TrustSec SXP Connections information:
+                  description: TrustSec SXP Connections information
+                  value:
+                    data:
+                    - listener-duration: '23'
+                      vdevice-dataKey: 172.16.255.15-vm5-10.1.16.116-Default
+                      vdevice-name: 172.16.255.15
+                      source-ip: 10.1.15.15
+                      listener-state: state-off
+                      peer-ip: 10.1.16.116
+                      vrf-name: Default
+                      lastupdated: 1652319406421
+                      speaker-state: state-off
+                      vdevice-host-name: vm5
+                      local-mode: con-mode-both
+                      speaker-duration: '35008'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,Device Monitoring-write

@@ -1,0 +1,307 @@
+openapi: 3.2.0
+info:
+  title: UX 1.0 Configuration Configuration - Policy IPv6 Device Access Definition Builder API
+  description: "Configuration of UX 1.0 device and policy.\nIncludes API operations for the following:\n  Managing original SD-WAN device configurations and policy configurations\n  Device templates and feature templates"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Configuration - Policy IPv6 Device Access Definition Builder
+paths:
+  /template/policy/definition/deviceaccesspolicyv6:
+    get:
+      tags:
+      - Configuration - Policy IPv6 Device Access Definition Builder
+      description: Get policy definitions
+      operationId: getDefinitions_ConfigurationPolicyIpv6DeviceAccessDefinitionBuilder_4803
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Policy definition:
+                  description: Policy definition
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write,Device Access Policy-readDevice Access Policy-write
+    post:
+      tags:
+      - Configuration - Policy IPv6 Device Access Definition Builder
+      description: Create policy definition
+      operationId: createPolicyDefinition_ConfigurationPolicyIpv6DeviceAccessDefinitionBuilder_4804
+      requestBody:
+        description: Policy definition
+        content:
+          application/json:
+            schema:
+              type: object
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy Configuration-write,Device Access Policy-write
+  /template/policy/definition/deviceaccesspolicyv6/bulk:
+    put:
+      tags:
+      - Configuration - Policy IPv6 Device Access Definition Builder
+      description: Create/Edit policy definitions in bulk
+      operationId: savePolicyDefinitionInBulk_ConfigurationPolicyIpv6DeviceAccessDefinitionBuilder_5303
+      requestBody:
+        description: Policy definition
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Policy definition:
+                description: Policy definition
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Policy definition:
+                  description: Policy definition
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy Configuration-write
+  /template/policy/definition/deviceaccesspolicyv6/multiple/{id}:
+    put:
+      tags:
+      - Configuration - Policy IPv6 Device Access Definition Builder
+      description: Edit multiple policy definitions
+      operationId: editMultiplePolicyDefinition_ConfigurationPolicyIpv6DeviceAccessDefinitionBuilder_6203
+      parameters:
+      - name: id
+        in: path
+        description: Policy Id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Policy definition
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Policy definition:
+                description: Policy definition
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Policy definition:
+                  description: Policy definition
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy Configuration-write
+  /template/policy/definition/deviceaccesspolicyv6/preview:
+    post:
+      tags:
+      - Configuration - Policy IPv6 Device Access Definition Builder
+      description: Preview policy definition
+      operationId: previewPolicyDefinition_ConfigurationPolicyIpv6DeviceAccessDefinitionBuilder_5604
+      requestBody:
+        description: Policy definition
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Policy definition:
+                description: Policy definition
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Policy definition:
+                  description: Policy definition
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+  /template/policy/definition/deviceaccesspolicyv6/preview/{id}:
+    get:
+      tags:
+      - Configuration - Policy IPv6 Device Access Definition Builder
+      description: Preview policy definition
+      operationId: previewPolicyDefinitionById_ConfigurationPolicyIpv6DeviceAccessDefinitionBuilder_6103
+      parameters:
+      - name: id
+        in: path
+        description: Policy Id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Policy definition:
+                  description: Policy definition
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+  /template/policy/definition/deviceaccesspolicyv6/{id}:
+    get:
+      tags:
+      - Configuration - Policy IPv6 Device Access Definition Builder
+      description: Get a specific policy definitions
+      operationId: getPolicyDefinition_ConfigurationPolicyIpv6DeviceAccessDefinitionBuilder_5303
+      parameters:
+      - name: id
+        in: path
+        description: Policy Id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Policy definition:
+                  description: Policy definition
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write,Device Access Policy-readDevice Access Policy-write
+    put:
+      tags:
+      - Configuration - Policy IPv6 Device Access Definition Builder
+      description: Edit a policy definitions
+      operationId: editPolicyDefinition_ConfigurationPolicyIpv6DeviceAccessDefinitionBuilder_5303
+      parameters:
+      - name: id
+        in: path
+        description: Policy Id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Policy definition
+        content:
+          application/json:
+            schema:
+              type: object
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy Configuration-write,Device Access Policy-write
+    delete:
+      tags:
+      - Configuration - Policy IPv6 Device Access Definition Builder
+      description: Delete policy definition
+      operationId: deletePolicyDefinition_ConfigurationPolicyIpv6DeviceAccessDefinitionBuilder_5306
+      parameters:
+      - name: id
+        in: path
+        description: Policy Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy Configuration-write,Device Access Policy-write

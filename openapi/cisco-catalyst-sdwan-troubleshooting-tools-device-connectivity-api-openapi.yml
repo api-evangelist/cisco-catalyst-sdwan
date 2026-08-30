@@ -1,0 +1,1167 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Troubleshooting Tools - Device Connectivity API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Troubleshooting Tools - Device Connectivity
+paths:
+  /device/tools/admintech:
+    post:
+      tags:
+      - Troubleshooting Tools - Device Connectivity
+      description: Generate admin tech logs
+      operationId: createAdminTech
+      requestBody:
+        description: Admin tech generation request
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                custom-commands:
+                  type: array
+                  description: custom commands
+                  example:
+                  - show version
+                  - show platform
+                  items:
+                    type: string
+                    description: command
+                    example: show versio
+                device-type:
+                  type: string
+                  example: vmanage
+                deviceIP:
+                  type: string
+                  example: 10.3.0.1
+                exclude-cores:
+                  type: boolean
+                  example: true
+                exclude-logs:
+                  type: boolean
+                  example: true
+                exclude-tech:
+                  type: boolean
+                  example: false
+                tech-filter:
+                  type: array
+                  items:
+                    type: string
+              $$ref: '#/components/schemas/AdminTechCreateReq'
+            examples:
+              Generate Admin tech log:
+                description: Generate Admin tech log
+                value:
+                  deviceIP: 10.3.0.1
+                  device-type: vmanage
+                  exclude-cores: true
+                  exclude-tech: false
+                  exclude-logs: false
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Tools-write,dca
+  /device/tools/admintech/copy:
+    post:
+      tags:
+      - Troubleshooting Tools - Device Connectivity
+      description: copy admin tech logs
+      operationId: copyAdminTechOnDevice
+      requestBody:
+        description: Admin tech copy request
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                deviceIP:
+                  type: string
+                  example: 10.3.0.1
+                fileName:
+                  type: string
+                  example: 10.3.0.1-20200522-102611-admin-tech.tar.gz
+              $$ref: '#/components/schemas/AdminTechReq'
+            examples:
+              Copy Admin tech log:
+                description: Copy Admin tech log
+                value:
+                  deviceIP: 10.3.0.1
+                  fileName: 10.3.0.1-20200522-102611-admin-tech.tar.gz
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Tools-write,dca
+  /device/tools/admintech/delete:
+    delete:
+      tags:
+      - Troubleshooting Tools - Device Connectivity
+      description: delete admin tech logs
+      operationId: deleteAdminTechOnDevice
+      requestBody:
+        description: Admin tech delete request
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                deviceIP:
+                  type: string
+                  example: 10.3.0.1
+                fileName:
+                  type: string
+                  example: 10.3.0.1-20200522-102611-admin-tech.tar.gz
+              $$ref: '#/components/schemas/AdminTechReq'
+            examples:
+              Delete Admin tech log:
+                description: Delete Admin tech log
+                value:
+                  deviceIP: 10.3.0.1
+                  fileName: 10.3.0.1-20200522-102611-admin-tech.tar.gz
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Tools-write,dca
+  /device/tools/admintech/download/{filename}:
+    get:
+      tags:
+      - Troubleshooting Tools - Device Connectivity
+      description: Download admin tech logs
+      operationId: downloadAdminTechFile
+      parameters:
+      - name: filename
+        in: path
+        description: Admin tech file
+        required: true
+        schema:
+          type: string
+        example: 172.16.255.14-vm4-20240605-175206-admin-tech.tar.gz
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Tools-write,dca
+  /device/tools/admintech/supportedfeatures/{deviceModel}/{deviceIP}/{personality}:
+    get:
+      tags:
+      - Troubleshooting Tools - Device Connectivity
+      summary: Get supported admin tech features
+      description: Get supported admin tech features
+      operationId: getSupportedAdminTechFeatures
+      parameters:
+      - name: deviceModel
+        in: path
+        description: device Model
+        required: true
+        schema:
+          type: object
+          properties:
+            deviceModel:
+              type: string
+          description: 'This is the valid DeviceModel '
+          $$ref: '#/components/schemas/DeviceModel'
+      - name: deviceIP
+        in: path
+        description: Device IP
+        required: true
+        schema:
+          type: object
+          properties:
+            deviceIp:
+              type: string
+          description: This is the valid DeviceIP
+          $$ref: '#/components/schemas/DeviceIP'
+      - name: personality
+        in: path
+        description: personality
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/tools/admintech/{requestID}:
+    delete:
+      tags:
+      - Troubleshooting Tools - Device Connectivity
+      description: Delete admin tech logs
+      operationId: deleteAdminTechFile
+      parameters:
+      - name: requestID
+        in: path
+        description: Request Id of admin tech generation request
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Tools-write
+  /device/tools/admintechlist:
+    post:
+      tags:
+      - Troubleshooting Tools - Device Connectivity
+      description: List admin tech logs
+      operationId: listAdminTechsOnDevice
+      requestBody:
+        description: Admin tech listing request
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                deviceIP:
+                  type: string
+                  example: 10.3.0.1
+              $$ref: '#/components/schemas/AdminTechListReq'
+            examples:
+              List Admin tech log:
+                description: List Admin tech log
+                value:
+                  deviceIP: 10.3.0.1
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    creationTime:
+                      type: integer
+                      format: int64
+                      example: 1590186370340
+                    fileName:
+                      type: string
+                      example: 10.3.0.1-20200522-102611-admin-tech.tar.gz
+                    requestTokenId:
+                      type: string
+                      example: 10540562-6759-40ad-917f-71d4b81ff37d
+                    size:
+                      type: integer
+                      format: int32
+                      example: 1081406
+                    state:
+                      type: string
+                      example: done
+                  $$ref: '#/components/schemas/AdminTechListRes'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Tools-write,dca
+  /device/tools/admintechs:
+    get:
+      tags:
+      - Troubleshooting Tools - Device Connectivity
+      description: Get device admin-tech information
+      operationId: listAdminTechs
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  creationTime:
+                    type: integer
+                    format: int64
+                    example: 1590186370340
+                  deviceIP:
+                    type: string
+                    example: 10.3.0.1
+                  fileName:
+                    type: string
+                    example: 10.3.0.1-20200522-102611-admin-tech.tar.gz
+                  local-system-ip:
+                    type: string
+                    example: 10.3.0.1
+                  requestTokenId:
+                    type: string
+                    example: 10540562-6759-40ad-917f-71d4b81ff37d
+                  size:
+                    type: integer
+                    format: int32
+                    example: 1081406
+                  state:
+                    type: string
+                    example: done
+                  tac_state:
+                    type: string
+                    example: notStarted
+                $$ref: '#/components/schemas/AdminTechsRes'
+              examples:
+                Example:
+                  description: Example
+                  value:
+                    data:
+                    - creationTime: 1590186370340
+                      size: 1081406
+                      fileName: 10.3.0.1-20200522-102611-admin-tech.tar.gz
+                      state: done
+                      deviceIP: 10.3.0.1
+                      local-system-ip: 10.3.0.1
+                      requestTokenId: 10540562-6759-40ad-917f-71d4b81ff37d
+                      tac_state: notStarted
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceCommonDevicetoolsapiResponseExampleAdmintechs'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Tools-write,dca
+  /device/tools/admintechs/inprogress:
+    get:
+      tags:
+      - Troubleshooting Tools - Device Connectivity
+      description: Get device admin-tech InProgressCount
+      operationId: getInProgressCount
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  inProgressCount:
+                    type: integer
+                    format: int32
+                    example: 5
+                $$ref: '#/components/schemas/InProgressCount'
+              examples:
+                Example:
+                  description: Example
+                  value:
+                    data:
+                    - inProgressCount: '5'
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceCommonDevicetoolsapiResponseExampleAdmintechsinprogress'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Tools-write,dca
+  /device/tools/admintechs/upload:
+    post:
+      tags:
+      - Troubleshooting Tools - Device Connectivity
+      description: upload admin tech to SR
+      operationId: uploadAdminTech
+      requestBody:
+        description: Admin tech upload request
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                requestTokenId:
+                  type: string
+                  example: ea8cb172-61c4-47e0-8957-ac83b384f53e
+                sr_number:
+                  type: string
+                  example: '69131837254'
+                token:
+                  type: string
+                  example: 9b42986QTUc
+                vpn:
+                  type: string
+                  example: VPN 0
+              $$ref: '#/components/schemas/AdminTechsUploadReq'
+            examples:
+              upload Admin tech log:
+                description: upload Admin tech log
+                value:
+                  sr_number: '69131837254'
+                  token: 9b42986QTUc
+                  vpn: VPN 0
+                  requestTokenId: ea8cb172-61c4-47e0-8957-ac83b384f53e
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Tools-write,dca
+  /device/tools/factoryreset:
+    post:
+      tags:
+      - Troubleshooting Tools - Device Connectivity
+      description: Device factory reset
+      operationId: factoryReset
+      requestBody:
+        description: Device factory reset
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Device factory reset:
+                description: Device factory reset
+                value:
+                  deviceIP: 172.16.255.16
+                  resetOption: full-wipe/retain-license
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/tools/nping/{deviceIP}:
+    post:
+      tags:
+      - Troubleshooting Tools - Device Connectivity
+      description: NPing device
+      operationId: npingDevice
+      parameters:
+      - name: deviceIP
+        in: path
+        description: Device IP
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Ping parameter
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                count:
+                  type: string
+                  example: '5'
+                destPort:
+                  type: string
+                  example: '22'
+                df:
+                  type: string
+                  example: 'true'
+                host:
+                  type: string
+                  example: 3::2
+                interfaceIP:
+                  type: string
+                  example: 3::1
+                mtu:
+                  type: string
+                  example: '128'
+                probeType:
+                  type: string
+                  example: tcp
+                rapid:
+                  type: string
+                  example: 'true'
+                size:
+                  type: string
+                  example: '128'
+                source:
+                  type: string
+                  example: 3::1
+                sourcePort:
+                  type: string
+                  example: '22'
+                tos:
+                  type: string
+                  example: '1'
+                ttl:
+                  type: string
+                  example: '1'
+                vpn:
+                  type: string
+                  example: '0'
+              $$ref: '#/components/schemas/NPingRequest'
+            examples:
+              Ping parameter:
+                description: Ping parameter
+                value:
+                  host: 10.1.12.16
+                  probeType: icmp
+                  source: 10.1.12.15
+                  interfaceIP: 10.1.12.15
+                  vpn: '0'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  avgRoundTrip:
+                    type: number
+                    example: 3.964
+                  lossPercentage:
+                    type: number
+                    example: 0
+                  maxRoundTrip:
+                    type: number
+                    example: 14.43
+                  minRoundTrip:
+                    type: number
+                    example: 1.221
+                  packetsReceived:
+                    type: number
+                    example: 5
+                  packetsTransmitted:
+                    type: number
+                    example: 5
+                  rawOutput:
+                    type: array
+                    items:
+                      type: string
+                $$ref: '#/components/schemas/NPingResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Tools-read
+  /device/tools/ping/{deviceIP}:
+    post:
+      tags:
+      - Troubleshooting Tools - Device Connectivity
+      description: Ping device
+      operationId: pingDevice
+      parameters:
+      - name: deviceIP
+        in: path
+        description: Device IP
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Ping parameter
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                count:
+                  type: string
+                  example: '5'
+                host:
+                  type: string
+                  example: 10.1.12.16
+                rapid:
+                  type: string
+                  example: 'true'
+                size:
+                  type: string
+                  example: '128'
+                source:
+                  type: string
+                  example: 10.1.12.15
+                vpn:
+                  type: string
+                  example: '0'
+              $$ref: '#/components/schemas/PingRequest'
+            examples:
+              Ping parameter:
+                description: Ping parameter
+                value:
+                  host: 10.1.12.16
+                  source: 10.1.12.15
+                  vpn: '0'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  avgRoundTrip:
+                    type: number
+                    example: 0.389
+                  lossPercentage:
+                    type: number
+                    example: 0
+                  maxRoundTrip:
+                    type: number
+                    example: 0.534
+                  minRoundTrip:
+                    type: number
+                    example: 0.226
+                  packetsReceived:
+                    type: number
+                    example: 5
+                  packetsTransmitted:
+                    type: number
+                    example: 5
+                  rawOutput:
+                    type: array
+                    items:
+                      type: string
+                $$ref: '#/components/schemas/PingResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Tools-read
+  /device/tools/porthopcolor/{deviceIP}:
+    post:
+      tags:
+      - Troubleshooting Tools - Device Connectivity
+      description: Request port hop color
+      operationId: processPortHopColor
+      parameters:
+      - name: deviceIP
+        in: path
+        description: Device IP
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Device port hop color
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Device port hop color:
+                description: Device port hop color
+                value:
+                  color: mpls
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/tools/reset/interface/{deviceIP}:
+    post:
+      tags:
+      - Troubleshooting Tools - Device Connectivity
+      description: Reset device interface
+      operationId: processInterfaceReset
+      parameters:
+      - name: deviceIP
+        in: path
+        description: Device IP
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Device interface
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ifname:
+                  type: string
+                  example: GigabitEthernet1
+                vpnId:
+                  type: string
+                  example: '512'
+              $$ref: '#/components/schemas/ResetInterfaceReq'
+            examples:
+              Device interface:
+                description: Device interface
+                value:
+                  vpnId: '512'
+                  ifname: GigabitEthernet1
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Tools-write
+  /device/tools/reset/profile:
+    post:
+      tags:
+      - Troubleshooting Tools - Device Connectivity
+      summary: Reset Cellular Profile
+      description: Reset Cellular Profile
+      operationId: processCellularProfileReset
+      requestBody:
+        description: Reset Cellular Profile
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                localSystemIp:
+                  type: string
+                  description: local system ip
+                  example: 172.16.255.15
+              $$ref: '#/components/schemas/ResetProfileReq'
+            examples:
+              Reset Cellular Profile:
+                description: Reset Cellular Profile
+                value:
+                  localSystemIp: 172.16.255.15
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Cellular Profile Reset-write
+  /device/tools/resetuser/{deviceIP}:
+    post:
+      tags:
+      - Troubleshooting Tools - Device Connectivity
+      description: Request reset user
+      operationId: processResetUser
+      parameters:
+      - name: deviceIP
+        in: path
+        description: Device IP
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Device user reset
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Device user reset:
+                description: Device user reset
+                value:
+                  user: admin
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/tools/servicepath/{deviceIP}:
+    post:
+      tags:
+      - Troubleshooting Tools - Device Connectivity
+      description: Service path
+      operationId: servicePath
+      parameters:
+      - name: deviceIP
+        in: path
+        description: Device IP
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Service path parameter
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Service path parameter:
+                description: Service path parameter
+                value: {}
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/tools/traceroute/{deviceIP}:
+    post:
+      tags:
+      - Troubleshooting Tools - Device Connectivity
+      description: Traceroute
+      operationId: tracerouteDevice
+      parameters:
+      - name: deviceIP
+        in: path
+        description: Device IP
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Traceroute parameter
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                deviceIp:
+                  type: string
+                  example: 172.16.255.15
+                host:
+                  type: string
+                  example: 3::2
+                interface:
+                  type: string
+                  example: 3::1
+                interfaceIP:
+                  type: string
+                  example: 3::1
+                size:
+                  type: string
+                  example: '128'
+                vpn:
+                  type: string
+                  example: '0'
+              $$ref: '#/components/schemas/TracerouteRequest'
+            examples:
+              Traceroute parameter:
+                description: Traceroute parameter
+                value:
+                  deviceIp: 172.16.255.15
+                  host: 10.1.12.16
+                  interface: 10.1.12.15
+                  interfaceIP: 10.1.12.15
+                  vpn: '0'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  nexthops:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        errorInfo:
+                          type: string
+                          example: Host unreachable
+                        hopName:
+                          type: string
+                        hopNumber:
+                          type: string
+                          example: '1'
+                        ipAddress:
+                          type: string
+                          example: 3::2
+                        meanLatency:
+                          type: string
+                          example: '1.269'
+                      $$ref: '#/components/schemas/Hops'
+                  rawOutput:
+                    type: array
+                    items:
+                      type: string
+                $$ref: '#/components/schemas/TracerouteResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Tools-read
+  /device/tools/tunnelpath/{deviceIP}:
+    post:
+      tags:
+      - Troubleshooting Tools - Device Connectivity
+      description: TunnelPath
+      operationId: tunnelPath
+      parameters:
+      - name: deviceIP
+        in: path
+        description: Device IP
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: TunnelPath parameter
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              TunnelPath parameter:
+                description: TunnelPath parameter
+                value: {}
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /troubleshooting/control/{uuid}:
+    get:
+      tags:
+      - Troubleshooting Tools - Device Connectivity
+      description: Troubleshoot control connections
+      operationId: getControlConnections
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          pattern: ^[a-zA-Z0-9\/\\-]*$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  actualControlConnectionsToVsmart:
+                    type: integer
+                    format: int32
+                    example: 0
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        actual-connections:
+                          type: integer
+                          format: int32
+                          example: 2
+                        color:
+                          type: string
+                          example: LTE
+                        control:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              host-name:
+                                type: string
+                                example: vm9
+                              is-preferred:
+                                type: boolean
+                                example: true
+                              local-status:
+                                type: string
+                                enum:
+                                - green
+                                - red
+                              local-status-info:
+                                type: string
+                              peer-type:
+                                type: string
+                                example: vsmart
+                                enum:
+                                - vbond
+                                - vedge
+                                - vsmart
+                                - vmanage
+                                - vedge-vbond
+                                - nonSDWAN
+                              remote-status:
+                                type: string
+                                enum:
+                                - green
+                                - red
+                              remote-status-info:
+                                type: string
+                              state:
+                                type: string
+                                example: up
+                                enum:
+                                - up
+                                - down
+                              system-ip:
+                                type: string
+                                example: 172.16.255.19
+                            $$ref: '#/components/schemas/TlocControl'
+                        expected-connections:
+                          type: integer
+                          format: int32
+                          example: 2
+                        interface:
+                          type: string
+                          example: GigabitEthernet1
+                        nat-type:
+                          type: string
+                          example: Not learned
+                        private-ip:
+                          type: string
+                          example: 10.1.15.15
+                        private-port:
+                          type: string
+                          example: '12366'
+                        public-ip:
+                          type: string
+                          example: 10.1.15.15
+                        public-port:
+                          type: string
+                          example: '12366'
+                        tloc-status:
+                          type: string
+                          enum:
+                          - green
+                          - red
+                        tloc-type:
+                          type: string
+                      $$ref: '#/components/schemas/ControlConnectionInfo'
+                  expectedControlConnectionsToVsmart:
+                    type: integer
+                    format: int32
+                    example: 2
+                $$ref: '#/components/schemas/GetControlConnections'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Tools-read
+  /troubleshooting/devicebringup:
+    get:
+      tags:
+      - Troubleshooting Tools - Device Connectivity
+      description: Debug device bring up
+      operationId: getDeviceConfiguration
+      parameters:
+      - name: uuid
+        in: query
+        required: true
+        schema:
+          pattern: ^[a-zA-Z0-9\/\\-]*$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        message:
+                          type: array
+                          items:
+                            type: string
+                        name:
+                          type: string
+                          example: Data plane connectivity established
+                        operation:
+                          type: string
+                          example: DataPlane
+                          enum:
+                          - DataPlane
+                          - ControlPlane
+                          - RouterConfiguration
+                          - SoftwareImageUpdate
+                          - vBondAuth
+                        status:
+                          type: string
+                          enum:
+                          - Success
+                          - NA
+                          - Error
+                          - Unknown
+                        timestamp:
+                          type: integer
+                          format: int64
+                          example: 1695272160000
+                      $$ref: '#/components/schemas/BringupInfo'
+                $$ref: '#/components/schemas/GetDeviceConfiguration'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Tools-read

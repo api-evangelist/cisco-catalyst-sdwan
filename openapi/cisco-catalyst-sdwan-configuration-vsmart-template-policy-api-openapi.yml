@@ -1,0 +1,612 @@
+openapi: 3.2.0
+info:
+  title: UX 1.0 Configuration Configuration - vSmart Template Policy API
+  description: "Configuration of UX 1.0 device and policy.\nIncludes API operations for the following:\n  Managing original SD-WAN device configurations and policy configurations\n  Device templates and feature templates"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Configuration - vSmart Template Policy
+paths:
+  /template/policy/vsmart:
+    get:
+      tags:
+      - Configuration - vSmart Template Policy
+      description: Get all template vsmart policy list
+      operationId: generateVSmartPolicyTemplateList
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Template vSmart policy list:
+                  description: Template vSmart policy list
+                  value:
+                    data:
+                    - policyVersion: 12282017T235740495
+                      lastUpdatedBy: admin
+                      policyName: StrictHub-n-Spoke
+                      policyDefinition:
+                        assembly:
+                        - definitionId: 207bd271-5008-4271-bd51-a58b14a8dd31
+                          type: vpnMembershipGroup
+                        - definitionId: 4ddd51c0-d8a4-4dff-8874-09c24742b518
+                          type: control
+                          entries:
+                          - direction: out
+                            siteLists:
+                            - 5d4384b7-b2ab-4d05-9e93-76851304092d
+                        - definitionId: c41897b6-b17c-4a1c-b6d9-403af38ef418
+                          type: data
+                          entries:
+                          - direction: service
+                            siteLists:
+                            - 5d4384b7-b2ab-4d05-9e93-76851304092d
+                            vpnLists:
+                            - f4955f7d-f7b1-4fb5-b0d5-365c40829c51
+                      createdOn: 1514732091489
+                      isPolicyActivated: false
+                      policyDescription: BFD/IPSec based Hub-n-Spoke Topology
+                      '@rid': 6
+                      policyId: a8205140-92d9-4688-a127-c70d5f1b93a5
+                      createdBy: admin
+                      policyType: feature
+                      lastUpdatedOn: 1514732091489
+                    - policyVersion: 12302017T143348286
+                      lastUpdatedBy: admin
+                      policyName: MultiTopologyPolicy
+                      policyDefinition:
+                        assembly:
+                        - definitionId: a8390569-3aef-4f99-9e6f-678c21bf9dac
+                          type: vpnMembershipGroup
+                        - definitionId: c41897b6-b17c-4a1c-b6d9-403af38ef418
+                          type: data
+                          entries:
+                          - direction: service
+                            siteLists:
+                            - 5d4384b7-b2ab-4d05-9e93-76851304092d
+                            vpnLists:
+                            - f4955f7d-f7b1-4fb5-b0d5-365c40829c51
+                        - definitionId: ce4afddc-3674-4d74-86f2-1005b15e22dc
+                          type: control
+                          entries:
+                          - direction: out
+                            siteLists:
+                            - 5d4384b7-b2ab-4d05-9e93-76851304092d
+                      createdOn: 1514732164516
+                      isPolicyActivated: false
+                      policyDescription: Multi-Topology Policy
+                      '@rid': 7
+                      policyId: 45f0b251-bce6-4b6b-bb8c-de7dbf13ea0f
+                      createdBy: admin
+                      policyType: feature
+                      lastUpdatedOn: 1514732164516
+                    - policyVersion: 12312017T143840434
+                      lastUpdatedBy: admin
+                      policyName: MultiTopologyPlusFWInsertion
+                      policyDefinition:
+                        assembly:
+                        - definitionId: 1ded189f-4c6b-41cf-a686-655120fdf179
+                          type: vpnMembershipGroup
+                        - definitionId: 73096eaf-8bfe-43bd-a67a-9fcaaa2f8c38
+                          type: control
+                          entries:
+                          - direction: out
+                            siteLists:
+                            - 5d4384b7-b2ab-4d05-9e93-76851304092d
+                        - definitionId: c41897b6-b17c-4a1c-b6d9-403af38ef418
+                          type: data
+                          entries:
+                          - direction: service
+                            siteLists:
+                            - 5d4384b7-b2ab-4d05-9e93-76851304092d
+                            vpnLists:
+                            - f4955f7d-f7b1-4fb5-b0d5-365c40829c51
+                      createdOn: 1514732296993
+                      isPolicyActivated: false
+                      policyDescription: Adding FW for inter-branch communication in VPN 10
+                      '@rid': 8
+                      policyId: b33477d1-1ebc-4080-ba44-b89dbf14fef7
+                      createdBy: admin
+                      policyType: feature
+                      lastUpdatedOn: 1514732296993
+                    - policyVersion: 12312017T153128841
+                      lastUpdatedBy: admin
+                      policyName: MultiTopologyPlusACL
+                      policyDefinition:
+                        assembly:
+                        - definitionId: 968d1ce3-7ff7-4f97-8b69-01e4e06ecad2
+                          type: data
+                          entries:
+                          - direction: service
+                            siteLists:
+                            - 5d4384b7-b2ab-4d05-9e93-76851304092d
+                            vpnLists:
+                            - 19f53630-0ce6-4f6b-8e4f-6a527cd15ca4
+                        - definitionId: ce4afddc-3674-4d74-86f2-1005b15e22dc
+                          type: control
+                          entries:
+                          - direction: out
+                            siteLists:
+                            - 5d4384b7-b2ab-4d05-9e93-76851304092d
+                        - definitionId: c41897b6-b17c-4a1c-b6d9-403af38ef418
+                          type: data
+                          entries:
+                          - direction: service
+                            siteLists:
+                            - 5d4384b7-b2ab-4d05-9e93-76851304092d
+                            vpnLists:
+                            - f4955f7d-f7b1-4fb5-b0d5-365c40829c51
+                        - definitionId: a8390569-3aef-4f99-9e6f-678c21bf9dac
+                          type: vpnMembershipGroup
+                      createdOn: 1514734542150
+                      isPolicyActivated: false
+                      policyDescription: Application/ACL Policy for inter-branch traffic in VPN 20
+                      '@rid': 9
+                      policyId: 7f156d32-537d-493f-9a7d-53d9e1f05a19
+                      createdBy: admin
+                      policyType: feature
+                      lastUpdatedOn: 1514734542150
+                    - policyVersion: 04092018T121824907
+                      lastUpdatedBy: admin
+                      policyName: MultiTopologyPlusAppRoute
+                      policyDefinition:
+                        assembly:
+                        - definitionId: 433db0fb-c89a-4642-a498-e3b9a257faef
+                          type: appRoute
+                          entries:
+                          - siteLists:
+                            - 5d4384b7-b2ab-4d05-9e93-76851304092d
+                            vpnLists:
+                            - 67c9a7e1-e1b2-4a31-bd7c-7d0bbf9b7bbb
+                          - siteLists:
+                            - 1baf2339-97c0-43fb-98d2-285428a61820
+                            vpnLists:
+                            - 67c9a7e1-e1b2-4a31-bd7c-7d0bbf9b7bbb
+                        - definitionId: ce4afddc-3674-4d74-86f2-1005b15e22dc
+                          type: control
+                          entries:
+                          - direction: out
+                            siteLists:
+                            - 5d4384b7-b2ab-4d05-9e93-76851304092d
+                        - definitionId: c41897b6-b17c-4a1c-b6d9-403af38ef418
+                          type: data
+                          entries:
+                          - direction: service
+                            siteLists:
+                            - 5d4384b7-b2ab-4d05-9e93-76851304092d
+                            vpnLists:
+                            - f4955f7d-f7b1-4fb5-b0d5-365c40829c51
+                        - definitionId: a8390569-3aef-4f99-9e6f-678c21bf9dac
+                          type: vpnMembershipGroup
+                      createdOn: 1514736045181
+                      isPolicyActivated: false
+                      policyDescription: App Aware Routing Policy based on SLA
+                      '@rid': 10
+                      policyId: 12df3ed9-6b1f-4b0a-91a2-377cefb8039f
+                      createdBy: admin
+                      policyType: feature
+                      lastUpdatedOn: 1514736045181
+                    - policyVersion: 06212018T190131728
+                      lastUpdatedBy: admin
+                      policyName: cflowd_policy
+                      policyDefinition: "policy\ndata-policy cflowd-policy\n  vpn-list vpn_10-20\n    default-action accept\n  !\n!\ncflowd-template lab-cflowd-template\n  flow-inactive-timeout 10\n\n  flow-active-timeout 60\n\n  template-refresh 600\n  collector vpn 10 address 198.18.133.34 port 2055 transport transport_udp\n!\nlists\n  vpn-list vpn_10-20\n   vpn 10-20\n  !\n  site-list cflowd-sites\n   site-id 100-400\n  !\n  \n  apply-policy\nsite-list cflowd-sites\n  data-policy cflowd-policy all\n  cflowd-template lab-cflowd-template"
+                      createdOn: 1530540307108
+                      isPolicyActivated: false
+                      policyDescription: cflowd
+                      '@rid': 12
+                      policyId: 1c865c35-05ac-43a7-a6ee-6328138cd1c4
+                      createdBy: admin
+                      policyType: cli
+                      lastUpdatedOn: 1530540307108
+                    - policyVersion: 02242019T10524417
+                      lastUpdatedBy: admin
+                      policyName: Hub-Spoke-Policy-PCI
+                      policyDefinition:
+                        assembly:
+                        - definitionId: 605fabbd-4c99-4be4-8842-aebb256f7010
+                          type: hubAndSpoke
+                        - definitionId: c41897b6-b17c-4a1c-b6d9-403af38ef418
+                          type: data
+                          entries:
+                          - direction: service
+                            siteLists:
+                            - 5d4384b7-b2ab-4d05-9e93-76851304092d
+                            vpnLists:
+                            - f4955f7d-f7b1-4fb5-b0d5-365c40829c51
+                        - definitionId: 207bd271-5008-4271-bd51-a58b14a8dd31
+                          type: vpnMembershipGroup
+                      createdOn: 1551005623067
+                      isPolicyActivated: false
+                      policyDescription: Enforce PCI VPN to be Hub and Spoke per corporate requirements
+                      '@rid': 1365
+                      policyId: 67b2d453-671f-4eaf-b79a-d1c4c0069f1a
+                      createdBy: admin
+                      policyType: feature
+                      lastUpdatedOn: 1551005623067
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+      - Configuration - vSmart Template Policy
+      description: Create template for given policy
+      operationId: createVSmartTemplate
+      requestBody:
+        description: Template policy
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Template policy:
+                description: Template policy
+                value:
+                  policyDescription: demoVPN
+                  policyType: feature
+                  policyName: demoVPN
+                  policyDefinition:
+                    assembly:
+                    - definitionId: 605fabbd-4c99-4be4-8842-aebb256f7010
+                      type: hubAndSpoke
+                  isPolicyActivated: false
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Policy Id:
+                  description: Policy Id
+                  value:
+                    policyId: 05917007-14e4-42b0-9575-3d3d11f8a371
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/policy/vsmart/activate/central/{policyId}:
+    post:
+      tags:
+      - Configuration - vSmart Template Policy
+      description: Activate vsmart policy for a given policy id
+      operationId: activatePolicyForCloudServices
+      parameters:
+      - name: policyId
+        in: path
+        description: Policy Id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Template policy
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Template policy:
+                description: Template policy
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/policy/vsmart/activate/{policyId}:
+    post:
+      tags:
+      - Configuration - vSmart Template Policy
+      description: Activate vsmart policy for a given policy id
+      operationId: activatePolicy
+      parameters:
+      - name: policyId
+        in: path
+        description: Policy Id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Template policy
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Activate policy:
+                description: Activate policy
+                value:
+                  isEdited: false
+              Deactivate policy:
+                description: Deactivate policy
+                value: {}
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value:
+                    id: vsmart_policy_config-01242017T020647984
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/policy/vsmart/central/{policyId}:
+    put:
+      tags:
+      - Configuration - vSmart Template Policy
+      description: Edit template for given policy id to allow for multiple component edits
+      operationId: editTemplateWithoutLockChecks
+      parameters:
+      - name: policyId
+        in: path
+        description: Policy Id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Template policy
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Template policy:
+                description: Template policy
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Template policy:
+                  description: Template policy
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/policy/vsmart/connectivity/status:
+    get:
+      tags:
+      - Configuration - vSmart Template Policy
+      description: Check VSmart Connectivity Status
+      operationId: checkVSmartConnectivityStatus
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Connectivity Status:
+                  description: Connectivity Status
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/policy/vsmart/deactivate/{policyId}:
+    post:
+      tags:
+      - Configuration - vSmart Template Policy
+      description: Deactivate vsmart policy for a given policy id
+      operationId: deActivatePolicy
+      parameters:
+      - name: policyId
+        in: path
+        description: Policy Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value:
+                    id: vsmart_policy_config-60851f10-d9f0-4f41-a27e-9eedbd1bae65
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/policy/vsmart/definition/{policyId}:
+    get:
+      tags:
+      - Configuration - vSmart Template Policy
+      description: Get template policy definition by policy id
+      operationId: getTemplateByPolicyId
+      parameters:
+      - name: policyId
+        in: path
+        description: Policy Id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Template vSmart policy:
+                  description: Template vSmart policy
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/policy/vsmart/qosmos_nbar_migration_warning:
+    get:
+      tags:
+      - Configuration - vSmart Template Policy
+      description: Qosmos Nbar migration
+      operationId: QosmosNbarMigrationWarning
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                NBAR list:
+                  description: NBAR list
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/policy/vsmart/{policyId}:
+    put:
+      tags:
+      - Configuration - vSmart Template Policy
+      description: Edit template for given policy id
+      operationId: editVSmartTemplate
+      parameters:
+      - name: policyId
+        in: path
+        description: Policy Id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Template policy
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Template policy:
+                description: Template policy
+                value:
+                  policyId: 1c865c35-05ac-43a7-a6ee-6328138cd1c4
+                  policyState: edit
+                  policyVersion: 06212018T190131728
+                  lastUpdatedBy: admin
+                  policyName: cflowd_policy
+                  policyDefinition: "policy\ndata-policy cflowd-policy\n  vpn-list vpn_10-20\n    default-action accept\n  !\n!\ncflowd-template lab-cflowd-template\n  flow-inactive-timeout 10\n\n  flow-active-timeout 60\n\n  template-refresh 600\n  collector vpn 10 address 198.18.133.34 port 2055 transport transport_udp\n!\nlists\n  vpn-list vpn_10-20\n   vpn 10-20\n  !\n  site-list cflowd-sites\n   site-id 100-400\n  !\n  \n  apply-policy\nsite-list cflowd-sites\n  data-policy cflowd-policy all\n  cflowd-template lab-cflowd-template"
+                  createdOn: 1530540307108
+                  isPolicyActivated: false
+                  policyDescription: cflowd
+                  '@rid': 12
+                  createdBy: admin
+                  policyType: cli
+                  lastUpdatedOn: 1530540307108
+                  isEdited: true
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Template policy:
+                  description: Template policy
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+      - Configuration - vSmart Template Policy
+      description: Delete template for a given policy id
+      operationId: deleteVSmartTemplate
+      parameters:
+      - name: policyId
+        in: path
+        description: Policy Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

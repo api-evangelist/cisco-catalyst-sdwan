@@ -1,0 +1,455 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - SDWAN Statistics API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - SDWAN Statistics
+paths:
+  /device/sdwan-global-drop-statistics:
+    get:
+      tags:
+      - Real-Time Monitoring - SDWAN Statistics
+      description: Get SD-WAN global drop statistics detail from device (Real Time)
+      operationId: getSDWanGlobalDropStatistics
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                SD-WAN global drop statistics:
+                  description: SD-WAN global drop statistics
+                  value:
+                    data:
+                    - ipv4-acl-lookup-miss-octets: '0'
+                      ip-ttl-exceeded-pkts: '0'
+                      unconfigured-mpls-fia-pkts: '0'
+                      tunnel-pkt-sb-missed-octets: '0'
+                      lisp-decap-failed-octets: '0'
+                      sdwan-bfd-octets: '0'
+                      gre-bad-options-pkts: '0'
+                      sdwan-data-policy-octets: '0'
+                      inv-common-preamble-pkts: '0'
+                      firewall-nonsession-octets: '0'
+                      bqs-oor-pkts: '0'
+                      unconfigured-ipv4-fia-pkts: '0'
+                      perf-lic-policer-lo-octets: '0'
+                      reass-frag-too-big-octets: '0'
+                      unsupport-linktype-no-route-pkts: '0'
+                      lisp-failed-to-punt-dynmaic-eid-config-pkts: '0'
+                      ipv4-no-adj-pkts: '323'
+                      sdwan-octets: '0'
+                      ipv6-acl-octets: '0'
+                      ipv4-acl-pkts: '0'
+                      firewall-backpressure-octets: '0'
+                      ipsec-input-octets: '6185'
+                      ipv6-adj-drop-pkts: '0'
+                      lookup-oce-unsupport-linktype-octets: '0'
+                      ipv6-no-adj-pkts: '6'
+                      reass-bad-len-octets: '0'
+                      ipv4-null0-pkts: '0'
+                      tcp-badfrag-pkts: '0'
+                      ip-bad-options-pkts: '0'
+                      reass-bad-len-pkts: '0'
+                      reass-no-frags-left-pkts: '0'
+                      reass-timeout-pkts: '0'
+                      ipv4-no-route-octets: '63122'
+                      oce-drop-adj-octets: '0'
+                      sdwan-generic-pkts: '0'
+                      no-gpm-memory-err-octets: '0'
+                      lisp-decap-failed-pkts: '0'
+                      frfab-wred-drop-octets: '0'
+                      ipsec-ted-indicate-octets: '0'
+                      lisp-sfltr-pkts: '0'
+                      tunnel-sec-chk-fail-octets: '0'
+                      pa-walk-err-pkts: '0'
+                      loadbalance-null0-pkts: '0'
+                      hqf-tx-error-octets: '0'
+                      ipv4mc-extra-replicae-octets: '0'
+                      ipv4-martian-pkts: '0'
+                      tcp-octets: '0'
+                      ipv4-pbr-pkts: '0'
+                      ipsec-invalid-sa-octets: '0'
+                      no-mem-octets: '0'
+                      ipv4-adj-drop-octets: '0'
+                      glean-adj-unsupport-linktype-octets: '0'
+                      vdevice-name: 169.254.10.12
+                      ipv4-martian-octets: '0'
+                      identity-cft-error-pkts: '0'
+                      reass-frag-too-big-pkts: '0'
+                      lisp-disabled-octets: '0'
+                      udp-octets: '0'
+                      multilink-cfg-pkts: '0'
+                      pa-walk-err-octets: '0'
+                      bad-adj-octets: '0'
+                      unconfigured-ipv6-fia-pkts: '51334'
+                      flow-queue-failure-id-octets: '0'
+                      multilink-cfg-octets: '0'
+                      gpm-tx-len-exceed-pkts: '0'
+                      tunnel-decap-too-many-times-pkts: '0'
+                      inv-hdr-err-pkts: '0'
+                      attn-invalid-spid-octets: '0'
+                      tail-drop-octets: '0'
+                      tunnel-bad-gre-checksum-octets: '0'
+                      ipv4mc-ttl-threshold-chk-failed-pkts: '0'
+                      mpass-err-octets: '0'
+                      nat-out2in-octets: '0'
+                      ip-format-err-octets: '0'
+                      firewall-backpressure-pkts: '0'
+                      illegal-obj-pkts: '0'
+                      reass-overlap-octets: '0'
+                      bad-len-octets: '0'
+                      tunnel-misconfiguration-pkts: '0'
+                      reass-too-many-frags-octets: '0'
+                      punt-global-policer-drop-octets: '0'
+                      reass-too-many-frags-pkts: '0'
+                      frr-oce-invalid-state-octets: '0'
+                      invalid-queue-pkts: '0'
+                      ipv4mc-extra-replicae-pkts: '0'
+                      mpls-adj-drop-octets: '0'
+                      bad-uidb-idx-octets: '0'
+                      mpass-err-pkts: '0'
+                      ipv6-truncatedpkts-octets: '0'
+                      lastupdated: 1645693979596
+                      ip-format-err-pkts: '0'
+                      ipsec-deny-drop-pkts: '0'
+                      invalid-encap-octets: '0'
+                      lookup-oce-should-drop-octets: '0'
+                      lisp-hash-lkup-failed-octets: '0'
+                      unresolved-octets: '0'
+                      ipv4-no-route-pkts: '398'
+                      lisp-failed-to-punt-gsmr-enabled-pkts: '0'
+                      ipv6-null0-pkts: '0'
+                      sdwan-bfd-pkts: '0'
+                      ipv4mc-invalid-replica-record-pkts: '0'
+                      unconfigured-fia-octets: '0'
+                      ext-drop-path-octets: '0'
+                      qos-actions-pkts: '0'
+                      mpass-invalid-fs-vector-pkts: '0'
+                      oce-drop-adj-pkts: '0'
+                      max-tu-octets: '0'
+                      invalid-encap-pkts: '0'
+                      mpls-pkts: '0'
+                      punt-err-pkts: '0'
+                      hqf-tx-error-pkts: '0'
+                      reass-drop-octets: '0'
+                      tail-drop-pkts: '0'
+                      ip-frag-err-octets: '0'
+                      punt-policer-drop-pkts: '0'
+                      mlp-pkts: '0'
+                      max-tu-pkts: '0'
+                      lisp-hash-lkup-failed-pkts: '0'
+                      inv-l2-hdr-pkts: '0'
+                      ipv4-unclassified-octets: '0'
+                      lisp-failed-to-punt-lsb-mismatch-pkts: '0'
+                      nat64-v6tov4-octets: '480'
+                      lisp-failed-to-punt-gsmr-enabled-octets: '0'
+                      sdwan-data-policy-pkts: '0'
+                      bqs-oor-octets: '0'
+                      ipv4-routing-err-pkts: '0'
+                      disabled-pkts: '2590'
+                      cts-format-octets: '0'
+                      bad-len-pkts: '0'
+                      ipv6-routing-err-octets: '0'
+                      illegal-obj-octets: '0'
+                      ipv6-unclassified-octets: '0'
+                      bad-uidb-idx-pkts: 0
+                      bad-uidb-sub-idx-pkts: '0'
+                      for-us-pkts: '0'
+                      icmp-pkts: '0'
+                      invalid-wred-pkts: '0'
+                      lisp-elig-oce-octets: '0'
+                      bfd-octets: '0'
+                      sdwan-tloc-ext-pkts: '0'
+                      ipv4-acl-lookup-miss-pkts: '0'
+                      reass-no-frag-info-octets: '0'
+                      mpls-adj-drop-pkts: '0'
+                      sdwan-generic-octets: '0'
+                      reass-drop-pkts: '0'
+                      inv-common-preamble-octets: '0'
+                      bad-ip-checksum-octets: '0'
+                      ipv6-acl-lookup-miss-pkts: '0'
+                      reass-no-frag-info-low-pkts: '0'
+                      frr-oce-no-backup-pkts: '0'
+                      ipv6-unclassified-pkts: '0'
+                      mpls-mismatch-linktype-pkts: '0'
+                      wred-pkts: '0'
+                      ipv6-badsource-pkts: '0'
+                      lisp-disabled-pkts: '0'
+                      choice-oce-octets: '0'
+                      ipv6-acl-lookup-miss-octets: '0'
+                      bad-adj-pkts: '0'
+                      min-tu-octets: '0'
+                      nat-out2in-pkts: '0'
+                      unsupport-linktype-null0-octets: '0'
+                      firewall-invalid-zone-pkts: '0'
+                      lisp-failed-to-punt-dynmaic-eid-config-octets: '0'
+                      attn-invalid-spid-pkts: '0'
+                      not-enabled-octets: '0'
+                      fia-error-pkts: '0'
+                      bad-ip-checksum-pkts: '0'
+                      ipsec-ike-indicate-octets: '0'
+                      sdwan-app-route-policy-pkts: '0'
+                      ipv6-toobigpacket-octets: '0'
+                      ipv6-formaterr-octets: '0'
+                      ipv4mc-no-route-pkts: '0'
+                      mpls-frag-req-octets: '0'
+                      vdevice-dataKey: 169.254.10.12-
+                      lookup-oce-should-drop-pkts: '0'
+                      cts-not-enable-octets: '0'
+                      loadbalance-null0-octets: '0'
+                      frr-oce-invalid-state-pkts: '0'
+                      tcp-pkts: '0'
+                      ipv6-acl-pkts: '0'
+                      nat-in2out-pkts: '0'
+                      ipv6-badhop-pkts: '0'
+                      ipv6-badsource-octets: '0'
+                      inv-hdr-err-octets: '0'
+                      tcp-badfrag-octets: '0'
+                      ipv4-mtr-octets: '0'
+                      ipsec-ted-indicate-pkts: '0'
+                      ipsec-output-octets: '0'
+                      nat66-out2in-octets: '0'
+                      lisp-misconfiguration-octets: '0'
+                      ipsec-output-pkts: '0'
+                      cts-not-enable-pkts: '0'
+                      mlp-octets: '0'
+                      qos-actions-octets: '0'
+                      iphc-octets: '0'
+                      disabled-octets: '403111'
+                      unknown-ext-header-pkts: '0'
+                      mpls-mismatch-linktype-octets: '0'
+                      ipv6-no-adj-octets: '456'
+                      fia-error-octets: '0'
+                      gre-bad-options-octets: '0'
+                      reass-overlap-pkts: '0'
+                      vfr-tail-drop-octets: '0'
+                      sdwan-acl-octets: '0'
+                      ipv4-null0-octets: '0'
+                      unresolved-pkts: '0'
+                      invalid-queue-octets: '0'
+                      sdwan-implicit-acl-octets: '55011'
+                      ipv4-routing-err-octets: '0'
+                      inject-err-pkts: '0'
+                      punt-policer-drop-octets: '0'
+                      reass-no-frag-info-low-octets: '0'
+                      min-tu-pkts: '0'
+                      ipsec-input-pkts: '17'
+                      perf-lic-policer-hi-octets: '0'
+                      mac-acl-lookup-miss-octets: '0'
+                      ipv6-no-route-pkts: '3'
+                      cts-format-pkts: '0'
+                      ipsec-deny-drop-octets: '0'
+                      ip-bad-options-octets: '0'
+                      frag-tail-drop-octets: '0'
+                      frr-oce-no-backup-octets: '0'
+                      internal-ctl-pkts: '0'
+                      flow-queue-failure-id-pkts: '0'
+                      unconfigured-mpls-fia-octets: '0'
+                      ip-ttl-exceeded-octets: '0'
+                      unsupported-oce-pkts: '0'
+                      sdwan-acl-pkts: '0'
+                      no-gpm-memory-err-pkts: '0'
+                      perf-lic-policer-hi-pkts: '0'
+                      nat64-v6tov4-pkts: '6'
+                      unsupport-linktype-null0-pkts: '0'
+                      ipv4mc-ttl-threshold-chk-failed-octets: '0'
+                      glean-adj-unsupport-linktype-pkts: '0'
+                      firewall-l4-insp-pkts: '0'
+                      mpass-invalid-fs-vector-octets: '0'
+                      inv-l2-hdr-octets: '0'
+                      mpls-frag-req-pkts: '0'
+                      internal-ctl-octets: '0'
+                      identity-cft-error-octets: '0'
+                      sdwan-pkts: '0'
+                      reass-no-frag-info-pkts: '0'
+                      mpls-octets: '0'
+                      sdwan-interface-policy-octets: '0'
+                      frag-tail-drop-pkts: '0'
+                      ip-acl-err-octets: '0'
+                      discard-pkts: '0'
+                      sdwan-tunnel-lkup-pkts: '0'
+                      not-enabled-pkts: '0'
+                      choice-oce-pkts: '0'
+                      lookup-oce-unsupport-linktype-pkts: '0'
+                      sdwan-app-route-policy-octets: '0'
+                      lisp-misconfiguration-pkts: '0'
+                      bad-uidb-sub-idx-octets: '0'
+                      reass-timeout-octets: '0'
+                      tunnel-decap-too-many-times-octets: '0'
+                      vdevice-host-name: vm5
+                      icmp-octets: '0'
+                      ipv4-adj-drop-pkts: '0'
+                      tunnel-invalid-protocol-pkts: '0'
+                      wred-octets: '0'
+                      lisp-sfltr-octets: '0'
+                      ipv6-no-route-octets: '168'
+                      unconfigured-ipv6-fia-octets: '5564369'
+                      for-us-octets: '0'
+                      vfr-tail-drop-pkts: '0'
+                      frfab-wred-drop-pkts: '0'
+                      ipsec-invalid-sa-pkts: '0'
+                      ipv6-null0-octets: '0'
+                      ipv4-acl-octets: '0'
+                      firewall-nonsession-pkts: '0'
+                      ipsec-tail-drop-pkts: '0'
+                      tunnel-misconfiguration-octets: '0'
+                      bfd-pkts: '0'
+                      ipv4mc-invalid-replica-record-octets: '0'
+                      ip-acl-err-pkts: '0'
+                      ipsec-ike-indicate-pkts: '0'
+                      idle-packet-octets: '0'
+                      unconfigured-ipv4-fia-octets: '0'
+                      ipv6-toobigpacket-pkts: '0'
+                      idle-packet-pkts: '0'
+                      ipv4mc-rpf-failed-pkts: '0'
+                      ip-frag-err-pkts: '0'
+                      sdwan-interface-policy-pkts: '0'
+                      vfr-err-pkts: '0'
+                      unknown-encap-octets: '0'
+                      ipv4mc-no-route-octets: '0'
+                      unsupported-oce-octets: '0'
+                      unconfigured-fia-pkts: '0'
+                      sdwan-tloc-ext-octets: '0'
+                      qos-policing-octets: '0'
+                      sdwan-implicit-acl-pkts: '607'
+                      internal-intf-err-pkts: '0'
+                      firewall-l4-insp-octets: '0'
+                      mac-acl-octets: '0'
+                      no-mem-pkts: '0'
+                      ipv4-mtr-pkts: '0'
+                      internal-intf-err-octets: '0'
+                      invalid-wred-octets: '0'
+                      ipsec-tail-drop-octets: '0'
+                      lisp-elig-oce-pkts: '0'
+                      layer2-no-route-pkts: '0'
+                      ipv6-routing-err-pkts: '0'
+                      ext-drop-path-pkts: '0'
+                      unsupport-linktype-no-route-octets: '0'
+                      mac-acl-lookup-miss-pkts: '0'
+                      ipv4-fpm-pkts: '0'
+                      nat-in2out-octets: '0'
+                      ipv6-adj-drop-octets: '0'
+                      ipv4-no-adj-octets: '20728'
+                      ipv4-fpm-octets: '0'
+                      punt-global-policer-drop-pkts: '0'
+                      ipv4-pbr-octets: '0'
+                      nat66-in2out-octets: '0'
+                      nat66-out2in-pkts: '0'
+                      nat66-in2out-pkts: '0'
+                      ipv6-formaterr-pkts: '0'
+                      vfr-err-octets: '0'
+                      mac-acl-pkts: '0'
+                      ipv6-truncatedpkts-pkts: '0'
+                      tunnel-pkt-sb-missed-pkts: '0'
+                      qos-policing-pkts: '0'
+                      gpm-tx-len-exceed-octets: '0'
+                      layer2-no-route-octets: '0'
+                      perf-lic-policer-lo-pkts: '0'
+                      null-jib-hdr-tbl-pkts: '0'
+                      ipv6-badhop-octets: '0'
+                      udp-pkts: '0'
+                      unknown-encap-pkts: '0'
+                      ipv4-unclassified-pkts: '0'
+                      tunnel-bad-gre-checksum-pkts: '0'
+                      tunnel-invalid-protocol-octets: '0'
+                      reass-no-frags-left-octets: '0'
+                      tunnel-sec-chk-fail-pkts: '0'
+                      ipv4mc-rpf-failed-octets: '0'
+                      lisp-failed-to-punt-lsb-mismatch-octets: '0'
+                      inject-err-octets: '0'
+                      iphc-pkts: '0'
+                      discard-octets: '0'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write,System-read,System-write
+  /device/sdwan-stats:
+    get:
+      tags:
+      - Real-Time Monitoring - SDWAN Statistics
+      description: Get SD-WAN statistics detail from device (Real Time)
+      operationId: getSDWanStats
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                SD-WAN statistics:
+                  description: SD-WAN statistics
+                  value:
+                    data:
+                    - ipv4-acl-out-drop-action-drop: '0'
+                      ipv4-acl-in-drop-action-drop: '0'
+                      ipv6-acl-in-drop-action-drop: '0'
+                      ipv4-acl-in-prior-implicit-acl-disallow-drop: '607'
+                      vdevice-name: 169.254.10.12
+                      app-route-sla-strict-drop: '0'
+                      data-policy-in-drop-action-drop: '0'
+                      ipv6-acl-in-prior-implicit-acl-disallow-drop: '0'
+                      data-policy-out-drop-action-drop: '0'
+                      vdevice-host-name: vm5
+                      ipv4-acl-in-implicit-acl-allow-service-accept: '9484'
+                      ipv4-acl-out-police-exceed-drop: '0'
+                      ipv6-acl-out-police-exceed-drop: '0'
+                      ipv4-acl-in-police-exceed-drop: '0'
+                      ipv6-acl-in-police-exceed-drop: '0'
+                      vdevice-dataKey: 169.254.10.12-
+                      ipv6-acl-out-drop-action-drop: '0'
+                      ipv6-acl-in-implicit-acl-allow-service-accept: '0'
+                      lastupdated: 1645691843259
+                      data-policy-in-set-remote-tloc-fail-drop: '0'
+                      app-route-matched-none-drop: '0'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write,System-read,System-write

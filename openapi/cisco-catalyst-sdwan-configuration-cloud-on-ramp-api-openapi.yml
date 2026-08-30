@@ -1,0 +1,1192 @@
+openapi: 3.2.0
+info:
+  title: UX 1.0 Configuration Configuration - Cloud On Ramp API
+  description: "Configuration of UX 1.0 device and policy.\nIncludes API operations for the following:\n  Managing original SD-WAN device configurations and policy configurations\n  Device templates and feature templates"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Configuration - Cloud On Ramp
+paths:
+  /template/cor:
+    post:
+      tags:
+      - Configuration - Cloud On Ramp
+      description: Map Host to Transit VPC/VNet
+      operationId: createAndMap
+      requestBody:
+        description: Map host to transit VPC request
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Map host to transit VPC request:
+                description: Map host to transit VPC request
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Cloud OnRamp-write
+    get:
+      tags:
+      - Configuration - Cloud On Ramp
+      description: Get Cloud On Ramp list
+      operationId: getCORStatus
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Cloud on ramp status:
+                  description: Cloud on ramp status
+                  value:
+                    data:
+                    - accountId: 010098612700
+                      accountName: 010098612700
+                      cloudType: AWS
+                      mappedAccountCount: 0
+                      cloudRegionList:
+                      - cloudRegion: us-west-1
+                        transitVpcCount: 1
+                        hostVpcCount: 0
+                        deviceCount: 2
+                        hostVpcReachableCount: 0
+                        hostVpcUnreachableCount: 0
+                        deviceReachableCount: 0
+                        deviceUnreachableCount: 2
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Cloud OnRamp-read
+  /template/cor/accountid/{accountid}:
+    delete:
+      tags:
+      - Configuration - Cloud On Ramp
+      description: Delete transit VPC/VNet
+      operationId: removeTransitVPC
+      parameters:
+      - name: accountid
+        in: path
+        description: Account Id
+        required: true
+        schema:
+          type: string
+      - name: transitvpcid
+        in: query
+        description: Cloud VPC Id
+        required: true
+        schema:
+          type: string
+      - name: cloudregion
+        in: query
+        description: Cloud region
+        required: true
+        schema:
+          type: string
+      - name: cloudtype
+        in: query
+        description: Cloud type
+        schema:
+          type: string
+          default: AWS
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Cloud OnRamp-write
+  /template/cor/acquireResourcePool:
+    post:
+      tags:
+      - Configuration - Cloud On Ramp
+      description: Acquire IP from resource pool
+      operationId: acquireResourcePool
+      requestBody:
+        description: Add IP from resource pool request
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Add IP from resource pool request:
+                description: Add IP from resource pool request
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Cloud OnRamp-write
+  /template/cor/ami:
+    get:
+      tags:
+      - Configuration - Cloud On Ramp
+      description: Get AMI list
+      operationId: getAmiList
+      parameters:
+      - name: accountid
+        in: query
+        description: Account Id
+        required: true
+        schema:
+          type: string
+      - name: cloudregion
+        in: query
+        description: Cloud region
+        required: true
+        schema:
+          type: string
+      - name: cloudtype
+        in: query
+        description: Cloud type
+        schema:
+          type: string
+          default: AWS
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                AMI:
+                  description: AMI
+                  value: "{\"data\":{\n      \"amis\":[\n         {\n            \"amiId\":\"ami-00c8377340219e9fc\",\n            \"version\":\"18.3.0\",\n            \"modelType\":\"vedge\"\n         },\n         {\n            \"amiId\":\"ami-0136d4095d027e741\",\n            \"version\":\"19.1.0-temp\",\n            \"modelType\":\"vedge\"\n         },\n         {\n            \"amiId\":\"ami-02a3c4c89a7e3294e\",\n            \"version\":\"19.1.0\",\n            \"modelType\":\"vedge\"\n         },\n         {\n            \"amiId\":\"ami-02f9c3711e326dcb6\",\n            \"version\":\"csr-CSR_SDWAN-AMI.16.12.01b-8ffa16cf-1756-44a2-9e95-2b4369bb2fe9-ami-0be17bfec080cee40.4\",\n            \"modelType\":\"csr\"\n         },\n         {\n            \"amiId\":\"ami-053eee5e68e33f25b\",\n            \"version\":\"Cisco-CSR-SDWAN-16.12.03-8ffa16cf-1756-44a2-9e95-2b4369bb2fe9-ami-0379a842c0f9e5378.4\",\n            \"modelType\":\"csr\"\n         }\n      ]}"
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Cloud OnRamp-read
+  /template/cor/cloud:
+    get:
+      tags:
+      - Configuration - Cloud On Ramp
+      description: Get cloud list
+      operationId: getCloudList
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Cloud type:
+                  description: Cloud type
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Cloud OnRamp-read
+  /template/cor/cloud/account:
+    get:
+      tags:
+      - Configuration - Cloud On Ramp
+      description: Get cloud accounts
+      operationId: getCloudAccounts
+      parameters:
+      - name: cloudtype
+        in: query
+        description: Cloud type
+        required: true
+        schema:
+          type: string
+      - name: cloudEnvironment
+        in: query
+        description: Cloud environment
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Cloud account:
+                  description: Cloud account
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Cloud OnRamp-read
+  /template/cor/cloud/authenticate:
+    put:
+      tags:
+      - Configuration - Cloud On Ramp
+      description: Authenticate and update cloud account credentials
+      operationId: authenticateCredAndUpdate
+      requestBody:
+        description: Cloud account credential
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Cloud account credential:
+                description: Cloud account credential
+                value:
+                  cloudType: AWS
+                  authType: KEY
+                  apiKey: dummy
+                  secretKey: dummy
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Cloud account:
+                  description: Cloud account
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Cloud OnRamp-write
+    post:
+      tags:
+      - Configuration - Cloud On Ramp
+      description: Authenticate cloud account credentials
+      operationId: authenticateCloudOnRampCredAndAdd
+      requestBody:
+        description: Cloud account credential
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Cloud account credential:
+                description: Cloud account credential
+                value:
+                  cloudType: AWS
+                  authType: KEY
+                  apiKey: dummy
+                  secretKey: dummy
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Cloud account:
+                  description: Cloud account
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Cloud OnRamp-write
+  /template/cor/cloud/host/accountdetails:
+    get:
+      tags:
+      - Configuration - Cloud On Ramp
+      description: Get cloud host VPC account details
+      operationId: getCloudHostVpcAccountDetails
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Cloud host account:
+                  description: Cloud host account
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Cloud OnRamp-read
+  /template/cor/cloud/mappedhostaccounts:
+    get:
+      tags:
+      - Configuration - Cloud On Ramp
+      description: Get cloud mapped accounts view
+      operationId: getCloudMappedHostAccounts
+      parameters:
+      - name: accountid
+        in: query
+        description: Account Id
+        required: true
+        schema:
+          type: string
+      - name: cloudtype
+        in: query
+        description: Cloud type
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Cloud mapped host account:
+                  description: Cloud mapped host account
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Cloud OnRamp-read
+  /template/cor/createResourcePool:
+    post:
+      tags:
+      - Configuration - Cloud On Ramp
+      description: Add resource pool
+      operationId: createResourcePool
+      requestBody:
+        description: Add resource pool request
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Add resource pool request:
+                description: Add resource pool request
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Cloud OnRamp-write
+  /template/cor/deleteDevicepair:
+    delete:
+      tags:
+      - Configuration - Cloud On Ramp
+      description: Remove device pair
+      operationId: removeDeviceId
+      parameters:
+      - name: accountid
+        in: query
+        description: Account Id
+        required: true
+        schema:
+          type: string
+      - name: transitvpcid
+        in: query
+        description: VPC Id
+        required: true
+        schema:
+          type: string
+      - name: transitvpcname
+        in: query
+        description: VPC Name
+        required: true
+        schema:
+          type: string
+      - name: cloudregion
+        in: query
+        description: Cloud region
+        required: true
+        schema:
+          type: string
+      - name: cloudtype
+        in: query
+        description: Cloud type
+        schema:
+          type: string
+          default: AWS
+      - name: devicePairId
+        in: query
+        description: Device pair Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Cloud OnRamp-write
+  /template/cor/device:
+    get:
+      tags:
+      - Configuration - Cloud On Ramp
+      description: Get available device list
+      operationId: getCloudOnRampDevices
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Devices:
+                  description: Devices
+                  value: "\"data\":[\n      {\n         \"uuid\":\"f21dbb35-30b3-47f4-93bb-d2b2fe092d35\",\n         \"deviceIP\":\"1.1.1.100\",\n         \"host-name\":\"AWS-vEdge-1\",\n         \"deviceModel\":\"vedge-cloud\",\n         \"modelType\":\"vedge\"\n      },\n      {\n         \"uuid\":\"52c7911f-c5b0-45df-b826-3155809a2a1a\",\n         \"deviceIP\":\"1.1.1.200\",\n         \"host-name\":\"AWS-vEdge-2\",\n         \"deviceModel\":\"vedge-cloud\",\n         \"modelType\":\"vedge\"\n      }\n   ]"
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Cloud OnRamp-read
+  /template/cor/devicepair:
+    post:
+      tags:
+      - Configuration - Cloud On Ramp
+      description: Add device pair
+      operationId: addDevicePair
+      requestBody:
+        description: Add device pair request
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Add device pair request:
+                description: Add device pair request
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Cloud OnRamp-write
+  /template/cor/devicepair/hostvpc:
+    get:
+      tags:
+      - Configuration - Cloud On Ramp
+      description: Get host VPC details
+      operationId: getHostVPCs
+      parameters:
+      - name: transitVpcId
+        in: query
+        description: Transit VPC Id
+        required: true
+        schema:
+          type: string
+      - name: devicePairId
+        in: query
+        description: Device pair Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Host VPC:
+                  description: Host VPC
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Cloud OnRamp-read
+  /template/cor/externalId:
+    get:
+      tags:
+      - Configuration - Cloud On Ramp
+      description: Get the vManage external ID for AWS
+      operationId: getExternalId
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                externalId:
+                  description: externalId
+                  value: 12345abcd
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Cloud OnRamp-read
+  /template/cor/getTransitDevicePairAndHostList:
+    get:
+      tags:
+      - Configuration - Cloud On Ramp
+      description: Get device and host details
+      operationId: getTransitDevicePairAndHostList
+      parameters:
+      - name: accountId
+        in: query
+        description: Account Id
+        required: true
+        schema:
+          type: string
+      - name: cloudRegion
+        in: query
+        description: Cloud region
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device and host:
+                  description: Device and host
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Cloud OnRamp-read
+  /template/cor/getTransitVpnList:
+    get:
+      tags:
+      - Configuration - Cloud On Ramp
+      description: Get transit VPN list
+      operationId: getTransitVpcVpnList
+      parameters:
+      - name: accountId
+        in: query
+        description: Account Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Transit VPN:
+                  description: Transit VPN
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Cloud OnRamp-read
+  /template/cor/hostvpc:
+    get:
+      tags:
+      - Configuration - Cloud On Ramp
+      description: Get host VPC/VNet list
+      operationId: getCloudHostVPCs
+      parameters:
+      - name: accountid
+        in: query
+        description: Account Id
+        required: true
+        schema:
+          type: string
+      - name: cloudregion
+        in: query
+        description: Cloud region
+        required: true
+        schema:
+          type: string
+      - name: cloudtype
+        in: query
+        description: Cloud type
+        schema:
+          type: string
+          default: AWS
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                VPC/VNet:
+                  description: VPC/VNet
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Cloud OnRamp-read
+  /template/cor/map:
+    post:
+      tags:
+      - Configuration - Cloud On Ramp
+      description: Map host to transit VPC/VNet
+      operationId: mapVPCs
+      requestBody:
+        description: Map host to VPC/VNet
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Map host to VPC/VNet:
+                description: Map host to VPC/VNet
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Cloud OnRamp-write
+    delete:
+      tags:
+      - Configuration - Cloud On Ramp
+      description: Unmap host from transit VPC/VNet
+      operationId: unmapVPCs
+      requestBody:
+        description: Unmap host to VPC/VNet
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Unmap host to VPC/VNet:
+                description: Unmap host to VPC/VNet
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Cloud OnRamp-write
+    get:
+      tags:
+      - Configuration - Cloud On Ramp
+      description: Get mapped VPC/VNet list
+      operationId: getMappedVPCs
+      parameters:
+      - name: accountid
+        in: query
+        description: Account Id
+        required: true
+        schema:
+          type: string
+      - name: cloudregion
+        in: query
+        description: Cloud region
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Cloud OnRamp-read
+  /template/cor/pem:
+    get:
+      tags:
+      - Configuration - Cloud On Ramp
+      description: Get transit VPC PEM key list
+      operationId: getPemKeyList
+      parameters:
+      - name: accountid
+        in: query
+        description: Account Id
+        required: true
+        schema:
+          type: string
+      - name: cloudregion
+        in: query
+        description: Cloud region
+        required: true
+        schema:
+          type: string
+      - name: cloudtype
+        in: query
+        description: Cloud type
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                PEM key:
+                  description: PEM key
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Cloud OnRamp-read
+  /template/cor/scale/down:
+    post:
+      tags:
+      - Configuration - Cloud On Ramp
+      description: Scale down cloud on ramp
+      operationId: scaleDown
+      requestBody:
+        description: Update VPC
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Update VPC:
+                description: Update VPC
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: viptela-reserved-cloud
+  /template/cor/scale/up:
+    post:
+      tags:
+      - Configuration - Cloud On Ramp
+      description: Scale up cloud on ramp
+      operationId: scaleUp
+      requestBody:
+        description: Update VPC
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Update VPC:
+                description: Update VPC
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: viptela-reserved-cloud
+  /template/cor/transitvpc:
+    get:
+      tags:
+      - Configuration - Cloud On Ramp
+      description: Get transit VPC/VNet list
+      operationId: getTransitVPCs
+      parameters:
+      - name: accountid
+        in: query
+        description: Account Id
+        required: true
+        schema:
+          type: string
+      - name: cloudregion
+        in: query
+        description: Cloud region
+        required: true
+        schema:
+          type: string
+      - name: cloudtype
+        in: query
+        description: Cloud type
+        schema:
+          type: string
+          default: AWS
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                VPC/VNet list:
+                  description: VPC/VNet list
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Cloud OnRamp-read
+    put:
+      tags:
+      - Configuration - Cloud On Ramp
+      description: Update transit VPC/VNet
+      operationId: updateTransitVPC
+      requestBody:
+        description: VPC
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              VPC:
+                description: VPC
+                value:
+                  accountId: 010098612700
+                  cloudRegion: us-west-1
+                  cloudType: AWS
+                  transitVpcName: DemoVPC
+                  transitVpcId: vpc-0dfdd169a61492554
+                  dia: DISABLED
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Cloud OnRamp-write
+    post:
+      tags:
+      - Configuration - Cloud On Ramp
+      description: Create transit VPC/VNet
+      operationId: addTransitVPC
+      requestBody:
+        description: VPC
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              VPC:
+                description: VPC
+                value:
+                  accountId: 010098612700
+                  cloudRegion: us-west-1
+                  cloudType: AWS
+                  transitVpcName: DemoVPC
+                  transitVpcSize: c3.large
+                  amiId: ami-0f0f993e800121941
+                  deviceModelType: vedge
+                  transitVpcSubnet: ''
+                  maxHostVpcPerDevicePair: 1
+                  devicePairList:
+                  - deviceList:
+                    - uuid: f21dbb35-30b3-47f4-93bb-d2b2fe092d35
+                      preference: active
+                    - uuid: 52c7911f-c5b0-45df-b826-3155809a2a1a
+                      preference: backup
+                    devicePairId: f21dbb35-30b3-47f4-93bb-d2b2fe092d35
+                    isPrimary: true
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value:
+                    id: b634bf94-b47b-40a2-ba72-d289036234fd
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Cloud OnRamp-write
+  /template/cor/transitvpc/autoscale-properties:
+    put:
+      tags:
+      - Configuration - Cloud On Ramp
+      description: Update transit VPC autoscale properties
+      operationId: updateTransitVpcAutoscaleProperties
+      requestBody:
+        description: VPC
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              VPC:
+                description: VPC
+                value:
+                  accountId: 010098612700
+                  cloudRegion: us-west-1
+                  cloudType: AWS
+                  transitVpcName: DemoVPC
+                  transitVpcId: vpc-0dfdd169a61492554
+                  maxHostVpcPerDevicePair: 2
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value:
+                    id: ''
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Cloud OnRamp-write
+  /template/cor/transitvpc/size:
+    get:
+      tags:
+      - Configuration - Cloud On Ramp
+      description: Get transit VPC supported size
+      operationId: getTransitVPCSupportedSize
+      parameters:
+      - name: cloudtype
+        in: query
+        description: Cloud type
+        schema:
+          type: string
+          default: AWS
+      - name: cloudEnvironment
+        in: query
+        description: Cloud environment
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                VPC size:
+                  description: VPC size
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Cloud OnRamp-read

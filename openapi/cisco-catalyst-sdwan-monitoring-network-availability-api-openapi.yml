@@ -1,0 +1,508 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Monitoring - Network Availability API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Monitoring - Network Availability
+paths:
+  /statistics/nwa:
+    post:
+      tags:
+      - Monitoring - Network Availability
+      description: Get network availability raw data based on input query and filters.
+      operationId: getAggregationDataByQuery_MonitoringNetworkAvailability_1504
+      parameters:
+      - name: query
+        in: query
+        required: true
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '24'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+            - value:
+              - site
+              field: type
+              type: string
+              operator: in
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sortBy
+        in: query
+        schema:
+          type: string
+      - name: sortOrder
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  required:
+                  - health
+                  - jitter
+                  - latency
+                  - loss
+                  type: object
+                  properties:
+                    availability:
+                      type: number
+                      example: 0.9
+                    health:
+                      type: string
+                      example: good
+                      enum:
+                      - good
+                      - fair
+                      - poor
+                    jitter:
+                      type: number
+                      example: 40
+                    latency:
+                      type: number
+                      example: 500
+                    latitude:
+                      type: string
+                      example: '12.1114325'
+                    longitude:
+                      type: string
+                      example: '120.235674'
+                    loss:
+                      type: number
+                      example: 1.2
+                    siteid:
+                      type: string
+                      example: '100'
+                    sitename:
+                      type: string
+                      example: sjc
+                  $$ref: '#/components/schemas/NetworkAvailabilityResp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/nwa/aggregation:
+    post:
+      tags:
+      - Monitoring - Network Availability
+      description: Get network availability aggregated data based on input query and filters.
+      operationId: getPostAggregationDataByQuery_MonitoringNetworkAvailability_2704
+      requestBody:
+        description: Stats query string
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              site availability table query string:
+                description: site availability table query string
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '24'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+                    - value:
+                      - site
+                      field: type
+                      type: string
+                      operator: in
+                  aggregation:
+                    field:
+                    - property: site_id
+                      sequence: 1
+                      size: 100
+                    metrics:
+                    - property: down_time
+                      type: sum
+                      order: desc
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceNetworkavailabilityStatisticsapiParameterExampleSiteavailabilitytable'
+              link availability table query string:
+                description: link availability table query string
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '24'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+                    - value:
+                      - link
+                      field: type
+                      type: string
+                      operator: in
+                  aggregation:
+                    field:
+                    - property: system_ip
+                      sequence: 1
+                      size: 100
+                    - property: color
+                      sequence: 2
+                      size: 100
+                    metrics:
+                    - property: down_time
+                      type: sum
+                      order: desc
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceNetworkavailabilityStatisticsapiParameterExampleLinkavailabilitytable'
+              site availability chart query string:
+                description: site availability chart query string
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '24'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+                    - value:
+                      - site
+                      field: type
+                      type: string
+                      operator: in
+                  aggregation:
+                    field:
+                    - property: site_id
+                      sequence: 1
+                      size: 100
+                    metrics:
+                    - property: down_time
+                      type: sum
+                      order: desc
+                    histogram:
+                      property: entry_time
+                      type: minute
+                      interval: 60
+                      order: asc
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceNetworkavailabilityStatisticsapiParameterExampleSiteavailabilitychart'
+              link availability chart query string:
+                description: link availability chart query string
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '24'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+                    - value:
+                      - link
+                      field: type
+                      type: string
+                      operator: in
+                  aggregation:
+                    field:
+                    - property: system_ip
+                      sequence: 1
+                      size: 100
+                    - property: color
+                      sequence: 1
+                      size: 100
+                    metrics:
+                    - property: down_time
+                      type: sum
+                      order: desc
+                    histogram:
+                      property: entry_time
+                      type: minute
+                      interval: 60
+                      order: asc
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceNetworkavailabilityStatisticsapiParameterExampleLinkavailabilitychart'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  required:
+                  - health
+                  - jitter
+                  - latency
+                  - loss
+                  type: object
+                  properties:
+                    availability:
+                      type: number
+                      example: 0.9
+                    health:
+                      type: string
+                      example: good
+                      enum:
+                      - good
+                      - fair
+                      - poor
+                    jitter:
+                      type: number
+                      example: 40
+                    latency:
+                      type: number
+                      example: 500
+                    latitude:
+                      type: string
+                      example: '12.1114325'
+                    longitude:
+                      type: string
+                      example: '120.235674'
+                    loss:
+                      type: number
+                      example: 1.2
+                    siteid:
+                      type: string
+                      example: '100'
+                    sitename:
+                      type: string
+                      example: sjc
+                  $$ref: '#/components/schemas/NetworkAvailabilityResp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,Device Monitoring-write
+  /statistics/nwa/details:
+    post:
+      tags:
+      - Monitoring - Network Availability
+      description: Get network availability aggregated data with details based on input query and filters.
+      operationId: getDetailAggregationDataByQuery
+      parameters:
+      - name: includePrev
+        in: query
+        schema:
+          type: boolean
+          default: false
+      requestBody:
+        description: Stats query string
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              site availability table query string:
+                description: site availability table query string
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '24'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+                    - value:
+                      - site
+                      field: type
+                      type: string
+                      operator: in
+                  aggregation:
+                    field:
+                    - property: site_id
+                      sequence: 1
+                      size: 100
+                    metrics:
+                    - property: down_time
+                      type: sum
+                      order: desc
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceNetworkavailabilityStatisticsapiParameterExampleSiteavailabilitytable'
+              link availability table query string:
+                description: link availability table query string
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '24'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+                    - value:
+                      - link
+                      field: type
+                      type: string
+                      operator: in
+                  aggregation:
+                    field:
+                    - property: system_ip
+                      sequence: 1
+                      size: 100
+                    - property: color
+                      sequence: 2
+                      size: 100
+                    metrics:
+                    - property: down_time
+                      type: sum
+                      order: desc
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceNetworkavailabilityStatisticsapiParameterExampleLinkavailabilitytable'
+              site availability chart query string:
+                description: site availability chart query string
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '24'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+                    - value:
+                      - site
+                      field: type
+                      type: string
+                      operator: in
+                  aggregation:
+                    field:
+                    - property: site_id
+                      sequence: 1
+                      size: 100
+                    metrics:
+                    - property: down_time
+                      type: sum
+                      order: desc
+                    histogram:
+                      property: entry_time
+                      type: minute
+                      interval: 60
+                      order: asc
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceNetworkavailabilityStatisticsapiParameterExampleSiteavailabilitychart'
+              link availability chart query string:
+                description: link availability chart query string
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '24'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+                    - value:
+                      - link
+                      field: type
+                      type: string
+                      operator: in
+                  aggregation:
+                    field:
+                    - property: system_ip
+                      sequence: 1
+                      size: 100
+                    - property: color
+                      sequence: 1
+                      size: 100
+                    metrics:
+                    - property: down_time
+                      type: sum
+                      order: desc
+                    histogram:
+                      property: entry_time
+                      type: minute
+                      interval: 60
+                      order: asc
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceNetworkavailabilityStatisticsapiParameterExampleLinkavailabilitychart'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  required:
+                  - health
+                  - jitter
+                  - latency
+                  - loss
+                  type: object
+                  properties:
+                    availability:
+                      type: number
+                      example: 0.9
+                    health:
+                      type: string
+                      example: good
+                      enum:
+                      - good
+                      - fair
+                      - poor
+                    jitter:
+                      type: number
+                      example: 40
+                    latency:
+                      type: number
+                      example: 500
+                    latitude:
+                      type: string
+                      example: '12.1114325'
+                    longitude:
+                      type: string
+                      example: '120.235674'
+                    loss:
+                      type: number
+                      example: 1.2
+                    siteid:
+                      type: string
+                      example: '100'
+                    sitename:
+                      type: string
+                      example: sjc
+                  $$ref: '#/components/schemas/NetworkAvailabilityResp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,Device Monitoring-write

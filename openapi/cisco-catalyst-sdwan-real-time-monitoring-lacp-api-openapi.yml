@@ -1,0 +1,234 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - Lacp API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - Lacp
+paths:
+  /device/lacp/info:
+    get:
+      tags:
+      - Real-Time Monitoring - Lacp
+      description: Get device lacp port channel info list (Real Time)
+      operationId: getLacpInterfaceList
+      parameters:
+      - name: channel-group
+        in: query
+        description: Channel-group
+        schema:
+          type: string
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device lacp info:
+                  description: Device lacp info
+                  value:
+                    data:
+                    - ayer-type: l3-etherchannel
+                      vdevice-name: 10.0.0.121
+                      channel-group: '1'
+                      vdevice-host-name: ISR4451-X
+                      total-no-of-links-bundled: 2
+                      total-no-of-links-standby: 0
+                      total-no-of-links-down: 0
+                      vdevice-dataKey: 10.0.0.121-1
+                      total-no-of-links: 2
+                      port-channel-up: 'true'
+                      lastupdated: 1650883014316
+                      total-no-of-links-suspended: '0'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Interface-read,Interface-write
+  /device/lacp/members:
+    get:
+      tags:
+      - Real-Time Monitoring - Lacp
+      description: Get device lacp port channel interface table (Real Time)
+      operationId: getLacpMembers
+      parameters:
+      - name: channel-group
+        in: query
+        description: Channel-group
+        schema:
+          type: string
+      - name: ifName
+        in: query
+        description: Interface Name
+        schema:
+          type: string
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device lacp port channel interface:
+                  description: Device lacp port channel interface
+                  value:
+                    data:
+                    - flood-packets: '0'
+                      max-macs: 1024
+                      move: 0
+                      vdevice-name: 10.0.0.121
+                      learn: 0
+                      age-time: 300
+                      rx-packets: '0'
+                      rx-routed-packets: '0'
+                      num-macs: 4
+                      routing-interface: Vlan1
+                      vdevice-host-name: ISR4451-X
+                      vdevice-dataKey: 10.0.0.121-1
+                      vlan: '1'
+                      tx-octets: '0'
+                      tx-packets: '0'
+                      name: default
+                      rx-octets: '0'
+                      lastupdated: 1650882963285
+                      bridge-id: '1'
+                      flood-octets: '0'
+                      tx-routed-packets: '0'
+                      age: 0
+                    - flood-packets: '0'
+                      max-macs: 1024
+                      move: 0
+                      vdevice-name: 10.0.0.121
+                      learn: 0
+                      age-time: 300
+                      rx-packets: '0'
+                      rx-routed-packets: '0'
+                      num-macs: 0
+                      routing-interface: 'null'
+                      vdevice-host-name: ISR4451-X
+                      vdevice-dataKey: 10.0.0.121-1002
+                      vlan: '1002'
+                      tx-octets: '0'
+                      tx-packets: '0'
+                      name: fddi-default
+                      rx-octets: '0'
+                      lastupdated: 1650882963285
+                      bridge-id: '1002'
+                      flood-octets: '0'
+                      tx-routed-packets: '0'
+                      age: 0
+                    - flood-packets: '0'
+                      max-macs: 1024
+                      move: 0
+                      vdevice-name: 10.0.0.121
+                      learn: 0
+                      age-time: 300
+                      rx-packets: '0'
+                      rx-routed-packets: '0'
+                      num-macs: 0
+                      routing-interface: 'null'
+                      vdevice-host-name: ISR4451-X
+                      vdevice-dataKey: 10.0.0.121-1003
+                      vlan: '1003'
+                      tx-octets: '0'
+                      tx-packets: '0'
+                      name: token-ring-default
+                      rx-octets: '0'
+                      lastupdated: 1650882963285
+                      bridge-id: '1003'
+                      flood-octets: '0'
+                      tx-routed-packets: '0'
+                      age: 0
+                    - flood-packets: '0'
+                      max-macs: 1024
+                      move: 0
+                      vdevice-name: 10.0.0.121
+                      learn: 0
+                      age-time: 300
+                      rx-packets: '0'
+                      rx-routed-packets: '0'
+                      num-macs: 0
+                      routing-interface: 'null'
+                      vdevice-host-name: ISR4451-X
+                      vdevice-dataKey: 10.0.0.121-1004
+                      vlan: '1004'
+                      tx-octets: '0'
+                      tx-packets: '0'
+                      name: fddinet-default
+                      rx-octets: '0'
+                      lastupdated: 1650882963285
+                      bridge-id: '1004'
+                      flood-octets: '0'
+                      tx-routed-packets: '0'
+                      age: 0
+                    - flood-packets: '0'
+                      max-macs: 1024
+                      move: 0
+                      vdevice-name: 10.0.0.121
+                      learn: 0
+                      age-time: 300
+                      rx-packets: '0'
+                      rx-routed-packets: '0'
+                      num-macs: 0
+                      routing-interface: 'null'
+                      vdevice-host-name: ISR4451-X
+                      vdevice-dataKey: 10.0.0.121-1005
+                      vlan: '1005'
+                      tx-octets: '0'
+                      tx-packets: '0'
+                      name: trnet-default
+                      rx-octets: '0'
+                      lastupdated: 1650882963285
+                      bridge-id: '1005'
+                      flood-octets: '0'
+                      tx-routed-packets: '0'
+                      age: 0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Interface-read,Interface-write

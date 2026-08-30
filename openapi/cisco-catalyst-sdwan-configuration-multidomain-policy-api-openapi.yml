@@ -1,0 +1,532 @@
+openapi: 3.2.0
+info:
+  title: Others Configuration - Multidomain Policy API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Configuration - Multidomain Policy
+paths:
+  /mdp/attachDevices/{nmsId}:
+    put:
+      tags:
+      - Configuration - Multidomain Policy
+      description: Edit attached devices
+      operationId: updateAttachedDevices
+      parameters:
+      - name: nmsId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: deviceList
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              devices:
+                description: devices
+                value: {}
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Status:
+                  description: Status
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    get:
+      tags:
+      - Configuration - Multidomain Policy
+      description: Retrieve MDP attached devices
+      operationId: getMappedDevices
+      parameters:
+      - name: nmsId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Devices:
+                  description: Devices
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+      - Configuration - Multidomain Policy
+      description: Share devices with MDP
+      operationId: attachDevices
+      parameters:
+      - name: nmsId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: deviceList
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Devices:
+                description: Devices
+                value: {}
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Status:
+                  description: Status
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /mdp/detachDevices/{nmsId}:
+    post:
+      tags:
+      - Configuration - Multidomain Policy
+      description: Disconnect devices from mpd controller
+      operationId: detachDevices
+      parameters:
+      - name: nmsId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: deviceList
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Onboard:
+                description: Onboard
+                value: {}
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Status:
+                  description: Status
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /mdp/devices/{nmsId}:
+    get:
+      tags:
+      - Configuration - Multidomain Policy
+      description: Retrieve MDP supported devices
+      operationId: getDevices_ConfigurationMultidomainPolicy_2003
+      parameters:
+      - name: nmsId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Devices:
+                  description: Devices
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /mdp/disconnect/{nmsId}:
+    get:
+      tags:
+      - Configuration - Multidomain Policy
+      description: disconnect from mpd controller
+      operationId: disconnectMDP
+      parameters:
+      - name: nmsId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                status:
+                  description: status
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: admin
+  /mdp/onboard:
+    post:
+      tags:
+      - Configuration - Multidomain Policy
+      description: Start MDP onboarding operation
+      operationId: onboardMDP
+      requestBody:
+        description: Onboard
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              onboarding-payload:
+                description: onboarding-payload
+                value:
+                  controllerUUID: fc335c24-fb30-46bb-81ff-fda84264eb58
+                  name: sdwane2e
+                  description: sdwan24
+                  requestStream: request-sdwane2e-fc335c24-fb30-46bb-81ff-fda84264eb58
+                  responseStream: response-sdwane2e-fc335c24-fb30-46bb-81ff-fda84264eb58
+                  otp: CB3313CD-0FE1-BAF3-6DFE-D4F797C35BF0
+                  uri: 10.10.10.1:24038
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                nmsId:
+                  description: nmsId
+                  value:
+                    nmsId: fc335c24-fb30-46bb-81ff-fda84264eb58
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: admin
+  /mdp/onboard/status:
+    get:
+      tags:
+      - Configuration - Multidomain Policy
+      description: Get MDP onboarding status
+      operationId: getOnboardingPayload
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Status:
+                  description: Status
+                  value:
+                    status: completed
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: admin
+  /mdp/onboard/{nmsId}:
+    put:
+      tags:
+      - Configuration - Multidomain Policy
+      description: update MDP onboarding document
+      operationId: updateOnboardingPayload
+      parameters:
+      - name: nmsId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Onboard
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              onboarding-payload:
+                description: onboarding-payload
+                value:
+                  controllerUUID: fc335c24-fb30-46bb-81ff-fda84264eb58
+                  name: sdwane2e
+                  description: sdwan24
+                  requestStream: request-sdwane2e-fc335c24-fb30-46bb-81ff-fda84264eb58
+                  responseStream: response-sdwane2e-fc335c24-fb30-46bb-81ff-fda84264eb58
+                  otp: CB3313CD-0FE1-BAF3-6DFE-D4F797C35BF0
+                  uri: 10.10.10.1:24038
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                nmsId:
+                  description: nmsId
+                  value:
+                    nmsId: fc335c24-fb30-46bb-81ff-fda84264eb58
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: admin
+    delete:
+      tags:
+      - Configuration - Multidomain Policy
+      description: offboard the mdp application
+      operationId: deleteOnboardingPayload
+      parameters:
+      - name: nmsId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: admin
+  /mdp/policies/mdpconfig:
+    put:
+      tags:
+      - Configuration - Multidomain Policy
+      description: Add internal policy from Manager
+      operationId: addInternalPolicy
+      requestBody:
+        description: addInternalPolicy
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              mdpConfig-payload:
+                description: mdpConfig-payload
+                value:
+                  controllerUUID: fc335c24-fb30-46bb-81ff-fda84264eb58
+                  name: sdwane2e
+                  description: sdwan24
+                  requestStream: request-sdwane2e-fc335c24-fb30-46bb-81ff-fda84264eb58
+                  responseStream: response-sdwane2e-fc335c24-fb30-46bb-81ff-fda84264eb58
+                  otp: CB3313CD-0FE1-BAF3-6DFE-D4F797C35BF0
+                  uri: 10.10.10.1:24038
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                deviceId:
+                  description: deviceId
+                  value:
+                    deviceId: fc335c24-fb30-46bb-81ff-fda84264eb58
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: admin
+  /mdp/policies/mdpconfig/{deviceId}:
+    get:
+      tags:
+      - Configuration - Multidomain Policy
+      description: Retrieve MDP ConfigObject
+      operationId: getMdpConfig
+      parameters:
+      - name: deviceId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                MdpConfig:
+                  description: MdpConfig
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /mdp/policies/{nmsId}:
+    get:
+      tags:
+      - Configuration - Multidomain Policy
+      description: Retrieve MDP policies
+      operationId: getPolicies
+      parameters:
+      - name: nmsId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Policies:
+                  description: Policies
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    put:
+      tags:
+      - Configuration - Multidomain Policy
+      description: update policy status
+      operationId: updatePolicyStatus
+      parameters:
+      - name: nmsId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: policyList
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              policies:
+                description: policies
+                value: {}
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Status:
+                  description: Status
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

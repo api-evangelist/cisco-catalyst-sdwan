@@ -1,0 +1,262 @@
+openapi: 3.2.0
+info:
+  title: Others Compliance - Device Details API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Compliance - Device Details
+paths:
+  /device/bytenants:
+    get:
+      tags:
+      - Compliance - Device Details
+      description: Gets devices and sites for all tenants
+      operationId: getTenantsDevicesAndSites
+      parameters:
+      - name: tenant
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+      x-roles-required: Device Monitoring-read
+  /device/compliance:
+    get:
+      tags:
+      - Compliance - Device Details
+      description: Get compliance information for devices
+      operationId: getComplianceDetails
+      parameters:
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 25
+      - name: deviceType
+        in: query
+        description: 'deviceType example: vedge'
+        schema:
+          type: array
+          items:
+            type: string
+            example:
+            - vedge
+      - name: status
+        in: query
+        schema:
+          type: array
+          example:
+          - RED
+          items:
+            type: string
+            example:
+            - RED
+      - name: type
+        in: query
+        schema:
+          type: array
+          example:
+          - vedge
+          items:
+            type: string
+            example:
+            - vedge
+      - name: sort_by
+        in: query
+        schema:
+          type: string
+        example: host-name
+      - name: order_by
+        in: query
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+        example: asc
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    format: int32
+                    example: 9
+                  devices:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        checkList:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              message:
+                                type: string
+                                example: Device is LTS - 1
+                              status:
+                                type: string
+                                example: GREEN
+                              type:
+                                type: string
+                                example: SOFTWARE_COMPLIANCE_CHECK
+                            $$ref: '#/components/schemas/DeviceCheckList'
+                        deviceDetails:
+                          type: object
+                          properties:
+                            chassis-Number:
+                              type: string
+                              example: 390b3f83-ffc2-4081-9881-4c41bc8665e8
+                            current-version:
+                              type: string
+                              example: 20.12.1
+                            device-type:
+                              type: string
+                              example: vedge
+                            host-name:
+                              type: string
+                              example: vm1
+                            local-system-ip:
+                              type: string
+                              example: 172.168.0.1
+                            personality:
+                              type: string
+                              example: vedge
+                            reachability:
+                              type: string
+                              example: reachable
+                            site-id:
+                              type: string
+                              example: '500'
+                            site-name:
+                              type: string
+                              example: SITE_500
+                            system-ip:
+                              type: string
+                              example: 172.168.0.1
+                            uuid:
+                              type: string
+                              example: 390b3f83-ffc2-4081-9881-4c41bc8665e8
+                          $$ref: '#/components/schemas/DeviceApiDetails'
+                        status:
+                          type: string
+                          example: GREEN
+                      $$ref: '#/components/schemas/DeviceComplianceApiData'
+                $$ref: '#/components/schemas/DeviceComplianceApiResponse'
+              examples:
+                Example:
+                  description: Example
+                  value:
+                    count: 9
+                    devices:
+                    - deviceDetails:
+                        local-system-ip: 172.168.0.1
+                        system-ip: 172.168.0.1
+                        site-id: '500'
+                        site-name: SITE_500
+                        host-name: vm1
+                        uuid: 390b3f83-ffc2-4081-9881-4c41bc8665e8
+                        chassis-Number: 390b3f83-ffc2-4081-9881-4c41bc8665e8
+                        reachability: reachable
+                        device-type: vedge
+                        personality: vedge
+                        current-version: 20.12.1
+                      checkList:
+                      - type: SOFTWARE_COMPLIANCE_CHECK
+                        status: GREEN
+                        message: Device is LTS - 1
+                      status: GREEN
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceCommonDeviceapiResponseExampleGetcompliance'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/compliance/summary:
+    get:
+      tags:
+      - Compliance - Device Details
+      description: Get compliance summary for devices
+      operationId: getComplianceSummary
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  checkList:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        controllerCount:
+                          type: integer
+                          format: int32
+                          example: 3
+                        type:
+                          type: string
+                          example: SOFTWARE_COMPLIANCE_CHECK
+                        vEdgeCount:
+                          type: integer
+                          format: int32
+                          example: 2
+                      $$ref: '#/components/schemas/DeviceComplianceCheckListData'
+                $$ref: '#/components/schemas/DeviceComplianceSummaryResponse'
+              examples:
+                Example:
+                  description: Example
+                  value:
+                    checkList:
+                    - type: SOFTWARE_COMPLIANCE_CHECK
+                      controllerCount: 3
+                      vEdgeCount: 2
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceCommonDeviceapiResponseExampleGetcompliancesummary'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

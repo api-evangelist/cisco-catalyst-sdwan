@@ -1,0 +1,1472 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Monitoring - QoS API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Monitoring - QoS
+paths:
+  /statistics/qos:
+    get:
+      tags:
+      - Monitoring - QoS
+      description: Get stats raw data
+      operationId: getStatDataRawData_MonitoringQos_1503
+      parameters:
+      - name: query
+        in: query
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '12'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+            - value:
+              - 172.16.255.11
+              field: vdevice_name
+              type: string
+              operator: in
+            - value:
+              - ge0/0
+              field: interface
+              type: string
+              operator: in
+      - name: page
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+      - name: sortBy
+        in: query
+        schema:
+          pattern: ^[a-zA-Z-_]+$
+          type: string
+      - name: sortOrder
+        in: query
+        schema:
+          type: string
+          enum:
+          - asc
+          - ASC
+          - Asc
+          - desc
+          - DESC
+          - Desc
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          device_model:
+                            type: string
+                          drop_in_bytes:
+                            type: number
+                          drop_in_kbps:
+                            type: integer
+                            format: int32
+                          drop_in_pkts:
+                            type: integer
+                            format: int32
+                          drop_in_pps:
+                            type: integer
+                            format: int64
+                          entry_time:
+                            type: string
+                          host_name:
+                            type: string
+                          id:
+                            type: string
+                          interface:
+                            type: string
+                          queue_name:
+                            type: string
+                          queued_bytes:
+                            type: number
+                          queued_bytes_in_kbps:
+                            type: number
+                          queued_pkts:
+                            type: number
+                          red_drop_bytes:
+                            type: number
+                          red_drop_pkts:
+                            type: number
+                          statcycletime:
+                            type: string
+                          tail_drop_bytes:
+                            type: integer
+                            format: int64
+                          tail_drop_pkts:
+                            type: integer
+                            format: int64
+                          tenant:
+                            type: string
+                          time_interval:
+                            type: integer
+                            format: int32
+                          tx_bytes:
+                            type: number
+                          tx_bytes_in_kbps:
+                            type: integer
+                            format: int64
+                          tx_bytes_in_pps:
+                            type: integer
+                            format: int64
+                          tx_pkts:
+                            type: number
+                          vdevice_name:
+                            type: string
+                          vip_idx:
+                            type: string
+                          vip_time:
+                            type: string
+                          vmanage_system_ip:
+                            type: string
+                        description: QOS specific response
+                        $$ref: '#/components/schemas/QoSResp'
+                    pageInfo:
+                      type: object
+                      properties:
+                        count:
+                          type: integer
+                          description: number of alarms to be fetched
+                          format: int64
+                        endTime:
+                          type: integer
+                          description: end time of alarms to be fetched
+                          format: int64
+                        startTime:
+                          type: integer
+                          description: start time of alarms to be fetched
+                          format: int64
+                      $$ref: '#/components/schemas/PageInfo'
+                  description: QoS response with page info
+                  $$ref: '#/components/schemas/QoSRespWithPageInfo'
+              example:
+                data:
+                - drop_in_kbps: 0
+                  device_model: vedge-cloud
+                  interface: ge0/0
+                  time_interval: 300
+                  queued_pkts: 0
+                  tx_pkts: 0
+                  statcycletime: 1676971800123
+                  drop_in_bytes: 0
+                  tx_bytes: 0
+                  tenant: default
+                  entry_time: 1676971204628
+                  drop_in_pkts: 0
+                  vip_time: 1676971204628
+                  tail_drop_bytes: 0
+                  tx_bytes_in_pps: 0
+                  vmanage_system_ip: 172.16.255.11
+                  queued_bytes: 0
+                  queue_name: Queue4
+                  red_drop_bytes: 0
+                  queued_bytes_in_kbps: 0
+                  red_drop_pkts: 0
+                  vdevice_name: 172.16.255.11
+                  vip_idx: 1448708
+                  drop_in_pps: 0
+                  tail_drop_pkts: 0
+                  tx_bytes_in_kbps: 0
+                  host_name: vm1
+                  id: z7ROc4YB8aNY7Lff9mZW
+                pageInfo:
+                  startTime: '1589073783045'
+                  endTime: '1589072535795'
+                  count: 15
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+      - Monitoring - QoS
+      description: Get stats raw data
+      operationId: getStatsRawData12
+      parameters:
+      - name: page
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+      - name: sortBy
+        in: query
+        schema:
+          pattern: ^[a-zA-Z-_]+$
+          type: string
+      - name: sortOrder
+        in: query
+        schema:
+          type: string
+          enum:
+          - asc
+          - ASC
+          - Asc
+          - desc
+          - DESC
+          - Desc
+      requestBody:
+        description: Stats query string
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Stats query string:
+                description: Stats query string
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '12'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+                    - value:
+                      - 172.16.255.11
+                      field: vdevice_name
+                      type: string
+                      operator: in
+                    - value:
+                      - ge0/0
+                      field: interface
+                      type: string
+                      operator: in
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          device_model:
+                            type: string
+                          drop_in_bytes:
+                            type: number
+                          drop_in_kbps:
+                            type: integer
+                            format: int32
+                          drop_in_pkts:
+                            type: integer
+                            format: int32
+                          drop_in_pps:
+                            type: integer
+                            format: int64
+                          entry_time:
+                            type: string
+                          host_name:
+                            type: string
+                          id:
+                            type: string
+                          interface:
+                            type: string
+                          queue_name:
+                            type: string
+                          queued_bytes:
+                            type: number
+                          queued_bytes_in_kbps:
+                            type: number
+                          queued_pkts:
+                            type: number
+                          red_drop_bytes:
+                            type: number
+                          red_drop_pkts:
+                            type: number
+                          statcycletime:
+                            type: string
+                          tail_drop_bytes:
+                            type: integer
+                            format: int64
+                          tail_drop_pkts:
+                            type: integer
+                            format: int64
+                          tenant:
+                            type: string
+                          time_interval:
+                            type: integer
+                            format: int32
+                          tx_bytes:
+                            type: number
+                          tx_bytes_in_kbps:
+                            type: integer
+                            format: int64
+                          tx_bytes_in_pps:
+                            type: integer
+                            format: int64
+                          tx_pkts:
+                            type: number
+                          vdevice_name:
+                            type: string
+                          vip_idx:
+                            type: string
+                          vip_time:
+                            type: string
+                          vmanage_system_ip:
+                            type: string
+                        description: QOS specific response
+                        $$ref: '#/components/schemas/QoSResp'
+                    pageInfo:
+                      type: object
+                      properties:
+                        count:
+                          type: integer
+                          description: number of alarms to be fetched
+                          format: int64
+                        endTime:
+                          type: integer
+                          description: end time of alarms to be fetched
+                          format: int64
+                        startTime:
+                          type: integer
+                          description: start time of alarms to be fetched
+                          format: int64
+                      $$ref: '#/components/schemas/PageInfo'
+                  description: QoS response with page info
+                  $$ref: '#/components/schemas/QoSRespWithPageInfo'
+              example:
+                data:
+                - drop_in_kbps: 0
+                  device_model: vedge-cloud
+                  interface: ge0/0
+                  time_interval: 300
+                  queued_pkts: 0
+                  tx_pkts: 0
+                  statcycletime: 1676971800123
+                  drop_in_bytes: 0
+                  tx_bytes: 0
+                  tenant: default
+                  entry_time: 1676971204628
+                  drop_in_pkts: 0
+                  vip_time: 1676971204628
+                  tail_drop_bytes: 0
+                  tx_bytes_in_pps: 0
+                  vmanage_system_ip: 172.16.255.11
+                  queued_bytes: 0
+                  queue_name: Queue4
+                  red_drop_bytes: 0
+                  queued_bytes_in_kbps: 0
+                  red_drop_pkts: 0
+                  vdevice_name: 172.16.255.11
+                  vip_idx: 1448708
+                  drop_in_pps: 0
+                  tail_drop_pkts: 0
+                  tx_bytes_in_kbps: 0
+                  host_name: vm1
+                  id: z7ROc4YB8aNY7Lff9mZW
+                pageInfo:
+                  startTime: '1589073783045'
+                  endTime: '1589072535795'
+                  count: 15
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/qos/aggregation:
+    post:
+      tags:
+      - Monitoring - QoS
+      description: Get aggregated data based on input query and filters. The data can be filtered on time and other unique parameters based upon necessity and intended usage
+      operationId: getPostAggregationDataByQuery_MonitoringQos_2704
+      requestBody:
+        description: Stats query string
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Stats query string:
+                description: Stats query string
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '168'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+                    - value:
+                      - 172.16.255.11
+                      field: vdevice_name
+                      type: string
+                      operator: in
+                    - value:
+                      - ge0/0
+                      field: interface
+                      type: string
+                      operator: in
+                  aggregation:
+                    field:
+                    - property: queue_name
+                      sequence: 1
+                      size: 20
+                    histogram:
+                      property: entry_time
+                      type: hour
+                      interval: 6
+                      order: asc
+                    metrics:
+                    - property: tx_bytes_in_kbps
+                      type: avg
+                      order: desc
+                    - property: drop_in_kbps
+                      type: avg
+                  sort:
+                  - field: entry_time
+                    type: date
+                    order: asc
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    count:
+                      type: integer
+                      format: int32
+                      example: 5
+                    entry_time:
+                      type: string
+                      example: '1674813600000'
+                    jitter:
+                      type: integer
+                      format: int32
+                      example: 0
+                    latency:
+                      type: integer
+                      format: int32
+                      example: 0
+                    local_color:
+                      type: string
+                      example: 3g
+                    loss_percentage:
+                      type: integer
+                      format: int32
+                      example: 0
+                  $$ref: '#/components/schemas/QoSAggResp'
+              example: "[\n {\n     \"entry_time\": 1678924800000,\n     \"count\": 72,\n     \"queue_name\": \"Queue4\",\n     \"drop_in_kbps\": 0,\n     \"tx_bytes_in_kbps\": 0\n   },\n   {\n     \"entry_time\": 1678924800000,\n     \"count\": 72,\n     \"queue_name\": \"Queue5\",\n     \"drop_in_kbps\": 0,\n     \"tx_bytes_in_kbps\": 0\n   },\n   {\n     \"entry_time\": 1678924800000,\n     \"count\": 72,\n     \"queue_name\": \"Queue6\",\n     \"drop_in_kbps\": 0,\n     \"tx_bytes_in_kbps\": 0\n   }"
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    get:
+      tags:
+      - Monitoring - QoS
+      description: Monitoring - QoS
+      operationId: getAggregationDataByQuery_MonitoringQos_2703
+      parameters:
+      - name: query
+        in: query
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '168'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+            - value:
+              - 172.16.255.11
+              field: vdevice_name
+              type: string
+              operator: in
+            - value:
+              - ge0/0
+              field: interface
+              type: string
+              operator: in
+          aggregation:
+            field:
+            - property: queue_name
+              sequence: 1
+              size: 20
+            histogram:
+              property: entry_time
+              type: hour
+              interval: 6
+              order: asc
+            metrics:
+            - property: tx_bytes_in_kbps
+              type: avg
+              order: desc
+            - property: drop_in_kbps
+              type: avg
+          sort:
+          - field: entry_time
+            type: date
+            order: asc
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    count:
+                      type: integer
+                      format: int32
+                      example: 5
+                    entry_time:
+                      type: string
+                      example: '1674813600000'
+                    jitter:
+                      type: integer
+                      format: int32
+                      example: 0
+                    latency:
+                      type: integer
+                      format: int32
+                      example: 0
+                    local_color:
+                      type: string
+                      example: 3g
+                    loss_percentage:
+                      type: integer
+                      format: int32
+                      example: 0
+                  $$ref: '#/components/schemas/QoSAggResp'
+              example:
+              - entry_time: 1678924800000
+                count: 72
+                queue_name: Queue4
+                drop_in_kbps: 0
+                tx_bytes_in_kbps: 0
+              - entry_time: 1678924800000
+                count: 72
+                queue_name: Queue5
+                drop_in_kbps: 0
+                tx_bytes_in_kbps: 0
+              - entry_time: 1678924800000
+                count: 72
+                queue_name: Queue6
+                drop_in_kbps: 0
+                tx_bytes_in_kbps: 0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/qos/app-agg/aggregation:
+    post:
+      tags:
+      - Monitoring - QoS
+      description: Get aggregated data based on input query and filters. The data can be filtered on time and other unique parameters based upon necessity and intended usage
+      operationId: getPostAggregationAppDataByQuery_MonitoringQos_3504
+      requestBody:
+        description: Stats query string
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Stats query string:
+                description: Stats query string
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '24'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+                    - value:
+                      - 172.16.255.16
+                      field: vdevice_name
+                      type: string
+                      operator: in
+                    - value:
+                      - ge0/0
+                      field: interface
+                      type: number
+                      operator: in
+                  aggregation:
+                    field:
+                    - property: queue_name
+                      sequence: 1
+                      size: 20
+                    histogram:
+                      property: entry_time
+                      type: hour
+                      interval: 6
+                      order: asc
+                    metrics:
+                    - property: tx_bytes_in_kbps
+                      type: avg
+                      order: desc
+                    - property: drop_in_kbps
+                      type: avg
+                    - property: jitter
+                      type: avg
+                    sort:
+                    - property: entry_time
+                      type: date
+                      order: desc
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    count:
+                      type: integer
+                      format: int32
+                      example: 5
+                    entry_time:
+                      type: string
+                      example: '1674813600000'
+                    jitter:
+                      type: integer
+                      format: int32
+                      example: 0
+                    latency:
+                      type: integer
+                      format: int32
+                      example: 0
+                    local_color:
+                      type: string
+                      example: 3g
+                    loss_percentage:
+                      type: integer
+                      format: int32
+                      example: 0
+                  $$ref: '#/components/schemas/QoSAggResp'
+              example:
+              - entry_time: 1678881600000
+                count: 72
+                queue_name: Queue1
+                drop_in_kbps: 0
+                jitter: 0
+                tx_bytes_in_kbps: 0
+              - entry_time: 1678881600000
+                count: 72
+                queue_name: Queue2
+                drop_in_kbps: 0
+                jitter: 0
+                tx_bytes_in_kbps: 0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/qos/csv:
+    get:
+      tags:
+      - Monitoring - QoS
+      description: Get raw data with optional query as CSV
+      operationId: getStatDataRawDataAsCSV12
+      parameters:
+      - name: query
+        in: query
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '12'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+            - value:
+              - 172.16.255.11
+              field: vdevice_name
+              type: string
+              operator: in
+            - value:
+              - ge0/0
+              field: interface
+              type: string
+              operator: in
+      responses:
+        '200':
+          description: Success
+          content:
+            text/csv:
+              schema:
+                type: string
+              example: blob:https://<vmanageIP>/82c972bc-f9b3-4cce-bb70-1e1b033ef1cd
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/qos/doccount:
+    get:
+      tags:
+      - Monitoring - QoS
+      description: Get response count of a query
+      operationId: getCount13
+      parameters:
+      - name: query
+        in: query
+        required: true
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '12'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+            - value:
+              - 172.16.255.11
+              field: vdevice_name
+              type: string
+              operator: in
+            - value:
+              - ge0/0
+              field: interface
+              type: string
+              operator: in
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                count: 17193
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+      - Monitoring - QoS
+      description: Get response count of a query
+      operationId: getCountPost13
+      requestBody:
+        description: Stats query string
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Stats query string:
+                description: Stats query string
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '12'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+                    - value:
+                      - 172.16.255.11
+                      field: vdevice_name
+                      type: string
+                      operator: in
+                    - value:
+                      - ge0/0
+                      field: interface
+                      type: string
+                      operator: in
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                count: 17193
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/qos/fields:
+    get:
+      tags:
+      - Monitoring - QoS
+      description: Get fields and type
+      operationId: getStatDataFields13
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+              - dataType: string
+                property: mac
+              - dataType: string
+                property: vap
+              - dataType: number
+                property: rssi
+              - dataType: string
+                property: mode
+              - dataType: number
+                property: bandwidth
+              - dataType: string
+                property: data_security
+              - dataType: number
+                property: rx_rate
+              - dataType: string
+                property: assoc_time
+              - dataType: date
+                property: entry_time
+              - dataType: date
+                property: statcycletime
+              - dataType: string
+                property: ssid
+              - dataType: number
+                property: vip_idx
+              - dataType: date
+                property: vip_time
+              - dataType: string
+                property: vdevice_name
+              - dataType: string
+                property: host_name
+              - dataType: string
+                property: device_model
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/qos/page:
+    get:
+      tags:
+      - Monitoring - QoS
+      description: Get stats raw data
+      operationId: getStatBulkRawData_MonitoringQos_2003
+      parameters:
+      - name: query
+        in: query
+        schema:
+          type: string
+        example:
+          query:
+            condition: AND
+            rules:
+            - value:
+              - '12'
+              field: entry_time
+              type: date
+              operator: last_n_hours
+            - value:
+              - 172.16.255.11
+              field: vdevice_name
+              type: string
+              operator: in
+            - value:
+              - ge0/0
+              field: interface
+              type: string
+              operator: in
+      - name: scrollId
+        in: query
+        schema:
+          type: string
+      - name: count
+        in: query
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        device_model:
+                          type: string
+                        drop_in_bytes:
+                          type: number
+                        drop_in_kbps:
+                          type: integer
+                          format: int32
+                        drop_in_pkts:
+                          type: integer
+                          format: int32
+                        drop_in_pps:
+                          type: integer
+                          format: int64
+                        entry_time:
+                          type: string
+                        host_name:
+                          type: string
+                        id:
+                          type: string
+                        interface:
+                          type: string
+                        queue_name:
+                          type: string
+                        queued_bytes:
+                          type: number
+                        queued_bytes_in_kbps:
+                          type: number
+                        queued_pkts:
+                          type: number
+                        red_drop_bytes:
+                          type: number
+                        red_drop_pkts:
+                          type: number
+                        statcycletime:
+                          type: string
+                        tail_drop_bytes:
+                          type: integer
+                          format: int64
+                        tail_drop_pkts:
+                          type: integer
+                          format: int64
+                        tenant:
+                          type: string
+                        time_interval:
+                          type: integer
+                          format: int32
+                        tx_bytes:
+                          type: number
+                        tx_bytes_in_kbps:
+                          type: integer
+                          format: int64
+                        tx_bytes_in_pps:
+                          type: integer
+                          format: int64
+                        tx_pkts:
+                          type: number
+                        vdevice_name:
+                          type: string
+                        vip_idx:
+                          type: string
+                        vip_time:
+                          type: string
+                        vmanage_system_ip:
+                          type: string
+                      description: QOS specific response
+                      $$ref: '#/components/schemas/QoSResp'
+                  pageInfo:
+                    type: object
+                    properties:
+                      count:
+                        type: integer
+                        description: number of alarms to be fetched
+                        format: int64
+                      endTime:
+                        type: integer
+                        description: end time of alarms to be fetched
+                        format: int64
+                      startTime:
+                        type: integer
+                        description: start time of alarms to be fetched
+                        format: int64
+                    $$ref: '#/components/schemas/PageInfo'
+                description: QoS response with page info
+                $$ref: '#/components/schemas/QoSRespWithPageInfo'
+              example:
+                data:
+                - drop_in_kbps: 0
+                  device_model: vedge-cloud
+                  interface: ge0/0
+                  time_interval: 300
+                  queued_pkts: 0
+                  tx_pkts: 0
+                  statcycletime: 1676971800123
+                  drop_in_bytes: 0
+                  tx_bytes: 0
+                  tenant: default
+                  entry_time: 1676971204628
+                  drop_in_pkts: 0
+                  vip_time: 1676971204628
+                  tail_drop_bytes: 0
+                  tx_bytes_in_pps: 0
+                  vmanage_system_ip: 172.16.255.11
+                  queued_bytes: 0
+                  queue_name: Queue4
+                  red_drop_bytes: 0
+                  queued_bytes_in_kbps: 0
+                  red_drop_pkts: 0
+                  vdevice_name: 172.16.255.11
+                  vip_idx: 1448708
+                  drop_in_pps: 0
+                  tail_drop_pkts: 0
+                  tx_bytes_in_kbps: 0
+                  host_name: vm1
+                  id: z7ROc4YB8aNY7Lff9mZW
+                pageInfo:
+                  startTime: 647394800045,
+                  endTime: 1647394800047,
+                  scrollId: DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAf4WcUlydS1uYzlTdXFhR05GTlBpTFJ4QQ==_10,
+                  hasMoreData: true,
+                  count: 5,
+                  totalCount: 11140
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+      - Monitoring - QoS
+      description: Get stats raw data
+      operationId: getPostStatBulkRawData12
+      parameters:
+      - name: scrollId
+        in: query
+        schema:
+          type: string
+      - name: count
+        in: query
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: Stats query string
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Stats query string:
+                description: Stats query string
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - value:
+                      - '12'
+                      field: entry_time
+                      type: date
+                      operator: last_n_hours
+                    - value:
+                      - 172.16.255.11
+                      field: vdevice_name
+                      type: string
+                      operator: in
+                    - value:
+                      - ge0/0
+                      field: interface
+                      type: string
+                      operator: in
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        device_model:
+                          type: string
+                        drop_in_bytes:
+                          type: number
+                        drop_in_kbps:
+                          type: integer
+                          format: int32
+                        drop_in_pkts:
+                          type: integer
+                          format: int32
+                        drop_in_pps:
+                          type: integer
+                          format: int64
+                        entry_time:
+                          type: string
+                        host_name:
+                          type: string
+                        id:
+                          type: string
+                        interface:
+                          type: string
+                        queue_name:
+                          type: string
+                        queued_bytes:
+                          type: number
+                        queued_bytes_in_kbps:
+                          type: number
+                        queued_pkts:
+                          type: number
+                        red_drop_bytes:
+                          type: number
+                        red_drop_pkts:
+                          type: number
+                        statcycletime:
+                          type: string
+                        tail_drop_bytes:
+                          type: integer
+                          format: int64
+                        tail_drop_pkts:
+                          type: integer
+                          format: int64
+                        tenant:
+                          type: string
+                        time_interval:
+                          type: integer
+                          format: int32
+                        tx_bytes:
+                          type: number
+                        tx_bytes_in_kbps:
+                          type: integer
+                          format: int64
+                        tx_bytes_in_pps:
+                          type: integer
+                          format: int64
+                        tx_pkts:
+                          type: number
+                        vdevice_name:
+                          type: string
+                        vip_idx:
+                          type: string
+                        vip_time:
+                          type: string
+                        vmanage_system_ip:
+                          type: string
+                      description: QOS specific response
+                      $$ref: '#/components/schemas/QoSResp'
+                  pageInfo:
+                    type: object
+                    properties:
+                      count:
+                        type: integer
+                        description: number of alarms to be fetched
+                        format: int64
+                      endTime:
+                        type: integer
+                        description: end time of alarms to be fetched
+                        format: int64
+                      startTime:
+                        type: integer
+                        description: start time of alarms to be fetched
+                        format: int64
+                    $$ref: '#/components/schemas/PageInfo'
+                description: QoS response with page info
+                $$ref: '#/components/schemas/QoSRespWithPageInfo'
+              example:
+                data:
+                - drop_in_kbps: 0
+                  device_model: vedge-cloud
+                  interface: ge0/0
+                  time_interval: 300
+                  queued_pkts: 0
+                  tx_pkts: 0
+                  statcycletime: 1676971800123
+                  drop_in_bytes: 0
+                  tx_bytes: 0
+                  tenant: default
+                  entry_time: 1676971204628
+                  drop_in_pkts: 0
+                  vip_time: 1676971204628
+                  tail_drop_bytes: 0
+                  tx_bytes_in_pps: 0
+                  vmanage_system_ip: 172.16.255.11
+                  queued_bytes: 0
+                  queue_name: Queue4
+                  red_drop_bytes: 0
+                  queued_bytes_in_kbps: 0
+                  red_drop_pkts: 0
+                  vdevice_name: 172.16.255.11
+                  vip_idx: 1448708
+                  drop_in_pps: 0
+                  tail_drop_pkts: 0
+                  tx_bytes_in_kbps: 0
+                  host_name: vm1
+                  id: z7ROc4YB8aNY7Lff9mZW
+                pageInfo:
+                  startTime: 647394800045,
+                  endTime: 1647394800047,
+                  scrollId: DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAf4WcUlydS1uYzlTdXFhR05GTlBpTFJ4QQ==_10,
+                  hasMoreData: true,
+                  count: 5,
+                  totalCount: 11140
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/qos/query/fields:
+    get:
+      tags:
+      - Monitoring - QoS
+      description: Get query fields
+      operationId: getStatQueryFields_MonitoringQos_2803
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  dataType:
+                    type: string
+                    example: date
+                  fieldData:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                        example: dateList
+                    $$ref: '#/components/schemas/QoSQueryFieldsRespFieldData'
+                  isRequired:
+                    type: boolean
+                    example: true
+                  name:
+                    type: string
+                    example: Event Time
+                  options:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        enabledDateFields:
+                          type: boolean
+                          example: false
+                        key:
+                          type: string
+                          example: last_3_hours
+                        number:
+                          type: string
+                          example: '1'
+                        value:
+                          type: string
+                          example: last 1 hour
+                      $$ref: '#/components/schemas/QueryFieldsOption'
+                  property:
+                    type: string
+                    example: entry_time
+                $$ref: '#/components/schemas/QoSQueryFieldsResp'
+              example:
+                data:
+                - isRequired: true
+                  fieldData:
+                    type: dateList
+                  dataType: date
+                  property: entry_time
+                  name: Event Time
+                  options:
+                  - enableDateFields: false
+                    number: '1'
+                    value: Last 1 hour
+                    key: last_1_hour
+                  - enableDateFields: false
+                    number: '3'
+                    value: Last 3 hours
+                    key: last_3_hours
+                  - enableDateFields: false
+                    number: '6'
+                    value: Last 6 hours
+                    key: last_6_hours
+                  - enableDateFields: false
+                    number: '12'
+                    value: Last 12 hours
+                    key: last_12_hours
+                  - enableDateFields: false
+                    number: '24'
+                    isSelected: true
+                    value: Last 24 hours
+                    key: last_24_hours
+                  - enableDateFields: false
+                    number: '168'
+                    value: Last 7 days
+                    key: last_168_hours
+                  - enableDateFields: true
+                    value: Custom
+                    key: custom
+                header: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/qos/session/summary:
+    get:
+      tags:
+      - Monitoring - QoS
+      description: Get per-tunnel QoS sessions summary
+      operationId: getSessionQosSummaryStat
+      parameters:
+      - name: vdevice_name
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: last_n_hours
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+          default: 24
+      - name: start_time
+        in: query
+        schema:
+          type: string
+      - name: end_time
+        in: query
+        schema:
+          type: string
+      - name: sortBy
+        in: query
+        schema:
+          type: string
+          enum:
+          - tx_bytes_in_kbps
+          - queued_bytes_in_kbps
+          - drop_in_kbps
+      - name: sortOrder
+        in: query
+        schema:
+          type: string
+          enum:
+          - asc
+          - ASC
+          - Asc
+          - desc
+          - DESC
+          - Desc
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        count:
+                          type: number
+                          example: 441
+                        drop_in_kbps:
+                          type: number
+                          example: 0
+                        host_name:
+                          type: string
+                          example: vm6
+                        queued_bytes_in_kbps:
+                          type: number
+                          example: 0.499
+                        tunnel_endpoint:
+                          type: string
+                          example: 172.16.255.15_lte_172.16.255.16_lte_ipsec
+                        tx_bytes_in_kbps:
+                          type: number
+                          example: 0.499
+                      $$ref: '#/components/schemas/QosSessionSummaryObject'
+                $$ref: '#/components/schemas/QosSessionSummaryResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read

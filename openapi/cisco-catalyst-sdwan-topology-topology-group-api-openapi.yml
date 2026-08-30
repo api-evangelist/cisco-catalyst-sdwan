@@ -1,0 +1,736 @@
+openapi: 3.2.0
+info:
+  title: UX 2.0 Configuration Topology - Topology Group API
+  description: "Configuration of UX 2.0 device, policy, and topology\nIncludes API operations for the following\n  Configuration Groups (SD-WAN and SD-Routing)\n  Policy Groups\n  Topology Groups"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Topology - Topology Group
+paths:
+  /v1/topology-group:
+    post:
+      tags:
+      - Topology - Topology Group
+      description: Create a new Topology Group
+      operationId: CreateTopologyGroup
+      requestBody:
+        description: Topology Group
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  pattern: ^[^&<>! "]+$
+                  minLength: 1
+                  maxLength: 128
+                  $$ref: '#/components/schemas/CommonCommonDefs_cgFpPpNameDef'
+                description:
+                  type: string
+                solution:
+                  type: string
+                  enum:
+                  - sdwan
+                profiles:
+                  type: array
+                  description: list of profile ids that belongs to the topology group
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                    required:
+                    - id
+                    additionalProperties: false
+                    $$ref: '#/components/schemas/TopologygroupCommonPostRequest_profileIdObjDef'
+                  uniqueItems: true
+                  additionalProperties: false
+                fromTopologyGroup:
+                  type: object
+                  description: from another topology group
+                  oneOf:
+                  - properties:
+                      copy:
+                        type: string
+                        pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+                        $$ref: '#/components/schemas/CommonCommonDefs_uuidDef'
+                    required:
+                    - copy
+                    additionalProperties: false
+                  $$ref: '#/components/schemas/TopologygroupCommonPostRequest_fromTopologyGroupDef'
+              required:
+              - name
+              - description
+              - solution
+              additionalProperties: false
+              $$ref: '#/components/schemas/TopologygroupCommonPostRequest_SchemaPayload'
+            examples:
+              CEDGE-TopologyGroup1-NY:
+                value:
+                  name: CEDGE-TopologyGroup1-NY
+                  description: CEDGE Topology Group 1 for devices at site NY
+                  solution: sdwan
+                  profiles:
+                  - id: EEBE1AaD-DbC6-A9C2-E5F2-a9aFDD993FED
+                  - id: 4D7eb1e4-Bf34-9aeA-58d8-C86824ECF8f4
+                  - id: 4C56e3c3-C67F-Cf66-d02f-8c666bd005CC
+                $$ref: '#/components/examples/TopologygroupCommonPostRequest_CEDGE-TopologyGroup1-NY'
+              CEDGE-TopologyGroup1-COPY:
+                value:
+                  name: CEDGE-TopologyGroup1-COPY
+                  description: Copy Topology Group from EEBE1AaD-DbC6-A9C2-E5F2-a9aFDD993F99
+                  solution: sdwan
+                  fromTopologyGroup:
+                    copy: EEBE1AaD-DbC6-A9C2-E5F2-a9aFDD993F99
+                $$ref: '#/components/examples/TopologygroupCommonPostRequest_CEDGE-TopologyGroup1-COPY'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+              example: TODO
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Topology Group-write
+    get:
+      tags:
+      - Topology - Topology Group
+      description: Get a Topology Group by Solution
+      operationId: GetTopologyGroupBySolution
+      parameters:
+      - name: solution
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  required:
+                  - name
+                  - solution
+                  - state
+                  - version
+                  type: object
+                  properties:
+                    activeStatus:
+                      type: boolean
+                    copyInfo:
+                      type: string
+                    createdBy:
+                      type: string
+                      description: User who last created this.
+                      readOnly: true
+                    createdOn:
+                      type: integer
+                      description: Timestamp of creation
+                      format: int64
+                      readOnly: true
+                    description:
+                      type: string
+                      description: Description of the  Group.
+                      example: group for west coast retail stores
+                    devices:
+                      uniqueItems: true
+                      type: array
+                      items:
+                        type: string
+                    id:
+                      type: string
+                      description: System generated unique identifier of the  Group in UUID format.
+                      example: 6fa14197-c25f-4a14-b81b-299de32ed2ca
+                    lastUpdatedBy:
+                      type: string
+                      description: User who last updated this.
+                      readOnly: true
+                    lastUpdatedOn:
+                      type: integer
+                      description: Timestamp of last update
+                      format: int64
+                      readOnly: true
+                    name:
+                      type: string
+                      description: Name of the  Group. Must be unique.
+                      example: West coast retail stores
+                    numberOfDevices:
+                      type: integer
+                      format: int64
+                    numberOfDevicesUpToDate:
+                      type: integer
+                      format: int64
+                    origin:
+                      type: string
+                    originInfo:
+                      type: object
+                      additionalProperties:
+                        type: string
+                    profiles:
+                      type: array
+                      description: List of devices UUIDs associated with this group
+                      example:
+                      - id: 6fa14197-c25f-4a14-b81b-299de32ed2ca
+                        name: system feature profile
+                        solution: sdwan
+                        type: system
+                        description: Profile file description
+                        lastUpdatedBy: admin
+                        lastUpdatedOn: 1694179200000
+                        createdBy: admin
+                        createdOn: 1694092800000
+                        profileParcelCount: 5
+                        origin: internal
+                      items:
+                        required:
+                        - name
+                        - solution
+                        - type
+                        type: object
+                        properties:
+                          createdBy:
+                            type: string
+                            description: User who last created this.
+                            readOnly: true
+                          createdOn:
+                            type: integer
+                            description: Timestamp of creation
+                            format: int64
+                            readOnly: true
+                          description:
+                            type: string
+                            description: Description of the feature Profile.
+                            example: Profile file description
+                          id:
+                            type: string
+                            description: System generated unique identifier of the feature profile in UUID format.
+                            example: 6fa14197-c25f-4a14-b81b-299de32ed2ca
+                          lastUpdatedBy:
+                            type: string
+                            description: User who last updated this.
+                            readOnly: true
+                          lastUpdatedOn:
+                            type: integer
+                            description: Timestamp of last update
+                            format: int64
+                            readOnly: true
+                          name:
+                            type: string
+                            description: Name of the feature Profile. Must be unique.
+                            example: system feature profile
+                          origin:
+                            type: string
+                          profileParcelCount:
+                            type: integer
+                            description: Number of Parcels attached with Feature Profile
+                            format: int64
+                            readOnly: true
+                          solution:
+                            type: string
+                            description: Solution of the feature Profile.
+                            example: sdwan
+                          type:
+                            type: string
+                            description: Type of the feature Profile.
+                            example: system
+                        $$ref: '#/components/schemas/FeatureProfile'
+                    solution:
+                      type: string
+                      description: Specify one of the device platform solution
+                      example: sdwan
+                      enum:
+                      - mobility
+                      - sdwan
+                      - sd-routing
+                      - common
+                      - nfvirtual
+                      - service-insertion
+                      - cellulargateway
+                    source:
+                      type: string
+                      description: Source of group
+                      example: retail_workflow
+                    state:
+                      type: string
+                      description: ' Group Deployment state'
+                      example: ' Group Deployment state.Initial state Deployed '
+                    version:
+                      type: integer
+                      description: ' Group Version Flag'
+                      format: int64
+                  $$ref: '#/components/schemas/TopologyGroup'
+              examples:
+                West coast retail stores:
+                  value:
+                  - description: group for west coast retail stores
+                    id: 6fa14197-c25f-4a14-b81b-299de32ed2ca
+                    name: West coast retail stores
+                    profiles:
+                    - description: Profile file description
+                      id: 6fa14197-c25f-4a14-b81b-299de32ed2ca
+                      name: system feature profile
+                      solution: sdwan
+                      type: system
+                    solution: sdwan
+                    source: retail_workflow
+                    state: ' Group Deployment state.Initial state Deployed '
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Topology Group-read
+  /v1/topology-group/{topologyGroupId}:
+    get:
+      tags:
+      - Topology - Topology Group
+      description: Get a Topology Group by ID
+      operationId: GetTopologyGroup
+      parameters:
+      - name: topologyGroupId
+        in: path
+        required: true
+        schema:
+          pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                required:
+                - name
+                - solution
+                - state
+                - version
+                type: object
+                properties:
+                  activeStatus:
+                    type: boolean
+                  copyInfo:
+                    type: string
+                  createdBy:
+                    type: string
+                    description: User who last created this.
+                    readOnly: true
+                  createdOn:
+                    type: integer
+                    description: Timestamp of creation
+                    format: int64
+                    readOnly: true
+                  description:
+                    type: string
+                    description: Description of the  Group.
+                    example: group for west coast retail stores
+                  devices:
+                    uniqueItems: true
+                    type: array
+                    items:
+                      type: string
+                  id:
+                    type: string
+                    description: System generated unique identifier of the  Group in UUID format.
+                    example: 6fa14197-c25f-4a14-b81b-299de32ed2ca
+                  lastUpdatedBy:
+                    type: string
+                    description: User who last updated this.
+                    readOnly: true
+                  lastUpdatedOn:
+                    type: integer
+                    description: Timestamp of last update
+                    format: int64
+                    readOnly: true
+                  name:
+                    type: string
+                    description: Name of the  Group. Must be unique.
+                    example: West coast retail stores
+                  numberOfDevices:
+                    type: integer
+                    format: int64
+                  numberOfDevicesUpToDate:
+                    type: integer
+                    format: int64
+                  origin:
+                    type: string
+                  originInfo:
+                    type: object
+                    additionalProperties:
+                      type: string
+                  profiles:
+                    type: array
+                    description: List of devices UUIDs associated with this group
+                    example:
+                    - id: 6fa14197-c25f-4a14-b81b-299de32ed2ca
+                      name: system feature profile
+                      solution: sdwan
+                      type: system
+                      description: Profile file description
+                      lastUpdatedBy: admin
+                      lastUpdatedOn: 1694179200000
+                      createdBy: admin
+                      createdOn: 1694092800000
+                      profileParcelCount: 5
+                      origin: internal
+                    items:
+                      required:
+                      - name
+                      - solution
+                      - type
+                      type: object
+                      properties:
+                        createdBy:
+                          type: string
+                          description: User who last created this.
+                          readOnly: true
+                        createdOn:
+                          type: integer
+                          description: Timestamp of creation
+                          format: int64
+                          readOnly: true
+                        description:
+                          type: string
+                          description: Description of the feature Profile.
+                          example: Profile file description
+                        id:
+                          type: string
+                          description: System generated unique identifier of the feature profile in UUID format.
+                          example: 6fa14197-c25f-4a14-b81b-299de32ed2ca
+                        lastUpdatedBy:
+                          type: string
+                          description: User who last updated this.
+                          readOnly: true
+                        lastUpdatedOn:
+                          type: integer
+                          description: Timestamp of last update
+                          format: int64
+                          readOnly: true
+                        name:
+                          type: string
+                          description: Name of the feature Profile. Must be unique.
+                          example: system feature profile
+                        origin:
+                          type: string
+                        profileParcelCount:
+                          type: integer
+                          description: Number of Parcels attached with Feature Profile
+                          format: int64
+                          readOnly: true
+                        solution:
+                          type: string
+                          description: Solution of the feature Profile.
+                          example: sdwan
+                        type:
+                          type: string
+                          description: Type of the feature Profile.
+                          example: system
+                      $$ref: '#/components/schemas/FeatureProfile'
+                  solution:
+                    type: string
+                    description: Specify one of the device platform solution
+                    example: sdwan
+                    enum:
+                    - mobility
+                    - sdwan
+                    - sd-routing
+                    - common
+                    - nfvirtual
+                    - service-insertion
+                    - cellulargateway
+                  source:
+                    type: string
+                    description: Source of group
+                    example: retail_workflow
+                  state:
+                    type: string
+                    description: ' Group Deployment state'
+                    example: ' Group Deployment state.Initial state Deployed '
+                  version:
+                    type: integer
+                    description: ' Group Version Flag'
+                    format: int64
+                $$ref: '#/components/schemas/TopologyGroup'
+              examples:
+                West coast retail stores:
+                  value:
+                    description: group for west coast retail stores
+                    id: 6fa14197-c25f-4a14-b81b-299de32ed2ca
+                    name: West coast retail stores
+                    profiles:
+                    - description: Profile file description
+                      id: 6fa14197-c25f-4a14-b81b-299de32ed2ca
+                      name: system feature profile
+                      solution: sdwan
+                      type: system
+                    solution: sdwan
+                    source: retail_workflow
+                    state: ' Group Deployment state.Initial state Deployed '
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Topology Group-read
+    put:
+      tags:
+      - Topology - Topology Group
+      description: Edit a Topology Group
+      operationId: EditTopologyGroup
+      parameters:
+      - name: topologyGroupId
+        in: path
+        required: true
+        schema:
+          pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+          type: string
+      requestBody:
+        description: Topology Group
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  pattern: ^[^&<>! "]+$
+                  minLength: 1
+                  maxLength: 128
+                  $$ref: '#/components/schemas/CommonCommonDefs_cgFpPpNameDef'
+                description:
+                  type: string
+                solution:
+                  type: string
+                  enum:
+                  - sdwan
+                profiles:
+                  type: array
+                  description: list of profile ids that belongs to the topology group
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                    required:
+                    - id
+                    additionalProperties: false
+                    $$ref: '#/components/schemas/TopologygroupCommonPutRequest_profileIdObjDef'
+                  uniqueItems: true
+                  additionalProperties: false
+              required:
+              - name
+              - description
+              - solution
+              additionalProperties: false
+              $$ref: '#/components/schemas/TopologygroupCommonPutRequest_SchemaPayload'
+            examples:
+              CEDGE-TopologyGroup1-NY:
+                value:
+                  name: CEDGE-TopologyGroup1-NY
+                  description: CEDGE Topology Group 1 for devices at site NY
+                  solution: sdwan
+                  profiles:
+                  - id: EEBE1AaD-DbC6-A9C2-E5F2-a9aFDD993FED
+                  - id: 4D7eb1e4-Bf34-9aeA-58d8-C86824ECF8f4
+                  - id: 4C56e3c3-C67F-Cf66-d02f-8c666bd005CC
+                $$ref: '#/components/examples/TopologygroupCommonPutRequest_CEDGE-TopologyGroup1-NY'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+              example:
+                Solution: Mobility
+                name: Awesome Topology group
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Topology Group-write
+    delete:
+      tags:
+      - Topology - Topology Group
+      description: Delete Topology Group
+      operationId: DeleteTopologyGroup
+      parameters:
+      - name: topologyGroupId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Topology Group-write
+  /v1/topology-group/{topologyGroupId}/device/deploy:
+    post:
+      tags:
+      - Topology - Topology Group
+      description: deploy Topology group to devices
+      operationId: deployTopologyGroup
+      parameters:
+      - name: topologyGroupId
+        in: path
+        description: Topology Group Id
+        required: true
+        schema:
+          pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                deactivateTopology:
+                  type: boolean
+                  default: false
+              required: []
+              additionalProperties: false
+              $$ref: '#/components/schemas/TopologygroupCommonDeployPostRequest_SchemaPayload'
+            examples: {}
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  parentTaskId:
+                    type: string
+                    minLength: 1
+                    $$ref: '#/components/schemas/CommonCommonDefs_nonEmptyStringDef'
+                required:
+                - parentTaskId
+                additionalProperties: false
+                $$ref: '#/components/schemas/TopologygroupCommonDeployPostResponse_SchemaPayload'
+              examples:
+                example_1:
+                  value:
+                    parentTaskId: deploy-topology-group-73C544A7-5B4d-8f6c-feB4-b4af830b0d2c
+                  $$ref: '#/components/examples/TopologygroupCommonDeployPostResponse_example_1'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Topology Group > Device > Activate-write
+  /v1/topology-group/{topologyGroupId}/device/{deviceId}/preview:
+    post:
+      tags:
+      - Topology - Topology Group
+      description: Get a preview of the configuration for a device
+      operationId: getTopologyGroupDeviceConfigurationPreview
+      parameters:
+      - name: topologyGroupId
+        in: path
+        description: Topology Group Id
+        required: true
+        schema:
+          type: string
+      - name: deviceId
+        in: path
+        description: Device Id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                deactivateTopology:
+                  type: boolean
+                  description: Preview vSmart configuration with Topology Group config removed
+              required: []
+              additionalProperties: false
+              $$ref: '#/components/schemas/TopologygroupCommonPreviewPostRequest_SchemaPayload'
+            examples:
+              example_1:
+                value:
+                  deactivateTopology: true
+                $$ref: '#/components/examples/TopologygroupCommonPreviewPostRequest_example_1'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  existingConfig:
+                    type: string
+                  newConfig:
+                    type: string
+                  unsupportedParcels:
+                    type: array
+                    minItems: 0
+                    items:
+                      type: object
+                required:
+                - existingConfig
+                - newConfig
+                additionalProperties: false
+                $$ref: '#/components/schemas/TopologygroupCommonPreviewPostResponse_SchemaPayload'
+              examples:
+                example_1:
+                  value:
+                    existingConfig: old config
+                    newConfig: new config
+                  $$ref: '#/components/examples/TopologygroupCommonPreviewPostResponse_example_1'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Topology Group > Device > Activate-read

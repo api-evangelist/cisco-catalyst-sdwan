@@ -1,0 +1,809 @@
+openapi: 3.2.0
+info:
+  title: Others MultiCloud - Tagging API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: MultiCloud - Tagging
+paths:
+  /multicloud/hostvpc:
+    get:
+      tags:
+      - MultiCloud - Tagging
+      description: Get all Host VPCs
+      operationId: getHostVpcs
+      parameters:
+      - name: cloudType
+        in: query
+        description: Multicloud provider type
+        required: true
+        schema:
+          type: string
+      - name: accountIds
+        in: query
+        description: Multicloud cloud gateway enabled
+        schema:
+          type: string
+      - name: region
+        in: query
+        schema:
+          maxLength: 1024
+          minLength: 1
+          pattern: ^[a-zA-Z0-9_./\-]+$
+          type: string
+      - name: untagged
+        in: query
+        description: Multicloud cloud gateway enabled
+        schema:
+          pattern: ^(true|false)$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  required:
+                  - accountId
+                  - cloudType
+                  - hostVpcId
+                  - region
+                  - vnetId
+                  type: object
+                  properties:
+                    accountId:
+                      type: string
+                    accountName:
+                      type: string
+                    cloudTenantId:
+                      pattern: ^[a-zA-Z0-9_./\-]+$
+                      type: string
+                      description: Used for Azure and Azure GovCloud cloud types
+                    cloudType:
+                      type: string
+                    hostVpcId:
+                      pattern: ^[a-zA-Z0-9_./\-]+$
+                      type: string
+                      description: Used for AWS, AWS GovCloud and GCP cloud types
+                    hostVpcName:
+                      pattern: ^[a-zA-Z0-9_/\-]*$
+                      type: string
+                      description: Used for AWS, AWS GovCloud and GCP cloud types
+                    region:
+                      pattern: ^[a-zA-Z0-9_./\-]+$
+                      type: string
+                    resourceGroups:
+                      pattern: ^[a-zA-Z0-9_./\-]+$
+                      type: string
+                      description: Used for Azure and Azure GovCloud cloud types
+                    vnetId:
+                      pattern: ^[a-zA-Z0-9_./\-]+$
+                      type: string
+                      description: Used for Azure and Azure GovCloud cloud types
+                    vnetKey:
+                      pattern: ^[a-zA-Z0-9_./\-]+$
+                      type: string
+                      description: Used for Azure and Azure GovCloud cloud types
+                    vpcName:
+                      pattern: ^[a-zA-Z0-9_/\-]*$
+                      type: string
+                      description: Used for Azure and Azure GovCloud cloud types
+                  $$ref: '#/components/schemas/HostVpcsResponse'
+              examples:
+                AWS VPCs:
+                  description: AWS VPCs
+                  value:
+                  - accountId: '999293417507'
+                    accountName: test-aws-account
+                    region: us-west-2
+                    cloudType: AWS
+                    hostVpcId: vpc-0fd1fbce44f9db86b
+                    hostVpcName: test-vpc-1
+                Azure VNETs:
+                  description: Azure VNETs
+                  value:
+                  - accountId: 9e222d34-9f20-4a2f-9c01-e507193dabb
+                    accountName: test-azure-account
+                    region: us-west-2
+                    cloudType: AZURE
+                    vnetId: /subscriptions/9e222d34-9f20-4a2f-9c01-e507193dabb4/resourceGroups/test-rg/providers/Microsoft.Network/virtualNetworks/test-vnet-1
+                    vnetKey: 9e222d34-9f20-4a2f-9c01-e507193dabb4/test-rg/test-vnet-1
+                    resourceGroups: test-rg
+                GCP VPCs:
+                  description: GCP VPCs
+                  value:
+                  - accountId: gcp-test-1234
+                    accountName: test-gcp-account
+                    region: us-west-3
+                    cloudType: GCP
+                    hostVpcId: '8360972143511967399'
+                    hostVpcName: test-vpc-3
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/hostvpc/tags:
+    get:
+      tags:
+      - MultiCloud - Tagging
+      description: Get VPC Tags
+      operationId: getVpcTags
+      parameters:
+      - name: cloudType
+        in: query
+        description: Multicloud provider type
+        schema:
+          type: string
+      - name: region
+        in: query
+        schema:
+          maxLength: 1024
+          minLength: 1
+          pattern: ^[a-zA-Z0-9_./\-]+$
+          type: string
+      - name: tagName
+        in: query
+        schema:
+          maxLength: 1024
+          minLength: 1
+          pattern: ^[a-zA-Z0-9_./\-]+$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  required:
+                  - accountId
+                  - cloudType
+                  - hostVpcId
+                  - region
+                  - vnetId
+                  type: object
+                  properties:
+                    accountId:
+                      type: string
+                    accountName:
+                      type: string
+                    cloudTenantId:
+                      pattern: ^[a-zA-Z0-9_./\-]+$
+                      type: string
+                      description: Used for Azure and Azure GovCloud cloud types
+                    cloudType:
+                      type: string
+                    hostVpcId:
+                      pattern: ^[a-zA-Z0-9_./\-]+$
+                      type: string
+                      description: Used for AWS, AWS GovCloud and GCP cloud types
+                    hostVpcName:
+                      pattern: ^[a-zA-Z0-9_/\-]*$
+                      type: string
+                      description: Used for AWS, AWS GovCloud and GCP cloud types
+                    region:
+                      pattern: ^[a-zA-Z0-9_./\-]+$
+                      type: string
+                    resourceGroups:
+                      pattern: ^[a-zA-Z0-9_./\-]+$
+                      type: string
+                      description: Used for Azure and Azure GovCloud cloud types
+                    tag:
+                      type: string
+                    vnetId:
+                      pattern: ^[a-zA-Z0-9_./\-]+$
+                      type: string
+                      description: Used for Azure and Azure GovCloud cloud types
+                    vnetKey:
+                      pattern: ^[a-zA-Z0-9_./\-]+$
+                      type: string
+                      description: Used for Azure and Azure GovCloud cloud types
+                    vpcName:
+                      pattern: ^[a-zA-Z0-9_/\-]*$
+                      type: string
+                      description: Used for Azure and Azure GovCloud cloud types
+                  $$ref: '#/components/schemas/HostVpcTagResponse'
+              examples:
+                AWS VPC Tags:
+                  description: AWS VPC Tags
+                  value:
+                  - accountId: '999293417507'
+                    accountName: test-aws-account
+                    region: us-west-2
+                    cloudType: AWS
+                    hostVpcId: vpc-0fd1fbce44f9db86b
+                    hostVpcName: test-vpc-1
+                    tag: test-tag
+                Azure VNET Tags:
+                  description: Azure VNET Tags
+                  value:
+                  - accountId: 9e222d34-9f20-4a2f-9c01-e507193dabb
+                    accountName: test-azure-account
+                    region: us-west-2
+                    cloudType: AZURE
+                    vnetId: /subscriptions/9e222d34-9f20-4a2f-9c01-e507193dabb4/resourceGroups/test-rg/providers/Microsoft.Network/virtualNetworks/test-vnet-1
+                    vnetKey: 9e222d34-9f20-4a2f-9c01-e507193dabb4/test-rg/test-vnet-1
+                    resourceGroups: test-rg
+                    tag: test-tag
+                    interconnectTag: 'No'
+                GCP VPC Tags:
+                  description: GCP VPC Tags
+                  value:
+                  - accountId: gcp-test-1234
+                    accountName: test-gcp-account
+                    region: us-west-3
+                    cloudType: GCP
+                    hostVpcId: '8360972143511967399'
+                    hostVpcName: test-vpc-3
+                    tag: test-tag
+                    interconnectTag: 'No'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    put:
+      tags:
+      - MultiCloud - Tagging
+      description: Edit VPCs for a Tag
+      operationId: editTag
+      requestBody:
+        description: Payload for updating VPCs for a Tag
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                hostVpcs:
+                  type: array
+                  description: Used for AWS, AWS GovCloud and GCP cloud types
+                  items:
+                    required:
+                    - accountId
+                    - cloudType
+                    - hostVpcId
+                    - region
+                    - vnetId
+                    type: object
+                    properties:
+                      accountId:
+                        type: string
+                      accountName:
+                        type: string
+                      cgwAttachment:
+                        pattern: ^[\w.-]{1,128}$
+                        type: string
+                      cgwAutoAttachmentFlag:
+                        type: boolean
+                      cloudTenantId:
+                        pattern: ^[a-zA-Z0-9_./\-]+$
+                        type: string
+                        description: Used for Azure and Azure GovCloud cloud types
+                      cloudType:
+                        type: string
+                      hostVpcId:
+                        pattern: ^[a-zA-Z0-9_./\-]+$
+                        type: string
+                        description: Used for AWS, AWS GovCloud and GCP cloud types
+                      hostVpcName:
+                        pattern: ^[a-zA-Z0-9_/\-]*$
+                        type: string
+                        description: Used for AWS, AWS GovCloud and GCP cloud types
+                      id:
+                        pattern: ^[a-zA-Z0-9_./\-]+$
+                        type: string
+                      interconnectTag:
+                        pattern: ^(Yes|No)$
+                        type: string
+                      label:
+                        pattern: ^[a-zA-Z0-9_./\-]+$
+                        type: string
+                      region:
+                        pattern: ^[a-zA-Z0-9_./\-]+$
+                        type: string
+                      resourceGroups:
+                        pattern: ^[a-zA-Z0-9_./\-]+$
+                        type: string
+                        description: Used for Azure and Azure GovCloud cloud types
+                      tag:
+                        pattern: ^[a-zA-Z0-9_./\-]+$
+                        type: string
+                      vnetId:
+                        pattern: ^[a-zA-Z0-9_./\-]+$
+                        type: string
+                        description: Used for Azure and Azure GovCloud cloud types
+                      vnetKey:
+                        pattern: ^[a-zA-Z0-9_./\-]+$
+                        type: string
+                        description: Used for Azure and Azure GovCloud cloud types
+                      vpcName:
+                        pattern: ^[a-zA-Z0-9_/\-]*$
+                        type: string
+                        description: Used for Azure and Azure GovCloud cloud types
+                    description: Used for AWS, AWS GovCloud and GCP cloud types
+                    $$ref: '#/components/schemas/AllOfhostVpcTagPutHostVpcsItems'
+                interconnectTag:
+                  type: boolean
+                tagName:
+                  type: string
+                vnets:
+                  type: array
+                  description: Used for Azure and Azure GovCloud cloud types
+                  items:
+                    required:
+                    - accountId
+                    - cloudType
+                    - hostVpcId
+                    - region
+                    - vnetId
+                    type: object
+                    properties:
+                      accountId:
+                        type: string
+                      accountName:
+                        type: string
+                      cgwAttachment:
+                        pattern: ^[\w.-]{1,128}$
+                        type: string
+                      cgwAutoAttachmentFlag:
+                        type: boolean
+                      cloudTenantId:
+                        pattern: ^[a-zA-Z0-9_./\-]+$
+                        type: string
+                        description: Used for Azure and Azure GovCloud cloud types
+                      cloudType:
+                        type: string
+                      hostVpcId:
+                        pattern: ^[a-zA-Z0-9_./\-]+$
+                        type: string
+                        description: Used for AWS, AWS GovCloud and GCP cloud types
+                      hostVpcName:
+                        pattern: ^[a-zA-Z0-9_/\-]*$
+                        type: string
+                        description: Used for AWS, AWS GovCloud and GCP cloud types
+                      id:
+                        pattern: ^[a-zA-Z0-9_./\-]+$
+                        type: string
+                      interconnectTag:
+                        pattern: ^(Yes|No)$
+                        type: string
+                      label:
+                        pattern: ^[a-zA-Z0-9_./\-]+$
+                        type: string
+                      region:
+                        pattern: ^[a-zA-Z0-9_./\-]+$
+                        type: string
+                      resourceGroups:
+                        pattern: ^[a-zA-Z0-9_./\-]+$
+                        type: string
+                        description: Used for Azure and Azure GovCloud cloud types
+                      tag:
+                        pattern: ^[a-zA-Z0-9_./\-]+$
+                        type: string
+                      vnetId:
+                        pattern: ^[a-zA-Z0-9_./\-]+$
+                        type: string
+                        description: Used for Azure and Azure GovCloud cloud types
+                      vnetKey:
+                        pattern: ^[a-zA-Z0-9_./\-]+$
+                        type: string
+                        description: Used for Azure and Azure GovCloud cloud types
+                      vpcName:
+                        pattern: ^[a-zA-Z0-9_/\-]*$
+                        type: string
+                        description: Used for Azure and Azure GovCloud cloud types
+                    description: Used for Azure and Azure GovCloud cloud types
+                    $$ref: '#/components/schemas/AllOfhostVpcTagPutVnetsItems'
+              $$ref: '#/components/schemas/HostVpcTagPut'
+            examples:
+              Edit AWS Tag:
+                description: Edit AWS Tag
+                value:
+                  tagName: test-tag
+                  interconnectTag: false
+                  hostVpcs:
+                  - accountId: '999293417507'
+                    accountName: test-aws-account
+                    region: us-west-2
+                    cloudType: AWS
+                    hostVpcId: vpc-0fd1fbce44f9db86b
+                    hostVpcName: test-vpc-1
+                    id: vpc-0fd1fbce44f9db86b
+                    label: vpc-0fd1fbce44f9db86b
+                    interconnectTag: 'No'
+                  - accountId: '999293417507'
+                    accountName: test-aws-account
+                    region: us-west-2
+                    cloudType: AWS
+                    hostVpcId: vpc-089a6f8af08dacbf1
+                    hostVpcName: test-vpc-2
+                    id: vpc-089a6f8af08dacbf1
+                    label: vpc-089a6f8af08dacbf1
+                    interconnectTag: 'No'
+              Edit Azure Tag:
+                description: Edit Azure Tag
+                value:
+                  tagName: test-azure-tag
+                  interconnectTag: false
+                  vnets:
+                  - accountId: 9e222d34-9f20-4a2f-9c01-e507193dabb
+                    accountName: test-azure-account
+                    region: us-west-2
+                    cloudType: AZURE
+                    vnetId: /subscriptions/9e222d34-9f20-4a2f-9c01-e507193dabb4/resourceGroups/test-rg/providers/Microsoft.Network/virtualNetworks/test-vnet-1
+                    vnetKey: 9e222d34-9f20-4a2f-9c01-e507193dabb4/test-rg/test-vnet-1
+                    vpcName: test-vnet-1
+                    resourceGroups: test-rg
+                    id: /subscriptions/9e222d34-9f20-4a2f-9c01-e507193dabb4/resourceGroups/test-rg/providers/Microsoft.Network/virtualNetworks/test-vnet-1
+                    label: 9e222d34-9f20-4a2f-9c01-e507193dabb4/test-rg/test-vnet-1
+                    interconnectTag: 'No'
+                    tag: test-azure-tag
+                  - accountId: 9e222d34-9f20-4a2f-9c01-e507193dabb
+                    accountName: test-azure-account
+                    region: us-west-2
+                    cloudType: AZURE
+                    vnetId: /subscriptions/9e222d34-9f20-4a2f-9c01-e507193dabb4/resourceGroups/test-rg/providers/Microsoft.Network/virtualNetworks/test-vnet-2
+                    vnetKey: 9e222d34-9f20-4a2f-9c01-e507193dabb4/test-rg/test-vnet-2
+                    vpcName: test-vnet-2
+                    resourceGroups: test-rg
+                    id: /subscriptions/9e222d34-9f20-4a2f-9c01-e507193dabb4/resourceGroups/test-rg/providers/Microsoft.Network/virtualNetworks/test-vnet-2
+                    label: 9e222d34-9f20-4a2f-9c01-e507193dabb4/test-rg/test-vnet-2
+                    interconnectTag: 'No'
+                    tag: test-azure-tag
+              Edit GCP Tag:
+                description: Edit GCP Tag
+                value:
+                  tagName: test-gcp-tag
+                  interconnectTag: false
+                  hostVpcs:
+                  - accountId: gcp-test-1234
+                    accountName: test-gcp-account
+                    region: us-west-3
+                    cloudType: GCP
+                    hostVpcId: '8360972143511967399'
+                    hostVpcName: test-vpc-3
+                    tag: test-tag
+                    interconnectTag: 'No'
+                    id: '8360972143511967399'
+                    label: '8360972143511967399'
+                  - accountId: gcp-test-1234
+                    accountName: test-gcp-account
+                    region: us-west-3
+                    cloudType: GCP
+                    hostVpcId: '2261865283189378184'
+                    hostVpcName: test-vpc-4
+                    tag: test-tag
+                    interconnectTag: 'No'
+                    id: '2261865283189378184'
+                    label: '2261865283189378184'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: 6c723f65-9106-4f43-9d2b-a033a39353b3
+                description: Task id for polling status
+                $$ref: '#/components/schemas/Taskid'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+      - MultiCloud - Tagging
+      description: Tag a VPC
+      operationId: hostVpcTagging
+      requestBody:
+        description: Payload for tagging a VPC
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                hostVpcs:
+                  type: array
+                  description: Used for AWS, AWS GovCloud and GCP cloud types
+                  items:
+                    required:
+                    - accountId
+                    - cloudType
+                    - hostVpcId
+                    - region
+                    - vnetId
+                    type: object
+                    properties:
+                      accountId:
+                        type: string
+                      accountName:
+                        type: string
+                      cloudTenantId:
+                        pattern: ^[a-zA-Z0-9_./\-]+$
+                        type: string
+                        description: Used for Azure and Azure GovCloud cloud types
+                      cloudType:
+                        type: string
+                      hostVpcId:
+                        pattern: ^[a-zA-Z0-9_./\-]+$
+                        type: string
+                        description: Used for AWS, AWS GovCloud and GCP cloud types
+                      hostVpcName:
+                        pattern: ^[a-zA-Z0-9_/\-]*$
+                        type: string
+                        description: Used for AWS, AWS GovCloud and GCP cloud types
+                      id:
+                        pattern: ^[a-zA-Z0-9_./\-]+$
+                        type: string
+                      label:
+                        pattern: ^[a-zA-Z0-9_./\-]+$
+                        type: string
+                      region:
+                        pattern: ^[a-zA-Z0-9_./\-]+$
+                        type: string
+                      resourceGroups:
+                        pattern: ^[a-zA-Z0-9_./\-]+$
+                        type: string
+                        description: Used for Azure and Azure GovCloud cloud types
+                      vnetId:
+                        pattern: ^[a-zA-Z0-9_./\-]+$
+                        type: string
+                        description: Used for Azure and Azure GovCloud cloud types
+                      vnetKey:
+                        pattern: ^[a-zA-Z0-9_./\-]+$
+                        type: string
+                        description: Used for Azure and Azure GovCloud cloud types
+                      vpcName:
+                        pattern: ^[a-zA-Z0-9_/\-]*$
+                        type: string
+                        description: Used for Azure and Azure GovCloud cloud types
+                    description: Used for AWS, AWS GovCloud and GCP cloud types
+                    $$ref: '#/components/schemas/AllOfhostVpcTagPostHostVpcsItems'
+                interconnectTag:
+                  type: boolean
+                tagName:
+                  type: string
+                vnets:
+                  type: array
+                  description: Used for Azure and Azure GovCloud cloud types
+                  items:
+                    required:
+                    - accountId
+                    - cloudType
+                    - hostVpcId
+                    - region
+                    - vnetId
+                    type: object
+                    properties:
+                      accountId:
+                        type: string
+                      accountName:
+                        type: string
+                      cgwAttachment:
+                        pattern: ^[\w.-]{1,128}$
+                        type: string
+                      cgwAutoAttachmentFlag:
+                        type: boolean
+                      cloudTenantId:
+                        pattern: ^[a-zA-Z0-9_./\-]+$
+                        type: string
+                        description: Used for Azure and Azure GovCloud cloud types
+                      cloudType:
+                        type: string
+                      hostVpcId:
+                        pattern: ^[a-zA-Z0-9_./\-]+$
+                        type: string
+                        description: Used for AWS, AWS GovCloud and GCP cloud types
+                      hostVpcName:
+                        pattern: ^[a-zA-Z0-9_/\-]*$
+                        type: string
+                        description: Used for AWS, AWS GovCloud and GCP cloud types
+                      id:
+                        pattern: ^[a-zA-Z0-9_./\-]+$
+                        type: string
+                      label:
+                        pattern: ^[a-zA-Z0-9_./\-]+$
+                        type: string
+                      region:
+                        pattern: ^[a-zA-Z0-9_./\-]+$
+                        type: string
+                      resourceGroups:
+                        pattern: ^[a-zA-Z0-9_./\-]+$
+                        type: string
+                        description: Used for Azure and Azure GovCloud cloud types
+                      vnetId:
+                        pattern: ^[a-zA-Z0-9_./\-]+$
+                        type: string
+                        description: Used for Azure and Azure GovCloud cloud types
+                      vnetKey:
+                        pattern: ^[a-zA-Z0-9_./\-]+$
+                        type: string
+                        description: Used for Azure and Azure GovCloud cloud types
+                      vpcName:
+                        pattern: ^[a-zA-Z0-9_/\-]*$
+                        type: string
+                        description: Used for Azure and Azure GovCloud cloud types
+                    description: Used for Azure and Azure GovCloud cloud types
+                    $$ref: '#/components/schemas/AllOfhostVpcTagPostVnetsItems'
+              $$ref: '#/components/schemas/HostVpcTagPost'
+            examples:
+              Tag an AWS VPC:
+                description: Tag an AWS VPC
+                value:
+                  tagName: test-tag
+                  interconnectTag: false
+                  hostVpcs:
+                  - accountId: '999293417507'
+                    accountName: test-aws-account
+                    region: us-west-2
+                    cloudType: AWS
+                    hostVpcId: vpc-0fd1fbce44f9db86b
+                    hostVpcName: test-vpc-1
+                    id: vpc-0fd1fbce44f9db86b
+                    label: vpc-0fd1fbce44f9db86b
+              Tag an Azure VNET:
+                description: Tag an Azure VNET
+                value:
+                  tagName: test-azure-tag
+                  interconnectTag: false
+                  vnets:
+                  - accountId: 9e222d34-9f20-4a2f-9c01-e507193dabb
+                    accountName: test-azure-account
+                    region: us-west-2
+                    cloudType: AZURE
+                    vnetId: /subscriptions/9e222d34-9f20-4a2f-9c01-e507193dabb4/resourceGroups/test-rg/providers/Microsoft.Network/virtualNetworks/test-vnet-1
+                    vnetKey: 9e222d34-9f20-4a2f-9c01-e507193dabb4/test-rg/test-vnet-1
+                    vpcName: test-vnet-1
+                    resourceGroups: test-rg
+                    id: /subscriptions/9e222d34-9f20-4a2f-9c01-e507193dabb4/resourceGroups/test-rg/providers/Microsoft.Network/virtualNetworks/test-vnet-1
+                    label: 9e222d34-9f20-4a2f-9c01-e507193dabb4/test-rg/test-vnet-1
+              Tag a GCP VPC:
+                description: Tag a GCP VPC
+                value:
+                  tagName: test-gcp-tag
+                  interconnectTag: false
+                  hostVpcs:
+                  - accountId: gcp-test-1234
+                    accountName: test-gcp-account
+                    region: us-west-3
+                    cloudType: GCP
+                    hostVpcId: '8360972143511967399'
+                    hostVpcName: test-vpc-3
+                    tag: test-tag
+                    interconnectTag: 'No'
+                    id: '8360972143511967399'
+                    label: '8360972143511967399'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: 6c723f65-9106-4f43-9d2b-a033a39353b3
+                description: Task id for polling status
+                $$ref: '#/components/schemas/Taskid'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/hostvpc/tags/rebalanceVnets:
+    post:
+      tags:
+      - MultiCloud - Tagging
+      description: Tag a VPC
+      operationId: rebalanceVnets
+      parameters:
+      - name: cloudType
+        in: query
+        description: Multicloud provider type
+        required: true
+        schema:
+          type: string
+      - name: region
+        in: query
+        required: true
+        schema:
+          maxLength: 1024
+          minLength: 1
+          pattern: ^[a-zA-Z0-9_./\-]+$
+          type: string
+      - name: tagName
+        in: query
+        required: true
+        schema:
+          maxLength: 1024
+          minLength: 1
+          pattern: ^[a-zA-Z0-9_./\-]+$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: 6c723f65-9106-4f43-9d2b-a033a39353b3
+                description: Task id for polling status
+                $$ref: '#/components/schemas/Taskid'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/hostvpc/tags/{tagName}:
+    delete:
+      tags:
+      - MultiCloud - Tagging
+      description: Delete a Tag
+      operationId: unTag
+      parameters:
+      - name: tagName
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: 6c723f65-9106-4f43-9d2b-a033a39353b3
+                description: Task id for polling status
+                $$ref: '#/components/schemas/Taskid'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

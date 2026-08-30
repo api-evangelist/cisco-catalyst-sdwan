@@ -1,0 +1,266 @@
+openapi: 3.2.0
+info:
+  title: Others Device - Network API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Device - Network
+paths:
+  /network/connectionssummary:
+    get:
+      tags:
+      - Device - Network
+      description: Retrieve vManage control status
+      operationId: getVmanageControlStatus
+      parameters:
+      - name: isCached
+        in: query
+        description: Is cached flag
+        schema:
+          type: boolean
+          default: false
+      - name: vpnId
+        in: query
+        description: VPN Id
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              vpn:
+                type: string
+            description: This is the valid list of VPN-IDs
+            $$ref: '#/components/schemas/VPNID'
+      - name: site-id
+        in: query
+        description: Optional site ID  to filter devices
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                vManage control status:
+                  description: vManage control status
+                  value:
+                    data:
+                    - name: vSmart
+                      count: 2
+                      detailsURL: /dataservice/device/reachable?personality=vsmart
+                      status: error
+                      statusList:
+                      - name: vSmart
+                        status: error
+                        message: Number of devices down
+                        detailsURL: /dataservice/device/unreachable?personality=vsmart
+                        count: 0
+                    - name: WAN Edge
+                      count: 5
+                      detailsURL: /dataservice/device/reachable?personality=vedge
+                      status: error
+                      statusList:
+                      - name: vEdge
+                        status: error
+                        message: Number of devices down
+                        detailsURL: /dataservice/device/unreachable?personality=vedge
+                        count: 0
+                    - name: vBond
+                      count: 1
+                      detailsURL: /dataservice/device/reachable?personality=vbond
+                      status: error
+                      statusList:
+                      - name: vBond
+                        status: error
+                        message: Number of devices down
+                        detailsURL: /dataservice/device/unreachable?personality=vbond
+                        count: 0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: default,RBAC VPN-read
+  /network/issues/rebootcount:
+    get:
+      tags:
+      - Device - Network
+      description: Retrieve reboot count
+      operationId: getRebootCount
+      parameters:
+      - name: isCached
+        in: query
+        description: Is cached flag
+        required: true
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Reboot count:
+                  description: Reboot count
+                  value:
+                    data:
+                    - type: Reboot count
+                      name: Reboot
+                      showTitle: false
+                      count: 3
+                      detailView: dialog
+                      detailsURL: dataservice/device/reboothistory/details
+                      status: error
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: default
+  /network/issues/summary:
+    get:
+      tags:
+      - Device - Network
+      description: Retrieve network issues summary
+      operationId: getNetworkIssuesSummary
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Network issues:
+                  description: Network issues
+                  value:
+                    data:
+                    - type: Status summary
+                      name: Status summary
+                      showTitle: false
+                      count: 3
+                      detailView: dialog
+                      statusList:
+                      - status: Crashes
+                        name: Crashes
+                        detailView: dialog
+                        detailsURL: dataservice/device/crashlog/details
+                        color: fa7c7d
+                        icon: images/device/device-error.png
+                        count: 0
+                      - status: Reboots
+                        name: Reboots
+                        detailView: dialog
+                        detailsURL: dataservice/device/reboothistory/details
+                        color: f2ce60
+                        icon: images/device/device-warning.png
+                        count: 3
+                      - status: Hardware errors
+                        name: Hardware errors
+                        detailView: dialog
+                        detailsURL: dataservice/device/hardware/errors
+                        color: f2ce60
+                        icon: images/device/device-warning.png
+                        count: 0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,System-read
+  /network/status:
+    get:
+      tags:
+      - Device - Network
+      description: Retrieve network status summary
+      operationId: getNetworkStatusSummary
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Network status:
+                  description: Network status
+                  value:
+                    header:
+                      generatedOn: 1635483849920
+                    data:
+                    - type: vSmart
+                      name: vSmart
+                      image: images/vsmart.png
+                      count: 3
+                      detailView: dialog
+                      detailsURL: /dataservice/device?personality=vsmart
+                      statusList:
+                      - status: error
+                        name: Error
+                        detailView: dialog
+                        detailsURL: /dataservice/device?personality=vsmart&status=error
+                        color: fa7c7d
+                        icon: images/device/device-error.png
+                        count: 0
+                      - status: warning
+                        name: Warning
+                        detailView: dialog
+                        detailsURL: /dataservice/device?personality=vsmart&status=warning
+                        color: f2ce60
+                        icon: images/device/device-warning.png
+                        count: 0
+                      - status: normal
+                        name: Normal
+                        detailView: dialog
+                        detailsURL: /dataservice/device?personality=vsmart&status=normal
+                        color: b0e276
+                        icon: images/device/device-normal.png
+                        count: 3
+                      - status: new
+                        name: Discovered device
+                        detailView: dialog
+                        detailsURL: /dataservice/device?personality=vsmart&status=new
+                        color: 7c8afa
+                        icon: images/device/device-new.png
+                        count: 0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,System-read

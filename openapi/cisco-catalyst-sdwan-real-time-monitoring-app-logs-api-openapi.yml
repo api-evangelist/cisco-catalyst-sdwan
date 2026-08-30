@@ -1,0 +1,124 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - App Logs API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - App Logs
+paths:
+  /device/app/log/flow-count:
+    get:
+      tags:
+      - Real-Time Monitoring - App Logs
+      description: Get App log flows count from device (Real Time)
+      operationId: getAppLogFlowCount
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                App log flows count:
+                  description: App log flows count
+                  value:
+                    data:
+                    - vdevice-name: 172.16.254.1
+                      vdevice-host-name: vm2
+                      vpn-id: '1'
+                      count: '20'
+                      vdevice-dataKey: 172.16.254.1
+                      lastupdated: 1654066320000
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write
+  /device/app/log/flows:
+    get:
+      tags:
+      - Real-Time Monitoring - App Logs
+      description: Get App log flows from device (Real Time)
+      operationId: getAppLogFlows
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                App log flows:
+                  description: App log flows
+                  value:
+                    data:
+                    - vdevice-name: 172.16.254.2
+                      vdevice-host-name: vm2
+                      vpn-id: '0'
+                      src-ip: 10.0.5.19
+                      dest-ip: 10.1.15.15
+                      src-port: '23556'
+                      dest-port: '34576'
+                      dscp: '0'
+                      ip-proto: '6'
+                      tcp-cntrl-bits: '16'
+                      icmp-opcode: '0'
+                      nhop-ip: 10.1.15.15
+                      total-pkts: '8531'
+                      total-bytes: '1200071'
+                      start-time: Fri July  15 10:32:52 2022
+                      time-to-expire: '59'
+                      egress-intf-name: cpu
+                      ingress-intf-name: ge0/0
+                      policy-name: 123NenokaKantri
+                      policy-action: accept
+                      policy-direction: inbound-acl
+                      lastupdated: 1657853484627
+                      vdevice-dataKey: 172.16.254.2
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write

@@ -1,0 +1,1606 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - Device Control API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - Device Control
+paths:
+  /device/control/affinity/config:
+    get:
+      tags:
+      - Real-Time Monitoring - Device Control
+      description: Get affinity config from device (Real Time)
+      operationId: getAffinityConfig
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Affinity config:
+                  description: Affinity config
+                  value:
+                    data:
+                    - vdevice-dataKey: 169.254.10.10--0
+                      vdevice-name: 169.254.10.10
+                      affc-ccl: 0(2)Y
+                      affc-equil: 'Yes'
+                      affc-ecl: 0(2)
+                      affc-index: '0'
+                      lastupdated: 1642746599493
+                      affc-interface: ge0/1
+                      affc-last-resort: 'No'
+                      vdevice-host-name: vm3
+                      affc-ervc: '2'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Security-read,Security-write
+  /device/control/affinity/status:
+    get:
+      tags:
+      - Real-Time Monitoring - Device Control
+      description: Get affinity status from device (Real Time)
+      operationId: getAffinityStatus
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Affinity status:
+                  description: Affinity status
+                  value:
+                    data:
+                    - affs-acc: 172.16.253.129(0),172.16.255.130(0)
+                      vdevice-dataKey: 169.254.10.10--0
+                      vdevice-name: 169.254.10.10
+                      affs-index: '0'
+                      lastupdated: 1642746754330
+                      vdevice-host-name: vm3
+                      affs-interface: ge0/1
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Security-read,Security-write
+  /device/control/connections:
+    get:
+      tags:
+      - Real-Time Monitoring - Device Control
+      description: Get connections list from device (Real Time)
+      operationId: createRealTimeConnectionList_RealTimeMonitoringDeviceControl_2703
+      parameters:
+      - name: peer-type
+        in: query
+        description: Peer type
+        schema:
+          type: string
+          enum:
+          - vedge
+          - vsmart
+          - vmanage
+          - vbond
+      - name: system-ip
+        in: query
+        description: Peer system IP
+        schema:
+          type: string
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Connections list:
+                  description: Connections list
+                  value:
+                    data:
+                    - domain-id: 1
+                      instance: 0
+                      vdevice-name: 169.254.10.10
+                      behind-proxy: 'No'
+                      system-ip: 172.16.253.129
+                      remote-color: default
+                      site-id: 129
+                      private-port: 12346
+                      controller-group-id: 0
+                      vdevice-host-name: vm3
+                      local-color: default
+                      uptime: 0:05:55:35
+                      peer-type: vsmart
+                      v-org-name: vIPtela Inc Regression
+                      protocol: dtls
+                      vdevice-dataKey: 169.254.10.10-0-default-172.16.253.129-default
+                      public-ip: 10.103.129.129
+                      public-port: 12346
+                      lastupdated: 1642727162594
+                      state: up
+                      private-ip: 10.103.129.129
+                      uptime-date: 1642705800000
+                    - domain-id: 1
+                      instance: 0
+                      vdevice-name: 169.254.10.10
+                      behind-proxy: 'No'
+                      system-ip: 172.16.255.130
+                      remote-color: default
+                      site-id: 130
+                      private-port: 12346
+                      controller-group-id: 0
+                      vdevice-host-name: vm3
+                      local-color: default
+                      uptime: 0:05:55:35
+                      peer-type: vsmart
+                      v-org-name: vIPtela Inc Regression
+                      protocol: dtls
+                      vdevice-dataKey: 169.254.10.10-0-default-172.16.255.130-default
+                      public-ip: 10.103.130.130
+                      public-port: 12346
+                      lastupdated: 1642727162594
+                      state: up
+                      private-ip: 10.103.130.130
+                      uptime-date: 1642705800000
+                    - domain-id: 0
+                      instance: 0
+                      vdevice-name: 169.254.10.10
+                      behind-proxy: 'No'
+                      system-ip: 169.254.10.3
+                      remote-color: default
+                      site-id: 202
+                      private-port: 12346
+                      controller-group-id: 0
+                      vdevice-host-name: vm3
+                      local-color: default
+                      uptime: 0:05:55:35
+                      peer-type: vmanage
+                      v-org-name: vIPtela Inc Regression
+                      protocol: dtls
+                      vdevice-dataKey: 169.254.10.10-0-default-169.254.10.3-default
+                      public-ip: 10.103.202.202
+                      public-port: 12346
+                      lastupdated: 1642727162594
+                      state: up
+                      private-ip: 10.103.202.202
+                      uptime-date: 1642705800000
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Security-read,Security-write,Device Monitoring-read,Device Monitoring-write
+  /device/control/connectionshistory:
+    get:
+      tags:
+      - Real-Time Monitoring - Device Control
+      description: Get connections history list from device (Real Time)
+      operationId: createConnectionHistoryListRealTime
+      parameters:
+      - name: peer-type
+        in: query
+        description: Peer type
+        schema:
+          type: string
+          enum:
+          - vedge
+          - vsmart
+          - vmanage
+          - vbond
+      - name: system-ip
+        in: query
+        description: Peer system IP
+        schema:
+          type: string
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Connections list:
+                  description: Connections list
+                  value:
+                    data:
+                    - instance: 0
+                      vdevice-name: 169.254.10.10
+                      remote_enum-desc: No Error.
+                      system-ip: 0.0.0.0
+                      remote-color: default
+                      site-id: 0
+                      uuid: d7e88eac-250c-4189-bc66-747615452ad9
+                      peer-type: vbond
+                      protocol: dtls
+                      state: tear_down
+                      private-ip: 10.103.135.135
+                      local_enum-desc: Disconnect vBond after register reply.
+                      domain-id: 0
+                      rep-count: 0
+                      index: 0
+                      private-port: 12346
+                      vdevice-host-name: vm3
+                      vh-org-name: vIPtela Inc Regression
+                      local-color: default
+                      downtime: 2022-01-20T19:10:43+0000
+                      vdevice-dataKey: 169.254.10.10-0-0-2022-01-20T19:10:43+0000
+                      public-ip: 10.103.135.135
+                      downtime-date: 1642705843000
+                      remote_enum: NOERR
+                      public-port: 12346
+                      lastupdated: 1642727714927
+                      local_enum: DISCVBD
+                    - instance: 0
+                      vdevice-name: 169.254.10.10
+                      remote_enum-desc: No Error.
+                      system-ip: 169.254.10.3
+                      remote-color: default
+                      site-id: 202
+                      uuid: 387d8bf3-5306-41fe-9090-7ee61c91d9c3
+                      peer-type: vmanage
+                      protocol: dtls
+                      state: tear_down
+                      private-ip: 10.103.202.202
+                      local_enum-desc: TLOC Disabled.
+                      domain-id: 0
+                      rep-count: 0
+                      index: 1
+                      private-port: 12346
+                      vdevice-host-name: vm3
+                      vh-org-name: vIPtela Inc Regression
+                      local-color: biz-internet
+                      downtime: 2022-01-20T19:10:24+0000
+                      vdevice-dataKey: 169.254.10.10-0-1-2022-01-20T19:10:24+0000
+                      public-ip: 10.103.202.202
+                      downtime-date: 1642705824000
+                      remote_enum: NOERR
+                      public-port: 12346
+                      lastupdated: 1642727714927
+                      local_enum: DISTLOC
+                    - instance: 0
+                      vdevice-name: 169.254.10.10
+                      remote_enum-desc: No Error.
+                      system-ip: 172.16.255.130
+                      remote-color: default
+                      site-id: 130
+                      uuid: fca7532b-9366-466a-a8f9-79922392917b
+                      peer-type: vsmart
+                      protocol: dtls
+                      state: tear_down
+                      private-ip: 10.103.130.130
+                      local_enum-desc: TLOC Disabled.
+                      domain-id: 1
+                      rep-count: 0
+                      index: 2
+                      private-port: 12346
+                      vdevice-host-name: vm3
+                      vh-org-name: vIPtela Inc Regression
+                      local-color: biz-internet
+                      downtime: 2022-01-20T19:10:24+0000
+                      vdevice-dataKey: 169.254.10.10-0-2-2022-01-20T19:10:24+0000
+                      public-ip: 10.103.130.130
+                      downtime-date: 1642705824000
+                      remote_enum: NOERR
+                      public-port: 12346
+                      lastupdated: 1642727714927
+                      local_enum: DISTLOC
+                    - instance: 0
+                      vdevice-name: 169.254.10.10
+                      remote_enum-desc: No Error.
+                      system-ip: 169.254.10.3
+                      remote-color: default
+                      site-id: 202
+                      uuid: 387d8bf3-5306-41fe-9090-7ee61c91d9c3
+                      peer-type: vmanage
+                      protocol: dtls
+                      state: tear_down
+                      private-ip: 10.103.202.202
+                      local_enum-desc: TLOC Disabled.
+                      domain-id: 0
+                      rep-count: 0
+                      index: 5
+                      private-port: 12346
+                      vdevice-host-name: vm3
+                      vh-org-name: vIPtela Inc Regression
+                      local-color: default
+                      downtime: 2022-01-20T19:09:22+0000
+                      vdevice-dataKey: 169.254.10.10-0-5-2022-01-20T19:09:22+0000
+                      public-ip: 10.103.202.202
+                      downtime-date: 1642705762000
+                      remote_enum: NOERR
+                      public-port: 12346
+                      lastupdated: 1642727714927
+                      local_enum: DISTLOC
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Security-read,Security-write
+  /device/control/connectionsinfo:
+    get:
+      tags:
+      - Real-Time Monitoring - Device Control
+      description: Get connections list from device (Real Time)
+      operationId: createRealTimeConnectionList_RealTimeMonitoringDeviceControl_3103
+      parameters:
+      - name: peer-type
+        in: query
+        description: Peer type
+        schema:
+          type: string
+          enum:
+          - vedge
+          - vsmart
+          - vmanage
+          - vbond
+      - name: system-ip
+        in: query
+        description: Peer system IP
+        schema:
+          type: string
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Connections list:
+                  description: Connections list
+                  value:
+                    data:
+                    - vdevice-dataKey: 172.16.255.11---
+                      vdevice-name: 172.16.255.11
+                      rate: 'Per-Control Connection Rate: 300 pps'
+                      lastupdated: 1646962973344
+                      vdevice-host-name: vm1
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Security-read,Security-write,Device Monitoring-read,Device Monitoring-write
+  /device/control/count:
+    get:
+      tags:
+      - Real-Time Monitoring - Device Control
+      description: Get number of vedges and vsmart device in different control states
+      operationId: getTotalCountForDeviceStates
+      parameters:
+      - name: isCached
+        in: query
+        description: Device State cached
+        schema:
+          type: boolean
+          default: false
+      - name: site-id
+        in: query
+        description: Optional site ID  to filter devices
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device state count:
+                  description: Device state count
+                  value:
+                    data:
+                    - name: ControlStatus
+                      count: 7
+                      detailsURL: ''
+                      status: error
+                      statusList:
+                      - name: Controlup
+                        status: up
+                        message: devicesup
+                        detailsURL: /dataservice/device/control/networksummary?state=up
+                        count: 7
+                      - name: Partial
+                        status: warning
+                        message: devicesdown
+                        detailsURL: /dataservice/device/control/networksummary?state=partial
+                        count: 0
+                      - name: Controldown
+                        status: error
+                        message: devicesdown
+                        detailsURL: /dataservice/device/control/networksummary?state=down
+                        count: 0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /device/control/links:
+    get:
+      tags:
+      - Real-Time Monitoring - Device Control
+      description: Get connections list
+      operationId: createLinkList
+      parameters:
+      - name: state
+        in: query
+        description: Device State
+        required: true
+        schema:
+          type: string
+          example: up
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Connections list:
+                  description: Connections list
+                  value:
+                    data:
+                    - state: up
+                      color1: default
+                      color2: default
+                      lastupdated: '1646912547015'
+                      linkKey: 172.16.255.19:default-172.16.255.26:default
+                      linkKeyDisplay: 172.16.255.19(default)-172.16.255.26(default)
+                      adeviceId: 172.16.255.26
+                      bdeviceId: 172.16.255.19
+                      asystem-ip: 172.16.255.26
+                      bsystem-ip: 172.16.255.19
+                      asite-id: --
+                      bsite-id: '100'
+                      ahost-name: vm16
+                      bhost-name: vm9
+                      apersonality: vbond
+                      bpersonality: vsmart
+                    - state: up
+                      color1: default
+                      color2: default
+                      lastupdated: '1646912512113'
+                      linkKey: 172.16.255.20:default-172.16.255.26:default
+                      linkKeyDisplay: 172.16.255.20(default)-172.16.255.26(default)
+                      adeviceId: 172.16.255.26
+                      bdeviceId: 172.16.255.20
+                      asystem-ip: 172.16.255.26
+                      bsystem-ip: 172.16.255.20
+                      asite-id: --
+                      bsite-id: '200'
+                      ahost-name: vm16
+                      bhost-name: vm10
+                      apersonality: vbond
+                      bpersonality: vsmart
+                    - state: up
+                      color1: default
+                      color2: default
+                      lastupdated: '1646912347752'
+                      linkKey: 172.16.255.22:default-172.16.255.26:default
+                      linkKeyDisplay: 172.16.255.22(default)-172.16.255.26(default)
+                      adeviceId: 172.16.255.26
+                      bdeviceId: 172.16.255.22
+                      asystem-ip: 172.16.255.26
+                      bsystem-ip: 172.16.255.22
+                      asite-id: --
+                      bsite-id: '200'
+                      ahost-name: vm16
+                      bhost-name: vm12
+                      apersonality: vbond
+                      bpersonality: vmanage
+                    - state: up
+                      color1: lte
+                      color2: default
+                      lastupdated: '1646912547013'
+                      linkKey: 172.16.255.14:lte-172.16.255.19:default
+                      linkKeyDisplay: 172.16.255.14(lte)-172.16.255.19(default)
+                      adeviceId: 172.16.255.14
+                      bdeviceId: 172.16.255.19
+                      asystem-ip: 172.16.255.14
+                      bsystem-ip: 172.16.255.19
+                      asite-id: '400'
+                      bsite-id: '100'
+                      ahost-name: vm4
+                      bhost-name: vm9
+                      apersonality: vedge
+                      bpersonality: vsmart
+                    - state: up
+                      color1: lte
+                      color2: default
+                      lastupdated: '1646912512112'
+                      linkKey: 172.16.255.14:lte-172.16.255.20:default
+                      linkKeyDisplay: 172.16.255.14(lte)-172.16.255.20(default)
+                      adeviceId: 172.16.255.14
+                      bdeviceId: 172.16.255.20
+                      asystem-ip: 172.16.255.14
+                      bsystem-ip: 172.16.255.20
+                      asite-id: '400'
+                      bsite-id: '200'
+                      ahost-name: vm4
+                      bhost-name: vm10
+                      apersonality: vedge
+                      bpersonality: vsmart
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /device/control/localproperties:
+    get:
+      tags:
+      - Real-Time Monitoring - Device Control
+      description: Get local properties list (Real Time)
+      operationId: createLocalPropertiesListListRealTIme
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Local properties list:
+                  description: Local properties list
+                  value:
+                    data:
+                    - certificate-not-valid-before: Jan 26 07:37:47 2022 GMT
+                      site-id: '100'
+                      protocol: dtls
+                      root-ca-chain-status: Installed
+                      certificate-not-valid-after: Jan 26 07:37:47 2023 GMT
+                      dns-name: vbond
+                      vdevice-host-name: vm1
+                      port-hopped: 'TRUE'
+                      device-role: edge-router
+                      certificate-status: Installed
+                      device-type: vedge
+                      uuid: a555e577-d513-4768-a695-93574a15f5cc
+                      sp-organization-name: vIPtela Inc Regression
+                      lastupdated: 1643348428058
+                      region-id-set: N/A
+                      keygen-interval: '1:00:00:00'
+                      domain-id: '1'
+                      time-since-port-hop: '1:21:43:52'
+                      system-ip: 172.16.255.11
+                      board-serial: '12346580'
+                      certificate-validity: Valid
+                      max-controllers: '0'
+                      tls-port: '0'
+                      organization-name: vIPtela Inc Regression
+                      vdevice-name: 172.16.255.11
+                      vsmart-list-version: '0'
+                      number-vbond-peers: '0'
+                      vdevice-dataKey: 172.16.255.11
+                      token: Invalid
+                      number-active-wan-interfaces: '1'
+                      register-interval: 0:00:00:30
+                      retry-interval: 0:00:00:15
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Security-read,Security-write
+  /device/control/networksummary:
+    get:
+      tags:
+      - Real-Time Monitoring - Device Control
+      description: Get list of unreachable devices
+      operationId: networkSummary
+      parameters:
+      - name: state
+        in: query
+        description: Device State
+        schema:
+          type: string
+          example: up
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                list of unreachable devices:
+                  description: list of unreachable devices
+                  value:
+                    data:
+                    - device-model: vedge-cloud
+                      ompPeers: '2'
+                      number-vsmart-peers: 2
+                      local-system-ip: 172.16.255.21
+                      system-ip: 172.16.255.21
+                      host-name: vm11
+                      site-id: '100'
+                      version: 20.9.999-1766
+                      uuid: 2b57ef1a-5eb2-4d8d-8676-cce19b56b26b
+                      board-serial: '12345962'
+                      bfdSessions: '3'
+                      device-type: vedge
+                      lastupdated: 1646917368708
+                      reachability: reachable
+                      controlConnections: '3'
+                      uptime-date: 1646908860000
+                      controlConnectionsToVsmarts: '2'
+                    - device-model: vedge-cloud
+                      ompPeers: '2'
+                      number-vsmart-peers: 2
+                      local-system-ip: 172.16.255.11
+                      system-ip: 172.16.255.11
+                      host-name: vm1
+                      site-id: '100'
+                      version: 20.9.999-1766
+                      uuid: 84d1ab4e-0cbf-4369-a290-08fafeb80f95
+                      board-serial: '12345974'
+                      bfdSessions: '3'
+                      device-type: vedge
+                      lastupdated: 1646967284462
+                      reachability: reachable
+                      controlConnections: '3'
+                      uptime-date: 1646909100000
+                      controlConnectionsToVsmarts: '2'
+                    - device-model: vsmart
+                      ompPeers: '6'
+                      number-vsmart-peers: 1
+                      local-system-ip: 172.16.255.19
+                      system-ip: 172.16.255.19
+                      host-name: vm9
+                      site-id: '100'
+                      version: 20.9.999-1766
+                      uuid: 9abd3af9-9087-497d-8b99-8fd0a7baa3f2
+                      board-serial: '12345967'
+                      device-type: vsmart
+                      lastupdated: 1646967277159
+                      reachability: reachable
+                      controlConnections: '9'
+                      uptime-date: 1646908920000
+                      controlConnectionsToVsmarts: '1'
+                    - device-model: vsmart
+                      ompPeers: '6'
+                      number-vsmart-peers: 1
+                      local-system-ip: 172.16.255.20
+                      system-ip: 172.16.255.20
+                      host-name: vm10
+                      site-id: '200'
+                      version: 20.9.999-1766
+                      uuid: 43ba3223-9df7-4cc9-a059-a12e5382d79d
+                      board-serial: '12345961'
+                      device-type: vsmart
+                      lastupdated: 1646967275863
+                      reachability: reachable
+                      controlConnections: '9'
+                      uptime-date: 1646908860000
+                      controlConnectionsToVsmarts: '1'
+                    - device-model: vedge-cloud
+                      ompPeers: '2'
+                      number-vsmart-peers: 2
+                      local-system-ip: 172.16.255.14
+                      system-ip: 172.16.255.14
+                      host-name: vm4
+                      site-id: '400'
+                      version: 20.9.999-1766
+                      uuid: a66335c5-451f-4b93-a752-4116d688f347
+                      board-serial: '12345970'
+                      bfdSessions: '4'
+                      device-type: vedge
+                      lastupdated: 1646967282559
+                      reachability: reachable
+                      controlConnections: '3'
+                      uptime-date: 1646908980000
+                      controlConnectionsToVsmarts: '2'
+                    - device-model: vedge-C8000V
+                      ompPeers: '2'
+                      number-vsmart-peers: 2
+                      local-system-ip: 172.16.255.15
+                      system-ip: 172.16.255.15
+                      host-name: vm5
+                      site-id: '500'
+                      version: 17.09.01.0.154453
+                      uuid: C8K-8bda7a5d-6b75-47ec-a658-b30ca54e30eb
+                      board-serial: '12345703'
+                      bfdSessions: '4'
+                      device-type: vedge
+                      lastupdated: 1646967275462
+                      reachability: reachable
+                      controlConnections: '3'
+                      uptime-date: 1646909400000
+                      controlConnectionsToVsmarts: '2'
+                    - device-model: vedge-C8000V
+                      ompPeers: '2'
+                      number-vsmart-peers: 2
+                      local-system-ip: 172.16.255.16
+                      system-ip: 172.16.255.16
+                      host-name: vm6
+                      site-id: '600'
+                      version: 17.09.01.0.154453
+                      uuid: C8K-46aa4ddc-7468-45c2-9144-2d60c2f553f3
+                      board-serial: '12345702'
+                      bfdSessions: '4'
+                      device-type: vedge
+                      lastupdated: 1646967277103
+                      reachability: reachable
+                      controlConnections: '3'
+                      uptime-date: 1646909400000
+                      controlConnectionsToVsmarts: '2'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /device/control/regionconnections:
+    get:
+      tags:
+      - Real-Time Monitoring - Device Control
+      description: Get connections list from device (Real Time)
+      operationId: createRealTimeRegionConnectionList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Region Connections list:
+                  description: Region Connections list
+                  value: '{  "data":[    {      "instance":0,      "site-id":129,      "domain-id":1,      "vdevice-name":"169.254.10.10",      "vdevice-host-name":"vm3",      "local-private-ip":"10.103.129.129",      "local-private-port":12346,      "public-ip":"10.103.129.129",      "public-port":12346,      "region-idx":1,      "peer-system-ip":"172.16.253.129",      "color":"default",      "lastupdated":1642727162594,    }  ]}'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Security-read,Security-write,Device Monitoring-read,Device Monitoring-write
+  /device/control/statistics:
+    get:
+      tags:
+      - Real-Time Monitoring - Device Control
+      description: Get connection statistics from device (Real Time)
+      operationId: getConnectionStatistics
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Connection statistics:
+                  description: Connection statistics
+                  value:
+                    data:
+                    - rx_challenge: '14'
+                      challenge_failures: '0'
+                      vdevice-name: 169.254.10.10
+                      tx_dtls_handshake: '21'
+                      tx_register_replies: '0'
+                      rx_challenge_ack: '14'
+                      tx_octets: '24918292'
+                      rx_registers: '0'
+                      tx_dtls_handshake_failures: '7'
+                      tx_vmanage_to_peer: '0'
+                      tx_pkts: '330231'
+                      tx_blocked: '0'
+                      tx_dtls_handshake_done: '14'
+                      rx_octets: '50924456'
+                      tx_error: '0'
+                      bid_failures_needing_reset: '0'
+                      rx_error: '0'
+                      rx_dtls_handshake_done: '0'
+                      tx_challenge_ack_error: '0'
+                      rx_challenge_resp: '0'
+                      tx_challenge_error: '0'
+                      tx_challenge_resp_error: '0'
+                      tx_register_to_vmanage: '4'
+                      tx_challenge: '0'
+                      rx_connects: '0'
+                      tx_registers: '15'
+                      rx_pkts: '347847'
+                      tx_connects: '0'
+                      tx_challenge_gen_error: '0'
+                      rx_register_to_vmanage: '0'
+                      vdevice-host-name: vm3
+                      tx_hello: '212412'
+                      tx_challenge_ack: '0'
+                      rx_hello: '212399'
+                      tx_challenge_resp: '14'
+                      rx_dtls_handshake: '0'
+                      vdevice-dataKey: 169.254.10.10
+                      lastupdated: 1642730071268
+                      rx_dtls_handshake_failures: '0'
+                      rx_register_replies: '15'
+                      rx_vmanage_to_peer: '4'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Security-read,Security-write
+  /device/control/status:
+    get:
+      tags:
+      - Real-Time Monitoring - Device Control
+      description: Get local device status
+      operationId: getLocalDeviceStatus
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Local device status:
+                  description: Local device status
+                  value:
+                    data:
+                    - type: control
+                      name: Control
+                      image: images/control.png
+                      count: 0
+                      detailView: dialog
+                      detailsURL: /dataservice/device/control/links
+                      statusList:
+                      - status: up
+                        icon: images/connection/connection-network-up.png
+                        color: b0e276
+                        name: up
+                        detailView: dialog
+                        detailsURL: /dataservice/device/control/links?state=up
+                        count: 0
+                      - status: down
+                        icon: images/connection/connection-network-down.png
+                        color: fa7c7d
+                        name: down
+                        detailView: dialog
+                        detailsURL: /dataservice/device/control/links?state=down
+                        count: 0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /device/control/summary:
+    get:
+      tags:
+      - Real-Time Monitoring - Device Control
+      description: Get connections summary from device (Real Time)
+      operationId: createConnectionsSummary
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Connections summary:
+                  description: Connections summary
+                  value:
+                    data:
+                    - instance: 0
+                      vdevice-dataKey: 172.16.255.14-0
+                      vdevice-name: 172.16.255.14
+                      vmanage_counts: 1
+                      lastupdated: 1588603863504
+                      vsmart_counts: 2
+                      vbond_counts: 0
+                      vdevice-host-name: vm4
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Security-read,Security-write
+  /device/control/summary/device:
+    get:
+      tags:
+      - Real-Time Monitoring - Device Control
+      description: Get device control status summary
+      operationId: getDeviceControlStatusSummary
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device control status summary:
+                  description: Device control status summary
+                  value:
+                    data:
+                    - name: ControlConnection
+                      count: 3
+                      detailsURL: ''
+                      status: error
+                      statusList:
+                      - name: up
+                        message: 3up
+                        detailsURL: /dataservice/device/control/connection?deviceId=172.16.255.11&state=up
+                        count: 3
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /device/control/synced/connections:
+    get:
+      tags:
+      - Real-Time Monitoring - Device Control
+      description: Get connections list from vManage
+      operationId: createSyncedConnectionList
+      parameters:
+      - name: peer-type
+        in: query
+        description: Peer type
+        schema:
+          type: string
+          enum:
+          - vedge
+          - vsmart
+          - vmanage
+          - vbond
+      - name: system-ip
+        in: query
+        description: Peer system IP
+        schema:
+          type: string
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Connections list:
+                  description: Connections list
+                  value:
+                    data:
+                    - instance: 0
+                      vdevice-name: 172.16.255.11
+                      system-ip: 172.16.255.19
+                      remote-color: default
+                      site-id: 100
+                      controller-group-id: 0
+                      peer-type: vsmart
+                      shared-region-id-set: N/A
+                      protocol: dtls
+                      '@rid': 1060
+                      state: up
+                      private-ip: 10.0.5.19
+                      domain-id: 1
+                      behind-proxy: 'No'
+                      createTimeStamp: 1646912557634
+                      private-port: 12455
+                      vdevice-host-name: vm1
+                      local-color: lte
+                      v-org-name: vIPtelaIncRegression
+                      vdevice-dataKey: 172.16.255.11-0-lte-172.16.255.19-default
+                      vmanage-system-ip: 172.16.255.11
+                      public-ip: 10.0.5.19
+                      public-port: 12455
+                      lastupdated: 1646967283468
+                      uptime-date: 1646967180000
+                    - instance: 0
+                      vdevice-name: 172.16.255.11
+                      system-ip: 172.16.255.20
+                      remote-color: default
+                      site-id: 200
+                      controller-group-id: 0
+                      peer-type: vsmart
+                      shared-region-id-set: N/A
+                      protocol: dtls
+                      '@rid': 1063
+                      state: up
+                      private-ip: 10.0.12.20
+                      domain-id: 1
+                      behind-proxy: 'No'
+                      createTimeStamp: 1646912560801
+                      private-port: 12456
+                      vdevice-host-name: vm1
+                      local-color: lte
+                      v-org-name: vIPtelaIncRegression
+                      vdevice-dataKey: 172.16.255.11-0-lte-172.16.255.20-default
+                      vmanage-system-ip: 172.16.255.11
+                      public-ip: 10.0.12.20
+                      public-port: 12456
+                      lastupdated: 1646967283468
+                      uptime-date: 1646967180000
+                    - instance: 0
+                      vdevice-name: 172.16.255.11
+                      system-ip: 172.16.255.22
+                      remote-color: default
+                      site-id: 200
+                      controller-group-id: 0
+                      peer-type: vmanage
+                      protocol: dtls
+                      '@rid': 1068
+                      state: up
+                      private-ip: 10.0.12.22
+                      domain-id: 0
+                      behind-proxy: 'No'
+                      createTimeStamp: 1646912562214
+                      private-port: 12446
+                      vdevice-host-name: vm1
+                      local-color: lte
+                      v-org-name: vIPtelaIncRegression
+                      vdevice-dataKey: 172.16.255.11-0-lte-172.16.255.22-default
+                      vmanage-system-ip: 172.16.255.11
+                      public-ip: 10.0.12.22
+                      public-port: 12446
+                      lastupdated: 1646967283468
+                      uptime-date: 1646967180000
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Security-read,Security-write,Device Monitoring-read,Device Monitoring-write
+  /device/control/synced/localproperties:
+    get:
+      tags:
+      - Real-Time Monitoring - Device Control
+      description: Get local properties list
+      operationId: createLocalPropertiesSyncedList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Local properties list:
+                  description: Local properties list
+                  value:
+                    data:
+                    - retry-interval: 0:00:00:16
+                      vdevice-name: 172.16.255.11
+                      device-role: edge-router
+                      tls-port: '0'
+                      max-controllers: '0'
+                      system-ip: 172.16.255.11
+                      certificate-not-valid-before: Mar1011:16:192022GMT
+                      site-id: '100'
+                      certificate-not-valid-after: Mar1011:16:192023GMT
+                      uuid: 84d1ab4e-0cbf-4369-a290-08fafeb80f95
+                      number-active-wan-interfaces: '1'
+                      protocol: dtls
+                      board-serial: '12345974'
+                      vsmart-list-version: '0'
+                      '@rid': 1071
+                      certificate-status: Installed
+                      device-type: vedge
+                      port-hopped: 'TRUE'
+                      organization-name: vIPtelaIncRegression
+                      domain-id: '1'
+                      root-ca-chain-status: Installed
+                      dns-name: vbond
+                      createTimeStamp: 1646912563392
+                      sp-organization-name: vIPtelaIncRegression
+                      vdevice-host-name: vm1
+                      register-interval: 0:00:00:30
+                      token: Invalid
+                      keygen-interval: '1:00:00:00'
+                      vdevice-dataKey: 172.16.255.11
+                      certificate-validity: Valid
+                      vmanage-system-ip: 172.16.255.11
+                      lastupdated: 1646963388706
+                      number-vbond-peers: '2'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Security-read,Security-write
+  /device/control/synced/waninterface:
+    get:
+      tags:
+      - Real-Time Monitoring - Device Control
+      description: Get WAN interface list
+      operationId: createWanInterfaceSyncedList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                WAN interface list:
+                  description: WAN interface list
+                  value:
+                    data:
+                    - instance: 0
+                      low-bandwidth-link: 'No'
+                      color: lte
+                      vdevice-name: 172.16.255.11
+                      nat-type: N
+                      admin-state: up
+                      interface: ge0/2
+                      restrict-str: 'no'
+                      '@rid': 1077
+                      private-ipv6: '::'
+                      private-ip: 10.0.5.11
+                      per-wan-max-controllers: 2
+                      num-vsmarts: 2
+                      num-vmanages: 1
+                      preference: '0'
+                      createTimeStamp: 1646912567192
+                      weight: 1
+                      index: 0
+                      private-port: 12407
+                      vdevice-host-name: vm1
+                      vbond-as-stun-server: 'no'
+                      control-str: 'yes'
+                      carrier: default
+                      last-resort: 'No'
+                      vdevice-dataKey: 172.16.255.11-0-0
+                      vmanage-connection-preference: '5'
+                      vmanage-system-ip: 172.16.255.11
+                      public-ip: 10.0.5.11
+                      operation-state: up
+                      public-port: 12407
+                      region-id: Default
+                      lastupdated: 1646967283812
+                      wan-port-hopped: 'TRUE'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Security-read,Security-write
+  /device/control/validdevices:
+    get:
+      tags:
+      - Real-Time Monitoring - Device Control
+      description: Get vmanage valid device list (Real Time)
+      operationId: createValidDevicesListRealTime
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Device list:
+                  description: Device list
+                  value:
+                    data:
+                    - chassis-number: 00D132A6-F3D2-40BA-862B-A6D1A83EFAEA
+                      vdevice-dataKey: 172.16.255.22-00D132A6-F3D2-40BA-862B-A6D1A83EFAEA-12346574
+                      vdevice-name: 172.16.255.22
+                      serial-number: '12346574'
+                      lastupdated: 1649645323938
+                      vdevice-host-name: vm12
+                    - chassis-number: C8K-299C77FA-B7B2-4644-BCF1-E15BC635194F
+                      vdevice-dataKey: 172.16.255.22-C8K-299C77FA-B7B2-4644-BCF1-E15BC635194F-12345703
+                      vdevice-name: 172.16.255.22
+                      serial-number: '12345703'
+                      lastupdated: 1649645323938
+                      vdevice-host-name: vm12
+                    - chassis-number: C8K-9150A7F6-73E6-45BD-B14E-0A8F98A580F7
+                      vdevice-dataKey: 172.16.255.22-C8K-9150A7F6-73E6-45BD-B14E-0A8F98A580F7-12345705
+                      vdevice-name: 172.16.255.22
+                      serial-number: '12345705'
+                      lastupdated: 1649645323938
+                      vdevice-host-name: vm12
+                    - chassis-number: C8K-A9DF16AA-14C2-4B60-8D65-05957111879E
+                      vdevice-dataKey: 172.16.255.22-C8K-A9DF16AA-14C2-4B60-8D65-05957111879E-12345967
+                      vdevice-name: 172.16.255.22
+                      serial-number: '12345967'
+                      lastupdated: 1649645323938
+                      vdevice-host-name: vm12
+                    - chassis-number: C8K-D6E53254-74C7-4504-B8A7-50FBBC37073A
+                      vdevice-dataKey: 172.16.255.22-C8K-D6E53254-74C7-4504-B8A7-50FBBC37073A-12345707
+                      vdevice-name: 172.16.255.22
+                      serial-number: '12345707'
+                      lastupdated: 1649645323938
+                      vdevice-host-name: vm12
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Security-read,Security-write
+  /device/control/validvmanageid:
+    get:
+      tags:
+      - Real-Time Monitoring - Device Control
+      description: Get valid vManage from device (Real Time)
+      operationId: getValidVManageIdRealTime
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                vManage:
+                  description: vManage
+                  value:
+                    data:
+                    - chassis-number: 387d8bf3-5306-41fe-9090-7ee61c91d9c3
+                      vdevice-dataKey: 169.254.10.10-
+                      vdevice-name: 169.254.10.10
+                      lastupdated: 1642746085123
+                      vdevice-host-name: vm3
+                    - chassis-number: 59ddeeef-24ad-4bd3-9e55-f9760b640970
+                      vdevice-dataKey: 169.254.10.10-
+                      vdevice-name: 169.254.10.10
+                      lastupdated: 1642746085123
+                      vdevice-host-name: vm3
+                    - chassis-number: c0fd955c-7e0d-4b90-9626-55684f69a899
+                      vdevice-dataKey: 169.254.10.10-
+                      vdevice-name: 169.254.10.10
+                      lastupdated: 1642746085123
+                      vdevice-host-name: vm3
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Security-read,Security-write
+  /device/control/validvsmarts:
+    get:
+      tags:
+      - Real-Time Monitoring - Device Control
+      description: Get valid vSmart list from device (Real Time)
+      operationId: createValidVSmartsListRealTime
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                vSmart list:
+                  description: vSmart list
+                  value:
+                    data:
+                    - vdevice-dataKey: 169.254.10.10-12345701
+                      vdevice-name: 169.254.10.10
+                      serial-number: '12345701'
+                      lastupdated: 1642743541771
+                      vdevice-host-name: vm3
+                    - vdevice-dataKey: 169.254.10.10-12345702
+                      vdevice-name: 169.254.10.10
+                      serial-number: '12345702'
+                      lastupdated: 1642743541771
+                      vdevice-host-name: vm3
+                    - vdevice-dataKey: 169.254.10.10-12345703
+                      vdevice-name: 169.254.10.10
+                      serial-number: '12345703'
+                      lastupdated: 1642743541771
+                      vdevice-host-name: vm3
+                    - vdevice-dataKey: 169.254.10.10-12345704
+                      vdevice-name: 169.254.10.10
+                      serial-number: '12345704'
+                      lastupdated: 1642743541771
+                      vdevice-host-name: vm3
+                    - vdevice-dataKey: 169.254.10.10-12345705
+                      vdevice-name: 169.254.10.10
+                      serial-number: '12345705'
+                      lastupdated: 1642743541771
+                      vdevice-host-name: vm3
+                    - vdevice-dataKey: 169.254.10.10-12345706
+                      vdevice-name: 169.254.10.10
+                      serial-number: '12345706'
+                      lastupdated: 1642743541771
+                      vdevice-host-name: vm3
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Security-read,Security-write
+  /device/control/waninterface:
+    get:
+      tags:
+      - Real-Time Monitoring - Device Control
+      description: Get WAN interface list (Real Time)
+      operationId: createWanInterfaceListList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                WAN interface list:
+                  description: WAN interface list
+                  value:
+                    data:
+                    - instance: 0
+                      low-bandwidth-link: 'No'
+                      color: default
+                      vdevice-name: 169.254.10.10
+                      nat-type: N
+                      admin-state: up
+                      interface: ge0/1
+                      restrict-str: 'no'
+                      private-ipv6: '::'
+                      private-ip: 10.101.3.3
+                      per-wan-max-controllers: 2
+                      num-vsmarts: 2
+                      num-vmanages: 1
+                      preference: '0'
+                      wan-time-since-port-hop: 0:11:14:02
+                      spi-change: 0:00:45:59
+                      index: 0
+                      weight: 1
+                      private-port: 12386
+                      last-conn-time: 0:11:13:42
+                      vbond-as-stun-server: 'no'
+                      vdevice-host-name: vm3
+                      control-str: 'yes'
+                      carrier: default
+                      vmanage-connection-preference: '5'
+                      last-resort: 'No'
+                      vdevice-dataKey: 169.254.10.10-0-0
+                      public-ip: 10.101.3.3
+                      operation-state: up
+                      public-port: 12386
+                      lastupdated: 1642746267569
+                      last-conn-time-date: 1642705800000
+                      wan-port-hopped: 'TRUE'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Security-read,Security-write
+  /device/control/waninterface/color:
+    get:
+      tags:
+      - Real-Time Monitoring - Device Control
+      description: Get port hop colors
+      operationId: getPortHopColor
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device port hop colors:
+                  description: Device port hop colors
+                  value:
+                    data:
+                    - color: lte
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read

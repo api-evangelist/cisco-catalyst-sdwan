@@ -1,0 +1,143 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - Ucse API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - Ucse
+paths:
+  /device/ucse/stats:
+    get:
+      tags:
+      - Real-Time Monitoring - Ucse
+      description: Get  UCSE stats entry from device
+      operationId: createUcseStats
+      parameters:
+      - name: remote-tloc-address
+        in: query
+        description: Remote TLOC address
+        schema:
+          type: string
+      - name: remote-tloc-color
+        in: query
+        description: Remote tloc color
+        schema:
+          type: string
+          enum:
+          - default
+          - mpls
+          - metro-ethernet
+          - biz-internet
+          - public-internet
+          - lte
+          - 3g
+          - red
+          - green
+          - blue
+          - gold
+          - silver
+          - bronze
+          - custom1
+          - custom2
+          - custom3
+          - private1
+          - private2
+          - private3
+          - private4
+          - private5
+          - private6
+      - name: local-tloc-color
+        in: query
+        description: Local tloc color
+        schema:
+          type: string
+          enum:
+          - default
+          - mpls
+          - metro-ethernet
+          - biz-internet
+          - public-internet
+          - lte
+          - 3g
+          - red
+          - green
+          - blue
+          - gold
+          - silver
+          - bronze
+          - custom1
+          - custom2
+          - custom3
+          - private1
+          - private2
+          - private3
+          - private4
+          - private5
+          - private6
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                ' UCSE stats entry':
+                  description: ' UCSE stats entry'
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.15
+                      vdevice-host-name: vm5
+                      vdevice-dataKey: 172.16.254.15
+                      lastupdated: 1646031617468
+                      slot-num: '0'
+                      subslot-num: '1'
+                      shutdown-count: '1'
+                      status-count: '0'
+                      server-raid-password-reset-count: '1'
+                      server-bios-password-reset-count: '2'
+                      server-reload-count: '1'
+                      server-reset-count: '1'
+                      server-start-count: '1'
+                      server-stop-count: '1'
+                      imc-password-reset-count: '1'
+                      imc-vlan-count: '1'
+                      imc-access-port-count: '1'
+                      imc-ip-count: '1'
+                      stats-start-time: 13:59:27 PDT Jun 5 2022
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Security-read,Security-write

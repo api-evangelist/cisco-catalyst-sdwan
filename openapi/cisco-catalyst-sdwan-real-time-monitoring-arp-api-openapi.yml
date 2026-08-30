@@ -1,0 +1,85 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - ARP API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - ARP
+paths:
+  /device/arp:
+    get:
+      tags:
+      - Real-Time Monitoring - ARP
+      description: Get ARP interfaces from device (Real Time)
+      operationId: getARPInterface
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                ARP interface:
+                  description: ARP interface
+                  value:
+                    data:
+                    - if-name: ge0/1
+                      idle-timer: 0:00:10:36
+                      vdevice-dataKey: 169.254.10.10-0-ge0/1
+                      vdevice-name: 169.254.10.10
+                      ip: 10.101.254.254
+                      lastupdated: 1642578468257
+                      state: dynamic
+                      vpn-id: '0'
+                      uptime-date: 1642160280000
+                      vdevice-host-name: vm3
+                      mac: 52:54:00:7a:da:f8
+                      uptime: '4:20:09:23'
+                    - if-name: eth0
+                      vdevice-dataKey: 169.254.10.10-512-eth0
+                      vdevice-name: 169.254.10.10
+                      ip: 10.0.1.3
+                      lastupdated: 1642578468257
+                      state: static
+                      vpn-id: '512'
+                      uptime-date: 1642154760000
+                      vdevice-host-name: vm3
+                      mac: 00:50:56:00:01:03
+                      uptime: '4:21:41:16'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Interface-read,Interface-write

@@ -1,0 +1,166 @@
+openapi: 3.2.0
+info:
+  title: Others SmartLicensing - Sync EA Licenses API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: SmartLicensing - Sync EA Licenses
+paths:
+  /v1/smart-licensing/ea/fetch-accounts:
+    post:
+      tags:
+      - SmartLicensing - Sync EA Licenses
+      description: Fetch list of VAs from EA.
+      operationId: fetchEaVirtualAccounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties:
+                type: object
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /v1/smart-licensing/ea/fetch-sync-status:
+    get:
+      tags:
+      - SmartLicensing - Sync EA Licenses
+      description: Check if EA Account has been synced. Empty Response if EA sync has not been done
+      operationId: fetchEASyncStatus
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /v1/smart-licensing/ea/generate:
+    post:
+      tags:
+      - SmartLicensing - Sync EA Licenses
+      description: Generate Licenses from Enterprise Agreement Portal
+      operationId: generateEALicenses
+      requestBody:
+        description: Create a rule
+        content:
+          application/json:
+            schema:
+              type: string
+            examples:
+              Config Group:
+                description: Config Group
+                value:
+                  transactionId: ''
+                  smartAccountDomain: ''
+                  smartAccountId: '102811'
+                  targetVirtualAccountId: '129975'
+                  subscriptionId: Sub1149281
+                  modelNumber: ''
+                  userEmail: ''
+                  suites:
+                  - suiteName: ''
+                    atoName: E2-N-CL-SDWAN
+                    commerceSkus:
+                    - commerceSku: E2N-SDWAN-P-T2-G-P
+                      featureList:
+                      - featureSku: C1DNA-P-1G-A-3Y
+                        licenseQty: 1
+                        bandwithApplicable: 'YES'
+                    - commerceSku: E2N-SDWAN-P-T3-G-P
+                      featureList:
+                      - featureSku: C1DNA-P-10G-A-3Y
+                        licenseQty: 1
+                        bandwithApplicable: 'YES'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /v1/smart-licensing/ea/sync:
+    post:
+      tags:
+      - SmartLicensing - Sync EA Licenses
+      description: Get Specific Virtual Account's Details belonging to the EA
+      operationId: syncWithEA
+      parameters:
+      - name: virtual_account_id
+        in: query
+        description: virtual_account_id
+        required: true
+        schema:
+          maxLength: 200
+          minLength: 0
+          pattern: ^[0-9]+$
+          type: string
+        example: 702544
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              type: object
+              additionalProperties:
+                type: object
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

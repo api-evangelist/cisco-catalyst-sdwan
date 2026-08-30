@@ -1,0 +1,214 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Monitoring - Device Configuration Security Advisories API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Monitoring - Device Configuration Security Advisories
+paths:
+  /advisories/insecure-config/devices:
+    get:
+      tags:
+      - Monitoring - Device Configuration Security Advisories
+      summary: Get device advisories
+      operationId: getDeviceAdvisories
+      responses:
+        '200':
+          description: Successful response with device advisories
+          content:
+            application/json:
+              schema:
+                required:
+                - devices
+                - totalDevices
+                type: object
+                properties:
+                  devices:
+                    type: array
+                    description: List of devices with insecure config
+                    items:
+                      required:
+                      - chassisNumber
+                      - deviceModel
+                      - deviceType
+                      - hostName
+                      - insecureConfigCount
+                      - lastupdated
+                      - localSystemIp
+                      - managedBy
+                      - reachability
+                      - siteId
+                      - siteName
+                      - systemIp
+                      - tags
+                      - uuid
+                      - version
+                      type: object
+                      properties:
+                        chassisNumber:
+                          type: string
+                          description: Chassis number of the device
+                          example: C8K-74b60256-ae6e-4718-b080-29660c203463
+                        deviceModel:
+                          type: string
+                          description: Device model
+                          example: vedge-C8000V
+                        deviceType:
+                          type: string
+                          description: Device type
+                          example: vedge
+                        hostName:
+                          type: string
+                          description: Hostname of the device
+                          example: vm33
+                        insecureConfigCount:
+                          type: integer
+                          description: Insecure config count of the device
+                          format: int32
+                          example: 2
+                        lastupdated:
+                          type: integer
+                          description: Last updated time of the device in epoch milliseconds
+                          format: int64
+                          example: 1754276455939
+                        localSystemIp:
+                          type: string
+                          description: Local system ip of the device
+                          example: 172.16.255.15
+                        managedBy:
+                          type: string
+                          description: Managed by config group, template or policy etc
+                          example: Config group cg1
+                        reachability:
+                          type: string
+                          description: Reachability of the device
+                          example: reachable
+                        siteId:
+                          type: string
+                          description: Site id of the device
+                          example: '600'
+                        siteName:
+                          type: string
+                          description: Site name of the device
+                          example: SITE_600
+                        systemIp:
+                          type: string
+                          description: System ip of the device
+                          example: 172.16.255.15
+                        tags:
+                          type: array
+                          description: Tags associated with the device
+                          example:
+                          - east-china
+                          items:
+                            type: string
+                            description: associated tag
+                            example: east-china
+                        uuid:
+                          type: string
+                          description: Unique identifier of the device
+                          example: 74b60256-ae6e-4718-b080-29660c203465
+                        version:
+                          type: string
+                          description: Version of the device
+                          example: 17.18.02.0.2039
+                      description: List of devices with insecure config
+                      $$ref: '#/components/schemas/InsecureConfigDevice'
+                  totalDevices:
+                    type: integer
+                    description: Total devices with insecure config
+                    format: int32
+                    example: 1
+                $$ref: '#/components/schemas/InsecureDeviceAdvisoroesResponse'
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /advisories/insecure-config/devices/{deviceIP}:
+    get:
+      tags:
+      - Monitoring - Device Configuration Security Advisories
+      summary: Get insecure configuration for a device
+      operationId: getDeviceInsecureConfig
+      parameters:
+      - name: deviceIP
+        in: path
+        description: Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 10.1.1.15
+      responses:
+        '200':
+          description: Successful response with insecure configurations
+          content:
+            application/json:
+              schema:
+                required:
+                - insecureCliConfigurations
+                - insecureConfigCount
+                type: object
+                properties:
+                  insecureCliConfigurations:
+                    type: array
+                    description: Insecure cli configurations
+                    items:
+                      required:
+                      - description
+                      - insecureCli
+                      - reason
+                      - remediation
+                      type: object
+                      properties:
+                        description:
+                          type: string
+                          description: Description for insecure CLI
+                          example: authentication protocol for the user
+                        insecureCli:
+                          type: string
+                          description: Insecure device CLI
+                          example: snmp user {user} auth-protocol {auth-protocol}
+                        reason:
+                          type: string
+                          description: Reason for configuration CLI being marked insecure
+                          example: SHA-256 provides a more secure hashing algorithm compared to MD5 or SHA-1
+                        remediation:
+                          type: string
+                          description: Remediation action for insecure configuration CLI
+                          example: Use SHA-256 for stronger authentication
+                      description: Insecure cli configurations
+                      $$ref: '#/components/schemas/InsecureConfig'
+                  insecureConfigCount:
+                    type: integer
+                    description: The count of insecure configurations
+                    format: int32
+                    example: 1
+                $$ref: '#/components/schemas/InsecureConfigResp'
+        '404':
+          description: Device not found
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read

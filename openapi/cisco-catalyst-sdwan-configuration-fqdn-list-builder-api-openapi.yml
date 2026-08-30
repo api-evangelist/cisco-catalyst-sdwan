@@ -1,0 +1,572 @@
+openapi: 3.2.0
+info:
+  title: UX 1.0 Configuration Configuration - FQDN List Builder API
+  description: "Configuration of UX 1.0 device and policy.\nIncludes API operations for the following:\n  Managing original SD-WAN device configurations and policy configurations\n  Device templates and feature templates"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Configuration - FQDN List Builder
+paths:
+  /template/policy/list/fqdn:
+    get:
+      tags:
+      - Configuration - FQDN List Builder
+      description: Get policy lists
+      operationId: getPolicyLists_ConfigurationFqdnListBuilder_2603
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                App Policy:
+                  description: App Policy
+                  value: "{ \"data\": [\n    {\n      \"listId\": \"be6eb8f9-29df-48a6-ab18-b46af0c60cde\",\n      \"name\": \"Google_Apps\",\n      \"type\": \"app\",\n      \"description\": \"Google Applications List\",\n      \"entries\": [\n        {\n          \"app\": \"gcs\"\n        },\n      ],\n      \"lastUpdated\": 1588001890181,\n      \"owner\": \"system\",\n      \"readOnly\": true,\n      \"version\": \"4.2\",\n      \"infoTag\": \"\",\n      \"referenceCount\": 0,\n      \"references\": [],\n      \"isActivatedByVsmart\": false\n    },"
+                Prefix List:
+                  description: Prefix List
+                  value:
+                    data:
+                    - listId: 8bc43c09-f72c-40b8-aa90-608c7005e607
+                      name: Example
+                      type: prefix
+                      description: Desc Not Required
+                      entries:
+                      - ipPrefix: 10.0.0.0/24
+                      lastUpdated: 1588178457305
+                      owner: admin
+                      readOnly: false
+                      version: '0'
+                      infoTag: ''
+                      referenceCount: 0
+                      references: []
+                      isActivatedByVsmart: false
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+    post:
+      tags:
+      - Configuration - FQDN List Builder
+      description: Create policy list
+      operationId: createPolicyList_ConfigurationFqdnListBuilder_2604
+      requestBody:
+        description: Policy list
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Zone list:
+                description: Zone list
+                value:
+                  name: Demo-Zone
+                  description: Desc Not Required
+                  type: zone
+                  entries:
+                  - vpn: '10'
+              IPS list:
+                description: IPS list
+                value:
+                  name: Demo-IPS-list
+                  description: Desc Not Required
+                  type: ipssignature
+                  entries:
+                  - generatorId: '1111'
+                    signatureId: '4444'
+              URL white list:
+                description: URL white list
+                value:
+                  name: Demo-Whitelist
+                  description: Desc Not Required
+                  type: urlwhitelist
+                  entries:
+                  - pattern: https://www.youtube.com
+              URL black list:
+                description: URL black list
+                value:
+                  name: Demo-Black-list
+                  description: Desc Not Required
+                  type: urlblacklist
+                  entries:
+                  - pattern: www.facebook.com
+              TG API key list:
+                description: TG API key list
+                value:
+                  name: threatGridApiKeyList
+                  description: ''
+                  type: threatGridApiKey
+                  entries:
+                  - region: nam
+                    apikey: '1234567'
+                  - region: eur
+                    apikey: '1234567'
+              Local domain list:
+                description: Local domain list
+                value:
+                  name: Demo-Domain-Name-List
+                  description: Desc Not Required
+                  type: localdomain
+                  entries:
+                  - nameServer: cisco.com
+              Umbrella data list:
+                description: Umbrella data list
+                value:
+                  name: umbrellaTokenList
+                  description: ''
+                  type: umbrellaData
+                  entries:
+                  - apiKey: abcd
+                    secret: '12345'
+                    umbOrgId: '23405'
+                    token: abcedabcedabcedabcedabcedabcedabcedabced
+              App family:
+                description: App family
+                value:
+                  name: Demo-App-List
+                  description: Desc Not Required
+                  type: app
+                  entries:
+                  - appFamily: web
+                  - appFamily: audio-video
+              App list:
+                description: App list
+                value:
+                  name: Demo-App-List
+                  description: Desc Not Required
+                  type: app
+                  entries:
+                  - app: facebook
+                  - app: netshow
+              Color list:
+                description: Color list
+                value:
+                  name: Demo-Color-List
+                  description: Desc Not Required
+                  type: color
+                  entries:
+                  - color: biz-internet
+                  - color: public-internet
+              Data prefix:
+                description: Data prefix
+                value:
+                  name: Demo-Data-Prefix-List
+                  description: Desc Not Required
+                  type: dataprefix
+                  entries:
+                  - ipPrefix: 10.1.0.0/16
+                  - ipPrefix: 10.2.0.0/16
+              Policer:
+                description: Policer
+                value:
+                  name: Demo-Policer-list
+                  description: Desc Not Required
+                  type: policer
+                  entries:
+                  - burst: '16000'
+                    exceed: drop
+                    rate: '10000'
+              Prefix:
+                description: Prefix
+                value:
+                  name: Demo-Prefix-list
+                  description: Desc Not Required
+                  type: prefix
+                  entries:
+                  - ipPrefix: 10.0.0.0/12
+                    le: '32'
+              Site:
+                description: Site
+                value:
+                  name: Demo-Site-List
+                  description: Desc Not Required
+                  type: site
+                  listId: null
+                  entries:
+                  - siteId: '100'
+                  - siteId: '200'
+                  - siteId: 300-500
+              Class:
+                description: Class
+                value:
+                  name: Demo-Class-Map
+                  description: Desc Not Required
+                  type: class
+                  entries:
+                  - queue: '4'
+              App probe:
+                description: App probe
+                value:
+                  name: Demo-Probe-Class
+                  type: appProbe
+                  entries:
+                  - map:
+                    - color: biz-internet
+                      dscp: 46
+                    - color: public-internet
+                      dscp: 20
+                    forwardingClass: 391c5977-0af8-46b2-a9b2-e48702593d70
+              SLA:
+                description: SLA
+                value:
+                  name: Demo-SLA-Class
+                  description: Desc Not Required
+                  type: sla
+                  entries:
+                  - latency: '100'
+                    loss: '10'
+                    jitter: '10'
+                    appProbeClass: 39269a77-9592-4a5a-8b35-633a5615c47d
+              TLOC:
+                description: TLOC
+                value:
+                  name: Demo-TLOC-List
+                  description: Desc Not Required
+                  type: tloc
+                  entries:
+                  - tloc: 10.1.1.1
+                    color: biz-internet
+                    encap: ipsec
+                    preference: '10'
+                  - tloc: 10.2.2.2
+                    color: biz-internet
+                    encap: ipsec
+                    preference: '20'
+              VPN:
+                description: VPN
+                value:
+                  name: Demo-VPN-List
+                  description: Desc Not Required
+                  type: vpn
+                  listId: null
+                  entries:
+                  - vpn: '100'
+                  - vpn: '200'
+                  - vpn: 300-500
+              AS path:
+                description: AS path
+                value:
+                  name: Demo-AS-Path-List
+                  description: Desc Not Required
+                  type: aspath
+                  listId: null
+                  entries:
+                  - asPath: '100'
+                  - asPath: '200'
+                  - asPath: '65002'
+              Community:
+                description: Community
+                value:
+                  name: Demo-Community-List
+                  description: Desc Not Required
+                  type: community
+                  listId: null
+                  entries:
+                  - community: 1000:10000
+              Ext community:
+                description: Ext community
+                value:
+                  name: Demo-Extended-Community-List
+                  description: Desc Not Required
+                  type: extcommunity
+                  listId: null
+                  entries:
+                  - community: rt 100:10
+              Mirror:
+                description: Mirror
+                value:
+                  name: Demo-Mirror-List
+                  description: Desc Not Required
+                  type: mirror
+                  entries:
+                  - remoteDest: 10.1.1.1
+                    source: 20.1.1.1
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value:
+                    listId: 1066ffec-e6ab-426a-b303-434d41b0a4a6
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy Configuration-write
+    delete:
+      tags:
+      - Configuration - FQDN List Builder
+      description: Delete policy lists with specific info tag
+      operationId: deletePolicyListsWithInfoTag_ConfigurationFqdnListBuilder_2606
+      parameters:
+      - name: infoTag
+        in: query
+        description: InfoTag
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Policy list:
+                  description: Policy list
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/policy/list/fqdn/filtered:
+    get:
+      tags:
+      - Configuration - FQDN List Builder
+      description: Get policy lists with specific info tag
+      operationId: getPolicyListsWithInfoTag_ConfigurationFqdnListBuilder_3503
+      parameters:
+      - name: infoTag
+        in: query
+        description: InfoTag
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Policy list:
+                  description: Policy list
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/policy/list/fqdn/preview:
+    post:
+      tags:
+      - Configuration - FQDN List Builder
+      description: Preview a policy list based on the policy list type
+      operationId: previewPolicyList_ConfigurationFqdnListBuilder_3404
+      requestBody:
+        description: Policy list
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Policy list:
+                description: Policy list
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Preview policy list:
+                  description: Preview policy list
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+  /template/policy/list/fqdn/preview/{id}:
+    get:
+      tags:
+      - Configuration - FQDN List Builder
+      description: Preview a specific policy list entry based on id provided
+      operationId: previewPolicyListById_ConfigurationFqdnListBuilder_3903
+      parameters:
+      - name: id
+        in: path
+        description: Policy Id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Preview policy list:
+                  description: Preview policy list
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+  /template/policy/list/fqdn/{id}:
+    put:
+      tags:
+      - Configuration - FQDN List Builder
+      description: Edit policy list entries for a specific type of policy list
+      operationId: editPolicyList_ConfigurationFqdnListBuilder_3103
+      parameters:
+      - name: id
+        in: path
+        description: Policy Id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Policy list
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Policy list:
+                description: Policy list
+                value:
+                  name: Community
+                  description: Desc Not Required
+                  type: community
+                  listId: 1066ffec-e6ab-426a-b303-434d41b0a4a6
+                  entries:
+                  - community: 1000:8000
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Policy:
+                  description: Policy
+                  value:
+                    masterTemplatesAffected: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy Configuration-write
+    delete:
+      tags:
+      - Configuration - FQDN List Builder
+      description: Delete policy list entry for a specific type of policy list
+      operationId: deletePolicyList_ConfigurationFqdnListBuilder_3106
+      parameters:
+      - name: id
+        in: path
+        description: Policy Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy Configuration-write
+    get:
+      tags:
+      - Configuration - FQDN List Builder
+      description: Get a specific policy list based on the id
+      operationId: getListsById_ConfigurationFqdnListBuilder_3103
+      parameters:
+      - name: id
+        in: path
+        description: Policy Id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Policy:
+                  description: Policy
+                  value:
+                    listId: 1066ffec-e6ab-426a-b303-434d41b0a4a6
+                    name: Community
+                    type: community
+                    description: Desc Not Required
+                    entries:
+                    - community: 1000:5000
+                    lastUpdated: 1590184928436
+                    owner: admin
+                    readOnly: false
+                    version: '0'
+                    infoTag: ''
+                    referenceCount: 0
+                    references: []
+                    isActivatedByVsmart: false
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write

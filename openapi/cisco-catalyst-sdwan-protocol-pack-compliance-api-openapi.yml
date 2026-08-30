@@ -1,0 +1,939 @@
+openapi: 3.2.0
+info:
+  title: Others Protocol Pack Compliance API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Protocol Pack Compliance
+paths:
+  /sdavc/protocol-pack/compliance/all-devices:
+    get:
+      tags:
+      - Protocol Pack Compliance
+      description: Get all device compliance details
+      operationId: getAllSDAVCDevice
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Response:
+                  description: Response
+                  value:
+                    devices:
+                    - uuid: C8K-3657252c-96a4-4e4c-8860-270dec1f07d7
+                      hostName: vm1
+                      siteId: '100'
+                      systemIp: 172.16.255.11
+                      deviceModel: vedge-C8000V
+                      softwareVersion: 17.12.03.0.3419
+                      currentProtocolPackVersion: 68
+                      currentProtocolPackName: pp-adv-cat8k-1712.1a-49-68.0.0.pack
+                      lastUpgradeStatus: Success
+                      lastUpgradeStatusMessage: null
+                      isCompatible: true
+                      isAVCEnabled: true
+                      isDeviceReachable: true
+                    count: 1
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /sdavc/protocol-pack/compliance/application:
+    get:
+      tags:
+      - Protocol Pack Compliance
+      description: Get default application name compliance details
+      operationId: getDefaultApplicationComplianceDetails
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Empty Response:
+                  description: Empty Response
+                  value: []
+                Application Name Compliance:
+                  description: Application Name Compliance
+                  value:
+                  - id: 18f77d59-d79d-4529-9030-a78fd8c9b666
+                    name: rhapsody
+                    type: inBuiltApps
+                    applicationLists:
+                    - id: 1c03f3d3-fa3a-40e1-8036-30b7a4c78e82
+                      name: ux_1_0_sec_app_list_3
+                      type: localApp
+                      policies:
+                      - id: 40df04c6-b141-4a08-8424-a6f87ace50e2
+                        name: ux_1_0_sec_pol_3
+                        type: security-policy
+                      - id: 987e7cd3-b5e6-4dc9-8a49-45b462252985
+                        name: ux_1_0_unified_sec_pol_1
+                        type: security-policy
+                    - id: dd6cc450-8d47-43d3-8dc5-0f8ef1b2a760
+                      name: ux_1_0_aar_app_list_4
+                      type: app
+                      policies: []
+                  - id: a4c55d06-2390-4e73-9706-dec5df977567
+                    name: ipcd
+                    type: inBuiltApps
+                    applicationLists: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                500 - Internal Error:
+                  description: 500 - Internal Error
+                  value:
+                    error:
+                      message: <Short Message>
+                      code: PP0016
+                      details: <Detailed Message>
+  /sdavc/protocol-pack/compliance/application/initiate-compliance:
+    post:
+      tags:
+      - Protocol Pack Compliance
+      description: Initiate application name compliance task
+      operationId: initiateApplicationComplianceCheck
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Scheduled Response:
+                  description: Task Scheduled Response
+                  value:
+                    uuid: e4f18388-8ce8-41c3-be0e-3cf867caf17c
+                    status: scheduled
+                    message: Task scheduled
+                Task In Progress Response:
+                  description: Task In Progress Response
+                  value:
+                    uuid: e4f18388-8ce8-41c3-be0e-3cf867caf17c
+                    status: in_progress
+                    message: Task is in progress
+                Task Success Response:
+                  description: Task Success Response
+                  value:
+                    uuid: e4f18388-8ce8-41c3-be0e-3cf867caf17c
+                    status: success
+                    message: Success
+                Task Failed Response:
+                  description: Task Failed Response
+                  value:
+                    uuid: e4f18388-8ce8-41c3-be0e-3cf867caf17c
+                    status: failure
+                    message: Task Failed
+                Not Started Response:
+                  description: Not Started Response
+                  value:
+                    uuid: e4f18388-8ce8-41c3-be0e-3cf867caf17c
+                    status: not_started
+                    message: The task has not started yet
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                500 - Internal Error:
+                  description: 500 - Internal Error
+                  value:
+                    error:
+                      message: <Short Message>
+                      code: PP0017
+                      details: <Detailed Message>
+  /sdavc/protocol-pack/compliance/application/is-compliance-detected:
+    get:
+      tags:
+      - Protocol Pack Compliance
+      description: Check if there is any Application Compliance detected in the system
+      operationId: isApplicationComplianceDetected
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                If Compliance Detected:
+                  description: If Compliance Detected
+                  value:
+                    complianceDetected: true
+                If Compliance Not Detected:
+                  description: If Compliance Not Detected
+                  value:
+                    complianceDetected: false
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                500 - Internal Error:
+                  description: 500 - Internal Error
+                  value:
+                    error:
+                      message: <Short Message>
+                      code: PP0016
+                      details: <Detailed Message>
+  /sdavc/protocol-pack/compliance/application/status/{uuid}:
+    get:
+      tags:
+      - Protocol Pack Compliance
+      description: Get application name compliance task status
+      operationId: getApplicationComplianceStatus
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Scheduled Response:
+                  description: Scheduled Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: scheduled
+                    message: Task scheduled
+                In Progress Response:
+                  description: In Progress Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: in_progress
+                    message: Task is in progress
+                Success Response:
+                  description: Success Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: success
+                    message: Success
+                Failure Response:
+                  description: Failure Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: failure
+                    message: Task Failed
+                Not Started Response:
+                  description: Not Started Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: not_started
+                    message: The task has not started yet
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                500 - Internal Error:
+                  description: 500 - Internal Error
+                  value:
+                    error:
+                      message: <Short Message>
+                      code: PP0016
+                      details: <Detailed Message>
+  /sdavc/protocol-pack/compliance/application/{uuid}:
+    get:
+      tags:
+      - Protocol Pack Compliance
+      description: Get application name compliance details for given task uuid
+      operationId: getApplicationComplianceDetails
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Empty Response:
+                  description: Empty Response
+                  value: []
+                Application Name Compliance:
+                  description: Application Name Compliance
+                  value:
+                  - id: 18f77d59-d79d-4529-9030-a78fd8c9b666
+                    name: rhapsody
+                    type: inBuiltApps
+                    applicationLists:
+                    - id: 1c03f3d3-fa3a-40e1-8036-30b7a4c78e82
+                      name: ux_1_0_sec_app_list_3
+                      type: localApp
+                      policies:
+                      - id: 40df04c6-b141-4a08-8424-a6f87ace50e2
+                        name: ux_1_0_sec_pol_3
+                        type: security-policy
+                      - id: 987e7cd3-b5e6-4dc9-8a49-45b462252985
+                        name: ux_1_0_unified_sec_pol_1
+                        type: security-policy
+                    - id: dd6cc450-8d47-43d3-8dc5-0f8ef1b2a760
+                      name: ux_1_0_aar_app_list_4
+                      type: app
+                      policies: []
+                  - id: a4c55d06-2390-4e73-9706-dec5df977567
+                    name: ipcd
+                    type: inBuiltApps
+                    applicationLists: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                500 - Internal Error:
+                  description: 500 - Internal Error
+                  value:
+                    error:
+                      message: <Short Message>
+                      code: PP0016
+                      details: <Detailed Message>
+  /sdavc/protocol-pack/compliance/custom-application:
+    get:
+      tags:
+      - Protocol Pack Compliance
+      description: Get All Custom Applications
+      operationId: getCustomApplicationList
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Response:
+                  description: Response
+                  value:
+                    applications:
+                    - applicationName: custom-app-1
+                      applicationNumericId: '2502'
+                      applicationSDAVCId: null
+                    - applicationName: custom-app-2
+                      applicationNumericId: '3547'
+                      applicationSDAVCId: null
+                    - applicationName: custom-app-3
+                      applicationNumericId: '3658'
+                      applicationSDAVCId: null
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                500 - Internal Error:
+                  description: 500 - Internal Error
+                  value:
+                    error:
+                      message: <Short Message>
+                      code: PP0014
+                      details: <Detailed Message>
+  /sdavc/protocol-pack/compliance/device/noncompliant:
+    post:
+      tags:
+      - Protocol Pack Compliance
+      description: Get all non compliant devices for given protocol pack and selected device or entire network
+      operationId: getNonCompliantDevicesForProtocolPack_ProtocolPackCompliance_5104
+      requestBody:
+        description: Request Payload
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                devices:
+                  type: array
+                  items:
+                    type: string
+                protocolPackName:
+                  type: string
+              $$ref: '#/components/schemas/CompliantDeviceRequest'
+            examples:
+              All Devices and selective protocol pack:
+                description: All Devices and selective protocol pack
+                value:
+                  devices: []
+                  protocolPackName: pp-adv-cat8k-1712.1a-49-68.0.0.pack
+              All Devices and Default Protocol Pack:
+                description: All Devices and Default Protocol Pack
+                value:
+                  devices: []
+                  protocolPackName: null
+              Selective Devices and Selective Protocol Pack:
+                description: Selective Devices and Selective Protocol Pack
+                value:
+                  devices:
+                  - 172.16.255.11
+                  - 172.16.255.12
+                  protocolPackName: pp-adv-cat8k-1712.1a-49-68.0.0.pack
+              Selective Devices and Default Protocol Pack:
+                description: Selective Devices and Default Protocol Pack
+                value:
+                  devices:
+                  - 172.16.255.11
+                  - 172.16.255.12
+                  protocolPackName: null
+        required: true
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Response:
+                  description: Response
+                  value:
+                    devices:
+                    - uuid: C8K-3657252c-96a4-4e4c-8860-270dec1f07d7
+                      hostName: vm1
+                      siteId: '100'
+                      systemIp: 172.16.255.11
+                      deviceModel: vedge-C8000V
+                      softwareVersion: 17.12.03.0.3419
+                      currentProtocolPackVersion: 68
+                      currentProtocolPackName: pp-adv-cat8k-1712.1a-49-68.0.0.pack
+                      lastUpgradeStatus: Success
+                      lastUpgradeStatusMessage: null
+                      isCompatible: true
+                      isAVCEnabled: true
+                      isDeviceReachable: true
+                    count: 1
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                500 - Internal Server Error:
+                  description: 500 - Internal Server Error
+                  value:
+                    error:
+                      message: <Short Message>
+                      code: PP0015
+                      details: <Detailed Message>
+  /sdavc/protocol-pack/compliance/device/noncompliant/{protocolPackName}:
+    get:
+      tags:
+      - Protocol Pack Compliance
+      description: Get all non compliant devices for given protocol pack
+      operationId: getNonCompliantDevicesForProtocolPack_ProtocolPackCompliance_7003
+      parameters:
+      - name: protocolPackName
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Response:
+                  description: Response
+                  value:
+                    devices:
+                    - uuid: C8K-3657252c-96a4-4e4c-8860-270dec1f07d7
+                      hostName: vm1
+                      siteId: '100'
+                      systemIp: 172.16.255.11
+                      deviceModel: vedge-C8000V
+                      softwareVersion: 17.12.03.0.3419
+                      currentProtocolPackVersion: 68
+                      currentProtocolPackName: pp-adv-cat8k-1712.1a-49-68.0.0.pack
+                      lastUpgradeStatus: Success
+                      lastUpgradeStatusMessage: null
+                      isCompatible: true
+                      isAVCEnabled: true
+                      isDeviceReachable: true
+                    count: 1
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                500 - Internal Server Error:
+                  description: 500 - Internal Server Error
+                  value:
+                    error:
+                      message: <Short Message>
+                      code: PP0015
+                      details: <Detailed Message>
+  /sdavc/protocol-pack/compliance/device/status/{uuid}:
+    get:
+      tags:
+      - Protocol Pack Compliance
+      description: Get device compliance task status
+      operationId: getDeviceComplianceStatus_ProtocolPackCompliance_5203
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Scheduled Response:
+                  description: Scheduled Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: scheduled
+                    message: Task scheduled
+                In Progress Response:
+                  description: In Progress Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: in_progress
+                    message: Task is in progress
+                Success Response:
+                  description: Success Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: success
+                    message: Success
+                Failure Response:
+                  description: Failure Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: failure
+                    message: Task Failed
+                Not Started Response:
+                  description: Not Started Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: not_started
+                    message: The task has not started yet
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                500 - Internal Server Error:
+                  description: 500 - Internal Server Error
+                  value:
+                    error:
+                      message: <Short Message>
+                      code: PP0010
+                      details: <Detailed Message>
+  /sdavc/protocol-pack/compliance/initiate-device-compliance:
+    post:
+      tags:
+      - Protocol Pack Compliance
+      description: Initiate device compliance task
+      operationId: initiateDeviceCompliance
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Response:
+                  description: Response
+                  value:
+                    taskExtraKey: vIPtela Inc Regression
+                    uuid: 4840d575-25bf-4d05-9f44-017854e4457b
+                    status: scheduled
+                    taskId: sdavc_check_device_compliance-4840d575-25bf-4d05-9f44-017854e4457b
+                    message: 'Check Device Compliances initiated for : vIPtela Inc Regression'
+                    protocolPackName: vIPtela Inc Regression
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                500 - Internal Error:
+                  description: 500 - Internal Error
+                  value:
+                    error:
+                      message: <Short Message>
+                      code: PP0012
+                      details: <Detailed Message>
+  /sdavc/protocol-pack/compliance/initiate-policy-compliance:
+    post:
+      tags:
+      - Protocol Pack Compliance
+      description: Initiate policy compliance task
+      operationId: initiatePolicyCompliance
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Response:
+                  description: Response
+                  value:
+                    taskExtraKey: 68.0.0
+                    uuid: 860f1d98-2ede-4ff4-ae84-f6192d1aa2ac
+                    status: scheduled
+                    taskId: sdavc_check_policy_compliance-860f1d98-2ede-4ff4-ae84-f6192d1aa2ac
+                    message: 'Check Policy Compliances initiated for : 68.0.0'
+                    protocolPackName: pp-adv-cat8k-179.1a-46-68.0.0.pack
+                    protocolPackVersion: 68.0.0
+                    initial-task-delay-in-second: 0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                500 - Internal Error:
+                  description: 500 - Internal Error
+                  value:
+                    error:
+                      message: <Short Message>
+                      code: PP0011
+                      details: <Detailed Message>
+  /sdavc/protocol-pack/compliance/new-application/{deviceUUID}:
+    get:
+      tags:
+      - Protocol Pack Compliance
+      description: Get New Application List for given Device UUID
+      operationId: getNewApplicationList
+      parameters:
+      - name: deviceUUID
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Response:
+                  description: Response
+                  value:
+                    applications:
+                    - applicationName: ms-wudo
+                      applicationNumericId: '1304'
+                      applicationSDAVCId: 13:1304
+                    - applicationName: cisco-thousandeyes
+                      applicationNumericId: '1298'
+                      applicationSDAVCId: 13:1298
+                    - applicationName: kafka
+                      applicationNumericId: '1297'
+                      applicationSDAVCId: 13:1297
+                    - applicationName: code42-services
+                      applicationNumericId: '1301'
+                      applicationSDAVCId: 13:1301
+                    - applicationName: panasonic-ip-camera
+                      applicationNumericId: '1299'
+                      applicationSDAVCId: 13:1299
+                    - applicationName: telegram
+                      applicationNumericId: '1300'
+                      applicationSDAVCId: 13:1300
+                    - applicationName: mndp
+                      applicationNumericId: '1308'
+                      applicationSDAVCId: 13:1308
+                    - applicationName: ms-intune
+                      applicationNumericId: '1303'
+                      applicationSDAVCId: 13:1303
+                    - applicationName: ms-diagnostics
+                      applicationNumericId: '1302'
+                      applicationSDAVCId: 13:1302
+                    - applicationName: discord
+                      applicationNumericId: '1305'
+                      applicationSDAVCId: 13:1305
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                500 - Internal Error:
+                  description: 500 - Internal Error
+                  value:
+                    error:
+                      message: <Short Message>
+                      code: PP0014
+                      details: <Detailed Message>
+  /sdavc/protocol-pack/compliance/policy:
+    get:
+      tags:
+      - Protocol Pack Compliance
+      description: Get all policy compliance details
+      operationId: getCompliancePolicy
+      parameters:
+      - name: offset
+        in: query
+        description: Starting position of records
+        schema:
+          type: integer
+          format: int64
+      - name: limit
+        in: query
+        description: Total records to query after offset
+        schema:
+          type: integer
+          format: int64
+      - name: protocolPackName
+        in: query
+        description: Protocol pack name
+        schema:
+          type: string
+      - name: oldApplicationSource
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Scheduled Response:
+                  description: Scheduled Response
+                  value:
+                    data:
+                    - appList:
+                        id: 7304764c-7741-4336-8def-451b173a8f21
+                        name: app_fam
+                        createdBy: createdBy
+                        version: UX 2.0
+                        type: app-list
+                      applications:
+                      - oldApplications:
+                        - google-services
+                        newApplications:
+                        - google-translate
+                        - google-maps
+                      - oldApplications:
+                        - ms-wudo
+                        newApplications:
+                        - ms-wudo-app-1
+                      - oldApplications:
+                        - http
+                        newApplications:
+                        - ''
+                      - oldApplications:
+                        - https
+                        newApplications:
+                        - ''
+                      policy:
+                      - id: c4feefed-ef30-4d1c-82f2-702b5bc174e4
+                        name: PG_bug
+                        version: UX 2.0
+                      - id: 32f4c05c-d6db-4423-b7e1-cb9dcc87de5f
+                        name: PG2
+                        version: UX 2.0
+                      updatedAt: 1706800337447
+                    count: 1
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                500 - Internal Server Error:
+                  description: 500 - Internal Server Error
+                  value:
+                    error:
+                      message: <Short Message>
+                      code: PP0013
+                      details: <Detailed Message>
+  /sdavc/protocol-pack/compliance/policy/status/{uuid}:
+    get:
+      tags:
+      - Protocol Pack Compliance
+      description: Get policy compliance status
+      operationId: getPolicyComplianceStatus
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Scheduled Response:
+                  description: Scheduled Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: scheduled
+                    message: Task scheduled
+                In Progress Response:
+                  description: In Progress Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: in_progress
+                    message: Task is in progress
+                Success Response:
+                  description: Success Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: success
+                    message: Success
+                Failure Response:
+                  description: Failure Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: failure
+                    message: Task Failed
+                Not Started Response:
+                  description: Not Started Response
+                  value:
+                    uuid: 2f48cc13-a19e-4d62-8273-ea25896a6ecc
+                    status: not_started
+                    message: The task has not started yet
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                500 - Internal Server Error:
+                  description: 500 - Internal Server Error
+                  value:
+                    error:
+                      message: <Short Message>
+                      code: PP0009
+                      details: <Detailed Message>

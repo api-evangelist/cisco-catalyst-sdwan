@@ -1,0 +1,803 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - Crash Log API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - Crash Log
+paths:
+  /device/crashlog:
+    get:
+      tags:
+      - Real-Time Monitoring - Crash Log
+      description: Get device crash logs from device
+      operationId: getDeviceCrashLogs
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device crash logs:
+                  description: Device crash logs
+                  value:
+                    data:
+                    - core-time: Tue Feb 15 04:14:38 UTC 2022
+                      vdevice-dataKey: 169.254.10.12-0
+                      vdevice-name: 169.254.10.12
+                      index: 0
+                      lastupdated: 1645064726542
+                      core-filename: vm5_htx_19219_20220215-041430-UTC.core.gz
+                      core-time-date: 1644898478000
+                      vdevice-host-name: vm5
+                    - core-time: Tue Feb 15 04:15:24 UTC 2022
+                      vdevice-dataKey: 169.254.10.12-1
+                      vdevice-name: 169.254.10.12
+                      index: 1
+                      lastupdated: 1645064726542
+                      core-filename: vm5_htx_19539_20220215-041515-UTC.core.gz
+                      core-time-date: 1644898524000
+                      vdevice-host-name: vm5
+                    - core-time: Tue Feb 15 05:55:04 UTC 2022
+                      vdevice-dataKey: 169.254.10.12-2
+                      vdevice-name: 169.254.10.12
+                      index: 2
+                      lastupdated: 1645064726542
+                      core-filename: vm5_htx_30530_20220215-055452-UTC.core.gz
+                      core-time-date: 1644904504000
+                      vdevice-host-name: vm5
+                    - core-time: Tue Feb 15 05:55:50 UTC 2022
+                      vdevice-dataKey: 169.254.10.12-3
+                      vdevice-name: 169.254.10.12
+                      index: 3
+                      lastupdated: 1645064726542
+                      core-filename: vm5_htx_31380_20220215-055542-UTC.core.gz
+                      core-time-date: 1644904550000
+                      vdevice-host-name: vm5
+                    - core-time: Tue Feb 15 06:21:52 UTC 2022
+                      vdevice-dataKey: 169.254.10.12-4
+                      vdevice-name: 169.254.10.12
+                      index: 4
+                      lastupdated: 1645064726542
+                      core-filename: vm5_htx_26426_20220215-062140-UTC.core.gz
+                      core-time-date: 1644906112000
+                      vdevice-host-name: vm5
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Device Monitoring-read,Device Monitoring-write,Device Reboot-read,Device Reboot-write,Software Upgrade > Edge-write,Software Upgrade > Edge-read,Software Upgrade > Controller-write,Software Upgrade > Controller-read,Software Upgrade-read,Software Upgrade-write,dca
+  /device/crashlog/details:
+    get:
+      tags:
+      - Real-Time Monitoring - Crash Log
+      description: Get device crash logs for all device
+      operationId: getAllDeviceCrashLogs
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device crash logs:
+                  description: Device crash logs
+                  value:
+                    data:
+                    - core-time: MonMay908:25:21UTC2022
+                      vdevice-name: 172.16.255.11
+                      index: 8
+                      lastupdated: 1652085255804
+                      core-filename: vm1-system-report_20220509-082507-UTC.tar.gz
+                      core-time-date: 1652084721000
+                      vdevice-host-name: vm1
+                    - core-time: MonMay910:36:57UTC2022
+                      vdevice-name: 172.16.255.15
+                      index: 7
+                      lastupdated: 1652093038703
+                      core-filename: vm5-system-report_20220509-103645-UTC.tar.gz
+                      core-time-date: 1652092617000
+                      vdevice-host-name: vm5
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Device Monitoring-read,Device Monitoring-write,Device Reboot-read,Device Reboot-write,Software Upgrade > Edge-write,Software Upgrade > Edge-read,Software Upgrade > Controller-write,Software Upgrade > Controller-read,Software Upgrade-read,Software Upgrade-write
+  /device/crashlog/log:
+    get:
+      tags:
+      - Real-Time Monitoring - Crash Log
+      description: Get device crash info from device
+      operationId: getDeviceCrashInformation
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      - name: filename
+        in: query
+        description: Crash file name
+        required: true
+        schema:
+          type: string
+          example: vm1-system-report_20220509-082507-UTC.tar.gz
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                Device crash info:
+                  description: Device crash info
+                  value: '/bootflash/.prst_sync/reload_info
+
+                    /bootflash/pd_info/
+
+                    /bootflash/pd_info/system_report_trigger.log
+
+                    /bootflash/pd_info/free_mb_output-20220509-082405-UTC.log
+
+                    /bootflash/pd_info/proc_cpuinfo-20220509-082405-UTC.log
+
+                    /bootflash/pd_info/proc_stat-20220509-082405-UTC.log
+
+                    /bootflash/pd_info/topnmemuse_output-20220509-082405-UTC.log
+
+                    /bootflash/pd_info/smap_output-20220509-082405-UTC.log
+
+                    /bootflash/pd_info/proc_interrupts-20220509-082405-UTC.log
+
+                    /bootflash/pd_info/proc_timer_list-20220509-082405-UTC.log
+
+                    /bootflash/pd_info/dmesg_output-20220509-082405-UTC.log
+
+                    /bootflash/pd_info/df_output-20220509-082405-UTC.log
+
+                    /bootflash/pd_info/proc_sched_debug-20220509-082405-UTC.log
+
+                    /bootflash/pd_info/proc_meminfo-20220509-082405-UTC.log
+
+                    /bootflash/pd_info/proc_loadavg-20220509-082405-UTC.log
+
+                    /bootflash/pd_info/top_output-20220509-082405-UTC.log
+
+                    /tmp/vm1-bootuplog-20220509-082507-UTC.log
+
+                    /tmp/cyan/cyan.log
+
+                    /tmp/tdlresolve/epoch_dir/
+
+                    /tmp/tdlresolve/epoch_dir/active
+
+                    /tmp/tdlresolve/epoch_dir/rp1current
+
+                    /tmp/tdlresolve/epoch_dir/rp0current
+
+                    /tmp/tdlresolve/epoch_dir/2022_05_09_05_04_5173.epoch
+
+                    /tmp/fp/trace/fman_fp_image_pman_F0-0.16083_2.20220509082503.bin
+
+                    /tmp/fp/trace/cpp_cp_svr_pman_F0-0.17117_2.20220509082454.bin
+
+                    /tmp/fp/trace/cpp_sp_svr_pman_F0-0.16525_2.20220509082431.bin
+
+                    /tmp/fp/trace/btman_F0-0.17522_1.20220509081731.bin
+
+                    /tmp/fp/trace/fman_fp_F0-0.16106_1.20220509070441.bin
+
+                    /tmp/fp/trace/cpp_cp_F0-0.17128_0.20220509050616.bin
+
+                    /tmp/fp/trace/btman_pman_F0-0.17512_1.20220509050615.bin
+
+                    /tmp/fp/trace/cman_fp_F0-0.17317_0.20220509050615.bin
+
+                    /tmp/fp/trace/cman_fp_pman_F0-0.17307_1.20220509050615.bin
+
+                    /tmp/fp/trace/cpp_cp_svr_pman_F0-0.17117_1.20220509050614.bin
+
+                    /tmp/fp/trace/cpp_driver_F0-0.16917_0.20220509050613.bin
+
+                    /tmp/fp/trace/cpp_driver_pman_F0-0.16904_1.20220509050612.bin
+
+                    /tmp/fp/trace/cpp_ha_F0-0.16736_0.20220509050612.bin
+
+                    /tmp/fp/trace/cpp_ha_top_level_server_pman_F0-0.16727_1.20220509050612.bin
+
+                    /tmp/fp/trace/cpp_sp_F0-0.16538_0.20220509050611.bin
+
+                    /tmp/fp/trace/cpp_sp_svr_pman_F0-0.16525_1.20220509050611.bin
+
+                    /tmp/fp/trace/qfpxucodexcxkv_F0-0.16334_0.20220509050611.bin
+
+                    /tmp/fp/trace/qfp_ucode_cxkv_pman_F0-0.16321_1.20220509050610.bin
+
+                    /tmp/fp/trace/fman_fp_image_pman_F0-0.16083_1.20220509050609.bin
+
+                    /tmp/fp/trace/pvp_F0-0.15610_0.20220509050607.bin
+
+                    /tmp/rp/trace/flashutil_R0-0.9480_0.20220509082506.bin
+
+                    /tmp/rp/trace/ndbmand_R0-0.20343_2.20220509082506.bin
+
+                    /tmp/rp/trace/ndbmand_R0-0.20343_1.20220509082506.bin
+
+                    /tmp/rp/trace/dmiauthd_pman_R0-0.20704_2.20220509082441.bin
+
+                    /tmp/rp/trace/dmiauthd_R0-0.20711_1.20220509082440.bin
+
+                    /tmp/rp/trace/cxpd_pman_R0-0.26162_2.20220509082431.bin
+
+                    /tmp/rp/trace/cfgmgr_pman_R0-0.23017_2.20220509082431.bin
+
+                    /tmp/rp/trace/ftmd_pman_R0-0.26542_2.20220509082431.bin
+
+                    /tmp/rp/trace/dbgd_pman_R0-0.26285_12.20220509082430.bin
+
+                    /tmp/rp/trace/ncsshd_bp_R0-0.20977_19.20220509082427.bin
+
+                    /tmp/rp/trace/ncsshd_bp_R0-0.20977_18.20220509082427.bin
+
+                    /tmp/rp/trace/plogd_R0-0.6454_15.20220509082427.bin
+
+                    /tmp/rp/trace/nginx_pman_R0-0.23917_3.20220509082420.bin
+
+                    /tmp/rp/trace/nginx_pman_R0-0.23917_2.20220509082420.bin
+
+                    /tmp/rp/trace/ofa_pman_R0-0.6786_1.20220509082414.bin
+
+                    /tmp/rp/trace/sessmgrd_pman_R0-0.14700_1.20220509082413.bin
+
+                    /tmp/rp/trace/install_mgr_pman_R0-0.16776_1.20220509082413.bin
+
+                    /tmp/rp/trace/flashutil_R0-0.6969_0.20220509082357.bin
+
+                    /tmp/rp/trace/brelay_R0-0.5073_0.20220509082312.bin
+
+                    /tmp/rp/trace/droputil_R0-0.7228_41.20220509082309.bin
+
+                    /tmp/rp/trace/vdaemon_pman_R0-0.23139_27.20220509082256.bin
+
+                    /tmp/rp/trace/brelay_R0-0.32610_0.20220509082120.bin
+
+                    /tmp/rp/trace/flashutil_R0-0.31555_0.20220509082116.bin
+
+                    /tmp/rp/trace/brelay_R0-0.28844_0.20220509082045.bin
+
+                    /tmp/rp/trace/in_telnetd_R0-0.28714_0.20220509082044.bin
+
+                    /tmp/rp/trace/plogd_R0-0.6454_14.20220509081556.bin
+
+                    /tmp/rp/trace/utd_R0-0.21164_0.20220509081511.bin
+
+                    /tmp/rp/trace/brelay_R0-0.17059_0.20220509081122.bin
+
+                    /tmp/rp/trace/IOSRP_R0-0.5718_7.20220509080821.bin
+
+                    /tmp/rp/trace/brelay_R0-0.12315_0.20220509080810.bin
+
+                    /tmp/rp/trace/in_telnetd_R0-0.12179_0.20220509080808.bin
+
+                    /tmp/rp/trace/brelay_R0-0.9102_0.20220509080557.bin
+
+                    /tmp/rp/trace/in_telnetd_R0-0.8987_0.20220509080557.bin
+
+                    /tmp/rp/trace/dbgd_pman_R0-0.26285_11.20220509080429.bin
+
+                    /tmp/rp/trace/utd_R0-0.5943_0.20220509080401.bin
+
+                    /tmp/rp/trace/brelay_R0-0.5873_0.20220509080400.bin
+
+                    /tmp/rp/trace/in_telnetd_R0-0.5740_0.20220509080359.bin
+
+                    /tmp/rp/trace/brelay_R0-0.4593_0.20220509080339.bin
+
+                    /tmp/rp/trace/in_telnetd_R0-0.4475_0.20220509080338.bin
+
+                    /tmp/rp/trace/ncsshd_bp_R0-0.20977_17.20220509080331.bin
+
+                    /tmp/rp/trace/netconfxsubsys_R0-0.25635_0.20220509075716.bin
+
+                    /tmp/rp/trace/ncsshd_R0-0.25630_0.20220509075714.bin
+
+                    /tmp/rp/trace/ncsshd_R0-0.23604_0.20220509075527.bin
+
+                    /tmp/rp/trace/ncsshd_R0-0.20871_0.20220509075321.bin
+
+                    /tmp/rp/trace/utd_R0-0.20557_0.20220509075306.bin
+
+                    /tmp/rp/trace/utf_R0-0.9196_1.20220509074907.bin
+
+                    /tmp/rp/trace/IOSRP_R0-0.5718_6.20220509074231.bin
+
+                    /tmp/rp/trace/btman_R0-0.9196_1.20220509072434.bin
+
+                    /tmp/rp/trace/vdaemon_R0-0.23144_1.20220509070058.bin
+
+                    /tmp/rp/trace/fman_rp_R0-0.7340_1.20220509065929.bin
+
+                    /tmp/rp/trace/ttm_R0-0.26803_0.20220509050940.bin
+
+                    /tmp/rp/trace/ttmd_pman_R0-0.26797_1.20220509050939.bin
+
+                    /tmp/rp/trace/ompd_R0-0.26673_0.20220509050939.bin
+
+                    /tmp/rp/trace/ompd_pman_R0-0.26667_1.20220509050938.bin
+
+                    /tmp/rp/trace/ftmd_R0-0.26547_0.20220509050937.bin
+
+                    /tmp/rp/trace/ftmd_pman_R0-0.26542_1.20220509050937.bin
+
+                    /tmp/rp/trace/fpmd_R0-0.26411_0.20220509050937.bin
+
+                    /tmp/rp/trace/fpmd_pman_R0-0.26405_1.20220509050936.bin
+
+                    /tmp/rp/trace/dbgd_R0-0.26292_0.20220509050936.bin
+
+                    /tmp/rp/trace/cxpd_R0-0.26200_0.20220509050936.bin
+
+                    /tmp/rp/trace/cxpd_pman_R0-0.26162_1.20220509050933.bin
+
+                    /tmp/rp/trace/nginx_pman_R0-0.23917_1.20220509050911.bin
+
+                    /tmp/rp/trace/cfgmgr_R0-0.23065_0.20220509050811.bin
+
+                    /tmp/rp/trace/cfgmgr_pman_R0-0.23017_1.20220509050809.bin
+
+                    /tmp/rp/trace/linux_iosd_image_pman_R0-0.5705_2.20220509050747.bin
+
+                    /tmp/rp/trace/vip_confd_startup_sh_pman_R0-0.21463_0.20220509050629.bin
+
+                    /tmp/rp/trace/ncsshd_R0-0.21219_0.20220509050628.bin
+
+                    /tmp/rp/trace/ncsshd_pman_R0-0.21213_0.20220509050628.bin
+
+                    /tmp/rp/trace/pubd_R0-0.20002_0.20220509050628.bin
+
+                    /tmp/rp/trace/pvp_R0-0.5111_1.20220509050628.bin
+
+                    /tmp/rp/trace/ndbmand_R0-0.20343_0.20220509050627.bin
+
+                    /tmp/rp/trace/ncsshd_bp_pman_R0-0.20969_0.20220509050627.bin
+
+                    /tmp/rp/trace/dmiauthd_pman_R0-0.20704_1.20220509050626.bin
+
+                    /tmp/rp/trace/dmiauthd_R0-0.20711_0.20220509050626.bin
+
+                    /tmp/rp/trace/inter_fru_1_255-F0-0.0.20220509050626.bin
+
+                    /tmp/rp/trace/ndbmand_pman_R0-0.20333_0.20220509050625.bin
+
+                    /tmp/rp/trace/pubd_pman_R0-0.19984_0.20220509050624.bin
+
+                    /tmp/rp/trace/pttcd_R0-0.19704_0.20220509050624.bin
+
+                    /tmp/rp/trace/pttcd_pman_R0-0.19672_0.20220509050624.bin
+
+                    /tmp/rp/trace/periodic_sh_pman_R0-0.19258_0.20220509050621.bin
+
+                    /tmp/rp/trace/sort_files_by_inode_sh_pman_R0-0.18984_0.20220509050620.bin
+
+                    /tmp/rp/trace/cedge_tanman_sh_pman_R0-0.18381_0.20220509050619.bin
+
+                    /tmp/rp/trace/reflector_R0-0.7564_1.20220509050619.bin
+
+                    /tmp/rp/trace/cli_agent_R0-0.8908_0.20220509050618.bin
+
+                    /tmp/rp/trace/cmand_R0-0.8532_0.20220509050618.bin
+
+                    /tmp/rp/trace/dbm_R0-0.8111_0.20220509050617.bin
+
+                    /tmp/rp/trace/smand_R0-0.6034_1.20220509050616.bin
+
+                    /tmp/rp/trace/emd_R0-0.7821_0.20220509050616.bin
+
+                    /tmp/rp/trace/hman_R0-0.7098_0.20220509050614.bin
+
+                    /tmp/rp/trace/install_mgr_R0-0.16783_0.20220509050612.bin
+
+                    /tmp/rp/trace/install_mgr_pman_R0-0.16776_0.20220509050612.bin
+
+                    /tmp/rp/trace/sec_key_agent_R0-0.6957_0.20220509050610.bin
+
+                    /tmp/rp/trace/lman_R0-0.16040_0.20220509050609.bin
+
+                    /tmp/rp/trace/lman_pman_R0-0.16028_1.20220509050608.bin
+
+                    /tmp/rp/trace/ofa_R0-0.6790_0.20220509050608.bin
+
+                    /tmp/rp/trace/smd_R0-0.14706_0.20220509050607.bin
+
+                    /tmp/rp/trace/repm_R0-0.6188_0.20220509050606.bin
+
+                    /tmp/rp/trace/sdavc_proxy_R0-0.15234_0.20220509050604.bin
+
+                    /tmp/rp/trace/sdavc_proxy_pman_R0-0.15219_1.20220509050604.bin
+
+                    /tmp/rp/trace/sessmgrd_pman_R0-0.14700_0.20220509050602.bin
+
+                    /tmp/rp/trace/vman_R0-0.14560_0.20220509050602.bin
+
+                    /tmp/rp/trace/vman_pman_R0-0.14542_1.20220509050601.bin
+
+                    /tmp/rp/trace/psd_R0-0.5391_0.20220509050558.bin
+
+                    /tmp/rp/trace/selinux_smu_R0-0.13554_0.20220509050556.bin
+
+                    /tmp/rp/trace/kernel_ftrace_log_R0-0.13535_0.20220509050556.bin
+
+                    /tmp/rp/trace/btman_pman_R0-0.9189_1.20220509050455.bin
+
+                    /tmp/rp/trace/bhytoolsd_R0-0.6308_0.20220509050455.bin
+
+                    /tmp/rp/trace/cli_agent_pman_R0-0.8886_0.20220509050447.bin
+
+                    /tmp/rp/trace/binos_R0-0.8442_0.20220509050436.bin
+
+                    /tmp/rp/trace/dbm_pman_R0-0.8103_0.20220509050428.bin
+
+                    /tmp/rp/trace/iptbl_R0-0.8093_0.20220509050428.bin
+
+                    /tmp/rp/trace/emd_pman_R0-0.7817_1.20220509050424.bin
+
+                    /tmp/rp/trace/fman_rp_pman_R0-0.7329_1.20220509050415.bin
+
+                    /tmp/rp/trace/hman_pman_R0-0.7093_1.20220509050413.bin
+
+                    /tmp/rp/trace/keyman_pman_R0-0.6954_1.20220509050409.bin
+
+                    /tmp/rp/trace/ofa_pman_R0-0.6786_0.20220509050405.bin
+
+                    /tmp/rp/trace/oom_R0-0.6535_0.20220509050400.bin
+
+                    /tmp/rp/trace/plogd_pman_R0-0.6432_0.20220509050357.bin
+
+                    /tmp/rp/trace/repm_pman_R0-0.6181_0.20220509050352.bin
+
+                    /tmp/rp/trace/smand_pman_R0-0.6030_1.20220509050349.bin
+
+                    /tmp/rp/trace/psd_pman_R0-0.5318_1.20220509050343.bin
+
+                    /tmp/rp/trace/psvp_R0-0.5042_0.20220509050336.bin
+
+                    /harddisk/tracelogs/cia-netconf-trace.20220509_080125.gz
+
+                    /harddisk/tracelogs/cyaninit_R0-0.5010_0.20220509050340.bin.gz
+
+                    /harddisk/tracelogs/cia-netconf-trace.20220509_072735.gz
+
+                    /harddisk/tracelogs/cia-netconf-trace.20220509_080738.gz
+
+                    /harddisk/tracelogs/dmi_ports_fetch_R0-0.19770_0.20220509050041.bin.gz
+
+                    /harddisk/tracelogs/cia-netconf-trace.20220509_075711.gz
+
+                    /harddisk/tracelogs/cia-netconf-trace.20220509_074912.gz
+
+                    /harddisk/tracelogs/cia-netconf-trace.20220509_070208.gz
+
+                    /harddisk/tracelogs/btman_rotate_immediate_R0-0.20030_0.20220509050102.bin.gz
+
+                    /harddisk/tracelogs/btman_rotate_immediate_R0-0.19856_0.20220509050042.bin.gz
+
+                    /harddisk/tracelogs/system_shell_R0-0.9105_0.20220509080558.bin
+
+                    /harddisk/tracelogs/cia-netconf-trace.20220509_073035.gz
+
+                    /harddisk/tracelogs/cia-netconf-trace.20220509_070720.gz
+
+                    /harddisk/tracelogs/cia-netconf-trace.20220509_080023.gz
+
+                    /harddisk/tracelogs/cia-netconf-trace.20220509_073738.gz
+
+                    /harddisk/tracelogs/utf_R0-0.9196_0.20220509050620.bin.gz
+
+                    /tmp/maroon_stats/pman_rp_0_7093.maroon
+
+                    /tmp/maroon_stats/pman_rp_0_20333.maroon
+
+                    /tmp/maroon_stats/pman_fp_0_16083.maroon
+
+                    /tmp/maroon_stats/pman_fp_0_17117.maroon
+
+                    /tmp/maroon_stats/pman_rp_0_20704.maroon
+
+                    /tmp/maroon_stats/pman_rp_0_21463.maroon
+
+                    /tmp/maroon_stats/pman_rp_0_14542.maroon
+
+                    /tmp/maroon_stats/pman_rp_0_21213.maroon
+
+                    /tmp/maroon_stats/pman_rp_0_26162.maroon
+
+                    /tmp/maroon_stats/pman_fp_0_16525.maroon
+
+                    /tmp/maroon_stats/pman_rp_0_26667.maroon
+
+                    /tmp/maroon_stats/pman_fp_0_16904.maroon
+
+                    /tmp/maroon_stats/pman_rp_0_26542.maroon
+
+                    /tmp/maroon_stats/pman_rp_0_23017.maroon
+
+                    /tmp/maroon_stats/pman_rp_0_26405.maroon
+
+                    /tmp/maroon_stats/pman_rp_0_26797.maroon
+
+                    /tmp/maroon_stats/pman_rp_0_6432.maroon
+
+                    /tmp/maroon_stats/pman_rp_0_20969.maroon
+
+                    /tmp/maroon_stats/pman_rp_0_23917.maroon
+
+                    /tmp/maroon_stats/pman_fp_0_16321.maroon
+
+                    /tmp/maroon_stats/pman_fp_0_17307.maroon
+
+                    /tmp/maroon_stats/pman_fp_0_16727.maroon
+
+                    /tmp/maroon_stats/pman_fp_0_17512.maroon
+
+                    /tmp/maroon_stats/pman_rp_0_5705.maroon
+
+                    /tmp/maroon_stats/pman_rp_0_6030.maroon
+
+                    /tmp/maroon_stats/pman_rp_0_5318.maroon
+
+                    /tmp/maroon_stats/pman_rp_0_19984.maroon
+
+                    /tmp/maroon_stats/pman_rp_0_19258.maroon
+
+                    /tmp/maroon_stats/pman_rp_0_7329.maroon
+
+                    /tmp/maroon_stats/pman_rp_0_8886.maroon
+
+                    /tmp/maroon_stats/pman_rp_0_6954.maroon
+
+                    /tmp/maroon_stats/pman_rp_0_6181.maroon
+
+                    /tmp/maroon_stats/pman_rp_0_6786.maroon
+
+                    /tmp/maroon_stats/pman_rp_0_9189.maroon
+
+                    /tmp/maroon_stats/pman_rp_0_8103.maroon
+
+                    /tmp/maroon_stats/pman_rp_0_7817.maroon
+
+                    /tmp/maroon_stats/pman_rp_0_14700.maroon
+
+                    /tmp/maroon_stats/pman_rp_0_15219.maroon
+
+                    /tmp/maroon_stats/pman_rp_0_18381.maroon
+
+                    /tmp/maroon_stats/pman_rp_0_18984.maroon
+
+                    /tmp/maroon_stats/pman_rp_0_16028.maroon
+
+                    /tmp/maroon_stats/pman_rp_0_16776.maroon
+
+                    /tmp/maroon_stats/pman_rp_0_19672.maroon
+
+                    /tmp/maroon_stats/pman_rp_0_8528.maroon
+
+                    /tmp/maroon_stats/rotee_rp_0_13790.maroon
+
+                    /tmp/maroon_stats/pman_rp_0_26285.maroon
+
+                    /tmp/maroon_stats/ucode_pkt_PPE0_fp_0_16334.maroon
+
+                    /tmp/maroon_stats/keyman_rp_0_6957.maroon
+
+                    /tmp/maroon_stats/fpmd_rp_0_26411.maroon
+
+                    /tmp/maroon_stats/cxpd_rp_0_26200.maroon
+
+                    /tmp/maroon_stats/dbgd_rp_0_26292.maroon
+
+                    /tmp/maroon_stats/ompd_rp_0_26673.maroon
+
+                    /tmp/maroon_stats/ttmd_rp_0_26803.maroon
+
+                    /tmp/maroon_stats/ftmd_rp_0_26547.maroon
+
+                    /tmp/maroon_stats/pman_rp_0_23139.maroon
+
+                    /tmp/maroon_stats/cfgmgr_rp_0_23065.maroon
+
+                    /tmp/maroon_stats/vdaemon_rp_0_23144.maroon
+
+                    /tmp/maroon_stats/dmiauthd_rp_0_20711.maroon
+
+                    /tmp/maroon_stats/pubd_rp_0_20002.maroon
+
+                    /tmp/maroon_stats/ndbmand_rp_0_20343.maroon
+
+                    /tmp/maroon_stats/ncsshd_bp_rp_0_20977.maroon
+
+                    /tmp/maroon_stats/rotee_FRU_SLOT_NUM_7228.maroon
+
+                    /tmp/maroon_stats/install_mgr_rp_0_16783.maroon
+
+                    /tmp/maroon_stats/lman_rp_0_16040.maroon
+
+                    /tmp/maroon_stats/btman_fp_0_17522.maroon
+
+                    /tmp/maroon_stats/cman_fp_fp_0_17317.maroon
+
+                    /tmp/maroon_stats/cpp_cp_svr_fp_0_17128.maroon
+
+                    /tmp/maroon_stats/vman_rp_0_14560.maroon
+
+                    /tmp/maroon_stats/cpp_driver_fp_0_16917.maroon
+
+                    /tmp/maroon_stats/cpp_sp_svr_fp_0_16538.maroon
+
+                    /tmp/maroon_stats/cpp_ha_top_leve_fp_0_16736.maroon
+
+                    /tmp/maroon_stats/fman_fp_image_fp_0_16106.maroon
+
+                    /tmp/maroon_stats/cli_agent_rp_0_8908.maroon
+
+                    /tmp/maroon_stats/dbm_rp_0_8111.maroon
+
+                    /tmp/maroon_stats/linux_iosd-imag_rp_0_5718.maroon
+
+                    /tmp/maroon_stats/btman_rp_0_9196.maroon
+
+                    /tmp/maroon_stats/fman_rp_rp_0_7340.maroon
+
+                    /tmp/maroon_stats/cmand_rp_0_8532.maroon
+
+                    /tmp/maroon_stats/emd_rp_0_7821.maroon
+
+                    /tmp/maroon_stats/plogd_rp_0_6454.maroon
+
+                    /tmp/maroon_stats/hman_rp_0_7098.maroon
+
+                    /tmp/maroon_stats/repm_rp_0_6188.maroon
+
+                    /tmp/maroon_stats/smand_rp_0_6034.maroon
+
+                    /tmp/maroon_stats/psd_rp_0_5391.maroon
+
+                    /tmp/maroon_stats/sessmgrd_rp_0_14706.maroon
+
+                    /var/log/audit/audit.log'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write
+  /device/crashlog/synced:
+    get:
+      tags:
+      - Real-Time Monitoring - Crash Log
+      description: Get device crash logs synchronously from device
+      operationId: getDeviceCrashLogsSynced
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device crash logs:
+                  description: Device crash logs
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.11
+                      createTimeStamp: 1649439701737
+                      index: 0
+                      core-filename: vm1-system-report_20220407-031603-UTC.tar.gz
+                      vdevice-host-name: vm1
+                      core-time: ThuApr703:16:10UTC2022
+                      vdevice-dataKey: 172.16.255.11-0
+                      '@rid': 855
+                      vmanage-system-ip: 172.16.255.11
+                      lastupdated: 1649769370563
+                      core-time-date: 1649301370000
+                    - vdevice-name: 172.16.255.11
+                      createTimeStamp: 1651156427829
+                      index: 1
+                      core-filename: vm1-system-report_20220428-124017-UTC.tar.gz
+                      vdevice-host-name: vm1
+                      core-time: ThuApr2812:40:32UTC2022
+                      vdevice-dataKey: 172.16.255.11-1
+                      '@rid': 1224
+                      vmanage-system-ip: 172.16.255.11
+                      lastupdated: 1651156427519
+                      core-time-date: 1651149632000
+                    - vdevice-name: 172.16.255.11
+                      createTimeStamp: 1651156431854
+                      index: 2
+                      core-filename: vm1-system-report_20220428-125006-UTC.tar.gz
+                      vdevice-host-name: vm1
+                      core-time: ThuApr2812:50:11UTC2022
+                      vdevice-dataKey: 172.16.255.11-2
+                      '@rid': 1225
+                      vmanage-system-ip: 172.16.255.11
+                      lastupdated: 1651156427519
+                      core-time-date: 1651150211000
+                    - vdevice-name: 172.16.255.11
+                      createTimeStamp: 1651708111493
+                      index: 4
+                      core-filename: vm1_ftmd_25306_20220504-112749-UTC.core.gz
+                      vdevice-host-name: vm1
+                      core-time: WedMay411:28:57UTC2022
+                      vdevice-dataKey: 172.16.255.11-4
+                      '@rid': 1250
+                      vmanage-system-ip: 172.16.255.11
+                      lastupdated: 1651708111141
+                      core-time-date: 1651663737000
+                    - vdevice-name: 172.16.255.11
+                      createTimeStamp: 1651505130582
+                      index: 3
+                      core-filename: vm1-system-report_20220504-040557-UTC.tar.gz
+                      vdevice-host-name: vm1
+                      core-time: WedMay404:06:43UTC2022
+                      vdevice-dataKey: 172.16.255.11-3
+                      '@rid': 1463
+                      vmanage-system-ip: 172.16.255.11
+                      lastupdated: 1651637687479
+                      core-time-date: 1651637203000
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Device Monitoring-read,Device Monitoring-write,Device Reboot-read,Device Reboot-write,Software Upgrade > Edge-write,Software Upgrade > Edge-read,Software Upgrade > Controller-write,Software Upgrade > Controller-read,Software Upgrade-read,Software Upgrade-write

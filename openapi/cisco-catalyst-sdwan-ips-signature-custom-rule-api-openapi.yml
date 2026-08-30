@@ -1,0 +1,131 @@
+openapi: 3.2.0
+info:
+  title: Others IPS Signature - Custom Rule API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: IPS Signature - Custom Rule
+paths:
+  /signature-set/{signatureSetId}/custom-rule:
+    post:
+      tags:
+      - IPS Signature - Custom Rule
+      summary: create custom signature
+      operationId: createCustomSignature
+      parameters:
+      - name: signatureSetId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                associatedRuleGroups:
+                  type: array
+                  items:
+                    type: string
+                data:
+                  type: string
+                  example: alert tcp $EXTERNAL_NET $HTTP_PORTS -> $HOME_NET any ( msg:"BROWSER-CHROME Apple Safari/Google Chrome Webkit memory corruption attempt"; flow:to_client,established; file_data; content:"|3C|dialog|20|style|3D 27|position|3A|relative|27 3E|",fast_pattern,nocase; content:"|3C|h|20|style|3D 27|outline|2D|style|3A|auto|27 3E|"; metadata:policy max-detect-ips drop; service:http; reference:bugtraq,43078; reference:cve,2010-1813; classtype:attempted-user; sid:19005; rev:9; )
+              $$ref: '#/components/schemas/CreateCustomSignatureRequestPayload'
+        required: true
+      responses:
+        '200':
+          description: success response message
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: c8a4164a-4778-4a7e-8d93-45f78f387010
+                  message:
+                    type: string
+                    example: request processed successfully
+                  success:
+                    type: boolean
+                    example: true
+                $$ref: '#/components/schemas/DefaultPostSuccessResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+  /signature-set/{signatureSetId}/custom-rule/{ruleId}:
+    put:
+      tags:
+      - IPS Signature - Custom Rule
+      summary: update custom signature
+      operationId: updateCustomSignature
+      parameters:
+      - name: signatureSetId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: ruleId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                associatedRuleGroups:
+                  type: array
+                  items:
+                    type: string
+                data:
+                  type: string
+                  example: alert tcp $EXTERNAL_NET $HTTP_PORTS -> $HOME_NET any ( msg:"BROWSER-CHROME Apple Safari/Google Chrome Webkit memory corruption attempt"; flow:to_client,established; file_data; content:"|3C|dialog|20|style|3D 27|position|3A|relative|27 3E|",fast_pattern,nocase; content:"|3C|h|20|style|3D 27|outline|2D|style|3A|auto|27 3E|"; metadata:policy max-detect-ips drop; service:http; reference:bugtraq,43078; reference:cve,2010-1813; classtype:attempted-user; sid:19005; rev:9; )
+              $$ref: '#/components/schemas/CreateCustomSignatureRequestPayload'
+        required: true
+      responses:
+        '200':
+          description: success response message
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: request processed successfully
+                  success:
+                    type: boolean
+                    example: true
+                $$ref: '#/components/schemas/DefaultPutSuccessResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden

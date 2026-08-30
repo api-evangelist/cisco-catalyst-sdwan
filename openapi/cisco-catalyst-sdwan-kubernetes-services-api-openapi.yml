@@ -1,0 +1,226 @@
+openapi: 3.2.0
+info:
+  title: Others Kubernetes Services API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Kubernetes Services
+paths:
+  /app-registry/app/kubernetesapps:
+    get:
+      tags:
+      - Kubernetes Services
+      description: Obtain all services associated with clusters
+      operationId: getKubernetesServices
+      parameters:
+      - name: isCached
+        in: query
+        schema:
+          type: boolean
+          default: false
+      - name: offset
+        in: query
+        description: Pagination offset
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: limit
+        in: query
+        description: Pagination limit
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    clusterName:
+                      type: string
+                      example: someClusterName
+                    ip:
+                      type: array
+                      items:
+                        type: string
+                    name:
+                      type: string
+                      example: serviceName
+                    namespace:
+                      type: string
+                      example: awsNamespace
+                    port:
+                      type: array
+                      items:
+                        type: string
+                    protocol:
+                      type: string
+                      example: tcp
+                    serverName:
+                      type: array
+                      items:
+                        type: string
+                  $$ref: '#/components/schemas/DiscoveredServices'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /app-registry/clusters:
+    post:
+      tags:
+      - Kubernetes Services
+      description: Manually upload kubeConfig
+      operationId: postCluster
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    get:
+      tags:
+      - Kubernetes Services
+      description: Obtain all clusters with associated cloud accounts
+      operationId: getKubernetesCluster
+      parameters:
+      - name: isCached
+        in: query
+        schema:
+          type: boolean
+          default: true
+      - name: offset
+        in: query
+        description: Pagination offset
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: limit
+        in: query
+        description: Pagination limit
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    accountId:
+                      type: string
+                      example: awsAccountId
+                    accountName:
+                      type: string
+                      example: aws_account1
+                    accountType:
+                      type: string
+                      example: AWS
+                    discoveryStatus:
+                      type: boolean
+                      example: true
+                    expiration:
+                      type: string
+                      example: Dec 21, 2035
+                    name:
+                      type: string
+                      example: clusterName
+                  $$ref: '#/components/schemas/ClusterProperties'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /app-registry/clusters/{id}:
+    put:
+      tags:
+      - Kubernetes Services
+      description: Edit the discovery status of a cluster
+      operationId: editKubernetesCluster
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: enable or disable Cluster Discovery Status
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                discoveryStatus:
+                  type: boolean
+                  example: true
+              $$ref: '#/components/schemas/PutProperties'
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+      - Kubernetes Services
+      description: Delete manually uploaded cluster
+      operationId: deleteKubernetesCluster
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

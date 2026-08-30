@@ -1,0 +1,238 @@
+openapi: 3.2.0
+info:
+  title: Others Utility - Logging API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Utility - Logging
+paths:
+  /util/logfile/appserver:
+    get:
+      tags:
+      - Utility - Logging
+      description: Lists content of log file. This API accepts content type as text/plain. It is mandatory to provide response content type. Any other content type would result in empty response.
+      operationId: listLogFileDetails
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: object
+              example: '14-Mar-2024 00:00:00,001 UTC INFO  [] [vm12] [ClassName] (ThreadName) || test log message
+
+                14-Mar-2024 00:00:00,002 UTC INFO  [] [vm12] [ClassName] (ThreadName) || test log message 2
+
+                14-Mar-2024 00:00:00,003 UTC INFO  [] [vm12] [ClassName] (ThreadName) || test log message 3'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /util/logfile/appserver/lastnlines:
+    get:
+      tags:
+      - Utility - Logging
+      description: List last N lines of log file. This API accepts content type as text/plain. It is mandatory to provide response content type. Any other content type would result in empty response.
+      operationId: listVManageServerLogLastNLines
+      parameters:
+      - name: lines
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 100
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: object
+              example: '14-Mar-2024 00:00:00,001 UTC INFO  [] [vm12] [ClassName] (ThreadName) || test log message
+
+                14-Mar-2024 00:00:00,002 UTC INFO  [] [vm12] [ClassName] (ThreadName) || test log message 2
+
+                14-Mar-2024 00:00:00,003 UTC INFO  [] [vm12] [ClassName] (ThreadName) || test log message 3'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /util/logging/configurations:
+    get:
+      tags:
+      - Utility - Logging
+      description: List logger configuration
+      operationId: listConfigurations
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  loggerName:
+                    type: string
+                    example: vmanage-server
+                  sizeLimit:
+                    type: string
+                    example: 16MB
+                $$ref: '#/components/schemas/Configurations'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /util/logging/debuglog:
+    post:
+      tags:
+      - Utility - Logging
+      description: Test whether logging works
+      operationId: debugLog
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                loggerName:
+                  type: string
+                logMessage:
+                  type: string
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /util/logging/level:
+    post:
+      tags:
+      - Utility - Logging
+      description: Set log level for logger
+      operationId: setLogLevel
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                loggerName:
+                  type: string
+                logLevel:
+                  type: string
+        required: true
+      responses:
+        '200':
+          description: Set logger
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /util/logging/loggers:
+    get:
+      tags:
+      - Utility - Logging
+      description: List loggers
+      operationId: listLoggers
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    isDebugEnabled:
+                      type: boolean
+                    name:
+                      type: string
+                      example: com.cisco.example.package
+                  $$ref: '#/components/schemas/Loggers'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /util/logging/updateConfiguration:
+    post:
+      tags:
+      - Utility - Logging
+      description: Update logger configuration for rollover size and max file number
+      operationId: updateLoggerConfiguration
+      parameters:
+      - name: loggerName
+        in: query
+        description: Logger Configuration
+        required: true
+        schema:
+          type: string
+          enum:
+          - All
+          - vmanage-server
+          - vmanage-server-statistics
+          - vmanage-server-olap
+          - vmanage-server-deviceconfig-template
+          - vmanage-server-device-config
+      - name: sizeLimit
+        in: query
+        description: File size, unit is MB, range (16 - 250)
+        schema:
+          maximum: 250
+          minimum: 16
+          type: integer
+          format: int64
+        example: 16
+      - name: reset
+        in: query
+        description: Reset to default
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Update Configuration
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

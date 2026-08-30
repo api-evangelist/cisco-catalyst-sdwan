@@ -1,0 +1,164 @@
+openapi: 3.2.0
+info:
+  title: Others File based RealTime Data Collection - Get Data Collection status for Device UUID API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: File based RealTime Data Collection - Get Data Collection status for Device UUID
+paths:
+  /device/file-based/data-collection/all-statuses/{deviceUUID}:
+    get:
+      tags:
+      - File based RealTime Data Collection - Get Data Collection status for Device UUID
+      description: Get Data Collection status for given Device UUID
+      operationId: getDataCollectionStatusForDevice
+      parameters:
+      - name: deviceUUID
+        in: path
+        description: Device UUID
+        required: true
+        schema:
+          type: string
+        example: C8K-5e87e5c3-0923-4364-a729-d65d40298d76
+      responses:
+        '200':
+          description: All data collection statuses for given device
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                All data collection statuses for given device:
+                  description: All data collection statuses for given device
+                  value:
+                  - deviceUUID: C8K-10a453ab-e30b-4476-aa98-bc5ded7298ee
+                    deviceSystemIP: 172.16.255.15
+                    collectionSubStatus: file-downloaded-to-vmanage
+                    statsCommand: advertised-routes
+                    requestEndTime: 1661066092631
+                    requestUUID: 5fe0ec18-6da3-471f-aad7-03fc94b08a83
+                    requestStartTime: '1661065501749'
+                    requestedFileFormat: csv-file
+                    detailedMessage: Successfully downloaded file from device
+                    collectionMainStatus: success
+                    lastStateChangedTime: 1661066092544
+                    stateChangeLogs:
+                    - changeTime: 1661066092544
+                      detailedMessage: Successfully downloaded file from device
+                      state: file-downloaded-to-vmanage
+                    - changeTime: 1661066087249
+                      detailedMessage: Published to destination vManage for Downloading generated file
+                      state: publised-for-file-download
+                    - changeTime: 1661066087031
+                      detailedMessage: Device generated file
+                      state: file-generated
+                    - changeTime: 1661065506807
+                      detailedMessage: RPC sent to Device for file generation
+                      state: device-notified
+                    - changeTime: 1661065501797
+                      detailedMessage: Published to destination vManage for sending RPC request
+                      state: publised-for-rpc-request
+                  - deviceUUID: C8K-10a453ab-e30b-4476-aa98-bc5ded7298ee
+                    deviceSystemIP: 172.16.255.15
+                    collectionSubStatus: file-downloaded-to-vmanage
+                    statsCommand: advertised-routes
+                    requestEndTime: 1661066092631
+                    requestUUID: 893456sdf-6da3-471f-aad7-03fc94b08a83
+                    requestStartTime: '16610656756789'
+                    requestedFileFormat: json-file
+                    detailedMessage: Successfully downloaded file from device
+                    collectionMainStatus: success
+                    lastStateChangedTime: 1661066092544
+                    stateChangeLogs:
+                    - changeTime: 1661066092544
+                      detailedMessage: Successfully downloaded file from device
+                      state: file-downloaded-to-vmanage
+                    - changeTime: 1661066087249
+                      detailedMessage: Published to destination vManage for Downloading generated file
+                      state: publised-for-file-download
+                    - changeTime: 1661066087031
+                      detailedMessage: Device generated file
+                      state: file-generated
+                    - changeTime: 1661065506807
+                      detailedMessage: RPC sent to Device for file generation
+                      state: device-notified
+                    - changeTime: 1661065501797
+                      detailedMessage: Published to destination vManage for sending RPC request
+                      state: publised-for-rpc-request
+                  $$ref: '#/components/examples/ComViptelaVmanageServerFilebasedRealtimeDatacollectionDatacollectionapiResponseExampleAllstatuses200'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorMessage:
+                    type: string
+                    description: Message about bad request or parameters errors
+                  errorType:
+                    type: string
+                    description: Type of error
+                  operation:
+                    type: string
+                    description: Operation title
+                $$ref: '#/components/schemas/HttpError'
+              examples:
+                400 - Bad Request or Parameters:
+                  description: 400 - Bad Request or Parameters
+                  value:
+                    operation: Initiate file generation
+                    errorType: Invalid Payload or Parameter(s)
+                    errorMessage: Empty/Invalid Device IP
+                  $$ref: '#/components/examples/ComViptelaVmanageServerFilebasedRealtimeDatacollectionDatacollectionapiResponseExampleAllstatuses400'
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorMessage:
+                    type: string
+                    description: Message about bad request or parameters errors
+                  errorType:
+                    type: string
+                    description: Type of error
+                  operation:
+                    type: string
+                    description: Operation title
+                $$ref: '#/components/schemas/HttpError'
+              examples:
+                500 - Internal Server Error:
+                  description: 500 - Internal Server Error
+                  value:
+                    operation: 'Download generated file for UUID : b81467bb-9827-46a0-8db8-f742d4d91c0a'
+                    errorType: General or Internal Error
+                    errorMessage: Data Collection state is in-progress, Cannot download file at this moment
+                  $$ref: '#/components/examples/ComViptelaVmanageServerFilebasedRealtimeDatacollectionDatacollectionapiResponseExampleAllstatuses500'
+      x-roles-required: System-read,System-write

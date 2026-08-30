@@ -1,0 +1,460 @@
+openapi: 3.2.0
+info:
+  title: Others IDP Certificate Management API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: IDP Certificate Management
+paths:
+  /idpcertificate:
+    get:
+      tags:
+      - IDP Certificate Management
+      summary: Retrieves IDP Certificate Details
+      description: Retrieves IDP Certificate Details
+      operationId: getCertificateDetails
+      parameters:
+      - name: download
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                IDP Certificate Details Response:
+                  description: IDP Certificate Details Response
+                  value:
+                    company_name: abc
+                    org_unit: abc
+                    org: abc
+                    location: abc
+                    state: abc
+                    country: US
+                    signerType: self-signed
+                    notBefore: 1755626328000
+                    notAfter: 1913392728000
+                    certificateDetails: '-----BEGIN CERTIFICATE-----
+
+                      MIIDrjCCApagAwIBAgIgABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890abcdefghij
+
+                      DQYJKoZIhvcNAQELBQAwgYoxDDAKBgNVBAYTA1VTQTELMAkGA1UECBMCYWJJMQ0w
+
+                      CwYDVQQHEwRhYmMxDDAKBgNVBAoTA2FiYzEMMAoGA1UECxMDYWJjMQwwCgYDVQQD
+
+                      EwNhYmMwHhcNMjUwODE5MTc1ODQ4WhcNMzAwODE5MTc1ODQ4WjCBijEMMAoGA1UE
+
+                      BhMDVVNBMQswCQYDVQQIEwJhYmMxDTALBgNVBAcTBGFiYzEMMAoGA1UEChMDYWJj
+
+                      MQwwCgYDVQQLEwNhYmMxDDAKBgNVBAMTA2FiYzCCASIwDQYJKoZIhvcNAQEBBQAD
+
+                      ggEPADCCAQoCggEBAOJMznFNHIxnXok2yaV3Ll3qhrCjHJcm5fPPtFwweub3rWoY
+
+                      DD/1hXfpcD1T59uJGqq2JO9kMEvTuHLoe2+J9WWGo+W21iPICpSfIBMcrNar20i4
+
+                      aYaID5N5ehRbd/GBkxRdUcpZKPLMkB0wFjU4XGB642LInxA6RLCpX+gyu3ytJ4Dl
+
+                      8sIWLCSwwiiKYuLEGF6XEDXhfcYZ/F4TmsJOMcCypcw40hsoeQzb0W2oXPBSsj5x
+
+                      x4bZm/YFDBcb1yex+QhpXYN3WGEWLMuYSM29m1et9gLynfBsdn3aB278r/Xgyvq5
+
+                      kcz6FdZoBpIw/ZhRuCy8Enx3ro5iAYGNFqZdQc8CAwEAATANBgkqhkiG9w0BAQsF
+
+                      AAOCAQEAGGNk/Gi02xb/U6+T9eRwWko12RPKQwirwt4N78/ToRS5yI0IxwND/Rtp
+
+                      vcdVp7QqQXFoyLgyll7k8fch7R1AfKPzVKiefkHwOz+rBsiVWeRouaziwT3HlEYF
+
+                      m57xcIdfAdcemSQ1JkvivrgO7+cyr2vr75AbeZiEvzTML8w5Qy7AsTHeB9NpzwEo
+
+                      fUa0blHeuPtt6i95WuJQgLyld3soi2IPLXKQb6skTaKhQgC5KWBS6FaziMibmcvt
+
+                      N4UrZbDfCO0yu+Hhutybpztw6l/U9fytiq2NrnCiUAQ9Hpmm4TJZuerAb2NX620F
+
+                      DL9Ha0wKNaTxSKRPP+t89Z+5VV1lwg==
+
+                      -----END CERTIFICATE-----'
+                    validity: Valid
+                  $$ref: '#/components/examples/ComViptelaVmanageServerIdpcertificateapiResponseExampleGetidpcertificateresponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Settings-read
+  /idpcertificate/CSR:
+    put:
+      tags:
+      - IDP Certificate Management
+      summary: Generate Certificate Signing Request for IDP Certificate
+      description: Generate Certificate Signing Request for IDP Certificate
+      operationId: renewCSR
+      requestBody:
+        description: IDP Certificate configuration
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              IDP Certificate Request:
+                description: IDP Certificate Request
+                value:
+                  company_name: abc
+                  org_unit: abc
+                  org: abc
+                  location: abc
+                  state: abc
+                  country: US
+                  email: abc@cisco.com
+                  subject_alternative_name_dns:
+                  - www.example.com
+                  rsa_key_length: '2048'
+                $$ref: '#/components/examples/ComViptelaVmanageServerIdpcertificateapiRequestExamplePostidpcsrrequest'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                IDP Certificate Response:
+                  description: IDP Certificate Response
+                  value:
+                    id: 12345678-1234-1234-1234-123456789abc
+                  $$ref: '#/components/examples/ComViptelaVmanageServerIdpcertificateapiResponseExamplePostidpcsrresponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Settings-write
+    post:
+      tags:
+      - IDP Certificate Management
+      summary: Generate Certificate Signing Request for IDP Certificate
+      description: Generate Certificate Signing Request for IDP Certificate
+      operationId: genCSR
+      requestBody:
+        description: IDP Certificate configuration
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              IDP Certificate Request:
+                description: IDP Certificate Request
+                value:
+                  company_name: abc
+                  org_unit: abc
+                  org: abc
+                  location: abc
+                  state: abc
+                  country: US
+                  email: abc@cisco.com
+                  subject_alternative_name_dns:
+                  - www.example.com
+                  rsa_key_length: '2048'
+                $$ref: '#/components/examples/ComViptelaVmanageServerIdpcertificateapiRequestExamplePostidpcsrrequest'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                IDP Certificate Response:
+                  description: IDP Certificate Response
+                  value:
+                    id: 12345678-1234-1234-1234-123456789abc
+                  $$ref: '#/components/examples/ComViptelaVmanageServerIdpcertificateapiResponseExamplePostidpcsrresponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Settings-write
+    get:
+      tags:
+      - IDP Certificate Management
+      summary: Obtain Certificate Signing Request
+      description: Retrieve Certificate Signing Request Generated for IDP Certificate
+      operationId: getCSR_IdpCertificateManagement_1903
+      parameters:
+      - name: withParam
+        in: query
+        schema:
+          type: boolean
+      - name: download
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                IDP CSR Response:
+                  description: IDP CSR Response
+                  value: '-----BEGIN CERTIFICATE REQUEST-----
+
+                    MIICyzCCAbMCAQAwgYQxCzAJBgNVBAYTAlVTMQwwCgYDVQQIDANhYmMxDDAKBgNV
+
+                    BAcMA2FiYzEMMAoGA1UECgwDYWJjMQwwCgYDVQQLDANhYmMxDDAKBgNVBAMMA2Fi
+
+                    YzEfMB0GCSqGSIb3DQEJARYQYWJjQGNpc2NvLmNvbTAJBgNVBAYTAlVTMB0GA1UE
+
+                    AwwWd3d3LmV4YW1wbGUuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKC
+
+                    AQEA1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUV
+
+                    WXYZ1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWX
+
+                    YZ1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
+
+                    1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234
+
+                    567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890
+
+                    abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890abcdef
+
+                    ghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890abcdefghij
+
+                    klmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890abcdefghijklmn
+
+                    opqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZwIDAQABoAAwDQYJKoZIhvcNAQEL
+
+                    BQADggEBAKqGSIb3DQEBAQUAA4GNADCBiQKBgQC/1234567890abcdefghijklmn
+
+                    opqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890abcdefghijklmnop
+
+                    qrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890abcdefghijklmnopqr
+
+                    stuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZwIDAQAB
+
+                    -----END CERTIFICATE REQUEST-----'
+                  $$ref: '#/components/examples/ComViptelaVmanageServerIdpcertificateapiResponseExampleGetidpcsrresponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Settings-read
+  /idpcertificate/renew:
+    post:
+      tags:
+      - IDP Certificate Management
+      summary: Renew IDP self-signed certificate
+      description: Renew IDP certificate for Self-Signed Certificates only
+      operationId: renewIDPCertificate
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                Renew IDP Certificate Response:
+                  description: Renew IDP Certificate Response
+                  value:
+                    success: IDP certificate renewed successfully
+                  $$ref: '#/components/examples/ComViptelaVmanageServerIdpcertificateapiResponseExamplePostrenewidpcertresponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Settings-write
+  /idpcertificate/signed:
+    post:
+      tags:
+      - IDP Certificate Management
+      summary: Import a signed IDP certificate
+      description: Import a signed IDP certificate for SSO Configuration
+      operationId: importIDPCertificate
+      requestBody:
+        description: IDP Certificate configuration
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Import IDP Certificate Request:
+                description: Import IDP Certificate Request
+                value: '-----BEGIN CERTIFICATE-----
+
+                  MIIDhDCCAmwCCQCcDeb1sPMdpjANBgkqhkiG9w0BAQsFADCBhjELMAkGA1UEBhMC
+
+                  VVMxEzARBgNVBAgTCkNhbGlmb3JuaWExETAPBgNVBAcTCFNhbiBKb3NlMRUwEwYD
+
+                  VQQLEwx2SVB0ZWxhIFRlc3QxFDASBgNVBAoTC3ZJUHRlbGEgSW5jMSIwIAYJKoZI
+
+                  hvcNAQkBFhNzYW50b3NoQHZpcHRlbGEuY29tMB4XDTIzMDYwMzE1MDM1MFoXDTM0
+
+                  MDUzMTE1MDM1MFowgYAxFzAVBgNVBAMMDnZtbmdfc2NhbGVfaW5kMQswCQYDVQQG
+
+                  EwJJTjESMBAGA1UECAwJS2FybmF0YWthMRIwEAYDVQQHDAlCYW5nYWxvcmUxFzAV
+
+                  BgNVBAoMDnZtbmdfc2NhbGVfaW5kMRcwFQYDVQQLDA52bW5nX3NjYWxlX2luZDCC
+
+                  ASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAL9ZSFCz5JKuUUobW6sjela8
+
+                  XJa3BwJpza8GjALlYiseVW93vAI3cgn90pO/eXETG5e8EEj8/N3HTqIgbpcooHTf
+
+                  UuzfwjIXR5FWlbaDLsJEAXVDFiv3MDtGQ/RtFrrw49OBtlhAG3AmEkaMZ63dOksQ
+
+                  v5y9wu0XfDoLmkg0q47NlJ682j2KjcsLud68Vn6y7OWmzk8B2ErV3SP4dwpaDzic
+
+                  0BfOdn5oSXX+wGKpbJ0n5hCuwDreyDpsO5jJ5UYr1eUpvH4Sj2llli/n+7BOjLCT
+
+                  3Jy9RXotiajSxx1k0sNYuajcWw5qxzGAJes9R4fPqBSvKq/G3Lyc4tinwBOWLEMC
+
+                  AwEAATANBgkqhkiG9w0BAQsFAAOCAQEAjr1EajpucmaQmwHb+J531NxivLzhVxlu
+
+                  3F+Bklo4JLxoo/2CImjuE3X5NNed5qj4v1zgjPPxSSyOGcbXreiodXOSRsGpb6+I
+
+                  7AlPZRboS52Y6Zigwnw8HIBCINMkII2wNVY+gYJzFPg58UJobdedx7qNS+Pyu6W3
+
+                  avGXOGXEREzAqzE5WP+csV/5Too62EwAV3cT3vElpdE3kASHzNFJfbu9xctrQHeF
+
+                  jxOweOjsbMuikOSyRaYJqs0H4gQcP2Vyb9i+unHvPGKZruhFLsGdIxNq/FPv5cMx
+
+                  aNH3W/qegrUYlcdeCH6zRxXRJSTxy1f7114TMP039Zhphd0O6gNVrA==
+
+                  -----END CERTIFICATE-----'
+                $$ref: '#/components/examples/ComViptelaVmanageServerIdpcertificateapiRequestExamplePostsignedrequest'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                Import IDP Certificate Response:
+                  description: Import IDP Certificate Response
+                  value:
+                    certificateDetails: '-----BEGIN CERTIFICATE-----
+
+                      MIIG4TCCBUmgAwIBAgILEav/rOZdXZnl1C0wDQYJKoZIhvcNAQELBQAwWjELMAkG
+
+                      A1UEBhMCREUxETAPBgNVBAoMCE9wZW5YUEtJMQwwCgYDVQQLDANQS0kxKjAoBgNV
+
+                      BAMMIU9wZW5YUEtJIERlbW8gSXNzdWluZyBDQSAyMDI0MDUyMTAeFw0yNTA4MTkx
+
+                      NzQ3MThaFw0yNjA4MTkxNzQ3MThaMGUxEzARBgoJkiaJk/IsZAEZFgNvcmcxGDAW
+
+                      BgoJkiaJk/IsZAEZFghPcGVuWFBLSTEfMB0GCgmSJomT8ixkARkWD1Rlc3QgRGVw
+
+                      bG95bWVudDETMBEGA1UEAwwKTWFudWFsRGVtbzCCAiIwDQYJKoZIhvcNAQEBBQAD
+
+                      ggIPADCCAgoCggIBAOJ6VWxMO5nFdDq17IuEopS2kJ7SM3hnC9+rewEaqKBCDYJz
+
+                      FSwsQkyPMFNIFIXM5gIMCksgXkPiRRiBAzfwBL/WUjLn2GWCr7Oc9QVz+vbzBdvN
+
+                      RwDeCGZF2KiyGrP/EUiw9tS+uGA8WkQTF0Lxyc6EjHJo7hhAEA4zSezS4WM+GcV8
+
+                      36JLFLGBr7IcMcP8I1mwAsVZyy/5sGAwbA5DOP/v6SaAPOud3kxnyN+ghg7EnOIW
+
+                      O3f1nl5KC5bvDQku3GBISQxgPXXjFWnQ2b1eV7IxQcnYRKyzXmgxlYpaTWZ1eLaP
+
+                      Z6rjjF61ycptqtzW62AXyXhm6XcOKSIEu/M+oam3FSZWmryGiwMJd0edNOwyzsy4
+
+                      em6/NuRKpG0fWpawpm4X8DZHaVZM2anydWfGIUCcB2NyUoRJDf27sj9eF4Wj7qeX
+
+                      FlwW9dpc6iuVpBFiZVlx4paLxPbCJCrOep6Th/g1QoAoADRhj3S+ebsEXldODIwB
+
+                      arYuw2B/BQfbuOYK+AuokNo9GksLhfFs+pw/AHWCVVcjzu0vKtoP95kW0kWyDW77
+
+                      7EXBdx9p8Yz5XyS97796lp2Yi0sWxyoBk7HefrQgZGBCERzNn71W0xoBWqj0Hayh
+
+                      JLX+fVihi6sa8Ha+6ehA2rO0RyDetkh2lnwwU0kXSsOLbNujYlMn5VwYv+EjAgMB
+
+                      AAGjggIbMIICFzCBhwYIKwYBBQUHAQEEezB5MFEGCCsGAQUFBzAChkVodHRwOi8v
+
+                      cGtpLmV4YW1wbGUuY29tL2Rvd25sb2FkL09wZW5YUEtJX0RlbW9fSXNzdWluZ19D
+
+                      QV8yMDI0MDUyMS5jZXIwJAYIKwYBBQUHMAGGGGh0dHA6Ly9vY3NwLmV4YW1wbGUu
+
+                      Y29tLzAfBgNVHSMEGDAWgBRMcgN7qrDOHw63zUTVilGJaA+LhDAMBgNVHRMBAf8E
+
+                      AjAAMFYGA1UdHwRPME0wS6BJoEeGRWh0dHA6Ly9wa2kuZXhhbXBsZS5jb20vZG93
+
+                      bmxvYWQvT3BlblhQS0lfRGVtb19Jc3N1aW5nX0NBXzIwMjQwNTIxLmNybDATBgNV
+
+                      HSUEDDAKBggrBgEFBQcDATAOBgNVHQ8BAf8EBAMCBaAwgagGA1UdIASBoDCBnTCB
+
+                      mgYDKgMEMIGSMCsGCCsGAQUFBwIBFh9odHRwOi8vcGtpLmV4YW1wbGUuY29tL2Nw
+
+                      cy5odG1sMCsGCCsGAQUFBwIBFh9odHRwOi8vcGtpLmV4YW1wbGUuY29tL2Nwcy5o
+
+                      dG1sMDYGCCsGAQUFBwICMCoaKFRoaXMgaXMgYSBjb21tZW50IGZvciBwb2xpY3kg
+
+                      b2lkIDEuMi4zLjQwFQYDVR0RBA4wDIIKZnJ1aXRzLmNvbTAdBgNVHQ4EFgQUjNFy
+
+                      bcX06vuUovxNWhi4RylWXPAwDQYJKoZIhvcNAQELBQADggGBAA7f2sTv4lRNj9dn
+
+                      2XqEzEsYkT2aGNKlWFb1cOt036sIRrpKcuFMP/YaFVQ7nuzRQsEJq5ho01vGl9Ei
+
+                      N72KE3WxhzXOZb59cU5fjRPZT4ib3oELtbWJvFOpZt/jlxJz0D2FUBx25uGjrVtv
+
+                      MH+YTYDmHx2kXuHJ7594n5ZXAsixuOWyJw2KRIFyWkQ9zI1n+pyP5hSi4myKJmy7
+
+                      ozYoAQ6abqQxoJJ0pgyH9vu4fBz1elnfKCxjU2gBMtO2MnyHSKb6thsVrdvCR5Wi
+
+                      ySGrAtB/UmwXoO6+4cW7Yhjibv+de/tcgR9T8nUuJoY62WDYqHRTw9eIyYHi73bI
+
+                      aKGFUmeV0XimrtTsznvlaHNuGlh/ly3p2jzz5EN4CBSVgBgNw07wtGcFPfCPOw4J
+
+                      24AeJz9cd6jHHbEzmpwgLF+Omd99GjdKRMtKwinpwBGFJpYAPjF214VF4aFsT8TS
+
+                      J5HqsCFqpoYc1msMy5LxzM5twANEnEyaZtK03Sjumr3bWDY06A==
+
+                      -----END CERTIFICATE-----'
+                  $$ref: '#/components/examples/ComViptelaVmanageServerIdpcertificateapiResponseExamplePostsignedresponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Settings-write

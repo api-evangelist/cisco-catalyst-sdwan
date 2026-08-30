@@ -1,0 +1,966 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - DPI API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - DPI
+paths:
+  /device/dpi/application-mapping:
+    get:
+      tags:
+      - Real-Time Monitoring - DPI
+      description: Get DPI supported application list from device
+      operationId: getSupportedApplicationList
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                DPI supported application list:
+                  description: DPI supported application list
+                  value:
+                    data:
+                    - name: an
+                      family: network-service
+                      familyShort: network_service
+                      longname: ActiveNetworks
+                      appId: '861'
+                    - name: bb
+                      family: network-management
+                      familyShort: network_management
+                      longname: Systemsandnetworkmonitoringtool
+                      appId: '50333632'
+                    - name: fc
+                      family: network-service
+                      familyShort: network_service
+                      longname: FibreChannel
+                      appId: '16777349'
+                    - name: il
+                      family: network-service
+                      familyShort: network_service
+                      longname: InternalLinkTransportProtocol
+                      appId: '16777256'
+                    - name: ns
+                      family: network-service
+                      familyShort: network_service
+                      longname: NetworkSystems
+                      appId: '50332408'
+                    - name: sm
+                      family: network-service
+                      familyShort: network_service
+                      longname: SM
+                      appId: '16777338'
+                    - name: st
+                      family: network-service
+                      familyShort: network_service
+                      longname: Stream
+                      appId: '16777221'
+                    - name: 3pc
+                      family: network-service
+                      familyShort: network_service
+                      longname: ThirdPartyConnectProtocol
+                      appId: '16777250'
+                    - name: acp
+                      family: network-service
+                      familyShort: network_service
+                      longname: AeolonCoreProtocol
+                      appId: '50332247'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /device/dpi/application/fields:
+    get:
+      tags:
+      - Real-Time Monitoring - DPI
+      description: Get DPI query field from device
+      operationId: getDPIDeviceFieldJSON
+      parameters:
+      - name: isDeviceDashBoard
+        in: query
+        description: Flag whether is device dashboard request
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DPI query field:
+                  description: DPI query field
+                  value:
+                    data:
+                    - isRequired: true
+                      fieldData:
+                        type: dateList
+                      dataType: date
+                      property: entry_time
+                      name: EventTime
+                      options:
+                      - enableDateFields: false
+                        number: '24'
+                        value: Last24hours
+                        key: last_24_hours
+                      - enableDateFields: false
+                        number: '12'
+                        value: Last12hours
+                        key: last_12_hours
+                      - enableDateFields: false
+                        number: '6'
+                        value: Last6hours
+                        key: last_6_hours
+                      - enableDateFields: false
+                        number: '3'
+                        value: Last3hours
+                        key: last_3_hours
+                      - enableDateFields: false
+                        number: '1'
+                        value: Last1hour
+                        key: last_1_hour
+                      - enableDateFields: false
+                        number: '168'
+                        value: Last7days
+                        key: last_168_hours
+                    - isRequired: true
+                      fieldData:
+                        type: url
+                        url: dataservice/device/action/vpn
+                      dataType: int
+                      property: vpn_id
+                      name: VPN
+                      multiSelect: false
+                    - isRequired: true
+                      dataType: string
+                      property: vdevice_name
+                      name: Devicename
+                      multiSelect: false
+                      isHidden: true
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /device/dpi/applications:
+    get:
+      tags:
+      - Real-Time Monitoring - DPI
+      description: Get DPI applications from device (Real Time)
+      operationId: createDPICollectorList
+      parameters:
+      - name: vpn-id
+        in: query
+        description: VPN Id
+        schema:
+          type: string
+          enum:
+          - '0'
+          - '512'
+      - name: application
+        in: query
+        description: Application
+        schema:
+          type: string
+      - name: family
+        in: query
+        description: Family
+        schema:
+          type: string
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^((([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\p{N}\p{L}]+)?)((\s)(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\p{N}\p{L}]+)?)?$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                DPI applications:
+                  description: DPI applications
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.11
+                      vdevice-host-name: vm1
+                      vpn-id: '1'
+                      application: st
+                      family: network_service
+                      expired-flows: '0'
+                      last-seen: 1655736428995
+                      packets: '1000'
+                      octets: '100'
+                      lastupdated: 1655736428995
+                    - vdevice-name: 172.16.255.11
+                      vdevice-host-name: vm1
+                      vpn-id: '1'
+                      application: st
+                      family: network-management
+                      expired-flows: '0'
+                      last-seen: 1655736428995
+                      packets: '1000'
+                      octets: '100'
+                      lastupdated: 1655736428995
+                    - vdevice-name: 172.16.255.11
+                      vdevice-host-name: vm1
+                      vpn-id: '1'
+                      application: st
+                      family: network-service
+                      expired-flows: '0'
+                      last-seen: 1655736428995
+                      packets: '1000'
+                      octets: '100'
+                      lastupdated: 1655736428995
+                    - vdevice-name: 172.16.255.11
+                      vdevice-host-name: vm1
+                      vpn-id: '1'
+                      application: st
+                      family: network-management
+                      expired-flows: '0'
+                      last-seen: 1655736428995
+                      packets: '1000'
+                      octets: '100'
+                      lastupdated: 1655736428995
+                    - vdevice-name: 172.16.255.11
+                      vdevice-host-name: vm1
+                      vpn-id: '1'
+                      application: st
+                      family: network-service
+                      expired-flows: '0'
+                      last-seen: 1655736428995
+                      packets: '1000'
+                      octets: '100'
+                      lastupdated: 1655736428995
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write
+  /device/dpi/common/applications:
+    get:
+      tags:
+      - Real-Time Monitoring - DPI
+      description: Get DPI common application list from device
+      operationId: getCommonApplicationList
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                DPI common application list:
+                  description: DPI common application list
+                  value:
+                    data:
+                    - name: 3com-amp3
+                      familyShort: network-service
+                      longname: 3ComAMP3
+                      family: NetworkService
+                      qosmosName: 3com-amp3
+                      qosmosFamily: network-service
+                      trafficClass: bulk-data
+                      businessRelevance: default
+                    - name: 3com-tsmux
+                      familyShort: network-service
+                      longname: 3ComTSMUX
+                      family: NetworkService
+                      qosmosName: 3com-tsmux
+                      qosmosFamily: network-service
+                      trafficClass: bulk-data
+                      businessRelevance: default
+                    - name: 3pc
+                      familyShort: network-service
+                      longname: ThirdPartyConnect
+                      family: NetworkService
+                      qosmosName: 3pc
+                      qosmosFamily: network_service
+                      trafficClass: bulk-data
+                      businessRelevance: default
+                    - name: 4chan
+                      familyShort: web
+                      longname: 4CHAN
+                      family: Web
+                      qosmosName: 4chan
+                      qosmosFamily: web
+                      trafficClass: transactional-data
+                      businessRelevance: business-irrelevant
+                    - name: 58-city
+                      familyShort: web
+                      longname: 58City
+                      family: Web
+                      qosmosName: 58com
+                      qosmosFamily: web
+                      trafficClass: transactional-data
+                      businessRelevance: business-irrelevant
+                    - name: 914c/g
+                      familyShort: terminal
+                      longname: TexasInstruments914Terminal
+                      family: Terminal
+                      qosmosName: 914c/g
+                      qosmosFamily: terminal
+                      trafficClass: ops-admin-mgmt
+                      businessRelevance: business-relevant
+                    - name: 9pfs
+                      familyShort: network-service
+                      longname: 9P
+                      family: NetworkService
+                      qosmosName: 9p
+                      qosmosFamily: network-service
+                      trafficClass: bulk-data
+                      businessRelevance: default
+                    - name: abc-news
+                      familyShort: web
+                      longname: ABCNews
+                      family: Web
+                      qosmosName: abcnews
+                      qosmosFamily: web
+                      trafficClass: transactional-data
+                      businessRelevance: business-irrelevant
+                    - name: acap
+                      familyShort: network-management
+                      longname: ApplicationConfigurationAccessProtocol
+                      family: NetworkManagement
+                      qosmosName: acap
+                      qosmosFamily: network-management
+                      trafficClass: ops-admin-mgmt
+                      businessRelevance: business-relevant
+                    - name: acas
+                      familyShort: network-service
+                      longname: ACAServices
+                      family: NetworkService
+                      qosmosName: acas
+                      qosmosFamily: network-service
+                      trafficClass: bulk-data
+                      businessRelevance: default
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /device/dpi/device/fields:
+    get:
+      tags:
+      - Real-Time Monitoring - DPI
+      description: Get DPI field from device
+      operationId: getDPIFieldJSON
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DPI field:
+                  description: DPI field
+                  value:
+                    data:
+                    - property: entry_time
+                      name: EventTime
+                      isRequired: true
+                      dataType: date
+                      fieldData:
+                        type: dateList
+                      options:
+                      - key: last_24_hours
+                        value: Last24hours
+                        number: '24'
+                        enableDateFields: false
+                      - key: last_12_hours
+                        value: Last12hours
+                        number: '12'
+                        enableDateFields: false
+                      - key: last_6_hours
+                        value: Last6hours
+                        number: '6'
+                        enableDateFields: false
+                      - key: last_3_hours
+                        value: Last3hours
+                        number: '3'
+                        enableDateFields: false
+                      - key: last_1_hour
+                        value: Last1hour
+                        number: '1'
+                        enableDateFields: false
+                      - key: last_168_hours
+                        value: Last7days
+                        number: '168'
+                        enableDateFields: false
+                    - property: application
+                      name: Application
+                      isRequired: true
+                      multiSelect: false
+                      dataType: string
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /device/dpi/devicedetails/fields:
+    get:
+      tags:
+      - Real-Time Monitoring - DPI
+      description: Get DPI detailed field from device
+      operationId: getDPIDeviceDetailsFieldJSON
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DPI detailed field:
+                  description: DPI detailed field
+                  value:
+                    data:
+                    - property: entry_time
+                      name: EventTime
+                      isRequired: true
+                      dataType: date
+                      fieldData:
+                        type: dateList
+                      options:
+                      - key: last_24_hours
+                        value: Last24hours
+                        number: '24'
+                        enableDateFields: false
+                      - key: last_12_hours
+                        value: Last12hours
+                        number: '12'
+                        enableDateFields: false
+                      - key: last_6_hours
+                        value: Last6hours
+                        number: '6'
+                        enableDateFields: false
+                      - key: last_3_hours
+                        value: Last3hours
+                        number: '3'
+                        enableDateFields: false
+                      - key: last_1_hour
+                        value: Last1hour
+                        number: '1'
+                        enableDateFields: false
+                      - key: last_168_hours
+                        value: Last7days
+                        number: '168'
+                        enableDateFields: false
+                    - property: application
+                      name: Application
+                      isRequired: true
+                      multiSelect: false
+                      dataType: string
+                    - property: vdevice_name
+                      name: Devicename
+                      isRequired: true
+                      multiSelect: false
+                      dataType: string
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /device/dpi/flows:
+    get:
+      tags:
+      - Real-Time Monitoring - DPI
+      description: Get DPI flow list from device (Real Time)
+      operationId: createDPIFlowsList
+      parameters:
+      - name: vpn-id
+        in: query
+        description: VPN Id
+        schema:
+          type: string
+          enum:
+          - '0'
+          - '512'
+      - name: src-ip
+        in: query
+        description: Source IP
+        schema:
+          type: string
+      - name: application
+        in: query
+        description: Application
+        schema:
+          type: string
+      - name: family
+        in: query
+        description: Family
+        schema:
+          type: string
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^((([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\p{N}\p{L}]+)?)((\s)(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\p{N}\p{L}]+)?)?$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                DPI flows:
+                  description: DPI flows
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.11
+                      vdevice-host-name: vm1
+                      vpn-id: '1'
+                      src-ip: 1.1.1.1
+                      dst-ip: 2.2.2.2
+                      src-port: '80'
+                      dst-port: '8080'
+                      proto: ipsec
+                      application: st
+                      family: network-service
+                      active-since: 2022-06-14T17:07:39+0000
+                      active-since-date: 1655736428995
+                      lastupdated: 1655736428995
+                    - vdevice-name: 172.16.255.11
+                      vdevice-host-name: vm1
+                      vpn-id: '1'
+                      src-ip: 1.1.1.1
+                      dst-ip: 2.2.2.3
+                      src-port: '80'
+                      dst-port: '8080'
+                      proto: ipsec
+                      application: st
+                      family: network-service
+                      active-since: 2022-06-14T17:07:39+0000
+                      active-since-date: 1655736428995
+                      lastupdated: 1655736428995
+                    - vdevice-name: 172.16.255.11
+                      vdevice-host-name: vm1
+                      vpn-id: '1'
+                      src-ip: 1.1.1.1
+                      dst-ip: 2.2.2.4
+                      src-port: '80'
+                      dst-port: '8080'
+                      proto: ipsec
+                      application: st
+                      family: network-service
+                      active-since: 2022-06-14T17:07:39+0000
+                      active-since-date: 1655736428995
+                      lastupdated: 1655736428995
+                    - vdevice-name: 172.16.255.11
+                      vdevice-host-name: vm1
+                      vpn-id: '1'
+                      src-ip: 1.1.1.1
+                      dst-ip: 2.2.2.5
+                      src-port: '80'
+                      dst-port: '8080'
+                      proto: ipsec
+                      application: st
+                      family: network-service
+                      active-since: 2022-06-14T17:07:39+0000
+                      active-since-date: 1655736428995
+                      lastupdated: 1655736428995
+                    - vdevice-name: 172.16.255.11
+                      vdevice-host-name: vm1
+                      vpn-id: '1'
+                      src-ip: 1.1.1.1
+                      dst-ip: 2.2.2.6
+                      src-port: '80'
+                      dst-port: '8080'
+                      proto: ipsec
+                      application: st
+                      family: network-service
+                      active-since: 2022-06-14T17:07:39+0000
+                      active-since-date: 1655736428995
+                      lastupdated: 1655736428995
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write
+  /device/dpi/qosmos-static/applications:
+    get:
+      tags:
+      - Real-Time Monitoring - DPI
+      description: Get DPI QoSMos static application list
+      operationId: getQosmosStaticApplicationList
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                DPI QoSMos static application list:
+                  description: DPI QoSMos static application list
+                  value:
+                    data:
+                    - name: 9p
+                      family: FileServer
+                      familyShort: file_server
+                      longname: Plan9FilesystemProtocol
+                      appId: '3430'
+                    - name: ah
+                      family: NetworkService
+                      familyShort: network_service
+                      longname: AuthenticationHeader
+                      appId: '720'
+                    - name: dr
+                      family: Web
+                      familyShort: web
+                      longname: Dr.dk
+                      appId: '2043'
+                    - name: dv
+                      family: Web
+                      familyShort: web
+                      longname: DV.is
+                      appId: '1861'
+                    - name: hs
+                      family: Web
+                      familyShort: web
+                      longname: Hs.fi(HelsinginSanomat)
+                      appId: '2097'
+                    - name: il
+                      family: NetworkService
+                      familyShort: network_service
+                      longname: InternetLink(Transportprotocol)
+                      appId: '637'
+                    - name: ip
+                      family: NetworkService
+                      familyShort: network_service
+                      longname: InternetProtocol
+                      appId: '81'
+                    - name: ja
+                      family: Web
+                      familyShort: web
+                      longname: Ja.is
+                      appId: '1897'
+                    - name: mk
+                      family: Web
+                      familyShort: web
+                      longname: Mk.co.kr
+                      appId: '1213'
+                    - name: mq
+                      family: ApplicationService
+                      familyShort: application_service
+                      longname: IBMWebsphereMQ
+                      appId: '312'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /device/dpi/qosmos/applications:
+    get:
+      tags:
+      - Real-Time Monitoring - DPI
+      description: Get DPI QoSMos application list from device
+      operationId: getQosmosApplicationList
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                DPI QoSMos application list:
+                  description: DPI QoSMos application list
+                  value:
+                    data:
+                    - name: an
+                      family: network-service
+                      familyShort: network_service
+                      longname: ActiveNetworks
+                      appId: '861'
+                    - name: bna
+                      family: network-service
+                      familyShort: network_service
+                      longname: BNA
+                      appId: '803'
+                    - name: box
+                      family: web
+                      familyShort: web
+                      longname: Box
+                      appId: '1074'
+                    - name: dls
+                      family: network-service
+                      familyShort: network_service
+                      longname: DirectoryLocationService
+                      appId: '1078'
+                    - name: dmp
+                      family: audio-video
+                      familyShort: audio_video
+                      longname: CiscoDigitalMediaPlayer
+                      appId: '1422'
+                    - name: apple-location-services
+                      family: application-service
+                      familyShort: application_service
+                      longname: AppleLocationServices
+                      appId: '294'
+                    - name: apple-push-notification
+                      family: application-service
+                      familyShort: application_service
+                      longname: ApplePushNotificationService
+                      appId: '1169'
+                    - name: sixtofour-ipv6-tunneled
+                      family: network-service
+                      familyShort: network_service
+                      longname: SixtofourIPv6Tunneled
+                      appId: '1223'
+                    - name: internet-audio-streaming
+                      family: instant-messaging
+                      familyShort: instant_messaging
+                      longname: InternetAudioStreamingWebApps
+                      appId: '1514'
+                    - name: internet-video-streaming
+                      family: web
+                      familyShort: web
+                      longname: InternetVideoStreamingWebApps
+                      appId: '1513'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Device Monitoring-read
+  /device/dpi/summary:
+    get:
+      tags:
+      - Real-Time Monitoring - DPI
+      description: Get DPI summary from device (Real Time)
+      operationId: createDPISummaryRealTime
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^((([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\p{N}\p{L}]+)?)((\s)(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\p{N}\p{L}]+)?)?$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DPI applications:
+                  description: DPI applications
+                  value:
+                    data:
+                    - flows-expired: '0'
+                      vdevice-dataKey: 169.254.10.10
+                      flows-created: '0'
+                      vdevice-name: 169.254.10.10
+                      current-flows: '0'
+                      peak-rate: '0'
+                      current-rate: '0'
+                      lastupdated: 1643014386555
+                      vdevice-host-name: vm3
+                      status: disable
+                      peak-flows: '0'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write
+  /device/dpi/supported-applications:
+    get:
+      tags:
+      - Real-Time Monitoring - DPI
+      description: Get supported applications from device (Real Time)
+      operationId: createDPIStatistics
+      parameters:
+      - name: application
+        in: query
+        description: Application
+        schema:
+          type: string
+      - name: family
+        in: query
+        description: Family
+        schema:
+          type: string
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^((([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\p{N}\p{L}]+)?)((\s)(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\p{N}\p{L}]+)?)?$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                DPI applications:
+                  description: DPI applications
+                  value:
+                    data:
+                    - family-long-name: network-service
+                      vdevice-dataKey: 169.254.10.10-an
+                      application: an
+                      vdevice-name: 169.254.10.10
+                      lastupdated: 1643014674675
+                      family: network_service
+                      application-long-name: Active Networks
+                      vdevice-host-name: vm3
+                    - family-long-name: network-management
+                      vdevice-dataKey: 169.254.10.10-bb
+                      application: bb
+                      vdevice-name: 169.254.10.10
+                      lastupdated: 1643014674675
+                      family: network_management
+                      application-long-name: Systems and network monitoring tool
+                      vdevice-host-name: vm3
+                    - family-long-name: network-service
+                      vdevice-dataKey: 169.254.10.10-fc
+                      application: fc
+                      vdevice-name: 169.254.10.10
+                      lastupdated: 1643014674675
+                      family: network_service
+                      application-long-name: Fibre Channel
+                      vdevice-host-name: vm3
+                    - family-long-name: network-service
+                      vdevice-dataKey: 169.254.10.10-il
+                      application: il
+                      vdevice-name: 169.254.10.10
+                      lastupdated: 1643014674675
+                      family: network_service
+                      application-long-name: Internal Link Transport Protocol
+                      vdevice-host-name: vm3
+                    - family-long-name: network-service
+                      vdevice-dataKey: 169.254.10.10-ns
+                      application: ns
+                      vdevice-name: 169.254.10.10
+                      lastupdated: 1643014674675
+                      family: network_service
+                      application-long-name: Network Systems
+                      vdevice-host-name: vm3
+                    - family-long-name: network-service
+                      vdevice-dataKey: 169.254.10.10-sm
+                      application: sm
+                      vdevice-name: 169.254.10.10
+                      lastupdated: 1643014674675
+                      family: network_service
+                      application-long-name: SM
+                      vdevice-host-name: vm3
+                    - family-long-name: network-service
+                      vdevice-dataKey: 169.254.10.10-st
+                      application: st
+                      vdevice-name: 169.254.10.10
+                      lastupdated: 1643014674675
+                      family: network_service
+                      application-long-name: Stream
+                      vdevice-host-name: vm3
+                    - family-long-name: network-service
+                      vdevice-dataKey: 169.254.10.10-3pc
+                      application: 3pc
+                      vdevice-name: 169.254.10.10
+                      lastupdated: 1643014674675
+                      family: network_service
+                      application-long-name: Third Party Connect Protocol
+                      vdevice-host-name: vm3
+                    - family-long-name: network-service
+                      vdevice-dataKey: 169.254.10.10-acp
+                      application: acp
+                      vdevice-name: 169.254.10.10
+                      lastupdated: 1643014674675
+                      family: network_service
+                      application-long-name: Aeolon Core Protocol
+                      vdevice-host-name: vm3
+                    - family-long-name: erp
+                      vdevice-dataKey: 169.254.10.10-adp
+                      application: adp
+                      vdevice-name: 169.254.10.10
+                      lastupdated: 1643014674675
+                      family: erp
+                      application-long-name: Automatic Data Processing
+                      vdevice-host-name: vm3
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write

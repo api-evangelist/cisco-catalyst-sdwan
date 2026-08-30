@@ -1,0 +1,886 @@
+openapi: 3.2.0
+info:
+  title: Others MultiCloud - Mapping API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: MultiCloud - Mapping
+paths:
+  /multicloud/map:
+    post:
+      tags:
+      - MultiCloud - Mapping
+      description: Enable Mapping for cloudType
+      operationId: processMapping
+      requestBody:
+        description: Payloads for enable mapping
+        content:
+          application/json:
+            schema:
+              required:
+              - cloudType
+              type: object
+              properties:
+                cloudType:
+                  pattern: ^[a-zA-Z_]+$
+                  type: string
+                connMatrix:
+                  maxItems: 2147483647
+                  minItems: 1
+                  type: array
+                  items:
+                    required:
+                    - conn
+                    - destId
+                    - destType
+                    - srcId
+                    - srcType
+                    type: object
+                    properties:
+                      conn:
+                        type: string
+                      destId:
+                        type: string
+                      destType:
+                        type: string
+                      mapped:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            cgwAttachment:
+                              type: string
+                            cloudType:
+                              type: string
+                            destId:
+                              type: string
+                            destRegion:
+                              type: string
+                            destTag:
+                              type: string
+                            destType:
+                              type: string
+                            region:
+                              type: string
+                            sourceRegion:
+                              type: string
+                            sourceTag:
+                              type: string
+                            srcId:
+                              type: string
+                            srcType:
+                              type: string
+                            tunnelId:
+                              type: string
+                          $$ref: '#/components/schemas/PostMapRequestMapped'
+                      outstandingMapping:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            cgwAttachment:
+                              type: string
+                            cloudType:
+                              type: string
+                            destId:
+                              type: string
+                            destRegion:
+                              type: string
+                            destTag:
+                              type: string
+                            destType:
+                              type: string
+                            region:
+                              type: string
+                            sourceRegion:
+                              type: string
+                            sourceTag:
+                              type: string
+                            srcId:
+                              type: string
+                            srcType:
+                              type: string
+                            tunnelId:
+                              type: string
+                          $$ref: '#/components/schemas/PostMapRequestMapped'
+                      srcId:
+                        type: string
+                      srcType:
+                        type: string
+                      tgwRouteTableId:
+                        type: string
+                      unmapped:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            cgwAttachment:
+                              type: string
+                            cloudType:
+                              type: string
+                            destId:
+                              type: string
+                            destRegion:
+                              type: string
+                            destTag:
+                              type: string
+                            destType:
+                              type: string
+                            region:
+                              type: string
+                            sourceRegion:
+                              type: string
+                            sourceTag:
+                              type: string
+                            srcId:
+                              type: string
+                            srcType:
+                              type: string
+                            tunnelId:
+                              type: string
+                          $$ref: '#/components/schemas/PostMapRequestMapped'
+                    $$ref: '#/components/schemas/PostMapRequestConnMatrix'
+              $$ref: '#/components/schemas/PostMapRequest'
+            examples:
+              Post Map:
+                description: Post Map
+                value:
+                  cloudType: GCP
+                  connMatrix:
+                  - conn: enabled
+                    destId: tag1
+                    destType: tag
+                    srcId: '100'
+                    srcType: vpn
+                  - conn: enabled
+                    destId: vpn
+                    destType: tag
+                    srcId: '100'
+                    srcType: tag
+              Post UnMap:
+                description: Post UnMap
+                value:
+                  cloudType: GCP
+                  connMatrix:
+                  - conn: disabled
+                    destId: tag1
+                    destType: tag
+                    mapped: []
+                    outstandingMapping: []
+                    srcId: '100'
+                    srcType: vpn
+                    unmapped:
+                    - cloudType: GCP
+                      destId: '3889358374498280098'
+                      destRegion: global
+                      destTag: tag1
+                      destType: vpc
+                      sourceRegion: us-west1
+                      srcId: '100'
+                      srcType: vpn
+                      tunnelId: C8K-011df81d-760e-47e2-b930-cc8eaaff773d::100
+                    - cloudType: GCP
+                      destId: '3889358374498280098'
+                      destRegion: global
+                      destTag: tag1
+                      destType: vpc
+                      sourceRegion: us-west1
+                      srcId: '100'
+                      srcType: vpn
+                      tunnelId: C8K-6c832624-b47c-491e-bd95-b5b4b86981ec::100
+                  - conn: disabled
+                    destId: '100'
+                    destType: vpn
+                    srcId: tag1
+                    srcType: tag
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: 6c723f65-9106-4f43-9d2b-a033a39353b3
+                description: Task id for polling status
+                $$ref: '#/components/schemas/Taskid'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    get:
+      tags:
+      - MultiCloud - Mapping
+      description: Get Mapping details for cloudType
+      operationId: getMappingMatrix
+      parameters:
+      - name: cloudType
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - AWS
+          - AWS_GOVCLOUD
+          - AZURE
+          - AZURE_GOVCLOUD
+          - GCP
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    conn:
+                      type: string
+                    destId:
+                      type: string
+                    destType:
+                      type: string
+                    srcId:
+                      type: string
+                    srcType:
+                      type: string
+                    tgwRouteTableId:
+                      type: string
+                  $$ref: '#/components/schemas/GetMapResponse'
+              examples:
+                Get map Response:
+                  description: Get map Response
+                  value:
+                  - srcType: vpn
+                    srcId: '140'
+                    destType: tag
+                    destId: A14-sf-oregon-test-50
+                    conn: enabled
+                  - srcType: tag
+                    srcId: '140'
+                    destType: vpn
+                    destId: A14-sf-oregon-test-50
+                    conn: enabled
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/map/defaults:
+    get:
+      tags:
+      - MultiCloud - Mapping
+      description: Get default mapping values
+      operationId: getDefaultMappingValues
+      parameters:
+      - name: cloudType
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - AWS
+          - AWS_GOVCLOUD
+          - AZURE
+          - AZURE_GOVCLOUD
+          - GCP
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    conn:
+                      type: string
+                      example: enabled
+                    connType:
+                      type: string
+                      example: Intra
+                    destType:
+                      type: string
+                      example: vpn
+                    editable:
+                      type: boolean
+                      example: false
+                    srcType:
+                      type: string
+                      example: vpn
+                  $$ref: '#/components/schemas/MapDefaults'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/map/status:
+    get:
+      tags:
+      - MultiCloud - Mapping
+      description: Get mapping status
+      operationId: getMappingStatus
+      parameters:
+      - name: cloudType
+        in: query
+        description: Multicloud provider type
+        required: true
+        schema:
+          type: string
+      - name: region
+        in: query
+        schema:
+          maxLength: 1024
+          minLength: 1
+          pattern: ^[a-zA-Z0-9_./\-]+$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    destId:
+                      type: string
+                    destType:
+                      type: string
+                    mapped:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          cloudType:
+                            type: string
+                          destId:
+                            type: string
+                          destRegion:
+                            type: string
+                          destType:
+                            type: string
+                          sourceRegion:
+                            type: string
+                          sourceTag:
+                            type: string
+                          srcId:
+                            type: string
+                          srcType:
+                            type: string
+                          tgwRouteTableId:
+                            type: string
+                          tunnelId:
+                            type: string
+                        $$ref: '#/components/schemas/MapStatusMapped'
+                    outstandingMapping:
+                      type: string
+                    srcId:
+                      type: string
+                    srcType:
+                      type: string
+                    tgwRouteTableId:
+                      type: string
+                    unmapped:
+                      type: string
+                  $$ref: '#/components/schemas/MapStatus'
+              examples:
+                Get Map Status:
+                  description: Get Map Status
+                  value:
+                    srcType: tag
+                    srcId: tag1
+                    destType: vpn
+                    destId: '100'
+                    mapped:
+                    - srcType: vpc
+                      srcId: '4382130894513720959'
+                      destType: vpn
+                      destId: '100'
+                      tunnelId: C8K-5DE8FBB3-B624-1929-22C0-0C55E7DD6858::100
+                      destRegion: us-west3
+                      sourceTag: tag2
+                      sourceRegion: global
+                      cloudType: GCP
+                    - srcType: vpc
+                      srcId: '4382120894513720959'
+                      destType: vpn
+                      destId: '100'
+                      tunnelId: C8K-8FBB3-B624-1929-22C0-0C55E7DD6858::100
+                      destRegion: us-west3
+                      sourceTag: tag2
+                      sourceRegion: global
+                      cloudType: GCP
+                    - srcType: cgw
+                      srcId: tgw-0433b98d56b802ff6
+                      destType: vpn
+                      destId: '100'
+                      tunnelId: C8K-8FBB3-B624-1929-22C0-0C55E7DD6858::100
+                      destRegion: us-west3
+                      sourceTag: ''
+                      sourceRegion: global
+                      cloudType: AWS
+                    outstandingMapping: []
+                    unmapped: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/map/summary:
+    get:
+      tags:
+      - MultiCloud - Mapping
+      description: Get mapping summary
+      operationId: getMappingSummary
+      parameters:
+      - name: cloudType
+        in: query
+        schema:
+          type: string
+          enum:
+          - AWS
+          - AWS_GOVCLOUD
+          - AZURE
+          - AZURE_GOVCLOUD
+          - GCP
+      - name: vpnTunnelStatus
+        in: query
+        schema:
+          pattern: ^(true|false)$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    Account ID:
+                      type: object
+                      properties:
+                        Site To Cloud NCC Hub Name:
+                          type: string
+                        Site To Cloud NCC Spoke Name:
+                          type: string
+                        Site To Cloud Primary GCR Name:
+                          type: string
+                        Site To Cloud VPC ID:
+                          type: string
+                        Site To Cloud VPC Name:
+                          type: string
+                        Site To Site NCC Hub Name:
+                          type: string
+                        Site To Site VPC ID:
+                          type: string
+                        Site To Site VPC Name:
+                          type: string
+                        WAN VPC ID:
+                          type: string
+                        WAN VPC Name:
+                          type: string
+                      $$ref: '#/components/schemas/MapSummaryAccountID'
+                    Azure Virtual WAN Hub ID:
+                      type: string
+                    accountName:
+                      type: string
+                    additionalDetails:
+                      type: string
+                    cloudGatewayName:
+                      type: string
+                    cloudGatewaySolution:
+                      type: string
+                    cloudProviderMgmtReference:
+                      type: string
+                    cloudType:
+                      type: string
+                    connectedSites:
+                      type: integer
+                      format: int32
+                    connectivityState:
+                      type: string
+                    connectivityStateUpdateTs:
+                      type: string
+                    devices:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          reachability:
+                            type: string
+                          systemIp:
+                            type: string
+                          uuid:
+                            type: string
+                        $$ref: '#/components/schemas/MapSummaryDevices'
+                    hostVpcs:
+                      type: object
+                      properties:
+                        accountId:
+                          type: string
+                        hostVpcId:
+                          type: string
+                        tag:
+                          type: string
+                      $$ref: '#/components/schemas/MapSummaryHostVpcs'
+                    operState:
+                      type: string
+                    region:
+                      type: string
+                    status:
+                      type: string
+                    tags:
+                      type: object
+                      properties:
+                        tag:
+                          type: string
+                      $$ref: '#/components/schemas/MapSummaryTags'
+                    tgwRouteTableId:
+                      type: string
+                    tunnels:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          acceptedRouteCount:
+                            type: integer
+                            format: int32
+                          lastStatusChangeTimestamp:
+                            type: string
+                          outerIpAddr:
+                            type: string
+                          status:
+                            type: string
+                          statusMessage:
+                            type: string
+                          tunnelId:
+                            type: string
+                        $$ref: '#/components/schemas/MapSummaryTunnels'
+                    vpns:
+                      type: object
+                      properties:
+                        vpnId:
+                          type: string
+                      $$ref: '#/components/schemas/MapSummaryVpns'
+                  $$ref: '#/components/schemas/MapSummary'
+              examples:
+                Get GCP Map Summary:
+                  description: Get GCP Map Summary
+                  value:
+                    region: us-west2
+                    accountName: pp-acc
+                    cloudType: GCP
+                    cloudGatewayName: cgw1-gcp
+                    cloudGatewaySolution: gcp
+                    cloudProviderMgmtReference: NA
+                    connectivityState: Successful
+                    connectivityStateUpdateTs: '1660614410162'
+                    additionalDetails:
+                    - Account ID: gcp-abc-10202
+                    - WAN VPC Name: wan-209overlayfi
+                    - Site To Cloud VPC Name: s2c-209overlayfi
+                    - Site To Site VPC Name: s2s-209overlayfi
+                    - WAN VPC ID: '5949753400137042430'
+                    - Site To Cloud VPC ID: '4899470889371257287'
+                    - Site To Site VPC ID: '3797334272073222570'
+                    - Site To Cloud Primary GCR Name: s2c-cr-cgw1-gcp-209overlayfi-0
+                    - Site To Cloud NCC Spoke Name: cgw1-gcp-209overlayfi-s2c-spoke
+                    - Site To Cloud NCC Hub Name: s2c-hub-209overlayfi
+                    - Site To Site NCC Hub Name: s2s-hub-209overlayfi
+                    devices:
+                    - uuid: C8K-5DE8FBB3-B624-1929-22C0-0C55E7DD6858
+                      systemIp: 101.1.1.9
+                      reachability: reachable
+                    - uuid: C8K-4ABB877C-519B-5186-B271-5698961952F4
+                      systemIp: 101.1.1.7
+                      reachability: reachable
+                    - uuid: C8K-495C4EB7-0813-01F2-06E1-2BFBE1C15965
+                      systemIp: 101.1.1.6
+                      reachability: reachable
+                    status: normal,
+                    connectedSites: 1,
+                    vpns:
+                    - vpnId: '100'
+                    tunnels:
+                    - tunnelId: C8K-5DE8FBB3-B624-1929-22C0-0C55E7DD6858::100
+                      status: UP
+                      statusMessage: ''
+                      outerIpAddr: 10.0.0.42
+                      acceptedRouteCount: 0
+                      lastStatusChangeTimestamp: NotAvailable
+                    - tunnelId: C8K-4ABB877C-519B-5186-B271-5698961952F4::100
+                      status: UP
+                      statusMessage: ''
+                      outerIpAddr: 10.0.0.40
+                      acceptedRouteCount: 0
+                      lastStatusChangeTimestamp: NotAvailable
+                    tags:
+                    - tag: tag1
+                    hostVpcs:
+                    - hostVpcId: '4382130894513720959'
+                      accountId: gcp-pp-nprd-10202
+                      tag: tag1
+                    - hostVpcId: '5752708641463555655'
+                      accountId: gcp-pp-nprd-10202
+                      tag: tag1
+                    operState: ''
+                Get AWS Map Summary:
+                  description: Get AWS Map Summary
+                  value:
+                    region: us-west-1
+                    accountName: sdwan-pp
+                    cloudType: AWS
+                    cloudGatewayName: awstest
+                    cloudGatewaySolution: tgw_tvpc
+                    cloudProviderMgmtReference: arn:aws:networkma380167:global-network
+                    connectivityState: Successful
+                    connectivityStateUpdateTs: '1661542265017'
+                    additionalDetails:
+                    - Account ID: '845888380167'
+                    - Transit Gateway ID: tgw-0dd6167696ff9
+                    - TGW Route Table Count: '2'
+                    - Transit VPC ID: vpc-09f7ce0e792d78e73
+                    - Transit VPC Name: awscgwtest
+                    devices:
+                    - uuid: C8K-09f782-bc71-4f91-9673-cfeea2f8f235
+                      systemIp: 203.1.1.1
+                      reachability: reachable
+                    status: normal
+                    connectedSites: 1
+                    vpns:
+                    - vpnId: '100'
+                    tunnels:
+                    - tunnelId: C8K-09f76182-bc71-4f91-9673-cfeea2f8f235::100
+                      tunnelInnerIps:
+                      - 169.254.0.76/30
+                      - 169.254.0.80/30
+                      status: DOWN
+                      statusMessage: IPSEC IS DOWN
+                      outerIpAddr: 52.53.91.70
+                      acceptedRouteCount: 0
+                      lastStatusChangeTimestamp: '1660986000'
+                    tags:
+                    - tag: tagtest
+                    hostVpcs:
+                    - hostVpcId: vpc-0445ecc99eecdf
+                      accountId: '845888380167'
+                      tag: tagtest
+                    operState: ''
+                Get Azure Map Summary:
+                  description: Get Azure Map Summary
+                  value:
+                    region: westcentralus
+                    accountName: pp-azure
+                    cloudType: AZURE
+                    cloudGatewayName: AzureCGW
+                    connectivityState: Successful
+                    connectivityStateUpdateTs: '16606410162'
+                    additionalDetails:
+                    - Account ID: aws-pp-nprd-10202
+                    - WAN VPC Name: wan-209overlayfi
+                    - Site To Cloud VPC Name: s2c-209overlayfi
+                    - Site To Site VPC Name: s2s-209overlayfi
+                    - WAN VPC ID: '5949753400137042430'
+                    - Site To Cloud VPC ID: '4899470889371257287'
+                    - Site To Site VPC ID: '3797334272073222570'
+                    - Site To Cloud Primary GCR Name: s2c-cr-cgw1-gcp-209overlayfi-0
+                    - Site To Cloud NCC Spoke Name: cgw1-gcp-209overlayfi-s2c-spoke
+                    - Site To Cloud NCC Hub Name: s2c-hub-209overlayfi
+                    - Site To Site NCC Hub Name: s2s-hub-209overlayfi
+                    devices:
+                    - uuid: C8K-5DE8FBB3-B624-1929-22C0-0C55E7DD6858
+                      systemIp: 101.1.1.9
+                      reachability: reachable
+                    - status: normal
+                    - connectedSites: 1
+                    vpns:
+                    - vpnId: '100'
+                    tunnels:
+                    - tunnelId: C8K-5DE8FBB3-B624-1929-22C0-0C55E7DD6858::100
+                      status: UP
+                      statusMessage: ''
+                      outerIpAddr: 10.0.0.42
+                      acceptedRouteCount: 0
+                      lastStatusChangeTimestamp: NotAvailable
+                    tags:
+                    - tag: tag1
+                    hostVpcs:
+                    - hostVpcId: '4382130894513720959'
+                      accountId: gcp-shabshargcp-nprd-10202
+                      tag: tag1
+                    operState: ''
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/map/tags:
+    get:
+      tags:
+      - MultiCloud - Mapping
+      description: Get cloud gateway types for specified cloudType
+      operationId: getMappingTags
+      parameters:
+      - name: cloudType
+        in: query
+        schema:
+          type: string
+          enum:
+          - AWS
+          - AWS_GOVCLOUD
+          - AZURE
+          - AZURE_GOVCLOUD
+          - GCP
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tag:
+                    type: string
+                    example: test-tag
+                $$ref: '#/components/schemas/TagsResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/map/vpns:
+    get:
+      tags:
+      - MultiCloud - Mapping
+      description: Get default mapping values
+      operationId: getMappingVpns
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: a0b3f15d-a4e6-4e1d-86f9-8936284dbe1b
+                  referenceCount:
+                    type: integer
+                    format: int32
+                    example: 0
+                  segmentId:
+                    type: string
+                    example: '10'
+                  segmentName:
+                    type: string
+                    example: vpn10
+                  solution:
+                    type: string
+                    example: sd-routing
+                description: List of vpns for MultiCloud
+                $$ref: '#/components/schemas/MapVpnsResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/mapping/{cloudType}:
+    get:
+      tags:
+      - MultiCloud - Mapping
+      description: Get associated mappings to the CGW
+      operationId: getCgwAssociatedMappings
+      parameters:
+      - name: cloudType
+        in: path
+        description: Multicloud provider type
+        required: true
+        schema:
+          type: string
+      - name: cloudGatewayName
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: siteUuid
+        in: query
+        schema:
+          pattern: ^[a-zA-Z0-9\-]*$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accountName:
+                    type: string
+                    example: awsTest
+                  hostVpcId:
+                    type: string
+                    example: vpc-0638351a9efaf77e9
+                  hostVpcName:
+                    type: string
+                    description: Returned for AWS/AWS_GOVCLOUD/GCP
+                    example: vpc-0638351a9efaf77e9
+                  tag:
+                    type: string
+                    example: test-tag-aws
+                  tunnelCount:
+                    type: integer
+                    description: Returned for AWS/AWS_GOVCLOUD/GCP
+                    format: int32
+                    example: 6
+                  vpnId:
+                    type: string
+                    example: '10'
+                $$ref: '#/components/schemas/CgwVpnsResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

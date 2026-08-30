@@ -1,0 +1,644 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - Orchestrator API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - Orchestrator
+paths:
+  /device/orchestrator/connections:
+    get:
+      tags:
+      - Real-Time Monitoring - Orchestrator
+      description: Get connection list from device
+      operationId: createConnectionListFromDevice
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Connection list:
+                  description: Connection list
+                  value:
+                    data:
+                    - peer-region-id-set: N/A
+                      domain-id: 1
+                      site-id: 100
+                      local-color: default
+                      uptime: '1:23:51:47'
+                      lastupdated: 1649761493102
+                      vdevice-dataKey: 172.16.255.26-vsmart-172.16.255.19
+                      state: up
+                      private-port: 12355
+                      public-port: 12355
+                      public-ip: 10.0.5.19
+                      uptime-date: 1649589180000
+                      peer-type: vsmart
+                      vdevice-host-name: vm16
+                      private-ip: 10.0.5.19
+                      vdevice-name: 172.16.255.26
+                      system-ip: 172.16.255.19
+                    - peer-region-id-set: N/A
+                      domain-id: 1
+                      site-id: 100
+                      local-color: default
+                      uptime: '1:23:51:46'
+                      lastupdated: 1649761493102
+                      vdevice-dataKey: 172.16.255.26-vsmart-172.16.255.19
+                      state: up
+                      private-port: 12455
+                      public-port: 12455
+                      public-ip: 10.0.5.19
+                      uptime-date: 1649589180000
+                      peer-type: vsmart
+                      vdevice-host-name: vm16
+                      private-ip: 10.0.5.19
+                      vdevice-name: 172.16.255.26
+                      system-ip: 172.16.255.19
+                    - peer-region-id-set: N/A
+                      domain-id: 1
+                      site-id: 200
+                      local-color: default
+                      uptime: '1:23:51:47'
+                      lastupdated: 1649761493102
+                      vdevice-dataKey: 172.16.255.26-vsmart-172.16.255.20
+                      state: up
+                      private-port: 12356
+                      public-port: 12356
+                      public-ip: 10.0.12.20
+                      uptime-date: 1649589180000
+                      peer-type: vsmart
+                      vdevice-host-name: vm16
+                      private-ip: 10.0.12.20
+                      vdevice-name: 172.16.255.26
+                      system-ip: 172.16.255.20
+                    - peer-region-id-set: N/A
+                      domain-id: 1
+                      site-id: 200
+                      local-color: default
+                      uptime: '1:23:51:46'
+                      lastupdated: 1649761493102
+                      vdevice-dataKey: 172.16.255.26-vsmart-172.16.255.20
+                      state: up
+                      private-port: 12456
+                      public-port: 12456
+                      public-ip: 10.0.12.20
+                      uptime-date: 1649589180000
+                      peer-type: vsmart
+                      vdevice-host-name: vm16
+                      private-ip: 10.0.12.20
+                      vdevice-name: 172.16.255.26
+                      system-ip: 172.16.255.20
+                    - domain-id: 0
+                      site-id: 200
+                      local-color: default
+                      uptime: '1:23:51:45'
+                      lastupdated: 1649761493102
+                      vdevice-dataKey: 172.16.255.26-vmanage-172.16.255.22
+                      state: up
+                      private-port: 12346
+                      public-port: 12346
+                      public-ip: 10.0.12.22
+                      uptime-date: 1649589180000
+                      peer-type: vmanage
+                      vdevice-host-name: vm16
+                      private-ip: 10.0.12.22
+                      vdevice-name: 172.16.255.26
+                      system-ip: 172.16.255.22
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Security-read,Security-write
+  /device/orchestrator/connectionshistory:
+    get:
+      tags:
+      - Real-Time Monitoring - Orchestrator
+      description: Get connection history list from device
+      operationId: createConnectionHistoryList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Connection history list:
+                  description: Connection history list
+                  value:
+                    data:
+                    - remote-color: default
+                      index: 0
+                      site-id: 500
+                      public-port: 12386
+                      peer-type: vedge
+                      local_enum: RXTRDWN
+                      rep-count: 0
+                      local-color: default
+                      remote_enum: DISCVBD
+                      lastupdated: 1649764706061
+                      vdevice-dataKey: 172.16.255.26-0-2022-04-10T12:23:23+0000
+                      state: up
+                      domain-id: 1
+                      private-port: 12386
+                      public-ip: 10.1.15.15
+                      downtime: 2022-04-10T12:23:23+0000
+                      vdevice-host-name: vm16
+                      private-ip: 10.1.15.15
+                      remote_enum-desc: DisconnectvBondafterregisterreply.
+                      local_enum-desc: ReceivedTeardown.
+                      vdevice-name: 172.16.255.26
+                    - remote-color: default
+                      index: 1
+                      site-id: 100
+                      public-port: 12386
+                      peer-type: vedge
+                      local_enum: RXTRDWN
+                      rep-count: 0
+                      local-color: default
+                      remote_enum: DISCVBD
+                      lastupdated: 1649764706061
+                      vdevice-dataKey: 172.16.255.26-1-2022-04-10T11:48:32+0000
+                      state: up
+                      domain-id: 1
+                      private-port: 12386
+                      public-ip: 10.0.5.11
+                      downtime: 2022-04-10T11:48:32+0000
+                      vdevice-host-name: vm16
+                      private-ip: 10.0.5.11
+                      remote_enum-desc: DisconnectvBondafterregisterreply.
+                      local_enum-desc: ReceivedTeardown.
+                      vdevice-name: 172.16.255.26
+                    - remote-color: default
+                      index: 2
+                      site-id: 0
+                      public-port: 12387
+                      peer-type: unknown
+                      local_enum: DHSTMO
+                      rep-count: 0
+                      local-color: default
+                      remote_enum: NOERR
+                      lastupdated: 1649764706061
+                      vdevice-dataKey: 172.16.255.26-2-2022-04-10T11:48:21+0000
+                      state: connect
+                      domain-id: 0
+                      private-port: 0
+                      public-ip: 10.0.5.11
+                      downtime: 2022-04-10T11:48:21+0000
+                      vdevice-host-name: vm16
+                      private-ip: '::'
+                      remote_enum-desc: NoError.
+                      local_enum-desc: DTLSHandShakeTimeout.
+                      vdevice-name: 172.16.255.26
+                    - remote-color: lte
+                      index: 3
+                      site-id: 600
+                      public-port: 12366
+                      peer-type: vedge
+                      local_enum: RXTRDWN
+                      rep-count: 0
+                      local-color: lte
+                      remote_enum: DISCVBD
+                      lastupdated: 1649764706061
+                      vdevice-dataKey: 172.16.255.26-3-2022-04-10T11:13:44+0000
+                      state: up
+                      domain-id: 1
+                      private-port: 12366
+                      public-ip: 10.1.16.16
+                      downtime: 2022-04-10T11:13:44+0000
+                      vdevice-host-name: vm16
+                      private-ip: 10.1.16.16
+                      remote_enum-desc: DisconnectvBondafterregisterreply.
+                      local_enum-desc: ReceivedTeardown.
+                      vdevice-name: 172.16.255.26
+                    - remote-color: lte
+                      index: 4
+                      site-id: 100
+                      public-port: 12377
+                      peer-type: vedge
+                      local_enum: RXTRDWN
+                      rep-count: 0
+                      local-color: lte
+                      remote_enum: DISCVBD
+                      lastupdated: 1649764706061
+                      vdevice-dataKey: 172.16.255.26-4-2022-04-10T11:13:41+0000
+                      state: up
+                      domain-id: 1
+                      private-port: 12377
+                      public-ip: 10.0.5.21
+                      downtime: 2022-04-10T11:13:41+0000
+                      vdevice-host-name: vm16
+                      private-ip: 10.0.5.21
+                      remote_enum-desc: DisconnectvBondafterregisterreply.
+                      local_enum-desc: ReceivedTeardown.
+                      vdevice-name: 172.16.255.26
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Security-read,Security-write
+  /device/orchestrator/localproperties:
+    get:
+      tags:
+      - Real-Time Monitoring - Orchestrator
+      description: Get local properties list from device
+      operationId: createLocalPropertiesListList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Local properties list:
+                  description: Local properties list
+                  value:
+                    data:
+                    - certificate-not-valid-before: Apr1010:34:032022GMT
+                      certificate-status: Installed
+                      protocol: dtls
+                      uuid: 0a3c20df-82d6-43d4-b27f-a67864d35950
+                      root-ca-chain-status: Installed
+                      certificate-not-valid-after: Apr1010:34:032023GMT
+                      sp-organization-name: vIPtelaIncRegression
+                      lastupdated: 1649766458903
+                      certificate-validity: Valid
+                      vdevice-dataKey: 172.16.255.26
+                      vedge-list-version: '0'
+                      number-active-wan-interfaces: '1'
+                      system-ip: 172.16.255.26
+                      organization-name: vIPtelaIncRegression
+                      vdevice-host-name: vm16
+                      device-type: vbond
+                      vdevice-name: 172.16.255.26
+                      vsmart-list-version: '0'
+                      board-serial: '12346571'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Security-read,Security-write
+  /device/orchestrator/proxymapping:
+    get:
+      tags:
+      - Real-Time Monitoring - Orchestrator
+      description: Get reverse proxy mapping from vbond
+      operationId: createReverseProxyMappingList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Reverse proxy mapping:
+                  description: Reverse proxy mapping
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.26
+                      vdevice-host-name: vm16
+                      uuid: 1b852227-4a15-48be-8637-3e995b934578
+                      private-ip: 10.0.12.19
+                      private-port: '23456'
+                      proxy-ip: 10.0.37.19
+                      proxy-port: '23456'
+                      lastupdated: 1658198416779
+                      vdevice-dataKey: 172.16.255.26
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Security-read,Security-write,Device Monitoring-read,Device Monitoring-write
+  /device/orchestrator/statistics:
+    get:
+      tags:
+      - Real-Time Monitoring - Orchestrator
+      description: Get statistics from device
+      operationId: getStatistics
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Statistics:
+                  description: Statistics
+                  value:
+                    data:
+                    - tx_challenge_ack: 13
+                      tx_registers: 0
+                      rx_pkts: 168816
+                      tx_error: 0
+                      vdevice-dataKey: 172.16.255.26
+                      tx_challenge: 15
+                      rx_challenge_ack: 0
+                      tx_dtls_handshake_done: 0
+                      vdevice-host-name: vm16
+                      tx_dtls_handshake_failures: 0
+                      tx_challenge_gen_error: 0
+                      rx_connects: 0
+                      rx_octets: 42608317
+                      rx_registers: 64644
+                      lastupdated: 1649768154244
+                      rx_challenge_resp: 15
+                      tx_register_replies: 64644
+                      tx_challenge_ack_error: 0
+                      rx_challenge: 0
+                      tx_dtls_handshake: 0
+                      rx_dtls_handshake_done: 15
+                      rx_dtls_handshake_failures: 0
+                      rx_error: 0
+                      challenge_failures: 2
+                      tx_challenge_resp_error: 0
+                      vdevice-name: 172.16.255.26
+                      tx_blocked: 0
+                      tx_connects: 64671
+                      tx_octets: 63147501
+                      tx_challenge_error: 0
+                      rx_register_replies: 0
+                      tx_challenge_resp: 0
+                      tx_pkts: 242150
+                      rx_dtls_handshake: 70
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Security-read,Security-write
+  /device/orchestrator/summary:
+    get:
+      tags:
+      - Real-Time Monitoring - Orchestrator
+      description: Get connection summary from device
+      operationId: createConnectionSummary
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Connection summary:
+                  description: Connection summary
+                  value:
+                    data:
+                    - protocol: dtls
+                      listening_port: 12346
+                      listening_ip: 0.0.0.0
+                      vsmart_counts: 4
+                      vmanage_counts: 2
+                      lastupdated: 1649816906161
+                      instance: 0
+                      vdevice-host-name: vm16
+                      vdevice-dataKey: 172.16.255.26-0
+                      listening_ipv6: '::'
+                      vedge_counts: 0
+                      vdevice-name: 172.16.255.26
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Security-read,Security-write
+  /device/orchestrator/validvedges:
+    get:
+      tags:
+      - Real-Time Monitoring - Orchestrator
+      description: Get valid device list from device
+      operationId: createValidDevicesList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Valid device list:
+                  description: Valid device list
+                  value:
+                    data:
+                    - vdevice-host-name: vm16
+                      vdevice-dataKey: 172.16.255.26-1BFB0237-AFCA-4583-BF0C-BECD124565D6-12346572
+                      serial-number: '12346572'
+                      validity: valid
+                      lastupdated: 1649818236214
+                      chassis-number: 1BFB0237-AFCA-4583-BF0C-BECD124565D6
+                      vdevice-name: 172.16.255.26
+                    - vdevice-host-name: vm16
+                      vdevice-dataKey: 172.16.255.26-33418D3F-286E-4256-A7CB-7BF3A70E1ED8-12346570
+                      serial-number: '12346570'
+                      validity: valid
+                      lastupdated: 1649818236214
+                      chassis-number: 33418D3F-286E-4256-A7CB-7BF3A70E1ED8
+                      vdevice-name: 172.16.255.26
+                    - vdevice-host-name: vm16
+                      vdevice-dataKey: 172.16.255.26-4D0318BF-472E-4114-B72D-A5E99C5AFAD7-12346580
+                      serial-number: '12346580'
+                      validity: valid
+                      lastupdated: 1649818236214
+                      chassis-number: 4D0318BF-472E-4114-B72D-A5E99C5AFAD7
+                      vdevice-name: 172.16.255.26
+                    - vdevice-host-name: vm16
+                      vdevice-dataKey: 172.16.255.26-ADC329CC-701C-42D6-84C6-245F09C25583-12346578
+                      serial-number: '12346578'
+                      validity: valid
+                      lastupdated: 1649818236214
+                      chassis-number: ADC329CC-701C-42D6-84C6-245F09C25583
+                      vdevice-name: 172.16.255.26
+                    - vdevice-host-name: vm16
+                      vdevice-dataKey: 172.16.255.26-C685BD5F-6C3F-46C8-B58A-D59F2F1A6E2E-12346575
+                      serial-number: '12346575'
+                      validity: valid
+                      lastupdated: 1649818236214
+                      chassis-number: C685BD5F-6C3F-46C8-B58A-D59F2F1A6E2E
+                      vdevice-name: 172.16.255.26
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Security-read,Security-write
+  /device/orchestrator/validvmanageid:
+    get:
+      tags:
+      - Real-Time Monitoring - Orchestrator
+      description: Get valid vManage Id from device
+      operationId: getValidVManageId
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Valid vManage Id:
+                  description: Valid vManage Id
+                  value:
+                    data:
+                    - chassis-number: a52d3492-755a-4a02-9a3d-8bdf2dc1d241
+                      vdevice-dataKey: 172.16.255.26-
+                      vdevice-name: 172.16.255.26
+                      lastupdated: 1649823209136
+                      vdevice-host-name: vm16
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Security-read,Security-write
+  /device/orchestrator/validvsmarts:
+    get:
+      tags:
+      - Real-Time Monitoring - Orchestrator
+      description: Get valid vSmart list from device
+      operationId: createValidVSmartsList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Valid vSmart list:
+                  description: Valid vSmart list
+                  value:
+                    data:
+                    - vdevice-host-name: vm16
+                      vdevice-dataKey: 172.16.255.26-12346567
+                      serial-number: '12346567'
+                      vdevice-name: 172.16.255.26
+                      lastupdated: 1649824251432
+                    - vdevice-host-name: vm16
+                      vdevice-dataKey: 172.16.255.26-12346569
+                      serial-number: '12346569'
+                      vdevice-name: 172.16.255.26
+                      lastupdated: 1649824251432
+                    - vdevice-host-name: vm16
+                      vdevice-dataKey: 172.16.255.26-12346573
+                      serial-number: '12346573'
+                      vdevice-name: 172.16.255.26
+                      lastupdated: 1649824251432
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Security-read,Security-write

@@ -1,0 +1,992 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - Appqoe API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - Appqoe
+paths:
+  /device/appqoe/active-flow-id:
+    get:
+      tags:
+      - Real-Time Monitoring - Appqoe
+      description: Get Appqoe Active flow Id details from device
+      operationId: createAppqoeActiveFlowIdDetails
+      parameters:
+      - name: flow-id
+        in: query
+        description: Flow Id
+        required: true
+        schema:
+          type: string
+      - name: deviceId
+        in: query
+        description: Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Appqoe Flow Active FlowId details:
+                  description: Appqoe Flow Active FlowId details
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write
+  /device/appqoe/appqoe-hput-stats:
+    get:
+      tags:
+      - Real-Time Monitoring - Appqoe
+      description: Get Appqoe Hput Statistics from device
+      operationId: getAppqoeHputStats
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device Id
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Appqoe Hput Statistics:
+                  description: Appqoe Hput Statistics
+                  value:
+                    data:
+                    - hs-sch-delay20us: '2569563'
+                      hs-time-node-dealloc: '10730115'
+                      uhs-callout-drain: '0'
+                      uhs-stop-cancel: '0'
+                      hs-exp-list-process: '237791'
+                      hs-curr-node-null: '0'
+                      hs-sch-delay200us: '4110'
+                      hs-sch-delay10000us: '6741'
+                      uhs-callout-unlock: '0'
+                      uhs-add: '1624643'
+                      uhs-rst-sbt-drain: '0'
+                      hs-timer-deleted: '0'
+                      hs-sch-delay300us: '1809'
+                      uhs-stop-del-cancel: '0'
+                      hs-sch-delay400us: '1541'
+                      uhs-add-fail: '0'
+                      hs-sch-delay1000000us: '0'
+                      hs-sch-delay1000us: '1069'
+                      uhs-stop-no-pending: '4'
+                      hs-timer-del-failed: '0'
+                      hs-expired-send-sig: '224059'
+                      uhs-stop-nodrain: '0'
+                      hs-sch-delay500us: '1444'
+                      hs-sch-delay30us: '198079'
+                      hs-timer-alloc: '10730124'
+                      hs-time-node-added: '10713486'
+                      uhs-stop: '4'
+                      uhs-callout-lock: '0'
+                      uhs-raw-add: '9105481'
+                      hs-ktimer-start: '17812503'
+                      hs-sch-delay600us: '1463'
+                      hs-ktimer-cb: '10475629'
+                      uhs-rst-sbt-del: '0'
+                      hs-expired-list-alloc: '237791'
+                      hs-sch-delay700us: '1417'
+                      hs-timer-cb: '10730115'
+                      uhs-callout: '1624635'
+                      uhs-raw-cb: '9105480'
+                      hs-timer-add-req: '10730124'
+                      vdevice-name: 169.254.10.12
+                      uhs-rst-sbt-req: '1624643'
+                      hs-sch-delay40us: '27818'
+                      hs-timer-dealloc: '10730115'
+                      uhs-callout-done: '1624635'
+                      hs-time-node-deleted: '10713477'
+                      hs-sch-delay100000us: '2'
+                      uhs-callout-not-pending: '0'
+                      uhs-raw-add-failed: '0'
+                      hs-timer-del-req: '0'
+                      hs-pending-list-process: '224059'
+                      uhs-rst-sbt-add: '1624643'
+                      uhs-callout-cancel: '0'
+                      hs-sch-delay800us: '1334'
+                      hs-sch-delay10us: '7627736'
+                      hs-expired-list-dealloc: '237791'
+                      hs-min-sch-delay: '4330'
+                      uhs-callout-call: '1624635'
+                      uhs-callout-del: '0'
+                      uhs-rst-sbt-cancel: '0'
+                      vdevice-host-name: vm5
+                      hs-sch-delay900us: '1186'
+                      hs-time-node-alloc: '10730124'
+                      hs-time-node-exist: '0'
+                      hs-sch-delay50us: '13812'
+                      uhs-stop-drain: '0'
+                      uhs-stop-del: '0'
+                      hs-time-node-expired: '1642'
+                      vdevice-dataKey: 169.254.10.12
+                      hs-curr-node-ts-not-valid: '0'
+                      hs-timer-added: '10493918'
+                      hs-sch-delay100us: '16505'
+                      uihs-nr-hpts-cpu: '0'
+                      hs-timer-add-expired: '236206'
+                      hs-max-sch-delay: '36715506'
+                      lastupdated: 1644996827424
+                      hs-ktimer-stop: '17812503'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/appqoe/appqoe-nat-stats:
+    get:
+      tags:
+      - Real-Time Monitoring - Appqoe
+      description: Get Appqoe Nat Statistics from device
+      operationId: getAppqoeNatStats
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device Id
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Appqoe Nat Statistics:
+                  description: Appqoe Nat Statistics
+                  value:
+                    data:
+                    - port-alloc-fail: '0'
+                      port-free-succ: '0'
+                      port-free-fail: '0'
+                      vdevice-dataKey: 169.254.10.12
+                      vdevice-name: 169.254.10.12
+                      alloc-fail: '0'
+                      lastupdated: 1644997117219
+                      dup-entries: '0'
+                      vdevice-host-name: vm5
+                      port-alloc-succ: '0'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/appqoe/appqoe-rm-resource:
+    get:
+      tags:
+      - Real-Time Monitoring - Appqoe
+      description: Get Appqoe Resource Manager resources from device
+      operationId: getAppqoeRmResources
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device Id
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Appqoe Resource Manager resources:
+                  description: Appqoe Resource Manager resources
+                  value:
+                    data:
+                    - ssl-max-sess: '40000'
+                      avail-sys-mem: '2411556'
+                      dre-mem-per-sess: '0'
+                      ssl-used-sess: '0'
+                      vdevice-name: 169.254.10.12
+                      rm-global-health-flag: status-green
+                      rm-tcp-sess-flag: status-green
+                      dre-used-sess: '0'
+                      tcp-max-sess: '40000'
+                      http-mem-per-sess: '0'
+                      vdevice-host-name: vm5
+                      rm-svc-mem-flag: status-green
+                      vdevice-dataKey: 169.254.10.12
+                      per-used-serv-mem: '0'
+                      used-serv-mem: '0'
+                      http-max-sess: '0'
+                      tcp-used-sess: '0'
+                      ssl-mem-per-sess: '50'
+                      tcp-mem-per-sess: '64'
+                      lastupdated: 1644997246553
+                      http-used-sess: '0'
+                      max-serv-mem: '1205778'
+                      dre-max-sess: '0'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/appqoe/appqoe-rm-stats:
+    get:
+      tags:
+      - Real-Time Monitoring - Appqoe
+      description: Get Appqoe RM Statistics from device
+      operationId: getAppqoeRMStats
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device Id
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Appqoe RM Statistics:
+                  description: Appqoe RM Statistics
+                  value:
+                    data:
+                    - port-alloc-fail: '0'
+                      port-free-succ: '0'
+                      port-free-fail: '0'
+                      vdevice-dataKey: 169.254.10.12
+                      vdevice-name: 169.254.10.12
+                      alloc-fail: '0'
+                      lastupdated: 1644997491529
+                      dup-entries: '0'
+                      vdevice-host-name: vm5
+                      port-alloc-succ: '0'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/appqoe/appqoe-services-status:
+    get:
+      tags:
+      - Real-Time Monitoring - Appqoe
+      description: Get Appqoe Services Status from device
+      operationId: getAppqoeServicesStatus
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device Id
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Appqoe Services Status:
+                  description: Appqoe Services Status
+                  value:
+                    data:
+                    - vdevice-dataKey: 169.254.10.12
+                      load-status: appqoe-service-status-green
+                      vdevice-name: 169.254.10.12
+                      service: appqoe-service-tcpopt
+                      load-percentage: '0'
+                      lastupdated: 1644998907908
+                      vdevice-host-name: vm5
+                    - vdevice-dataKey: 169.254.10.12
+                      load-status: appqoe-service-status-green
+                      vdevice-name: 169.254.10.12
+                      service: appqoe-service-ssl
+                      load-percentage: '0'
+                      lastupdated: 1644998907908
+                      vdevice-host-name: vm5
+                    - vdevice-dataKey: 169.254.10.12
+                      load-status: appqoe-service-status-red
+                      vdevice-name: 169.254.10.12
+                      service: appqoe-service-dreopt
+                      lastupdated: 1644998907908
+                      vdevice-host-name: vm5
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/appqoe/appqoe-sppi-pipe-resource:
+    get:
+      tags:
+      - Real-Time Monitoring - Appqoe
+      description: Get Appqoe Sppi Pipe Stats from device
+      operationId: getAppqoeSppiPipeStats
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device Id
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Appqoe Sppi Pipe Statistics:
+                  description: Appqoe Sppi Pipe Statistics
+                  value:
+                    data:
+                    - p-invalid-mtu: '0'
+                      p-disconnect: '0'
+                      p-in-use: '0'
+                      p-invalid-queue-id: '0'
+                      vdevice-dataKey: 169.254.10.12
+                      vdevice-name: 169.254.10.12
+                      channel-num: '0'
+                      lastupdated: 1644997573992
+                      p-ifindex-error: '0'
+                      vdevice-host-name: vm5
+                      p-sock-error: '0'
+                    - p-invalid-mtu: '0'
+                      p-disconnect: '0'
+                      p-in-use: '0'
+                      p-invalid-queue-id: '0'
+                      vdevice-dataKey: 169.254.10.12
+                      vdevice-name: 169.254.10.12
+                      channel-num: '1'
+                      lastupdated: 1644997573993
+                      p-ifindex-error: '0'
+                      vdevice-host-name: vm5
+                      p-sock-error: '0'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/appqoe/appqoe-sppi-queue-resource:
+    get:
+      tags:
+      - Real-Time Monitoring - Appqoe
+      description: Get Appqoe Sppi Queue Stats from device
+      operationId: getAppqoeSppiQueueStats
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device Id
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Appqoe Sppi Queue Statistics:
+                  description: Appqoe Sppi Queue Statistics
+                  value:
+                    data:
+                    - pkt-send-failed: '0'
+                      vdevice-name: 169.254.10.12
+                      poll-error: '0'
+                      tpkt-version-error: '0'
+                      mmap-error: '0'
+                      truncated: '0'
+                      no-pkt-buf: '0'
+                      pkt-available: '0'
+                      invalid-ring: '0'
+                      vdevice-host-name: vm5
+                      in-use: '0'
+                      no-dev: '0'
+                      pkt-read-failed: '0'
+                      invalid-mode: '0'
+                      vdevice-dataKey: 169.254.10.12
+                      nomem: '0'
+                      no-iov-buf: '0'
+                      not-init: '0'
+                      sock-error: '0'
+                      pkt: '8'
+                      channel-num: '0'
+                      lastupdated: 1644998764198
+                      invalid-size: '0'
+                      pkt-losing: '0'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/appqoe/cluster-summary:
+    get:
+      tags:
+      - Real-Time Monitoring - Appqoe
+      description: Get Appqoe Cluster Summary from device
+      operationId: getAppqoeClusterSummary
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device Id
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Appqoe Cluster Summary:
+                  description: Appqoe Cluster Summary
+                  value:
+                    data:
+                    - load-status: appqoe-service-status-green
+                      vdevice-name: 169.254.10.12
+                      load-percentage: '0'
+                      system-ip: 172.16.254.4
+                      sng-name: SNG-APPQOE
+                      site-id: '5'
+                      vdevice-host-name: vm5
+                      lan-ip: 192.168.2.2
+                      vdevice-dataKey: 169.254.10.12-192.168.2.2
+                      error-message: '-'
+                      service: appqoe-service-tcpopt
+                      lastupdated: 1644995623537
+                      device-mode: device-mode-integrated-service-node
+                      status: sn-status-green
+                    - load-status: appqoe-service-status-green
+                      vdevice-name: 169.254.10.12
+                      load-percentage: '0'
+                      system-ip: 172.16.254.4
+                      sng-name: SNG-APPQOE
+                      site-id: '5'
+                      vdevice-host-name: vm5
+                      lan-ip: 192.168.2.2
+                      vdevice-dataKey: 169.254.10.12-192.168.2.2
+                      error-message: '-'
+                      service: appqoe-service-ssl
+                      lastupdated: 1644995623537
+                      device-mode: device-mode-integrated-service-node
+                      status: sn-status-green
+                    - load-status: appqoe-service-status-red
+                      vdevice-name: 169.254.10.12
+                      system-ip: 172.16.254.4
+                      sng-name: SNG-APPQOE
+                      site-id: '5'
+                      vdevice-host-name: vm5
+                      lan-ip: 192.168.2.2
+                      vdevice-dataKey: 169.254.10.12-192.168.2.2
+                      error-message: '-'
+                      service: appqoe-service-dreopt
+                      lastupdated: 1644995623537
+                      device-mode: device-mode-integrated-service-node
+                      status: sn-status-green
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/appqoe/error-recent:
+    get:
+      tags:
+      - Real-Time Monitoring - Appqoe
+      description: Get Appqoe error recent from device
+      operationId: getAppqoeErrorRecent
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device Id
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Appqoe Error Recent:
+                  description: Appqoe Error Recent
+                  value:
+                    data:
+                    - vdevice-dataKey: 169.254.10.12
+                      vdevice-name: 169.254.10.12
+                      stat-current: '0'
+                      stat-60s: '0'
+                      lastupdated: 1644995930359
+                      stat-30s: '0'
+                      label: appqoe-stat-rm-res-tcp-used-sess
+                      vdevice-host-name: vm5
+                    - vdevice-dataKey: 169.254.10.12
+                      vdevice-name: 169.254.10.12
+                      stat-current: '0'
+                      stat-60s: '0'
+                      lastupdated: 1644995930359
+                      stat-30s: '0'
+                      label: appqoe-stat-rm-res-ssl-used-sess
+                      vdevice-host-name: vm5
+                    - vdevice-dataKey: 169.254.10.12
+                      vdevice-name: 169.254.10.12
+                      stat-current: '0'
+                      stat-60s: '0'
+                      lastupdated: 1644995930359
+                      stat-30s: '0'
+                      label: appqoe-stat-rm-health-yellow
+                      vdevice-host-name: vm5
+                    - vdevice-dataKey: 169.254.10.12
+                      vdevice-name: 169.254.10.12
+                      stat-current: '0'
+                      stat-60s: '0'
+                      lastupdated: 1644995930359
+                      stat-30s: '0'
+                      label: appqoe-stat-rm-health-green
+                      vdevice-host-name: vm5
+                    - vdevice-dataKey: 169.254.10.12
+                      vdevice-name: 169.254.10.12
+                      stat-current: '0'
+                      stat-60s: '0'
+                      lastupdated: 1644995930359
+                      stat-30s: '0'
+                      label: appqoe-stat-rm-tcp-sess-alloc
+                      vdevice-host-name: vm5
+                    - vdevice-dataKey: 169.254.10.12
+                      vdevice-name: 169.254.10.12
+                      stat-current: '0'
+                      stat-60s: '0'
+                      lastupdated: 1644995930359
+                      stat-30s: '0'
+                      label: appqoe-stat-rm-tcp-sess-free
+                      vdevice-host-name: vm5
+                    - vdevice-dataKey: 169.254.10.12
+                      vdevice-name: 169.254.10.12
+                      stat-current: '0'
+                      stat-60s: '0'
+                      lastupdated: 1644995930359
+                      stat-30s: '0'
+                      label: appqoe-stat-rm-ssl-sess-alloc
+                      vdevice-host-name: vm5
+                    - vdevice-dataKey: 169.254.10.12
+                      vdevice-name: 169.254.10.12
+                      stat-current: '0'
+                      stat-60s: '0'
+                      lastupdated: 1644995930359
+                      stat-30s: '0'
+                      label: appqoe-stat-rm-ssl-sess-free
+                      vdevice-host-name: vm5
+                    - vdevice-dataKey: 169.254.10.12
+                      vdevice-name: 169.254.10.12
+                      stat-current: '0'
+                      stat-60s: '0'
+                      lastupdated: 1644995930359
+                      stat-30s: '0'
+                      label: appqoe-stat-tcp-tot-conn
+                      vdevice-host-name: vm5
+                    - vdevice-dataKey: 169.254.10.12
+                      vdevice-name: 169.254.10.12
+                      stat-current: '0'
+                      stat-60s: '0'
+                      lastupdated: 1644995930359
+                      stat-30s: '0'
+                      label: appqoe-stat-tcp-tot-flow-create
+                      vdevice-host-name: vm5
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/appqoe/expired-flow-id:
+    get:
+      tags:
+      - Real-Time Monitoring - Appqoe
+      description: Get Appqoe Expired flow Id details from device
+      operationId: createAppqoeFlowIdExpiredDetails
+      parameters:
+      - name: flow-id
+        in: query
+        description: Flow Id
+        required: true
+        schema:
+          type: string
+      - name: deviceId
+        in: query
+        description: Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Appqoe Expired flow Id details:
+                  description: Appqoe Expired flow Id details
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write
+  /device/appqoe/flow-closed-error:
+    get:
+      tags:
+      - Real-Time Monitoring - Appqoe
+      description: Get Appqoe flow closed error from device
+      operationId: getAppqoeFlowClosedError
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device Id
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Appqoe Flow Closed Error:
+                  description: Appqoe Flow Closed Error
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.11
+                      vdevice-host-name: vm1
+                      flow-id: '0'
+                      vpn-id: '1'
+                      client-ip: 1.1.1.1
+                      client-port: '80'
+                      remote-server-ip: 2.2.2.2
+                      remote-server-port: '8080'
+                      service: appqoe-service-ssl
+                      tcpproxy-err-tag: tag1
+                      sslproxy-err-tag: tag2
+                      lastupdated: 1655736428995
+                    - vdevice-name: 172.16.255.11
+                      vdevice-host-name: vm1
+                      flow-id: '0'
+                      vpn-id: '1'
+                      client-ip: 1.1.1.1
+                      client-port: '80'
+                      remote-server-ip: 2.2.2.3
+                      remote-server-port: '8080'
+                      service: appqoe-service-ssl
+                      tcpproxy-err-tag: tag1
+                      sslproxy-err-tag: tag2
+                      lastupdated: 1655736428995
+                    - vdevice-name: 172.16.255.11
+                      vdevice-host-name: vm1
+                      flow-id: '0'
+                      vpn-id: '1'
+                      client-ip: 1.1.1.1
+                      client-port: '80'
+                      remote-server-ip: 2.2.2.4
+                      remote-server-port: '8080'
+                      service: appqoe-service-ssl
+                      tcpproxy-err-tag: tag1
+                      sslproxy-err-tag: tag2
+                      lastupdated: 1655736428995
+                    - vdevice-name: 172.16.255.11
+                      vdevice-host-name: vm1
+                      flow-id: '0'
+                      vpn-id: '1'
+                      client-ip: 1.1.1.1
+                      client-port: '80'
+                      remote-server-ip: 2.2.2.5
+                      remote-server-port: '8080'
+                      service: appqoe-service-ssl
+                      tcpproxy-err-tag: tag1
+                      sslproxy-err-tag: tag2
+                      lastupdated: 1655736428995
+                    - vdevice-name: 172.16.255.11
+                      vdevice-host-name: vm1
+                      flow-id: '0'
+                      vpn-id: '1'
+                      client-ip: 1.1.1.1
+                      client-port: '80'
+                      remote-server-ip: 2.2.2.6
+                      remote-server-port: '8080'
+                      service: appqoe-service-ssl
+                      tcpproxy-err-tag: tag1
+                      sslproxy-err-tag: tag2
+                      lastupdated: 1655736428995
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/appqoe/flow-expired:
+    get:
+      tags:
+      - Real-Time Monitoring - Appqoe
+      description: Get Appqoe expired from device
+      operationId: getAppqoeExpired
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Appqoe Flow Expired List:
+                  description: Appqoe Flow Expired List
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write
+  /device/appqoe/service-controllers:
+    get:
+      tags:
+      - Real-Time Monitoring - Appqoe
+      description: Get Appqoe service controllers from device
+      operationId: getAppqoeServiceControllers
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device Id
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Appqoe Service Controllers:
+                  description: Appqoe Service Controllers
+                  value:
+                    data:
+                    - sn-lan-ip: 192.168.2.2
+                      vdevice-dataKey: 169.254.10.12-192.168.2.1
+                      vdevice-name: 169.254.10.12
+                      sc-lan-ip: 192.168.2.1
+                      system-ip: 172.16.254.4
+                      lastupdated: 1644996521181
+                      site-id: '5'
+                      vdevice-host-name: vm5
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/appqoe/status:
+    get:
+      tags:
+      - Real-Time Monitoring - Appqoe
+      description: Get Appqoe status from device
+      operationId: getAppqoeStatus
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device Id
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Appqoe Status:
+                  description: Appqoe Status
+                  value:
+                    data:
+                    - vdevice-dataKey: 169.254.10.12
+                      vdevice-name: 169.254.10.12
+                      module: appqoe-module-sslproxy
+                      err-tag: appqoe-err-ca-tp-cfg
+                      appqoe-status: appqoe-status-yellow
+                      lastupdated: 1644996370984
+                      vdevice-host-name: vm5
+                      status: appqoe-status-yellow
+                    - vdevice-dataKey: 169.254.10.12
+                      vdevice-name: 169.254.10.12
+                      module: appqoe-module-tcpproxy
+                      err-tag: appqoe-err-undef
+                      appqoe-status: appqoe-status-yellow
+                      lastupdated: 1644996370984
+                      vdevice-host-name: vm5
+                      status: appqoe-status-green
+                    - vdevice-dataKey: 169.254.10.12
+                      vdevice-name: 169.254.10.12
+                      module: appqoe-module-sc
+                      err-tag: appqoe-err-undef
+                      appqoe-status: appqoe-status-yellow
+                      lastupdated: 1644996370984
+                      vdevice-host-name: vm5
+                      status: appqoe-status-green
+                    - vdevice-dataKey: 169.254.10.12
+                      vdevice-name: 169.254.10.12
+                      module: appqoe-module-rm
+                      err-tag: appqoe-err-undef
+                      appqoe-status: appqoe-status-yellow
+                      lastupdated: 1644996370984
+                      vdevice-host-name: vm5
+                      status: appqoe-status-green
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/appqoe/vpn-id:
+    get:
+      tags:
+      - Real-Time Monitoring - Appqoe
+      description: Get Appqoe Active vpn Id details from device
+      operationId: createAppqoeVpnIdList
+      parameters:
+      - name: vpn-id
+        in: query
+        description: VPN Id
+        required: true
+        schema:
+          type: string
+      - name: client-ip
+        in: query
+        description: Client Ip
+        schema:
+          type: string
+      - name: server-ip
+        in: query
+        description: Server Ip
+        schema:
+          type: string
+      - name: server-port
+        in: query
+        description: Server-Port
+        schema:
+          type: string
+      - name: deviceId
+        in: query
+        description: Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Appqoe Flow Active VpnId List:
+                  description: Appqoe Flow Active VpnId List
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write

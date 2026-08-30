@@ -1,0 +1,355 @@
+openapi: 3.2.0
+info:
+  title: UX 1.0 Configuration Configuration - Voice Template Policy API
+  description: "Configuration of UX 1.0 device and policy.\nIncludes API operations for the following:\n  Managing original SD-WAN device configurations and policy configurations\n  Device templates and feature templates"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Configuration - Voice Template Policy
+paths:
+  /template/policy/voice:
+    post:
+      tags:
+      - Configuration - Voice Template Policy
+      description: Create Template
+      operationId: createVoiceTemplate
+      requestBody:
+        description: Policy template
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Policy template:
+                description: Policy template
+                value:
+                  policyDescription: SIP dail peers
+                  policyType: feature
+                  policyName: SIPpolicy
+                  policyDefinition:
+                    assembly:
+                    - definitionId: 5557cab0-b8f7-43d6-97d5-2dc572007aac
+                      type: dialPeer
+                      portType: sipDialPeer
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Policy Id:
+                  description: Policy Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    get:
+      tags:
+      - Configuration - Voice Template Policy
+      description: Generate template list
+      operationId: generateVoiceTemplateList
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Template list:
+                  description: Template list
+                  value:
+                    data:
+                    - lastUpdatedBy: admin
+                      mastersAttached: 0
+                      policyName: SIPpolicy
+                      virtualApplicationTemplates: []
+                      policyDefinition:
+                        assembly:
+                        - definitionId: 5557cab0-b8f7-43d6-97d5-2dc572007aac
+                          type: dialPeer
+                          portType: sipDialPeer
+                      policyDefinitionEdit:
+                        assembly:
+                        - definitionId: 5557cab0-b8f7-43d6-97d5-2dc572007aac
+                          type: dialPeer
+                          portType: sipDialPeer
+                      createdOn: 1590272854518
+                      policyDescription: SIP dail peers
+                      policyUseCase: custom
+                      '@rid': 1124
+                      policyId: 87fed5e0-3b95-47a3-9dae-bed8b68562ed
+                      createdBy: admin
+                      devicesAttached: 0
+                      policyType: feature
+                      lastUpdatedOn: 1590272854518
+                      supportedDevices:
+                      - vedge-C8300-2N2S-4T2X
+                      - vedge-C8200-1N-4T
+                      - vedge-C8200L-1N-4T
+                      - vedge-C8300-2N2S-6T
+                      - vedge-C8300-1N1S-4T2X
+                      - vedge-C8300-1N1S-6T
+                      - vedge-ISR-4451-X
+                      - vedge-ISR-4351
+                      - vedge-ISR-4461
+                      - vedge-ISR-4431
+                      - vedge-ISR-4321
+                      - vedge-ISR-4331
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/policy/voice/definition/{policyId}:
+    get:
+      tags:
+      - Configuration - Voice Template Policy
+      description: Get templates by policy Id
+      operationId: getTemplateById
+      parameters:
+      - name: policyId
+        in: path
+        description: Policy Id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Policy template:
+                  description: Policy template
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/policy/voice/devices:
+    get:
+      tags:
+      - Configuration - Voice Template Policy
+      description: Get all device list
+      operationId: getVoicePolicyDeviceList
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Device list:
+                  description: Device list
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/policy/voice/devices/{policyId}:
+    get:
+      tags:
+      - Configuration - Voice Template Policy
+      description: Get device list by policy Id
+      operationId: getDeviceListByPolicyId
+      parameters:
+      - name: policyId
+        in: path
+        description: Policy Id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Device list:
+                  description: Device list
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/policy/voice/summary:
+    get:
+      tags:
+      - Configuration - Voice Template Policy
+      description: Get templates that map a device model
+      operationId: generateVoicePolicySummary
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Policy summary:
+                  description: Policy summary
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/policy/voice/{deviceModel}:
+    get:
+      tags:
+      - Configuration - Voice Template Policy
+      description: Get templates that map a device model
+      operationId: getVoiceTemplatesForDevice
+      parameters:
+      - name: deviceModel
+        in: path
+        description: Device model
+        required: true
+        schema:
+          type: object
+          properties:
+            deviceModel:
+              type: string
+          description: 'This is the valid DeviceModel '
+          $$ref: '#/components/schemas/DeviceModel'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Template list:
+                  description: Template list
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/policy/voice/{policyId}:
+    put:
+      tags:
+      - Configuration - Voice Template Policy
+      description: Edit Template
+      operationId: editVoiceTemplate
+      parameters:
+      - name: policyId
+        in: path
+        description: Policy Id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Policy template
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Policy template:
+                description: Policy template
+                value:
+                  policyDescription: SIP dail peers
+                  policyType: feature
+                  policyName: SIPpolicy
+                  policyDefinition:
+                    assembly:
+                    - definitionId: 5557cab0-b8f7-43d6-97d5-2dc572007aac
+                      type: dialPeer
+                      portType: sipDialPeer
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Policy template:
+                  description: Policy template
+                  value:
+                    masterTemplatesAffected: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+      - Configuration - Voice Template Policy
+      description: Delete Template
+      operationId: deleteVoiceTemplate
+      parameters:
+      - name: policyId
+        in: path
+        description: Policy Id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

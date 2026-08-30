@@ -1,0 +1,279 @@
+openapi: 3.2.0
+info:
+  title: Others IPS Signature - Comment API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: IPS Signature - Comment
+paths:
+  /signature-set/{signatureSetId}/rule/{ruleId}/comment:
+    get:
+      tags:
+      - IPS Signature - Comment
+      summary: Fetch all comments on a rule
+      operationId: getCommentOnRule
+      parameters:
+      - name: signatureSetId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: ruleId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: success response message
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        comment:
+                          type: string
+                        createdOn:
+                          type: integer
+                          format: int64
+                        lastUpdatedOn:
+                          type: integer
+                          format: int64
+                        user:
+                          type: string
+                        uuid:
+                          type: string
+                      $$ref: '#/components/schemas/RuleComment'
+                  ruleId:
+                    type: string
+                  signatureId:
+                    type: string
+                $$ref: '#/components/schemas/RuleCommentsResponse'
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+      - IPS Signature - Comment
+      summary: Create comment on a rule
+      operationId: createCommentOnRule
+      parameters:
+      - name: signatureSetId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: ruleId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                comment:
+                  type: string
+              $$ref: '#/components/schemas/RuleCommentRequest'
+        required: true
+      responses:
+        '200':
+          description: success response message
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  ruleId:
+                    type: string
+                  signatureSetId:
+                    type: string
+                  success:
+                    type: boolean
+                  uuid:
+                    type: string
+                $$ref: '#/components/schemas/RuleCommentResponse'
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  ruleId:
+                    type: string
+                  signatureSetId:
+                    type: string
+                  success:
+                    type: boolean
+                  uuid:
+                    type: string
+                $$ref: '#/components/schemas/RuleCommentResponse'
+  /signature-set/{signatureSetId}/rule/{ruleId}/comment/{commentId}:
+    put:
+      tags:
+      - IPS Signature - Comment
+      summary: update comment on a rule
+      operationId: updateCommentOnRule
+      parameters:
+      - name: signatureSetId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: ruleId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: commentId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                comment:
+                  type: string
+              $$ref: '#/components/schemas/RuleCommentRequest'
+        required: true
+      responses:
+        '200':
+          description: success response message
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  ruleId:
+                    type: string
+                  signatureSetId:
+                    type: string
+                  success:
+                    type: boolean
+                  uuid:
+                    type: string
+                $$ref: '#/components/schemas/RuleCommentResponse'
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  ruleId:
+                    type: string
+                  signatureSetId:
+                    type: string
+                  success:
+                    type: boolean
+                  uuid:
+                    type: string
+                $$ref: '#/components/schemas/RuleCommentResponse'
+    delete:
+      tags:
+      - IPS Signature - Comment
+      summary: delete comment on a rule
+      operationId: deleteCommentOnRule
+      parameters:
+      - name: signatureSetId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: ruleId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: commentId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: success response message
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  ruleId:
+                    type: string
+                  signatureSetId:
+                    type: string
+                  success:
+                    type: boolean
+                  uuid:
+                    type: string
+                $$ref: '#/components/schemas/RuleCommentResponse'
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  ruleId:
+                    type: string
+                  signatureSetId:
+                    type: string
+                  success:
+                    type: boolean
+                  uuid:
+                    type: string
+                $$ref: '#/components/schemas/RuleCommentResponse'

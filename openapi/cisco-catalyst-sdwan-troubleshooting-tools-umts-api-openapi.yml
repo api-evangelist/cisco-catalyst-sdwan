@@ -1,0 +1,442 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Troubleshooting Tools - UMTS API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Troubleshooting Tools - UMTS
+paths:
+  /stream/device/umts:
+    post:
+      tags:
+      - Troubleshooting Tools - UMTS
+      summary: Assign sessionId to client
+      description: 'assign sessionId to client if there is no conflict ongoing sessions '
+      operationId: enableSession
+      requestBody:
+        description: Input query
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                deviceUUID:
+                  type: string
+                  example: C8K-21a355e3-fd5b-4d03-9d48-f2845388c07f
+                localColor:
+                  type: string
+                  example: lte
+                remoteColor:
+                  type: string
+                  example: remote-color-all
+                remoteSystem:
+                  type: string
+                  example: 172.16.255.16,172.16.255.14
+              $$ref: '#/components/schemas/UMTSInput'
+        required: true
+      responses:
+        '200':
+          description: Session info which client can start request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    download_status:
+                      type: string
+                      example: success
+                    payload:
+                      type: string
+                      example: '"{\"deviceUUID\":\"C8K-21a355e3-fd5b-4d03-9d48-f2845388c07f\",\"localColor\":\"lte\",\"remoteSystem\":\"172.16.255.16\",\"remoteColor\":\"lte\",\"actionType\":\"ON_DEMANDING\",\"sessionId\":\"5596803a-e594-413b-89f2-2acecd1d5f92\"}"'
+                    renewalTime:
+                      type: number
+                      example: 1654566270967
+                    requestStatus:
+                      type: string
+                      example: stop
+                    sessionId:
+                      type: string
+                      example: 5596803a-e594-413b-89f2-2acecd1d5f92
+                    startTime:
+                      type: number
+                      example: 1654566270968
+                    status:
+                      type: string
+                      example: success
+                    statusMessage:
+                      type: string
+                      example: device error
+                    type:
+                      type: string
+                      example: ON_DEMANDING
+                    user:
+                      type: string
+                      example: admin
+                    userIp:
+                      type: string
+                      example: 100.1.2.3
+                    uuid:
+                      type: string
+                      example: C8K-21a355e3-fd5b-4d03-9d48-f2845388c07f
+                  $$ref: '#/components/schemas/UMTSSession'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                conflicts sample:
+                  description: conflicts sample
+                  value:
+                    error:
+                      type: error
+                      message: Server Error
+                      details: device C8K-6dfe1f7c-7dc5-4891-bdb4-fb74e84882b7 is already have a active umts tunnel session
+                      code: TBST1008
+                  $$ref: '#/components/examples/ComViptelaVmanageServerTroubleshootingUmtsUmtsrestapiResponseExampleUmtsEnableError'
+  /stream/device/umts/statistics/{deviceUUID}/{eventType}:
+    get:
+      tags:
+      - Troubleshooting Tools - UMTS
+      summary: get UMTS Data
+      description: get UMTS result by type, time, and device uuid
+      operationId: getUMTSData
+      parameters:
+      - name: deviceUUID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: eventType
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: lastNHours
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 24
+      responses:
+        '200':
+          description: opertion result
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                get event-driven sample:
+                  description: get event-driven sample
+                  value:
+                    data:
+                    - vip_idx: 496
+                      vip_time: 16434009013877
+                      remote_color: lte
+                      local_color: lte
+                      remote_system_ip: 172.16.255.16
+                      local_system_ip: 172.16.255.21
+                      proto: IPSEC
+                      sent_qos: 135
+                      state: UP
+                      event_type: ON_DEMAND
+                      event_subtype: NONE111
+                      hops:
+                        hop:
+                        - idx: 1
+                          ip: 10.1.15.13
+                          hostname: ''
+                          rtt: 486
+                          rtt_min: 480
+                          rtt_max: 490
+                          loss: 0
+                          jitter: 0
+                          recv_qos: 0
+                          reply_qos: 0
+                          lbl_info: 0
+                        - idx: 2
+                          ip: 10.0.5.21
+                          hostname: ''
+                          rtt: 487
+                          rtt_min: 480
+                          rtt_max: 490
+                          loss: 0
+                          jitter: 0
+                          recv_qos: 0
+                          reply_qos: 0
+                          lbl_info: 0
+                  $$ref: '#/components/examples/ComViptelaVmanageServerTroubleshootingUmtsUmtsrestapiResponseExampleUmtsEventdrivenResult'
+        '400':
+          description: Bad Request
+  /stream/device/umts/{deviceUUID}/save:
+    post:
+      tags:
+      - Troubleshooting Tools - UMTS
+      summary: save UMTS result
+      description: 'Save UMTS Data, this api is called by device side '
+      operationId: saveUMTSData
+      parameters:
+      - name: deviceUUID
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Stats query string
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              on-demand sample:
+                description: on-demand sample
+                value:
+                  record:
+                  - vip_idx: 493
+                    vip_time: 1643400901398
+                    remote_color: lte
+                    local_color: lte
+                    remote_system_ip: 172.16.255.21
+                    local_system_ip: 172.16.255.15
+                    proto: IPSEC
+                    sent_qos: 72
+                    state: UP
+                    event_type: PERIODIC
+                    event_subtype: NONE
+                    hops:
+                      hop:
+                      - idx: 1
+                        ip: 10.1.15.13
+                        hostname: ''
+                        rtt: 486
+                        rtt_min: 480
+                        rtt_max: 490
+                        loss: 0
+                        jitter: 0
+                        recv_qos: 0
+                        reply_qos: 0
+                        lbl_info: 0
+                      - idx: 2
+                        ip: 10.0.5.21
+                        hostname: ''
+                        rtt: 487
+                        rtt_min: 480
+                        rtt_max: 490
+                        loss: 0
+                        jitter: 0
+                        recv_qos: 0
+                        reply_qos: 0
+                        lbl_info: 0
+                $$ref: '#/components/examples/ComViptelaVmanageServerTroubleshootingUmtsUmtsrestapiParameterExampleUmtssaverequest'
+        required: true
+      responses:
+        '200':
+          description: save result
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                save result sample:
+                  description: save result sample
+                  value: '{status: success}'
+        '400':
+          description: Bad Request
+      x-roles-required: vmanage-http-stream
+  /stream/device/umts/{operation}/{sessionId}:
+    get:
+      tags:
+      - Troubleshooting Tools - UMTS
+      summary: start/stop/disable/status/download session
+      description: 'start, stop,status,download or disable session '
+      operationId: updateUmtsSessionStatus
+      parameters:
+      - name: operation
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: sessionId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: opertion result
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                start/stop/disable/status/download sample:
+                  description: start/stop/disable/status/download sample
+                  value: '{status: success}'
+                status  ok sample:
+                  description: status  ok sample
+                  value:
+                    JSessionId: mRs3gc7GFhUcR1RDOBYpEW9YyLTx6JWxJRbZb852
+                    sessionId: dbd6e729-d071-4024-a42c-f55b88fa034b
+                    type: ON_DEMANDING
+                    uuid: C8K-6dfe1f7c-7dc5-4891-bdb4-fb74e84882b7
+                    statusMessage: ok
+                    renewalTime: 1655641163457
+                    '@rid': 1173
+                    payload: '{"deviceUUID":"C8K-6dfe1f7c-7dc5-4891-bdb4-fb74e84882b7","localColor":"local-color-all","remoteSystem":"172.16.255.16","remoteColor":"remote-color-all","actionType":"ON_DEMANDING","sessionId":"dbd6e729-d071-4024-a42c-f55b88fa034b"}'
+                    download_status: success
+                    userIp: 10.0.1.1
+                    startTime: 1655641163457
+                    user: kkk
+                    requestStatus: START
+                    status: success
+                  $$ref: '#/components/examples/ComViptelaVmanageServerTroubleshootingUmtsUmtsrestapiResponseExampleUmtsStatusResult'
+                status  fail sample:
+                  description: status  fail sample
+                  value:
+                    JSessionId: FuQnNel_IR7i_KoTyjH84Ud0SdOWh1g545IR9LuI
+                    sessionId: 3fb76734-2fcd-44ef-b69e-77536ab5d413
+                    type: ON_DEMANDING
+                    uuid: C8K-21a355e3-fd5b-4d03-9d48-f2845388c07f
+                    statusMessage: this is error message
+                    renewalTime: 1656285116463
+                    '@rid': 21692
+                    payload: '{"deviceUUID":"C8K-21a355e3-fd5b-4d03-9d48-f2845388c07f","localColor":"local-color-all","remoteSystem":"172.16.255.16","remoteColor":"lte","actionType":"ON_DEMANDING","sessionId":"3fb76734-2fcd-44ef-b69e-77536ab5d413"}'
+                    userIp: 10.0.1.1
+                    startTime: 1656285116464
+                    user: kkk
+                    requestStatus: STOP
+                    status: failure
+                  $$ref: '#/components/examples/ComViptelaVmanageServerTroubleshootingUmtsUmtsrestapiResponseExampleUmtsStatusFailResult'
+                status  downloadable sample:
+                  description: status  downloadable sample
+                  value:
+                    JSessionId: FuQnNel_IR7i_KoTyjH84Ud0SdOWh1g545IR9LuI
+                    sessionId: 3fb76734-2fcd-44ef-b69e-77536ab5d413
+                    type: ON_DEMANDING
+                    uuid: C8K-21a355e3-fd5b-4d03-9d48-f2845388c07f
+                    statusMessage: ok
+                    renewalTime: 1656285116463
+                    '@rid': 21692
+                    payload: '{"deviceUUID":"C8K-21a355e3-fd5b-4d03-9d48-f2845388c07f","localColor":"local-color-all","remoteSystem":"172.16.255.16","remoteColor":"lte","actionType":"ON_DEMANDING","sessionId":"3fb76734-2fcd-44ef-b69e-77536ab5d413"}'
+                    download_status: success
+                    userIp: 10.0.1.1
+                    startTime: 1656285116464
+                    user: kkk
+                    requestStatus: STOP
+                    status: success
+                  $$ref: '#/components/examples/ComViptelaVmanageServerTroubleshootingUmtsUmtsrestapiResponseExampleUmtsStatusDownloadableResult'
+                download  sample:
+                  description: download  sample
+                  value:
+                    data:
+                    - vip_idx: 496
+                      vip_time: 16434009013877
+                      remote_color: lte
+                      local_color: lte
+                      remote_system_ip: 172.16.255.16
+                      local_system_ip: 172.16.255.21
+                      proto: IPSEC
+                      sent_qos: 139
+                      state: UP
+                      event_type: ON_DEMAND
+                      event_subtype: NONE111
+                      hops:
+                        hop:
+                        - idx: 1
+                          ip: 10.1.15.13
+                          hostname: ''
+                          rtt: 486
+                          rtt_min: 480
+                          rtt_max: 490
+                          loss: 0
+                          jitter: 0
+                          recv_qos: 0
+                          reply_qos: 0
+                          lbl_info: 0
+                        - idx: 2
+                          ip: 10.0.5.21
+                          hostname: ''
+                          rtt: 487
+                          rtt_min: 480
+                          rtt_max: 490
+                          loss: 0
+                          jitter: 0
+                          recv_qos: 0
+                          reply_qos: 0
+                          lbl_info: 0
+                    - vip_idx: 497
+                      vip_time: 16434009013877
+                      remote_color: lte
+                      local_color: lte
+                      remote_system_ip: 172.16.255.16
+                      local_system_ip: 172.16.255.21
+                      proto: IPSEC
+                      sent_qos: 188
+                      state: down
+                      event_type: ON_DEMAND
+                      event_subtype: NONE111
+                      hops:
+                        hop:
+                        - idx: 1
+                          ip: 10.1.15.13
+                          hostname: ''
+                          rtt: 486
+                          rtt_min: 480
+                          rtt_max: 490
+                          loss: 0
+                          jitter: 0
+                          recv_qos: 0
+                          reply_qos: 0
+                          lbl_info: 0
+                        - idx: 2
+                          ip: 10.0.5.21
+                          hostname: ''
+                          rtt: 487
+                          rtt_min: 480
+                          rtt_max: 490
+                          loss: 0
+                          jitter: 0
+                          recv_qos: 0
+                          reply_qos: 0
+                          lbl_info: 0
+                  $$ref: '#/components/examples/ComViptelaVmanageServerTroubleshootingUmtsUmtsrestapiResponseExampleUmtsDownloadSample'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                error sample:
+                  description: error sample
+                  value:
+                    error:
+                      type: error
+                      message: Invalid Session
+                      details: Session 3fb76734-2fcd-44ef-b69e-77536ab5d41322 doesn't exist for Tenant default.
+                      code: TBST1005
+                  $$ref: '#/components/examples/ComViptelaVmanageServerTroubleshootingUmtsUmtsrestapiResponseExampleUmtsStatusError'

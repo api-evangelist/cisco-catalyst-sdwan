@@ -1,0 +1,311 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - CloudExpress API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - CloudExpress
+paths:
+  /device/cloudx/application/detail:
+    get:
+      tags:
+      - Real-Time Monitoring - CloudExpress
+      description: Get list of cloudexpress applications from device (Real Time)
+      operationId: createApplicationsDetailList
+      parameters:
+      - name: vpn-id
+        in: query
+        description: VPN Id
+        schema:
+          type: string
+          enum:
+          - '0'
+          - '512'
+      - name: application
+        in: query
+        description: Application
+        schema:
+          type: string
+      - name: query
+        in: query
+        description: Query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Cloudexpress applications detail:
+                  description: Cloudexpress applications detail
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.15
+                      vdevice-host-name: vm5
+                      vpn-id: 1
+                      application: office365
+                      app-name: Exchange
+                      exit-type: local
+                      gateway-system-ip: 10.1.15.13
+                      interface: GigabitEthernet1
+                      latency: 1
+                      loss: 5
+                      local-color: lte
+                      remote-color: lte
+                      vanalytics-score: 11
+                      lastupdated: 1660727547133
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/cloudx/applications:
+    get:
+      tags:
+      - Real-Time Monitoring - CloudExpress
+      description: Get list of cloudexpress applications from device (Real Time)
+      operationId: createApplicationsList
+      parameters:
+      - name: vpn-id
+        in: query
+        description: VPN Id
+        schema:
+          type: string
+          enum:
+          - '0'
+          - '512'
+      - name: application
+        in: query
+        description: Application
+        schema:
+          type: string
+      - name: query
+        in: query
+        description: Query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Cloudexpress applications:
+                  description: Cloudexpress applications
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.15
+                      vdevice-host-name: vm5
+                      vpn-id: 1
+                      application: amazon_aws
+                      exit-type: gateway
+                      gateway-system-ip: 10.1.15.13
+                      interface: GigabitEthernet1
+                      latency: 1
+                      loss: 40
+                      local-color: lte
+                      remote-color: lte
+                      lastupdated: 660244459596
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/cloudx/gatewayexits:
+    get:
+      tags:
+      - Real-Time Monitoring - CloudExpress
+      description: Get list of cloudexpress gateway exits from device (Real Time)
+      operationId: createGatewayExitsList
+      parameters:
+      - name: vpn-id
+        in: query
+        description: VPN Id
+        schema:
+          type: string
+          enum:
+          - '0'
+          - '512'
+      - name: application
+        in: query
+        description: Application
+        schema:
+          type: string
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Cloudexpress gateway exits:
+                  description: Cloudexpress gateway exits
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.15
+                      vdevice-host-name: vm5
+                      vpn-id: 1
+                      application: amazon_aws
+                      gateway-ip: 10.1.15.13
+                      latency: 1
+                      loss: 0
+                      local-color: lte
+                      remote-color: lte
+                      lastupdated: 660244459596
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/cloudx/loadbalance:
+    get:
+      tags:
+      - Real-Time Monitoring - CloudExpress
+      description: Get list of cloudexpress load balance applications from device (Real Time)
+      operationId: createLbApplicationsList
+      parameters:
+      - name: vpn-id
+        in: query
+        description: VPN Id
+        schema:
+          type: string
+          enum:
+          - '0'
+          - '512'
+      - name: application
+        in: query
+        description: Application
+        schema:
+          type: string
+      - name: query
+        in: query
+        description: Query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Cloudexpress load-balance applications-lb:
+                  description: Cloudexpress load-balance applications-lb
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.15
+                      vdevice-host-name: vm5
+                      vpn-id: 10
+                      application: office365
+                      interface: GigabitEthernet1
+                      exit-type: local
+                      gateway-system-ip: 10.0.1.2
+                      latency: 1
+                      loss: 5
+                      local-color: lte
+                      remote-color: lte
+                      lastupdated: 1660727547133
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/cloudx/localexits:
+    get:
+      tags:
+      - Real-Time Monitoring - CloudExpress
+      description: Get list of cloudexpress local exits from device (Real Time)
+      operationId: createLocalExitsList
+      parameters:
+      - name: vpn-id
+        in: query
+        description: VPN Id
+        schema:
+          type: string
+          enum:
+          - '0'
+          - '512'
+      - name: application
+        in: query
+        description: Application
+        schema:
+          type: string
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Cloudexpress local exits:
+                  description: Cloudexpress local exits
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.15
+                      vdevice-host-name: vm5
+                      vpn-id: 1
+                      application: 'office365 '
+                      interface: GigabitEthernet1
+                      latency: 1
+                      loss: 43
+                      lastupdated: 1660727547133
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write

@@ -1,0 +1,1679 @@
+openapi: 3.2.0
+info:
+  title: SD-WAN Services Multicloud Interconnect - Gateways API
+  description: Includes API operations for managing SD-WAN services such as Cloud OnRamp for SaaS and MultiCloud
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Multicloud Interconnect - Gateways
+paths:
+  /multicloud/interconnect/gateways:
+    get:
+      tags:
+      - Multicloud Interconnect - Gateways
+      summary: Get all Interconnect Gateways.
+      description: API to retrieve all Interconnect Gateways from vManage.
+      operationId: getInterconnectGateways
+      parameters:
+      - name: interconnect-type
+        in: query
+        description: Interconnect provider type
+        schema:
+          pattern: ^[a-zA-Z0-9][a-zA-Z0-9-]{1,22}[a-zA-Z0-9]$
+          type: string
+          enum:
+          - MEGAPORT
+          - EQUINIX
+      - name: interconnect-account-id
+        in: query
+        description: Interconnect provider account id
+        schema:
+          type: string
+      - name: region
+        in: query
+        description: Interconnect Region
+        schema:
+          pattern: ^[a-zA-Z0-9][a-zA-Z0-9-]{1,22}[a-zA-Z0-9]$
+          type: string
+      - name: region-id
+        in: query
+        description: Interconnect Region Id
+        schema:
+          pattern: ^[a-zA-Z0-9][a-zA-Z0-9-]{1,22}[a-zA-Z0-9]$
+          type: string
+      - name: interconnect-gateway-name
+        in: query
+        description: Interconnect Gateway Name
+        schema:
+          pattern: ^[a-zA-Z0-9][a-zA-Z0-9-]{1,22}[a-zA-Z0-9]$
+          type: string
+      - name: resource-state
+        in: query
+        description: Interconnect Resource State
+        schema:
+          pattern: ^[a-zA-Z0-9][a-zA-Z0-9-]{1,22}[a-zA-Z0-9]$
+          type: string
+      - name: interconnect-billing-account-id
+        in: query
+        description: Interconnect Billing Account Id
+        schema:
+          pattern: ^[a-zA-Z0-9][a-zA-Z0-9-]{1,22}[a-zA-Z0-9]$
+          type: string
+      - name: refresh
+        in: query
+        schema:
+          pattern: (true|false)
+          type: string
+          default: 'false'
+      responses:
+        '200':
+          description: All Interconnect Gateways .
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  required:
+                  - deviceUuid
+                  - edgeAccountId
+                  - edgeBillingAccountId
+                  - edgeGatewayName
+                  - edgeType
+                  - ipTransit
+                  - licenseType
+                  - region
+                  - regionId
+                  - siteName
+                  type: object
+                  properties:
+                    configGroupSettings:
+                      required:
+                      - configGroupId
+                      - configGroupName
+                      type: object
+                      properties:
+                        configGroupId:
+                          maxLength: 255
+                          minLength: 1
+                          type: string
+                          description: Config Group Id
+                          example: 482eb6f3-1168-4b6f-901a-bd2c788b370d
+                        configGroupName:
+                          maxLength: 255
+                          minLength: 1
+                          type: string
+                          description: Config Group name
+                          example: My-CG-1
+                      $$ref: '#/components/schemas/InterconnectConfigGroupSettings'
+                    description:
+                      maxLength: 255
+                      minLength: 1
+                      type: string
+                    deviceUuid:
+                      maxLength: 255
+                      minLength: 1
+                      type: string
+                    edgeAccountId:
+                      maxLength: 255
+                      minLength: 1
+                      type: string
+                    edgeBillingAccountId:
+                      maxLength: 255
+                      minLength: 1
+                      type: string
+                    edgeGatewayName:
+                      maxLength: 255
+                      minLength: 1
+                      type: string
+                    edgeType:
+                      type: string
+                    egwBgpAsn:
+                      type: string
+                      description: BGP ASN assigned to Interconnect Gateway
+                      example: '64500'
+                    ipTransit:
+                      maxLength: 255
+                      minLength: 1
+                      type: string
+                    ipTransitId:
+                      type: string
+                    ipTransitSkuId:
+                      type: string
+                    isCustomSetting:
+                      type: boolean
+                      description: Custom Settings enabled for Interconnect Gateway
+                      example: true
+                    licenseSkuId:
+                      type: string
+                      description: License Sku Id of Interconnect Gateway
+                      example: '12345'
+                    licenseType:
+                      type: string
+                      enum:
+                      - PAYG
+                      - PREPAID
+                      - DIRECT
+                    loopbackCidr:
+                      type: string
+                      description: Ip pool allocated to Interconnect Gateway for Loopback Interfaces
+                      example: 172.31.251.4/30
+                    mrfSettings:
+                      type: object
+                      properties:
+                        mrfRouterRole:
+                          type: string
+                          description: Multi Region Fabric router role
+                          example: border
+                        mrfTransportGateway:
+                          type: boolean
+                          description: Multi Region Fabric Transport Gateway
+                          example: false
+                        nhmRegionId:
+                          type: integer
+                          description: Network Hierarchy Region Id
+                          format: int64
+                          example: 123
+                        nhmRegionName:
+                          type: string
+                          description: Network Hierarchy Region name
+                          example: My-Region
+                      $$ref: '#/components/schemas/InterconnectMrfSettings'
+                    region:
+                      maxLength: 255
+                      minLength: 1
+                      type: string
+                    regionId:
+                      maxLength: 255
+                      minLength: 1
+                      type: string
+                    resourceState:
+                      type: string
+                    resourceStateMessage:
+                      type: string
+                    resourceStateUpdateTs:
+                      type: string
+                    serviceChainAttachments:
+                      type: string
+                    settings:
+                      required:
+                      - instanceSize
+                      - softwareImageId
+                      type: object
+                      properties:
+                        edgeGatewaySolution:
+                          type: string
+                          enum:
+                          - MVE
+                          - NE
+                        edgeType:
+                          type: string
+                          enum:
+                          - MEGAPORT
+                          - EQUINIX
+                          - ATT
+                        egwCustomSettingName:
+                          type: string
+                          description: Assigned name of the Interconnect Gateway Custom Settings
+                        instanceSize:
+                          maxLength: 255
+                          minLength: 1
+                          type: string
+                        ipSubnetPool:
+                          type: string
+                          description: Ip subnet pool assigned to the gateway
+                          example: 192.168.10.0/24
+                        softwareImageId:
+                          maxLength: 255
+                          minLength: 1
+                          pattern: ^C8000v.*$
+                          type: string
+                      $$ref: '#/components/schemas/InterconnectGatewaySettings'
+                    siteName:
+                      maxLength: 255
+                      minLength: 1
+                      type: string
+                  $$ref: '#/components/schemas/InterconnectGatewayExtended'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+      - Multicloud Interconnect - Gateways
+      summary: Create Interconnect gateway.
+      description: API to create an Intercoonect gateway in an Interconnect provider.
+      operationId: createInterconnectGateway
+      requestBody:
+        description: Request Payload for Multicloud Interconnect Gateways
+        content:
+          application/json:
+            schema:
+              required:
+              - deviceUuid
+              - edgeAccountId
+              - edgeBillingAccountId
+              - edgeGatewayName
+              - edgeType
+              - ipTransit
+              - licenseType
+              - region
+              - regionId
+              - siteName
+              type: object
+              properties:
+                configGroupSettings:
+                  required:
+                  - configGroupId
+                  - configGroupName
+                  type: object
+                  properties:
+                    configGroupId:
+                      maxLength: 255
+                      minLength: 1
+                      type: string
+                      description: Config Group Id
+                      example: 482eb6f3-1168-4b6f-901a-bd2c788b370d
+                    configGroupName:
+                      maxLength: 255
+                      minLength: 1
+                      type: string
+                      description: Config Group name
+                      example: My-CG-1
+                  $$ref: '#/components/schemas/InterconnectConfigGroupSettings'
+                description:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+                deviceUuid:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+                edgeAccountId:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+                edgeBillingAccountId:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+                edgeGatewayName:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+                edgeType:
+                  type: string
+                egwBgpAsn:
+                  type: string
+                  description: BGP ASN assigned to Interconnect Gateway
+                  example: '64500'
+                ipTransit:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+                ipTransitId:
+                  type: string
+                ipTransitSkuId:
+                  type: string
+                isCustomSetting:
+                  type: boolean
+                  description: Custom Settings enabled for Interconnect Gateway
+                  example: true
+                licenseSkuId:
+                  type: string
+                  description: License Sku Id of Interconnect Gateway
+                  example: '12345'
+                licenseType:
+                  type: string
+                  enum:
+                  - PAYG
+                  - PREPAID
+                  - DIRECT
+                loopbackCidr:
+                  type: string
+                  description: Ip pool allocated to Interconnect Gateway for Loopback Interfaces
+                  example: 172.31.251.4/30
+                mrfSettings:
+                  type: object
+                  properties:
+                    mrfRouterRole:
+                      type: string
+                      description: Multi Region Fabric router role
+                      example: border
+                    mrfTransportGateway:
+                      type: boolean
+                      description: Multi Region Fabric Transport Gateway
+                      example: false
+                    nhmRegionId:
+                      type: integer
+                      description: Network Hierarchy Region Id
+                      format: int64
+                      example: 123
+                    nhmRegionName:
+                      type: string
+                      description: Network Hierarchy Region name
+                      example: My-Region
+                  $$ref: '#/components/schemas/InterconnectMrfSettings'
+                region:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+                regionId:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+                resourceState:
+                  type: string
+                resourceStateMessage:
+                  type: string
+                resourceStateUpdateTs:
+                  type: string
+                serviceChainAttachments:
+                  type: string
+                settings:
+                  required:
+                  - instanceSize
+                  - softwareImageId
+                  type: object
+                  properties:
+                    edgeGatewaySolution:
+                      type: string
+                      enum:
+                      - MVE
+                      - NE
+                    edgeType:
+                      type: string
+                      enum:
+                      - MEGAPORT
+                      - EQUINIX
+                      - ATT
+                    egwCustomSettingName:
+                      type: string
+                      description: Assigned name of the Interconnect Gateway Custom Settings
+                    instanceSize:
+                      maxLength: 255
+                      minLength: 1
+                      type: string
+                    ipSubnetPool:
+                      type: string
+                      description: Ip subnet pool assigned to the gateway
+                      example: 192.168.10.0/24
+                    softwareImageId:
+                      maxLength: 255
+                      minLength: 1
+                      pattern: ^C8000v.*$
+                      type: string
+                  $$ref: '#/components/schemas/InterconnectGatewaySettings'
+                siteName:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+              $$ref: '#/components/schemas/InterconnectGatewayExtended'
+            examples:
+              Interconnect Megaport Gateways:
+                description: Interconnect Megaport Gateways
+                value:
+                  edgeType: MEGAPORT
+                  edgeAccountId: ABCD-1234-CDEF
+                  edgeGatewayName: mp-gateway-name
+                  description: This is my Megaport gateway
+                  region: 'Cologix TOR1, Toronto, ON, Canada : Toronto'
+                  regionId: '10'
+                  siteName: My_Megaport_Site
+                  deviceUuid: C8K-f7f6c42c-409d-11eb-9562-005056841be8
+                  settings:
+                    instanceSize: Small
+                    softwareImageId: C8000v 17.09.01a
+                  mrfSettings:
+                    mrfRouterRole: border
+                    mrfTransportGateway: false
+              Interconnect Equinix Gateways - MRF Enabled:
+                description: Interconnect Equinix Gateways - MRF Enabled
+                value: "{\n  \"edgeType\": \"EQUINIX\",\n  \"edgeAccountId\": \"ABCD-1234-CDEF\",\n  \"edgeGatewayName\": \"eq-gateway-name\",\n  \"description\": \"This is my Equinix Gateway\",\n  \"region\": \"NY Metro\",\n  \"regionId\": \"10\",\n  \"edgeBillingAccountId\": \"ABCD-1234-CDEF\",\n  \"siteName\": \"My_Equinix_Site\",\n  \"deviceUuid\": \"CSR-725caea2-41a4-497c-821d-a2e280be40f2\",\n  \"mrfSettings\": {\n    \"mrfRouterRole\": \"edge\",\n    \"mrfTransportGateway\": false\n  }\n  \"settings\": {\n    \"instanceSize\": \"Small\",\n    \"softwareImageId\": \"CSR1000v 17.03.03\"\n  }\n}"
+        required: true
+      responses:
+        '200':
+          description: Interconnect Process ID Information.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: Procees Id of the task
+                    example: 51d0a0e4-983a-471c-9abb-724d58144884
+                $$ref: '#/components/schemas/ProcessResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/interconnect/gateways/config-group:
+    post:
+      tags:
+      - Multicloud Interconnect - Gateways
+      summary: Create Interconnect gateway config group.
+      description: API to initiate a config group creation for an Interconnect gateway.
+      operationId: createInterconnectGatewayConfigGroup
+      parameters:
+      - name: interconnect-type
+        in: query
+        description: Interconnect provider type
+        required: true
+        schema:
+          type: string
+          enum:
+          - MEGAPORT
+          - EQUINIX
+      requestBody:
+        description: Request Payload for Multicloud Interconnect Gateway Config Group Creation
+        content:
+          application/json:
+            schema:
+              required:
+              - configGroupName
+              type: object
+              properties:
+                configGroupName:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+              $$ref: '#/components/schemas/GatewaysConfiggroupBody'
+            examples:
+              Interconnect Gateway Config Group Creation:
+                description: Interconnect Gateway Config Group Creation
+                value:
+                  configGroupName: ICGW_Config_Group
+        required: true
+      responses:
+        '200':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/interconnect/gateways/image-names:
+    get:
+      tags:
+      - Multicloud Interconnect - Gateways
+      summary: Get Interconnect gateway software versions.
+      description: API to retrieve Interconnect Gateway software image versions supported by an Interconnect Provider.
+      operationId: getInterconnectGatewayImageNames
+      parameters:
+      - name: interconnect-type
+        in: query
+        description: Interconnect provider type
+        required: true
+        schema:
+          type: string
+          enum:
+          - MEGAPORT
+          - EQUINIX
+      responses:
+        '200':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    description: version data list
+                    example:
+                    - C8000v 17.05.01a
+                    - C8000v 17.06.01a
+                    items:
+                      type: string
+                      description: version data
+                      example: C8000v 17.06.01a
+                $$ref: '#/components/schemas/InlineResponse2005'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/interconnect/gateways/instance-sizes:
+    get:
+      tags:
+      - Multicloud Interconnect - Gateways
+      summary: Get Interconnect gateway instance sizes.
+      description: API to retrieve Interconnect Gateway instance sizes supported by an  Interconnect provider.
+      operationId: getInterconnectGatewayInstanceSizes
+      parameters:
+      - name: interconnect-type
+        in: query
+        description: Interconnect provider type
+        required: true
+        schema:
+          type: string
+          enum:
+          - MEGAPORT
+          - EQUINIX
+      responses:
+        '200':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    description: List of size specs data
+                    example:
+                    - size: Small
+                      spec: small
+                    - size: Medium
+                      spec: medium
+                    items:
+                      type: object
+                      properties:
+                        size:
+                          type: string
+                          description: instance size
+                          example: Small
+                        spec:
+                          type: string
+                          description: instance size
+                          example: small
+                      description: Size spec object
+                      $$ref: '#/components/schemas/InlineResponse2004Data'
+                $$ref: '#/components/schemas/InlineResponse2004'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/interconnect/gateways/push-config:
+    post:
+      tags:
+      - Multicloud Interconnect - Gateways
+      summary: Push Interconnect gateway configuration.
+      description: API to initiate a configuration push for an Interconnect gateway.
+      operationId: pushInterconnectGatewayConfig
+      requestBody:
+        description: Request Payload for Multicloud Interconnect Gateway Configuration Push
+        content:
+          application/json:
+            schema:
+              required:
+              - edgeGatewayName
+              - edgeType
+              type: object
+              properties:
+                edgeGatewayName:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+                edgeType:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+              $$ref: '#/components/schemas/GatewaysPushconfigBody'
+            examples:
+              Interconnect Gateway Configuration Push:
+                description: Interconnect Gateway Configuration Push
+                value:
+                  edgeType: MEGAPORT
+                  edgeGatewayName: icgw-name
+        required: true
+      responses:
+        '200':
+          description: Interconnect Process ID Information.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: Procees Id of the task
+                    example: 51d0a0e4-983a-471c-9abb-724d58144884
+                $$ref: '#/components/schemas/ProcessResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/interconnect/gateways/types:
+    get:
+      tags:
+      - Multicloud Interconnect - Gateways
+      summary: Get supported Interconnect Gateway solution types.
+      description: API to retrieve the supported Interconnect Gateway solution types.
+      operationId: getInterconnetGatewayTypes
+      parameters:
+      - name: interconnect-type
+        in: query
+        description: Interconnect provider type
+        required: true
+        schema:
+          type: string
+          enum:
+          - MEGAPORT
+          - EQUINIX
+      responses:
+        '200':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/interconnect/gateways/{interconnect-gateway-name}:
+    put:
+      tags:
+      - Multicloud Interconnect - Gateways
+      summary: Edit Interconnect Gateway Information.
+      description: API to update the Interconnect Gateway Information in vManage.
+      operationId: updateInterconnectGateway_MulticloudInterconnectGateways_6103
+      parameters:
+      - name: interconnect-gateway-name
+        in: path
+        description: Interconnect gateway name
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Request Payload for Multicloud Interconnect Gateways
+        content:
+          application/json:
+            schema:
+              required:
+              - deviceUuid
+              - edgeAccountId
+              - edgeBillingAccountId
+              - edgeGatewayName
+              - edgeType
+              - ipTransit
+              - licenseType
+              - region
+              - regionId
+              - siteName
+              type: object
+              properties:
+                configGroupSettings:
+                  required:
+                  - configGroupId
+                  - configGroupName
+                  type: object
+                  properties:
+                    configGroupId:
+                      maxLength: 255
+                      minLength: 1
+                      type: string
+                      description: Config Group Id
+                      example: 482eb6f3-1168-4b6f-901a-bd2c788b370d
+                    configGroupName:
+                      maxLength: 255
+                      minLength: 1
+                      type: string
+                      description: Config Group name
+                      example: My-CG-1
+                  $$ref: '#/components/schemas/InterconnectConfigGroupSettings'
+                description:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+                deviceUuid:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+                edgeAccountId:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+                edgeBillingAccountId:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+                edgeGatewayName:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+                edgeType:
+                  type: string
+                egwBgpAsn:
+                  type: string
+                  description: BGP ASN assigned to Interconnect Gateway
+                  example: '64500'
+                ipTransit:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+                ipTransitId:
+                  type: string
+                ipTransitSkuId:
+                  type: string
+                isCustomSetting:
+                  type: boolean
+                  description: Custom Settings enabled for Interconnect Gateway
+                  example: true
+                licenseSkuId:
+                  type: string
+                  description: License Sku Id of Interconnect Gateway
+                  example: '12345'
+                licenseType:
+                  type: string
+                  enum:
+                  - PAYG
+                  - PREPAID
+                  - DIRECT
+                loopbackCidr:
+                  type: string
+                  description: Ip pool allocated to Interconnect Gateway for Loopback Interfaces
+                  example: 172.31.251.4/30
+                mrfSettings:
+                  type: object
+                  properties:
+                    mrfRouterRole:
+                      type: string
+                      description: Multi Region Fabric router role
+                      example: border
+                    mrfTransportGateway:
+                      type: boolean
+                      description: Multi Region Fabric Transport Gateway
+                      example: false
+                    nhmRegionId:
+                      type: integer
+                      description: Network Hierarchy Region Id
+                      format: int64
+                      example: 123
+                    nhmRegionName:
+                      type: string
+                      description: Network Hierarchy Region name
+                      example: My-Region
+                  $$ref: '#/components/schemas/InterconnectMrfSettings'
+                region:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+                regionId:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+                resourceState:
+                  type: string
+                resourceStateMessage:
+                  type: string
+                resourceStateUpdateTs:
+                  type: string
+                serviceChainAttachments:
+                  type: string
+                settings:
+                  required:
+                  - instanceSize
+                  - softwareImageId
+                  type: object
+                  properties:
+                    edgeGatewaySolution:
+                      type: string
+                      enum:
+                      - MVE
+                      - NE
+                    edgeType:
+                      type: string
+                      enum:
+                      - MEGAPORT
+                      - EQUINIX
+                      - ATT
+                    egwCustomSettingName:
+                      type: string
+                      description: Assigned name of the Interconnect Gateway Custom Settings
+                    instanceSize:
+                      maxLength: 255
+                      minLength: 1
+                      type: string
+                    ipSubnetPool:
+                      type: string
+                      description: Ip subnet pool assigned to the gateway
+                      example: 192.168.10.0/24
+                    softwareImageId:
+                      maxLength: 255
+                      minLength: 1
+                      pattern: ^C8000v.*$
+                      type: string
+                  $$ref: '#/components/schemas/InterconnectGatewaySettings'
+                siteName:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+              $$ref: '#/components/schemas/InterconnectGatewayExtended'
+            examples:
+              Interconnect Megaport Gateways:
+                description: Interconnect Megaport Gateways
+                value:
+                  edgeType: MEGAPORT
+                  edgeAccountId: ABCD-1234-CDEF
+                  edgeGatewayName: mp-gateway-name
+                  description: This is my Megaport gateway
+                  region: 'Cologix TOR1, Toronto, ON, Canada : Toronto'
+                  regionId: '10'
+                  siteName: My_Megaport_Site
+                  deviceUuid: C8K-f7f6c42c-409d-11eb-9562-005056841be8
+                  settings:
+                    instanceSize: Small
+                    softwareImageId: C8000v 17.09.01a
+                  mrfSettings:
+                    mrfRouterRole: border
+                    mrfTransportGateway: false
+              Interconnect Equinix Gateways - MRF Enabled:
+                description: Interconnect Equinix Gateways - MRF Enabled
+                value: "{\n  \"edgeType\": \"EQUINIX\",\n  \"edgeAccountId\": \"ABCD-1234-CDEF\",\n  \"edgeGatewayName\": \"eq-gateway-name\",\n  \"description\": \"This is my Equinix Gateway\",\n  \"region\": \"NY Metro\",\n  \"regionId\": \"10\",\n  \"edgeBillingAccountId\": \"ABCD-1234-CDEF\",\n  \"siteName\": \"My_Equinix_Site\",\n  \"deviceUuid\": \"CSR-725caea2-41a4-497c-821d-a2e280be40f2\",\n  \"mrfSettings\": {\n    \"mrfRouterRole\": \"edge\",\n    \"mrfTransportGateway\": false\n  }\n  \"settings\": {\n    \"instanceSize\": \"Small\",\n    \"softwareImageId\": \"CSR1000v 17.03.03\"\n  }\n}"
+        required: true
+      responses:
+        '200':
+          description: Interconnect Gateway Information.
+          content:
+            application/json:
+              schema:
+                required:
+                - deviceUuid
+                - edgeAccountId
+                - edgeBillingAccountId
+                - edgeGatewayName
+                - edgeType
+                - ipTransit
+                - licenseType
+                - region
+                - regionId
+                - siteName
+                type: object
+                properties:
+                  configGroupSettings:
+                    required:
+                    - configGroupId
+                    - configGroupName
+                    type: object
+                    properties:
+                      configGroupId:
+                        maxLength: 255
+                        minLength: 1
+                        type: string
+                        description: Config Group Id
+                        example: 482eb6f3-1168-4b6f-901a-bd2c788b370d
+                      configGroupName:
+                        maxLength: 255
+                        minLength: 1
+                        type: string
+                        description: Config Group name
+                        example: My-CG-1
+                    $$ref: '#/components/schemas/InterconnectConfigGroupSettings'
+                  description:
+                    maxLength: 255
+                    minLength: 1
+                    type: string
+                  deviceUuid:
+                    maxLength: 255
+                    minLength: 1
+                    type: string
+                  edgeAccountId:
+                    maxLength: 255
+                    minLength: 1
+                    type: string
+                  edgeBillingAccountId:
+                    maxLength: 255
+                    minLength: 1
+                    type: string
+                  edgeGatewayName:
+                    maxLength: 255
+                    minLength: 1
+                    type: string
+                  edgeType:
+                    type: string
+                  egwBgpAsn:
+                    type: string
+                    description: BGP ASN assigned to Interconnect Gateway
+                    example: '64500'
+                  ipTransit:
+                    maxLength: 255
+                    minLength: 1
+                    type: string
+                  ipTransitId:
+                    type: string
+                  ipTransitSkuId:
+                    type: string
+                  isCustomSetting:
+                    type: boolean
+                    description: Custom Settings enabled for Interconnect Gateway
+                    example: true
+                  licenseSkuId:
+                    type: string
+                    description: License Sku Id of Interconnect Gateway
+                    example: '12345'
+                  licenseType:
+                    type: string
+                    enum:
+                    - PAYG
+                    - PREPAID
+                    - DIRECT
+                  loopbackCidr:
+                    type: string
+                    description: Ip pool allocated to Interconnect Gateway for Loopback Interfaces
+                    example: 172.31.251.4/30
+                  mrfSettings:
+                    type: object
+                    properties:
+                      mrfRouterRole:
+                        type: string
+                        description: Multi Region Fabric router role
+                        example: border
+                      mrfTransportGateway:
+                        type: boolean
+                        description: Multi Region Fabric Transport Gateway
+                        example: false
+                      nhmRegionId:
+                        type: integer
+                        description: Network Hierarchy Region Id
+                        format: int64
+                        example: 123
+                      nhmRegionName:
+                        type: string
+                        description: Network Hierarchy Region name
+                        example: My-Region
+                    $$ref: '#/components/schemas/InterconnectMrfSettings'
+                  region:
+                    maxLength: 255
+                    minLength: 1
+                    type: string
+                  regionId:
+                    maxLength: 255
+                    minLength: 1
+                    type: string
+                  resourceState:
+                    type: string
+                  resourceStateMessage:
+                    type: string
+                  resourceStateUpdateTs:
+                    type: string
+                  serviceChainAttachments:
+                    type: string
+                  settings:
+                    required:
+                    - instanceSize
+                    - softwareImageId
+                    type: object
+                    properties:
+                      edgeGatewaySolution:
+                        type: string
+                        enum:
+                        - MVE
+                        - NE
+                      edgeType:
+                        type: string
+                        enum:
+                        - MEGAPORT
+                        - EQUINIX
+                        - ATT
+                      egwCustomSettingName:
+                        type: string
+                        description: Assigned name of the Interconnect Gateway Custom Settings
+                      instanceSize:
+                        maxLength: 255
+                        minLength: 1
+                        type: string
+                      ipSubnetPool:
+                        type: string
+                        description: Ip subnet pool assigned to the gateway
+                        example: 192.168.10.0/24
+                      softwareImageId:
+                        maxLength: 255
+                        minLength: 1
+                        pattern: ^C8000v.*$
+                        type: string
+                    $$ref: '#/components/schemas/InterconnectGatewaySettings'
+                  siteName:
+                    maxLength: 255
+                    minLength: 1
+                    type: string
+                $$ref: '#/components/schemas/InterconnectGatewayExtended'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    get:
+      tags:
+      - Multicloud Interconnect - Gateways
+      summary: Get Interconnect Gateway Information.
+      description: API to retrieve the Interconnect Gateway Information from vManage.
+      operationId: getInterconnectGateway
+      parameters:
+      - name: interconnect-gateway-name
+        in: path
+        description: Interconnect gateway name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Interconnect Gateway Information.
+          content:
+            application/json:
+              schema:
+                required:
+                - deviceUuid
+                - edgeAccountId
+                - edgeBillingAccountId
+                - edgeGatewayName
+                - edgeType
+                - ipTransit
+                - licenseType
+                - region
+                - regionId
+                - siteName
+                type: object
+                properties:
+                  configGroupSettings:
+                    required:
+                    - configGroupId
+                    - configGroupName
+                    type: object
+                    properties:
+                      configGroupId:
+                        maxLength: 255
+                        minLength: 1
+                        type: string
+                        description: Config Group Id
+                        example: 482eb6f3-1168-4b6f-901a-bd2c788b370d
+                      configGroupName:
+                        maxLength: 255
+                        minLength: 1
+                        type: string
+                        description: Config Group name
+                        example: My-CG-1
+                    $$ref: '#/components/schemas/InterconnectConfigGroupSettings'
+                  description:
+                    maxLength: 255
+                    minLength: 1
+                    type: string
+                  deviceUuid:
+                    maxLength: 255
+                    minLength: 1
+                    type: string
+                  edgeAccountId:
+                    maxLength: 255
+                    minLength: 1
+                    type: string
+                  edgeBillingAccountId:
+                    maxLength: 255
+                    minLength: 1
+                    type: string
+                  edgeGatewayName:
+                    maxLength: 255
+                    minLength: 1
+                    type: string
+                  edgeType:
+                    type: string
+                  egwBgpAsn:
+                    type: string
+                    description: BGP ASN assigned to Interconnect Gateway
+                    example: '64500'
+                  ipTransit:
+                    maxLength: 255
+                    minLength: 1
+                    type: string
+                  ipTransitId:
+                    type: string
+                  ipTransitSkuId:
+                    type: string
+                  isCustomSetting:
+                    type: boolean
+                    description: Custom Settings enabled for Interconnect Gateway
+                    example: true
+                  licenseSkuId:
+                    type: string
+                    description: License Sku Id of Interconnect Gateway
+                    example: '12345'
+                  licenseType:
+                    type: string
+                    enum:
+                    - PAYG
+                    - PREPAID
+                    - DIRECT
+                  loopbackCidr:
+                    type: string
+                    description: Ip pool allocated to Interconnect Gateway for Loopback Interfaces
+                    example: 172.31.251.4/30
+                  mrfSettings:
+                    type: object
+                    properties:
+                      mrfRouterRole:
+                        type: string
+                        description: Multi Region Fabric router role
+                        example: border
+                      mrfTransportGateway:
+                        type: boolean
+                        description: Multi Region Fabric Transport Gateway
+                        example: false
+                      nhmRegionId:
+                        type: integer
+                        description: Network Hierarchy Region Id
+                        format: int64
+                        example: 123
+                      nhmRegionName:
+                        type: string
+                        description: Network Hierarchy Region name
+                        example: My-Region
+                    $$ref: '#/components/schemas/InterconnectMrfSettings'
+                  region:
+                    maxLength: 255
+                    minLength: 1
+                    type: string
+                  regionId:
+                    maxLength: 255
+                    minLength: 1
+                    type: string
+                  resourceState:
+                    type: string
+                  resourceStateMessage:
+                    type: string
+                  resourceStateUpdateTs:
+                    type: string
+                  serviceChainAttachments:
+                    type: string
+                  settings:
+                    required:
+                    - instanceSize
+                    - softwareImageId
+                    type: object
+                    properties:
+                      edgeGatewaySolution:
+                        type: string
+                        enum:
+                        - MVE
+                        - NE
+                      edgeType:
+                        type: string
+                        enum:
+                        - MEGAPORT
+                        - EQUINIX
+                        - ATT
+                      egwCustomSettingName:
+                        type: string
+                        description: Assigned name of the Interconnect Gateway Custom Settings
+                      instanceSize:
+                        maxLength: 255
+                        minLength: 1
+                        type: string
+                      ipSubnetPool:
+                        type: string
+                        description: Ip subnet pool assigned to the gateway
+                        example: 192.168.10.0/24
+                      softwareImageId:
+                        maxLength: 255
+                        minLength: 1
+                        pattern: ^C8000v.*$
+                        type: string
+                    $$ref: '#/components/schemas/InterconnectGatewaySettings'
+                  siteName:
+                    maxLength: 255
+                    minLength: 1
+                    type: string
+                $$ref: '#/components/schemas/InterconnectGatewayExtended'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+      - Multicloud Interconnect - Gateways
+      summary: Delete an Interconnect gateway.
+      description: API to delete an Interconnect Gateway from an Interconnect provider.
+      operationId: deleteInterconnectGateway
+      parameters:
+      - name: interconnect-gateway-name
+        in: path
+        description: Interconnect gateway name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Interconnect Process ID Information.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: Procees Id of the task
+                    example: 51d0a0e4-983a-471c-9abb-724d58144884
+                $$ref: '#/components/schemas/ProcessResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/interconnect/gateways/{interconnect-gateway-name}/settings:
+    get:
+      tags:
+      - Multicloud Interconnect - Gateways
+      summary: Get Interconnect gateway custom settings.
+      description: API to retrieve the custom settings specified for an Interconnect Gateway
+      operationId: getInterconnectGatewayCustomSettings
+      parameters:
+      - name: interconnect-gateway-name
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: interconnect-account-id
+        in: query
+        description: Interconnect Account Id
+        required: true
+        schema:
+          pattern: ^[a-zA-Z0-9][a-zA-Z0-9-]{1,22}[a-zA-Z0-9]$
+          type: string
+      responses:
+        '200':
+          description: Interconnect Gateway Custom Settings
+          content:
+            application/json:
+              schema:
+                required:
+                - instanceSize
+                - softwareImageId
+                type: object
+                properties:
+                  edgeGatewaySolution:
+                    type: string
+                    enum:
+                    - MVE
+                    - NE
+                  edgeType:
+                    type: string
+                    enum:
+                    - MEGAPORT
+                    - EQUINIX
+                    - ATT
+                  egwCustomSettingName:
+                    type: string
+                    description: Assigned name of the Interconnect Gateway Custom Settings
+                  instanceSize:
+                    maxLength: 255
+                    minLength: 1
+                    type: string
+                  ipSubnetPool:
+                    type: string
+                    description: Ip subnet pool assigned to the gateway
+                    example: 192.168.10.0/24
+                  softwareImageId:
+                    maxLength: 255
+                    minLength: 1
+                    pattern: ^C8000v.*$
+                    type: string
+                $$ref: '#/components/schemas/InterconnectGatewaySettings'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/interconnect/{interconnect-type}/gateways/device-chassis-numbers:
+    get:
+      tags:
+      - Multicloud Interconnect - Gateways
+      summary: Get Interconnect gateway devices by config ID.
+      description: API to retrieve available devices or devices associated to a config group.
+      operationId: getAvailableDevicesOrByCGId_MulticloudInterconnectGateways_7603
+      parameters:
+      - name: interconnect-type
+        in: path
+        description: Interconnect provider type
+        required: true
+        schema:
+          type: string
+          enum:
+          - MEGAPORT
+          - EQUINIX
+      - name: config-group-id
+        in: query
+        description: Config Group Id
+        schema:
+          pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+          type: string
+      - name: device-solution-type
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    configuredHostname:
+                      type: string
+                      example: ICGW1
+                    configuredSystemIP:
+                      type: string
+                      example: 1.1.1.10
+                    deviceModel:
+                      type: string
+                      example: C8000v
+                    uuid:
+                      type: string
+                  $$ref: '#/components/schemas/InlineResponse2003'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/interconnect/{interconnect-type}/gateways/devices:
+    get:
+      tags:
+      - Multicloud Interconnect - Gateways
+      summary: Get available Interconnect Gateway devices.
+      description: API to retrieve available Interconnect Gateway devices.
+      operationId: getInterconnectGatewayDevices
+      parameters:
+      - name: interconnect-type
+        in: path
+        description: Interconnect Provider Type
+        required: true
+        schema:
+          type: string
+          enum:
+          - MEGAPORT
+          - EQUINIX
+      responses:
+        '200':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    configuredHostname:
+                      type: string
+                      example: ICGW1
+                    configuredSystemIP:
+                      type: string
+                      example: 1.1.1.10
+                    deviceModel:
+                      type: string
+                      example: C8000v
+                    uuid:
+                      type: string
+                  $$ref: '#/components/schemas/InlineResponse2003'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /v1/multicloud/interconnect/gateways/{interconnect-gateway-name}:
+    put:
+      tags:
+      - Multicloud Interconnect - Gateways
+      summary: Edit Interconnect Gateway Information.
+      description: Asynchronous API to update the Interconnect Gateway Information in vManage.
+      operationId: updateInterconnectGateway_MulticloudInterconnectGateways_6403
+      parameters:
+      - name: interconnect-gateway-name
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Request Payload for Multicloud Interconnect Gateways
+        content:
+          application/json:
+            schema:
+              required:
+              - deviceUuid
+              - edgeAccountId
+              - edgeBillingAccountId
+              - edgeGatewayName
+              - edgeType
+              - ipTransit
+              - licenseType
+              - region
+              - regionId
+              - siteName
+              type: object
+              properties:
+                configGroupSettings:
+                  required:
+                  - configGroupId
+                  - configGroupName
+                  type: object
+                  properties:
+                    configGroupId:
+                      maxLength: 255
+                      minLength: 1
+                      type: string
+                      description: Config Group Id
+                      example: 482eb6f3-1168-4b6f-901a-bd2c788b370d
+                    configGroupName:
+                      maxLength: 255
+                      minLength: 1
+                      type: string
+                      description: Config Group name
+                      example: My-CG-1
+                  $$ref: '#/components/schemas/InterconnectConfigGroupSettings'
+                description:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+                deviceUuid:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+                edgeAccountId:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+                edgeBillingAccountId:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+                edgeGatewayName:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+                edgeType:
+                  type: string
+                egwBgpAsn:
+                  type: string
+                  description: BGP ASN assigned to Interconnect Gateway
+                  example: '64500'
+                ipTransit:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+                ipTransitId:
+                  type: string
+                ipTransitSkuId:
+                  type: string
+                isCustomSetting:
+                  type: boolean
+                  description: Custom Settings enabled for Interconnect Gateway
+                  example: true
+                licenseSkuId:
+                  type: string
+                  description: License Sku Id of Interconnect Gateway
+                  example: '12345'
+                licenseType:
+                  type: string
+                  enum:
+                  - PAYG
+                  - PREPAID
+                  - DIRECT
+                loopbackCidr:
+                  type: string
+                  description: Ip pool allocated to Interconnect Gateway for Loopback Interfaces
+                  example: 172.31.251.4/30
+                mrfSettings:
+                  type: object
+                  properties:
+                    mrfRouterRole:
+                      type: string
+                      description: Multi Region Fabric router role
+                      example: border
+                    mrfTransportGateway:
+                      type: boolean
+                      description: Multi Region Fabric Transport Gateway
+                      example: false
+                    nhmRegionId:
+                      type: integer
+                      description: Network Hierarchy Region Id
+                      format: int64
+                      example: 123
+                    nhmRegionName:
+                      type: string
+                      description: Network Hierarchy Region name
+                      example: My-Region
+                  $$ref: '#/components/schemas/InterconnectMrfSettings'
+                region:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+                regionId:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+                resourceState:
+                  type: string
+                resourceStateMessage:
+                  type: string
+                resourceStateUpdateTs:
+                  type: string
+                serviceChainAttachments:
+                  type: string
+                settings:
+                  required:
+                  - instanceSize
+                  - softwareImageId
+                  type: object
+                  properties:
+                    edgeGatewaySolution:
+                      type: string
+                      enum:
+                      - MVE
+                      - NE
+                    edgeType:
+                      type: string
+                      enum:
+                      - MEGAPORT
+                      - EQUINIX
+                      - ATT
+                    egwCustomSettingName:
+                      type: string
+                      description: Assigned name of the Interconnect Gateway Custom Settings
+                    instanceSize:
+                      maxLength: 255
+                      minLength: 1
+                      type: string
+                    ipSubnetPool:
+                      type: string
+                      description: Ip subnet pool assigned to the gateway
+                      example: 192.168.10.0/24
+                    softwareImageId:
+                      maxLength: 255
+                      minLength: 1
+                      pattern: ^C8000v.*$
+                      type: string
+                  $$ref: '#/components/schemas/InterconnectGatewaySettings'
+                siteName:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+              $$ref: '#/components/schemas/InterconnectGatewayExtended'
+            examples:
+              Interconnect Megaport Gateways:
+                description: Interconnect Megaport Gateways
+                value:
+                  edgeType: MEGAPORT
+                  edgeAccountId: ABCD-1234-CDEF
+                  edgeGatewayName: mp-gateway-name
+                  description: This is my Megaport gateway
+                  region: 'Cologix TOR1, Toronto, ON, Canada : Toronto'
+                  regionId: '10'
+                  siteName: My_Megaport_Site
+                  deviceUuid: C8K-f7f6c42c-409d-11eb-9562-005056841be8
+                  settings:
+                    instanceSize: Small
+                    softwareImageId: C8000v 17.09.01a
+                  mrfSettings:
+                    mrfRouterRole: border
+                    mrfTransportGateway: false
+              Interconnect Equinix Gateways - MRF Enabled:
+                description: Interconnect Equinix Gateways - MRF Enabled
+                value: "{\n  \"edgeType\": \"EQUINIX\",\n  \"edgeAccountId\": \"ABCD-1234-CDEF\",\n  \"edgeGatewayName\": \"eq-gateway-name\",\n  \"description\": \"This is my Equinix Gateway\",\n  \"region\": \"NY Metro\",\n  \"regionId\": \"10\",\n  \"edgeBillingAccountId\": \"ABCD-1234-CDEF\",\n  \"siteName\": \"My_Equinix_Site\",\n  \"deviceUuid\": \"CSR-725caea2-41a4-497c-821d-a2e280be40f2\",\n  \"mrfSettings\": {\n    \"mrfRouterRole\": \"edge\",\n    \"mrfTransportGateway\": false\n  }\n  \"settings\": {\n    \"instanceSize\": \"Small\",\n    \"softwareImageId\": \"CSR1000v 17.03.03\"\n  }\n}"
+              Interconnect ATT Gateways - Config Group based:
+                description: Interconnect ATT Gateways - Config Group based
+                value: "{\n  \"edgeType\": \"ATT\",\n  \"edgeAccountId\": \"ABCD-1234-CDEF\",\n  \"edgeGatewayName\": \"att-gateway-name\",\n  \"description\": \"This is my ATT Gateway\",\n  \"region\": \"NY Metro\",\n  \"regionId\": \"10\",\n  \"siteName\": \"My_ATT_Site\",\n  \"deviceUuid\": \"CSR-725caea2-41a4-497c-821d-a2e280be40f2\",\n  \"settings\": {\n    \"instanceSize\": \"Small\",\n    \"softwareImageId\": \"CSR1000v 17.03.03\"\n  }\n  \"configGroupSettings\": {\n    \"configGroupName\": \"ATT-ICGW-CG1\",\n    \"configGroupId\": \"a15fa637-7985-4833-a24c-c8db32d378e1\"\n  }\n}"
+        required: true
+      responses:
+        '200':
+          description: Interconnect Gateway Information.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: Procees Id of the task
+                    example: 51d0a0e4-983a-471c-9abb-724d58144884
+                $$ref: '#/components/schemas/ProcessResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

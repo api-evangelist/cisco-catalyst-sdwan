@@ -1,0 +1,3743 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Monitoring - Events API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Monitoring - Events
+paths:
+  /event:
+    post:
+      tags:
+      - Monitoring - Events
+      description: Get events for given query.
+      operationId: postEvents
+      parameters:
+      - name: page
+        in: query
+        description: Specify page number. Value should be a positive integer
+        schema:
+          minimum: 1
+          type: integer
+          format: int64
+      - name: pageSize
+        in: query
+        description: Specify page size. Value should be a positive integer
+        schema:
+          minimum: 1
+          type: integer
+          format: int64
+      - name: sortBy
+        in: query
+        description: Specify a field by which alarms need to be sorted
+        schema:
+          pattern: ^[a-zA-Z-_]+$
+          type: string
+      - name: sortOrder
+        in: query
+        description: Select sorting order. Use ASC for ascending and DESC for descending
+        schema:
+          type: string
+      - name: site-id
+        in: query
+        description: Specify the site-id to filter the events
+        schema:
+          pattern: ^[0-9]+$
+          type: string
+      - name: includeTenants
+        in: query
+        schema:
+          type: boolean
+      requestBody:
+        description: Event query string
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Get events filter by hours:
+                description: Get events filter by hours
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - field: entry_time
+                      operator: last_n_hours
+                      type: date
+                      value:
+                      - '10'
+                  size: 100
+                $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterByHours'
+              Get events filter between dates:
+                description: Get events filter between dates
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - field: entry_time
+                      type: date
+                      value:
+                      - 2024-04-30T19:30:00 UTC
+                      - 2024-05-30T17:30:00 UTC
+                      operator: between
+                  size: 100
+                $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterBetweenDates'
+              Get events filter by type:
+                description: Get events filter by type
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - field: entry_time
+                      operator: last_n_hours
+                      type: date
+                      value:
+                      - '10'
+                    - field: eventname
+                      operator: in
+                      type: string
+                      value:
+                      - memory-usage
+                  size: 100
+                $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterByType'
+              Get events filter by system ip:
+                description: Get events filter by system ip
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - field: entry_time
+                      operator: last_n_hours
+                      type: date
+                      value:
+                      - '10'
+                    - field: system_ip
+                      operator: in
+                      type: string
+                      value:
+                      - 1.1.1.1
+                  size: 100
+                $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterBySystemIp'
+              Get events filter by severity:
+                description: Get events filter by severity
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - field: entry_time
+                      operator: last_n_hours
+                      type: date
+                      value:
+                      - '10'
+                    - field: severity_level
+                      operator: in
+                      type: string
+                      value:
+                      - critical
+                  size: 100
+                $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterBySeverity'
+              Get events filter by site-id:
+                description: Get events filter by site-id
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - field: entry_time
+                      operator: last_n_hours
+                      type: date
+                      value:
+                      - '10'
+                    - field: site_id
+                      operator: in
+                      type: string
+                      value:
+                      - '400'
+                      - '500'
+                  size: 100
+                $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterBySites'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Events:
+                  description: Events
+                  value:
+                    data:
+                    - system_ip: 172.16.255.11
+                      vmanage_system_ip: 172.16.255.11
+                      tenant: default
+                      device_type: vedge
+                      entry_time: 1666259117528
+                      statcycletime: 1666259117528
+                      eventname: bfd-state-change
+                      component: BFD
+                      severity_level: major
+                      host_name: vm1
+                      event:
+                        bfd-state-change:
+                          src-ip: 10.0.5.11
+                          dst-ip: 10.1.16.16
+                          local-system-ip: 172.16.255.11
+                          src-port: 12347
+                          system-ip: 172.16.255.11
+                          dst-port: 12346
+                          remote-color: lte
+                          host-name: vm1
+                          remote-system-ip: 172.16.255.16
+                          severity-level: major
+                          local-color: lte
+                          xmlns: http://viptela.com/bfd
+                          deleted: false
+                          flap-reason: na
+                          proto: ipsec
+                          new-state: down
+                      details: host-name=vm1; src-ip=10.0.5.11; dst-ip=10.1.16.16; proto=ipsec; src-port=12347; dst-port=12346; local-system-ip=172.16.255.11; local-color=lte; remote-system-ip=172.16.255.16; remote-color=lte; new-state=down; deleted=false; flap-reason=na
+                      id: xh_I9IMBLPMz2to0aA3r
+                    pageInfo:
+                      startTime: '1589073783045'
+                      endTime: '1589072535795'
+                      count: 15
+                  $$ref: '#/components/examples/ComViptelaVmanageServerEventResponseEvent'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: default
+    get:
+      tags:
+      - Monitoring - Events
+      description: Get events for given query. If query is empty then last 30 mins data will be returned.
+      operationId: getEvents_MonitoringEvents_603
+      parameters:
+      - name: query
+        in: query
+        description: Query
+        allowEmptyValue: true
+        schema:
+          type: string
+        examples:
+          Empty:
+            description: Empty
+          Get events filter by hours:
+            description: Get events filter by hours
+            value:
+              query:
+                condition: AND
+                rules:
+                - field: entry_time
+                  operator: last_n_hours
+                  type: date
+                  value:
+                  - '10'
+              size: 100
+            $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterByHours'
+          Get events filter between dates:
+            description: Get events filter between dates
+            value:
+              query:
+                condition: AND
+                rules:
+                - field: entry_time
+                  type: date
+                  value:
+                  - 2024-04-30T19:30:00 UTC
+                  - 2024-05-30T17:30:00 UTC
+                  operator: between
+              size: 100
+            $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterBetweenDates'
+          Get events filter by type:
+            description: Get events filter by type
+            value:
+              query:
+                condition: AND
+                rules:
+                - field: entry_time
+                  operator: last_n_hours
+                  type: date
+                  value:
+                  - '10'
+                - field: eventname
+                  operator: in
+                  type: string
+                  value:
+                  - memory-usage
+              size: 100
+            $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterByType'
+          Get events filter by system ip:
+            description: Get events filter by system ip
+            value:
+              query:
+                condition: AND
+                rules:
+                - field: entry_time
+                  operator: last_n_hours
+                  type: date
+                  value:
+                  - '10'
+                - field: system_ip
+                  operator: in
+                  type: string
+                  value:
+                  - 1.1.1.1
+              size: 100
+            $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterBySystemIp'
+          Get events filter by severity:
+            description: Get events filter by severity
+            value:
+              query:
+                condition: AND
+                rules:
+                - field: entry_time
+                  operator: last_n_hours
+                  type: date
+                  value:
+                  - '10'
+                - field: severity_level
+                  operator: in
+                  type: string
+                  value:
+                  - critical
+              size: 100
+            $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterBySeverity'
+          Get events filter by site-id:
+            description: Get events filter by site-id
+            value:
+              query:
+                condition: AND
+                rules:
+                - field: entry_time
+                  operator: last_n_hours
+                  type: date
+                  value:
+                  - '10'
+                - field: site_id
+                  operator: in
+                  type: string
+                  value:
+                  - '400'
+                  - '500'
+              size: 100
+            $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterBySites'
+      - name: page
+        in: query
+        description: Specify page number. Value should be a positive integer
+        schema:
+          minimum: 1
+          type: integer
+          format: int64
+      - name: pageSize
+        in: query
+        description: Specify page size. Value should be a positive integer
+        schema:
+          minimum: 1
+          type: integer
+          format: int64
+      - name: sortBy
+        in: query
+        description: Specify a field by which alarms need to be sorted
+        schema:
+          pattern: ^[a-zA-Z-_]+$
+          type: string
+      - name: sortOrder
+        in: query
+        description: Select sorting order. Use ASC for ascending and DESC for descending
+        schema:
+          type: string
+      - name: site-id
+        in: query
+        description: Specify the site-id to filter the events
+        schema:
+          pattern: ^[0-9]+$
+          type: string
+      - name: includeTenants
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Events:
+                  description: Events
+                  value:
+                    data:
+                    - system_ip: 172.16.255.11
+                      vmanage_system_ip: 172.16.255.11
+                      tenant: default
+                      device_type: vedge
+                      entry_time: 1666259117528
+                      statcycletime: 1666259117528
+                      eventname: bfd-state-change
+                      component: BFD
+                      severity_level: major
+                      host_name: vm1
+                      event:
+                        bfd-state-change:
+                          src-ip: 10.0.5.11
+                          dst-ip: 10.1.16.16
+                          local-system-ip: 172.16.255.11
+                          src-port: 12347
+                          system-ip: 172.16.255.11
+                          dst-port: 12346
+                          remote-color: lte
+                          host-name: vm1
+                          remote-system-ip: 172.16.255.16
+                          severity-level: major
+                          local-color: lte
+                          xmlns: http://viptela.com/bfd
+                          deleted: false
+                          flap-reason: na
+                          proto: ipsec
+                          new-state: down
+                      details: host-name=vm1; src-ip=10.0.5.11; dst-ip=10.1.16.16; proto=ipsec; src-port=12347; dst-port=12346; local-system-ip=172.16.255.11; local-color=lte; remote-system-ip=172.16.255.16; remote-color=lte; new-state=down; deleted=false; flap-reason=na
+                      id: xh_I9IMBLPMz2to0aA3r
+                    pageInfo:
+                      startTime: '1589073783045'
+                      endTime: '1589072535795'
+                      count: 15
+                  $$ref: '#/components/examples/ComViptelaVmanageServerEventResponseEvent'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Events-read
+  /event/aggregation:
+    get:
+      tags:
+      - Monitoring - Events
+      description: Get aggregated count of events based on given query.
+      operationId: getAggregationData_MonitoringEvents_1803
+      parameters:
+      - name: query
+        in: query
+        description: Query
+        required: true
+        schema:
+          type: string
+        examples:
+          Aggregation by severity:
+            description: Aggregation by severity
+            value:
+              query:
+                condition: AND
+                rules:
+                - field: entry_time
+                  type: date
+                  value:
+                  - '24'
+                  operator: last_n_hours
+              aggregation:
+                field:
+                - property: severity_level
+                  order: asc
+                  sequence: 1
+                histogram:
+                  property: entry_time
+                  type: minute
+                  interval: 60
+                  order: asc
+            $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestAggregationBySeverity'
+      - name: site-id
+        in: query
+        description: Specify the site-id to filter the events
+        schema:
+          pattern: ^[0-9]+$
+          type: string
+      - name: includeTenants
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      count:
+                        type: integer
+                        format: int64
+                        example: 6
+                      entry_time:
+                        type: integer
+                        format: int64
+                        example: 1653575400000
+                      severity:
+                        type: string
+                        enum:
+                        - MINOR
+                        - MAJOR
+                        - MEDIUM
+                        - CRITICAL
+                    $$ref: '#/components/schemas/AlarmAggregation'
+                  entryTimeList:
+                    type: array
+                    items:
+                      type: integer
+                      format: int64
+                $$ref: '#/components/schemas/AlarmAggregationResponse'
+              examples:
+                Aggregation by severity:
+                  description: Aggregation by severity
+                  value:
+                    header:
+                      generatedOn: 1718014129437
+                      columns:
+                      - property: entry_time
+                        title: Entry_time
+                        dataType: date
+                        isDisplay: true
+                      - property: severity_level
+                        title: Severity_level
+                        dataType: string
+                        isDisplay: true
+                      fields:
+                      - property: entry_time
+                        dataType: date
+                      - property: severity_level
+                        dataType: string
+                    entryTimeList:
+                    - 1717927200000
+                    - 1717930800000
+                    - 1717934400000
+                    - 1717938000000
+                    - 1717941600000
+                    data:
+                    - entry_time: 1717988400000
+                      severity_level: major
+                      count: 878
+                    - entry_time: 1717988400000
+                      severity_level: minor
+                      count: 1104
+                    - entry_time: 1717988400000
+                      severity_level: critical
+                      count: 7
+                    - entry_time: 1717992000000
+                      severity_level: minor
+                      count: 385
+                    - entry_time: 1717992000000
+                      severity_level: major
+                      count: 548
+                  $$ref: '#/components/examples/ComViptelaVmanageServerEventResponseAggregationBySeverity'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Events-read
+    post:
+      tags:
+      - Monitoring - Events
+      description: Get aggregated count of events based on given query.
+      operationId: postAggregationData_MonitoringEvents_1804
+      parameters:
+      - name: site-id
+        in: query
+        description: Specify the site-id to filter the events
+        schema:
+          pattern: ^[0-9]+$
+          type: string
+      - name: includeTenants
+        in: query
+        schema:
+          type: boolean
+      requestBody:
+        description: Query
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Aggregation by severity:
+                description: Aggregation by severity
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - field: entry_time
+                      type: date
+                      value:
+                      - '24'
+                      operator: last_n_hours
+                  aggregation:
+                    field:
+                    - property: severity_level
+                      order: asc
+                      sequence: 1
+                    histogram:
+                      property: entry_time
+                      type: minute
+                      interval: 60
+                      order: asc
+                $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestAggregationBySeverity'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      count:
+                        type: integer
+                        format: int64
+                        example: 6
+                      entry_time:
+                        type: integer
+                        format: int64
+                        example: 1653575400000
+                      severity:
+                        type: string
+                        enum:
+                        - MINOR
+                        - MAJOR
+                        - MEDIUM
+                        - CRITICAL
+                    $$ref: '#/components/schemas/AlarmAggregation'
+                  entryTimeList:
+                    type: array
+                    items:
+                      type: integer
+                      format: int64
+                $$ref: '#/components/schemas/AlarmAggregationResponse'
+              examples:
+                Aggregation by severity:
+                  description: Aggregation by severity
+                  value:
+                    header:
+                      generatedOn: 1718014129437
+                      columns:
+                      - property: entry_time
+                        title: Entry_time
+                        dataType: date
+                        isDisplay: true
+                      - property: severity_level
+                        title: Severity_level
+                        dataType: string
+                        isDisplay: true
+                      fields:
+                      - property: entry_time
+                        dataType: date
+                      - property: severity_level
+                        dataType: string
+                    entryTimeList:
+                    - 1717927200000
+                    - 1717930800000
+                    - 1717934400000
+                    - 1717938000000
+                    - 1717941600000
+                    data:
+                    - entry_time: 1717988400000
+                      severity_level: major
+                      count: 878
+                    - entry_time: 1717988400000
+                      severity_level: minor
+                      count: 1104
+                    - entry_time: 1717988400000
+                      severity_level: critical
+                      count: 7
+                    - entry_time: 1717992000000
+                      severity_level: minor
+                      count: 385
+                    - entry_time: 1717992000000
+                      severity_level: major
+                      count: 548
+                  $$ref: '#/components/examples/ComViptelaVmanageServerEventResponseAggregationBySeverity'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Events-read
+  /event/byuuids:
+    post:
+      tags:
+      - Monitoring - Events
+      description: Get Events for given uuids
+      operationId: getByUuids
+      parameters:
+      - name: timeFilter
+        in: query
+        description: Query
+        allowEmptyValue: true
+        schema:
+          type: string
+        examples:
+          Empty:
+            description: Empty
+          Get events filter by hours:
+            description: Get events filter by hours
+            value:
+              field: entry_time
+              operator: last_n_hours
+              type: date
+              value:
+              - '10'
+          Get events filter between dates:
+            description: Get events filter between dates
+            value:
+              field: entry_time
+              type: date
+              value:
+              - 2024-04-30T19:30:00 UTC
+              - 2024-05-30T17:30:00 UTC
+              operator: between
+      requestBody:
+        description: List of event uuids
+        content:
+          application/json:
+            schema:
+              type: array
+            examples:
+              List of event uuids:
+                description: List of event uuids
+                value:
+                - 8ee4a76c-3e45-4e99-b789-dae0fdcdb015
+                - 5f22b598-10cd-4162-9c73-6b37540521e5
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Response:
+                  description: Response
+                  value: TODO
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Alarms-read
+  /event/component/keyvalue:
+    get:
+      tags:
+      - Monitoring - Events
+      description: Get event component types.
+      operationId: getComponentsAsKeyValue
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  key:
+                    type: string
+                    example: system
+                  value:
+                    type: string
+                    example: System
+                $$ref: '#/components/schemas/SimpleKeyValueMapping'
+              examples:
+                Response:
+                  description: Response
+                  value:
+                    data:
+                    - key: Policy
+                      value: Policy
+                    - key: Nat
+                      value: Nat
+                    - key: BFD
+                      value: BFD
+                    - key: App-Route
+                      value: App-Route
+                    - key: Nwpi
+                      value: Nwpi
+                    - key: Security
+                      value: Security
+                    - key: Statistics
+                      value: Statistics
+                    - key: System
+                      value: System
+                    - key: Control
+                      value: Control
+                    - key: security
+                      value: security
+                    - key: OMP
+                      value: OMP
+                    - key: VPN
+                      value: VPN
+                    - key: PIM
+                      value: PIM
+                    - key: Software
+                      value: Software
+                    - key: Hardware
+                      value: Hardware
+                    - key: CloudExpress
+                      value: CloudExpress
+                    - key: cloudDock
+                      value: cloudDock
+                    - key: Firmware
+                      value: Firmware
+                    - key: Bridge
+                      value: Bridge
+                    - key: OSPF
+                      value: OSPF
+                  $$ref: '#/components/examples/ComViptelaVmanageServerEventResponseComponentKeyvalue'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: default
+  /event/doccount:
+    get:
+      tags:
+      - Monitoring - Events
+      description: Get the count of events as per the query passed.
+      operationId: getDocCount_MonitoringEvents_1503
+      parameters:
+      - name: query
+        in: query
+        description: Query
+        required: true
+        schema:
+          type: string
+        examples:
+          Get events filter by hours:
+            description: Get events filter by hours
+            value:
+              query:
+                condition: AND
+                rules:
+                - field: entry_time
+                  operator: last_n_hours
+                  type: date
+                  value:
+                  - '10'
+              size: 100
+            $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterByHours'
+          Get events filter between dates:
+            description: Get events filter between dates
+            value:
+              query:
+                condition: AND
+                rules:
+                - field: entry_time
+                  type: date
+                  value:
+                  - 2024-04-30T19:30:00 UTC
+                  - 2024-05-30T17:30:00 UTC
+                  operator: between
+              size: 100
+            $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterBetweenDates'
+          Get events filter by type:
+            description: Get events filter by type
+            value:
+              query:
+                condition: AND
+                rules:
+                - field: entry_time
+                  operator: last_n_hours
+                  type: date
+                  value:
+                  - '10'
+                - field: eventname
+                  operator: in
+                  type: string
+                  value:
+                  - memory-usage
+              size: 100
+            $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterByType'
+          Get events filter by system ip:
+            description: Get events filter by system ip
+            value:
+              query:
+                condition: AND
+                rules:
+                - field: entry_time
+                  operator: last_n_hours
+                  type: date
+                  value:
+                  - '10'
+                - field: system_ip
+                  operator: in
+                  type: string
+                  value:
+                  - 1.1.1.1
+              size: 100
+            $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterBySystemIp'
+          Get events filter by severity:
+            description: Get events filter by severity
+            value:
+              query:
+                condition: AND
+                rules:
+                - field: entry_time
+                  operator: last_n_hours
+                  type: date
+                  value:
+                  - '10'
+                - field: severity_level
+                  operator: in
+                  type: string
+                  value:
+                  - critical
+              size: 100
+            $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterBySeverity'
+          Get events filter by site-id:
+            description: Get events filter by site-id
+            value:
+              query:
+                condition: AND
+                rules:
+                - field: entry_time
+                  operator: last_n_hours
+                  type: date
+                  value:
+                  - '10'
+                - field: site_id
+                  operator: in
+                  type: string
+                  value:
+                  - '400'
+                  - '500'
+              size: 100
+            $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterBySites'
+      - name: site-id
+        in: query
+        description: Specify the site-id to filter the events
+        schema:
+          pattern: ^[0-9]+$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Count:
+                  description: Count
+                  value:
+                    count: 964
+                  $$ref: '#/components/examples/ComViptelaVmanageServerEventResponseDoccount'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+      - Monitoring - Events
+      description: Get the count of events as per the query passed.
+      operationId: postDocCount_MonitoringEvents_1504
+      parameters:
+      - name: site-id
+        in: query
+        description: Specify the site-id to filter the events
+        schema:
+          pattern: ^[0-9]+$
+          type: string
+      requestBody:
+        description: Query
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Get events filter by hours:
+                description: Get events filter by hours
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - field: entry_time
+                      operator: last_n_hours
+                      type: date
+                      value:
+                      - '10'
+                  size: 100
+                $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterByHours'
+              Get events filter between dates:
+                description: Get events filter between dates
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - field: entry_time
+                      type: date
+                      value:
+                      - 2024-04-30T19:30:00 UTC
+                      - 2024-05-30T17:30:00 UTC
+                      operator: between
+                  size: 100
+                $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterBetweenDates'
+              Get events filter by type:
+                description: Get events filter by type
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - field: entry_time
+                      operator: last_n_hours
+                      type: date
+                      value:
+                      - '10'
+                    - field: eventname
+                      operator: in
+                      type: string
+                      value:
+                      - memory-usage
+                  size: 100
+                $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterByType'
+              Get events filter by system ip:
+                description: Get events filter by system ip
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - field: entry_time
+                      operator: last_n_hours
+                      type: date
+                      value:
+                      - '10'
+                    - field: system_ip
+                      operator: in
+                      type: string
+                      value:
+                      - 1.1.1.1
+                  size: 100
+                $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterBySystemIp'
+              Get events filter by severity:
+                description: Get events filter by severity
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - field: entry_time
+                      operator: last_n_hours
+                      type: date
+                      value:
+                      - '10'
+                    - field: severity_level
+                      operator: in
+                      type: string
+                      value:
+                      - critical
+                  size: 100
+                $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterBySeverity'
+              Get events filter by site-id:
+                description: Get events filter by site-id
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - field: entry_time
+                      operator: last_n_hours
+                      type: date
+                      value:
+                      - '10'
+                    - field: site_id
+                      operator: in
+                      type: string
+                      value:
+                      - '400'
+                      - '500'
+                  size: 100
+                $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterBySites'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Count:
+                  description: Count
+                  value:
+                    count: 964
+                  $$ref: '#/components/examples/ComViptelaVmanageServerEventResponseDoccount'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /event/enable/fileprocess:
+    get:
+      tags:
+      - Monitoring - Events
+      description: Enable events from file.
+      operationId: enableEventsFromFile
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  empty:
+                    type: boolean
+                additionalProperties:
+                  type: string
+                $$ref: '#/components/schemas/GeneralSchema'
+              examples:
+                Enabled status:
+                  description: Enabled status
+                  value:
+                    enable.events.from.files: true
+                  $$ref: '#/components/examples/ComViptelaVmanageServerEventResponseEnableFileprocess'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Events-read
+  /event/getEventsByComponent:
+    get:
+      tags:
+      - Monitoring - Events
+      description: Get event names by component.
+      operationId: getEventNamesByComponent
+      parameters:
+      - name: query
+        in: query
+        description: Event component name
+        required: true
+        schema:
+          type: string
+        examples:
+          Policy:
+            description: Policy
+            value: Policy
+          Nat:
+            description: Nat
+            value: Nat
+          BFD:
+            description: BFD
+            value: BFD
+          App Route:
+            description: App Route
+            value: App-Route
+          Nwpi:
+            description: Nwpi
+            value: Nwpi
+          Security:
+            description: Security
+            value: Security
+          Statistics:
+            description: Statistics
+            value: Statistics
+          System:
+            description: System
+            value: System
+          Control:
+            description: Control
+            value: Control
+          OMP:
+            description: OMP
+            value: OMP
+          VPN:
+            description: VPN
+            value: VPN
+          PIM:
+            description: PIM
+            value: PIM
+          Software:
+            description: Software
+            value: Software
+          Hardware:
+            description: Hardware
+            value: Hardware
+          CloudExpress:
+            description: CloudExpress
+            value: CloudExpress
+          cloudDock:
+            description: cloudDock
+            value: cloudDock
+          Firmware:
+            description: Firmware
+            value: Firmware
+          Bridge:
+            description: Bridge
+            value: Bridge
+          OSPF:
+            description: OSPF
+            value: OSPF
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  component:
+                    type: string
+                    example: Software
+                  event:
+                    type: string
+                    example: system-software-install-change
+                $$ref: '#/components/schemas/ComponentEventMapping'
+              examples:
+                Events:
+                  description: Events
+                  value:
+                    data:
+                    - component: Software
+                      event: system-software-install-change
+                    - component: Software
+                      event: system-software-install-status
+                    - component: Firmware
+                      event: system-firmware-install-status
+                    - component: Software
+                      event: im-event
+                    - component: Software
+                      event: utd-notification
+                    - component: Software
+                      event: utd-update
+                    - component: Software
+                      event: utd-ips-alert
+                    - component: Software
+                      event: utd-engine-status
+                    - component: Software
+                      event: utd-sessions-max
+                    - component: Software
+                      event: utd-version-mismatch
+                    - component: Software
+                      event: utd-file-reputation-retrospective-alert
+                    - component: Software
+                      event: utd-file-analysis-upload-state
+                    - component: Software
+                      event: utd-file-reputation-alert
+                    - component: Software
+                      event: utd-file-analysis-status-event
+                    - component: Software
+                      event: utd-file-reputation-status-event
+                    - component: Software
+                      event: utd-con
+                    - component: Software
+                      event: appqoe-event
+                    - component: Software
+                      event: data-policy-association-status
+                    - component: Software
+                      event: access-list-association-status
+                    - component: Software
+                      event: device-policy-association-status
+                    - component: Software
+                      event: umbrella-anycast-server-switch
+                    - component: Software
+                      event: system-software-patch-change
+                    - component: Software
+                      event: system-software-install-complete-change
+                    - component: BFD
+                      event: bfd-state-change
+                    - component: Hardware
+                      event: flash-fault
+                    - component: Hardware
+                      event: emmc-fault
+                    - component: Hardware
+                      event: sdcard-fault
+                    - component: Hardware
+                      event: tempsensor-fault
+                    - component: Hardware
+                      event: tempsensor-state
+                    - component: Hardware
+                      event: fan-fault
+                    - component: Hardware
+                      event: fantray-fault
+                    - component: Hardware
+                      event: pem-fault
+                    - component: Hardware
+                      event: pem-state-change
+                    - component: Hardware
+                      event: pim-fault
+                    - component: Hardware
+                      event: pim-state-change
+                    - component: Hardware
+                      event: sfp-state-change
+                    - component: Hardware
+                      event: usb-state-change
+                    - component: Hardware
+                      event: sfp-support-state
+                    - component: OMP
+                      event: omp-number-of-vsmarts-change
+                    - component: OMP
+                      event: omp-ro-gen-failure
+                    - component: OMP
+                      event: omp-state-change
+                    - component: OMP
+                      event: omp-peer-state-change
+                    - component: OMP
+                      event: omp-tloc-state-change
+                    - component: OMP
+                      event: omp-data-policy
+                    - component: OMP
+                      event: omp-policy
+                    - component: Control
+                      event: control-connection-state-change
+                    - component: Control
+                      event: control-connection-auth-fail
+                    - component: Control
+                      event: control-vbond-state-change
+                    - component: Control
+                      event: control-connection-tloc-ip-change
+                    - component: Control
+                      event: control-no-active-vsmart
+                    - component: Control
+                      event: control-no-active-vbond
+                    - component: Control
+                      event: control-vedge-list-request
+                    - component: Control
+                      event: tunnel-ipsec-rekey
+                    - component: Control
+                      event: tunnel-ipsec-manual-rekey
+                    - component: Security
+                      event: security-root-cert-chain-installed
+                    - component: Security
+                      event: pki-certificate-event
+                    - component: Security
+                      event: pki-certificate-expiry
+                    - component: Security
+                      event: security-certificate-installed
+                    - component: Security
+                      event: service-gre-state-update
+                    - component: Security
+                      event: security-new-csr-generated
+                    - component: Security
+                      event: security-root-cert-chain-uninstalled
+                    - component: Security
+                      event: security-clear-installed-certificate
+                    - component: Security
+                      event: security-vedge-serial-file-uploaded
+                    - component: Security
+                      event: security-vsmart-serial-file-uploaded
+                    - component: Security
+                      event: security-vedge-entry-added
+                    - component: Security
+                      event: security-vedge-entry-removed
+                    - component: Security
+                      event: security-unclaimed-vedge-entry-added
+                    - component: Security
+                      event: security-vsmart-entry-added
+                    - component: Security
+                      event: security-vsmart-entry-removed
+                    - component: Security
+                      event: ssl-certificate-warning
+                    - component: Security
+                      event: security-certificate-expired
+                    - component: Security
+                      event: vbond-reject-vedge-connection
+                    - component: Security
+                      event: device-template-missing
+                    - component: Security
+                      event: device-template-attached-during-ztp
+                    - component: System
+                      event: process-restart
+                    - component: System
+                      event: process-down
+                    - component: System
+                      event: reboot-aborted
+                    - component: System
+                      event: disk-usage
+                    - component: System
+                      event: memory-usage
+                    - component: System
+                      event: aaa-admin-pwd-change
+                    - component: System
+                      event: site-id-change
+                    - component: System
+                      event: domain-id-change
+                    - component: System
+                      event: system-ip-change
+                    - component: System
+                      event: org-name-change
+                    - component: System
+                      event: system-login-change
+                    - component: System
+                      event: system-logout-change
+                    - component: System
+                      event: system-aaa-login-fail
+                    - component: System
+                      event: cpu-usage
+                    - component: System
+                      event: system-commit
+                    - component: System
+                      event: pseudo-commit-status
+                    - component: VPN
+                      event: bgp-peer-state-change
+                    - component: VPN
+                      event: interface-state-change
+                    - component: VPN
+                      event: interface-bw
+                    - component: VPN
+                      event: interface-auto-bw
+                    - component: VPN
+                      event: route-install-fail
+                    - component: VPN
+                      event: tunnel-install-fail
+                    - component: VPN
+                      event: vrrp-group-state-change
+                    - component: OSPF
+                      event: ospf-neighbor-state-change
+                    - component: OSPF
+                      event: ospf-interface-state-change
+                    - component: PIM
+                      event: pim-neighbor-state-change
+                    - component: PIM
+                      event: pim-interface-state-change
+                    - component: PIM
+                      event: pim-tunnel-state-change
+                    - component: PIM
+                      event: pim-tunnel-change
+                    - component: System
+                      event: system-reboot-issued
+                    - component: System
+                      event: system-reboot-complete
+                    - component: VPN
+                      event: dhcp-address-assigned
+                    - component: VPN
+                      event: dhcp-address-renewed
+                    - component: VPN
+                      event: dhcp-address-released
+                    - component: VPN
+                      event: dhcp-request-rejected
+                    - component: VPN
+                      event: dhcp-address-rejected
+                    - component: VPN
+                      event: dhcp-server-state-change
+                    - component: App-Route
+                      event: sla-change
+                    - component: App-Route
+                      event: sla-violation
+                    - component: App-Route
+                      event: sla-violation-pkt-drop
+                    - component: VPN
+                      event: fib-update
+                    - component: VPN
+                      event: fib-updates
+                    - component: Bridge
+                      event: bridge-creation
+                    - component: Bridge
+                      event: bridge-deletion
+                    - component: Bridge
+                      event: bridge-interface-state-change
+                    - component: Bridge
+                      event: bridge-max-mac-reached
+                    - component: System
+                      event: app-dpi-flows-out-of-memory
+                    - component: System
+                      event: app-dpi-flows-write-failed-vedge
+                    - component: Statistics
+                      event: data-block-create
+                    - component: Statistics
+                      event: data-block-delete
+                    - component: security
+                      event: vmanage-connection-preference-changed
+                    - component: CloudExpress
+                      event: cloudexpress-application-change
+                    - component: CloudExpress
+                      event: cloudexpress-score-change
+                    - component: CloudExpress
+                      event: cloudexpress-max-local-exit-exceeded
+                    - component: Hardware
+                      event: sim-state-change
+                    - component: VPN
+                      event: interface-admin-state-change
+                    - component: VPN
+                      event: endpoint_tracker_state_change
+                    - component: Hardware
+                      event: domain-state-change
+                    - component: Hardware
+                      event: reg-state-change
+                    - component: Hardware
+                      event: bearer-change
+                    - component: Policy
+                      event: zbfw-flow-creation
+                    - component: Policy
+                      event: zbfw-flow-deletion
+                    - component: Policy
+                      event: zbfw-clear-flow-table-full
+                    - component: Policy
+                      event: zbfw-pkt-log
+                    - component: Policy
+                      event: zbfw-sessions-maximum
+                    - component: Policy
+                      event: zbfw-sess-rate-alert-on
+                    - component: Policy
+                      event: zbfw-sess-rate-alert-off
+                    - component: Policy
+                      event: data-policy-association-status
+                    - component: Policy
+                      event: access-list-association-status
+                    - component: Policy
+                      event: zbfw-flow-table-full
+                    - component: Policy
+                      event: zbfw-half-open-limit-hit
+                    - component: App-Route
+                      event: sla-config
+                    - component: cloudDock
+                      event: NETWORK_CREATE
+                    - component: cloudDock
+                      event: NETWORK_DELETE
+                    - component: cloudDock
+                      event: BRIDGE_CREATE
+                    - component: cloudDock
+                      event: BRIDGE_UPDATE
+                    - component: cloudDock
+                      event: BRIDGE_DELETE
+                    - component: cloudDock
+                      event: WAN_DHCP_RENEW
+                    - component: cloudDock
+                      event: MGMT_DHCP_RENEW
+                    - component: cloudDock
+                      event: INTF_STATUS_CHANGE
+                    - component: cloudDock
+                      event: UPGRADE_REGISTER
+                    - component: cloudDock
+                      event: UPGRADE_APPLY
+                    - component: cloudDock
+                      event: RBAC_USER_CREATE
+                    - component: cloudDock
+                      event: RBAC_USER_PASSWORD_UPDATE
+                    - component: cloudDock
+                      event: RBAC_USER_ROLE_UPDATE
+                    - component: cloudDock
+                      event: RBAC_USER_DELETE
+                    - component: cloudDock
+                      event: RBAC_USERS_INACTIVATED
+                    - component: cloudDock
+                      event: RBAC_USER_ACTIVATED
+                    - component: cloudDock
+                      event: RBAC_PWD_EXPIRED
+                    - component: cloudDock
+                      event: SECURITY_SERVER_CREATE
+                    - component: cloudDock
+                      event: SECURITY_SERVER_UPDATE
+                    - component: cloudDock
+                      event: SECURITY_SERVER_DELETE
+                    - component: cloudDock
+                      event: AAA_TYPE_CREATE
+                    - component: cloudDock
+                      event: AAA_TYPE_UPDATE
+                    - component: cloudDock
+                      event: CERT_SWITCH_CERT
+                    - component: cloudDock
+                      event: CERT_CSR_CREATE
+                    - component: cloudDock
+                      event: CERT_CA_CERT_INSTALL
+                    - component: cloudDock
+                      event: REBOOT
+                    - component: cloudDock
+                      event: SHUTDOWN
+                    - component: cloudDock
+                      event: LOGGING_FAILURE
+                    - component: cloudDock
+                      event: DISK_SPACE_ALMOST_FULL
+                    - component: cloudDock
+                      event: ROTATED_LOGS_DELETE
+                    - component: cloudDock
+                      event: TIME_UPDATE
+                    - component: cloudDock
+                      event: TIMEZONE_UPDATE
+                    - component: cloudDock
+                      event: FILE_COPY_STATUS
+                    - component: cloudDock
+                      event: FILE_DOWNLOAD_STATUS
+                    - component: cloudDock
+                      event: FILE_DOWNLOAD_START
+                    - component: cloudDock
+                      event: FILE_DOWNLOAD_VERIFIED
+                    - component: cloudDock
+                      event: FILE_DOWNLOAD_DONE
+                    - component: cloudDock
+                      event: FILE_DOWNLOAD_FAILED
+                    - component: cloudDock
+                      event: CREATE_IMAGE
+                    - component: cloudDock
+                      event: DELETE_IMAGE
+                    - component: cloudDock
+                      event: CREATE_FLAVOR
+                    - component: cloudDock
+                      event: VM_DEPLOYED
+                    - component: cloudDock
+                      event: VM_ALIVE
+                    - component: cloudDock
+                      event: SERVICE_ALIVE
+                    - component: cloudDock
+                      event: VM_UNDEPLOYED
+                    - component: cloudDock
+                      event: SERVICE_UNDEPLOYED
+                    - component: cloudDock
+                      event: SERVICE_UPDATED
+                    - component: cloudDock
+                      event: VM_STOPPED
+                    - component: cloudDock
+                      event: VM_STARTED
+                    - component: cloudDock
+                      event: VM_UPDATED
+                    - component: cloudDock
+                      event: VM_REBOOTED
+                    - component: cloudDock
+                      event: VM_RECOVERY_INIT
+                    - component: cloudDock
+                      event: VM_RECOVERY_REBOOT
+                    - component: cloudDock
+                      event: VM_RECOVERY_COMPLETE
+                    - component: cloudDock
+                      event: VM_MONITOR_UNSET
+                    - component: cloudDock
+                      event: VM_MONITOR_SET
+                    - component: cloudDock
+                      event: CIMC_PASSWORD_UPDATE
+                    - component: cloudDock
+                      event: FACTORY_RESET
+                    - component: cloudDock
+                      event: CPU_USAGE_HIGH
+                    - component: cloudDock
+                      event: viptela
+                    - component: cloudDock
+                      event: ccmEvent
+                    - component: Software
+                      event: umbrella-registration-success
+                    - component: Software
+                      event: umbrella-registration-failure
+                    - component: Software
+                      event: site-id-mismatch
+                    - component: Software
+                      event: service-node-state
+                    - component: Software
+                      event: appqoe-alarm
+                    - component: Security
+                      event: fw-alert
+                    - component: Security
+                      event: ftm-zia-tunnel-setup
+                    - component: Security
+                      event: ftm-tunnel-setup
+                    - component: Security
+                      event: ftm-zia-location-setup
+                    - component: Security
+                      event: ftm-tunnel-tracker
+                    - component: System
+                      event: dca-change-event
+                    - component: System
+                      event: geo-fence-alert-status
+                    - component: Software
+                      event: app-list-app-aliases-notify
+                    - component: Software
+                      event: app-list-unsupported-app-notify
+                    - component: VPN
+                      event: tracker-state-change
+                    - component: System
+                      event: disk-read-speed
+                    - component: System
+                      event: disk-write-speed
+                    - component: Software
+                      event: idmgr-pxgrid-connection
+                    - component: Nwpi
+                      event: qos-congestion
+                    - component: Nat
+                      event: nat-update
+                    - component: System
+                      event: aaa-password-expiry-warning
+                    - component: System
+                      event: aaa-password-expired
+                    - component: Policy
+                      event: data-policy-commit-failure
+                    - component: System
+                      event: non-yang-cli-file-generated
+                    - component: Hardware
+                      event: cellular-network-status-change
+                  $$ref: '#/components/examples/ComViptelaVmanageServerEventResponseGeteventsbycomponent'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: default
+  /event/listeners:
+    get:
+      tags:
+      - Monitoring - Events
+      description: Retrieve listener information
+      operationId: getListenersInfo
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                Listeners:
+                  description: Listeners
+                  value:
+                    data:
+                    - - 172.16.255.14
+                      - b6f96d9d-c7f4-42cf-a0c3-229987ebfadd
+                      - 1717499753110
+                      - 1418525
+                    - - 172.16.255.19
+                      - 7ed6a5b0-ddcb-4024-88ae-73e723476202
+                      - 1717499754183
+                      - 1405384
+                    - - 172.16.255.21
+                      - 5cd0fe57-30ee-4e9b-bf9a-028141a02f1e
+                      - 1717499751671
+                      - 1362486
+                    - - 172.16.255.16
+                      - 21a8ce32-0400-4c1b-8860-07af4180addb
+                      - 1717499751021
+                      - 1398150
+                    - - 172.16.255.20
+                      - a12fecf8-7c83-470b-8d4b-238f5197fcef
+                      - 1717499753787
+                      - 1399405
+                    - - 172.16.255.26
+                      - a52dcb70-bd3b-4d9e-baf0-6616ab20538c
+                      - 1717499754401
+                      - 462213
+                    - - 172.16.255.11
+                      - 91e86df6-8cd1-4a5d-99a9-0104b2960114
+                      - 1717499752137
+                      - 1450422
+                    - - 172.16.255.15
+                      - 0f2d7ac4-72cb-47ad-b02f-ed35c0517b79
+                      - 1717499751235
+                      - 1408530
+                    - - 172.16.255.22
+                      - c2c0d332-91d6-4159-b0a5-2dc0f4861f5e
+                      - 1717499783893
+                      - 485555
+                  $$ref: '#/components/examples/ComViptelaVmanageServerEventResponseListeners'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /event/page:
+    get:
+      tags:
+      - Monitoring - Events
+      description: Get paginated events
+      operationId: getPage_MonitoringEvents_1103
+      parameters:
+      - name: query
+        in: query
+        description: Query
+        schema:
+          type: string
+        examples:
+          Get events filter by hours:
+            description: Get events filter by hours
+            value:
+              query:
+                condition: AND
+                rules:
+                - field: entry_time
+                  operator: last_n_hours
+                  type: date
+                  value:
+                  - '10'
+              size: 100
+            $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterByHours'
+          Get events filter between dates:
+            description: Get events filter between dates
+            value:
+              query:
+                condition: AND
+                rules:
+                - field: entry_time
+                  type: date
+                  value:
+                  - 2024-04-30T19:30:00 UTC
+                  - 2024-05-30T17:30:00 UTC
+                  operator: between
+              size: 100
+            $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterBetweenDates'
+          Get events filter by type:
+            description: Get events filter by type
+            value:
+              query:
+                condition: AND
+                rules:
+                - field: entry_time
+                  operator: last_n_hours
+                  type: date
+                  value:
+                  - '10'
+                - field: eventname
+                  operator: in
+                  type: string
+                  value:
+                  - memory-usage
+              size: 100
+            $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterByType'
+          Get events filter by system ip:
+            description: Get events filter by system ip
+            value:
+              query:
+                condition: AND
+                rules:
+                - field: entry_time
+                  operator: last_n_hours
+                  type: date
+                  value:
+                  - '10'
+                - field: system_ip
+                  operator: in
+                  type: string
+                  value:
+                  - 1.1.1.1
+              size: 100
+            $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterBySystemIp'
+          Get events filter by severity:
+            description: Get events filter by severity
+            value:
+              query:
+                condition: AND
+                rules:
+                - field: entry_time
+                  operator: last_n_hours
+                  type: date
+                  value:
+                  - '10'
+                - field: severity_level
+                  operator: in
+                  type: string
+                  value:
+                  - critical
+              size: 100
+            $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterBySeverity'
+          Get events filter by site-id:
+            description: Get events filter by site-id
+            value:
+              query:
+                condition: AND
+                rules:
+                - field: entry_time
+                  operator: last_n_hours
+                  type: date
+                  value:
+                  - '10'
+                - field: site_id
+                  operator: in
+                  type: string
+                  value:
+                  - '400'
+                  - '500'
+              size: 100
+            $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterBySites'
+      - name: scrollId
+        in: query
+        description: Scroll ID
+        schema:
+          type: string
+      - name: count
+        in: query
+        description: Number of alarms per page
+        schema:
+          type: integer
+          format: int32
+      - name: site-id
+        in: query
+        description: Specify the site-id to filter the events
+        schema:
+          pattern: ^[0-9]+$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        acknowledged:
+                          type: boolean
+                        active:
+                          type: boolean
+                        cleared_by:
+                          type: string
+                          format: uuid
+                          example: 0a0dca23-11d5-4014-bfbb-976d3c6de492
+                        cleared_events:
+                          type: array
+                          items:
+                            type: string
+                            format: uuid
+                        cleared_time:
+                          type: integer
+                          format: int64
+                          example: 1652894923722
+                        component:
+                          type: string
+                          example: Schedule Telemetry collection
+                        consumed_events:
+                          type: array
+                          items:
+                            type: object
+                            $$ref: '#/components/schemas/OneOfAlarmConsumedEventsItems'
+                        devices:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              system-ip:
+                                type: string
+                                example: 19.19.19.1
+                            $$ref: '#/components/schemas/AlarmDevices'
+                        entry_time:
+                          type: integer
+                          format: int64
+                          example: 1652906591837
+                        eventname:
+                          type: string
+                          example: telemetry-data-collection-failure
+                        id:
+                          type: string
+                          example: HHbp2IABUbH5BDy9BhJe
+                        message:
+                          type: string
+                          example: Scheduled telemetry data collection failed on 19.19.19.1
+                        possible_causes:
+                          type: array
+                          items:
+                            type: string
+                        receive_time:
+                          type: integer
+                          format: int64
+                        rule_name_display:
+                          type: string
+                          example: Telemetry data save failed
+                        rulename:
+                          type: string
+                          example: cpu-usage
+                        severity:
+                          type: string
+                          enum:
+                          - Minor
+                          - Major
+                          - Critical
+                          - Medium
+                        severity_number:
+                          type: integer
+                          format: int64
+                          example: 4
+                        site_id:
+                          type: integer
+                          format: int64
+                          example: 100
+                        statcycletime:
+                          type: integer
+                          format: int64
+                        suppressed:
+                          type: boolean
+                          example: false
+                        suppressed_by:
+                          type: object
+                          example:
+                            system-ip:
+                              type: string
+                              example: 172.16.255.11
+                            component:
+                              type: string
+                              example: BFD
+                        system_ip:
+                          type: string
+                          example: 172.16.255.26
+                        tenant:
+                          type: string
+                          example: default
+                        type:
+                          type: string
+                          example: Telemetry data save failed
+                        uuid:
+                          type: string
+                          format: uuid
+                          example: f6f83721-3a69-42d1-841f-94e015957fb7
+                        values:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              empty:
+                                type: boolean
+                            additionalProperties:
+                              type: string
+                            $$ref: '#/components/schemas/GeneralSchema'
+                        values_short_display:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              empty:
+                                type: boolean
+                            additionalProperties:
+                              type: string
+                            $$ref: '#/components/schemas/GeneralSchema'
+                      description: Represents any kind of alarm
+                      $$ref: '#/components/schemas/Alarm'
+                  pageInfo:
+                    type: object
+                    properties:
+                      count:
+                        type: integer
+                        description: number of alarms to be fetched
+                        format: int64
+                      endTime:
+                        type: integer
+                        description: end time of alarms to be fetched
+                        format: int64
+                      startTime:
+                        type: integer
+                        description: start time of alarms to be fetched
+                        format: int64
+                    $$ref: '#/components/schemas/PageInfo'
+                description: AlarmResponse is used for GET/POST /alarms call.
+                $$ref: '#/components/schemas/AlarmResponse'
+              examples:
+                Response:
+                  description: Response
+                  value:
+                    data:
+                    - entry_time: 1717405624895
+                      statcycletime: 1717405624895
+                      tenant: default
+                      deviceuuid: 91e86df6-8cd1-4a5d-99a9-0104b2960114
+                      host_name: vedge
+                      system_ip: 172.16.255.11
+                      vmanage_system_ip: 172.16.255.11
+                      device_type: vedge
+                      eventname: interface-state-change
+                      component: VPN
+                      severity_level: major
+                      event: '{"interface-state-change":{"if-name":"eth0","xmlns":"http://viptela.com/vpn","system-ip":"::","host-name":"vedge","vpn-id":512,"new-state":"up","severity-level":"major"}}'
+                      details: host-name=vedge; vpn-id=512; if-name=eth0; new-state=up
+                      tunnelname: eth0
+                      process_id: ''
+                      event_type: ''
+                      event_description: ''
+                      cor_region: ''
+                      cloud_type: ''
+                      transit_vpc_account_id: ''
+                      transit_vpc_account_name: ''
+                      transit_vpc_id: ''
+                      transit_vpc_name: ''
+                      host_vpc_id: ''
+                      host_vpc_account_id: ''
+                      host_vpc_account_name: ''
+                      instance_id: ''
+                      device_pair_id: ''
+                      device_uuid_list: ''
+                      device_instance_id_list: ''
+                      old_device_pair_id: ''
+                      target_device_ip: ''
+                      target_device_uuid: ''
+                      date_string: ''
+                      alert_timestamp: 0
+                      filename: ''
+                      dst_port: 0
+                      dst_ip: ''
+                    pageInfo:
+                      startTime: '1717405606203'
+                      endTime: '1717405624910'
+                      scrollId: NQYkPL3cg2Y8fSMTClSW7MJ5e8A4ilV1vb7o0YhfJzHKS3hdaq6uOgIX2tUev4MV865y1txxwN6GU6XXg3hNX5dYrvKRfb4MeEUnc4pmkrgVwRUQnhUkZils
+                      hasMoreData: true
+                      count: 4
+                      totalCount: 2728
+                  $$ref: '#/components/examples/ComViptelaVmanageServerEventResponsePage'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Events-read
+    post:
+      tags:
+      - Monitoring - Events
+      description: Get paginated events
+      operationId: postPage_MonitoringEvents_1104
+      parameters:
+      - name: scrollId
+        in: query
+        description: Scroll ID
+        schema:
+          type: string
+      - name: count
+        in: query
+        description: Number of alarms per page
+        schema:
+          type: integer
+          format: int32
+      - name: site-id
+        in: query
+        description: Specify the site-id to filter the events
+        schema:
+          pattern: ^[0-9]+$
+          type: string
+      requestBody:
+        description: Event query string
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Get events filter by hours:
+                description: Get events filter by hours
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - field: entry_time
+                      operator: last_n_hours
+                      type: date
+                      value:
+                      - '10'
+                  size: 100
+                $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterByHours'
+              Get events filter between dates:
+                description: Get events filter between dates
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - field: entry_time
+                      type: date
+                      value:
+                      - 2024-04-30T19:30:00 UTC
+                      - 2024-05-30T17:30:00 UTC
+                      operator: between
+                  size: 100
+                $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterBetweenDates'
+              Get events filter by type:
+                description: Get events filter by type
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - field: entry_time
+                      operator: last_n_hours
+                      type: date
+                      value:
+                      - '10'
+                    - field: eventname
+                      operator: in
+                      type: string
+                      value:
+                      - memory-usage
+                  size: 100
+                $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterByType'
+              Get events filter by system ip:
+                description: Get events filter by system ip
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - field: entry_time
+                      operator: last_n_hours
+                      type: date
+                      value:
+                      - '10'
+                    - field: system_ip
+                      operator: in
+                      type: string
+                      value:
+                      - 1.1.1.1
+                  size: 100
+                $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterBySystemIp'
+              Get events filter by severity:
+                description: Get events filter by severity
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - field: entry_time
+                      operator: last_n_hours
+                      type: date
+                      value:
+                      - '10'
+                    - field: severity_level
+                      operator: in
+                      type: string
+                      value:
+                      - critical
+                  size: 100
+                $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterBySeverity'
+              Get events filter by site-id:
+                description: Get events filter by site-id
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - field: entry_time
+                      operator: last_n_hours
+                      type: date
+                      value:
+                      - '10'
+                    - field: site_id
+                      operator: in
+                      type: string
+                      value:
+                      - '400'
+                      - '500'
+                  size: 100
+                $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterBySites'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        acknowledged:
+                          type: boolean
+                        active:
+                          type: boolean
+                        cleared_by:
+                          type: string
+                          format: uuid
+                          example: 0a0dca23-11d5-4014-bfbb-976d3c6de492
+                        cleared_events:
+                          type: array
+                          items:
+                            type: string
+                            format: uuid
+                        cleared_time:
+                          type: integer
+                          format: int64
+                          example: 1652894923722
+                        component:
+                          type: string
+                          example: Schedule Telemetry collection
+                        consumed_events:
+                          type: array
+                          items:
+                            type: object
+                            $$ref: '#/components/schemas/OneOfAlarmConsumedEventsItems'
+                        devices:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              system-ip:
+                                type: string
+                                example: 19.19.19.1
+                            $$ref: '#/components/schemas/AlarmDevices'
+                        entry_time:
+                          type: integer
+                          format: int64
+                          example: 1652906591837
+                        eventname:
+                          type: string
+                          example: telemetry-data-collection-failure
+                        id:
+                          type: string
+                          example: HHbp2IABUbH5BDy9BhJe
+                        message:
+                          type: string
+                          example: Scheduled telemetry data collection failed on 19.19.19.1
+                        possible_causes:
+                          type: array
+                          items:
+                            type: string
+                        receive_time:
+                          type: integer
+                          format: int64
+                        rule_name_display:
+                          type: string
+                          example: Telemetry data save failed
+                        rulename:
+                          type: string
+                          example: cpu-usage
+                        severity:
+                          type: string
+                          enum:
+                          - Minor
+                          - Major
+                          - Critical
+                          - Medium
+                        severity_number:
+                          type: integer
+                          format: int64
+                          example: 4
+                        site_id:
+                          type: integer
+                          format: int64
+                          example: 100
+                        statcycletime:
+                          type: integer
+                          format: int64
+                        suppressed:
+                          type: boolean
+                          example: false
+                        suppressed_by:
+                          type: object
+                          example:
+                            system-ip:
+                              type: string
+                              example: 172.16.255.11
+                            component:
+                              type: string
+                              example: BFD
+                        system_ip:
+                          type: string
+                          example: 172.16.255.26
+                        tenant:
+                          type: string
+                          example: default
+                        type:
+                          type: string
+                          example: Telemetry data save failed
+                        uuid:
+                          type: string
+                          format: uuid
+                          example: f6f83721-3a69-42d1-841f-94e015957fb7
+                        values:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              empty:
+                                type: boolean
+                            additionalProperties:
+                              type: string
+                            $$ref: '#/components/schemas/GeneralSchema'
+                        values_short_display:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              empty:
+                                type: boolean
+                            additionalProperties:
+                              type: string
+                            $$ref: '#/components/schemas/GeneralSchema'
+                      description: Represents any kind of alarm
+                      $$ref: '#/components/schemas/Alarm'
+                  pageInfo:
+                    type: object
+                    properties:
+                      count:
+                        type: integer
+                        description: number of alarms to be fetched
+                        format: int64
+                      endTime:
+                        type: integer
+                        description: end time of alarms to be fetched
+                        format: int64
+                      startTime:
+                        type: integer
+                        description: start time of alarms to be fetched
+                        format: int64
+                    $$ref: '#/components/schemas/PageInfo'
+                description: AlarmResponse is used for GET/POST /alarms call.
+                $$ref: '#/components/schemas/AlarmResponse'
+              examples:
+                Response:
+                  description: Response
+                  value:
+                    data:
+                    - entry_time: 1717405624895
+                      statcycletime: 1717405624895
+                      tenant: default
+                      deviceuuid: 91e86df6-8cd1-4a5d-99a9-0104b2960114
+                      host_name: vedge
+                      system_ip: 172.16.255.11
+                      vmanage_system_ip: 172.16.255.11
+                      device_type: vedge
+                      eventname: interface-state-change
+                      component: VPN
+                      severity_level: major
+                      event: '{"interface-state-change":{"if-name":"eth0","xmlns":"http://viptela.com/vpn","system-ip":"::","host-name":"vedge","vpn-id":512,"new-state":"up","severity-level":"major"}}'
+                      details: host-name=vedge; vpn-id=512; if-name=eth0; new-state=up
+                      tunnelname: eth0
+                      process_id: ''
+                      event_type: ''
+                      event_description: ''
+                      cor_region: ''
+                      cloud_type: ''
+                      transit_vpc_account_id: ''
+                      transit_vpc_account_name: ''
+                      transit_vpc_id: ''
+                      transit_vpc_name: ''
+                      host_vpc_id: ''
+                      host_vpc_account_id: ''
+                      host_vpc_account_name: ''
+                      instance_id: ''
+                      device_pair_id: ''
+                      device_uuid_list: ''
+                      device_instance_id_list: ''
+                      old_device_pair_id: ''
+                      target_device_ip: ''
+                      target_device_uuid: ''
+                      date_string: ''
+                      alert_timestamp: 0
+                      filename: ''
+                      dst_port: 0
+                      dst_ip: ''
+                    pageInfo:
+                      startTime: '1717405606203'
+                      endTime: '1717405624910'
+                      scrollId: NQYkPL3cg2Y8fSMTClSW7MJ5e8A4ilV1vb7o0YhfJzHKS3hdaq6uOgIX2tUev4MV865y1txxwN6GU6XXg3hNX5dYrvKRfb4MeEUnc4pmkrgVwRUQnhUkZils
+                      hasMoreData: true
+                      count: 4
+                      totalCount: 2728
+                  $$ref: '#/components/examples/ComViptelaVmanageServerEventResponsePage'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Alarms-read
+  /event/query/fields:
+    get:
+      tags:
+      - Monitoring - Events
+      description: Get query fields
+      operationId: getQueryFields
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  component:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        key:
+                          type: string
+                          example: system
+                        value:
+                          type: string
+                          example: System
+                      $$ref: '#/components/schemas/SimpleKeyValueMapping'
+                  severityOptions:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        key:
+                          type: string
+                          example: system
+                        value:
+                          type: string
+                          example: System
+                      $$ref: '#/components/schemas/SimpleKeyValueMapping'
+                  timeOptions:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        enableDateFields:
+                          type: boolean
+                          example: false
+                        key:
+                          type: string
+                          example: last_24_hours
+                        value:
+                          type: string
+                          example: Last 24 hours
+                      $$ref: '#/components/schemas/TimeOptions'
+                $$ref: '#/components/schemas/EventQueryInputResponse'
+              examples:
+                Query fields:
+                  description: Query fields
+                  value:
+                    data:
+                    - isRequired: true
+                      fieldData:
+                        type: dateList
+                      dataType: date
+                      property: entry_time
+                      name: Event Time
+                      options:
+                      - enableDateFields: false
+                        number: '1'
+                        value: Last 1 hour
+                        key: last_1_hour
+                      - enableDateFields: false
+                        number: '3'
+                        isSelected: true
+                        value: Last 3 hours
+                        key: last_3_hours
+                      - enableDateFields: false
+                        number: '6'
+                        value: Last 6 hours
+                        key: last_6_hours
+                      - enableDateFields: false
+                        number: '12'
+                        value: Last 12 hours
+                        key: last_12_hours
+                      - enableDateFields: false
+                        number: '24'
+                        value: Last 24 hours
+                        key: last_24_hours
+                      - enableDateFields: false
+                        number: '168'
+                        value: Last 7 days
+                        key: last_168_hours
+                      - enableDateFields: true
+                        value: Custom
+                        key: custom
+                    - isRequired: false
+                      fieldData:
+                        type: enum
+                      dataType: string
+                      property: severity_level
+                      name: Severity
+                      options:
+                      - value: Critical
+                        key: critical
+                      - value: Major
+                        key: major
+                      - value: Minor
+                        key: minor
+                      multiSelect: true
+                    - isRequired: false
+                      fieldData:
+                        type: url
+                        url: dataservice/event/component/keyvalue
+                      dataType: string
+                      property: component
+                      name: Component
+                      multiSelect: true
+                    - isRequired: false
+                      fieldData:
+                        type: url
+                        url: dataservice/device/keyvalue
+                      dataType: string
+                      property: system_ip
+                      name: System IP
+                      multiSelect: true
+                    - isRequired: false
+                      fieldData:
+                        type: url
+                        url: dataservice/event/types/keyvalue
+                      dataType: string
+                      property: eventname
+                      name: Event name
+                      multiSelect: true
+                  $$ref: '#/components/examples/ComViptelaVmanageServerEventResponseQueryFields'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Events-read
+  /event/query/input:
+    get:
+      tags:
+      - Monitoring - Events
+      description: Get event field details
+      operationId: createEventsQueryConfig
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  component:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        key:
+                          type: string
+                          example: system
+                        value:
+                          type: string
+                          example: System
+                      $$ref: '#/components/schemas/SimpleKeyValueMapping'
+                  severityOptions:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        key:
+                          type: string
+                          example: system
+                        value:
+                          type: string
+                          example: System
+                      $$ref: '#/components/schemas/SimpleKeyValueMapping'
+                  timeOptions:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        enableDateFields:
+                          type: boolean
+                          example: false
+                        key:
+                          type: string
+                          example: last_24_hours
+                        value:
+                          type: string
+                          example: Last 24 hours
+                      $$ref: '#/components/schemas/TimeOptions'
+                $$ref: '#/components/schemas/EventQueryInputResponse'
+              examples:
+                Field details:
+                  description: Field details
+                  value:
+                    timeOptions:
+                    - key: last_24_hours
+                      value: Last 24 hours
+                      enableDateFields: false
+                    - key: last_12_hours
+                      value: Last 12 hours
+                      enableDateFields: false
+                    - key: last_6_hours
+                      value: Last 6 hours
+                      enableDateFields: false
+                    - key: last_1_hour
+                      value: Last 1 hour
+                      enableDateFields: false
+                    - key: custom
+                      value: Custom
+                      enableDateFields: true
+                    severityOptions:
+                    - key: critical
+                      value: Critical
+                    - key: major
+                      value: Major
+                    - key: minor
+                      value: Minor
+                    component:
+                    - key: system
+                      value: System
+                    - key: hardware
+                      value: Hardware
+                    - key: bfd
+                      value: BFD
+                    - key: control
+                      value: Control
+                    - key: interface
+                      value: Interface
+                    - key: omp
+                      value: OMP
+                    - key: tunnel
+                      value: Tunnel
+                    - key: routing
+                      value: Routing
+                    - key: policy
+                      value: vSmart Policy
+                    - key: security
+                      value: Security
+                    - key: software
+                      value: Software
+                  $$ref: '#/components/examples/ComViptelaVmanageServerEventResponseQueryInput'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Events-read
+  /event/severity:
+    get:
+      tags:
+      - Monitoring - Events
+      description: Get alarms by severity
+      operationId: getBySeverities
+      parameters:
+      - name: severity-level
+        in: query
+        description: Severity level
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+        examples:
+          critical:
+            description: critical
+            value: critical
+          major:
+            description: major
+            value: major
+          medium:
+            description: medium
+            value: medium
+          minor:
+            description: minor
+            value: minor
+      - name: deviceId
+        in: query
+        description: Device System IP
+        schema:
+          type: array
+          items:
+            type: string
+      - name: query
+        in: query
+        description: Query
+        allowEmptyValue: true
+        schema:
+          type: string
+        examples:
+          Empty:
+            description: Empty
+          Get events filter by hours:
+            description: Get events filter by hours
+            value:
+              query:
+                condition: AND
+                rules:
+                - field: entry_time
+                  operator: last_n_hours
+                  type: date
+                  value:
+                  - '10'
+              size: 100
+            $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterByHours'
+          Get events filter between dates:
+            description: Get events filter between dates
+            value:
+              query:
+                condition: AND
+                rules:
+                - field: entry_time
+                  type: date
+                  value:
+                  - 2024-04-30T19:30:00 UTC
+                  - 2024-05-30T17:30:00 UTC
+                  operator: between
+              size: 100
+            $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterBetweenDates'
+          Get events filter by type:
+            description: Get events filter by type
+            value:
+              query:
+                condition: AND
+                rules:
+                - field: entry_time
+                  operator: last_n_hours
+                  type: date
+                  value:
+                  - '10'
+                - field: eventname
+                  operator: in
+                  type: string
+                  value:
+                  - memory-usage
+              size: 100
+            $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterByType'
+          Get events filter by system ip:
+            description: Get events filter by system ip
+            value:
+              query:
+                condition: AND
+                rules:
+                - field: entry_time
+                  operator: last_n_hours
+                  type: date
+                  value:
+                  - '10'
+                - field: system_ip
+                  operator: in
+                  type: string
+                  value:
+                  - 1.1.1.1
+              size: 100
+            $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterBySystemIp'
+          Get events filter by severity:
+            description: Get events filter by severity
+            value:
+              query:
+                condition: AND
+                rules:
+                - field: entry_time
+                  operator: last_n_hours
+                  type: date
+                  value:
+                  - '10'
+                - field: severity_level
+                  operator: in
+                  type: string
+                  value:
+                  - critical
+              size: 100
+            $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterBySeverity'
+          Get events filter by site-id:
+            description: Get events filter by site-id
+            value:
+              query:
+                condition: AND
+                rules:
+                - field: entry_time
+                  operator: last_n_hours
+                  type: date
+                  value:
+                  - '10'
+                - field: site_id
+                  operator: in
+                  type: string
+                  value:
+                  - '400'
+                  - '500'
+              size: 100
+            $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterBySites'
+      - name: site-id
+        in: query
+        description: Specify the site-id to filter the events
+        schema:
+          pattern: ^[0-9]+$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                properties:
+                  empty:
+                    type: boolean
+                items:
+                  type: object
+                  properties:
+                    component:
+                      type: string
+                      example: System
+                    details:
+                      type: string
+                      example: host-name=vm12; user-name=admin; user-id=2276
+                    entry_time:
+                      type: string
+                    eventname:
+                      type: string
+                      example: system-login-change
+                    host_name:
+                      type: string
+                      example: vm12
+                    severity_level:
+                      type: string
+                      enum:
+                      - MINOR
+                      - MAJOR
+                      - MEDIUM
+                      - CRITICAL
+                    system_ip:
+                      type: string
+                      example: 172.16.255.22
+                  $$ref: '#/components/schemas/EventsBySeverity'
+                $$ref: '#/components/schemas/EventSeverityResponse'
+              examples:
+                Events:
+                  description: Events
+                  value:
+                    data:
+                    - entry_time: 1717494474191
+                      system_ip: 172.16.255.11
+                      eventname: cpu-usage
+                      host_name: vm1
+                      component: System
+                      severity_level: minor
+                      details: host-name=vm1; cpu-status=usage-healthy; warning=System CPU usage is back to normal level (below 60%); cpu-1min-percentage=100; cpu-5min-percentage=59.00
+                    - entry_time: 1717494424040
+                      system_ip: 172.16.255.11
+                      eventname: cpu-usage
+                      host_name: vm1
+                      component: System
+                      severity_level: minor
+                      details: host-name=vm1; cpu-status=usage-notice; warning=System CPU usage is above 60%; cpu-1min-percentage=100; cpu-5min-percentage=68.00
+                    - entry_time: 1717494036440
+                      system_ip: 172.16.255.22
+                      eventname: security-root-cert-chain-installed
+                      host_name: vm12
+                      component: Security
+                      severity_level: minor
+                      details: host-name=vm12
+                    - entry_time: 1717494028056
+                      system_ip: 172.16.255.26
+                      eventname: security-root-cert-chain-installed
+                      host_name: vm16
+                      component: Security
+                      severity_level: minor
+                      details: host-name=vm16
+                    - entry_time: 1717493916930
+                      system_ip: 172.16.255.21
+                      eventname: dhcp-address-renewed
+                      host_name: vm11
+                      component: VPN
+                      severity_level: minor
+                      details: host-name=vm11; vpn-id=512; if-name=eth0; client-mac=00:50:56:00:01:1f; ip=10.0.1.31
+                    - entry_time: 1717493882579
+                      system_ip: 172.16.255.16
+                      eventname: dhcp-address-renewed
+                      host_name: vm6
+                      component: VPN
+                      severity_level: minor
+                      details: host-name=vm6; vpn-id=512; if-name=eth0; client-mac=00:50:56:00:01:10; ip=10.0.1.16
+                    - entry_time: 1717493881309
+                      system_ip: 172.16.255.20
+                      eventname: dhcp-address-renewed
+                      host_name: vm10
+                      component: VPN
+                      severity_level: minor
+                      details: host-name=vm10; vpn-id=0; if-name=eth0; client-mac=00:50:56:00:01:1e; ip=10.0.1.30
+                    - entry_time: 1717493517448
+                      system_ip: 172.16.255.22
+                      eventname: system-login-change
+                      host_name: vm12
+                      component: System
+                      severity_level: minor
+                      details: host-name=vm12; user-name=admin; user-id=-28374
+                    - entry_time: 1717493517448
+                      system_ip: 172.16.255.22
+                      eventname: system-login-change
+                      host_name: vm12
+                      component: System
+                      severity_level: minor
+                      details: host-name=vm12; user-name=admin; user-id=-28374
+                    - entry_time: 1717493018537
+                      system_ip: 172.16.255.26
+                      eventname: dhcp-address-renewed
+                      host_name: vm16
+                      component: VPN
+                      severity_level: minor
+                      details: host-name=vm16; vpn-id=512; if-name=eth0; client-mac=00:50:56:00:01:24; ip=10.0.1.36
+                    - entry_time: 1717493018537
+                      system_ip: 172.16.255.26
+                      eventname: dhcp-address-renewed
+                      host_name: vm16
+                      component: VPN
+                      severity_level: minor
+                      details: host-name=vm16; vpn-id=512; if-name=eth0; client-mac=00:50:56:00:01:24; ip=10.0.1.36
+                    - entry_time: 1717492082508
+                      system_ip: 172.16.255.16
+                      eventname: dhcp-address-renewed
+                      host_name: vm6
+                      component: VPN
+                      severity_level: minor
+                      details: host-name=vm6; vpn-id=512; if-name=eth0; client-mac=00:50:56:00:01:10; ip=10.0.1.16
+                    - entry_time: 1717491129726
+                      system_ip: 172.16.255.15
+                      eventname: cpu-usage
+                      host_name: vm5
+                      component: System
+                      severity_level: minor
+                      details: host-name=vm5; cpu-status=usage-healthy; warning=System CPU usage is back to normal level (below 60%); cpu-1min-percentage=42.00; cpu-5min-percentage=59.00
+                    - entry_time: 1717491119767
+                      system_ip: 172.16.255.15
+                      eventname: cpu-usage
+                      host_name: vm5
+                      component: System
+                      severity_level: minor
+                      details: host-name=vm5; cpu-status=usage-notice; warning=System CPU usage is above 60%; cpu-1min-percentage=50.00; cpu-5min-percentage=61.00
+                    - entry_time: 1717491109539
+                      system_ip: 172.16.255.15
+                      eventname: cpu-usage
+                      host_name: vm5
+                      component: System
+                      severity_level: minor
+                      details: host-name=vm5; cpu-status=usage-healthy; warning=System CPU usage is back to normal level (below 60%); cpu-1min-percentage=41.00; cpu-5min-percentage=60.00
+                    - entry_time: 1717490271278
+                      system_ip: 172.16.255.15
+                      eventname: dhcp-address-renewed
+                      host_name: vm5
+                      component: VPN
+                      severity_level: minor
+                      details: host-name=vm5; vpn-id=512; if-name=eth0; client-mac=00:50:56:00:01:0f; ip=10.0.1.15
+                    - entry_time: 1717488474843
+                      system_ip: 172.16.255.19
+                      eventname: dhcp-address-renewed
+                      host_name: vm9
+                      component: VPN
+                      severity_level: minor
+                      details: host-name=vm9; vpn-id=0; if-name=eth0; client-mac=00:50:56:00:01:13; ip=10.0.1.19
+                    - entry_time: 1717488471237
+                      system_ip: 172.16.255.15
+                      eventname: dhcp-address-renewed
+                      host_name: vm5
+                      component: VPN
+                      severity_level: minor
+                      details: host-name=vm5; vpn-id=512; if-name=eth0; client-mac=00:50:56:00:01:0f; ip=10.0.1.15
+                    - entry_time: 1717488462547
+                      system_ip: 172.16.255.14
+                      eventname: dhcp-address-renewed
+                      host_name: vm4
+                      component: VPN
+                      severity_level: minor
+                      details: host-name=vm4; vpn-id=512; if-name=eth0; client-mac=00:50:56:00:01:0e; ip=10.0.1.14
+                    - entry_time: 1717483994936
+                      system_ip: 172.16.255.22
+                      eventname: dhcp-address-renewed
+                      host_name: vm12
+                      component: VPN
+                      severity_level: minor
+                      details: host-name=vm12; vpn-id=0; if-name=eth0; client-mac=00:50:56:00:01:20; ip=10.0.1.32
+                  $$ref: '#/components/examples/ComViptelaVmanageServerEventResponseSeverity'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Events-read
+  /event/severity/summary:
+    get:
+      tags:
+      - Monitoring - Events
+      description: Get event severity histogram
+      operationId: getSeverityHistogram
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device system ip
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: query
+        in: query
+        description: Query
+        allowEmptyValue: true
+        schema:
+          type: string
+        examples:
+          Empty:
+            description: Empty
+          Get events filter by hours:
+            description: Get events filter by hours
+            value:
+              query:
+                condition: AND
+                rules:
+                - field: entry_time
+                  operator: last_n_hours
+                  type: date
+                  value:
+                  - '10'
+              size: 100
+            $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterByHours'
+          Get events filter between dates:
+            description: Get events filter between dates
+            value:
+              query:
+                condition: AND
+                rules:
+                - field: entry_time
+                  type: date
+                  value:
+                  - 2024-04-30T19:30:00 UTC
+                  - 2024-05-30T17:30:00 UTC
+                  operator: between
+              size: 100
+            $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterBetweenDates'
+          Get events filter by type:
+            description: Get events filter by type
+            value:
+              query:
+                condition: AND
+                rules:
+                - field: entry_time
+                  operator: last_n_hours
+                  type: date
+                  value:
+                  - '10'
+                - field: eventname
+                  operator: in
+                  type: string
+                  value:
+                  - memory-usage
+              size: 100
+            $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterByType'
+          Get events filter by system ip:
+            description: Get events filter by system ip
+            value:
+              query:
+                condition: AND
+                rules:
+                - field: entry_time
+                  operator: last_n_hours
+                  type: date
+                  value:
+                  - '10'
+                - field: system_ip
+                  operator: in
+                  type: string
+                  value:
+                  - 1.1.1.1
+              size: 100
+            $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterBySystemIp'
+          Get events filter by severity:
+            description: Get events filter by severity
+            value:
+              query:
+                condition: AND
+                rules:
+                - field: entry_time
+                  operator: last_n_hours
+                  type: date
+                  value:
+                  - '10'
+                - field: severity_level
+                  operator: in
+                  type: string
+                  value:
+                  - critical
+              size: 100
+            $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterBySeverity'
+          Get events filter by site-id:
+            description: Get events filter by site-id
+            value:
+              query:
+                condition: AND
+                rules:
+                - field: entry_time
+                  operator: last_n_hours
+                  type: date
+                  value:
+                  - '10'
+                - field: site_id
+                  operator: in
+                  type: string
+                  value:
+                  - '400'
+                  - '500'
+              size: 100
+            $$ref: '#/components/examples/ComViptelaVmanageServerEventRequestFilterBySites'
+      - name: site-id
+        in: query
+        description: Specify the site-id to filter the events
+        schema:
+          pattern: ^[0-9]+$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                $$ref: '#/components/schemas/SeveritySummary'
+              examples:
+                Severity:
+                  description: Severity
+                  value:
+                    header:
+                      generatedOn: 1718015805314
+                      viewKeys:
+                        uniqueKey: []
+                        preferenceKey: grid-DeviceEvent_histogram
+                      columns:
+                      - title: Event Time
+                        property: entry_time
+                        displayFormat: DD MMM YYYY h:mm:ss A z
+                        inputFormat: unix-time
+                        width: 200
+                        dataType: date
+                      - title: Count
+                        property: count
+                        width: 150
+                        dataType: number
+                      - title: Severity
+                        property: severity_level
+                        width: 150
+                        dataType: string
+                      fields:
+                      - property: entry_time
+                        dataType: date
+                      - property: count
+                        dataType: number
+                      - property: severity_level
+                        dataType: string
+                      chart:
+                        xAxis:
+                        - entry_time
+                        yAxis:
+                        - count
+                        series:
+                        - severity_level
+                        title: view.chart.clientViewEventHistogram.events
+                        xAxisLabel: view.chart.clientViewEventHistogram.time
+                        yAxisLabel: view.chart.clientViewEventHistogram.count
+                    data:
+                    - entry_time: 1718002800000
+                      severity_level: major
+                      count: 32
+                    - entry_time: 1718006400000
+                      severity_level: major
+                      count: 96
+                    - entry_time: 1718010000000
+                      severity_level: major
+                      count: 96
+                    - entry_time: 1718013600000
+                      severity_level: major
+                      count: 56
+                  $$ref: '#/components/examples/ComViptelaVmanageServerEventResponseSeveritySummary'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /event/types/keyvalue:
+    get:
+      tags:
+      - Monitoring - Events
+      description: Get event types.
+      operationId: getEventTypesAsKeyValue
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  key:
+                    type: string
+                    example: system
+                  value:
+                    type: string
+                    example: System
+                $$ref: '#/components/schemas/SimpleKeyValueMapping'
+              examples:
+                Response:
+                  description: Response
+                  value:
+                    data:
+                    - key: system-software-install-change
+                      value: system-software-install-change
+                    - key: system-software-install-status
+                      value: system-software-install-status
+                    - key: system-firmware-install-status
+                      value: system-firmware-install-status
+                    - key: im-event
+                      value: im-event
+                    - key: utd-notification
+                      value: utd-notification
+                    - key: utd-update
+                      value: utd-update
+                    - key: utd-ips-alert
+                      value: utd-ips-alert
+                    - key: utd-engine-status
+                      value: utd-engine-status
+                    - key: utd-sessions-max
+                      value: utd-sessions-max
+                    - key: utd-version-mismatch
+                      value: utd-version-mismatch
+                    - key: utd-file-reputation-retrospective-alert
+                      value: utd-file-reputation-retrospective-alert
+                    - key: utd-file-analysis-upload-state
+                      value: utd-file-analysis-upload-state
+                    - key: utd-file-reputation-alert
+                      value: utd-file-reputation-alert
+                    - key: utd-file-analysis-status-event
+                      value: utd-file-analysis-status-event
+                    - key: utd-file-reputation-status-event
+                      value: utd-file-reputation-status-event
+                    - key: utd-con
+                      value: utd-con
+                    - key: appqoe-event
+                      value: appqoe-event
+                    - key: data-policy-association-status
+                      value: data-policy-association-status
+                    - key: access-list-association-status
+                      value: access-list-association-status
+                    - key: device-policy-association-status
+                      value: device-policy-association-status
+                    - key: umbrella-anycast-server-switch
+                      value: umbrella-anycast-server-switch
+                    - key: system-software-patch-change
+                      value: system-software-patch-change
+                    - key: system-software-install-complete-change
+                      value: system-software-install-complete-change
+                    - key: bfd-state-change
+                      value: bfd-state-change
+                    - key: flash-fault
+                      value: flash-fault
+                    - key: emmc-fault
+                      value: emmc-fault
+                    - key: sdcard-fault
+                      value: sdcard-fault
+                    - key: tempsensor-fault
+                      value: tempsensor-fault
+                    - key: tempsensor-state
+                      value: tempsensor-state
+                    - key: fan-fault
+                      value: fan-fault
+                    - key: fantray-fault
+                      value: fantray-fault
+                    - key: pem-fault
+                      value: pem-fault
+                    - key: pem-state-change
+                      value: pem-state-change
+                    - key: pim-fault
+                      value: pim-fault
+                    - key: pim-state-change
+                      value: pim-state-change
+                    - key: sfp-state-change
+                      value: sfp-state-change
+                    - key: usb-state-change
+                      value: usb-state-change
+                    - key: sfp-support-state
+                      value: sfp-support-state
+                    - key: omp-number-of-vsmarts-change
+                      value: omp-number-of-vsmarts-change
+                    - key: omp-ro-gen-failure
+                      value: omp-ro-gen-failure
+                    - key: omp-state-change
+                      value: omp-state-change
+                    - key: omp-peer-state-change
+                      value: omp-peer-state-change
+                    - key: omp-tloc-state-change
+                      value: omp-tloc-state-change
+                    - key: omp-data-policy
+                      value: omp-data-policy
+                    - key: omp-policy
+                      value: omp-policy
+                    - key: control-connection-state-change
+                      value: control-connection-state-change
+                    - key: control-connection-auth-fail
+                      value: control-connection-auth-fail
+                    - key: control-vbond-state-change
+                      value: control-vbond-state-change
+                    - key: control-connection-tloc-ip-change
+                      value: control-connection-tloc-ip-change
+                    - key: control-no-active-vsmart
+                      value: control-no-active-vsmart
+                    - key: control-no-active-vbond
+                      value: control-no-active-vbond
+                    - key: control-vedge-list-request
+                      value: control-vedge-list-request
+                    - key: tunnel-ipsec-rekey
+                      value: tunnel-ipsec-rekey
+                    - key: tunnel-ipsec-manual-rekey
+                      value: tunnel-ipsec-manual-rekey
+                    - key: security-root-cert-chain-installed
+                      value: security-root-cert-chain-installed
+                    - key: pki-certificate-event
+                      value: pki-certificate-event
+                    - key: pki-certificate-expiry
+                      value: pki-certificate-expiry
+                    - key: security-certificate-installed
+                      value: security-certificate-installed
+                    - key: service-gre-state-update
+                      value: service-gre-state-update
+                    - key: security-new-csr-generated
+                      value: security-new-csr-generated
+                    - key: security-root-cert-chain-uninstalled
+                      value: security-root-cert-chain-uninstalled
+                    - key: security-clear-installed-certificate
+                      value: security-clear-installed-certificate
+                    - key: security-vedge-serial-file-uploaded
+                      value: security-vedge-serial-file-uploaded
+                    - key: security-vsmart-serial-file-uploaded
+                      value: security-vsmart-serial-file-uploaded
+                    - key: security-vedge-entry-added
+                      value: security-vedge-entry-added
+                    - key: security-vedge-entry-removed
+                      value: security-vedge-entry-removed
+                    - key: security-unclaimed-vedge-entry-added
+                      value: security-unclaimed-vedge-entry-added
+                    - key: security-vsmart-entry-added
+                      value: security-vsmart-entry-added
+                    - key: security-vsmart-entry-removed
+                      value: security-vsmart-entry-removed
+                    - key: ssl-certificate-warning
+                      value: ssl-certificate-warning
+                    - key: security-certificate-expired
+                      value: security-certificate-expired
+                    - key: vbond-reject-vedge-connection
+                      value: vbond-reject-vedge-connection
+                    - key: device-template-missing
+                      value: device-template-missing
+                    - key: device-template-attached-during-ztp
+                      value: device-template-attached-during-ztp
+                    - key: process-restart
+                      value: process-restart
+                    - key: process-down
+                      value: process-down
+                    - key: reboot-aborted
+                      value: reboot-aborted
+                    - key: disk-usage
+                      value: disk-usage
+                    - key: memory-usage
+                      value: memory-usage
+                    - key: aaa-admin-pwd-change
+                      value: aaa-admin-pwd-change
+                    - key: site-id-change
+                      value: site-id-change
+                    - key: domain-id-change
+                      value: domain-id-change
+                    - key: system-ip-change
+                      value: system-ip-change
+                    - key: org-name-change
+                      value: org-name-change
+                    - key: system-login-change
+                      value: system-login-change
+                    - key: system-logout-change
+                      value: system-logout-change
+                    - key: system-aaa-login-fail
+                      value: system-aaa-login-fail
+                    - key: cpu-usage
+                      value: cpu-usage
+                    - key: system-commit
+                      value: system-commit
+                    - key: pseudo-commit-status
+                      value: pseudo-commit-status
+                    - key: bgp-peer-state-change
+                      value: bgp-peer-state-change
+                    - key: interface-state-change
+                      value: interface-state-change
+                    - key: interface-bw
+                      value: interface-bw
+                    - key: interface-auto-bw
+                      value: interface-auto-bw
+                    - key: route-install-fail
+                      value: route-install-fail
+                    - key: tunnel-install-fail
+                      value: tunnel-install-fail
+                    - key: vrrp-group-state-change
+                      value: vrrp-group-state-change
+                    - key: ospf-neighbor-state-change
+                      value: ospf-neighbor-state-change
+                    - key: ospf-interface-state-change
+                      value: ospf-interface-state-change
+                    - key: pim-neighbor-state-change
+                      value: pim-neighbor-state-change
+                    - key: pim-interface-state-change
+                      value: pim-interface-state-change
+                    - key: pim-tunnel-state-change
+                      value: pim-tunnel-state-change
+                    - key: pim-tunnel-change
+                      value: pim-tunnel-change
+                    - key: system-reboot-issued
+                      value: system-reboot-issued
+                    - key: system-reboot-complete
+                      value: system-reboot-complete
+                    - key: dhcp-address-assigned
+                      value: dhcp-address-assigned
+                    - key: dhcp-address-renewed
+                      value: dhcp-address-renewed
+                    - key: dhcp-address-released
+                      value: dhcp-address-released
+                    - key: dhcp-request-rejected
+                      value: dhcp-request-rejected
+                    - key: dhcp-address-rejected
+                      value: dhcp-address-rejected
+                    - key: dhcp-server-state-change
+                      value: dhcp-server-state-change
+                    - key: sla-change
+                      value: sla-change
+                    - key: sla-violation
+                      value: sla-violation
+                    - key: sla-violation-pkt-drop
+                      value: sla-violation-pkt-drop
+                    - key: fib-update
+                      value: fib-update
+                    - key: fib-updates
+                      value: fib-updates
+                    - key: bridge-creation
+                      value: bridge-creation
+                    - key: bridge-deletion
+                      value: bridge-deletion
+                    - key: bridge-interface-state-change
+                      value: bridge-interface-state-change
+                    - key: bridge-max-mac-reached
+                      value: bridge-max-mac-reached
+                    - key: app-dpi-flows-out-of-memory
+                      value: app-dpi-flows-out-of-memory
+                    - key: app-dpi-flows-write-failed-vedge
+                      value: app-dpi-flows-write-failed-vedge
+                    - key: data-block-create
+                      value: data-block-create
+                    - key: data-block-delete
+                      value: data-block-delete
+                    - key: vmanage-connection-preference-changed
+                      value: vmanage-connection-preference-changed
+                    - key: cloudexpress-application-change
+                      value: cloudexpress-application-change
+                    - key: cloudexpress-score-change
+                      value: cloudexpress-score-change
+                    - key: cloudexpress-max-local-exit-exceeded
+                      value: cloudexpress-max-local-exit-exceeded
+                    - key: sim-state-change
+                      value: sim-state-change
+                    - key: interface-admin-state-change
+                      value: interface-admin-state-change
+                    - key: endpoint_tracker_state_change
+                      value: endpoint_tracker_state_change
+                    - key: domain-state-change
+                      value: domain-state-change
+                    - key: reg-state-change
+                      value: reg-state-change
+                    - key: bearer-change
+                      value: bearer-change
+                    - key: zbfw-flow-creation
+                      value: zbfw-flow-creation
+                    - key: zbfw-flow-deletion
+                      value: zbfw-flow-deletion
+                    - key: zbfw-clear-flow-table-full
+                      value: zbfw-clear-flow-table-full
+                    - key: zbfw-pkt-log
+                      value: zbfw-pkt-log
+                    - key: zbfw-sessions-maximum
+                      value: zbfw-sessions-maximum
+                    - key: zbfw-sess-rate-alert-on
+                      value: zbfw-sess-rate-alert-on
+                    - key: zbfw-sess-rate-alert-off
+                      value: zbfw-sess-rate-alert-off
+                    - key: zbfw-flow-table-full
+                      value: zbfw-flow-table-full
+                    - key: zbfw-half-open-limit-hit
+                      value: zbfw-half-open-limit-hit
+                    - key: sla-config
+                      value: sla-config
+                    - key: NETWORK_CREATE
+                      value: NETWORK_CREATE
+                    - key: NETWORK_DELETE
+                      value: NETWORK_DELETE
+                    - key: BRIDGE_CREATE
+                      value: BRIDGE_CREATE
+                    - key: BRIDGE_UPDATE
+                      value: BRIDGE_UPDATE
+                    - key: BRIDGE_DELETE
+                      value: BRIDGE_DELETE
+                    - key: WAN_DHCP_RENEW
+                      value: WAN_DHCP_RENEW
+                    - key: MGMT_DHCP_RENEW
+                      value: MGMT_DHCP_RENEW
+                    - key: INTF_STATUS_CHANGE
+                      value: INTF_STATUS_CHANGE
+                    - key: UPGRADE_REGISTER
+                      value: UPGRADE_REGISTER
+                    - key: UPGRADE_APPLY
+                      value: UPGRADE_APPLY
+                    - key: RBAC_USER_CREATE
+                      value: RBAC_USER_CREATE
+                    - key: RBAC_USER_PASSWORD_UPDATE
+                      value: RBAC_USER_PASSWORD_UPDATE
+                    - key: RBAC_USER_ROLE_UPDATE
+                      value: RBAC_USER_ROLE_UPDATE
+                    - key: RBAC_USER_DELETE
+                      value: RBAC_USER_DELETE
+                    - key: RBAC_USERS_INACTIVATED
+                      value: RBAC_USERS_INACTIVATED
+                    - key: RBAC_USER_ACTIVATED
+                      value: RBAC_USER_ACTIVATED
+                    - key: RBAC_PWD_EXPIRED
+                      value: RBAC_PWD_EXPIRED
+                    - key: SECURITY_SERVER_CREATE
+                      value: SECURITY_SERVER_CREATE
+                    - key: SECURITY_SERVER_UPDATE
+                      value: SECURITY_SERVER_UPDATE
+                    - key: SECURITY_SERVER_DELETE
+                      value: SECURITY_SERVER_DELETE
+                    - key: AAA_TYPE_CREATE
+                      value: AAA_TYPE_CREATE
+                    - key: AAA_TYPE_UPDATE
+                      value: AAA_TYPE_UPDATE
+                    - key: CERT_SWITCH_CERT
+                      value: CERT_SWITCH_CERT
+                    - key: CERT_CSR_CREATE
+                      value: CERT_CSR_CREATE
+                    - key: CERT_CA_CERT_INSTALL
+                      value: CERT_CA_CERT_INSTALL
+                    - key: REBOOT
+                      value: REBOOT
+                    - key: SHUTDOWN
+                      value: SHUTDOWN
+                    - key: LOGGING_FAILURE
+                      value: LOGGING_FAILURE
+                    - key: DISK_SPACE_ALMOST_FULL
+                      value: DISK_SPACE_ALMOST_FULL
+                    - key: ROTATED_LOGS_DELETE
+                      value: ROTATED_LOGS_DELETE
+                    - key: TIME_UPDATE
+                      value: TIME_UPDATE
+                    - key: TIMEZONE_UPDATE
+                      value: TIMEZONE_UPDATE
+                    - key: FILE_COPY_STATUS
+                      value: FILE_COPY_STATUS
+                    - key: FILE_DOWNLOAD_STATUS
+                      value: FILE_DOWNLOAD_STATUS
+                    - key: FILE_DOWNLOAD_START
+                      value: FILE_DOWNLOAD_START
+                    - key: FILE_DOWNLOAD_VERIFIED
+                      value: FILE_DOWNLOAD_VERIFIED
+                    - key: FILE_DOWNLOAD_DONE
+                      value: FILE_DOWNLOAD_DONE
+                    - key: FILE_DOWNLOAD_FAILED
+                      value: FILE_DOWNLOAD_FAILED
+                    - key: CREATE_IMAGE
+                      value: CREATE_IMAGE
+                    - key: DELETE_IMAGE
+                      value: DELETE_IMAGE
+                    - key: CREATE_FLAVOR
+                      value: CREATE_FLAVOR
+                    - key: VM_DEPLOYED
+                      value: VM_DEPLOYED
+                    - key: VM_ALIVE
+                      value: VM_ALIVE
+                    - key: SERVICE_ALIVE
+                      value: SERVICE_ALIVE
+                    - key: VM_UNDEPLOYED
+                      value: VM_UNDEPLOYED
+                    - key: SERVICE_UNDEPLOYED
+                      value: SERVICE_UNDEPLOYED
+                    - key: SERVICE_UPDATED
+                      value: SERVICE_UPDATED
+                    - key: VM_STOPPED
+                      value: VM_STOPPED
+                    - key: VM_STARTED
+                      value: VM_STARTED
+                    - key: VM_UPDATED
+                      value: VM_UPDATED
+                    - key: VM_REBOOTED
+                      value: VM_REBOOTED
+                    - key: VM_RECOVERY_INIT
+                      value: VM_RECOVERY_INIT
+                    - key: VM_RECOVERY_REBOOT
+                      value: VM_RECOVERY_REBOOT
+                    - key: VM_RECOVERY_COMPLETE
+                      value: VM_RECOVERY_COMPLETE
+                    - key: VM_MONITOR_UNSET
+                      value: VM_MONITOR_UNSET
+                    - key: VM_MONITOR_SET
+                      value: VM_MONITOR_SET
+                    - key: CIMC_PASSWORD_UPDATE
+                      value: CIMC_PASSWORD_UPDATE
+                    - key: FACTORY_RESET
+                      value: FACTORY_RESET
+                    - key: CPU_USAGE_HIGH
+                      value: CPU_USAGE_HIGH
+                    - key: viptela
+                      value: viptela
+                    - key: ccmEvent
+                      value: ccmEvent
+                    - key: umbrella-registration-success
+                      value: umbrella-registration-success
+                    - key: umbrella-registration-failure
+                      value: umbrella-registration-failure
+                    - key: site-id-mismatch
+                      value: site-id-mismatch
+                    - key: service-node-state
+                      value: service-node-state
+                    - key: appqoe-alarm
+                      value: appqoe-alarm
+                    - key: fw-alert
+                      value: fw-alert
+                    - key: ftm-zia-tunnel-setup
+                      value: ftm-zia-tunnel-setup
+                    - key: ftm-tunnel-setup
+                      value: ftm-tunnel-setup
+                    - key: ftm-zia-location-setup
+                      value: ftm-zia-location-setup
+                    - key: ftm-tunnel-tracker
+                      value: ftm-tunnel-tracker
+                    - key: dca-change-event
+                      value: dca-change-event
+                    - key: geo-fence-alert-status
+                      value: geo-fence-alert-status
+                    - key: app-list-app-aliases-notify
+                      value: app-list-app-aliases-notify
+                    - key: app-list-unsupported-app-notify
+                      value: app-list-unsupported-app-notify
+                    - key: tracker-state-change
+                      value: tracker-state-change
+                    - key: disk-read-speed
+                      value: disk-read-speed
+                    - key: disk-write-speed
+                      value: disk-write-speed
+                    - key: idmgr-pxgrid-connection
+                      value: idmgr-pxgrid-connection
+                    - key: qos-congestion
+                      value: qos-congestion
+                    - key: nat-update
+                      value: nat-update
+                    - key: aaa-password-expiry-warning
+                      value: aaa-password-expiry-warning
+                    - key: aaa-password-expired
+                      value: aaa-password-expired
+                    - key: data-policy-commit-failure
+                      value: data-policy-commit-failure
+                    - key: non-yang-cli-file-generated
+                      value: non-yang-cli-file-generated
+                    - key: cellular-network-status-change
+                      value: cellular-network-status-change
+                  $$ref: '#/components/examples/ComViptelaVmanageServerEventResponseTypesKeyvalue'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: default

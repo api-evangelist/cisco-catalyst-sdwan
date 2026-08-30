@@ -1,0 +1,212 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - DOT1x API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - DOT1x
+paths:
+  /device/dot1x/clients:
+    get:
+      tags:
+      - Real-Time Monitoring - DOT1x
+      description: Get DOT1x client from device (Real Time)
+      operationId: getWLANDOT1xClients
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DOT1x client:
+                  description: DOT1x client
+                  value:
+                    data:
+                    - vdevice-name: 172.16.254.2
+                      vdevice-host-name: vm3
+                      if-name: ge0/1
+                      mac-address: 00:50:b6:0f:1c:84
+                      auth-state: Authenticating
+                      auth-method: Radius
+                      vlan: '12'
+                      vpn: '-'
+                      eap-method: (PEAP)
+                      username: admin
+                      session-time: '9'
+                      connected-time: '9'
+                      inactive-time: '0'
+                      session-id: 57E1B641-00000001
+                      eapol-frames-rx: '50'
+                      eapol-frames-tx: '50'
+                      eapol-start-frames-rx: '50'
+                      eapol-logoff-frames-rx: '50'
+                      eapol-request-id-frames-tx: '50'
+                      eapol-response-id-frames-rx: '50'
+                      eapol-request-frames-tx: '50'
+                      eapol-request-frames-rx: '50'
+                      lastupdated: 1657853484627
+                      vdevice-dataKey: 172.16.254.2
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write
+  /device/dot1x/interfaces:
+    get:
+      tags:
+      - Real-Time Monitoring - DOT1x
+      description: Get DOT1x interface from device (Real Time)
+      operationId: getWLANDOT1xInterfaces
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DOT1x interface:
+                  description: DOT1x interface
+                  value:
+                    data:
+                    - vdevice-name: 172.16.254.1
+                      vdevice-host-name: vm2
+                      if-name: ge0/1
+                      oper-state: up
+                      host-mode: Multi Auth
+                      ctrl-dir: none
+                      mab-server: 'true'
+                      mab-local: 'true'
+                      wake-on-lan: 'true'
+                      reauth-timeout: '600'
+                      inactivity-timeout: '3600'
+                      guest-vlan: '11'
+                      auth-fail-vlan: '12'
+                      auth-reject-vlan: '13'
+                      default-vlan: ''
+                      primary-radius-server: 192.168.48.12
+                      secondary-radius-server: 192.168.48.11
+                      accounting-interval: disabled
+                      nas-identifier: none
+                      nas-ipaddr: none
+                      num-clients: '1'
+                      lastupdated: 1654066320000
+                      vdevice-dataKey: 172.16.254.1
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write
+  /device/dot1x/radius:
+    get:
+      tags:
+      - Real-Time Monitoring - DOT1x
+      description: Get DOT1x Radius from device (Real Time)
+      operationId: getDOT1xRadius
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DOT1x Radius:
+                  description: DOT1x Radius
+                  value:
+                    data:
+                    - vdevice-name: 172.16.254.1
+                      vdevice-host-name: vm2
+                      if-name: ge0/1
+                      ip-address: 192.168.48.11
+                      vpn: '512'
+                      is-primary: 'true'
+                      auth-port: '1812'
+                      auth-is-current: 'true'
+                      auth-round-trip-time: '0'
+                      auth-access-requests: '10'
+                      auth-access-retransmissions: '0'
+                      auth-access-accepts: '1'
+                      auth-access-rejects: '0'
+                      auth-access-challenges: '9'
+                      auth-malformed-access-responses: '0'
+                      auth-bad-authenticators: '0'
+                      auth-pending-requests: '0'
+                      auth-timeouts: '0'
+                      auth-unknown-types: '0'
+                      auth-packets-dropped: '0'
+                      acct-port: '1813'
+                      acct-is-current: 'true'
+                      acct-round-trip-time: '0'
+                      acct-requests: '5'
+                      acct-retransmissions: '0'
+                      acct-responses: '2'
+                      acct-malformed-responses: '0'
+                      acct-bad-authenticators: '0'
+                      acct-pending-requests: '0'
+                      acct-timeouts: '3'
+                      acct-unknown-types: '0'
+                      acct-packets-dropped: '0'
+                      vdevice-dataKey: 172.16.254.1
+                      lastupdated: 1654066320000
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write

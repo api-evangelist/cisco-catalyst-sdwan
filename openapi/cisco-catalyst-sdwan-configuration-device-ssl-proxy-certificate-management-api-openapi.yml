@@ -1,0 +1,941 @@
+openapi: 3.2.0
+info:
+  title: Others Configuration - Device SSL Proxy Certificate Management API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Configuration - Device SSL Proxy Certificate Management
+paths:
+  /sslproxy/certificate:
+    get:
+      tags:
+      - Configuration - Device SSL Proxy Certificate Management
+      description: Get edge proxy certificate
+      operationId: getProxyCertOfEdge
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Edge proxy certificate:
+                  description: Edge proxy certificate
+                  value:
+                    enterpriseCA: true
+                    vManageRootCA: true
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Certificates-read,Certificates-write
+    put:
+      tags:
+      - Configuration - Device SSL Proxy Certificate Management
+      description: Upload device certificate
+      operationId: updateCertificate
+      requestBody:
+        description: Upload device certificate
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Upload device certificate:
+                description: Upload device certificate
+                value:
+                  uuid: C8K-2e556375-5d15-420b-aa4d-dd3e5072e585
+                  certificate: '-----BEGIN CERTIFICATE-----
+
+                    ...
+
+                    -----END CERTIFICATE-----'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: '{id: "210c2bc2-5423-4a6b-9269-22eaf058d774"}'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Certificates-write
+  /sslproxy/certificate/wanedge/{deviceId}:
+    post:
+      tags:
+      - Configuration - Device SSL Proxy Certificate Management
+      description: Add SSL proxy wan edge
+      operationId: addWANEdge
+      parameters:
+      - name: deviceId
+        in: path
+        description: Device Id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Cert state
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Cert state:
+                description: Cert state
+                value: {}
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Certificates-write
+  /sslproxy/certificates:
+    post:
+      tags:
+      - Configuration - Device SSL Proxy Certificate Management
+      description: Upload device certificates
+      operationId: uploadCertificiates
+      requestBody:
+        description: Certificate file
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+            examples:
+              Certificate file:
+                description: Certificate file
+        required: true
+      responses:
+        '200':
+          description: Success
+        '207':
+          description: Multi-status
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Certificates-write
+  /sslproxy/csr:
+    get:
+      tags:
+      - Configuration - Device SSL Proxy Certificate Management
+      description: Get SSL proxy CSR
+      operationId: getSslProxyCSR
+      parameters:
+      - name: deviceId
+        in: query
+        description: device UUID
+        required: true
+        schema:
+          type: string
+          example: 8d86d8b2-2239-402e-9fef-467f7bad3f2f
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                CSR:
+                  description: CSR
+                  value:
+                    csr:
+                    - hostCommonName: vManageCA_vm12
+                      csr: '-----BEGIN NEW CERTIFICATE REQUEST-----
+
+                        ...
+
+                        -----END NEW CERTIFICATE REQUEST-----'
+                      last updated: 07 Apr 2022 07:56:17 UTC
+                      commonName: vManageCA
+                      org: Cisco System
+                      orgUnit: Cisco System
+                      locality: Shanghai
+                      state: Shanghai
+                      country: CN
+                      email: name@cisco.com
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Certificates-read,Certificates-write
+  /sslproxy/devicecertificates:
+    post:
+      tags:
+      - Configuration - Device SSL Proxy Certificate Management
+      description: Get certificate for all cEdges
+      operationId: getAllDeviceCertificates
+      requestBody:
+        description: Device list
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Device list:
+                description: Device list
+                value:
+                - uuid: C8K-2e556375-5d15-420b-aa4d-dd3e5072e585
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Certificate:
+                  description: Certificate
+                  value: '{    "header": {        "generatedOn": 1650355912089    },    "data": [        {            "certificate": "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----",            "uuid": "C8K-2e556375-5d15-420b-aa4d-dd3e5072e585"        }    ]}}'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Certificates-read,Certificates-write
+  /sslproxy/devicecsr:
+    post:
+      tags:
+      - Configuration - Device SSL Proxy Certificate Management
+      description: Get CSR for all cEdges
+      operationId: getAllDeviceCSR
+      requestBody:
+        description: Device list
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Device list:
+                description: Device list
+                value:
+                - uuid: C8K-2e556375-5d15-420b-aa4d-dd3e5072e585
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                CSR:
+                  description: CSR
+                  value:
+                    header:
+                      generatedOn: 1650354738278
+                    data:
+                    - csr: '-----BEGIN CERTIFICATE REQUEST-----
+
+                        ...
+
+                        -----END CERTIFICATE REQUEST-----'
+                      uuid: C8K-2e556375-5d15-420b-aa4d-dd3e5072e585
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Certificates-read,Certificates-write
+  /sslproxy/generate/csr/sslproxy:
+    post:
+      tags:
+      - Configuration - Device SSL Proxy Certificate Management
+      description: CSR request SSL proxy for edge
+      operationId: generateSslProxyCSR
+      requestBody:
+        description: CSR request for edge
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              CSR request for edge:
+                description: CSR request for edge
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Certificates-write
+  /sslproxy/generate/vmanage/csr:
+    post:
+      tags:
+      - Configuration - Device SSL Proxy Certificate Management
+      description: Generate CSR
+      operationId: generateSSLProxyCSR
+      requestBody:
+        description: CSR request
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              CSR request:
+                description: CSR request
+                value:
+                  commonName: vManageCA
+                  org: Cisco System
+                  orgUnit: Cisco System
+                  locality: Shanghai
+                  state: Shanghai
+                  country: CN
+                  email: name@cisco.com
+                  intermediateCA: 'true'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value:
+                    id: ba6586b6-6caf-4eac-a6ae-ec4d57d0fe2c
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Certificates-write
+  /sslproxy/list:
+    get:
+      tags:
+      - Configuration - Device SSL Proxy Certificate Management
+      description: Get SSL proxy certificate list
+      operationId: getSslProxyList
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Certificate list:
+                  description: Certificate list
+                  value:
+                  - deviceModel: vedge-C8000V
+                    chasisNumber: C8K-2e556375-5d15-420b-aa4d-dd3e5072e585
+                    configuredHostname: vm5
+                    managementSystemIP: 172.16.255.15
+                    deviceSerialNumber: '12345712'
+                    configuredSiteId: '500'
+                    commonName: C8K-2e556375-5d15-420b-aa4d-dd3e5072e585
+                    csr: '-----BEGIN CERTIFICATE REQUEST-----
+
+                      ...
+
+                      -----END CERTIFICATE REQUEST-----'
+                    serialNumber: ''
+                    '@rid': 1023
+                    last updated: 07 Apr 2022 09:07:34 UTC
+                    certificate: '-----BEGIN CERTIFICATE-----
+
+                      ...
+
+                      -----END CERTIFICATE-----'
+                    state: CSR_GENERATED
+                    uuid: C8K-2e556375-5d15-420b-aa4d-dd3e5072e585
+                    scep: false
+                    expirationDate: Apr 08 09:07:34 2022 UTC
+                    hasCert: true
+                    hasCSR: true
+                    hasEnterpriseCert: false
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Certificates-read,Certificates-write
+  /sslproxy/renew:
+    post:
+      tags:
+      - Configuration - Device SSL Proxy Certificate Management
+      description: Renew device certificate
+      operationId: renewCertificate
+      requestBody:
+        description: Renew device certificate request
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Renew device certificate request:
+                description: Renew device certificate request
+                value:
+                  uuid: C8K-2e556375-5d15-420b-aa4d-dd3e5072e585
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value:
+                    id: 0ed22d4e-ba07-4828-9bd6-f3ea9d281513
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Certificates-write
+  /sslproxy/revoke:
+    post:
+      tags:
+      - Configuration - Device SSL Proxy Certificate Management
+      description: Revoke device certificate
+      operationId: revokeCertificate
+      requestBody:
+        description: Revoke device certificate request
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Revoke device certificate request:
+                description: Revoke device certificate request
+                value:
+                  uuid: C8K-2e556375-5d15-420b-aa4d-dd3e5072e585
+                  revokeReason: Unspecified
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value:
+                    id: e23238cc-8b2f-49ed-9ce4-4c68c06fa6f4
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Certificates-write
+  /sslproxy/revokerenew:
+    post:
+      tags:
+      - Configuration - Device SSL Proxy Certificate Management
+      description: Revoke and renew device certificate
+      operationId: revokeRenewCertificate
+      requestBody:
+        description: Revoke device certificate request
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Revoke and renew device certificate request:
+                description: Revoke and renew device certificate request
+                value:
+                  uuid: C8K-2e556375-5d15-420b-aa4d-dd3e5072e585
+                  revokeReason: Unspecified
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value:
+                    id: e23238cc-8b2f-49ed-9ce4-4c68c06fa6f4
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Certificates-write
+  /sslproxy/settings/certificate:
+    get:
+      tags:
+      - Configuration - Device SSL Proxy Certificate Management
+      description: Get certificate state
+      operationId: getCertificateState
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Certificate State:
+                  description: Certificate State
+                  value:
+                    enterpriseCA: false
+                    vManageRootCA: true
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Certificates-read,Certificates-write
+  /sslproxy/settings/enterprise/certificate:
+    post:
+      tags:
+      - Configuration - Device SSL Proxy Certificate Management
+      description: Configure enterprise certificate
+      operationId: setEnterpriseCert
+      requestBody:
+        description: Config enterprise certificate request
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Enterprise certificate request:
+                description: Enterprise certificate request
+                value:
+                  scep: 'false'
+                  enterpriseRootCA: '-----BEGIN CERTIFICATE-----
+
+                    ...
+
+                    -----END CERTIFICATE-----'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Certificate:
+                  description: Certificate
+                  value:
+                    scep: false
+                    last updated: 07 Apr 2022 03:45:59 UTC
+                    commonName: OCSP-CA
+                    enterpriseRootCA: '-----BEGIN CERTIFICATE-----
+
+                      ...
+
+                      -----END CERTIFICATE-----'
+                    fingerprint: db06d0f8799353eabbc47bb201321d54f5086289
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Certificates-write
+    get:
+      tags:
+      - Configuration - Device SSL Proxy Certificate Management
+      description: Get enterprise certificate
+      operationId: getEnterpriseCertificate
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Enterprise certificate:
+                  description: Enterprise certificate
+                  value:
+                    scep: false
+                    last updated: 07 Apr 2022 03:45:59 UTC
+                    commonName: OCSP-CA
+                    enterpriseRootCA: '-----BEGIN CERTIFICATE-----
+
+                      ...
+
+                      -----END CERTIFICATE-----'
+                    fingerprint: db06d0f8799353eabbc47bb201321d54f5086289
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Certificates-read,Certificates-write
+  /sslproxy/settings/enterprise/rootca:
+    post:
+      tags:
+      - Configuration - Device SSL Proxy Certificate Management
+      description: Set vManage enterprise root certificate
+      operationId: setEnterpriseRootCaCert
+      requestBody:
+        description: Set enterprise root CA request
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Enterprise root CA:
+                description: Enterprise root CA
+                value:
+                  enterpriseRootCA: '-----BEGIN CERTIFICATE-----
+
+                    ...
+
+                    -----END CERTIFICATE-----'
+                  intermediateCA: 'true'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Enterprise root certificate:
+                  description: Enterprise root certificate
+                  value:
+                    enterpriseRootCA: '-----BEGIN CERTIFICATE-----
+
+                      ...
+
+                      -----END CERTIFICATE-----'
+                    fingerprint: db06d0f8799353eabbc47bb201321d54f5086289
+                    last updated: 07 Apr 2022 03:53:12 UTC
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Certificates-write
+    get:
+      tags:
+      - Configuration - Device SSL Proxy Certificate Management
+      description: Get vManage enterprise root certificate
+      operationId: getVManageEnterpriseRootCertificate
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Enterprise root certificate:
+                  description: Enterprise root certificate
+                  value:
+                    enterpriseRootCA: '-----BEGIN CERTIFICATE-----
+
+                      ...
+
+                      -----END CERTIFICATE-----'
+                    fingerprint: db06d0f8799353eabbc47bb201321d54f5086289
+                    last updated: 07 Apr 2022 03:53:12 UTC
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Certificates-read,Certificates-write
+  /sslproxy/settings/vmanage/certificate:
+    get:
+      tags:
+      - Configuration - Device SSL Proxy Certificate Management
+      description: Get vManage intermediate certificate
+      operationId: getvManageCertificate
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                vManage intermediate certificate:
+                  description: vManage intermediate certificate
+                  value:
+                    header:
+                      generatedOn: 1649322823353
+                    data:
+                    - vManageRootCA: '-----BEGIN CERTIFICATE-----
+
+                        ...
+
+                        -----END CERTIFICATE-----'
+                      hostCommonName: vManageCA_vm12
+                      commonName: vManageCA_vm12
+                      fingerprint: fcb9c623aa9022354fecd95b1f355e1372802aeb
+                      last updated: 07 Apr 2022 07:56:17 UTC
+                      intermediateCA: 'true'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Certificates-read,Certificates-write
+    post:
+      tags:
+      - Configuration - Device SSL Proxy Certificate Management
+      description: Set vManage root certificate
+      operationId: setvManageintermediateCert
+      requestBody:
+        description: Set vManage intermediate CA request
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              vManage intermediate CA:
+                description: vManage intermediate CA
+                value:
+                  data:
+                  - commonName: vManageCA_vm12
+                    vManageRootCA: '-----BEGIN CERTIFICATE-----
+
+                      ...
+
+                      -----END CERTIFICATE-----'
+                    intermediateCA: 'true'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                vManage intermediate certificate:
+                  description: vManage intermediate certificate
+                  value:
+                    header:
+                      generatedOn: 1649318177975
+                    data:
+                    - vManageRootCA: '-----BEGIN CERTIFICATE-----
+
+                        ...
+
+                        -----END CERTIFICATE-----'
+                      hostCommonName: vManageCA_vm12
+                      commonName: vManageCA_vm12
+                      fingerprint: fcb9c623aa9022354fecd95b1f355e1372802aeb
+                      last updated: 07 Apr 2022 07:56:17 UTC
+                      intermediateCA: 'true'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Certificates-write
+  /sslproxy/settings/vmanage/csr:
+    get:
+      tags:
+      - Configuration - Device SSL Proxy Certificate Management
+      description: Get vManage CSR
+      operationId: getvManageCSR
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                vManage CSR:
+                  description: vManage CSR
+                  value:
+                    csr:
+                    - hostCommonName: vManageCA_vm12
+                      csr: '-----BEGIN NEW CERTIFICATE REQUEST-----
+
+                        ...
+
+                        -----END NEW CERTIFICATE REQUEST-----'
+                      last updated: 07 Apr 2022 04:37:37 UTC
+                      commonName: vManageCA
+                      org: Cisco System
+                      orgUnit: Cisco System
+                      locality: Shanghai
+                      state: Shanghai
+                      country: CN
+                      email: name@cisco.com
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Certificates-read,Certificates-write
+  /sslproxy/settings/vmanage/rootca:
+    post:
+      tags:
+      - Configuration - Device SSL Proxy Certificate Management
+      description: Set vManage root certificate
+      operationId: setvManageRootCA
+      requestBody:
+        description: Set vManage root CA request
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              vManage root CA:
+                description: vManage root CA
+                value:
+                  commonName: vManageRootCa
+                  org: Cisco System
+                  orgUnit: Cisco System
+                  locality: Shanghai
+                  state: Shanghai
+                  country: CN
+                  validity: 10
+                  email: name@cisco.com
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                vManage root certificate:
+                  description: vManage root certificate
+                  value:
+                    id: 4aa25a65-b65a-443c-9ebf-21d1dee0ed20
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Certificates-write
+    get:
+      tags:
+      - Configuration - Device SSL Proxy Certificate Management
+      description: Get vManage root certificate
+      operationId: getvManageRootCA
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                vManage root certificate:
+                  description: vManage root certificate
+                  value:
+                    header:
+                      generatedOn: 1649300400918
+                    data:
+                    - vManageRootCA: '...'
+                      publickey: '-----BEGIN CERTIFICATE-----
+
+                        ...
+
+                        -----END CERTIFICATE-----'
+                      csr: '-----BEGIN NEW CERTIFICATE REQUEST-----
+
+                        ...
+
+                        -----END NEW CERTIFICATE REQUEST-----'
+                      hostCommonName: vManageRootCa_vm12
+                      last updated: 07 Apr 2022 02:59:59 UTC
+                      uuid: 3a0733ad-3967-4f71-b4fc-a64c3f634366
+                      fingerprint: 1aef4396ce2c71e5df49c448a5eb49b488e9305b
+                      commonName: vManageRootCa
+                      org: Cisco System
+                      orgUnit: Cisco System
+                      locality: Shanghai
+                      state: Shanghai
+                      country: CN
+                      email: name@cisco.com
+                      validity: '10'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Certificates-read,Certificates-write

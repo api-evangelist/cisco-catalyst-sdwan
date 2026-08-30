@@ -1,0 +1,763 @@
+openapi: 3.2.0
+info:
+  title: Others Tenant Management API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Tenant Management
+paths:
+  /tenant:
+    post:
+      tags:
+      - Tenant Management
+      description: 'Create a new tenant in Multi-Tenant vManage<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: createTenant
+      requestBody:
+        description: Tenant model
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Tenant model:
+                description: Tenant model
+                value: "{\n      \"orgName\": \"fq-tenan1 - 19442\",\n      \"subDomain\": \"tenant1-fq-dev-dev.viptela.info\",\n      \"name\": \"fq-tenan1 - 19442\",\n      \"desc\": \"fq-tenan1 - 19442\"\n      \"wanEdgeForecast\": \"100\"\n}"
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Tenant model:
+                  description: Tenant model
+                  value:
+                    tenantId: b22dad42-b889-4701-91bd-410a699e8522
+                    name: fq-tenan1 - 19442
+                    desc: fq-tenan1 - 19442
+                    orgName': fq-tenan1 - 19442
+                    subDomain: tenant1-fq-dev-dev.viptela.info
+                    wanEdgeForecast: '100'
+                    vBondAddress: fq-cluster1-vb-dev.viptela.info
+                    vSmarts:
+                    - 2d50c19b-a54a-48c6-b259-44628014534b
+                    - 1f0ceb7c-6943-43be-ad4f-4900c1850e69
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Tenant Management-write
+    put:
+      tags:
+      - Tenant Management
+      description: 'Update tenants in Multi-Tenant vManage<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: updateTenantBulk
+      requestBody:
+        description: Tenant model
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Tenant model:
+                description: Tenant model
+                value: "[\n    {\n        \"tenantId\": \"a239afa8-ea24-439d-8dea-62056508c2fb\",\n        \"subDomain\": \"cherry.fruits.com\",\n        \"desc\": \"This is Cherry\",\n        \"wanEdgeForecast\": \"10\",\n        \"edgeConnectorSystemIp\" : \"172.16.255.81\",\n        \"edgeConnectorTunnelInterfaceName\" : \"Gigbit1\",\n        \"tenantExternalServiceData\": [\n            {\n                \"serviceType\": \"notification\",\n                \"isProviderManaged\": true,\n            },\n            {\n                \"serviceType\": \"aaa\",\n                \"isProviderManaged\": true,\n            }\n             {\n                \"serviceType\": \"ise\",\n                \"isProviderManaged\": true,\n            }\n        ]\n    }\n    {\n        \"tenantId\": \"a239afa8-ea24-439d-8dea-62056508c2fc\",\n        \"subDomain\": \"grape.fruits.com\",\n        \"name\": \"Grape\",\n        \"desc\": \"This is Grape\",\n        \"wanEdgeForecast\": \"10\",\n        \"edgeConnectorTunnelInterfaceName\" : \"Gigbit1\",\n        \"edgeConnectorSystemIp\" : \"172.16.255.81\",\n        \"tenantExternalServiceData\": []\n    }\n]"
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Tenant model:
+                  description: Tenant model
+                  value: "[\n    {\n        \"tenantId\": \"a239afa8-ea24-439d-8dea-62056508c2fb\",\n        \"orgName\": \"vIPtela Inc Regression-Cherry Inc\",\n        \"subDomain\": \"cherry.fruits.com\",\n        \"name\": \"Cherry\",\n        \"desc\": \"This is Cherry\",\n        \"wanEdgeForecast\": \"10\",\n        \"vSmarts\": [\n            \"2d50c19b-a54a-48c6-b259-44628014534b\",\n            \"1f0ceb7c-6943-43be-ad4f-4900c1850e69\"\n        ],\n        \"edgeConnectorTunnelInterfaceName\" : \"Gigbit1\",\n        \"tenantExternalServiceData\": [\n            {\n                \"serviceType\": \"notification\",\n                \"isProviderManaged\": true,\n                \"isServiceConnectorEnabled\": true,\n                \"serviceConnectorSystemIp\": \"1.1.1.1\",\n                \"serviceConnectorInterfaceName\": \"Gigabit1\"\n            },\n            {\n                \"serviceType\": \"aaa\",\n                \"isProviderManaged\": true,\n                \"isServiceConnectorEnabled\": true,\n                \"serviceConnectorSystemIp\": \"2.2.2.2\",\n                \"serviceConnectorInterfaceName\": \"Higabit1\"\n            }\n            {\n                \"serviceType\": \"ise\",\n                \"isProviderManaged\": true,\n                \"isServiceConnectorEnabled\": true,\n                \"serviceConnectorSystemIp\": \"3.3.3.3\",\n                \"serviceConnectorInterfaceName\": \"Gigabit1\"\n            }\n        ]\n    }\n    {\n        \"tenantId\": \"a239afa8-ea24-439d-8dea-62056508c2fc\",\n        \"orgName\": \"vIPtela Inc Regression-Grape Inc\",\n        \"subDomain\": \"grape.fruits.com\",\n        \"name\": \"Grape\",\n        \"desc\": \"This is Grape\",\n        \"wanEdgeForecast\": \"10\",\n        \"vSmarts\": [\n            \"2d50c19b-a54a-48c6-b259-44628014534b\",\n            \"1f0ceb7c-6943-43be-ad4f-4900c1850e69\"\n        ],\n        \"edgeConnectorTunnelInterfaceName\" : \"Gigbit1\",\n        \"tenantExternalServiceData\": []\n    }\n]"
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Tenant Management-write
+    get:
+      tags:
+      - Tenant Management
+      description: 'Lists all the tenants on the vManage<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: getAllTenants
+      parameters:
+      - name: deviceId
+        in: query
+        description: List all tenants associated with a vSmart or MTEdge
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Tenant models:
+                  description: Tenant models
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Tenant Management-read,dca,Manage LI-read
+  /tenant/async:
+    post:
+      tags:
+      - Tenant Management
+      description: 'Create a new tenant in Multi-Tenant vManage asynchronously<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: createTenantAsync
+      requestBody:
+        description: Tenant model
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Tenant model:
+                description: Tenant model
+                value: "{\n      \"orgName\": \"fq-tenan1 - 19442\",\n      \"subDomain\": \"tenant1-fq-dev-dev.viptela.info\",\n      \"name\": \"fq-tenan1 - 19442\",\n      \"desc\": \"fq-tenan1 - 19442\"\n      \"wanEdgeForecast\": \"100\"\n}"
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value:
+                    id: 103c183b-5ae3-43bf-93d1-37ca341303b0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Tenant Management-write
+  /tenant/bulk/async:
+    post:
+      tags:
+      - Tenant Management
+      description: 'Create multiple tenants on vManage asynchronously<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: createTenantAsyncBulk
+      requestBody:
+        description: Tenant model
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Tenant model:
+                description: Tenant model
+                value:
+                - orgName: fq-tenan1 - 19442
+                  subDomain: tenant1-fq-dev-dev.viptela.info
+                  name: fq-tenan1 - 19442
+                  desc: fq-tenan1 - 19442
+                  wanEdgeForecast: '100'
+                - orgName: fq-tenan2 - 19442
+                  subDomain: tenant2-fq-dev-dev.viptela.info
+                  name: fq-tenan2 - 19442
+                  desc: fq-tenan2 - 19442
+                  wanEdgeForecast: '100'
+                  vSmarts:
+                  - 9cd565cc-16b8-47e7-9115-35e53bbc6848
+                  - 7efaa90d-5d80-4f18-adc0-54660250f0ce
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value:
+                    id: 103c183b-5ae3-43bf-93d1-37ca341303b0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Tenant Management-write
+    delete:
+      tags:
+      - Tenant Management
+      description: 'Delete multiple tenants on vManage asynchronously<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: deleteTenantAsyncBulk
+      requestBody:
+        description: Tenant model
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Tenant model:
+                description: Tenant model
+                value:
+                  password: '12345'
+                  tenantIdList:
+                  - 0f4f1c6e-47da-40c4-8517-9d1e918965d9
+                  - 6b7b23bf-5dba-4cca-a36c-1c3cc2254d68
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value:
+                    id: 103c183b-5ae3-43bf-93d1-37ca341303b0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Tenant Management-write
+  /tenant/capacity:
+    get:
+      tags:
+      - Tenant Management
+      description: 'List tenant hosting capacity of vManage and all the vSmarts<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: getTenantHostingCapacity
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Tenant Hosting Capacity:
+                  description: Tenant Hosting Capacity
+                  value:
+                    data:
+                      manager:
+                        totalTenantCapacity: 150
+                        currentTenantCount: 4
+                        availableTenantCapacity: 146
+                        totalDeviceCapacity: 7500
+                        currentDeviceForecast: 500
+                        availableDeviceCapacity: 7000
+                      controller:
+                      - vSmartUuid: d1733982-2249-433f-b615-0fd4bebf4a4e
+                        totalTenantCapacity: 24
+                        currentTenantCount: 0
+                      - vSmartUuid: c5d058ec-33e6-48ca-b9d0-c28345d75a8d
+                        totalTenantCapacity: 24
+                        currentTenantCount: 4
+                      - vSmartUuid: 46bfc014-980e-4ef7-af8e-05d8d2ed2698
+                        totalTenantCapacity: 24
+                        currentTenantCount: 2
+                      - vSmartUuid: 24bb12ed-fa4e-4c1a-b495-e84a659173b3
+                        totalTenantCapacity: 24
+                        currentTenantCount: 2
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Tenant Management-read,dca
+  /tenant/vsmart:
+    put:
+      tags:
+      - Tenant Management
+      description: 'Update placement of all tenants from source vSmart to destination vSmart<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: relocateAllTenantsFromVsmart
+      requestBody:
+        description: Tenant model
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              UpdateTenantvSmartModel:
+                description: UpdateTenantvSmartModel
+                value:
+                  srcvSmartUuid: UUID
+                  destvSmartUuid: UUID
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value:
+                    id: 103c183b-5ae3-43bf-93d1-37ca341303b0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Tenant Management-write
+    get:
+      tags:
+      - Tenant Management
+      description: 'Retrieve mapping of tenants to vSmarts<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: getvSmartTenantMapping
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                vSmart tenant mapping:
+                  description: vSmart tenant mapping
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Tenant Management-read,dca
+  /tenant/vsmart/capacity:
+    get:
+      tags:
+      - Tenant Management
+      description: 'Lists all the vsmarts on the vManage and its tenant hosting capacity<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: getvSmartTenantHostingCapacity
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                vSmart Capacity:
+                  description: vSmart Capacity
+                  value:
+                    data:
+                    - vSmartUuid: 6dbf3f8d-d537-4650-9200-154d8b98b302
+                      totalTenantCapacity: 24
+                      currentTenantCount: 2
+                    - vSmartUuid: 05aab9ac-44f7-4292-b8c5-2cc40f3afb5a
+                      totalTenantCapacity: 24
+                      currentTenantCount: 2
+                    - vSmartUuid: b20b4468-7a5f-48f1-8ee6-f393afd3ac72
+                      totalTenantCapacity: 24
+                      currentTenantCount: 2
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Tenant Management-read,dca
+  /tenant/{tenantId}:
+    get:
+      tags:
+      - Tenant Management
+      description: 'Get a tenant by Id<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: getTenant
+      parameters:
+      - name: tenantId
+        in: path
+        description: Tenant Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Tenant model:
+                  description: Tenant model
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Tenant Management-read
+    delete:
+      tags:
+      - Tenant Management
+      description: 'Delete tenant on vManage asynchronously<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: deleteTenantAsync
+      parameters:
+      - name: tenantId
+        in: path
+        description: Tenant Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value:
+                    id: 103c183b-5ae3-43bf-93d1-37ca341303b0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Tenant Management-write
+    put:
+      tags:
+      - Tenant Management
+      description: 'Update a tenant in Multi-Tenant vManage<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: updateTenant
+      parameters:
+      - name: tenantId
+        in: path
+        description: Tenant Id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Tenant model
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Tenant model:
+                description: Tenant model
+                value: "{\n      \"tenantId\": \"a239afa8-ea24-439d-8dea-62056508c2fb\",\n      \"subDomain\": \"tenant1-fq-dev-dev.viptela.info\",\n      \"desc\": \"fq-tenan1 - 19442\",\n      \"wanEdgeForecast\": \"15\",\n      \"controllerVisibilityEnable\": false,\n      \"edgeConnectorSystemIp\": \"172.16.255.81\",\n      \"edgeConnectorTunnelInterfaceName\": \"Gigbit1\",\n      \"tenantExternalServiceData\": [\n         {\n            \"serviceType\": \"notification\",\n            \"isProviderManaged\": true,\n         },\n         {\n            \"serviceType\": \"aaa\",\n            \"isProviderManaged\": true,\n         }\n     ]\n}"
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Tenant model:
+                  description: Tenant model
+                  value:
+                    tenantId: a239afa8-ea24-439d-8dea-62056508c2fb
+                    desc: fq-tenan1 - 19442
+                    orgName': fq-tenan1 - 19442
+                    subDomain: tenant1-fq-dev-dev.viptela.info
+                    name: fq-tenan1
+                    wanEdgeForecast: '15'
+                    controllerVisibilityEnable: false
+                    vBondAddress: fq-cluster1-vb-dev.viptela.info
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Tenant Management-write
+  /tenant/{tenantId}/delete:
+    post:
+      tags:
+      - Tenant Management
+      description: 'Delete a tenant by Id<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: deleteTenant
+      parameters:
+      - name: tenantId
+        in: path
+        description: Tenant Id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Tenant model
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Tenant model:
+                description: Tenant model
+                value:
+                  password: password
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Tenant Management-write
+  /tenant/{tenantId}/switch:
+    post:
+      tags:
+      - Tenant Management
+      description: 'Switch to a specific tenant<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: switchTenant
+      parameters:
+      - name: tenantId
+        in: path
+        description: Tenant Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                vSession model:
+                  description: vSession model
+                  value: "{\n    “VSessionId”: “MTU0MTA4MDUwODM5OQ==”\n}"
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Tenant Management-read
+  /tenant/{tenantId}/vsessionid:
+    post:
+      tags:
+      - Tenant Management
+      description: 'Get VSessionId for a specific tenant<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: vSessionId
+      parameters:
+      - name: tenantId
+        in: path
+        description: Tenant Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                vSession model:
+                  description: vSession model
+                  value: "{\n    “VSessionId”: “MTU0MTA4MDUwODM5OQ==”\n}"
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Tenant Management-read,dca
+  /tenant/{tenantId}/vsmart:
+    put:
+      tags:
+      - Tenant Management
+      description: 'Update placement of the Tenant from source vSmart to destination vSmart<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: updateTenantvSmartPlacement
+      parameters:
+      - name: tenantId
+        in: path
+        description: Tenant Id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Tenant model
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              UpdateTenantvSmartModel:
+                description: UpdateTenantvSmartModel
+                value:
+                  srcvSmartUuid: UUID
+                  destvSmartUuid: UUID
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value:
+                    id: 103c183b-5ae3-43bf-93d1-37ca341303b0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+      x-roles-required: Tenant Management-write
+  /tenant/{tenantId}/vsmarts:
+    put:
+      tags:
+      - Tenant Management
+      description: 'Update placement of the tenant on vSmarts<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: updateTenantvSmartsPlacement
+      parameters:
+      - name: tenantId
+        in: path
+        description: Tenant Id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Tenant model
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              UpdateTenantvSmartListModel:
+                description: UpdateTenantvSmartListModel
+                value:
+                  addvSmartUuidList:
+                  - 1a50c19b-a54a-48c6-b259-44628014534b
+                  - 2a50c19b-a54a-48c6-b259-44628014534b
+                  deletevSmartUuidList:
+                  - 3a50c19b-a54a-48c6-b259-44628014534b
+                  - 4a50c19b-a54a-48c6-b259-44628014534b
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value:
+                    id: 103c183b-5ae3-43bf-93d1-37ca341303b0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Tenant Management-write
+  /tenantstatus:
+    get:
+      tags:
+      - Tenant Management
+      description: 'List all tenant status<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: getAllTenantStatuses
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Tenant status:
+                  description: Tenant status
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Tenant Management-read
+  /tenantstatus/force:
+    post:
+      tags:
+      - Tenant Management
+      description: 'Force tenant status collection<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: forceStatusCollection
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Tenant Management-write

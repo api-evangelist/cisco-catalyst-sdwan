@@ -1,0 +1,141 @@
+openapi: 3.2.0
+info:
+  title: Others File based RealTime Data Collection - Initiate File Generation API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: File based RealTime Data Collection - Initiate File Generation
+paths:
+  /device/file-based/data-collection/initiate-file-generation:
+    post:
+      tags:
+      - File based RealTime Data Collection - Initiate File Generation
+      description: Request device to prepare realtime collection data in required file format
+      operationId: initiateFileGenerationRequestToDevice
+      requestBody:
+        description: Initiate file generation payload
+        content:
+          application/json:
+            schema:
+              required:
+              - deviceUUID
+              - requestedFileFormat
+              - statsCommand
+              type: object
+              properties:
+                deviceUUID:
+                  type: string
+                  description: UUID of the device
+                requestedFileFormat:
+                  type: string
+                statsCommand:
+                  type: string
+              $$ref: '#/components/schemas/InitiateFileGenerationRequest'
+            examples:
+              Initiate File Generation - OMP Routes Advertised in CSV Format:
+                description: Initiate File Generation - OMP Routes Advertised in CSV Format
+                value:
+                  deviceUUID: C8K-abf1808c-21c0-4612-a062-5afc29f8bc02
+                  statsCommand: advertised-routes
+                  requestedFileFormat: csv-file
+                $$ref: '#/components/examples/ComViptelaVmanageServerFilebasedRealtimeDatacollectionDatacollectionapiRequestExampleInitiatefilegenerationcsv'
+              Initiate File Generation - OMP Routes Received in JSON Format:
+                description: Initiate File Generation - OMP Routes Received in JSON Format
+                value:
+                  deviceUUID: C8K-abf1808c-21c0-4612-a062-5afc29f8bc02
+                  statsCommand: received-routes
+                  requestedFileFormat: json-file
+                $$ref: '#/components/examples/ComViptelaVmanageServerFilebasedRealtimeDatacollectionDatacollectionapiRequestExampleInitiatefilegenerationjson'
+        required: true
+      responses:
+        '200':
+          description: Response for file generation request
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                Data Collection information:
+                  description: Data Collection information
+                  value:
+                    deviceUUID: C8K-abf1808c-21c0-4612-a062-5afc29f8bc02
+                    requestedFileFormat: csv-file
+                    statsCommand: advertised-routes
+                    uuid: b81467bb-9827-46a0-8db8-f742d4d91c0a
+                  $$ref: '#/components/examples/ComViptelaVmanageServerFilebasedRealtimeDatacollectionDatacollectionapiResponseExampleInitiatefilegeneration200'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorMessage:
+                    type: string
+                    description: Message about bad request or parameters errors
+                  errorType:
+                    type: string
+                    description: Type of error
+                  operation:
+                    type: string
+                    description: Operation title
+                $$ref: '#/components/schemas/HttpError'
+              examples:
+                400 - Bad Request or Parameters:
+                  description: 400 - Bad Request or Parameters
+                  value:
+                    operation: Inititate file generation
+                    errorType: Invalid Payload or Parameter(s)
+                    errorMessage: Empty/Invalid Device IP
+                  $$ref: '#/components/examples/ComViptelaVmanageServerFilebasedRealtimeDatacollectionDatacollectionapiResponseExampleInitiatefilegeneration400'
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorMessage:
+                    type: string
+                    description: Message about bad request or parameters errors
+                  errorType:
+                    type: string
+                    description: Type of error
+                  operation:
+                    type: string
+                    description: Operation title
+                $$ref: '#/components/schemas/HttpError'
+              examples:
+                500 - Internal Server Error:
+                  description: 500 - Internal Server Error
+                  value:
+                    operation: 'Download generated file for UUID : b81467bb-9827-46a0-8db8-f742d4d91c0a'
+                    errorType: General or Internal Error
+                    errorMessage: Data Collection state is in-progress, Cannot download file at this momemnt
+                  $$ref: '#/components/examples/ComViptelaVmanageServerFilebasedRealtimeDatacollectionDatacollectionapiResponseExampleInitiatefilegeneration500'
+      x-roles-required: System-read,System-write

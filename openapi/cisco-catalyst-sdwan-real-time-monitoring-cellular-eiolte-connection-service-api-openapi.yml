@@ -1,0 +1,148 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - Cellular EIOLTE Connection Service API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - Cellular EIOLTE Connection Service
+paths:
+  /device/cellularEiolte/connections:
+    get:
+      tags:
+      - Real-Time Monitoring - Cellular EIOLTE Connection Service
+      description: Get cellular connection info from device
+      operationId: getEiolteConnectionInfo
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device Ip address, example:172.16.255.111
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                cellular connection info:
+                  description: cellular connection info
+                  value:
+                  - vdevice-name: 172.16.255.111
+                    rx-errors: 0
+                    cellular-interface-name: Cellular 1/0
+                    tx-errors: 0
+                    sec-dns-ipv4-addr: 0.0.0.0
+                    pri-dns-ipv4-addr: 8.8.8.8
+                    tx-ofl: 0
+                    connectivity: Attach and Data
+                    ipv4-address: 192.168.3.2
+                    rx-ofl: 0
+                    rx-pkts: 42067
+                    apn: internet
+                    ipv6-prefix-length: '0'
+                    tx-pkts: 36604
+                    ipv4-gateway-addr: 192.168.3.1
+                    session-status: Connected
+                    pri-dns-ipv6-addr: '::'
+                    sec-dns-ipv6-addr: '::'
+                    vdevice-host-name: CellularGateway
+                    tx-drops: 0
+                    rx-drops: 0
+                    vdevice-dataKey: 172.16.255.111-1-1-
+                    profile-id: 1
+                    modem-index: '1'
+                    tx-bytes: 10145490
+                    lastupdated: 1649249750021
+                    ipv6-gw-prefix-length: '0'
+                    ipv6-gw-prefix: '::'
+                    rx-bytes: 8887213
+                    ipv6-prefix: '::'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,System-read
+  /device/cellularEiolte/radio:
+    get:
+      tags:
+      - Real-Time Monitoring - Cellular EIOLTE Connection Service
+      description: Get cellular radio info from device
+      operationId: getEiolteRadioInfo
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device Ip address, example:172.16.255.111
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                cellular radio info:
+                  description: cellular radio info
+                  value:
+                  - Current-ENDC-RSRQ: -11 dB
+                    Current-ENDC-RSRP: -71 dBm
+                    vdevice-name: 172.16.255.111
+                    LTE-Bandwidth: 20 MHz
+                    cellular-interface-name: Cellular 1/0
+                    Offline-Reason: Unknown
+                    LTE-Rx-Channel-Number: 18300
+                    Measured-ENDC-SINR: 36.0 dB
+                    ENDC-active-downlink-channel: '632628'
+                    Low-Power-Reason: Unknown
+                    ENDC-active-band: '78'
+                    SNR: 30.0 dB
+                    ENDC-Physical-CellId: '500'
+                    LTE-Band: 1
+                    RSRP: -60 dBm
+                    Radio-Status: online
+                    ENDC-active-uplink-channel: '632628'
+                    RSRQ: -7 dB
+                    LTE-Tx-Channel-Number: 300
+                    vdevice-host-name: CellularGateway
+                    RSSI: -33 dBm
+                    vdevice-dataKey: 172.16.255.111-1-
+                    PCI: 1
+                    ENDC-bandwidth: 50 MHz
+                    modem-index: '1'
+                    lastupdated: 1649250251234
+                    RAT-Selected: LTE
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,System-read

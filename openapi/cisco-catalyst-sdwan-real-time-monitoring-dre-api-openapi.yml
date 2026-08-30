@@ -1,0 +1,228 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - DRE API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - DRE
+paths:
+  /device/dre/auto-bypass-stats:
+    get:
+      tags:
+      - Real-Time Monitoring - DRE
+      description: Get DRE auto-bypass statistics
+      operationId: getDreAutoBypassStats
+      parameters:
+      - name: appqoe-dre-auto-bypass-server-ip
+        in: query
+        description: Server IP
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+      - name: appqoe-dre-auto-bypass-port
+        in: query
+        description: Port
+        schema:
+          type: number
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DRE Auto-Bypass Stats:
+                  description: DRE Auto-Bypass Stats
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.16
+                      vdevice-host-name: vm6
+                      appqoe-dre-auto-bypass-server-ip: 10.0.0.1
+                      appqoe-dre-auto-bypass-port: '9088'
+                      appqoe-dre-auto-bypass-state: Monitor
+                      appqoe-dre-auto-bypass-dre-lan-bytes: 48887002724
+                      appqoe-dre-auto-bypass-dre-wan-bytes: 49401300299
+                      appqoe-dre-auto-bypass-dre-comp: 0
+                      appqoe-dre-auto-bypass-last-update: '13:41:51'
+                      appqoe-dre-auto-bypass-entry-creation-time: 03:08:53
+                      lastupdated: 1645775163290
+                      vdevice-dataKey: 172.16.255.16
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write,Template Configuration-read,Template Configuration-write
+  /device/dre/dre-stats:
+    get:
+      tags:
+      - Real-Time Monitoring - DRE
+      description: Get DRE statistics
+      operationId: getDreStats
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DRE Stats:
+                  description: DRE Stats
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.16
+                      vdevice-host-name: vm6
+                      data-total-cons: 325071
+                      data-max-cons: 704
+                      data-active-cons: 0
+                      data-total-orig-bytes: 6743098654720
+                      data-total-opt-bytes: 3039763103744
+                      data-reduction-ratio: 54
+                      data-cache-status: Active
+                      data-cache-size: 426322690048
+                      data-cache-used-percent: 93
+                      data-cache-oldest-data: '17:13:53:40'
+                      data-data-replaced: 0
+                      lastupdated: 1645775163290
+                      vdevice-dataKey: 172.16.255.16
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write,Template Configuration-read,Template Configuration-write
+  /device/dre/dre-status:
+    get:
+      tags:
+      - Real-Time Monitoring - DRE
+      description: Get DRE status
+      operationId: getDreStatus
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DRE Status:
+                  description: DRE Status
+                  value:
+                    data:
+                    - lastupdated: 1645775163290
+                      appqoe-dre-status-health-status: dre-status-disabled
+                      vdevice-dataKey: 169.254.10.12
+                      vdevice-name: 169.254.10.12
+                      vdevice-host-name: vm5
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write,Template Configuration-read,Template Configuration-write
+  /device/dre/peer-stats:
+    get:
+      tags:
+      - Real-Time Monitoring - DRE
+      description: Get DRE peer statistics
+      operationId: getDrePeerStats
+      parameters:
+      - name: appqoe-dre-stats-peer-system-ip
+        in: query
+        description: System IP
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+      - name: appqoe-dre-stats-peer-peer-no
+        in: query
+        description: Peer Number
+        schema:
+          type: number
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DRE Peer Stats:
+                  description: DRE Peer Stats
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.16
+                      vdevice-host-name: vm6
+                      appqoe-dre-stats-peer-peer-no: '0'
+                      appqoe-dre-stats-peer-system-ip: 209.165.201.1
+                      appqoe-dre-stats-peer-hostname: dreopt
+                      appqoe-dre-stats-peer-active-cons: '0'
+                      appqoe-dre-stats-peer-total-cons: '3714'
+                      lastupdated: 1652171693495
+                      vdevice-dataKey: 172.16.255.16
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write,Template Configuration-read,Template Configuration-write

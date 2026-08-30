@@ -1,0 +1,2382 @@
+openapi: 3.2.0
+info:
+  title: Others MultiCloud - CloudGateway API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: MultiCloud - CloudGateway
+paths:
+  /multicloud/cloudgateway:
+    post:
+      tags:
+      - MultiCloud - CloudGateway
+      description: Create cloud gateway
+      operationId: createCgw
+      requestBody:
+        description: Payloads for updating Cloud Gateway based on CloudType
+        content:
+          application/json:
+            schema:
+              required:
+              - accountId
+              - azureProperties
+              - cloudGatewayName
+              - cloudType
+              type: object
+              properties:
+                accountId:
+                  type: string
+                awsCwanProperties:
+                  type: object
+                  properties:
+                    coreNetworkEdgeId:
+                      type: string
+                      description: Refers to AWS site id within the core network
+                    coreNetworkEdgeSource:
+                      type: string
+                      enum:
+                      - aws
+                      - tvpcOnly
+                      - toBeCreated
+                    coreNetworkId:
+                      type: string
+                    coreNetworkSource:
+                      type: string
+                      enum:
+                      - aws
+                      - tvpcOnly
+                      - toBeCreated
+                  description: Used in AWS/AWS Govcloud CGW creation. Null if type is TGW based
+                  $$ref: '#/components/schemas/CloudGatewayPostAwsCwanProperties'
+                awsTgwProperties:
+                  type: object
+                  properties:
+                    tgwConnections:
+                      type: array
+                      properties:
+                        empty:
+                          type: boolean
+                      description: Defines a list of TGW connections. Null if tgwSource is not aws
+                      items:
+                        type: object
+                        properties:
+                          conn:
+                            type: string
+                          tgwRouteTableId:
+                            type: string
+                          vpnId:
+                            type: string
+                        description: Defines a list of TGW connections. Null if tgwSource is not aws
+                        $$ref: '#/components/schemas/TgwConnectionsInner'
+                    tgwId:
+                      type: string
+                    tgwSource:
+                      type: string
+                      enum:
+                      - aws
+                      - tvpcOnly
+                      - toBeCreated
+                  description: Used in AWS/AWS Govcloud CGW creation. Null if type is cloudwan based
+                  $$ref: '#/components/schemas/CloudGatewayPostAwsTgwProperties'
+                azureProperties:
+                  required:
+                  - resourceGroupName
+                  - resourceGroupSource
+                  - vhubName
+                  - vhubSource
+                  - vwanName
+                  - vwanSource
+                  type: object
+                  properties:
+                    nvaSource:
+                      type: string
+                    resourceGroupName:
+                      pattern: ^[a-zA-Z0-9_/\\\-]+$
+                      type: string
+                    resourceGroupSource:
+                      type: string
+                    vhubName:
+                      pattern: ^[a-zA-Z0-9_/\\\-]+$
+                      type: string
+                    vhubResourceGroupAccountId:
+                      type: string
+                    vhubResourceGroupName:
+                      pattern: ^[a-zA-Z0-9_/\\\-]+$
+                      type: string
+                    vhubResourceGroupSource:
+                      type: string
+                    vhubSource:
+                      type: string
+                    vpnGatewaySource:
+                      type: string
+                    vwanName:
+                      pattern: ^[a-zA-Z0-9_/\\\-]+$
+                      type: string
+                    vwanSource:
+                      type: string
+                  description: Used in Azure/Azure GovCloud CGW creation
+                  $$ref: '#/components/schemas/CloudGatewayPostAzureProperties'
+                cloudGatewayMode:
+                  pattern: ^(sdwan|sd-routing)$
+                  type: string
+                cloudGatewayName:
+                  maxLength: 255
+                  minLength: 1
+                  type: string
+                cloudGatewaySolution:
+                  pattern: ^[a-zA-Z_]+$
+                  type: string
+                cloudGatewayTag:
+                  pattern: ^[a-zA-Z0-9_./\\\-]+$
+                  type: string
+                cloudType:
+                  type: string
+                configGroupSettings:
+                  type: object
+                  properties:
+                    configGroupId:
+                      pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+                      type: string
+                    configGroupName:
+                      pattern: ^[a-zA-Z0-9_/\\\-]+$
+                      type: string
+                  description: Used in Azure/Azure GovCloud CGW creation
+                  $$ref: '#/components/schemas/CloudGatewayPostConfigGroupSettings'
+                description:
+                  maxLength: 1024
+                  minLength: 0
+                  pattern: ^[a-zA-Z0-9_./\-\s]*$
+                  type: string
+                devices:
+                  type: array
+                  items:
+                    type: string
+                mrfRouterRole:
+                  pattern: ^(edge|border)$
+                  type: string
+                region:
+                  pattern: ^[a-zA-Z0-9_./\-]+$
+                  type: string
+                s2sPermitted:
+                  pattern: ^(true|false)$
+                  type: string
+                settings:
+                  type: object
+                  properties:
+                    cloudGatewaySolution:
+                      pattern: ^[a-zA-Z_]*$
+                      type: string
+                    cloudType:
+                      pattern: ^[a-zA-Z_]*$
+                      type: string
+                    instanceSize:
+                      pattern: ^[a-zA-Z0-9_./\-]*$
+                      type: string
+                    ipSubnetPool:
+                      pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}\/(?:3[0-2]|[0-2]?[0-9]))(?:\s*,\s*(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}\/(?:3[0-2]|[0-2]?[0-9]))*$
+                      type: string
+                    name:
+                      pattern: ^[a-zA-Z_]*$
+                      type: string
+                    networkTier:
+                      pattern: ^[a-zA-Z0-9_./\-]*$
+                      type: string
+                      description: Used for GCP Custom settings
+                    skuScaleUnit:
+                      pattern: ^[0-9]*$
+                      type: string
+                      description: Used for Azure/Azure GovCloud Custom settings
+                    softwareImageId:
+                      pattern: ^[a-zA-Z0-9_./\-\s]*$
+                      type: string
+                    tunnelCount:
+                      pattern: ^[0-9]*$
+                      type: string
+                      description: Tunnel Count for AWS Connect based and branch connect
+                  $$ref: '#/components/schemas/AllOfcloudGatewayPostSettings'
+                siteName:
+                  pattern: ^[a-zA-Z0-9_./\\\-]+$
+                  type: string
+                sshKeyName:
+                  pattern: ^[a-zA-Z0-9_./\\\-]+$
+                  type: string
+              $$ref: '#/components/schemas/CloudGatewayPost'
+            examples:
+              GCP CGW Create request:
+                description: GCP CGW Create request
+                value:
+                  accountId: gcp-project-nprd-312512
+                  cloudType: GCP
+                  region: us-west4
+                  cloudGatewayName: gcp-test
+                  devices:
+                  - C8K-2F69B355-2B3D-2801-EB48-F44789422299
+                  - C8K-53349F28-AB44-70C5-260B-096581250519
+                  description: GCP post request
+                  s2sPermitted: false
+                  mrfRouterRole: border
+                  siteName: SITE_1
+                  configGroupSettings:
+                    configGroupName: CG_1
+                    configGroupId: d0846e2c-a977-46fa-8acb-0e387a30eadf
+              AWS/AWS GovCloud CGW create request:
+                description: AWS/AWS GovCloud CGW create request
+                value:
+                  accountId: '238112874124'
+                  cloudType: AWS
+                  region: us-east-1
+                  cloudGatewayName: aws-test
+                  devices:
+                  - C8K-2F69B355-2B3D-2801-EB48-F44789422299
+                  - C8K-53349F28-AB44-70C5-260B-096581250519
+                  description: AWS/AWS_GOVCLOUD post request
+                  mrfRouterRole: border
+                  siteName: SITE_1
+                  configGroupSettings:
+                    configGroupName: CG_1
+                    configGroupId: d0846e2c-a977-46fa-8acb-0e387a30eadf
+              Azure/Azure GovCloud CGW create request:
+                description: Azure/Azure GovCloud CGW create request
+                value:
+                  accountId: 81k99acb9-1a58-b3b6-214f-840623g789a0
+                  cloudType: AZURE
+                  region: westus2
+                  cloudGatewayName: azure-test
+                  mrfRouterRole: border
+                  siteName: SITE_1
+                  devices:
+                  - C8K-2F69B355-2B3D-2801-EB48-F44789422299 C8K-53349F28-AB44-70C5-260B-096581250519
+                  description: AZURE/AZURE_GOVCLOUD post request
+                  azureProperties:
+                    resourceGroupName: azureTestRGP
+                    resourceGroupSource: azure
+                    vwanName: azureTestVwan
+                    vwanSource: azure
+                    vhubName: azureTestVhub
+                    vhubSource: toBeCreated
+                    nvaSource: toBeCreated
+                  configGroupSettings:
+                    configGroupName: CG_1
+                    configGroupId: d0846e2c-a977-46fa-8acb-0e387a30eadf
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: 6c723f65-9106-4f43-9d2b-a033a39353b3
+                description: Task id for polling status
+                $$ref: '#/components/schemas/Taskid'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    get:
+      tags:
+      - MultiCloud - CloudGateway
+      description: Get cloud gateways
+      operationId: getCgws
+      parameters:
+      - name: cloudType
+        in: query
+        description: Multicloud provider type
+        schema:
+          type: string
+      - name: accountId
+        in: query
+        description: Multicloud account id
+        schema:
+          type: string
+      - name: region
+        in: query
+        description: Multicloud region
+        schema:
+          pattern: ^[a-zA-Z0-9_./\-]+$
+          type: string
+      - name: cloudGatewayName
+        in: query
+        description: Multicloud cloud gateway name
+        schema:
+          maxLength: 255
+          minLength: 1
+          type: string
+      - name: connectivityState
+        in: query
+        description: Multicloud connectivity state
+        schema:
+          pattern: ^[a-zA-Z_./\\\-\s]+$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    accountId:
+                      type: string
+                    accountName:
+                      type: string
+                    cloudGatewayId:
+                      type: string
+                    cloudGatewayName:
+                      type: string
+                    cloudType:
+                      type: string
+                    customSettings:
+                      type: boolean
+                    description:
+                      type: string
+                    region:
+                      type: string
+                    status:
+                      type: string
+                  $$ref: '#/components/schemas/CloudGatewayListResponse'
+              examples:
+                Azure Cgw list:
+                  description: Azure Cgw list
+                  value:
+                  - resourceGroupName: azure-rgp
+                    cloudGatewayName: az-test
+                    accountName: ramL
+                    devices:
+                    - C8K-2F69B355-2B3D-2801-EB48-F44789422299
+                    - C8K-53349F28-AB44-70C5-260B-096581250519
+                    virtualRouterAsn: '65515'
+                    vhubName: az-test
+                    description: ''
+                    vwanName: azure-vwan
+                    connectivityStateUpdateTs: 1655141135729
+                    accountId: 8b188c39-f358-4db6-a44f-84068541233a
+                    cloudGatewayId: /subscriptions/8b188c39-f358-4db6-a44f-84068541233a0/resourceGroups/test-resource-group/providers/Microsoft.Network/virtualHubs/az-test
+                    vhubId: /subscriptions/8b188c39-f358-4db6-a44f-84068541233a0/resourceGroups/test-resource-group/providers/Microsoft.Network/virtualHubs/az-test
+                    cloudType: AZURE
+                    customSettings: false
+                    region: westus2
+                    connectivityState: initialized
+                    cloudGatewaySolution: vhub
+                    settings:
+                      softwareImageId: 17.6.01
+                      skuScaleUnit: 2
+                      ipSubnetPool: 10.0.0.0/16
+                      instanceSize: 2
+                    status: normal
+                    vpns: []
+                    connectedSites: 1
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/cloudgateway/availabilityZones:
+    get:
+      tags:
+      - MultiCloud - CloudGateway
+      description: Discover AWS availability zones
+      operationId: getAvailabilityZones
+      parameters:
+      - name: cloudType
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - AWS
+          - AWS_GOVCLOUD
+      - name: accountId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: region
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    AttachmentId:
+                      type: string
+                      example: tgw-12345
+                  $$ref: '#/components/schemas/TgwAttachmentsListResponse'
+              examples:
+                Discover AWS availability zones:
+                  description: Discover AWS availability zones
+                  value:
+                  - zoneId: usw2-az2
+                    zoneName: us-west-2
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/cloudgateway/config-group:
+    post:
+      tags:
+      - MultiCloud - CloudGateway
+      summary: Create cloud gateway config group
+      description: API to initiate a config group creation for a cloud gateway.
+      operationId: createCloudGatewayConfigGroup
+      parameters:
+      - name: cloudType
+        in: query
+        description: Multicloud provider type
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Request Payload for Multicloud Gateway Config Group Creation
+        content:
+          application/json:
+            schema:
+              required:
+              - configGroupName
+              type: object
+              properties:
+                configGroupName:
+                  pattern: ^[a-zA-Z0-9_/\\\-]+$
+                  type: string
+                configGroupSolution:
+                  pattern: ^(sdwan|sd-routing)$
+                  type: string
+              $$ref: '#/components/schemas/MultiCloudGatewaysConfiggroupBody'
+            examples:
+              Cloud Gateway Config Group Creation:
+                description: Cloud Gateway Config Group Creation
+                value:
+                  configGroupName: CGW_Config_Group
+                  configGroupSolution: sdwan
+        required: true
+      responses:
+        '200':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  createdBy:
+                    type: string
+                  createdOn:
+                    type: number
+                  description:
+                    type: string
+                  devices:
+                    type: array
+                    items:
+                      type: string
+                  fullConfigCli:
+                    type: boolean
+                  id:
+                    type: string
+                  iosConfigCli:
+                    type: boolean
+                  lastUpdatedBy:
+                    type: string
+                  lastUpdatedOn:
+                    type: number
+                  name:
+                    type: string
+                  numberOfDevices:
+                    type: integer
+                    format: int32
+                  numberOfDevicesUpToDate:
+                    type: integer
+                    format: int32
+                  origin:
+                    type: string
+                  profiles:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        createdBy:
+                          type: string
+                        createdOn:
+                          type: number
+                        description:
+                          type: string
+                        id:
+                          type: string
+                        lastUpdatedBy:
+                          type: string
+                        lastUpdatedOn:
+                          type: number
+                        name:
+                          type: string
+                        profileParcelCount:
+                          type: string
+                        solution:
+                          type: string
+                        type:
+                          type: string
+                      $$ref: '#/components/schemas/PostCgwConfigGroupResponseProfiles'
+                  solution:
+                    type: string
+                  source:
+                    type: string
+                  state:
+                    type: string
+                  topology:
+                    type: string
+                  version:
+                    type: integer
+                    format: int32
+                $$ref: '#/components/schemas/PostCgwConfigGroupResponse'
+              examples:
+                Cloud Gateway Config Group Creation Response:
+                  description: Cloud Gateway Config Group Creation Response
+                  value:
+                    id: 9f4bb392-8255-46cd-a849-1aea7ccbad9a
+                    name: test_cg
+                    description: test_cg Config Group
+                    source: MULTICLOUD_AZURE
+                    solution: sdwan
+                    lastUpdatedBy: system
+                    lastUpdatedOn: 1712732936141
+                    createdBy: system
+                    createdOn: 1712732936141
+                    profiles:
+                    - id: 5329eb9c-084e-40da-ad17-3304c1922634
+                      name: test_cg_AZURE_transport
+                      solution: sdwan
+                      type: transport
+                      description: null
+                      lastUpdatedBy: system
+                      lastUpdatedOn: 1712732936112
+                      createdBy: system
+                      createdOn: 1712732935034
+                      profileParcelCount: 2
+                    - id: e578e626-3517-4bcc-b802-aecc4a7e85ba
+                      name: test_cg_AZURE_system
+                      solution: sdwan
+                      type: system
+                      description: null
+                      lastUpdatedBy: system
+                      lastUpdatedOn: 1712732935020
+                      createdBy: system
+                      createdOn: 1712732931425
+                      profileParcelCount: 9
+                    version: 1
+                    state: null
+                    devices: []
+                    numberOfDevices: 0
+                    numberOfDevicesUpToDate: 0
+                    origin: user
+                    topology: null
+                    fullConfigCli: false
+                    iosConfigCli: false
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/cloudgateway/nvaSecurityRules/{cloudGatewayName}:
+    get:
+      tags:
+      - MultiCloud - CloudGateway
+      description: Get NVA Security Rules
+      operationId: getNvaSecurityRules
+      parameters:
+      - name: cloudGatewayName
+        in: path
+        description: Multicloud cloud gateway name
+        required: true
+        schema:
+          maxLength: 255
+          minLength: 1
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accountId:
+                    type: string
+                    example: '112948124124'
+                  accountName:
+                    type: string
+                    example: test_account_name
+                  cloudType:
+                    type: string
+                    example: AZURE
+                  expirationTime:
+                    type: string
+                    example: 6/10/2022 6:12:36 PM UTC
+                  nvaId:
+                    type: string
+                    example: /subscriptions/112948124124/resourceGroups/test-resource-group/providers/Microsoft.Network/networkVirtualAppliances/CiscoSdwanV2-nva-399bdf13-65e9-4177-876b-d125bee704d6
+                  resourceGroupName:
+                    type: string
+                    example: test-resource-group
+                  ruleName:
+                    type: string
+                    example: test_rule
+                  securityRulesList:
+                    type: object
+                    properties:
+                      securityRulesList:
+                        type: array
+                        items:
+                          required:
+                          - destinationPortRange
+                          - protocol
+                          - sourceAddressPrefix
+                          type: object
+                          properties:
+                            destinationPortRange:
+                              pattern: ^\d+$
+                              type: string
+                              example: '22'
+                            protocol:
+                              pattern: ^(TCP|UDP)$
+                              type: string
+                              example: TCP
+                            sourceAddressPrefix:
+                              pattern: ^(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}\/(?:3[0-2]|[0-2]?[0-9])$
+                              type: string
+                              example: 192.168.1.1/32
+                          $$ref: '#/components/schemas/NvaRulesListRequestSecurityRulesList'
+                    $$ref: '#/components/schemas/NvaRulesListRequest'
+                $$ref: '#/components/schemas/NvaRulesResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    put:
+      tags:
+      - MultiCloud - CloudGateway
+      description: Update NVA Security Rules
+      operationId: updateNvaSecurityRules
+      parameters:
+      - name: cloudGatewayName
+        in: path
+        required: true
+        schema:
+          pattern: ^[\w.-]{1,128}$
+          type: string
+      requestBody:
+        description: Update NVA security Rules
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                securityRulesList:
+                  type: array
+                  items:
+                    required:
+                    - destinationPortRange
+                    - protocol
+                    - sourceAddressPrefix
+                    type: object
+                    properties:
+                      destinationPortRange:
+                        pattern: ^\d+$
+                        type: string
+                        example: '22'
+                      protocol:
+                        pattern: ^(TCP|UDP)$
+                        type: string
+                        example: TCP
+                      sourceAddressPrefix:
+                        pattern: ^(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}\/(?:3[0-2]|[0-2]?[0-9])$
+                        type: string
+                        example: 192.168.1.1/32
+                    $$ref: '#/components/schemas/NvaRulesListRequestSecurityRulesList'
+              $$ref: '#/components/schemas/NvaRulesListRequest'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: 6c723f65-9106-4f43-9d2b-a033a39353b3
+                description: Task id for polling status
+                $$ref: '#/components/schemas/Taskid'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/cloudgateway/nvas:
+    get:
+      tags:
+      - MultiCloud - CloudGateway
+      description: Discover Azure Network Virtual Appliances
+      operationId: getAzureNetworkVirtualAppliances
+      parameters:
+      - name: cloudType
+        in: query
+        required: true
+        schema:
+          pattern: ^[a-zA-Z_]+$
+          type: string
+      - name: accountId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: region
+        in: query
+        required: true
+        schema:
+          pattern: ^[a-zA-Z0-9_./\-]+$
+          type: string
+      - name: resourceGroupName
+        in: query
+        required: true
+        schema:
+          pattern: ^[\w.-]{1,128}$
+          type: string
+      - name: resourceGroupSource
+        in: query
+        required: true
+        schema:
+          pattern: ^[a-zA-Z_]+$
+          type: string
+      - name: vhubName
+        in: query
+        required: true
+        schema:
+          pattern: ^[\w.-]{1,128}$
+          type: string
+      - name: vhubSource
+        in: query
+        required: true
+        schema:
+          pattern: ^[a-zA-Z_]+$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    nvaId:
+                      type: string
+                      example: /subscriptions/8b188c39-f358-4db6-a44f-84068541233a0/resourceGroups/test-resource-group/providers/Microsoft.Network/networkVirtualAppliances/CiscoSdwanV2-nva-f383f40c-d07e-41be-bbc7-aa7abbfbf7fc
+                    nvaName:
+                      type: string
+                      example: CiscoSdwanV2-nva-f383f40c-d07e-41be-bbc7-aa7abbfbf7fc
+                    source:
+                      type: string
+                      example: vManage
+                    uuids:
+                      type: array
+                      example:
+                      - C8K-2F69B355-2B3D-2801-EB48-F44789422299
+                      - C8K-10A9ACE8-2283-B45A-4E3A-23DFA39DBEF9
+                      items:
+                        type: string
+                        example:
+                        - C8K-2F69B355-2B3D-2801-EB48-F44789422299
+                        - C8K-10A9ACE8-2283-B45A-4E3A-23DFA39DBEF9
+                  $$ref: '#/components/schemas/NvasResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/cloudgateway/nvasku:
+    get:
+      tags:
+      - MultiCloud - CloudGateway
+      description: Get Azure NVA SKUs
+      operationId: getAzureNvaSkuResources
+      parameters:
+      - name: cloudType
+        in: query
+        description: Multicloud provider type
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accountId:
+                    type: string
+                    example: '112948124124'
+                  accountName:
+                    type: string
+                    example: test_account_name
+                  cloudType:
+                    type: string
+                    example: AZURE
+                  nvaSkuId:
+                    type: string
+                    example: ciscosdwan
+                  nvaSkuName:
+                    type: string
+                    example: ciscosdwan
+                  scaleValueList:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        instanceCount:
+                          type: integer
+                          format: int32
+                        instanceType:
+                          type: string
+                        scaleUnit:
+                          type: string
+                      $$ref: '#/components/schemas/NvaSkuListResponseScaleValueList'
+                  versionList:
+                    type: array
+                    items:
+                      type: string
+                $$ref: '#/components/schemas/NvaSkuListResponse'
+              examples:
+                NVA Skus:
+                  description: NVA Skus
+                  value:
+                  - accountId: '112948124124'
+                    accountName: test_account_name
+                    cloudType: AZURE
+                    nvaSkuId: ciscosdwan
+                    nvaSkuName: ciscosdwan
+                    versionList:
+                    - - 17.4.20201218
+                      - 17.6.01
+                      - 17.7.01
+                    scaleValueList:
+                    - - scaleUnit: 10
+                        instanceType: Standard_D4_v2
+                        instanceCount: 2
+                      - scaleUnit: 2
+                        instanceType: Standard_D4_v2
+                        instanceCount: 2
+                      - scaleUnit: 4
+                        instanceType: Standard_D4_v2
+                        instanceCount: 2
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/cloudgateway/resource:
+    get:
+      tags:
+      - MultiCloud - CloudGateway
+      description: Discover Resource of CGW
+      operationId: getCgwOrgResources
+      parameters:
+      - name: cloudGatewayName
+        in: query
+        description: Multicloud cloud gateway name
+        required: true
+        schema:
+          maxLength: 255
+          minLength: 1
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    creationDate:
+                      type: string
+                    details:
+                      type: object
+                      properties:
+                        devices:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              publicIp:
+                                type: string
+                              uuid:
+                                type: string
+                            $$ref: '#/components/schemas/CgwResourceResponseDetailsDevices'
+                        vhubName:
+                          type: string
+                        virtualRouterAsn:
+                          type: string
+                        vwanName:
+                          type: string
+                      $$ref: '#/components/schemas/CgwResourceResponseDetails'
+                    esourceId:
+                      type: string
+                    resourceType:
+                      type: string
+                  $$ref: '#/components/schemas/CgwResourceResponse'
+              examples:
+                Get CGW Resource:
+                  description: Get CGW Resource
+                  value:
+                    resourceType: CGW
+                    resourceId: /subscriptions/9b188cb9-f358-4db6-a44f-8406854789a0/resourceGroups/uxtestrg
+                    creationDate: Not-Available
+                    details:
+                      vwanName: uxabc
+                      vhubName: AzureCGW
+                      devices:
+                      - uuid: C8K-f64c775a-f93a-4c6b-ac54-57448bdc304b
+                        publicIp: '[1.2.193.149]'
+                      - uuid: C8K-f64ca-f93a-4c6b-ac54-57448bdc304b
+                        publicIp: '[13.78.223.149]'
+                      virtualRouterAsn: '65275'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/cloudgateway/resourceGroups:
+    get:
+      tags:
+      - MultiCloud - CloudGateway
+      description: Discover Azure Resource Groups
+      operationId: getAzureResourceGroups
+      parameters:
+      - name: cloudType
+        in: query
+        description: Multicloud provider type
+        required: true
+        schema:
+          type: string
+      - name: accountId
+        in: query
+        description: Multicloud account id
+        schema:
+          type: string
+      - name: discoverAllResourceGroups
+        in: query
+        description: Flag to get all resources group
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    resourceGroupId:
+                      type: string
+                      example: /subscriptions/8b188c39-f358-4db6-a44f-84068541233a0/resourceGroups/test-resource-group
+                    source:
+                      type: string
+                      example: azureStored
+                  $$ref: '#/components/schemas/ResourceGroupsResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/cloudgateway/tgw/Attachments:
+    get:
+      tags:
+      - MultiCloud - CloudGateway
+      description: Discover AWS brownfield TGW Attachments
+      operationId: getAwsTgwAttachments
+      parameters:
+      - name: cloudType
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - AWS
+          - AWS_GOVCLOUD
+      - name: accountId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: region
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: tgwId
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    AttachmentId:
+                      type: string
+                      example: tgw-12345
+                  $$ref: '#/components/schemas/TgwAttachmentsListResponse'
+              examples:
+                Discover AWS brownfield TGW Attachments:
+                  description: Discover AWS brownfield TGW Attachments
+                  value: "[\n  {\n    \"attachmentId\": \"tgw-12345\",\n    \"attachmentName\": \"test-attachment\"\n    \"attachmentType\": \"vpc\"\n  }\n]"
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/cloudgateway/tgw/RouteTables:
+    get:
+      tags:
+      - MultiCloud - CloudGateway
+      description: Discover AWS brownfield TGW route tables
+      operationId: getAwsTgwRouteTables
+      parameters:
+      - name: cloudType
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - AWS
+          - AWS_GOVCLOUD
+      - name: accountId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: region
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: tgwId
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    AttachmentId:
+                      type: string
+                      example: rt-12345
+                  $$ref: '#/components/schemas/TgwRouteTablesListResponse'
+              examples:
+                Discover AWS brownfield TGW route tables:
+                  description: Discover AWS brownfield TGW route tables
+                  value:
+                  - routeTableId: rt-12345
+                    routeTableName: test-rt
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/cloudgateway/tgws:
+    get:
+      tags:
+      - MultiCloud - CloudGateway
+      description: Discover AWS brownfield TGWs
+      operationId: getAwsTgws
+      parameters:
+      - name: cloudType
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - AWS
+          - AWS_GOVCLOUD
+      - name: accountId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: region
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    tgwId:
+                      type: string
+                      example: tgw-12345
+                    tgwName:
+                      type: string
+                      example: tgw-test
+                  $$ref: '#/components/schemas/TgwsListResponse'
+              examples:
+                Discovered AWS brownfield TGWs:
+                  description: Discovered AWS brownfield TGWs
+                  value:
+                  - tgwId: tgw-12345
+                    tgwName: tgw-test
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/cloudgateway/vhubs:
+    get:
+      tags:
+      - MultiCloud - CloudGateway
+      description: Discover Azure Virtual HUBs
+      operationId: getAzureVirtualHubs
+      parameters:
+      - name: cloudType
+        in: query
+        required: true
+        schema:
+          pattern: ^[a-zA-Z_]+$
+          type: string
+      - name: accountId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: region
+        in: query
+        required: true
+        schema:
+          pattern: ^[a-zA-Z0-9_./\-]+$
+          type: string
+      - name: resourceGroupName
+        in: query
+        required: true
+        schema:
+          pattern: ^[\w.-]{1,128}$
+          type: string
+      - name: resourceGroupSource
+        in: query
+        required: true
+        schema:
+          pattern: ^[a-zA-Z_]+$
+          type: string
+      - name: vwanName
+        in: query
+        required: true
+        schema:
+          pattern: ^[\w.-]{1,128}$
+          type: string
+      - name: vwanSource
+        in: query
+        required: true
+        schema:
+          pattern: ^[a-zA-Z_]+$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    source:
+                      type: string
+                      example: vManage
+                    vhubId:
+                      type: string
+                      example: /subscriptions/8b188c39-f358-4db6-a44f-84068541233a0/resourceGroups/test-resource-group/providers/Microsoft.Network/virtualHubs/cgw-test
+                    vhubName:
+                      type: string
+                      example: cgw-test
+                  $$ref: '#/components/schemas/VhubsListResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/cloudgateway/vnetsNoofAttached:
+    get:
+      tags:
+      - MultiCloud - CloudGateway
+      description: Discover Azure Virtual HUBs
+      operationId: getAzureVirtualVnetsAttached
+      parameters:
+      - name: cloudType
+        in: query
+        description: Multicloud provider type
+        required: true
+        schema:
+          type: string
+      - name: cloudGatewayName
+        in: query
+        required: true
+        schema:
+          maxLength: 1024
+          minLength: 1
+          pattern: ^[a-zA-Z0-9_./\-]+$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  isVnetAttached:
+                    type: boolean
+                    example: true
+                $$ref: '#/components/schemas/IsVnetAttached'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/cloudgateway/vpn-gateways:
+    get:
+      tags:
+      - MultiCloud - CloudGateway
+      description: Discover Azure Vpn Gateways
+      operationId: getAzureVpnGateways
+      parameters:
+      - name: cloudType
+        in: query
+        required: true
+        schema:
+          pattern: ^[a-zA-Z_]+$
+          type: string
+      - name: accountId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: region
+        in: query
+        required: true
+        schema:
+          pattern: ^[a-zA-Z0-9_./\-]+$
+          type: string
+      - name: resourceGroupName
+        in: query
+        required: true
+        schema:
+          pattern: ^[\w.-]{1,128}$
+          type: string
+      - name: resourceGroupSource
+        in: query
+        required: true
+        schema:
+          pattern: ^[a-zA-Z_]+$
+          type: string
+      - name: vhubName
+        in: query
+        required: true
+        schema:
+          pattern: ^[\w.-]{1,128}$
+          type: string
+      - name: vhubSource
+        in: query
+        required: true
+        schema:
+          pattern: ^[a-zA-Z_]+$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    source:
+                      type: string
+                      example: vManage
+                    vpnGatewayId:
+                      type: string
+                      example: /subscriptions/9b188cb9-f358-4db6-a44f-8406854789a0/resourceGroups/azureTestRGP8/providers/Microsoft.Network/virtualHubs/azureTestVhub2
+                    vpnGatewayName:
+                      type: string
+                      example: vpn-gateway-azure-east-2
+                  $$ref: '#/components/schemas/VpnGatewayResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/cloudgateway/vwans:
+    get:
+      tags:
+      - MultiCloud - CloudGateway
+      description: Discover Azure Virtual WANS
+      operationId: getAzureVirtualWans
+      parameters:
+      - name: cloudType
+        in: query
+        required: true
+        schema:
+          pattern: ^[a-zA-Z_]+$
+          type: string
+      - name: accountId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: resourceGroupName
+        in: query
+        required: true
+        schema:
+          pattern: ^[\w.-]{1,128}$
+          type: string
+      - name: resourceGroupSource
+        in: query
+        required: true
+        schema:
+          pattern: ^[a-zA-Z_]+$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    source:
+                      type: string
+                      example: vmanage
+                    vwanId:
+                      type: string
+                      example: /subscriptions/8b188c39-f358-4db6-a44f-84068541233a0/resourceGroups/test-resource-group/providers/Microsoft.Network/virtualWans/test-vwan
+                    vwanName:
+                      type: string
+                      example: test-vwan
+                  $$ref: '#/components/schemas/VwanListResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/cloudgateway/{cloudGatewayName}:
+    get:
+      tags:
+      - MultiCloud - CloudGateway
+      description: Get cloud gateway by name
+      operationId: getCgwDetails
+      parameters:
+      - name: cloudGatewayName
+        in: path
+        description: Multicloud cloud gateway name
+        required: true
+        schema:
+          maxLength: 255
+          minLength: 1
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accountId:
+                    type: string
+                  cloudGatewayId:
+                    type: string
+                  cloudGatewayMode:
+                    type: string
+                    description: Only applicable to AWS/AWS_GOVCLOUD CloudTypes
+                  cloudGatewayName:
+                    type: string
+                  cloudGatewaySolution:
+                    type: string
+                  cloudProviderASN:
+                    type: integer
+                    description: CGW details relevant to AWS/AWS_GOVCLOUD
+                    format: int32
+                  cloudProviderMgmtReference:
+                    type: string
+                    description: CGW details relevant to AWS/AWS_GOVCLOUD
+                  cloudType:
+                    type: string
+                  connectedSites:
+                    type: integer
+                    format: int32
+                  connectivityState:
+                    type: string
+                  connectivityStateUpdateTs:
+                    type: number
+                  customSettings:
+                    type: boolean
+                  description:
+                    type: string
+                  devices:
+                    type: array
+                    items:
+                      type: string
+                  mrfRouterRole:
+                    type: string
+                  region:
+                    type: string
+                  resourceGroupName:
+                    type: string
+                    description: CGW details relevant to AZURE/AZURE_GOVCLOUD CloudTypes
+                  routeTableCount:
+                    type: string
+                    description: CGW details relevant to AWS/AWS_GOVCLOUD
+                  s2sPermitted:
+                    type: boolean
+                    description: Only applicable to GCP CloudGateways
+                  settings:
+                    type: object
+                    properties:
+                      cloudGatewaySolution:
+                        pattern: ^[a-zA-Z_]*$
+                        type: string
+                      cloudType:
+                        pattern: ^[a-zA-Z_]*$
+                        type: string
+                      instanceSize:
+                        pattern: ^[a-zA-Z0-9_./\-]*$
+                        type: string
+                      ipSubnetPool:
+                        pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}\/(?:3[0-2]|[0-2]?[0-9]))(?:\s*,\s*(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}\/(?:3[0-2]|[0-2]?[0-9]))*$
+                        type: string
+                      name:
+                        pattern: ^[a-zA-Z_]*$
+                        type: string
+                      networkTier:
+                        pattern: ^[a-zA-Z0-9_./\-]*$
+                        type: string
+                        description: Used for GCP Custom settings
+                      skuScaleUnit:
+                        pattern: ^[0-9]*$
+                        type: string
+                        description: Used for Azure/Azure GovCloud Custom settings
+                      softwareImageId:
+                        pattern: ^[a-zA-Z0-9_./\-\s]*$
+                        type: string
+                      tunnelCount:
+                        pattern: ^[0-9]*$
+                        type: string
+                        description: Tunnel Count for AWS Connect based and branch connect
+                    $$ref: '#/components/schemas/CustomSettings'
+                  siteName:
+                    type: string
+                  status:
+                    type: string
+                  tunnelCidrBlocks:
+                    type: array
+                    description: CGW details relevant to AWS/AWS_GOVCLOUD
+                    items:
+                      type: object
+                      description: CGW details relevant to AWS/AWS_GOVCLOUD
+                  tunnels:
+                    type: array
+                    properties:
+                      empty:
+                        type: boolean
+                    description: CGW details relevant to AWS/AWS_GOVCLOUD
+                    items:
+                      type: object
+                      properties:
+                        acceptedRouteCount:
+                          type: integer
+                          format: int32
+                        lastStatusChangeTimestamp:
+                          type: string
+                        outerIpAddr:
+                          type: string
+                        status:
+                          type: string
+                        statusMessage:
+                          type: string
+                        tunnelId:
+                          type: string
+                        tunnelInnerIp:
+                          type: array
+                          items:
+                            type: string
+                      description: CGW details relevant to AWS/AWS_GOVCLOUD
+                      $$ref: '#/components/schemas/TunnelsInner'
+                  vhubName:
+                    type: string
+                    description: CGW details relevant to AZURE/AZURE_GOVCLOUD CloudTypes
+                  virtualRouterAsn:
+                    type: string
+                    description: CGW details relevant to AZURE/AZURE_GOVCLOUD CloudTypes
+                  vpns:
+                    type: array
+                    items:
+                      type: string
+                  vwanName:
+                    type: string
+                    description: CGW details relevant to AZURE/AZURE_GOVCLOUD CloudTypes
+                $$ref: '#/components/schemas/CloudGatewayAdjusted'
+              examples:
+                'Get GCP CGW ':
+                  description: 'Get GCP CGW '
+                  value:
+                    cloudGatewayName: gcp-test
+                    accountName: gcp-dev
+                    devices:
+                    - C8K-4B68E23F-B24F-EDE8-05DD-B36EAA14C9C1
+                    - C8K-0D92AF4F-EA3C-3D40-4781-BD5B4112B05B
+                    - C8K-10A9ACE8-2283-B45A-4E3A-23DFA39DBEF9
+                    description: ''
+                    cloudProviderMgmtReference: NA
+                    connectivityStateUpdateTs: 1654905819730
+                    s2sPermitted: true
+                    accountId: gcp-project-nprd-31900
+                    cloudProviderAsn: 0
+                    sshKeyName: ''
+                    tunnelCidrBlocks: []
+                    cloudGatewayId: s2c-hub-gcp-test, s2s-hub-gcp-test
+                    cloudType: GCP
+                    customSettings: true
+                    cloudGatewaySolution: gcp
+                    region: us-west4
+                    connectivityState: Successful
+                    routeTableCount: NA
+                    settings:
+                      softwareImageId: cisco-c8k-17-05-01a-cisco-public
+                      instanceSize: n1-standard-4
+                      ipSubnetPool: 10.0.0.0/16
+                      networkTier: STANDARD
+                    status: error
+                    vpns:
+                    - vpnId: '9'
+                    connectedSites: 0
+                    tunnels:
+                    - tunnelId: C8K-10A9ACE8-2283-B45A-4E3A-23DFA39DBEF9::9
+                      status: DOWN
+                      statusMessage: NotAvailable
+                      outerIpAddr: NotAvailable
+                      acceptedRouteCount: 0
+                      lastStatusChangeTimestamp: NotAvailable
+                    - tunnelId: C8K-0D92AF4F-EA3C-3D40-4781-BD5B4112B05B::9
+                      status: DOWN
+                      statusMessage: NotAvailable
+                      outerIpAddr: NotAvailable
+                      acceptedRouteCount: 0
+                      lastStatusChangeTimestamp: NotAvailable
+                    - tunnelId: C8K-4B68E23F-B24F-EDE8-05DD-B36EAA14C9C1::9
+                      status: DOWN
+                      statusMessage: NotAvailable
+                      outerIpAddr: NotAvailable
+                      acceptedRouteCount: 0
+                      lastStatusChangeTimestamp: NotAvailable
+                'Get AWS/AWS GovCloud  CGW ':
+                  description: 'Get AWS/AWS GovCloud  CGW '
+                  value:
+                    cloudGatewayName: aws-test
+                    accountName: aws-dev
+                    devices:
+                    - C8K-BF4B09D2-1C07-8634-753D-5DE2F5D6B15C
+                    - C8K-C516558F-45CA-3486-38FD-5D0306E05999
+                    description: ''
+                    cloudProviderMgmtReference: ''
+                    connectivityStateUpdateTs: 1655144961158
+                    accountId: '759589527992'
+                    cloudProviderAsn: 64520
+                    tunnelCidrBlocks: []
+                    cloudGatewayId: tgw-0b6ac1173825c3663
+                    cloudType: AWS
+                    customSettings: true
+                    cloudGatewaySolution: tgw_tvpc
+                    region: us-east-1
+                    connectivityState: Successful
+                    routeTableCount: '2'
+                    settings:
+                      softwareImageId: Cisco-C8K-17.04.01a-42cb6e93-8d9d-490b-a73c-e3e56077ffd1-ami-012fee29ab1f5f2c3.4
+                      instanceSize: c5.large
+                      ipSubnetPool: 11.0.0.0/16
+                    status: normal
+                    vpns:
+                    - vpnId: '9'
+                    connectedSites: 2
+                    tunnels:
+                    - tunnelId: C8K-C516558F-45CA-3486-38FD-5D0306E05999::9
+                      tunnelInnerIps:
+                      - 169.254.0.12/30
+                      - 169.254.0.16/30
+                      status: DOWN
+                      statusMessage: NotAvailable
+                      outerIpAddr: NotAvailable
+                      acceptedRouteCount: 0
+                      lastStatusChangeTimestamp: NotAvailable
+                    - tunnelId: C8K-BF4B09D2-1C07-8634-753D-5DE2F5D6B15C::9
+                      tunnelInnerIps:
+                      - 169.254.0.4/30
+                      - 169.254.0.8/30
+                      status: DOWN
+                      statusMessage: NotAvailable
+                      outerIpAddr: NotAvailable
+                      acceptedRouteCount: 0
+                      lastStatusChangeTimestamp: NotAvailable
+                Get Azure/Azure GovCloud CGW:
+                  description: Get Azure/Azure GovCloud CGW
+                  value:
+                    resourceGroupName: azure-rgp
+                    cloudGatewayName: az-test
+                    accountName: ramL
+                    devices:
+                    - C8K-2F69B355-2B3D-2801-EB48-F44789422299
+                    - C8K-53349F28-AB44-70C5-260B-096581250519
+                    virtualRouterAsn: '65515'
+                    vhubName: az-test
+                    description: ''
+                    vwanName: azure-vwan
+                    connectivityStateUpdateTs: 1655141135729
+                    accountId: 8b188c39-f358-4db6-a44f-84068541233a
+                    cloudGatewayId: /subscriptions/8b188c39-f358-4db6-a44f-84068541233a0/resourceGroups/test-resource-group/providers/Microsoft.Network/virtualHubs/az-test
+                    vhubId: /subscriptions/8b188c39-f358-4db6-a44f-84068541233a0/resourceGroups/test-resource-group/providers/Microsoft.Network/virtualHubs/az-test
+                    cloudType: AZURE
+                    customSettings: false
+                    region: westus2
+                    connectivityState: initialized
+                    cloudGatewaySolution: vhub
+                    settings:
+                      softwareImageId: 17.6.01
+                      skuScaleUnit: 2
+                      ipSubnetPool: 10.0.0.0/16
+                      instanceSize: 2
+                    status: normal
+                    vpns: []
+                    connectedSites: 1
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    put:
+      tags:
+      - MultiCloud - CloudGateway
+      description: Update cloud gateway
+      operationId: updateCgw
+      parameters:
+      - name: cloudGatewayName
+        in: path
+        required: true
+        schema:
+          pattern: ^[\w.-]{1,128}$
+          type: string
+      requestBody:
+        description: Payloads for updating Cloud Gateway based on CloudType
+        content:
+          application/json:
+            schema:
+              required:
+              - accountId
+              - cloudGatewayName
+              - cloudType
+              - region
+              - resourceGroupName
+              - vhubId
+              type: object
+              properties:
+                accountId:
+                  type: string
+                awsTgwProperties:
+                  type: object
+                  properties:
+                    disconnectTgw:
+                      type: boolean
+                    tgwConnections:
+                      type: array
+                      properties:
+                        empty:
+                          type: boolean
+                      description: Defines a list of TGW connections. Null if tgwSource is not aws
+                      items:
+                        type: object
+                        properties:
+                          conn:
+                            type: string
+                          tgwRouteTableId:
+                            type: string
+                          vpnId:
+                            type: string
+                        description: Defines a list of TGW connections. Null if tgwSource is not aws
+                        $$ref: '#/components/schemas/TgwConnectionsInner'
+                    tgwId:
+                      type: string
+                    tgwSource:
+                      type: string
+                      enum:
+                      - aws
+                      - tvpcOnly
+                      - toBeCreated
+                  description: Used in AWS brownfield CGW creation
+                  $$ref: '#/components/schemas/UpdateCgwAwsTgwProperties'
+                cloudGatewayName:
+                  pattern: ^[\w.-]{1,128}$
+                  type: string
+                cloudType:
+                  pattern: ^[a-zA-Z_]+$
+                  type: string
+                description:
+                  type: string
+                deviceChanges:
+                  type: object
+                  properties:
+                    devicesAdded:
+                      type: array
+                      items:
+                        type: string
+                    devicesDeleted:
+                      type: array
+                      items:
+                        type: string
+                  description: Used for GCP updateCgw
+                  $$ref: '#/components/schemas/UpdateCgwDeviceChanges'
+                devices:
+                  type: array
+                  description: Used for AZURE updateCgw
+                  items:
+                    type: string
+                    description: Used for AZURE updateCgw
+                mrfRouterRole:
+                  pattern: ^(border|edge)$
+                  type: string
+                region:
+                  pattern: ^[a-zA-Z0-9_./\-]+$
+                  type: string
+                resourceGroupName:
+                  pattern: ^[\w.-]{1,128}$
+                  type: string
+                  description: Used for AZURE updateCgw
+                s2sPermitted:
+                  pattern: ^(true|false)$
+                  type: string
+                  description: Used for GCP updateCgw
+                settings:
+                  type: object
+                  properties:
+                    cloudGatewaySolution:
+                      pattern: ^[a-zA-Z_]*$
+                      type: string
+                    cloudType:
+                      pattern: ^[a-zA-Z_]*$
+                      type: string
+                    instanceSize:
+                      pattern: ^[a-zA-Z0-9_./\-]*$
+                      type: string
+                    ipSubnetPool:
+                      pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}\/(?:3[0-2]|[0-2]?[0-9]))(?:\s*,\s*(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}\/(?:3[0-2]|[0-2]?[0-9]))*$
+                      type: string
+                    name:
+                      pattern: ^[a-zA-Z_]*$
+                      type: string
+                    networkTier:
+                      pattern: ^[a-zA-Z0-9_./\-]*$
+                      type: string
+                      description: Used for GCP Custom settings
+                    skuScaleUnit:
+                      pattern: ^[0-9]*$
+                      type: string
+                      description: Used for Azure/Azure GovCloud Custom settings
+                    softwareImageId:
+                      pattern: ^[a-zA-Z0-9_./\-\s]*$
+                      type: string
+                    tunnelCount:
+                      pattern: ^[0-9]*$
+                      type: string
+                      description: Tunnel Count for AWS Connect based and branch connect
+                  $$ref: '#/components/schemas/AllOfupdateCgwSettings'
+                vhubId:
+                  type: string
+                  description: Used for AZURE updateCgw
+              $$ref: '#/components/schemas/UpdateCgw'
+            examples:
+              GCP CGW CGW update:
+                description: GCP CGW CGW update
+                value:
+                  cloudType: GCP
+                  accountId: gcp-project-nprd-31900
+                  region: us-west4
+                  s2sPermitted: true
+                  mrfRouterRole: border
+                  deviceChanges:
+                    devicesAdded:
+                    - C8K-10A9ACE8-2283-B45A-4E3A-23DFA39DBEF9
+                    devicesDeleted: []
+              AWS/AWS GovCloud CGW update:
+                description: AWS/AWS GovCloud CGW update
+                value:
+                  cloudType: AWS
+                  mrfRouterRole: border
+                  settings:
+                    tunnelCount: 3
+              AZURE/AZURE GovCloud CGW update:
+                description: AZURE/AZURE GovCloud CGW update
+                value:
+                  cloudType: AZURE
+                  accountId: 8b188c39-f358-4db6-a44f-84068541233a
+                  region: westus2
+                  cloudGatewayName: az-test
+                  mrfRouterRole: border
+                  devices:
+                  - C8K-2F69B355-2B3D-2801-EB48-F44789422299
+                  - C8K-D4821270-27FF-A1B0-B902-12A321E3A550
+                  description: ''
+                  resourceGroupName: test-resource-group
+                  vhubId: /subscriptions/8b188c39-f358-4db6-a44f-84068541233a0/resourceGroups/test-resource-group/providers/Microsoft.Network/virtualHubs/az-test
+                  settings:
+                    cloudType: AZURE
+                    name: AZURE_CUSTOM_SETTINGS
+                    ipSubnetPool: 10.0.0.0/16
+                    skuScaleUnit: 4
+                    softwareImageId: 17.6.01
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: 6c723f65-9106-4f43-9d2b-a033a39353b3
+                description: Task id for polling status
+                $$ref: '#/components/schemas/Taskid'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+      - MultiCloud - CloudGateway
+      description: Delete cloud gateway
+      operationId: deleteCgw
+      parameters:
+      - name: cloudGatewayName
+        in: path
+        description: Multicloud cloud gateway name
+        required: true
+        schema:
+          maxLength: 255
+          minLength: 1
+          type: string
+      - name: deleteAllResources
+        in: query
+        schema:
+          pattern: ^(true|false)$
+          type: string
+          default: 'true'
+      - name: deleteVhubResourceGroup
+        in: query
+        schema:
+          pattern: ^(true|false)$
+          type: string
+          default: 'true'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: 6c723f65-9106-4f43-9d2b-a033a39353b3
+                description: Task id for polling status
+                $$ref: '#/components/schemas/Taskid'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/cloudgateway/{cloudType}/gateways/device-chassis-numbers:
+    get:
+      tags:
+      - MultiCloud - CloudGateway
+      summary: Get cloud gateway devices by config ID.
+      description: API to retrieve available devices or devices associated to a config group.
+      operationId: getAvailableDevicesOrByCGId_MulticloudCloudgateway_6803
+      parameters:
+      - name: cloudType
+        in: path
+        description: Multicloud provider type
+        required: true
+        schema:
+          type: string
+      - name: config-group-id
+        in: query
+        description: Multicloud config group id
+        schema:
+          pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+          type: string
+      - name: device-solution-type
+        in: query
+        description: Multicloud device solution type
+        schema:
+          pattern: ^(sdwan|sd-routing)$
+          type: string
+      responses:
+        '200':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    data:
+                      type: array
+                      description: data list
+                      example:
+                      - MEGAPORT
+                      - EQUINIX
+                      - ATT
+                      items:
+                        type: string
+                        description: data
+                        example: MEGAPORT
+                  $$ref: '#/components/schemas/InlineResponse200'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/cloudgateways/{cloudType}:
+    get:
+      tags:
+      - MultiCloud - CloudGateway
+      description: Get sites with connectivity to the cloud by cloud type
+      operationId: getCloudGateways
+      parameters:
+      - name: cloudType
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - AWS
+          - AWS_GOVCLOUD
+          - AZURE
+          - AZURE_GOVCLOUD
+          - GCP
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    accountId:
+                      type: string
+                    accountName:
+                      type: string
+                    cloudGatewayId:
+                      type: string
+                    cloudGatewayName:
+                      type: string
+                    cloudType:
+                      type: string
+                    customSettings:
+                      type: boolean
+                    description:
+                      type: string
+                    region:
+                      type: string
+                    status:
+                      type: string
+                  $$ref: '#/components/schemas/CloudGatewayListResponse'
+              examples:
+                ' List of CGWs per cloudType ':
+                  description: ' List of CGWs per cloudType '
+                  value:
+                  - cloudGatewayName: gcp-test
+                    cloudGatewayId: s2c-hub-gcptest, s2s-hub-gcptest
+                    description: ''
+                    cloudType: GCP
+                    accountId: gcp-project-nprd-31900
+                    accountName: gcp-dev
+                    region: us-west2
+                    customSettings: true
+                    status: normal
+                  - cloudGatewayName: gcp-test-west-4
+                    cloudGatewayId: s2c-hub-gcptest, s2s-hub-gcptest
+                    description: ''
+                    cloudType: GCP
+                    accountId: gcp-project-nprd-3190
+                    accountName: gcp-dev
+                    region: us-west4
+                    customSettings: true
+                    status: normal
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/cloudgatewaysetting/{cloudGatewayName}:
+    get:
+      tags:
+      - MultiCloud - CloudGateway
+      description: Get cloud gateway custom setting by cloud gateway name
+      operationId: getCgwCustomSettingDetails
+      parameters:
+      - name: cloudGatewayName
+        in: path
+        required: true
+        schema:
+          pattern: ^[\w.-]{1,128}$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cloudGatewaySolution:
+                    pattern: ^[a-zA-Z_]*$
+                    type: string
+                  cloudType:
+                    pattern: ^[a-zA-Z_]*$
+                    type: string
+                  instanceSize:
+                    pattern: ^[a-zA-Z0-9_./\-]*$
+                    type: string
+                  ipSubnetPool:
+                    pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}\/(?:3[0-2]|[0-2]?[0-9]))(?:\s*,\s*(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}\/(?:3[0-2]|[0-2]?[0-9]))*$
+                    type: string
+                  name:
+                    pattern: ^[a-zA-Z_]*$
+                    type: string
+                  networkTier:
+                    pattern: ^[a-zA-Z0-9_./\-]*$
+                    type: string
+                    description: Used for GCP Custom settings
+                  skuScaleUnit:
+                    pattern: ^[0-9]*$
+                    type: string
+                    description: Used for Azure/Azure GovCloud Custom settings
+                  softwareImageId:
+                    pattern: ^[a-zA-Z0-9_./\-\s]*$
+                    type: string
+                  tunnelCount:
+                    pattern: ^[0-9]*$
+                    type: string
+                    description: Tunnel Count for AWS Connect based and branch connect
+                $$ref: '#/components/schemas/CustomSettings'
+              examples:
+                GCP Custom Custom Settings:
+                  description: GCP Custom Custom Settings
+                  value:
+                    cloudType: GCP
+                    instanceSize: n1-standard-4
+                    cgwCustomSettingName: GCP_CUSTOM_SETTING_gcp-test
+                    networkTier: STANDARD
+                    ipSubnetPool: 10.0.0.0/16
+                    softwareImageId: cisco-c8k-17-05-01a-cisco-public
+                AWS/AWS_GOVCLOUD Custom Settings:
+                  description: AWS/AWS_GOVCLOUD Custom Settings
+                  value:
+                    cloudType: AWS
+                    ipSubnetPool: 10.0.0.0/16
+                    instanceSize: c5.large
+                    cgwCustomSettingName: AWS_CUSTOM_SETTING_aws-test
+                    softwareImageId: Cisco-C8K-17.04.01a-42cb6e93-8d9d-490b-a73c-e3e56077ffd1-ami-012fee29ab1f5f2c3.4
+                AZURE/AZURE_GOVCLOUD Custom Settings:
+                  description: AZURE/AZURE_GOVCLOUD Custom Settings
+                  value:
+                    cloudType: AZURE
+                    ipSubnetPool: 10.0.0.0/16
+                    skuScaleUnit: 2
+                    cgwCustomSettingName: AZURE_CUSTOM_SETTING_azure-test
+                    softwareImageId: 17.6.01
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/cloudgatewaytype:
+    get:
+      tags:
+      - MultiCloud - CloudGateway
+      description: Get cloud gateway types for specified cloudType
+      operationId: getCgwTypes
+      parameters:
+      - name: cloudType
+        in: query
+        schema:
+          type: string
+          enum:
+          - AWS
+          - AWS_GOVCLOUD
+          - AZURE
+          - AZURE_GOVCLOUD
+          - GCP
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/pushCgwConfig:
+    post:
+      tags:
+      - MultiCloud - CloudGateway
+      description: Push configuration to devices of CGW
+      operationId: pushCgwCfg
+      requestBody:
+        description: Push configuration to devices of CGW
+        content:
+          application/json:
+            schema:
+              required:
+              - cloudGatewayName
+              - cloudType
+              type: object
+              properties:
+                cloudGatewayName:
+                  pattern: ^[\w.-]{1,128}$
+                  type: string
+                  example: cgw-test
+                cloudType:
+                  pattern: ^[a-zA-Z_]+$
+                  type: string
+                  example: GCP
+              $$ref: '#/components/schemas/PushCgwConfig'
+            examples:
+              Push Cgw Config to devices:
+                description: Push Cgw Config to devices
+                value:
+                  cloudGatewayName: cgw-test
+                  cloudType: GCP
+              Post UnMap:
+                description: Post UnMap
+                value:
+                  cloudType: GCP
+                  connMatrix:
+                  - conn: disabled
+                    destId: tag1
+                    destType: tag
+                    mapped: []
+                    outstandingMapping: []
+                    srcId: '100'
+                    srcType: vpn
+                    unmapped:
+                    - cloudType: GCP
+                      destId: '3889358374498280098'
+                      destRegion: global
+                      destTag: tag1
+                      destType: vpc
+                      sourceRegion: us-west1
+                      srcId: '100'
+                      srcType: vpn
+                      tunnelId: C8K-011df81d-760e-47e2-b930-cc8eaaff773d::100
+                    - cloudType: GCP
+                      destId: '3889358374498280098'
+                      destRegion: global
+                      destTag: tag1
+                      destType: vpc
+                      sourceRegion: us-west1
+                      srcId: '100'
+                      srcType: vpn
+                      tunnelId: C8K-6c832624-b47c-491e-bd95-b5b4b86981ec::100
+                  - conn: disabled
+                    destId: '100'
+                    destType: vpn
+                    srcId: tag1
+                    srcType: tag
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: 6c723f65-9106-4f43-9d2b-a033a39353b3
+                description: Task id for polling status
+                $$ref: '#/components/schemas/Taskid'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /multicloud/tunnels/{cloudType}:
+    get:
+      tags:
+      - MultiCloud - CloudGateway
+      description: Get the tunnels for cloudType
+      operationId: getTunnelNames
+      parameters:
+      - name: cloudType
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - AWS
+          - AWS_GOVCLOUD
+          - AZURE
+          - AZURE_GOVCLOUD
+          - GCP
+      - name: cloudGatewayName
+        in: query
+        required: true
+        schema:
+          pattern: ^[\w.-]{1,128}$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    Private IP:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          hostname:
+                            type: string
+                          tunnels:
+                            type: string
+                        $$ref: '#/components/schemas/GetTunnelsResponsePrivateIP'
+                  $$ref: '#/components/schemas/GetTunnelsResponse'
+              examples:
+                Get Tunnels:
+                  description: Get Tunnels
+                  value:
+                    101.1.1.9:
+                      hostname: gcp1109
+                      tunnels:
+                      - GigabitEthernet2
+                    101.1.1.7:
+                      hostname: gcp1107
+                      tunnels:
+                      - GigabitEthernet2
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

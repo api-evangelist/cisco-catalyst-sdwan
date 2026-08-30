@@ -1,0 +1,209 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - Device Feature List API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - Device Feature List
+paths:
+  /device/featurelist:
+    get:
+      tags:
+      - Real-Time Monitoring - Device Feature List
+      description: Get feature lists from device (Real Time)
+      operationId: getFeatureList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Feature lists:
+                  description: Feature lists
+                  value:
+                    data:
+                    - vdevice-dataKey: 172.16.255.11-statistics-collection-1.0
+                      vdevice-name: 172.16.255.11
+                      name: statistics-collection
+                      lastupdated: 1647222469375
+                      version: '1.0'
+                      vdevice-host-name: vm1
+                    - vdevice-dataKey: 172.16.255.11-upgrade-confirm-1.0
+                      vdevice-name: 172.16.255.11
+                      name: upgrade-confirm
+                      lastupdated: 1647222469375
+                      version: '1.0'
+                      vdevice-host-name: vm1
+                    - vdevice-dataKey: 172.16.255.11-vmanage-mode-2.0
+                      vdevice-name: 172.16.255.11
+                      name: vmanage-mode
+                      lastupdated: 1647222469375
+                      version: '2.0'
+                      vdevice-host-name: vm1
+                    - vdevice-dataKey: 172.16.255.11-dpi-statistics-2.0
+                      vdevice-name: 172.16.255.11
+                      name: dpi-statistics
+                      lastupdated: 1647222469375
+                      version: '2.0'
+                      vdevice-host-name: vm1
+                    - vdevice-dataKey: 172.16.255.11-cert-serial-hashing-1.0
+                      vdevice-name: 172.16.255.11
+                      name: cert-serial-hashing
+                      lastupdated: 1647222469375
+                      version: '1.0'
+                      vdevice-host-name: vm1
+                    - vdevice-dataKey: 172.16.255.11-upgrade-1.0
+                      vdevice-name: 172.16.255.11
+                      name: upgrade
+                      lastupdated: 1647222469375
+                      version: '1.0'
+                      vdevice-host-name: vm1
+                    - vdevice-dataKey: 172.16.255.11-cert-serial-version-1.0
+                      vdevice-name: 172.16.255.11
+                      name: cert-serial-version
+                      lastupdated: 1647222469375
+                      version: '1.0'
+                      vdevice-host-name: vm1
+                    - vdevice-dataKey: 172.16.255.11-vbond-standalone-1.0
+                      vdevice-name: 172.16.255.11
+                      name: vbond-standalone
+                      lastupdated: 1647222469375
+                      version: '1.0'
+                      vdevice-host-name: vm1
+                    - vdevice-dataKey: 172.16.255.11-tools-2.0
+                      vdevice-name: 172.16.255.11
+                      name: tools
+                      lastupdated: 1647222469375
+                      version: '2.0'
+                      vdevice-host-name: vm1
+                    - vdevice-dataKey: 172.16.255.11-admin-tech-options-1.0
+                      vdevice-name: 172.16.255.11
+                      name: admin-tech-options
+                      lastupdated: 1647222469375
+                      version: '1.0'
+                      vdevice-host-name: vm1
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write
+  /device/featurelist/synced:
+    get:
+      tags:
+      - Real-Time Monitoring - Device Feature List
+      description: Get feature lists synchronously from device
+      operationId: getSyncedFeatureList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Feature lists:
+                  description: Feature lists
+                  value:
+                    data:
+                    - vdevice-dataKey: 172.16.255.11-statistics-collection-1.0
+                      '@rid': 632
+                      vdevice-name: 172.16.255.11
+                      vmanage-system-ip: 172.16.255.11
+                      createTimeStamp: 1646912241600
+                      name: statistics-collection
+                      lastupdated: 1646912240766
+                      vdevice-host-name: vm1
+                      version: '1.0'
+                    - vdevice-dataKey: 172.16.255.11-upgrade-confirm-1.0
+                      '@rid': 639
+                      vdevice-name: 172.16.255.11
+                      vmanage-system-ip: 172.16.255.11
+                      createTimeStamp: 1646912243273
+                      name: upgrade-confirm
+                      lastupdated: 1646912240766
+                      vdevice-host-name: vm1
+                      version: '1.0'
+                    - vdevice-dataKey: 172.16.255.11-vmanage-mode-2.0
+                      '@rid': 646
+                      vdevice-name: 172.16.255.11
+                      vmanage-system-ip: 172.16.255.11
+                      createTimeStamp: 1646912247190
+                      name: vmanage-mode
+                      lastupdated: 1646912240766
+                      vdevice-host-name: vm1
+                      version: '2.0'
+                    - vdevice-dataKey: 172.16.255.11-dpi-statistics-2.0
+                      '@rid': 654
+                      vdevice-name: 172.16.255.11
+                      vmanage-system-ip: 172.16.255.11
+                      createTimeStamp: 1646912250128
+                      name: dpi-statistics
+                      lastupdated: 1646912240766
+                      vdevice-host-name: vm1
+                      version: '2.0'
+                    - vdevice-dataKey: 172.16.255.11-cert-serial-hashing-1.0
+                      '@rid': 662
+                      vdevice-name: 172.16.255.11
+                      vmanage-system-ip: 172.16.255.11
+                      createTimeStamp: 1646912255235
+                      name: cert-serial-hashing
+                      lastupdated: 1646912240766
+                      vdevice-host-name: vm1
+                      version: '1.0'
+                    - vdevice-dataKey: 172.16.255.11-upgrade-1.0
+                      '@rid': 669
+                      vdevice-name: 172.16.255.11
+                      vmanage-system-ip: 172.16.255.11
+                      createTimeStamp: 1646912260609
+                      name: upgrade
+                      lastupdated: 1646912240766
+                      vdevice-host-name: vm1
+                      version: '1.0'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write

@@ -1,0 +1,164 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - Transport API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - Transport
+paths:
+  /device/transport/connection:
+    get:
+      tags:
+      - Real-Time Monitoring - Transport
+      description: Get transport connection list from device
+      operationId: createTransportConnectionList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Transport connection list:
+                  description: Transport connection list
+                  value:
+                    data:
+                    - vdevice-dataKey: 169.254.10.10--
+                      vdevice-name: 169.254.10.10
+                      destination: 10.103.135.135
+                      index: '0'
+                      lastupdated: 1644816647932
+                      source: 0.0.0.0
+                      time: Fri Feb 11 18:19:43 2022
+                      state: up
+                      vdevice-host-name: vm3
+                      track-type: tloc
+                    - vdevice-dataKey: 169.254.10.10--
+                      vdevice-name: 169.254.10.10
+                      destination: 10.103.135.135
+                      index: '1'
+                      lastupdated: 1644816647933
+                      source: 0.0.0.0
+                      time: Fri Feb 11 18:16:58 2022
+                      state: down
+                      vdevice-host-name: vm3
+                      track-type: tloc
+                    - vdevice-dataKey: 169.254.10.10--
+                      vdevice-name: 169.254.10.10
+                      destination: 10.103.135.135
+                      index: '2'
+                      lastupdated: 1644816647933
+                      source: 0.0.0.0
+                      time: Fri Feb  4 18:19:51 2022
+                      state: up
+                      vdevice-host-name: vm3
+                      track-type: tloc
+                    - vdevice-dataKey: 169.254.10.10--
+                      vdevice-name: 169.254.10.10
+                      destination: 10.103.135.135
+                      index: '3'
+                      lastupdated: 1644816647933
+                      source: 0.0.0.0
+                      time: Fri Feb  4 18:17:06 2022
+                      state: down
+                      vdevice-host-name: vm3
+                      track-type: tloc
+                    - vdevice-dataKey: 169.254.10.10--
+                      vdevice-name: 169.254.10.10
+                      destination: 10.103.135.135
+                      index: '4'
+                      lastupdated: 1644816647934
+                      source: 0.0.0.0
+                      time: Thu Feb  3 18:23:58 2022
+                      state: up
+                      vdevice-host-name: vm3
+                      track-type: tloc
+                    - vdevice-dataKey: 169.254.10.10--
+                      vdevice-name: 169.254.10.10
+                      destination: 10.103.135.135
+                      index: '5'
+                      lastupdated: 1644816647934
+                      source: 0.0.0.0
+                      time: Thu Feb  3 18:21:13 2022
+                      state: down
+                      vdevice-host-name: vm3
+                      track-type: tloc
+                    - vdevice-dataKey: 169.254.10.10--
+                      vdevice-name: 169.254.10.10
+                      destination: 10.103.135.135
+                      index: '6'
+                      lastupdated: 1644816647935
+                      source: 0.0.0.0
+                      time: Wed Feb  2 18:19:38 2022
+                      state: up
+                      vdevice-host-name: vm3
+                      track-type: tloc
+                    - vdevice-dataKey: 169.254.10.10--
+                      vdevice-name: 169.254.10.10
+                      destination: 10.103.135.135
+                      index: '7'
+                      lastupdated: 1644816647935
+                      source: 0.0.0.0
+                      time: Wed Feb  2 18:16:47 2022
+                      state: down
+                      vdevice-host-name: vm3
+                      track-type: tloc
+                    - vdevice-dataKey: 169.254.10.10--
+                      vdevice-name: 169.254.10.10
+                      destination: 10.103.135.135
+                      index: '8'
+                      lastupdated: 1644816647935
+                      source: 0.0.0.0
+                      time: Tue Feb  1 18:19:56 2022
+                      state: up
+                      vdevice-host-name: vm3
+                      track-type: tloc
+                    - vdevice-dataKey: 169.254.10.10--
+                      vdevice-name: 169.254.10.10
+                      destination: 10.103.135.135
+                      index: '9'
+                      lastupdated: 1644816647936
+                      source: 0.0.0.0
+                      time: Tue Feb  1 18:17:11 2022
+                      state: down
+                      vdevice-host-name: vm3
+                      track-type: tloc
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write

@@ -1,0 +1,219 @@
+openapi: 3.2.0
+info:
+  title: Cisco Catalyst Sdwan Configuration - Topology API
+  version: 26.1.0+2026-01-06
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  description: 'Operations tagged Configuration - Topology across 2 of this provider''s published API definitions: cisco-catalyst-sdwan-others-openapi.json, cisco-catalyst-sdwan-ux-1-0-configuration-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /dataservice
+tags:
+- name: Configuration - Topology
+paths:
+  /topology:
+    get:
+      tags:
+      - Configuration - Topology
+      description: Create full topology
+      operationId: createFullTopology
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Topologies:
+                  description: Topologies
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+    servers:
+    - url: /dataservice
+  /topology/device:
+    get:
+      tags:
+      - Configuration - Topology
+      description: Create device topology
+      operationId: createDeviceTopology
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device Id list
+        required: true
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              deviceIp:
+                type: string
+            description: This is the valid DeviceIP
+            $$ref: '#/components/schemas/DeviceIP'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Topology:
+                  description: Topology
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+    servers:
+    - url: /dataservice
+  /topology/device/site/{siteId}:
+    get:
+      tags:
+      - Configuration - Topology
+      description: Get topology for a given site id
+      operationId: getSiteTopology
+      parameters:
+      - name: siteId
+        in: path
+        description: Site Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Template Deploy-read,Template Deploy-write,System-read
+    servers:
+    - url: /dataservice
+  /topology/monitor/site/{siteId}:
+    get:
+      tags:
+      - Configuration - Topology
+      description: Get topology monitor data for a given site id
+      operationId: getSiteTopologyMonitorData
+      parameters:
+      - name: siteId
+        in: path
+        description: Site Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Site topology monitor:
+                  description: Site topology monitor
+                  value:
+                    data:
+                    - device-id: C8K-9272137f-9fd1-424b-9f0e-8df10fe7dc88
+                      device-health: yellow
+                      circuits:
+                      - color: lte
+                        system_ip: 172.16.255.14
+                        circuit-health: yellow
+                        tunnels:
+                        - name: 172.16.255.14:lte-172.16.255.15:lte
+                          health: yellow
+                          state: Up
+                          vqoe_score: 7
+                      if-speed:
+                      - interface: GigabitEthernet1
+                        count: 34
+                        tx_kbps: 0
+                        rx_kbps: 0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,Device Monitoring-write
+    servers:
+    - url: /dataservice
+  /topology/physical:
+    get:
+      tags:
+      - Configuration - Topology
+      description: Create pysical topology
+      operationId: createPhysicalTopology
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device Id list
+        required: true
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              deviceIp:
+                type: string
+            description: This is the valid DeviceIP
+            $$ref: '#/components/schemas/DeviceIP'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Topology:
+                  description: Topology
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+    servers:
+    - url: /dataservice
+x-refined-from:
+- cisco-catalyst-sdwan-others-openapi.json
+- cisco-catalyst-sdwan-ux-1-0-configuration-openapi.json

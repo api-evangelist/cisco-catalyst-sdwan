@@ -1,0 +1,377 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - AAA API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - AAA
+paths:
+  /device/aaa/servers:
+    get:
+      tags:
+      - Real-Time Monitoring - AAA
+      description: Get AAA servers from device (Real Time)
+      operationId: getAAAservers
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                AAA servers:
+                  description: AAA servers
+                  value:
+                    data:
+                    - authen-retried-access-requests: '0'
+                      vdevice-name: 169.254.10.13
+                      author-errors-received: '0'
+                      author-retried-access-requests: '0'
+                      connection-failures: '0'
+                      acct-messages-sent: '0'
+                      acct-errors-received: '0'
+                      author-timeout-access-requests: '0'
+                      author-messages-sent: '0'
+                      auth-port: '1812'
+                      acct-port: '1813'
+                      authen-access-accepts: '0'
+                      author-access-accepts: '0'
+                      connection-timeouts: '0'
+                      author-access-rejects: '0'
+                      authen-timeout-access-requests: '0'
+                      authen-messages-received: '0'
+                      stats-time: '2022-06-06T06:55:52+00:00'
+                      authen-errors-received: '0'
+                      author-messages-received: '0'
+                      vdevice-host-name: vm6
+                      vdevice-dataKey: 169.254.10.13-vm6-radius-0-10.10.10.10-1812-1813
+                      group-name: radius-0
+                      authen-access-rejects: '0'
+                      lastupdated: 1654498624166
+                      connection-aborts: '0'
+                      radius-server-ip: 10.10.10.10
+                      authen-messages-sent: '0'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write,System-read,System-write
+  /device/aaa/users:
+    get:
+      tags:
+      - Real-Time Monitoring - AAA
+      description: Get AAA users from device (Real Time)
+      operationId: getAAAUsers
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                AAA users:
+                  description: AAA users
+                  value:
+                    data:
+                    - protocol: aaa-sess-proto-type-none
+                      ip-addr: 0.0.0.0
+                      vdevice-dataKey: 169.254.10.13-admin-4157
+                      vdevice-name: 169.254.10.13
+                      login-time: '2022-06-06T08:54:01+00:00'
+                      lastupdated: 1654505707413
+                      aaa-uid: '4157'
+                      vdevice-host-name: vm6
+                      username: admin
+                      session-id: '4145'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write,System-read,System-write
+  /device/acl/matchcounter:
+    get:
+      tags:
+      - Real-Time Monitoring - AAA
+      description: Get ACL match counters from device (Real Time)
+      operationId: getACLMatchCounterUsers
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                ACL match counters:
+                  description: ACL match counters
+                  value:
+                    data:
+                    - vdevice-dataKey: 10.0.0.121-CISCO-CWA-URL-REDIRECT-ACL-100
+                      vdevice-name: 10.0.0.121
+                      rule-name: '100'
+                      access-control-list-name: CISCO-CWA-URL-REDIRECT-ACL
+                      lastupdated: 1652169932765
+                      vdevice-host-name: Router
+                      match-counter: '0'
+                    - vdevice-dataKey: 10.0.0.121-CISCO-CWA-URL-REDIRECT-ACL-101
+                      vdevice-name: 10.0.0.121
+                      rule-name: '101'
+                      access-control-list-name: CISCO-CWA-URL-REDIRECT-ACL
+                      lastupdated: 1652169932765
+                      vdevice-host-name: Router
+                      match-counter: '0'
+                    - vdevice-dataKey: 10.0.0.121-CISCO-CWA-URL-REDIRECT-ACL-102
+                      vdevice-name: 10.0.0.121
+                      rule-name: '102'
+                      access-control-list-name: CISCO-CWA-URL-REDIRECT-ACL
+                      lastupdated: 1652169932765
+                      vdevice-host-name: Router
+                      match-counter: '0'
+                    - vdevice-dataKey: 10.0.0.121-CISCO-CWA-URL-REDIRECT-ACL-103
+                      vdevice-name: 10.0.0.121
+                      rule-name: '103'
+                      access-control-list-name: CISCO-CWA-URL-REDIRECT-ACL
+                      lastupdated: 1652169932765
+                      vdevice-host-name: Router
+                      match-counter: '0'
+                    - vdevice-dataKey: 10.0.0.121-CISCO-CWA-URL-REDIRECT-ACL-104
+                      vdevice-name: 10.0.0.121
+                      rule-name: '104'
+                      access-control-list-name: CISCO-CWA-URL-REDIRECT-ACL
+                      lastupdated: 1652169932765
+                      vdevice-host-name: Router
+                      match-counter: '0'
+                    - vdevice-dataKey: 10.0.0.121-CISCO-CWA-URL-REDIRECT-ACL-105
+                      vdevice-name: 10.0.0.121
+                      rule-name: '105'
+                      access-control-list-name: CISCO-CWA-URL-REDIRECT-ACL
+                      lastupdated: 1652169932765
+                      vdevice-host-name: Router
+                      match-counter: '0'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write,System-read,System-write
+  /device/logging:
+    get:
+      tags:
+      - Real-Time Monitoring - AAA
+      description: Get logging from device (Real Time)
+      operationId: getLoggingFromDevice
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Logging:
+                  description: Logging
+                  value:
+                    data:
+                    - disk_priority: info
+                      disk_filerotate: 10
+                      vdevice-dataKey: 169.254.10.10
+                      vdevice-name: 169.254.10.10
+                      host_priority: emerg
+                      lastupdated: 1643178776334
+                      disk_status: enabled
+                      disk_filename: vsyslog
+                      disk_filesize: 10
+                      host_status: disabled
+                      host_vpn_id: 0
+                      vdevice-host-name: vm3
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Interface-read,Interface-write
+  /device/unclaimed/vedges:
+    get:
+      tags:
+      - Real-Time Monitoring - AAA
+      description: Get unclaimed vEdges from vbond
+      operationId: getUnclaimedVedges
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Unclaimed vEdges:
+                  description: Unclaimed vEdges
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.15
+                      chassis-number: 07a08f05-ad1d-4ccc-b383-dc608f4eb2a3
+                      serial-number: E66DC14C154D4861
+                      subject-serial-number: E66DC14C154D4861
+                      org: viptela.local
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write,System-read,System-write
+  /device/users:
+    get:
+      tags:
+      - Real-Time Monitoring - AAA
+      description: Get users from device (Real Time)
+      operationId: getUsersFromDevice
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Users:
+                  description: Users
+                  value:
+                  - from: 10.0.1.1
+                    proto: ssh
+                    login-time: '2022-01-26T07:36:15+00:00'
+                    auth-group: 'netadmin log '
+                    lastupdated: 1644914131016
+                    vdevice-dataKey: 172.16.255.11-28
+                    session: '28'
+                    user: admin
+                    context: cli
+                    vdevice-host-name: vm1
+                    vdevice-name: 172.16.255.11
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write
+  /device/users/list:
+    get:
+      tags:
+      - Real-Time Monitoring - AAA
+      description: Get all users from device
+      operationId: getAllDeviceUsers
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Users:
+                  description: Users
+                  value:
+                    data:
+                    - user: admin
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write,Tools-read,Tools-write

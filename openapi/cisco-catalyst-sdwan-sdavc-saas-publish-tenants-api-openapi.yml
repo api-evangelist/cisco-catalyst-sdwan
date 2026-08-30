@@ -1,0 +1,67 @@
+openapi: 3.2.0
+info:
+  title: Others SDAVC SaaS - Publish Tenants API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: SDAVC SaaS - Publish Tenants
+paths:
+  /sdavc/saas/publish-tenants:
+    post:
+      tags:
+      - SDAVC SaaS - Publish Tenants
+      description: Publish all Tenant Details to SDAVC SaaS
+      operationId: publishTenants
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Success response:
+                  description: Success response
+                  value:
+                    status: success
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                500 - Internal Server Error:
+                  description: 500 - Internal Server Error
+                  value:
+                    error:
+                      message: Publishing tenant mappings to SDAVC SaaS failed.
+                      code: PT0001
+                      details: <Detailed Error message>
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

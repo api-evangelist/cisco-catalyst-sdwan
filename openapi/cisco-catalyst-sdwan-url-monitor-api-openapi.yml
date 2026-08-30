@@ -1,0 +1,139 @@
+openapi: 3.2.0
+info:
+  title: Others url monitor API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: url monitor
+paths:
+  /url/monitor:
+    get:
+      tags:
+      - url monitor
+      summary: List url monitoring information.
+      description: List url's with monitoring configuration and details about the current state of alarm.
+      operationId: getUrlMonitor
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                properties:
+                  empty:
+                    type: boolean
+                items:
+                  type: object
+                  properties:
+                    alarmRaised:
+                      type: boolean
+                      example: true
+                    threshold:
+                      type: integer
+                      description: VManage alarm is raised after reaching the threshold.
+                      format: int32
+                      example: 20
+                    url:
+                      type: string
+                      description: url registered for monitoring requests.
+                      example: /client/server/ready
+                  $$ref: '#/components/schemas/UrlMonitoringInfoInner'
+                $$ref: '#/components/schemas/UrlMonitoringInfo'
+        '204':
+          description: No content
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+      - url monitor
+      summary: Create url monitor.
+      description: Monitor the url with specified configuration.
+      operationId: createUrlMonitor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              URL Monitor Payload:
+                description: URL Monitor Payload
+                value:
+                  threshold: 20
+                  url: /client/server/ready
+        required: true
+      responses:
+        '201':
+          description: url monitor created
+        '400':
+          description: Bad Request
+    put:
+      tags:
+      - url monitor
+      summary: Update url monitor configuration
+      description: Update monitor configuration related to the url
+      operationId: updateUrlMonitor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              URL Monitor Payload:
+                description: URL Monitor Payload
+                value:
+                  threshold: 20
+                  url: /client/server/ready
+        required: true
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+    delete:
+      tags:
+      - url monitor
+      summary: Delete monitored url.
+      description: Delete an url which is already being monitored.
+      operationId: deleteUrlMonitor
+      parameters:
+      - name: url
+        in: query
+        description: url to delete
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '404':
+          description: Not Found

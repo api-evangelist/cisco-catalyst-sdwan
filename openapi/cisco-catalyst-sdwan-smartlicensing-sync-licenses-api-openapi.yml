@@ -1,0 +1,190 @@
+openapi: 3.2.0
+info:
+  title: Others SmartLicensing - Sync Licenses API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: SmartLicensing - Sync Licenses
+paths:
+  /v1/smart-licensing/license:
+    get:
+      tags:
+      - SmartLicensing - Sync Licenses
+      description: Get licenses from vManage db
+      operationId: license
+      parameters:
+      - name: virtual_account_id
+        in: query
+        description: virtual_account_id
+        required: true
+        schema:
+          maxLength: 200
+          minLength: 0
+          pattern: ^[0-9]+$
+          type: string
+        example: 702544
+      - name: licenseType
+        in: query
+        description: License type 'prepaid' or 'postpaid'
+        required: true
+        schema:
+          maxLength: 20
+          minLength: 0
+          pattern: ^[a-zA-Z]+$
+          type: string
+        example: prepaid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                properties:
+                  empty:
+                    type: boolean
+                items:
+                  type: object
+                  properties:
+                    billing_model:
+                      type: string
+                      example: UNCOMMITTED
+                    billing_type:
+                      type: string
+                      example: USAGE
+                    licenses:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          Available:
+                            type: string
+                            example: '0'
+                          Purchased:
+                            type: integer
+                            format: int64
+                          billing_model:
+                            type: string
+                            example: UNCOMMITTED
+                          billing_type:
+                            type: string
+                            example: USAGE
+                          display_name:
+                            type: string
+                            example: 'Routing DNA Essentials: Tier 1'
+                          inUse:
+                            type: string
+                            example: '1'
+                          quantity:
+                            type: string
+                            example: '1'
+                          tag:
+                            type: string
+                            example: regid.2020-10.com.cisco.DSTACK_T1_E,1.0_e3ff4086-b5f3-4845-b0ac-7a23d3b4a139
+                        $$ref: '#/components/schemas/LicenseInfo'
+                    subscription_id:
+                      type: string
+                      example: 32BJDSLL789AF
+                  $$ref: '#/components/schemas/GetLicenseResponseInner'
+                $$ref: '#/components/schemas/GetLicenseResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /v1/smart-licensing/sync:
+    post:
+      tags:
+      - SmartLicensing - Sync Licenses
+      description: Sync licenses from CSSM to vManage db
+      operationId: syncLicenses_SmartlicensingSyncLicenses_2404
+      requestBody:
+        description: Partner
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: string
+                  example:
+                    mode: onprem
+                    multipleEntitlement: false
+                    smartAccounts:
+                    - account_id: '1'
+                      name: sjc24_onprem_sle
+                      virtual_accounts:
+                      - virtual_account_id: '1'
+                name:
+                  type: string
+                  format: binary
+              $$ref: '#/components/schemas/SyncRequest'
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /v1/smart-licensing/user-settings:
+    get:
+      tags:
+      - SmartLicensing - Sync Licenses
+      description: Get smart licensing user settings
+      operationId: getUserSettings
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  isPresentCredentials:
+                    type: boolean
+                    example: true
+                  mode:
+                    type: string
+                    description: Smart Licensing mode can be 'online', 'offline' or 'onPrem'
+                    example: online
+                  multipleEntitlement:
+                    type: boolean
+                    example: false
+                  uname:
+                    type: string
+                    description: Smart Licensing user name
+                    example: TestUser
+                $$ref: '#/components/schemas/UserSettingsResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

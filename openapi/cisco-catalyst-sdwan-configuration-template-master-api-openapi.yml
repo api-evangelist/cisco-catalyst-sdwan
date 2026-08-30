@@ -1,0 +1,581 @@
+openapi: 3.2.0
+info:
+  title: UX 1.0 Configuration Configuration - Template Master API
+  description: "Configuration of UX 1.0 device and policy.\nIncludes API operations for the following:\n  Managing original SD-WAN device configurations and policy configurations\n  Device templates and feature templates"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Configuration - Template Master
+paths:
+  /template/device:
+    get:
+      tags:
+      - Configuration - Template Master
+      description: 'Generate template list<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: generateMasterTemplateList
+      parameters:
+      - name: feature
+        in: query
+        description: Feature
+        required: true
+        schema:
+          type: string
+          enum:
+          - lawful-interception
+          - cloud-dock
+          - network-design
+          - vmanage-default
+          - all
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Template list:
+                  description: Template list
+                  value:
+                    data:
+                    - deviceType: vsmart
+                      lastUpdatedBy: admin
+                      factoryDefault: false
+                      templateName: vSmartConfigurationTemplate
+                      devicesAttached: 0
+                      draftMode: false
+                      templateDescription: Config template for vSmarts
+                      templateClass: vedge
+                      lastUpdatedOn: 1529606745011
+                      configType: file
+                      templateId: e1f3de23-1ded-49d8-85b1-1e6ab668775f
+                      templateAttached: 0
+                    - deviceType: vedge-C1111-8PLTELA
+                      lastUpdatedBy: system
+                      templateClass: cedge
+                      configType: template
+                      templateId: b6aacdc9-ae1f-4471-a359-13657ce98204
+                      factoryDefault: true
+                      templateName: Factory_Default_C1111_8PLTELA_V01
+                      devicesAttached: 0
+                      draftMode: false
+                      templateDescription: Factory Default template for C1111-8PLTELA
+                      lastUpdatedOn: 1588082428579
+                      templateAttached: 15
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/device/cli:
+    post:
+      tags:
+      - Configuration - Template Master
+      description: 'Create CLI template<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: createCLITemplate
+      requestBody:
+        description: Create template request
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Template:
+                description: Template
+                value:
+                  templateName: vSmartConfigurationTemplate
+                  templateDescription: Config template for vSmarts
+                  deviceType: vsmart
+                  templateConfiguration: "system\n   host-name         {{Hostname}}\n   gps-location latitude {{gps-latitude}}\n   gps-location longitude {{gps-longitude}}\n   system-ip         {{System-IP}}\n   site-id           {{Site-ID}}\n   organization-name \"Cisco Sy1 - 19968\"\n   vbond vbond.cisco.com\n   aaa\n   auth-order local radius tacacs\n   usergroup basic\n   task system read write\n   task interface read write\n   !\n   usergroup netadmin\n   !\n   usergroup operator\n   task system read\n   task interface read\n   task policy read\n   task routing read\n   task security read\n   !\n        user admin\n   password $6$YsNdljyTklJyRlUZ$u.vOqeMSUbzfc.aWBty9OIovNCxlUASviwfgXO2bTCJV5ddUoV7EG8Q3EA3Yl0aMv./GnJLPPbjC6uQPjtwVo.\n   !\n   !\n   logging\n   disk\n   enable\n   !\n   !\n   !\n   omp\n   no shutdown\n   send-path-limit 8\n   send-backup-paths\n   graceful-restart\n   !\n   banner\n       login \"Cisco SD-WAN/Viptela dCloud Demo V2\"\n   !\n   !\n   vpn 0\n   dns 198.18.1.1 secondary\n   dns 198.18.1.254 primary\n   host vbond.cisco.com ip 198.18.1.11 198.18.1.21\n   interface eth0\n   ip address {{Tunnel-IP-Address}}\n   ipv6 dhcp-client\n   tunnel-interface\n   allow-service dhcp\n   allow-service dns\n   allow-service icmp\n   allow-service sshd\n   allow-service netconf\n   no allow-service ntp\n   no allow-service stun\n   !\n   no shutdown\n   !\n   ip route 0.0.0.0/0 {{Default GW}}\n   !\n   vpn 512\n   !"
+                  factoryDefault: false
+                  configType: file
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Template Id:
+                  description: Template Id
+                  value:
+                    templateId: 81b558c9-f575-4255-ac11-2e5437be1ea0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/device/feature:
+    post:
+      tags:
+      - Configuration - Template Master
+      description: 'Create a device template from feature templates and sub templates<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: createMasterTemplate
+      requestBody:
+        description: Create template request
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Template:
+                description: Template
+                value:
+                  templateName: vEdge_Device_Template
+                  templateDescription: Demo device template
+                  deviceType: vedge-100
+                  configType: template
+                  factoryDefault: false
+                  policyId: ''
+                  featureTemplateUidRange: []
+                  connectionPreferenceRequired: true
+                  connectionPreference: true
+                  generalTemplates:
+                  - templateId: 3b30e089-2e26-44f1-b5b2-ac44f3f4279e
+                    templateType: aaa
+                  - templateId: 0419c4f6-eb61-4048-a3fe-78ea7f7248b0
+                    templateType: bfd-vedge
+                  - templateId: eb7162be-b018-47c5-b1de-bbb65ff802e3
+                    templateType: omp-vedge
+                  - templateId: 486d419f-4e6c-44a5-a6fb-7b5ccf94ff90
+                    templateType: security-vedge
+                  - templateId: 7d7396a2-4715-44d8-8f6e-ddf0ca06be44
+                    templateType: system-vedge
+                    subTemplates:
+                    - templateId: edf3d309-91d4-45be-98d9-cfd57a05a479
+                      templateType: logging
+                  - templateId: 171e9bd4-7a7b-460d-b692-83f0d5ce0124
+                    templateType: vpn-vedge
+                    subTemplates:
+                    - templateId: a632ee5f-f489-46ec-8761-1b493d5a6a40
+                      templateType: vpn-vedge-interface
+                  - templateId: 45ea940a-45d2-4fd9-8da2-570a1a6d6874
+                    templateType: vpn-vedge
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Template Id:
+                  description: Template Id
+                  value:
+                    templateId: 81610551-9dc5-492f-ad3b-b2c30077b992
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/device/migration:
+    get:
+      tags:
+      - Configuration - Template Master
+      description: 'Generate a list of templates which require migration<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: generateTemplateForMigration
+      parameters:
+      - name: hasAAA
+        in: query
+        description: Return only those uses AAA
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Template:
+                  description: Template
+                  value:
+                    data:
+                    - deviceType: vedge-CSR-1000v
+                      lastUpdatedBy: admin
+                      templateClass: cedge_vedge
+                      templateId: c62e6fba-fb53-4562-b436-3878de0fbbc2
+                      configType: template
+                      factoryDefault: false
+                      templateName: BranchType1Template-CSR
+                      devicesAttached: 2
+                      templateDescription: Branch Type 1 Template for CSR Routers
+                      lastUpdatedOn: 1588093291553
+                      templateAttached: 22
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+      - Configuration - Template Master
+      description: Migrate the device templates given the template Ids
+      operationId: migrateTemplates
+      parameters:
+      - name: id
+        in: query
+        description: Template Id
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: prefix
+        in: query
+        description: Prefix
+        schema:
+          type: string
+          default: cisco
+      - name: includeAll
+        in: query
+        description: Include all flag
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value:
+                    status: Template migration started
+                    taskId: TEMPLATE_MIGRATIONa548c416-bfb8-46dd-9866-d0aa042f17ab
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/device/migration_info:
+    get:
+      tags:
+      - Configuration - Template Master
+      description: 'Returns the mapping between old and migrated templates<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: migrationInfo
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Migrated templates mapping:
+                  description: Migrated templates mapping
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/device/object/{templateId}:
+    get:
+      tags:
+      - Configuration - Template Master
+      description: 'Generate template by Id<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: getMasterTemplateDefinition
+      parameters:
+      - name: templateId
+        in: path
+        description: Template Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Template:
+                  description: Template
+                  value:
+                    templateName: Default_EQUINIX_DHCP_DNS_ICGW_CSR1000V_Template_V02
+                    templateDescription: Default DHCP DNS device template for Equinix Interconnect Gateway CSR1000V
+                    deviceType: vedge-CSR-1000v
+                    configType: template
+                    factoryDefault: true
+                    policyId: ''
+                    featureTemplateUidRange: []
+                    connectionPreference: true
+                    connectionPreferenceRequired: true
+                    generalTemplates:
+                    - templateId: 857c21b1-6ceb-41a6-b4f1-f6f2c2fb3de6
+                      templateType: cedge_aaa
+                    - templateId: 154fbddf-4430-4629-8fdc-6fd12d35d8b6
+                      templateType: cisco_bfd
+                    - templateId: c8f31360-9b6a-451e-8d21-aba3ac0c41d9
+                      templateType: cisco_omp
+                    - templateId: 348a0dc3-2796-4b8f-9158-6faa384fa14c
+                      templateType: cisco_security
+                    - templateId: 32372d0e-bcf6-416f-9c16-2d2ab14bd752
+                      templateType: cisco_system
+                      subTemplates:
+                      - templateId: 8627651a-0140-42d9-925b-706e6281dbac
+                        templateType: cisco_logging
+                    - templateId: e54fc487-46d4-4f8c-8ffd-fec76ed1826c
+                      templateType: cisco_vpn
+                      subTemplates:
+                      - templateId: b8415ca4-16de-4bbb-90f3-05d652747370
+                        templateType: cisco_vpn_interface
+                    - templateId: db1d1bbf-a6b3-47b5-8c05-1f6004e3d68d
+                      templateType: cisco_vpn
+                      subTemplates:
+                      - templateId: 5f0d22ae-b5ae-4c3c-afa7-53e2c8119ebd
+                        templateType: cisco_vpn_interface
+                    - templateId: b71170bc-97be-47b5-b9f8-bcf1782a8286
+                      templateType: cedge_global
+                    templateClass: cedge
+                    templateId: 067250e7-4e82-4ce0-9e42-1a58a9634afb
+                    deviceRole: sdwan-edge
+                    draftMode: false
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/device/resource-group/{resourceGroupName}/{templateId}:
+    post:
+      tags:
+      - Configuration - Template Master
+      description: Change template resource group
+      operationId: changeTemplateResourceGroup_ConfigurationTemplateMaster_6404
+      parameters:
+      - name: templateId
+        in: path
+        description: Template Id
+        required: true
+        schema:
+          type: string
+      - name: resourceGroupName
+        in: path
+        description: Resource group name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/device/syncstatus:
+    get:
+      tags:
+      - Configuration - Template Master
+      description: 'Get template sync status<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: getOutOfSyncTemplates
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Template list:
+                  description: Template list
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/device/syncstatus/{templateId}:
+    get:
+      tags:
+      - Configuration - Template Master
+      description: 'Get out of sync devices<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: getOutOfSyncDevices
+      parameters:
+      - name: templateId
+        in: path
+        description: Template Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Devices:
+                  description: Devices
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/device/{templateId}:
+    delete:
+      tags:
+      - Configuration - Template Master
+      description: 'Delete template<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: deleteMasterTemplate
+      parameters:
+      - name: templateId
+        in: path
+        description: Template Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    put:
+      tags:
+      - Configuration - Template Master
+      description: 'Edit template<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      operationId: editMasterTemplate
+      parameters:
+      - name: templateId
+        in: path
+        description: Template Id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Template
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Template:
+                description: Template
+                value:
+                  templateId: 81610551-9dc5-492f-ad3b-b2c30077b992
+                  templateName: vEdge_Device_Template
+                  templateDescription: Demo device template
+                  deviceType: vedge-100
+                  configType: template
+                  factoryDefault: false
+                  policyId: ''
+                  featureTemplateUidRange: []
+                  connectionPreferenceRequired: true
+                  connectionPreference: true
+                  draftMode: false
+                  generalTemplates:
+                  - templateId: 3b30e089-2e26-44f1-b5b2-ac44f3f4279e
+                    templateType: aaa
+                  - templateId: e1b5b6e9-3b54-4279-a532-a2aaaef3e6a1
+                    templateType: bfd-vedge
+                  - templateId: 998725f9-3572-4950-a5e5-d48827d347cd
+                    templateType: omp-vedge
+                  - templateId: 486d419f-4e6c-44a5-a6fb-7b5ccf94ff90
+                    templateType: security-vedge
+                  - templateId: 7d7396a2-4715-44d8-8f6e-ddf0ca06be44
+                    templateType: system-vedge
+                    subTemplates:
+                    - templateId: edf3d309-91d4-45be-98d9-cfd57a05a479
+                      templateType: logging
+                  - templateId: 171e9bd4-7a7b-460d-b692-83f0d5ce0124
+                    templateType: vpn-vedge
+                    subTemplates:
+                    - templateId: a632ee5f-f489-46ec-8761-1b493d5a6a40
+                      templateType: vpn-vedge-interface
+                  - templateId: 45ea940a-45d2-4fd9-8da2-570a1a6d6874
+                    templateType: vpn-vedge
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Attached devices:
+                  description: Attached devices
+                  value:
+                    data:
+                      attachedDevices: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /template/device/{templateId}/featuretemplates:
+    get:
+      tags:
+      - Configuration - Template Master
+      description: get Associated Feature Templates Details
+      operationId: getAssociatedFeatureTemplatesDetails
+      parameters:
+      - name: templateId
+        in: path
+        description: TemplateId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

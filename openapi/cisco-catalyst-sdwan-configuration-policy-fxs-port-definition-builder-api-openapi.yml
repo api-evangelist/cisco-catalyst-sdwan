@@ -1,0 +1,1015 @@
+openapi: 3.2.0
+info:
+  title: UX 1.0 Configuration Configuration - Policy FXS Port Definition Builder API
+  description: "Configuration of UX 1.0 device and policy.\nIncludes API operations for the following:\n  Managing original SD-WAN device configurations and policy configurations\n  Device templates and feature templates"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Configuration - Policy FXS Port Definition Builder
+paths:
+  /template/policy/definition/fxsport:
+    get:
+      tags:
+      - Configuration - Policy FXS Port Definition Builder
+      description: Get policy definitions
+      operationId: getDefinitions_ConfigurationPolicyFxsPortDefinitionBuilder_3503
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Policy definition:
+                  description: Policy definition
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+    post:
+      tags:
+      - Configuration - Policy FXS Port Definition Builder
+      description: Create policy definition
+      operationId: createPolicyDefinition_ConfigurationPolicyFxsPortDefinitionBuilder_3504
+      requestBody:
+        description: Policy definition
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              ACL policy:
+                description: ACL policy
+                value:
+                  name: Demo-ACL
+                  type: acl
+                  description: Demo-ACL
+                  defaultAction:
+                    type: accept
+                  sequences:
+                  - sequenceId: 1
+                    sequenceName: Access Control List
+                    baseAction: accept
+                    sequenceType: acl
+                    sequenceIpType: ipv4
+                    match:
+                      entries:
+                      - field: dscp
+                        value: '46'
+                    actions:
+                    - type: class
+                      parameter:
+                        ref: 89d20034-7149-4492-b392-b5c4f7903235
+              ZBFW definition:
+                description: ZBFW definition
+                value:
+                  name: Demo-ZBFW
+                  type: zoneBasedFW
+                  description: Demo-ZBFW
+                  definition:
+                    defaultAction:
+                      type: drop
+                    sequences: []
+                    entries:
+                    - sourceZone: 5f35c58e-234e-4013-9e1a-77c7fa6aec53
+                      destinationZone: 5f35c58e-234e-4013-9e1a-77c7fa6aec53
+              IPS definition:
+                description: IPS definition
+                value:
+                  name: Demo-IPS-Policy
+                  type: intrusionPrevention
+                  description: Testing
+                  definition:
+                    signatureSet: security
+                    inspectionMode: detection
+                    signatureWhiteList:
+                      ref: ad189f08-af06-4799-97d6-0a7c7409cb8d
+                    logLevel: error
+                    logging: []
+                    targetVpns:
+                    - '10'
+              URL filtering definition:
+                description: URL filtering definition
+                value:
+                  name: Demo-URL-Filtering-Policy
+                  type: urlFiltering
+                  description: ''
+                  definition:
+                    webCategoriesAction: block
+                    webCategories:
+                    - auctions
+                    - bot-nets
+                    webReputation: moderate-risk
+                    urlWhiteList:
+                      ref: c20e31fb-fcea-4f48-93e3-09d2c6492d8b
+                    urlBlackList:
+                      ref: 557ed432-6cf8-495b-a445-d340d4c6236e
+                    blockPageAction: text
+                    blockPageContents: Access to the requested page has been denied. Please contact your Network Administrator
+                    enableAlerts: true
+                    alerts:
+                    - blacklist
+                    - whitelist
+                    - categories-reputation
+                    logging: []
+                    targetVpns:
+                    - '10'
+                    - '20'
+              AMP definition:
+                description: AMP definition
+                value:
+                  name: Demo-AMP-Policy
+                  type: advancedMalwareProtection
+                  description: ''
+                  definition:
+                    matchAllVpn: false
+                    fileReputationCloudServer: nam
+                    fileReputationEstServer: nam
+                    fileReputationAlert: critical
+                    fileAnalysisCloudServer: ''
+                    fileAnalysisFileTypes: []
+                    fileAnalysisAlert: ''
+                    targetVpns:
+                    - '10'
+                    - '20'
+              DNS definition:
+                description: DNS definition
+                value:
+                  name: Demo-DNS-Policy
+                  type: DNSSecurity
+                  description: Testing
+                  definition:
+                    localDomainBypassList:
+                      ref: 143f753f-8d51-4be6-805d-bc330f09982f
+                    matchAllVpn: true
+                    umbrellaDefault: true
+                    childOrgId: '7999118'
+                    localDomainBypassEnabled: true
+                    dnsCrypt: true
+                    umbrellaData:
+                      ref: e6d85acd-fb1c-4cd9-ad77-e5bce620ccfa
+              HubandSpoke definition:
+                description: HubandSpoke definition
+                value:
+                  name: Demo-Hub-n-Spoke-Policy
+                  type: hubAndSpoke
+                  description: Demo-Hub-n-Spoke-Policy
+                  definition:
+                    vpnList: cb3ef8e0-9c70-4bb5-85f1-25f22cda76bf
+                    subDefinitions:
+                    - name: My Hub-and-Spoke
+                      equalPreference: false
+                      advertiseTloc: true
+                      spokes:
+                      - siteList: 5c58c36c-9cd6-468f-8434-ee6d5801c6ba
+                        hubs:
+                        - siteList: 24747ccd-4f7f-4dfa-8800-34f565fb65b4
+                          preference: '20'
+                          prefixLists:
+                          - b5c4d764-20bc-4de3-9bac-52ef70f1186c
+                          ipv6PrefixLists: []
+                      tlocList: 1e97c258-4323-4754-9dc0-44e9656d43bf
+              VPN membership group definition:
+                description: VPN membership group definition
+                value:
+                  name: Demo-VPN-Membership-Policy
+                  type: vpnMembershipGroup
+                  description: Demo-VPN-Membership-Policy
+                  definition:
+                    sites:
+                    - siteList: 24747ccd-4f7f-4dfa-8800-34f565fb65b4
+                      vpnList:
+                      - cb3ef8e0-9c70-4bb5-85f1-25f22cda76bf
+                    - siteList: 5c58c36c-9cd6-468f-8434-ee6d5801c6ba
+                      vpnList:
+                      - cb3ef8e0-9c70-4bb5-85f1-25f22cda76bf
+              AppRoute definition:
+                description: AppRoute definition
+                value:
+                  name: Demo-AAR-Policy
+                  type: appRoute
+                  description: Demo-AAR-Policy
+                  sequences:
+                  - sequenceId: 1
+                    sequenceName: App Route
+                    sequenceType: appRoute
+                    sequenceIpType: ipv4
+                    match:
+                      entries:
+                      - field: appList
+                        ref: b6752dba-969b-46de-a7e7-da11910fb1bf
+                      - field: dnsAppList
+                        ref: b6752dba-969b-46de-a7e7-da11910fb1bf
+                      - field: dns
+                        value: request
+                      - field: dscp
+                        value: '46'
+                      - field: plp
+                        value: high
+                      - field: protocol
+                        value: '6'
+                      - field: sourceDataPrefixList
+                        ref: 6c2b7164-5de2-4775-938c-b443504324ab
+                      - field: sourcePort
+                        value: '1025'
+                      - field: destinationDataPrefixList
+                        ref: 6c2b7164-5de2-4775-938c-b443504324ab
+                      - field: destinationPort
+                        value: '65000'
+                    actions:
+                    - type: backupSlaPreferredColor
+                      parameter: biz-internet
+                    - type: count
+                      parameter: Demo-Counter
+                    - type: log
+                      parameter: ''
+                    - type: slaClass
+                      parameter:
+                      - field: name
+                        ref: 46cea5a1-1570-4921-b87a-837d590eb37e
+                      - field: preferredColor
+                        value: public-internet
+                      - field: strict
+                  - sequenceId: 11
+                    sequenceName: App Route
+                    sequenceType: appRoute
+                    sequenceIpType: ipv4
+                    match:
+                      entries:
+                      - field: saasAppList
+                        ref: 1e6688ce-2d21-4d7a-9a93-ae6a8ebd4a06
+                    actions:
+                    - type: cloudSaas
+                      parameter: ''
+                  - sequenceId: 21
+                    sequenceName: App Route
+                    sequenceType: appRoute
+                    sequenceIpType: ipv6
+                    match:
+                      entries:
+                      - field: dscp
+                        value: '46'
+                      - field: protocol
+                        value: '6'
+                      - field: sourceIpv6
+                        value: 2001::/8
+                      - field: sourcePort
+                        value: '65000'
+                      - field: destinationIpv6
+                        value: 2001::/8
+                      - field: destinationPort
+                        value: '65000'
+                    actions:
+                    - type: backupSlaPreferredColor
+                      parameter: biz-internet
+                    - type: count
+                      parameter: Demo-Counter
+                    - type: log
+                      parameter: ''
+                    - type: slaClass
+                      parameter:
+                      - field: name
+                        ref: 46cea5a1-1570-4921-b87a-837d590eb37e
+                      - field: preferredColor
+                        value: public-internet
+                      - field: strict
+              Data policy definition:
+                description: Data policy definition
+                value:
+                  name: Demo-Data-Policy
+                  type: data
+                  description: Demo-Data-Policy
+                  defaultAction:
+                    type: drop
+                  sequences:
+                  - sequenceId: 1
+                    sequenceName: Custom
+                    baseAction: accept
+                    sequenceType: data
+                    sequenceIpType: ipv4
+                    match:
+                      entries:
+                      - field: appList
+                        ref: b6752dba-969b-46de-a7e7-da11910fb1bf
+                      - field: dnsAppList
+                        ref: b6752dba-969b-46de-a7e7-da11910fb1bf
+                      - field: dns
+                        value: response
+                      - field: dscp
+                        value: '46'
+                      - field: packetLength
+                        value: '1504'
+                      - field: plp
+                        value: high
+                      - field: protocol
+                        value: '6'
+                      - field: sourceDataPrefixList
+                        ref: 6c2b7164-5de2-4775-938c-b443504324ab
+                      - field: sourcePort
+                        value: '65000'
+                      - field: destinationIp
+                        value: 10.0.0.0/12
+                      - field: destinationPort
+                        value: '65000'
+                      - field: tcp
+                        value: syn
+                    actions:
+                    - type: count
+                      parameter: Demo-Counter
+                    - type: set
+                      parameter:
+                      - field: dscp
+                        value: '34'
+                      - field: forwardingClass
+                        value: ef-class
+                      - field: localTlocList
+                        value:
+                          color: public-internet
+                          restrict: ''
+                          encap: ipsec
+                      - field: nextHop
+                        value: 10.0.0.1
+                      - field: policer
+                        ref: ecf250c7-bef0-405b-8e74-4d67440cac90
+                    - type: cflowd
+                    - type: log
+                      parameter: ''
+                    - type: nat
+                      parameter:
+                        field: pool
+                        value: '1'
+                    - type: redirectDns
+                      parameter:
+                        field: dnsType
+                        value: umbrella
+                  - sequenceId: 11
+                    sequenceName: Custom
+                    baseAction: accept
+                    sequenceType: data
+                    sequenceIpType: ipv4
+                    match:
+                      entries:
+                      - field: appList
+                        ref: b6752dba-969b-46de-a7e7-da11910fb1bf
+                    actions:
+                    - type: set
+                      parameter:
+                      - field: service
+                        value:
+                          type: FW
+                          vpn: '10'
+                          tloc:
+                            ip: 10.0.0.1
+                            color: biz-internet
+                            encap: ipsec
+                    - type: tcpOptimization
+                      parameter: ''
+                    - type: lossProtect
+                      parameter: fecAdaptive
+                    - type: lossProtectFec
+                      parameter: fecAdaptive
+                    - type: sig
+                      parameter: ''
+              CFlowd definition:
+                description: CFlowd definition
+                value:
+                  name: Demo-cflowd-Policy
+                  type: cflowd
+                  description: Demo-cflowd-Policy
+                  definition:
+                    flowActiveTimeout: 3600
+                    flowInactiveTimeout: 3600
+                    flowSamplingInterval: 65513
+                    templateRefresh: 86400
+                    collectors:
+                    - vpn: '10'
+                      address: 10.0.0.1
+                      port: 9912
+                      transport: transport_tcp
+                      sourceInterface: ge0/1
+                    - vpn: '20'
+                      address: 10.0.0.1
+                      port: 1025
+                      transport: transport_udp
+                      sourceInterface: GigabitEthernet0/0/1
+                    protocol: ipv4
+              QoS map definition:
+                description: QoS map definition
+                value:
+                  name: Demo-QoS-Policy
+                  type: qosMap
+                  description: Demo-QoS-Policy
+                  definition:
+                    qosSchedulers:
+                    - queue: '0'
+                      bandwidthPercent: '75'
+                      bufferPercent: '75'
+                      burst: '15000'
+                      scheduling: llq
+                      drops: tail-drop
+                      classMapRef: ''
+                    - queue: '7'
+                      bandwidthPercent: '25'
+                      bufferPercent: '25'
+                      scheduling: wrr
+                      drops: red-drop
+                      classMapRef: 4484c444-b956-4016-bd15-538b74fc2785
+              VPN-QoS map definition:
+                description: VPN-QoS map definition
+                value:
+                  name: Demo-VPN-QoS-Policy
+                  type: vpnQosMap
+                  description: Demo-VPN-QoS-Policy
+                  definition:
+                    vpnQosSchedulers:
+                    - vpnListRef: ''
+                      bandwidthRate: '100000'
+                      shapingRate: '120000'
+                      childMapRef: ''
+                    - childMapRef: ''
+              Rewrite rule definition:
+                description: Rewrite rule definition
+                value:
+                  name: Demo-Rewrite-Rule
+                  type: rewriteRule
+                  description: Demo-Rewrite-Rule
+                  definition:
+                    rules:
+                    - class: 4484c444-b956-4016-bd15-538b74fc2785
+                      plp: low
+                      dscp: '46'
+                      layer2Cos: '2'
+              Device access policy definition:
+                description: Device access policy definition
+                value:
+                  name: Demo-DeviceAccess-Policy
+                  type: deviceaccesspolicy
+                  description: Demo-DeviceAccess-Policy
+                  defaultAction:
+                    type: drop
+                  sequences:
+                  - sequenceId: 1
+                    sequenceName: Device Access Control List
+                    baseAction: accept
+                    sequenceType: deviceaccesspolicy
+                    sequenceIpType: ipv4
+                    match:
+                      entries:
+                      - field: destinationPort
+                        value: '22'
+                      - field: sourceIp
+                        value: 10.10.24.0/24
+                      - field: sourcePort
+                        value: '65000'
+                      - field: destinationIp
+                        value: 10.10.10.1/32
+                      - field: vpn
+                        value: '10'
+                    actions: []
+                  - sequenceId: 11
+                    sequenceName: Device Access Control List
+                    baseAction: drop
+                    sequenceType: deviceaccesspolicy
+                    sequenceIpType: ipv4
+                    match:
+                      entries:
+                      - field: destinationPort
+                        value: '161'
+                      - field: sourceDataPrefixList
+                        ref: 6c2b7164-5de2-4775-938c-b443504324ab
+                    actions: []
+              vEdge route definition:
+                description: vEdge route definition
+                value:
+                  name: Demo-Route-Policy
+                  type: vedgeRoute
+                  description: Demo-Route-Policy
+                  defaultAction:
+                    type: reject
+                  sequences:
+                  - sequenceId: 1
+                    sequenceName: Route
+                    baseAction: accept
+                    sequenceType: vedgeRoute
+                    sequenceIpType: ipv4
+                    match:
+                      entries:
+                      - field: address
+                        ref: b5c4d764-20bc-4de3-9bac-52ef70f1186c
+                      - field: asPath
+                        ref: 79f8c180-1a23-4f09-800d-62652b571258
+                      - field: community
+                        matchFlag: or
+                        ref: 33de059b-27ec-4a83-be28-8985128381eb
+                      - field: localPreference
+                        value: '200'
+                      - field: metric
+                        value: '100'
+                      - field: nextHop
+                        ref: b5c4d764-20bc-4de3-9bac-52ef70f1186c
+                      - field: ompTag
+                        value: '10'
+                      - field: affinity
+                        value: '10'
+                      - field: origin
+                        value: igp
+                      - field: ospfTag
+                        value: '10'
+                      - field: peer
+                        value: 10.0.0.1
+                    actions:
+                    - type: set
+                      parameter:
+                      - field: asPath
+                        value:
+                          exclude: 120 130
+                          prepend: 65521 65521
+                      - field: localPreference
+                        value: '200'
+                      - field: metricType
+                        value: type1
+                      - field: metric
+                        value: '100'
+                      - field: nextHop
+                        value: 10.0.0.1
+                      - field: ompTag
+                        value: '100'
+                      - field: weight
+                        value: '200'
+                      - field: ospfTag
+                        value: '122'
+                      - field: originator
+                        value: 10.0.0.1
+                      - field: origin
+                        value: igp
+                      - field: community
+                        value: 1000:10000
+              vSmart definition:
+                description: vSmart definition
+                value:
+                  policyDescription: Demo-Centralized-Policy
+                  policyType: feature
+                  policyName: Demo-Centralized-Policy
+                  policyDefinition:
+                    assembly:
+                    - definitionId: eb0daba9-7fc4-4f4f-bae7-cd958f81f863
+                      type: cflowd
+                      entries:
+                      - siteLists:
+                        - 5c58c36c-9cd6-468f-8434-ee6d5801c6ba
+                        - 24747ccd-4f7f-4dfa-8800-34f565fb65b4
+                    - definitionId: 3e33fa50-a30d-4586-9d69-106121feaaf4
+                      type: data
+                      entries:
+                      - direction: service
+                        siteLists:
+                        - 5c58c36c-9cd6-468f-8434-ee6d5801c6ba
+                        - 24747ccd-4f7f-4dfa-8800-34f565fb65b4
+                        vpnLists:
+                        - cb3ef8e0-9c70-4bb5-85f1-25f22cda76bf
+                    - definitionId: 8b2e7c44-2666-48a7-87a0-36a43c2d003e
+                      type: appRoute
+                      entries:
+                      - siteLists:
+                        - 5c58c36c-9cd6-468f-8434-ee6d5801c6ba
+                        - 24747ccd-4f7f-4dfa-8800-34f565fb65b4
+                        vpnLists:
+                        - cb3ef8e0-9c70-4bb5-85f1-25f22cda76bf
+                    - definitionId: 1b76052e-1cb5-44b1-8e5e-4096cb261736
+                      type: vpnMembershipGroup
+                    - definitionId: 62960276-c797-41fd-bebb-c017fc752f4e
+                      type: hubAndSpoke
+                  isPolicyActivated: false
+              vEdge definition:
+                description: vEdge definition
+                value:
+                  policyDescription: Demo-Local-Policy
+                  policyType: feature
+                  policyName: Demo-Local-Policy
+                  policyDefinition:
+                    assembly:
+                    - definitionId: 56283dcf-6dda-4831-bcd1-d9cf62d33fdc
+                      type: qosMap
+                    - definitionId: a75ead1f-f6ab-4a80-af29-79b742b31c5c
+                      type: rewriteRule
+                    - definitionId: 555dd393-e7b6-4861-866f-f227f5f780b7
+                      type: deviceAccessPolicy
+                    - definitionId: 22655824-d0df-4a8b-9be0-9808938a0e6b
+                      type: vedgeRoute
+                    settings:
+                      flowVisibility: true
+                      flowVisibilityIPv6: true
+                      appVisibility: true
+                      cloudQos: true
+                      cloudQosServiceSide: true
+                      implicitAclLogging: true
+                      appVisibilityIPv6: true
+                  isPolicyActivated: false
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value:
+                    definitionId: 00f718df-4f95-4363-8639-1fe855c9eb09
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy Configuration-write
+  /template/policy/definition/fxsport/bulk:
+    put:
+      tags:
+      - Configuration - Policy FXS Port Definition Builder
+      description: Create/Edit policy definitions in bulk
+      operationId: savePolicyDefinitionInBulk_ConfigurationPolicyFxsPortDefinitionBuilder_4003
+      requestBody:
+        description: Policy definition
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Policy definition:
+                description: Policy definition
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Policy definition:
+                  description: Policy definition
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy Configuration-write
+  /template/policy/definition/fxsport/multiple/{id}:
+    put:
+      tags:
+      - Configuration - Policy FXS Port Definition Builder
+      description: Edit multiple policy definitions
+      operationId: editMultiplePolicyDefinition_ConfigurationPolicyFxsPortDefinitionBuilder_4903
+      parameters:
+      - name: id
+        in: path
+        description: Policy Id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Policy definition
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Policy definition:
+                description: Policy definition
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Policy definition:
+                  description: Policy definition
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy Configuration-write
+  /template/policy/definition/fxsport/preview:
+    post:
+      tags:
+      - Configuration - Policy FXS Port Definition Builder
+      description: Preview policy definition
+      operationId: previewPolicyDefinition_ConfigurationPolicyFxsPortDefinitionBuilder_4304
+      requestBody:
+        description: Policy definition
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Policy definition:
+                description: Policy definition
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Policy definition:
+                  description: Policy definition
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+  /template/policy/definition/fxsport/preview/{id}:
+    get:
+      tags:
+      - Configuration - Policy FXS Port Definition Builder
+      description: Preview policy definition
+      operationId: previewPolicyDefinitionById_ConfigurationPolicyFxsPortDefinitionBuilder_4803
+      parameters:
+      - name: id
+        in: path
+        description: Policy Id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Policy definition:
+                  description: Policy definition
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+  /template/policy/definition/fxsport/{id}:
+    get:
+      tags:
+      - Configuration - Policy FXS Port Definition Builder
+      description: Get a specific policy definitions
+      operationId: getPolicyDefinition_ConfigurationPolicyFxsPortDefinitionBuilder_4003
+      parameters:
+      - name: id
+        in: path
+        description: Policy Id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Policy definition:
+                  description: Policy definition
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+    put:
+      tags:
+      - Configuration - Policy FXS Port Definition Builder
+      description: Edit a policy definitions
+      operationId: editPolicyDefinition_ConfigurationPolicyFxsPortDefinitionBuilder_4003
+      parameters:
+      - name: id
+        in: path
+        description: Policy Id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Policy definition
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              ACL policy:
+                description: ACL policy
+                value:
+                  name: Demo-ACL
+                  type: acl
+                  description: Demo-ACL
+                  defaultAction:
+                    type: accept
+                  sequences:
+                  - sequenceId: 1
+                    sequenceName: Access Control List
+                    baseAction: accept
+                    sequenceType: acl
+                    sequenceIpType: ipv4
+                    match:
+                      entries:
+                      - field: dscp
+                        value: '46'
+                      - field: protocol
+                        value: '6'
+                    actions:
+                    - type: class
+                      parameter:
+                        ref: 89d20034-7149-4492-b392-b5c4f7903235
+              ZBFW definition:
+                description: ZBFW definition
+                value:
+                  name: Demo-ZBFW
+                  type: zoneBasedFW
+                  description: Demo-ZBFW
+                  definition:
+                    defaultAction:
+                      type: drop
+                    sequences:
+                    - sequenceId: 1
+                      sequenceName: Demo-Rule-1
+                      baseAction: inspect
+                      sequenceType: zoneBasedFW
+                      match:
+                        entries:
+                        - field: sourceDataPrefixList
+                          ref: ecbea5de-b200-4ff7-aa76-f537b5f858e9
+                      actions: []
+                    entries:
+                    - sourceZone: 5f35c58e-234e-4013-9e1a-77c7fa6aec53
+                      destinationZone: 5f35c58e-234e-4013-9e1a-77c7fa6aec53
+              IPS definition:
+                description: IPS definition
+                value:
+                  name: Demo-IPS-Policy
+                  type: intrusionPrevention
+                  description: Testing
+                  definition:
+                    signatureSet: security
+                    inspectionMode: detection
+                    signatureWhiteList:
+                      ref: ad189f08-af06-4799-97d6-0a7c7409cb8d
+                    logLevel: error
+                    logging: []
+                    targetVpns:
+                    - '10'
+                    - '20'
+              URL filtering definition:
+                description: URL filtering definition
+                value:
+                  name: Demo-URL-Filtering-Policy
+                  type: urlFiltering
+                  description: ''
+                  definition:
+                    webCategoriesAction: block
+                    webCategories:
+                    - auctions
+                    - bot-nets
+                    - news-and-media
+                    webReputation: moderate-risk
+                    urlWhiteList:
+                      ref: c20e31fb-fcea-4f48-93e3-09d2c6492d8b
+                    urlBlackList:
+                      ref: 557ed432-6cf8-495b-a445-d340d4c6236e
+                    blockPageAction: text
+                    blockPageContents: Access to the requested page has been denied. Please contact your Network Administrator
+                    enableAlerts: true
+                    alerts:
+                    - blacklist
+                    - whitelist
+                    - categories-reputation
+                    logging: []
+                    targetVpns:
+                    - '30'
+              AMP definition:
+                description: AMP definition
+                value:
+                  name: Demo-AMP-Policy
+                  type: advancedMalwareProtection
+                  description: ''
+                  definition:
+                    matchAllVpn: true
+                    fileReputationCloudServer: nam
+                    fileReputationEstServer: nam
+                    fileReputationAlert: critical
+                    fileAnalysisCloudServer: nam
+                    fileAnalysisFileTypes:
+                    - pdf
+                    - ms-exe
+                    fileAnalysisAlert: critical
+                    targetVpns:
+                    - '10'
+                    - '20'
+                    fileAnalysisEnabled: true
+              DNS definition:
+                description: DNS definition
+                value:
+                  name: Demo-DNS-Policy
+                  type: DNSSecurity
+                  description: Testing
+                  definition:
+                    localDomainBypassList:
+                      ref: 143f753f-8d51-4be6-805d-bc330f09982f
+                    matchAllVpn: false
+                    targetVpns:
+                    - vpns:
+                      - '10'
+                      umbrellaDefault: false
+                      childOrgId: '7999118'
+                      dnsServerIP: 10.10.10.1
+                      localDomainBypassEnabled: true
+                    dnsCrypt: true
+                    umbrellaData:
+                      ref: e6d85acd-fb1c-4cd9-ad77-e5bce620ccfa
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Policy definition:
+                  description: Policy definition
+                  value:
+                    masterTemplatesAffected: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy Configuration-write
+    delete:
+      tags:
+      - Configuration - Policy FXS Port Definition Builder
+      description: Delete policy definition
+      operationId: deletePolicyDefinition_ConfigurationPolicyFxsPortDefinitionBuilder_4006
+      parameters:
+      - name: id
+        in: path
+        description: Policy Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy Configuration-write

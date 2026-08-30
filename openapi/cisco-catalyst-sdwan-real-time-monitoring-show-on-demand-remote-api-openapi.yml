@@ -1,0 +1,109 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - Show On Demand Remote API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - Show On Demand Remote
+paths:
+  /device/ondemand/remote:
+    get:
+      tags:
+      - Real-Time Monitoring - Show On Demand Remote
+      description: Get on-demand remote (Real Time)
+      operationId: getOnDemandRemote
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                On Demand Remote list:
+                  description: On Demand Remote list
+                  value:
+                    data:
+                    - status: '-'
+                      site-id: '3'
+                      on-demand: 'no'
+                      lastupdated: 1642745561447
+                      idle-timeout-expiry: '-'
+                      vdevice-dataKey: 169.254.10.9-
+                      vdevice-host-name: vm2
+                      vdevice-name: 169.254.10.9
+                      system-ip: 172.16.254.2
+                    - status: '-'
+                      site-id: '4'
+                      on-demand: 'no'
+                      lastupdated: 1642745561447
+                      idle-timeout-expiry: '-'
+                      vdevice-dataKey: 169.254.10.9-
+                      vdevice-host-name: vm2
+                      vdevice-name: 169.254.10.9
+                      system-ip: 172.16.254.3
+                    - status: '-'
+                      site-id: '5'
+                      on-demand: 'no'
+                      lastupdated: 1642745561447
+                      idle-timeout-expiry: '-'
+                      vdevice-dataKey: 169.254.10.9-
+                      vdevice-host-name: vm2
+                      vdevice-name: 169.254.10.9
+                      system-ip: 172.16.254.4
+                    - status: '-'
+                      site-id: '6'
+                      on-demand: 'no'
+                      lastupdated: 1642745561447
+                      idle-timeout-expiry: '-'
+                      vdevice-dataKey: 169.254.10.9-
+                      vdevice-host-name: vm2
+                      vdevice-name: 169.254.10.9
+                      system-ip: 172.16.254.5
+                    - status: '-'
+                      site-id: '16'
+                      on-demand: 'no'
+                      lastupdated: 1642745561447
+                      idle-timeout-expiry: '-'
+                      vdevice-dataKey: 169.254.10.9-
+                      vdevice-host-name: vm2
+                      vdevice-name: 169.254.10.9
+                      system-ip: 172.16.254.16
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write

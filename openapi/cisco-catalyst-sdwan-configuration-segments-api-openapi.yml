@@ -1,0 +1,202 @@
+openapi: 3.2.0
+info:
+  title: Others Configuration - Segments API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Configuration - Segments
+paths:
+  /segment:
+    get:
+      tags:
+      - Configuration - Segments
+      description: Get network segments
+      operationId: getSegments
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Segment list:
+                  description: Segment list
+                  value:
+                    data:
+                    - segmentName: Discovered_VPN_10
+                      segmentId: '10'
+                      solution: sdwan
+                      id: c952c18b-30b3-4f0b-b985-494693d7adfb
+                      referenceCount: 2
+                    - segmentName: Discovered_VPN_65529
+                      segmentId: '65529'
+                      solution: sdwan
+                      id: 5dd3f122-e52f-437e-b5e5-5ae94ad09cd6
+                      referenceCount: 0
+                    - segmentName: Discovered_VPN_20
+                      segmentId: '20'
+                      solution: sd-routing
+                      id: 83b6309d-f61d-4ac5-9699-7d3c04a1caef
+                      referenceCount: 0
+                    - segmentName: Discovered_VPN_40
+                      segmentId: '40'
+                      solution: sd-routing
+                      id: 64b30b74-08e2-4b4b-81ca-d019c7e452d5
+                      referenceCount: 1
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+      - Configuration - Segments
+      description: Create network segment
+      operationId: createSegment
+      requestBody:
+        description: Network segment
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Network segment:
+                description: Network segment
+                value:
+                  segmentName: Discovered_VPN_80
+                  segmentId: '80'
+                  solution: sdwan
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value:
+                    id: bab577b9-e3c7-4385-abc1-d800dacb5f36
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /segment/{id}:
+    delete:
+      tags:
+      - Configuration - Segments
+      description: Delete network segment
+      operationId: deleteSegment
+      parameters:
+      - name: id
+        in: path
+        description: Segment Id
+        required: true
+        schema:
+          pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    get:
+      tags:
+      - Configuration - Segments
+      description: Get network segment
+      operationId: getSegment
+      parameters:
+      - name: id
+        in: path
+        description: Segment Id
+        required: true
+        schema:
+          pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Segment list:
+                  description: Segment list
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    put:
+      tags:
+      - Configuration - Segments
+      description: Edit network segment
+      operationId: editSegment
+      parameters:
+      - name: id
+        in: path
+        description: Segment Id
+        required: true
+        schema:
+          pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+          type: string
+      requestBody:
+        description: Network segment
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Network segment:
+                description: Network segment
+                value: "{{\n   \"segmentName\":\"Discovered_VPN_80\",\n   \"segmentId\":\"90\",\n   \"solution\":\"sdwan\",\n   \"id\":\"bab577b9-e3c7-4385-abc1-d800dacb5f36\",\n   \"referenceCount\":0\n}}"
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

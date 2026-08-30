@@ -1,0 +1,202 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - Software API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - Software
+paths:
+  /device/smu:
+    get:
+      tags:
+      - Real-Time Monitoring - Software
+      description: Get software list from device
+      operationId: createSmuList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Software list:
+                  description: Software list
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.15
+                      vdevice-host-name: vm5
+                      smu-compatible-with: 16.6.1.0
+                      package-state: Not Installed
+                      defect: CSCxxXXXXX
+                      smu-type: reload
+                      lastupdated: 1661330128299
+                      vdevice-dataKey: 172.16.254.15
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/smu/synced:
+    get:
+      tags:
+      - Real-Time Monitoring - Software
+      description: Get software list from device synchronously
+      operationId: createSyncedSmuList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Software list:
+                  description: Software list
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.15
+                      vdevice-host-name: vm5
+                      smu-compatible-with: 16.6.1.0
+                      package-state: Not Installed
+                      defect: CSCxxXXXXX
+                      smu-type: reload
+                      lastupdated: 1661330128299
+                      vdevice-dataKey: 172.16.254.15
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/software:
+    get:
+      tags:
+      - Real-Time Monitoring - Software
+      description: Get software list from device
+      operationId: getAAAUcreateSoftwareListsers
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Software list:
+                  description: Software list
+                  value:
+                    data:
+                    - default: 'true'
+                      vdevice-dataKey: 169.254.10.10-20.6.2-432
+                      software: true
+                      vdevice-name: 169.254.10.10
+                      active: 'true'
+                      lastupdated: 1643356263821
+                      version: 20.6.2-432
+                      vdevice-host-name: vm3
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write
+  /device/software/synced:
+    get:
+      tags:
+      - Real-Time Monitoring - Software
+      description: Get software list from device synchronously
+      operationId: createSyncedSoftwareList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Software list:
+                  description: Software list
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.11
+                      software: true
+                      createTimeStamp: 1647315989838
+                      active: 'true'
+                      version: 20.9.999-1787
+                      vdevice-host-name: vm1
+                      default: 'true'
+                      vdevice-dataKey: 172.16.255.11-20.9.999-1787
+                      '@rid': 1084
+                      vmanage-system-ip: 172.16.255.11
+                      lastupdated: 1647315989833
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write

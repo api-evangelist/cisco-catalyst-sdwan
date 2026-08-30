@@ -1,0 +1,1302 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - Policy API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - Policy
+paths:
+  /device/policy/accesslistassociations:
+    get:
+      tags:
+      - Real-Time Monitoring - Policy
+      description: Get access list associations from device
+      operationId: createPolicyAccessListAssociations
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Access list associations:
+                  description: Access list associations
+                  value:
+                    data:
+                    - vdevice-dataKey: 172.16.255.16-pol-acl-test
+                      vdevice-name: 172.16.255.16
+                      name: pol-acl-test
+                      lastupdated: 1653374017047
+                      vdevice-host-name: vm6
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/policy/accesslistcounters:
+    get:
+      tags:
+      - Real-Time Monitoring - Policy
+      description: Get access list counter from device
+      operationId: createPolicyAccessListCounters
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Access list counter:
+                  description: Access list counter
+                  value:
+                    data:
+                    - vdevice-dataKey: 172.16.255.16-pol-acl-test
+                      counter-name: default_action_count
+                      vdevice-name: 172.16.255.16
+                      bytes: '0'
+                      name: pol-acl-test
+                      lastupdated: 1653374287187
+                      vdevice-host-name: vm6
+                      packets: '0'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/policy/accesslistnames:
+    get:
+      tags:
+      - Real-Time Monitoring - Policy
+      description: Get access list names from device
+      operationId: createPolicyAccessListNames
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Access list names:
+                  description: Access list names
+                  value:
+                    data:
+                    - vdevice-dataKey: 172.16.255.16-pol-acl-test
+                      vdevice-name: 172.16.255.16
+                      name: pol-acl-test
+                      lastupdated: 1653374338991
+                      vdevice-host-name: vm6
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/policy/accesslistpolicers:
+    get:
+      tags:
+      - Real-Time Monitoring - Policy
+      description: Get access list policers from device
+      operationId: createPolicyAccessListPolicers
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Access list policers:
+                  description: Access list policers
+                  value:
+                    data:
+                    - name: pol-acl-test
+                      lastupdated: 1653374393223
+                      vdevice-dataKey: 172.16.255.16-pol-acl-test-
+                      vdevice-name: 172.16.255.16
+                      vdevice-host-name: vm6
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/policy/approutepolicyfilter:
+    get:
+      tags:
+      - Real-Time Monitoring - Policy
+      description: Get approute policy filter from device
+      operationId: createPolicyAppRoutePolicyFilter
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Approute policy filter:
+                  description: Approute policy filter
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.16
+                      vdevice-host-name: vm6
+                      policy-name: accept_nat
+                      vpn-name: vpn_1
+                      counter-name: natpool1
+                      packets: 18179
+                      bytes: '27448882'
+                      vdevice-dataKey: 172.16.255.16-accept_nat-vpn_1-natpool1
+                      lastupdated: 1656400527112
+                    - vdevice-name: 172.16.255.16
+                      vdevice-host-name: vm6
+                      policy-name: accept_nat
+                      vpn-name: vpn_1
+                      counter-name: natpool2
+                      packets: 18229
+                      bytes: '27441234'
+                      vdevice-dataKey: 172.16.255.16-accept_nat-vpn_1-natpool2
+                      lastupdated: 1656400527112
+                    - vdevice-name: 172.16.255.16
+                      vdevice-host-name: vm6
+                      policy-name: accept_nat
+                      vpn-name: vpn_1
+                      counter-name: natpool3
+                      packets: 18888
+                      bytes: '27444442'
+                      vdevice-dataKey: 172.16.255.16-accept_nat-vpn_1-natpool3
+                      lastupdated: 1656400527112
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/policy/datapolicyfilter:
+    get:
+      tags:
+      - Real-Time Monitoring - Policy
+      description: Get data policy filters from device
+      operationId: createPolicDataPolicyFilter
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Data policy filter:
+                  description: Data policy filter
+                  value:
+                    data:
+                    - vpn-name: vpn_1
+                      vdevice-dataKey: 172.16.255.15-accept_nat-vpn_1-natpool1
+                      counter-name: natpool1
+                      vdevice-name: 172.16.255.15
+                      bytes: '27448882'
+                      policy-name: accept_nat
+                      lastupdated: 1656400527112
+                      vdevice-host-name: vm5
+                      packets: 18179
+                    - vpn-name: vpn_1
+                      vdevice-dataKey: 172.16.255.15-accept_nat-vpn_1-natpool2
+                      counter-name: natpool2
+                      vdevice-name: 172.16.255.15
+                      bytes: '27042692'
+                      policy-name: accept_nat
+                      lastupdated: 1656400527112
+                      vdevice-host-name: vm5
+                      packets: 17910
+                    - vpn-name: vpn_1
+                      vdevice-dataKey: 172.16.255.15-accept_nat-vpn_1-natpool3
+                      counter-name: natpool3
+                      vdevice-name: 172.16.255.15
+                      bytes: '26630462'
+                      policy-name: accept_nat
+                      lastupdated: 1656400527112
+                      vdevice-host-name: vm5
+                      packets: 17637
+                    - vpn-name: vpn_1
+                      vdevice-dataKey: 172.16.255.15-accept_nat-vpn_1-natpool4
+                      counter-name: natpool4
+                      vdevice-name: 172.16.255.15
+                      bytes: '26252860'
+                      policy-name: accept_nat
+                      lastupdated: 1656400527112
+                      vdevice-host-name: vm5
+                      packets: 17386
+                    - vpn-name: vpn_1
+                      vdevice-dataKey: 172.16.255.15-accept_nat-vpn_1-natpool5
+                      counter-name: natpool5
+                      vdevice-name: 172.16.255.15
+                      bytes: '25849690'
+                      policy-name: accept_nat
+                      lastupdated: 1656400527112
+                      vdevice-host-name: vm5
+                      packets: 17119
+                    - vpn-name: vpn_1
+                      vdevice-dataKey: 172.16.255.15-accept_nat-vpn_1-default_action_count
+                      counter-name: default_action_count
+                      vdevice-name: 172.16.255.15
+                      bytes: '0'
+                      policy-name: accept_nat
+                      lastupdated: 1656400527112
+                      vdevice-host-name: vm5
+                      packets: 0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/policy/filtermemoryusage:
+    get:
+      tags:
+      - Real-Time Monitoring - Policy
+      description: Get data policy filter memory usage from device
+      operationId: createPolicyFilterMemoryUsage
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Data policy filter memory usage:
+                  description: Data policy filter memory usage
+                  value:
+                    data:
+                    - filter-max: '512'
+                      vdevice-dataKey: 169.254.10.10-0
+                      vdevice-name: 169.254.10.10
+                      blocks-used: '0'
+                      blocks-max: '1048576'
+                      filter-used: '0'
+                      lastupdated: 1643266183894
+                      vdevice-host-name: vm3
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/policy/iptosgtbindings:
+    get:
+      tags:
+      - Real-Time Monitoring - Policy
+      description: show ip to sgt binding from Vsmart
+      operationId: showVsmartIptoSgtBinding
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                SDWAN policy from vSmart:
+                  description: SDWAN policy from vSmart
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/policy/iptouserbindings:
+    get:
+      tags:
+      - Real-Time Monitoring - Policy
+      description: show ip to user binding from Vsmart
+      operationId: showVsmartIptoUserBinding
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                SDWAN policy from vSmart:
+                  description: SDWAN policy from vSmart
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/policy/ipv6/accesslistassociations:
+    get:
+      tags:
+      - Real-Time Monitoring - Policy
+      description: Get access list associations from device
+      operationId: createPolicyAccessListAssociationsIpv6
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Access list associations:
+                  description: Access list associations
+                  value:
+                    data:
+                    - vdevice-dataKey: 172.16.255.16-ipv6_pol-acl-test
+                      vdevice-name: 172.16.255.16
+                      name: ipv6_pol-acl-test
+                      lastupdated: 1653376026043
+                      vdevice-host-name: vm6
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/policy/ipv6/accesslistcounters:
+    get:
+      tags:
+      - Real-Time Monitoring - Policy
+      description: Get access list counters from device
+      operationId: createPolicyAccessListCountersIpv6
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Access list counters:
+                  description: Access list counters
+                  value:
+                    data:
+                    - vdevice-dataKey: 172.16.255.16-ipv6_pol-acl-test
+                      counter-name: default_action_count
+                      vdevice-name: 172.16.255.16
+                      bytes: '0'
+                      name: ipv6_pol-acl-test
+                      lastupdated: 1653376073433
+                      vdevice-host-name: vm6
+                      packets: '0'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/policy/ipv6/accesslistnames:
+    get:
+      tags:
+      - Real-Time Monitoring - Policy
+      description: Get access list names from device
+      operationId: createPolicyAccessListNamesIpv6
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Access list names:
+                  description: Access list names
+                  value:
+                    data:
+                    - vdevice-dataKey: 172.16.255.16-ipv6_pol-acl-test
+                      vdevice-name: 172.16.255.16
+                      name: ipv6_pol-acl-test
+                      lastupdated: 1653376118299
+                      vdevice-host-name: vm6
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/policy/ipv6/accesslistpolicers:
+    get:
+      tags:
+      - Real-Time Monitoring - Policy
+      description: Get access list policers from device
+      operationId: createPolicyAccessListPolicersIpv6
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Access list policers:
+                  description: Access list policers
+                  value:
+                    data:
+                    - name: ipv6_pol-acl-test
+                      lastupdated: 1653376169819
+                      vdevice-dataKey: 172.16.255.16-ipv6_pol-acl-test-
+                      vdevice-name: 172.16.255.16
+                      vdevice-host-name: vm6
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/policy/pxgridstatus:
+    get:
+      tags:
+      - Real-Time Monitoring - Policy
+      description: show Pxgrid status From Vsmart
+      operationId: showVsmartPxGridStatus
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                SDWAN policy from vSmart:
+                  description: SDWAN policy from vSmart
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/policy/pxgridusersessions:
+    get:
+      tags:
+      - Real-Time Monitoring - Policy
+      description: show Pxgrid sessions From Vsmart
+      operationId: showVsmartPxGridUserSessions
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                SDWAN policy from vSmart:
+                  description: SDWAN policy from vSmart
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/policy/qosmapinfo:
+    get:
+      tags:
+      - Real-Time Monitoring - Policy
+      description: Get QoS map information from device
+      operationId: createPolicQosMapInfo
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                QoS map information:
+                  description: QoS map information
+                  value:
+                    data:
+                    - lastupdated: 1654481032855
+                      vdevice-dataKey: 169.254.10.9-policy_qos_map
+                      vdevice-name: 169.254.10.9
+                      qos-map-name: policy_qos_map
+                      vdevice-host-name: vm2
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/policy/qosschedulerinfo:
+    get:
+      tags:
+      - Real-Time Monitoring - Policy
+      description: Get QoS scheduler information from device
+      operationId: createPolicQosSchedulerInfo
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                QoS scheduler information:
+                  description: QoS scheduler information
+                  value:
+                    data:
+                    - vdevice-dataKey: 169.254.10.9-policy_qos_map_0
+                      vdevice-name: 169.254.10.9
+                      qos-map-name: policy_qos_map
+                      buffer-percent: '100'
+                      lastupdated: 1654481134775
+                      bandwidth-percent: '100'
+                      qos-scheduler-name: policy_qos_map_0
+                      vdevice-host-name: vm2
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/policy/rewriteassociations:
+    get:
+      tags:
+      - Real-Time Monitoring - Policy
+      description: Get rewrite associations information from device
+      operationId: createPolicyRewriteAssociationsInfo
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Rewrite associations information:
+                  description: Rewrite associations information
+                  value:
+                    data:
+                    - name: vpn10_rewrite_policy
+                      lastupdated: 1654562464357
+                      vdevice-dataKey: 169.254.10.9-vpn10_rewrite_policy
+                      vdevice-name: 169.254.10.9
+                      vdevice-host-name: vm2
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/policy/userusergroupbindings:
+    get:
+      tags:
+      - Real-Time Monitoring - Policy
+      description: Show User-Usergroup bindings from Vsmart
+      operationId: showVsmartUserUsergroupBindings
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                SDWAN policy from vSmart:
+                  description: SDWAN policy from vSmart
+                  value:
+                  - omp-update-state: omp-updated
+                    vdevice-dataKey: 172.16.255.19
+                    vdevice-name: 172.16.255.19
+                    user-groups: User Identity Groups:Employee
+                    lastupdated: 1646677354863
+                    vdevice-host-name: vm9
+                    username: TestUser0
+                  - omp-update-state: omp-updated
+                    vdevice-dataKey: 172.16.255.19
+                    vdevice-name: 172.16.255.19
+                    user-groups: User Identity Groups:TestUserGroup-1
+                    lastupdated: 1646677354863
+                    vdevice-host-name: vm9
+                    username: TestUser0
+                  - omp-update-state: omp-updated
+                    vdevice-dataKey: 172.16.255.19
+                    vdevice-name: 172.16.255.19
+                    user-groups: User Identity Groups:Employee
+                    lastupdated: 1646677354863
+                    vdevice-host-name: vm9
+                    username: TestUser1
+                  - omp-update-state: omp-updated
+                    vdevice-dataKey: 172.16.255.19
+                    vdevice-name: 172.16.255.19
+                    user-groups: User Identity Groups:TestUserGroup-1
+                    lastupdated: 1646677354863
+                    vdevice-host-name: vm9
+                    username: TestUser1
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/policy/vsmart:
+    get:
+      tags:
+      - Real-Time Monitoring - Policy
+      description: show Sdwan Policy From Vsmart
+      operationId: showSdwanPolicyFromVsmart
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                SDWAN policy from vSmart:
+                  description: SDWAN policy from vSmart
+                  value:
+                    data:
+                    - vdevice-name: 169.254.10.9
+                      vdevice-host-name: vm2
+                      name: dp1
+                      app-list: SSH_policy
+                      vpn-list: vpn_1_list
+                      vpn-id: '1'
+                      lastupdated: 1658198416779
+                      vdevice-dataKey: 169.254.10.9
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/policy/zbfwdropstatistics:
+    get:
+      tags:
+      - Real-Time Monitoring - Policy
+      description: Get zone drop statistics from device
+      operationId: getZoneDropStatistics
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Zone drop statistics:
+                  description: Zone drop statistics
+                  value:
+                    data:
+                    - l4-tcp-l7-ooo-seg: '0'
+                      l4-icmp-err-l4-invalid-seq: '0'
+                      policy-action-drop: '0'
+                      l4-icmp-err-no-ip-no-icmp: '0'
+                      l7-type-drop: '0'
+                      l4-scb-close: '0'
+                      l4-tcp-invalid-seg-synsent-state: '0'
+                      l4-tcp-syn-flood-drop: '0'
+                      l4-icmp-internal-err-no-nat: '0'
+                      l4-tcp-invalid-seq: '0'
+                      l7-no-seg: '0'
+                      no-new-session: '0'
+                      l4-icmp-internal-err-get-stat-blk-fail: '0'
+                      syncookie-max-dst: '0'
+                      insp-internal-err-get-stat-blk-fail: '0'
+                      l4-invalid-hdr: '0'
+                      l4-icmp-internal-err-alloc-fail: '0'
+                      l4-tcp-invalid-seg-pkt-win-overflow: '0'
+                      no-forwarding-zone: '0'
+                      l4-icmp-too-many-err-pkts: '0'
+                      fdb-err: '0'
+                      no-session: '0'
+                      insp-dstaddr-lookup-fail: '0'
+                      l4-session-limit: '0'
+                      insp-class-action-drop: '0'
+                      l4-tcp-rst-to-resp: '0'
+                      l4-tcp-stray-seg: '0'
+                      not-initiator: '0'
+                      backpressure: '0'
+                      l4-tcp-invalid-tcp-initiator: '0'
+                      l4-icmp-pkt-too-short: '0'
+                      zone-mismatch: '0'
+                      l4-tcp-unexpect-tcp-payload: '0'
+                      l7-no-frag: '0'
+                      l4-tcp-invalid-seg-pyld-after-fin-send: '0'
+                      l4-icmp-err-policy-not-present: '0'
+                      l7-alg-ret-drop: '0'
+                      l4-tcp-internal-err-synflood-alloc-hostdb-fail: '0'
+                      insp-classification-fail: '0'
+                      l4-tcp-invalid-win-scale-option: '0'
+                      l4-tcp-syn-in-win: '0'
+                      policy-icmp-action-drop: '0'
+                      vdevice-name: 169.254.10.12
+                      lisp-inner-ipv6-insane: '0'
+                      l4-tcp-rst-in-win: '0'
+                      l4-tcp-retrans-invalid-flags: '0'
+                      catch-all: '0'
+                      l4-icmp-err-l4-invalid-ack: '0'
+                      syncookie-trigger: '0'
+                      l7-unknown-proto: '0'
+                      l4-tcp-syn-with-data: '0'
+                      l4-tcp-invalid-seg-pkt-too-old: '0'
+                      l4-icmp-err-classification-fail: '0'
+                      l4-icmp-internal-err-dir-not-identified: '0'
+                      l4-internal-err-undefined-dir: '0'
+                      insp-policy-not-present: '0'
+                      syncookie-internal-err-alloc-fail: '0'
+                      lisp-header-restore-fail: '0'
+                      l4-tcp-synflood-blackout-drop: '0'
+                      l4-tcp-invalid-ack-flag: '0'
+                      insp-pam-lookup-fail: '0'
+                      l4-icmp-scb-close: '0'
+                      invalid-zone: '0'
+                      ha-ar-standby: '0'
+                      vdevice-host-name: vm5
+                      l4-tcp-invalid-seg-synrcvd-state: '0'
+                      l4-tcp-invalid-ack-num: '0'
+                      l7-promote-fail-no-policy: '0'
+                      l4-too-many-pkts: '0'
+                      l4-icmp-err-pkts-burst: '0'
+                      l7-promote-fail-no-zone-pair: '0'
+                      vdevice-dataKey: 169.254.10.12-0
+                      l4-icmp-err-multiple-unreach: '0'
+                      policy-fragment-drop: '0'
+                      l4-tcp-invalid-flags: '0'
+                      lisp-inner-ipv4-insane: '0'
+                      lastupdated: 1645666649064
+                      l4-max-halfsession: '0'
+                      insp-sess-miss-policy-not-present: '0'
+                      l4-icmp-pkt-no-ip-hdr: '0'
+                      insp-policy-misconfigure: '0'
+                      lisp-inner-pkt-insane: '0'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/policy/zbfwstatistics:
+    get:
+      tags:
+      - Real-Time Monitoring - Policy
+      description: Get zone based firewall statistics from device
+      operationId: getZbfwStatistics
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Zone based firewall statistics:
+                  description: Zone based firewall statistics
+                  value:
+                    data:
+                    - no-pair-diff-zone-dropped: '0'
+                      tcp-retrans-seg: '0'
+                      flow-add-fail: '0'
+                      vdevice-name: 169.254.10.10
+                      tcp-drop-stray-seg: '0'
+                      tcp-drop-invalid-seg-pkt-too-old: '0'
+                      zbf-pkts: '0'
+                      state-check-fail: '0'
+                      unsupported-proto: '0'
+                      no-pair-same-zone-allowed: '0'
+                      zone-no-zone-inet-denied: '0'
+                      tcp-drop-invalid-seg-synsent-state: '0'
+                      max-halfopen-exceeded: '0'
+                      tcp-drop-invalid-flags: '0'
+                      tcp-drop-unexpect-tcp-pyld: '0'
+                      num-flow-entries: '0'
+                      tcp-ooo-seg: '0'
+                      tcp-drop-invalid-seg-synrcvd-state: '0'
+                      tcp-drop-no-syn-in-listen-state: '0'
+                      tcp-drop-invalid-ack-flag: '0'
+                      fragments: '0'
+                      zone-no-zone-dropped: '0'
+                      no-zone-no-zone-allowed: '0'
+                      tcp-drop-invalid-ack-num: '0'
+                      policy-change-dropped: '0'
+                      tcp-drop-rst-to-resp: '0'
+                      tcp-drop-syn-with-data: '0'
+                      tcp-drop-syn-in-win: '0'
+                      tcp-drop-invalid-dir: '0'
+                      tcp-drop-invalid-win-scale-option: '0'
+                      frag-fail: '0'
+                      tcp-drop-retrans-invalid-flags: '0'
+                      tcp-drop-internal-invalid-tcp-state: '0'
+                      tcp-drop-rst-in-win: '0'
+                      tcp-drop-invalid-seg-pkt-win-overflow: '0'
+                      vdevice-host-name: vm3
+                      vdevice-dataKey: 169.254.10.10-
+                      lastupdated: 1643271305369
+                      tcp-drop-invalid-seq: '0'
+                      zone-no-zone-inet-allowed: '0'
+                      tcp-drop-invalid-seg-pyld-after-fin-send: '0'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/policy/zonepairsessions:
+    get:
+      tags:
+      - Real-Time Monitoring - Policy
+      description: Get zone pair sessions from device
+      operationId: getZonePairSessions
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Zone pair session:
+                  description: Zone pair session
+                  value:
+                    data:
+                    - src-ip: 10.1.15.15
+                      dst-ip: 10.0.5.19
+                      src-vpn-id: '65534'
+                      vdevice-name: 172.16.255.15
+                      src-port: 12426
+                      zp-name: self_to_inet
+                      dst-vrf: '0'
+                      dst-port: 12455
+                      vdevice-host-name: vm5
+                      total-responder-bytes: '115724'
+                      protocol: PROTO_L4_UDP
+                      vdevice-dataKey: '13'
+                      lastupdated: 1655955518778
+                      state: open
+                      dst-vpn-id: '0'
+                      total-initiator-bytes: '103518'
+                      classmap-name: '3'
+                      session-id: '13'
+                      src-vrf: '0'
+                    - src-ip: 10.0.1.1
+                      dst-ip: 10.0.1.255
+                      src-vpn-id: '0'
+                      vdevice-name: 172.16.255.15
+                      src-port: 123
+                      zp-name: inet_to_self
+                      dst-vrf: '0'
+                      dst-port: 123
+                      vdevice-host-name: vm5
+                      total-responder-bytes: '0'
+                      protocol: PROTO_L7_NTP
+                      vdevice-dataKey: '28'
+                      lastupdated: 1655955518778
+                      state: opening
+                      dst-vpn-id: '65534'
+                      total-initiator-bytes: '48'
+                      classmap-name: '3'
+                      session-id: '28'
+                      src-vrf: '0'
+                    - src-ip: 10.1.15.15
+                      dst-ip: 10.0.12.22
+                      src-vpn-id: '65534'
+                      vdevice-name: 172.16.255.15
+                      src-port: 12426
+                      zp-name: self_to_inet
+                      dst-vrf: '0'
+                      dst-port: 12446
+                      vdevice-host-name: vm5
+                      total-responder-bytes: '918966'
+                      protocol: PROTO_L4_UDP
+                      vdevice-dataKey: '15'
+                      lastupdated: 1655955518778
+                      state: open
+                      dst-vpn-id: '0'
+                      total-initiator-bytes: '5037561'
+                      classmap-name: '3'
+                      session-id: '15'
+                      src-vrf: '0'
+                    - src-ip: 10.1.15.15
+                      dst-ip: 10.0.12.20
+                      src-vpn-id: '65534'
+                      vdevice-name: 172.16.255.15
+                      src-port: 12426
+                      zp-name: self_to_inet
+                      dst-vrf: '0'
+                      dst-port: 12456
+                      vdevice-host-name: vm5
+                      total-responder-bytes: '116455'
+                      protocol: PROTO_L4_UDP
+                      vdevice-dataKey: '14'
+                      lastupdated: 1655955518778
+                      state: open
+                      dst-vpn-id: '0'
+                      total-initiator-bytes: '107116'
+                      classmap-name: '3'
+                      session-id: '14'
+                      src-vrf: '0'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/policy/zonepairstatistics:
+    get:
+      tags:
+      - Real-Time Monitoring - Policy
+      description: Get zone pair statistics from device
+      operationId: getZonePairs
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Zone pair statistics:
+                  description: Zone pair statistics
+                  value:
+                    data:
+                    - max-active-conn: '0'
+                      class-action: Inspect Drop
+                      vdevice-name: 172.16.255.15
+                      src-zone-name: employee
+                      pkts-counter: '0'
+                      max-halfopen-conn: '0'
+                      vdevice-host-name: vm5
+                      zonepair-name: employee-inet
+                      class-name: cmap_1
+                      attempted-conn: '0'
+                      match-type-id: '3'
+                      match-type: access-group name
+                      current-active-conn: '0'
+                      current-halfopen-conn: '0'
+                      vdevice-dataKey: 172.16.255.15-employee-inet-cmap_1
+                      time-since-last-session-create: '0'
+                      current-terminating-conn: '0'
+                      policy-name: fw_policy1
+                      match-name: acl1_1
+                      lastupdated: 1655267493875
+                      max-terminating-conn: '0'
+                      dst-zone-name: internet
+                      bytes-counter: '0'
+                    - max-active-conn: '0'
+                      class-action: Inspect Drop
+                      vdevice-name: 172.16.255.15
+                      src-zone-name: employee
+                      pkts-counter: '0'
+                      max-halfopen-conn: '0'
+                      vdevice-host-name: vm5
+                      class-name: class-default
+                      zonepair-name: employee-inet
+                      attempted-conn: '0'
+                      current-active-conn: '0'
+                      current-halfopen-conn: '0'
+                      vdevice-dataKey: 172.16.255.15-employee-inet-class-default
+                      time-since-last-session-create: '0'
+                      current-terminating-conn: '0'
+                      policy-name: fw_policy1
+                      lastupdated: 1655267493875
+                      max-terminating-conn: '0'
+                      dst-zone-name: internet
+                      bytes-counter: '0'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write
+  /device/policy/zonepolicyfilter:
+    get:
+      tags:
+      - Real-Time Monitoring - Policy
+      description: Get zone policy filter from device
+      operationId: getZonePolicyFilters
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Zone policy filter:
+                  description: Zone policy filter
+                  value:
+                    data:
+                    - vdevice-name: 169.254.10.9
+                      vdevice-host-name: vm2
+                      name: ZONE-POLICY-1
+                      counter-name: counter_seq_1
+                      packets: '2'
+                      bytes: '196'
+                      lastupdated: 1658198416779
+                      vdevice-dataKey: 169.254.10.9-ZONE-POLICY-1
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write

@@ -1,0 +1,2511 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Monitoring - Device Details API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Monitoring - Device Details
+paths:
+  /data/device/state/{state_data_type}:
+    get:
+      tags:
+      - Monitoring - Device Details
+      description: Get device state data
+      operationId: generateDeviceStateData
+      parameters:
+      - name: state_data_type
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: startId
+        in: query
+        schema:
+          type: string
+      - name: count
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 1000
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        '@rid':
+                          type: integer
+                          format: int32
+                          example: 3413
+                        auto-downstream-bandwidth:
+                          type: string
+                          example: '0'
+                        auto-upstream-bandwidth:
+                          type: string
+                          example: '0'
+                        bia-address:
+                          type: string
+                          example: 00:50:56:00:01:0e
+                        createTimeStamp:
+                          type: string
+                          example: '1681732399130'
+                        description:
+                          type: string
+                          example: Service Management VPN Interface Ethernet
+                        hwaddr:
+                          type: string
+                          example: 00:50:56:00:01:0e
+                        if-admin-status:
+                          type: string
+                          example: if-state-up
+                        if-oper-status:
+                          type: string
+                          example: if-oper-state-ready
+                        ifindex:
+                          type: string
+                          example: '1'
+                        ifname:
+                          type: string
+                          example: GigabitEthernet1
+                        interface-type:
+                          type: string
+                          example: iana-iftype-ethernet-csmacd
+                        ip-address:
+                          type: string
+                          example: 10.0.1.14
+                        ipv4-subnet-mask:
+                          type: string
+                          example: 255.255.255.0
+                        ipv4-tcp-adjust-mss:
+                          type: string
+                          example: '0'
+                        ipv6-tcp-adjust-mss:
+                          type: string
+                          example: '0'
+                        lastupdated:
+                          type: integer
+                          format: int32
+                          example: 168232232
+                        mtu:
+                          type: string
+                          example: '1500'
+                        recordId:
+                          type: string
+                          example: 0:CEdgeInterfaceNode:1681732387143:3340
+                        rx-drops:
+                          type: integer
+                          format: int32
+                          example: 0
+                        rx-errors:
+                          type: integer
+                          format: int32
+                          example: 1
+                        rx-octets:
+                          type: integer
+                          format: int32
+                          example: 22625972
+                        rx-packets:
+                          type: string
+                          example: '367109'
+                        speed-mbps:
+                          type: string
+                          example: '1000'
+                        tx-drops:
+                          type: integer
+                          format: int32
+                          example: 0
+                        tx-errors:
+                          type: integer
+                          format: int32
+                          example: 0
+                        tx-octets:
+                          type: integer
+                          format: int32
+                          example: 12993252
+                        tx-packets:
+                          type: integer
+                          format: int32
+                          example: 38282
+                        vdevice-dataKey:
+                          type: string
+                          example: 172.16.255.14-512-GigabitEthernet1-10.0.1.14-00:50:56:00:01:0e
+                        vdevice-host-name:
+                          type: string
+                          example: vm4
+                        vdevice-name:
+                          type: string
+                          example: 172.16.255.14
+                        vmanage-system-ip:
+                          type: string
+                          example: 172.16.255.14
+                        vpn-id:
+                          type: string
+                          example: '512'
+                      $$ref: '#/components/schemas/GenerateDeviceStateDataData'
+                $$ref: '#/components/schemas/GenerateDeviceStateData'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /data/device/state/{state_data_type}/fields:
+    get:
+      tags:
+      - Monitoring - Device Details
+      description: Get device state data fileds
+      operationId: generateDeviceStateDataFields
+      parameters:
+      - name: state_data_type
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                properties:
+                  empty:
+                    type: boolean
+                items:
+                  type: object
+                  properties:
+                    dataType:
+                      type: string
+                    display:
+                      type: string
+                    property:
+                      type: string
+                  $$ref: '#/components/schemas/GenerateDeviceStateDataFieldsInner'
+                $$ref: '#/components/schemas/GenerateDeviceStateDataFields'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /data/device/state/{state_data_type}/query:
+    get:
+      tags:
+      - Monitoring - Device Details
+      description: Get device state data fileds
+      operationId: generateDeviceStateDataWithQueryString
+      parameters:
+      - name: state_data_type
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        '@rid':
+                          type: integer
+                          format: int32
+                          example: 3413
+                        auto-downstream-bandwidth:
+                          type: string
+                          example: '0'
+                        auto-upstream-bandwidth:
+                          type: string
+                          example: '0'
+                        bia-address:
+                          type: string
+                          example: 00:50:56:00:01:0e
+                        createTimeStamp:
+                          type: string
+                          example: '1681732399130'
+                        description:
+                          type: string
+                          example: Service Management VPN Interface Ethernet
+                        hwaddr:
+                          type: string
+                          example: 00:50:56:00:01:0e
+                        if-admin-status:
+                          type: string
+                          example: if-state-up
+                        if-oper-status:
+                          type: string
+                          example: if-oper-state-ready
+                        ifindex:
+                          type: string
+                          example: '1'
+                        ifname:
+                          type: string
+                          example: GigabitEthernet1
+                        interface-type:
+                          type: string
+                          example: iana-iftype-ethernet-csmacd
+                        ip-address:
+                          type: string
+                          example: 10.0.1.14
+                        ipv4-subnet-mask:
+                          type: string
+                          example: 255.255.255.0
+                        ipv4-tcp-adjust-mss:
+                          type: string
+                          example: '0'
+                        ipv6-tcp-adjust-mss:
+                          type: string
+                          example: '0'
+                        lastupdated:
+                          type: integer
+                          format: int32
+                          example: 168232232
+                        mtu:
+                          type: string
+                          example: '1500'
+                        recordId:
+                          type: string
+                          example: 0:CEdgeInterfaceNode:1681732387143:3340
+                        rx-drops:
+                          type: integer
+                          format: int32
+                          example: 0
+                        rx-errors:
+                          type: integer
+                          format: int32
+                          example: 1
+                        rx-octets:
+                          type: integer
+                          format: int32
+                          example: 22625972
+                        rx-packets:
+                          type: string
+                          example: '367109'
+                        speed-mbps:
+                          type: string
+                          example: '1000'
+                        tx-drops:
+                          type: integer
+                          format: int32
+                          example: 0
+                        tx-errors:
+                          type: integer
+                          format: int32
+                          example: 0
+                        tx-octets:
+                          type: integer
+                          format: int32
+                          example: 12993252
+                        tx-packets:
+                          type: integer
+                          format: int32
+                          example: 38282
+                        vdevice-dataKey:
+                          type: string
+                          example: 172.16.255.14-512-GigabitEthernet1-10.0.1.14-00:50:56:00:01:0e
+                        vdevice-host-name:
+                          type: string
+                          example: vm4
+                        vdevice-name:
+                          type: string
+                          example: 172.16.255.14
+                        vmanage-system-ip:
+                          type: string
+                          example: 172.16.255.14
+                        vpn-id:
+                          type: string
+                          example: '512'
+                      $$ref: '#/components/schemas/GenerateDeviceStateDataData'
+                $$ref: '#/components/schemas/GenerateDeviceStateDataWithQueryString'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device:
+    get:
+      tags:
+      - Monitoring - Device Details
+      description: List all devices
+      operationId: listAllDevices
+      parameters:
+      - name: site-id
+        in: query
+        schema:
+          pattern: ^[0-9]+$
+          type: string
+      - name: includeTenantvSmart
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  board-serial:
+                    type: string
+                    example: '12345704'
+                  certificate-validity:
+                    type: string
+                    example: Valid
+                  connectedVManages:
+                    type: array
+                    items:
+                      type: string
+                  controlConnections:
+                    type: string
+                    example: '9'
+                  device-groups:
+                    type: array
+                    items:
+                      type: string
+                  device-model:
+                    type: string
+                    example: vmanage
+                  device-os:
+                    type: string
+                    example: device-os
+                  device-type:
+                    type: string
+                    example: vmanage
+                  deviceId:
+                    type: string
+                    example: 169.254.10.1
+                  domain-id:
+                    type: string
+                    example: '0'
+                  host-name:
+                    type: string
+                    example: 169.254.10.1
+                  isDeviceGeoData:
+                    type: boolean
+                    example: false
+                  lastupdated:
+                    type: string
+                    example: '1634627015139'
+                  latitude:
+                    type: string
+                    example: '37.666684'
+                  layoutLevel:
+                    type: integer
+                    format: int32
+                    example: 1
+                  local-system-ip:
+                    type: string
+                    example: 172.16.255.200
+                  longitude:
+                    type: string
+                    example: '-122.777023'
+                  max-controllers:
+                    type: string
+                    example: '0'
+                  model_sku:
+                    type: string
+                    example: None
+                  personality:
+                    type: string
+                    example: vmanage
+                  platform:
+                    type: string
+                    example: x86_64
+                  reachability:
+                    type: string
+                    example: reachable
+                  site-id:
+                    type: string
+                    example: '200'
+                  state:
+                    type: string
+                    example: green
+                  state_description:
+                    type: string
+                    example: All daemons up
+                  status:
+                    type: string
+                    example: normal
+                  statusOrder:
+                    type: string
+                    example: '4'
+                  system-ip:
+                    type: string
+                    example: 169.254.10.1
+                  testbed_mode:
+                    type: boolean
+                    example: true
+                  timezone:
+                    type: string
+                    example: UTC
+                  total_cpu_count:
+                    type: string
+                    example: '8'
+                  uptime-date:
+                    type: string
+                    example: '1634626320000'
+                  uuid:
+                    type: string
+                    example: 96af574a-eadd-4b6a-97bf-d5c1e98f40f2
+                  validity:
+                    type: string
+                    example: valid
+                  version:
+                    type: string
+                    example: '9'
+                $$ref: '#/components/schemas/DeviceData'
+              examples:
+                Devices List:
+                  description: Devices List
+                  value:
+                  - deviceId: 169.254.10.1
+                    system-ip: 169.254.10.1
+                    host-name: vm200
+                    reachability: reachable
+                    status: normal
+                    personality: vmanage
+                    device-type: vmanage
+                    timezone: UTC
+                    device-groups:
+                    - No groups
+                    lastupdated: 1634627015139
+                    domain-id: '0'
+                    board-serial: '12345704'
+                    certificate-validity: Valid
+                    max-controllers: '0'
+                    uuid: 96af574a-eadd-4b6a-97bf-d5c1e98f40f2
+                    controlConnections: '9'
+                    device-model: vmanage
+                    version: 20.8.999-1397
+                    connectedVManages:
+                    - 169.254.10.1
+                    site-id: '200'
+                    latitude: '37.666684'
+                    longitude: -122.777023
+                    isDeviceGeoData: false
+                    platform: x86_64
+                    uptime-date: 1634626320000
+                    statusOrder: 4
+                    device-os: next
+                    validity: valid
+                    state: green
+                    state_description: All daemons up
+                    model_sku: None
+                    local-system-ip: 172.16.255.200
+                    total_cpu_count: '8'
+                    testbed_mode: true
+                    layoutLevel: 1
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/blockSync:
+    post:
+      tags:
+      - Monitoring - Device Details
+      description: Set collection manager block set flag
+      operationId: setBlockSync
+      parameters:
+      - name: blockSync
+        in: query
+        description: Block sync flag
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/config:
+    get:
+      tags:
+      - Monitoring - Device Details
+      description: Get device running configuration
+      operationId: getDeviceRunningConfig
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device Id list
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                Device running configuration:
+                  description: Device running configuration
+            text/xml:
+              schema:
+                type: string
+              examples:
+                Device running configuration:
+                  description: Device running configuration
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/config/html:
+    get:
+      tags:
+      - Monitoring - Device Details
+      description: Get device running configuration in HTML format
+      operationId: getDeviceRunningConfigHTML
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device Id list
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/html:
+              schema:
+                type: string
+              examples:
+                Device running configuration:
+                  description: Device running configuration
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /device/counters:
+    get:
+      tags:
+      - Monitoring - Device Details
+      description: Get device counters
+      operationId: getDeviceCounters
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        crashCount:
+                          type: integer
+                          format: int32
+                          example: 0
+                        expectedControlConnections:
+                          type: integer
+                          format: int32
+                          example: 3
+                        number-vsmart-control-connections:
+                          type: integer
+                          format: int32
+                          example: 3
+                        rebootCount:
+                          type: integer
+                          format: int32
+                          example: 2
+                        system-ip:
+                          type: string
+                      $$ref: '#/components/schemas/DeviceCountersData'
+                  header:
+                    type: object
+                    properties:
+                      generatedOn:
+                        type: integer
+                        format: int64
+                        example: 1635224742597
+                    $$ref: '#/components/schemas/DeviceResponseHeader'
+                $$ref: '#/components/schemas/DeviceCountersResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/devicestatus:
+    get:
+      tags:
+      - Monitoring - Device Details
+      description: Get devices status per type
+      operationId: getDeviceOnlyStatus
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    format: int32
+                    example: 0
+                  detailsURL:
+                    type: string
+                    example: /dataservice/device?personality=vbond&status=error
+                  image:
+                    type: string
+                    example: images/vsmart.png
+                  name:
+                    type: string
+                    example: vSmart
+                  statusList:
+                    type: array
+                    items:
+                      type: array
+                      properties:
+                        empty:
+                          type: boolean
+                      items:
+                        type: object
+                        properties:
+                          count:
+                            type: integer
+                            format: int64
+                          message:
+                            type: string
+                          name:
+                            type: string
+                          status:
+                            type: string
+                        $$ref: '#/components/schemas/StatusObject'
+                      $$ref: '#/components/schemas/StatusList'
+                  type:
+                    type: string
+                    example: vSmart
+                $$ref: '#/components/schemas/DeviceStatusData'
+              examples:
+                Device Status:
+                  description: Device Status
+                  value: "[\n  {\n    \"type\": \"vSmart\",\n    \"name\": \"vSmart\",\n    \"image\": \"images/vsmart.png\",\n    \"count\": 3,\n    \"detailView\": \"dialog\",\n    \"detailsURL\": \"/dataservice/device?personality=vsmart\",\n    \"statusList\": [\n      {\n        \"status\": \"error\",\n        \"name\": \"Error\",\n        \"detailView\": \"dialog\",\n        \"detailsURL\": \"/dataservice/device?personality=vsmart&status=error\",\n        \"color\": \"fa7c7d\",\n        \"icon\": \"images/device/device-error.png\",\n        \"count\": 0\n      },\n      {\n        \"status\": \"warning\",\n        \"name\": \"Warning\",\n        \"detailView\": \"dialog\",\n        \"detailsURL\": \"/dataservice/device?personality=vsmart&status=warning\",\n        \"color\": \"f2ce60\",\n        \"icon\": \"images/device/device-warning.png\",\n        \"count\": 0\n      },\n      {\n        \"status\": \"normal\",\n        \"name\": \"Normal\",\n        \"detailView\": \"dialog\",\n        \"detailsURL\": \"/dataservice/device?personality=vsmart&status=normal\",\n        \"color\": \"b0e276\",\n        \"icon\": \"images/device/device-normal.png\",\n        \"count\": 3\n      },\n      {\n        \"status\": \"new\",\n        \"name\": \"Discovered device\",\n        \"detailView\": \"dialog\",\n        \"detailsURL\": \"/dataservice/device?personality=vsmart&status=new\",\n        \"color\": \"7c8afa\",\n        \"icon\": \"images/device/device-new.png\",\n        \"count\": 0\n      }\n    ]"
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/enableSDAVC/{deviceIP}/{enable}:
+    post:
+      tags:
+      - Monitoring - Device Details
+      description: Enable/Disable SDAVC on device
+      operationId: enableSDAVCOnDevice
+      parameters:
+      - name: deviceIP
+        in: path
+        description: Device IP
+        required: true
+        schema:
+          type: string
+      - name: enable
+        in: path
+        description: Enable/Disable flag
+        required: true
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/featuresupport:
+    get:
+      tags:
+      - Monitoring - Device Details
+      description: Get device feature support summary info
+      operationId: getDeviceFeatureSupport
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cellular:
+                    type: boolean
+                    example: true
+                  sdrouting:
+                    type: boolean
+                    example: true
+                $$ref: '#/components/schemas/DeviceFeatureSupportData'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/hardwarehealth/detail:
+    get:
+      tags:
+      - Monitoring - Device Details
+      description: Get hardware health details for device
+      operationId: getHardwareHealthDetails
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device Id
+        schema:
+          type: string
+      - name: state
+        in: query
+        description: Device state
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    bfdSessions:
+                      type: string
+                      example: '3'
+                    board-serial:
+                      type: string
+                      example: '12346568'
+                    controlConnections:
+                      type: string
+                      example: '3'
+                    cpuLoadDisplay:
+                      type: string
+                      example: '39.27'
+                    device-model:
+                      type: string
+                      example: vedge-cloud
+                    device-type:
+                      type: string
+                      example: vedge
+                    hardwareState:
+                      type: string
+                      example: normal
+                    host-name:
+                      type: string
+                      example: vm11
+                    lastupdated:
+                      type: integer
+                      format: int64
+                      example: 1635371851165
+                    local-system-ip:
+                      type: string
+                      example: 172.16.255.21
+                    memUsageDisplay:
+                      type: string
+                      example: '52.0'
+                    number-vsmart-peers:
+                      type: integer
+                      format: int32
+                      example: 2
+                    ompPeers:
+                      type: string
+                      example: '2'
+                    reachability:
+                      type: string
+                      example: reachable
+                    site-id:
+                      type: string
+                      example: '100'
+                    system-ip:
+                      type: string
+                      example: 172.16.255.21
+                    uptime-date:
+                      type: integer
+                      format: int64
+                      example: 1635324240000
+                    uuid:
+                      type: string
+                      example: 63e8518c-e76f-4d5f-a4c7-28ffb669526b
+                    version:
+                      type: string
+                      example: 20.7.999-1133
+                  $$ref: '#/components/schemas/DeviceHardwareHealthDetail'
+              examples:
+                Device hardware health details:
+                  description: Device hardware health details
+                  value:
+                    data:
+                    - bfdSessions: '3'
+                      memUsageDisplay: '52.0'
+                      site-id: '100'
+                      device-type: vedge
+                      version: 20.7.999-1133
+                      hardwareState: normal
+                      uptime-date: 1635324240000
+                      uuid: 63e8518c-e76f-4d5f-a4c7-28ffb669526b
+                      lastupdated: 1635371851165
+                      reachability: reachable
+                      device-model: vedge-cloud
+                      host-name: vm11
+                      local-system-ip: 172.16.255.21
+                      cpuLoadDisplay: '39.27'
+                      controlConnections: '3'
+                      board-serial: '12346568'
+                      number-vsmart-peers: 2
+                      system-ip: 172.16.255.21
+                      ompPeers: '2'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/hardwarehealth/summary:
+    get:
+      tags:
+      - Monitoring - Device Details
+      description: Get hardware health summary for device
+      operationId: getHardwareHealthSummary
+      parameters:
+      - name: isCached
+        in: query
+        description: Status cached
+        schema:
+          type: boolean
+          default: false
+      - name: vpnId
+        in: query
+        description: VPN Id
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Device hardware health:
+                  description: Device hardware health
+                  value:
+                    data:
+                    - count: 5
+                      status: error
+                      statusList:
+                      - status: up
+                        count: 5
+                        message: 5 {normal=5, warning=0, error=0}
+                        name: normal
+                        detailsURL: /dataservice/device/hardwarehealth/detail?state=normal
+                      - status: warning
+                        count: 0
+                        message: 0 {normal=5, warning=0, error=0}
+                        name: warning
+                        detailsURL: /dataservice/device/hardwarehealth/detail?state=warning
+                      - status: down
+                        count: 0
+                        message: 0 {normal=5, warning=0, error=0}
+                        name: error
+                        detailsURL: /dataservice/device/hardwarehealth/detail?state=error
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/keyvalue:
+    get:
+      tags:
+      - Monitoring - Device Details
+      description: Get vEdge inventory as key value (key as systemIp value as hostName)
+      operationId: getDeviceListAsKeyValue
+      parameters:
+      - name: site-id
+        in: query
+        description: Optional site ID  to filter devices
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                vEdge inventory:
+                  description: vEdge inventory
+                  value:
+                    header:
+                      generatedOn: 1635297986225
+                    data:
+                    - key: 172.16.255.128
+                      value: vm128 (172.16.255.128)
+                    - key: 172.16.253.129
+                      value: vm129 (172.16.253.129)
+                    - key: 172.16.255.130
+                      value: vm130 (172.16.255.130)
+                    - key: 172.16.253.131
+                      value: vm131 (172.16.253.131)
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/models:
+    get:
+      tags:
+      - Monitoring - Device Details
+      description: Get all device models supported by the vManage
+      operationId: listAllDeviceModels
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        cpuCountAttribute:
+                          type: object
+                          properties:
+                            attributeField:
+                              type: string
+                              example: total_cpu_count
+                            enable:
+                              type: boolean
+                              example: true
+                          $$ref: '#/components/schemas/DeviceCpuCount'
+                        deviceClass:
+                          type: string
+                          example: cisco-router
+                        deviceType:
+                          type: string
+                          example: vedge
+                        displayName:
+                          type: string
+                          example: ISR4461
+                        interfaces:
+                          type: object
+                          properties:
+                            day0:
+                              type: array
+                              description: day0 interfaces
+                              example:
+                              - GigabitEthernet0/0/0
+                              items:
+                                type: string
+                                description: day0 interface
+                                example: GigabitEthernet0/0/0
+                            lan:
+                              type: array
+                              description: lan interfaces
+                              example:
+                              - GigabitEthernet
+                              - TenGigabitEthernet
+                              - Loopback
+                              items:
+                                type: string
+                                description: lan interface
+                                example: GigabitEthernet
+                            mgmt:
+                              type: array
+                              description: mgmt interfaces
+                              example:
+                              - GigabitEthernet
+                              - TenGigabitEthernet
+                              - Loopback
+                              items:
+                                type: string
+                                description: mgmt interface
+                                example: GigabitEthernet
+                            wan:
+                              type: array
+                              description: wan interfaces
+                              example:
+                              - GigabitEthernet
+                              - TenGigabitEthernet
+                              - Loopback
+                              items:
+                                type: string
+                                description: wan interface
+                                example: GigabitEthernet
+                          $$ref: '#/components/schemas/DeviceInterface'
+                        isCliSupported:
+                          type: boolean
+                          example: true
+                        name:
+                          type: string
+                          example: vedge-ISR-4461
+                        onboardCert:
+                          type: boolean
+                          example: true
+                        templateClass:
+                          type: string
+                          example: cedge
+                        templateSupported:
+                          type: boolean
+                          example: true
+                      $$ref: '#/components/schemas/DeviceModelsData'
+                  header:
+                    type: object
+                    properties:
+                      generatedOn:
+                        type: integer
+                        format: int64
+                        example: 1635224742597
+                    $$ref: '#/components/schemas/DeviceResponseHeader'
+                $$ref: '#/components/schemas/DeviceModelsResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/models/{uuid}:
+    get:
+      tags:
+      - Monitoring - Device Details
+      description: Get device model for the device
+      operationId: getDeviceModels
+      parameters:
+      - name: uuid
+        in: path
+        description: Device uuid
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device model:
+                  description: Device model
+                  value:
+                    name: vedge-cloud
+                    displayName: vEdge Cloud
+                    deviceType: vedge
+                    isCliSupported: true
+                    templateSupported: true
+                    deviceClass: viptela-router
+                    cpuCountAttribute:
+                      enable: true
+                      attributeField: linux_cpu_count
+                    onboardCert: false
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/monitor:
+    get:
+      tags:
+      - Monitoring - Device Details
+      description: Get all monitoring details of the devices
+      operationId: listAllMonitorDetailsDevices
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Monitor device details:
+                  description: Monitor device details
+                  value:
+                    header:
+                      generatedOn: 1635227574211
+                      viewKeys:
+                        uniqueKey: []
+                        preferenceKey: grid-MonitorDeviceDetails
+                      columns:
+                      - title: Status
+                        property: status
+                        display: icon
+                        iconProperty: status-icon
+                        colorProperty: status-color
+                        hideable: false
+                        dataType: string
+                      - title: Device Type
+                        property: device-type
+                        display: keyvalue
+                        keyvalueProperty: device-type
+                        keyvalue:
+                        - key: vsmart
+                          value: vSmart
+                        - key: vbond
+                          value: vBond
+                        - key: vmanage
+                          value: vManage
+                        - key: vedge
+                          value: WAN Edge
+                        dataType: string
+                      fields:
+                      - property: status
+                        dataType: string
+                        display: icon
+                      - property: host-name
+                        dataType: string
+                        display: iconAndText
+                    data:
+                    - device-model: vmanage
+                      device-type: vmanage
+                      system-ip: 169.254.10.1
+                      host-name: vm200
+                      site-id: '200'
+                      layoutLevel: 1
+                      status: normal
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/queues:
+    get:
+      tags:
+      - Monitoring - Device Details
+      description: Get synchronized queue information, returns information about syncing, queued and stuck devices
+      operationId: getSyncQueues
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Queue status:
+                  description: Queue status
+                  value:
+                    syncing: []
+                    queued: []
+                    Stuck: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/reachable:
+    get:
+      tags:
+      - Monitoring - Device Details
+      description: Get list of reachable devices
+      operationId: listReachableDevices
+      parameters:
+      - name: personality
+        in: query
+        description: personality
+        schema:
+          type: string
+        examples:
+          vedge personality:
+            description: vedge personality
+            value: vedge
+          vsmart personality:
+            description: vsmart personality
+            value: vsmart
+          vbond personality:
+            description: vbond personality
+            value: vbond
+      - name: vpnId
+        in: query
+        description: vpnId
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  availableVersions:
+                    type: array
+                    items:
+                      type: string
+                  board-serial:
+                    type: integer
+                    format: int64
+                  board_type:
+                    type: string
+                  bootloader_version:
+                    type: string
+                  build_number:
+                    type: integer
+                    format: int64
+                  certificate-not-valid-after:
+                    type: string
+                  certificate-not-valid-before:
+                    type: string
+                  certificate-status:
+                    type: string
+                  certificate-validity:
+                    type: string
+                  chassis-number:
+                    type: string
+                  chassis-serial-number:
+                    type: number
+                    format: float
+                  connectedVManages:
+                    type: array
+                    items:
+                      type: string
+                  controlConnections:
+                    type: integer
+                    format: int64
+                  controlConnectionsDown:
+                    type: integer
+                    format: int32
+                  controlConnectionsUp:
+                    type: integer
+                    format: int64
+                  cpuLoadDisplay:
+                    type: number
+                    format: float
+                  cpuState:
+                    type: string
+                  defaultVersion:
+                    type: string
+                  device-category:
+                    type: string
+                  device-groups:
+                    type: array
+                    items:
+                      type: string
+                  device-model:
+                    type: string
+                  device-os:
+                    type: string
+                  device-type:
+                    type: string
+                    example: '9'
+                  deviceId:
+                    type: string
+                  domain-id:
+                    type: integer
+                    format: int32
+                  expectedControlConnections:
+                    type: integer
+                    format: int64
+                  fips_mode:
+                    type: string
+                  firmwareAvailablePackages:
+                    type: array
+                    items:
+                      type: string
+                  firmwareAvailableVersions:
+                    type: array
+                    items:
+                      type: string
+                  firmwareVersion:
+                    type: string
+                  grid:
+                    type: integer
+                    format: int32
+                  groupId:
+                    type: array
+                    items:
+                      type: string
+                  hardwareState:
+                    type: string
+                  hasGeoData:
+                    type: boolean
+                  host-name:
+                    type: string
+                  isDeviceGeoData:
+                    type: boolean
+                  lastDataSyncTime:
+                    type: integer
+                    format: int64
+                  lastupdated:
+                    type: integer
+                    format: int64
+                  latitude:
+                    type: string
+                  layoutLevel:
+                    type: integer
+                    format: int32
+                  local-system-ip:
+                    type: string
+                  longitude:
+                    type: string
+                  memStatenormal:
+                    type: string
+                  memUsage:
+                    type: integer
+                    format: int32
+                  memUsageDisplay:
+                    type: integer
+                    format: int32
+                  model_sku:
+                    type: string
+                  mpPeers:
+                    type: integer
+                    format: int32
+                  name:
+                    type: string
+                  number-vbond-peers:
+                    type: integer
+                    format: int32
+                  number-vsmart-control-connections:
+                    type: integer
+                    format: int64
+                  number-vsmart-peers:
+                    type: integer
+                    format: int64
+                  ompPeersDown:
+                    type: integer
+                    format: int64
+                  ompPeersUp:
+                    type: integer
+                    format: int32
+                  organization-name:
+                    type: string
+                  personality:
+                    type: string
+                  platform:
+                    type: string
+                  policy-template-nam:
+                    type: string
+                  policy-template-name:
+                    type: string
+                  policy-template-version:
+                    type: string
+                  reachability:
+                    type: string
+                  site-id:
+                    type: integer
+                    format: int32
+                  sp-organization-name:
+                    type: string
+                  state:
+                    type: string
+                  state_description:
+                    type: string
+                  status:
+                    type: string
+                  statusOrder:
+                    type: integer
+                    format: int32
+                  syncCompleted:
+                    type: integer
+                    format: int64
+                  syncQueued:
+                    type: integer
+                    format: int64
+                  syncScheduled:
+                    type: integer
+                    format: int64
+                  syncState:
+                    type: string
+                  system-ip:
+                    type: string
+                  testbed_mode:
+                    type: boolean
+                  timezone:
+                    type: string
+                  token:
+                    type: string
+                  total_cpu_count:
+                    type: integer
+                    format: int64
+                  uptime:
+                    type: string
+                  uptime-date:
+                    type: integer
+                    format: int64
+                  uuid:
+                    type: string
+                  vbond:
+                    type: string
+                  vedge-list-version:
+                    type: integer
+                    format: int32
+                  version:
+                    type: string
+                  vmanage-system-ip:
+                    type: string
+                  vmanageConnectionState:
+                    type: string
+                  vsmart-list-version:
+                    type: integer
+                    format: int32
+                    example: 0
+                $$ref: '#/components/schemas/DeviceReachableData'
+              examples:
+                List of reachable devices:
+                  description: List of reachable devices
+                  value: "[\n      {\n         \"device-model\":\"vsmart\",\n         \"statusOrder\":4,\n         \"total_cpu_count\":\"2\",\n         \"groupId\":[\n            \"none\"\n         ],\n         \"certificate-not-valid-before\":\"Feb 23 02:32:17 2021 GMT\",\n         \"uuid\":\"bd7440de-aff6-4f9f-a99a-48d5f08b9fa5\",\n         \"deviceId\":\"172.16.255.19\",\n         \"syncScheduled\":1616436317638,\n         \"chassis-serial-number\":\"None\",\n         \"cpuLoad\":0.22,\n         \"state_description\":\"All daemons up\",\n         \"vsmart-list-version\":\"0\",\n         \"vbond\":\"10.0.12.26\",\n         \"ompPeersUp\":3,\n         \"syncQueued\":1616436317586,\n         \"isDeviceGeoData\":true,\n         \"device-type\":\"vsmart\",\n         \"state\":\"green\",\n         \"firmwareVersion\":\"---\",\n         \"organization-name\":\"vIPtela Inc Regression\",\n         \"longitude\":\"-122.0\",\n         \"syncCompleted\":1616436319560,\n         \"domain-id\":\"1\",\n         \"policy-template-name\":\"\",\n         \"expectedControlConnections\":1,\n         \"memUsageDisplay\":\"39.0\",\n         \"model_sku\":\"None\",\n         \"sp-organization-name\":\"vIPtela Inc Regression\",\n         \"version\":\"20.6.999-756\",\n         \"firmwareAvailablePackages\":\"[]\",\n         \"layoutLevel\":2,\n         \"bootloader_version\":\"Not applicable\",\n         \"fips_mode\":\"enabled\",\n         \"name\":\"172.16.255.19\",\n         \"controlConnectionsUp\":5,\n         \"controlConnectionsToVsmarts\":\"1\",\n         \"number-vbond-peers\":\"1\",\n         \"defaultVersion\":\"20.6.999-756\",\n         \"status\":\"normal\",\n         \"ompPeers\":\"3\",\n         \"memState\":\"normal\",\n         \"chassis-number\":\"bd7440de-aff6-4f9f-a99a-48d5f08b9fa5\",\n         \"board_type\":\"None\",\n         \"device-os\":\"next\",\n         \"local-system-ip\":\"172.16.255.19\",\n         \"timezone\":\"UTC\",\n         \"latitude\":\"45.0\",\n         \"system-ip\":\"172.16.255.19\",\n         \"site-id\":\"100\",\n         \"certificate-not-valid-after\":\"Feb 23 02:32:17 2022 GMT\",\n         \"platform\":\"x86_64\",\n         \"hardwareState\":\"--\",\n         \"board-serial\":\"12345981\",\n         \"@rid\":377,\n         \"vedge-list-version\":\"0\",\n         \"personality\":\"vsmart\",\n         \"memUsage\":39.0,\n         \"lastDataSyncTime\":1616436319524,\n         \"certificate-status\":\"Installed\",\n         \"reachability\":\"reachable\",\n         \"controlConnections\":\"5\",\n         \"controlConnectionsDown\":0,\n         \"availableVersions\":[\n            \n         ],\n         \"policy-template-version\":\"\",\n         \"number-vsmart-peers\":1,\n         \"connectedVManages\":[\n            \"172.16.255.22\"\n         ],\n         \"testbed_mode\":true,\n         \"syncState\":\"Completed\",\n         \"firmwareAvailableVersions\":[\n            \n         ],\n         \"host-name\":\"vm9\",\n         \"uptime\":\"27 days 15 hrs 59 min 37 sec\",\n         \"token\":\"-NA-\",\n         \"cpuLoadDisplay\":\"0.22\",\n         \"cpuState\":\"normal\",\n         \"certificate-validity\":\"Valid\",\n         \"number-vsmart-control-connections\":1,\n         \"vmanage-system-ip\":\"172.16.255.19\",\n         \"ompPeersDown\":0,\n         \"vmanageConnectionState\":\"connected\",\n         \"build_number\":\"756\\n\",\n         \"lastupdated\":1616436319460,\n         \"device-category\":\"controller\",\n         \"device-groups\":[\n            \"No groups\"\n         ],\n         \"hasGeoData\":true,\n         \"uptime-date\":1614045900000\n      },\n      {\n         \"device-model\":\"vsmart\",\n         \"statusOrder\":4,\n         \"total_cpu_count\":\"2\",\n         \"groupId\":[\n            \"none\"\n         ],\n         \"certificate-not-valid-before\":\"Feb 23 02:32:18 2021 GMT\",\n         \"uuid\":\"0faa6449-8ab8-4e53-a580-893f16f80738\",\n         \"deviceId\":\"172.16.255.20\",\n         \"syncScheduled\":0,\n         \"chassis-serial-number\":\"None\",\n         \"cpuLoad\":0.18,\n         \"state_description\":\"All daemons up\",\n         \"vsmart-list-version\":\"0\",\n         \"vbond\":\"10.0.12.26\",\n         \"ompPeersUp\":3,\n         \"syncQueued\":1616395493285,\n         \"isDeviceGeoData\":true,\n         \"device-type\":\"vsmart\",\n         \"state\":\"green\",\n         \"firmwareVersion\":\"---\",\n         \"organization-name\":\"vIPtela Inc Regression\",\n         \"longitude\":\"-90.0\",\n         \"syncCompleted\":1616395494540,\n         \"domain-id\":\"1\",\n         \"policy-template-name\":\"\",\n         \"expectedControlConnections\":1,\n         \"memUsageDisplay\":\"39.0\",\n         \"model_sku\":\"None\",\n         \"sp-organization-name\":\"vIPtela Inc Regression\",\n         \"version\":\"20.6.999-756\",\n         \"firmwareAvailablePackages\":\"[]\",\n         \"layoutLevel\":2,\n         \"bootloader_version\":\"Not applicable\",\n         \"fips_mode\":\"enabled\",\n         \"name\":\"172.16.255.20\",\n         \"controlConnectionsUp\":5,\n         \"controlConnectionsToVsmarts\":\"1\",\n         \"number-vbond-peers\":\"1\",\n         \"defaultVersion\":\"20.6.999-756\",\n         \"status\":\"normal\",\n         \"ompPeers\":\"3\",\n         \"memState\":\"normal\",\n         \"chassis-number\":\"0faa6449-8ab8-4e53-a580-893f16f80738\",\n         \"board_type\":\"None\",\n         \"device-os\":\"next\",\n         \"local-system-ip\":\"172.16.255.20\",\n         \"timezone\":\"UTC\",\n         \"latitude\":\"45.0\",\n         \"system-ip\":\"172.16.255.20\",\n         \"site-id\":\"200\",\n         \"certificate-not-valid-after\":\"Feb 23 02:32:18 2022 GMT\",\n         \"platform\":\"x86_64\",\n         \"hardwareState\":\"--\",\n         \"board-serial\":\"12345975\",\n         \"@rid\":393,\n         \"vedge-list-version\":\"0\",\n         \"personality\":\"vsmart\",\n         \"memUsage\":39.0,\n         \"lastDataSyncTime\":1616395494518,\n         \"certificate-status\":\"Installed\",\n         \"reachability\":\"reachable\",\n         \"controlConnections\":\"5\",\n         \"controlConnectionsDown\":0,\n         \"availableVersions\":[\n            \n         ],\n         \"policy-template-version\":\"\",\n         \"number-vsmart-peers\":1,\n         \"connectedVManages\":[\n            \"172.16.255.22\"\n         ],\n         \"testbed_mode\":true,\n         \"syncState\":\"Completed\",\n         \"firmwareAvailableVersions\":[\n            \n         ],\n         \"host-name\":\"vm10\",\n         \"uptime\":\"27 days 04 hrs 39 min 57 sec\",\n         \"token\":\"-NA-\",\n         \"cpuLoadDisplay\":\"0.18\",\n         \"cpuState\":\"normal\",\n         \"certificate-validity\":\"Valid\",\n         \"number-vsmart-control-connections\":1,\n         \"vmanage-system-ip\":\"172.16.255.20\",\n         \"ompPeersDown\":0,\n         \"vmanageConnectionState\":\"connected\",\n         \"build_number\":\"756\\n\",\n         \"lastupdated\":1616395494468,\n         \"device-category\":\"controller\",\n         \"device-groups\":[\n            \"No groups\"\n         ],\n         \"hasGeoData\":true,\n         \"uptime-date\":1614045840000\n      }\n{\n   \"device-model\":\"vedge-cloud\",\n   \"statusOrder\":4,\n   \"total_cpu_count\":\"2\",\n   \"groupId\":[\n      \"none\"\n   ],\n   \"certificate-not-valid-before\":\"Feb 23 02:32:40 2021 GMT\",\n   \"fp_cpu_count\":\"1\",\n   \"uuid\":\"fd31a48b-2908-4315-a911-a3f2f0a8da24\",\n   \"deviceId\":\"172.16.255.26\",\n   \"syncScheduled\":1616411710011,\n   \"chassis-serial-number\":\"None\",\n   \"cpuLoad\":1.04,\n   \"state_description\":\"All daemons up\",\n   \"vsmart-list-version\":\"0\",\n   \"vbond\":\"10.0.12.26\",\n   \"syncQueued\":1616411703542,\n   \"isDeviceGeoData\":false,\n   \"device-type\":\"vbond\",\n   \"state\":\"green\",\n   \"firmwareVersion\":\"---\",\n   \"organization-name\":\"vIPtela Inc Regression\",\n   \"longitude\":\"-122.777023\",\n   \"syncCompleted\":1616411711225,\n   \"memUsageDisplay\":\"63.7\",\n   \"model_sku\":\"None\",\n   \"sp-organization-name\":\"vIPtela Inc Regression\",\n   \"version\":\"20.6.999-756\",\n   \"firmwareAvailablePackages\":\"[]\",\n   \"layoutLevel\":3,\n   \"bootloader_version\":\"Not applicable\",\n   \"fips_mode\":\"enabled\",\n   \"name\":\"172.16.255.26\",\n   \"defaultVersion\":\"20.6.999-756\",\n   \"status\":\"normal\",\n   \"memState\":\"normal\",\n   \"chassis-number\":\"fd31a48b-2908-4315-a911-a3f2f0a8da24\",\n   \"board_type\":\"Sim\",\n   \"device-os\":\"next\",\n   \"local-system-ip\":\"172.16.255.26\",\n   \"timezone\":\"UTC\",\n   \"latitude\":\"37.666684\",\n   \"system-ip\":\"172.16.255.26\",\n   \"certificate-not-valid-after\":\"Feb 23 02:32:40 2022 GMT\",\n   \"platform\":\"x86_64\",\n   \"hardwareState\":\"--\",\n   \"board-serial\":\"12345979\",\n   \"@rid\":369,\n   \"vedge-list-version\":\"0\",\n   \"personality\":\"vbond\",\n   \"memUsage\":63.7,\n   \"lastDataSyncTime\":1616411711185,\n   \"certificate-status\":\"Installed\",\n   \"reachability\":\"reachable\",\n   \"linux_cpu_count\":\"1\",\n   \"availableVersions\":[\n      \n   ],\n   \"vbond-standalone\":\"false\",\n   \"connectedVManages\":[\n      \"172.16.255.22\"\n   ],\n   \"testbed_mode\":true,\n   \"syncState\":\"Completed\",\n   \"firmwareAvailableVersions\":[\n      \n   ],\n   \"host-name\":\"vm16\",\n   \"tcpd_cpu_count\":\"0\",\n   \"uptime\":\"27 days 09 hrs 09 min 40 sec\",\n   \"cpuLoadDisplay\":\"1.04\",\n   \"cpuState\":\"normal\",\n   \"certificate-validity\":\"Valid\",\n   \"vmanage-system-ip\":\"172.16.255.26\",\n   \"vmanageConnectionState\":\"connected\",\n   \"build_number\":\"756\\n\",\n   \"lastupdated\":1616411711138,\n   \"device-category\":\"controller\",\n   \"device-groups\":[\n      \"No groups\"\n   ],\n   \"hasGeoData\":true,\n   \"uptime-date\":1614045900000\n}   ]"
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/stats:
+    get:
+      tags:
+      - Monitoring - Device Details
+      description: Get stats queue information
+      operationId: getStatsQueues
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Queue status:
+                  description: Queue status
+                  value:
+                    ProcessQueue-0:
+                      syncing: []
+                      queued: []
+                      stuck: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/status:
+    get:
+      tags:
+      - Monitoring - Device Details
+      description: Get devices status for vSmart,vBond,vEdge, and cEdge
+      operationId: getAllDeviceStatus
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Device status list:
+                  description: Device status list
+                  value:
+                    header:
+                      generatedOn: 1635236849570
+                    data:
+                    - type: vSmart
+                      name: vSmart
+                      image: images/vsmart.png
+                      count: 3
+                      detailView: dialog
+                      detailsURL: /dataservice/device?personality=vsmart
+                      statusList:
+                      - status: error
+                        name: Error
+                        detailView: dialog
+                        detailsURL: /dataservice/device?personality=vsmart&status=error
+                        color: fa7c7d
+                        icon: images/device/device-error.png
+                        count: 0
+                      - status: warning
+                        name: Warning
+                        detailView: dialog
+                        detailsURL: /dataservice/device?personality=vsmart&status=warning
+                        color: f2ce60
+                        icon: images/device/device-warning.png
+                        count: 0
+                      - status: normal
+                        name: Normal
+                        detailView: dialog
+                        detailsURL: /dataservice/device?personality=vsmart&status=normal
+                        color: b0e276
+                        icon: images/device/device-normal.png
+                        count: 3
+                      - status: new
+                        name: Discovered device
+                        detailView: dialog
+                        detailsURL: /dataservice/device?personality=vsmart&status=new
+                        color: 7c8afa
+                        icon: images/device/device-new.png
+                        count: 0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/sync_status:
+    get:
+      tags:
+      - Monitoring - Device Details
+      description: Get list of currently syncing devices
+      operationId: listCurrentlySyncingDevices
+      parameters:
+      - name: groupId
+        in: query
+        description: Group Id
+        required: true
+        schema:
+          type: string
+          default: all
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                List of currently syncing devices:
+                  description: List of currently syncing devices
+                  value:
+                    header:
+                      generatedOn: 1635237704919
+                    data:
+                    - name: vedge-C8500-12X4QC
+                      templateClass: cedge
+                      displayName: C8500-12X4QC
+                      deviceType: vedge
+                      isCliSupported: true
+                      templateSupported: true
+                      deviceClass: cisco-router
+                      cpuCountAttribute:
+                        enable: true
+                        attributeField: total_cpu_count
+                      interfaces:
+                        wan:
+                        - GigabitEthernet
+                        - TenGigabitEthernet
+                        - Loopback
+                        lan:
+                        - GigabitEthernet
+                        - TenGigabitEthernet
+                        - Loopback
+                        mgmt:
+                        - GigabitEthernet
+                        - TenGigabitEthernet
+                        - Loopback
+                        day0:
+                        - GigabitEthernet0/0/0
+                      onboardCert: true
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/syncall/memorydb:
+    post:
+      tags:
+      - Monitoring - Device Details
+      description: Synchronize memory database for all devices
+      operationId: syncAllDevicesMemDB
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/tier:
+    post:
+      tags:
+      - Monitoring - Device Details
+      description: add tier
+      operationId: addTier
+      requestBody:
+        description: Tier configuration
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              tier:
+                description: tier
+                value:
+                  tierName: bronze_tenant1
+                  vpn: 1
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Inventory-write
+    get:
+      tags:
+      - Monitoring - Device Details
+      description: getTiers
+      operationId: getTiers
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/tier/{tierName}:
+    delete:
+      tags:
+      - Monitoring - Device Details
+      description: deleteTier
+      operationId: deleteTier
+      parameters:
+      - name: tierName
+        in: path
+        description: deletetier
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/tloc:
+    get:
+      tags:
+      - Monitoring - Device Details
+      description: Get TLOC status list
+      operationId: getDeviceTlocStatus
+      parameters:
+      - name: deviceId
+        in: query
+        schema:
+          type: string
+      - name: color
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  bfdSessionsDown:
+                    type: integer
+                    format: int32
+                    example: 0
+                  bfdSessionsUp:
+                    type: integer
+                    format: int32
+                    example: 5
+                  color:
+                    type: string
+                    example: red
+                  controlConnectionsDown:
+                    type: string
+                    example: vmanage
+                  controlConnectionsUp:
+                    type: integer
+                    format: int32
+                    example: 2
+                  system-ip:
+                    type: string
+                    example: 169.254.10.1
+                $$ref: '#/components/schemas/DeviceTlocDataWithBFD'
+              examples:
+                Tloc Status:
+                  description: Tloc Status
+                  value:
+                  - color: default
+                    system-ip: 172.16.255.22
+                    expectedControlConnections: 2
+                    controlConnectionsUp: 8
+                    controlConnectionsToVsmarts: 2
+                    controlConnectionsDown: 0
+                  - color: default
+                    system-ip: 172.16.255.20
+                    expectedControlConnections: 1
+                    controlConnectionsUp: 15
+                    controlConnectionsToVsmarts: 1
+                    controlConnectionsDown: 0
+                  - color: lte
+                    system-ip: 172.16.255.21
+                    bfdSessionsDown: 0
+                    controlConnectionsUp: 2
+                    controlConnectionsToVsmarts: --
+                    bfdSessionsUp: 5
+                    controlConnectionsDown: 0
+                  - color: 3g
+                    system-ip: 172.16.255.21
+                    bfdSessionsDown: 0
+                    controlConnectionsUp: 3
+                    controlConnectionsToVsmarts: --
+                    bfdSessionsUp: 5
+                    controlConnectionsDown: 0
+                  - color: 3g
+                    system-ip: 172.16.255.11
+                    bfdSessionsDown: 0
+                    controlConnectionsUp: 3
+                    controlConnectionsToVsmarts: --
+                    bfdSessionsUp: 5
+                    controlConnectionsDown: 0
+                  - color: lte
+                    system-ip: 172.16.255.11
+                    bfdSessionsDown: 0
+                    controlConnectionsUp: 2
+                    controlConnectionsToVsmarts: --
+                    bfdSessionsUp: 5
+                    controlConnectionsDown: 0
+                  - color: red
+                    system-ip: 172.16.255.11
+                    bfdSessionsDown: 0
+                    controlConnectionsUp: 2
+                    controlConnectionsToVsmarts: --
+                    bfdSessionsUp: 5
+                    controlConnectionsDown: 0
+                  - color: gold
+                    system-ip: 172.16.255.11
+                    bfdSessionsDown: 0
+                    controlConnectionsUp: 2
+                    controlConnectionsToVsmarts: --
+                    bfdSessionsUp: 5
+                    controlConnectionsDown: 0
+                  - color: lte
+                    system-ip: 172.16.255.14
+                    bfdSessionsDown: 0
+                    controlConnectionsUp: 3
+                    controlConnectionsToVsmarts: --
+                    bfdSessionsUp: 10
+                    controlConnectionsDown: 0
+                  - color: 3g
+                    system-ip: 172.16.255.16
+                    bfdSessionsDown: 0
+                    controlConnectionsUp: 3
+                    controlConnectionsToVsmarts: --
+                    bfdSessionsUp: 10
+                    controlConnectionsDown: 0
+                  - color: lte
+                    system-ip: 172.16.255.16
+                    bfdSessionsDown: 0
+                    controlConnectionsUp: 2
+                    controlConnectionsToVsmarts: --
+                    bfdSessionsUp: 9
+                    controlConnectionsDown: 0
+                  - color: default
+                    system-ip: 172.16.255.19
+                    expectedControlConnections: 1
+                    controlConnectionsUp: 15
+                    controlConnectionsToVsmarts: 1
+                    controlConnectionsDown: 0
+                  - color: lte
+                    system-ip: 172.16.255.15
+                    bfdSessionsDown: 0
+                    controlConnectionsUp: 3
+                    bfdSessionsUp: 9
+                    controlConnectionsDown: 0
+                  - color: 3g
+                    system-ip: 172.16.255.15
+                    bfdSessionsDown: 0
+                    controlConnectionsUp: 2
+                    bfdSessionsUp: 10
+                    controlConnectionsDown: 0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/tlocutil:
+    get:
+      tags:
+      - Monitoring - Device Details
+      description: Get TLOC list
+      operationId: getDeviceTlocUtil
+      parameters:
+      - name: site-id
+        in: query
+        description: Optional site ID  to filter devices
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                TLOC list:
+                  description: TLOC list
+                  value:
+                    header:
+                      generatedOn: 1635311915500
+                      title: Transport Interface Distribution
+                      viewKeys:
+                        uniqueKey: []
+                        preferenceKey: grid-TlocUtilization
+                      columns:
+                      - title: Percentage Distribution
+                        property: percentageDistribution
+                        dataType: string
+                      - title: Value
+                        property: value
+                        dataType: number
+                      fields:
+                      - property: percentageDistribution
+                        dataType: string
+                      - property: value
+                        dataType: number
+                    data:
+                    - name: less_than_10_mbps
+                      percentageDistribution: < 10 Mbps
+                      detailsURL: /dataservice/device/tlocutil/detail?util=lessthan10mbps
+                      value: 0
+                    - name: 10_mbps_100_mbps
+                      percentageDistribution: 10 Mbps - 100 Mbps
+                      detailsURL: /dataservice/device/tlocutil/detail?util=10mbps100mbps
+                      value: 0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/tlocutil/detail:
+    get:
+      tags:
+      - Monitoring - Device Details
+      description: Get detailed TLOC list
+      operationId: getDeviceTlocUtilDetails
+      parameters:
+      - name: site-id
+        in: query
+        description: Optional site ID  to filter devices
+        schema:
+          type: string
+      - name: util
+        in: query
+        description: Tloc util
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Detailed TLOC list:
+                  description: Detailed TLOC list
+                  value:
+                    header:
+                      generatedOn: 1635314596057
+                      viewKeys:
+                        uniqueKey: []
+                        preferenceKey: grid-TlocUtilizationDetails
+                      columns:
+                      - title: Average
+                        property: average
+                        hideable: false
+                        dataType: number
+                      fields:
+                      - property: system-ip
+                        dataType: string
+                      - property: average
+                        dataType: number
+                    data: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/unconfigured:
+    get:
+      tags:
+      - Monitoring - Device Details
+      description: Get wan edge devices not configured by vManage (that is, those in CLI mode)
+      operationId: getUnconfigured
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    chassis-serial-number:
+                      type: string
+                      example: SSI130300YK
+                    configuredAaaUser:
+                      type: array
+                      items:
+                        type: string
+                    device-model:
+                      type: string
+                      example: C8000v
+                    device-os:
+                      type: string
+                      example: next
+                    device-type:
+                      type: string
+                      example: vedge
+                    deviceId:
+                      type: string
+                      example: C8K-cfb84064-12e9-4f7c-b9d9-bf78ce4dfb5f
+                    devicesAttached:
+                      type: integer
+                      format: int32
+                      example: 0
+                    discoveredDeviceInterfaces:
+                      type: array
+                      items:
+                        type: string
+                    host-name:
+                      type: string
+                      example: vm5
+                    loopback:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          interfaceIP:
+                            type: string
+                            example: 127.0.0.1
+                          interfaceName:
+                            type: string
+                            example: Loopback0
+                        $$ref: '#/components/schemas/Loopback'
+                    personality:
+                      type: string
+                      example: vedge
+                    platform:
+                      type: string
+                      example: x86_64
+                    reachability:
+                      type: string
+                      example: reachable
+                      enum:
+                      - reachable
+                      - unreachable
+                    registrationDate:
+                      type: integer
+                      format: int64
+                      example: 1590186370340
+                    serialNumber:
+                      type: string
+                      example: '12345712'
+                    site-id:
+                      type: string
+                      example: '500'
+                    state:
+                      type: string
+                      example: green
+                    status:
+                      type: string
+                      example: normal
+                      enum:
+                      - error
+                      - warning
+                      - normal
+                      - new
+                    system-ip:
+                      type: string
+                      example: 172.16.255.15
+                    templateStatus:
+                      type: string
+                      example: Success
+                    uuid:
+                      type: string
+                      example: C8K-cfb84064-12e9-4f7c-b9d9-bf78ce4dfb5f
+                    validity:
+                      type: string
+                      example: valid
+                      enum:
+                      - invalid
+                      - staging
+                      - valid
+                      - prestaging
+                    version:
+                      type: string
+                      example: 17.06.01.0.1422
+                    wanInterfaces:
+                      type: array
+                      items:
+                        type: string
+                  $$ref: '#/components/schemas/Device'
+              examples:
+                Unconfigured devices:
+                  description: Unconfigured devices
+                  value:
+                  - uuid: 3e314ce8-cbaf-4fc7-882b-bacd16bd9a33
+                    systemIp: 172.16.255.11
+                    deviceType: vedge
+                  - uuid: a9d47933-ee30-4e9f-bee6-a2ac81a0b284
+                    systemIp: 172.16.255.21
+                    deviceType: vedge
+                  - uuid: e417ea1d-43dd-4285-8077-f7e20975568a
+                    systemIp: 172.16.255.14
+                    deviceType: vedge
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/unreachable:
+    get:
+      tags:
+      - Monitoring - Device Details
+      description: Get list of unreachable devices
+      operationId: listUnreachableDevices
+      parameters:
+      - name: personality
+        in: query
+        description: Device personality (vedge OR vsmart OR vbond... )
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                List of unreachable devices:
+                  description: List of unreachable devices
+                  value:
+                    header:
+                      generatedOn: 1635316653935
+                      viewKeys:
+                        uniqueKey:
+                        - system-ip
+                        preferenceKey: grid-vManage Control Connections
+                      columns:
+                      - title: Reachability
+                        property: reachability
+                        colorProperty: reachability
+                        color:
+                        - key: reachable
+                          value: '616161'
+                        - key: unreachable
+                          value: ef5350
+                        - key: auth-failed
+                          value: ffb300
+                        width: 100
+                        minWidth: 90
+                        dataType: string
+                      - title: Hostname
+                        property: host-name
+                        display: iconAndText
+                        iconProperty: device-type
+                        hideable: false
+                        icon:
+                        - key: vmanage
+                          value: images/vmanage_table.png
+                        - key: vedge
+                          value: images/vedge_table.png
+                        - key: vedge-vbond
+                          value: images/vedge-vbond_table.png
+                        - key: vsmart
+                          value: images/vsmart_table.png
+                        - key: vbond
+                          value: images/vbond_table.png
+                        width: 150
+                        dataType: string
+                      fields:
+                      - property: board-serial
+                        dataType: string
+                      - property: lastupdated
+                        dataType: date
+                    data: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/unreachable/{deviceIP}:
+    delete:
+      tags:
+      - Monitoring - Device Details
+      description: Delete unreachable device
+      operationId: removeUnreachableDevice
+      parameters:
+      - name: deviceIP
+        in: path
+        description: Device IP
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/vedgeinventory/detail:
+    get:
+      tags:
+      - Monitoring - Device Details
+      description: Get detailed vEdge inventory
+      operationId: getVedgeInventory
+      parameters:
+      - name: status
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  chasisNumber:
+                    type: string
+                    example: 0a452cf0-5db7-47c2-80bf-7e619e294a6b
+                  deviceType:
+                    type: string
+                    example: vedge
+                  local-system-ip:
+                    type: string
+                    example: 172.16.255.14
+                  serialNumber:
+                    type: string
+                    example: '12345707'
+                  site-id:
+                    type: string
+                    example: '400'
+                  system-ip:
+                    type: string
+                    example: 0.0.0.0
+                  validity:
+                    type: string
+                    example: valid
+                $$ref: '#/components/schemas/VedgeInventoryData'
+              examples:
+                vEdge Inventory:
+                  description: vEdge Inventory
+                  value:
+                  - site-id: '400'
+                    serialNumber: '12346576'
+                    validity: valid
+                    host-name: vm4
+                    deviceType: vedge
+                    local-system-ip: 172.16.255.14
+                    chasisNumber: 59414e3c-24cd-44de-8072-261224224c25
+                    system-ip: 172.16.255.14
+                  - site-id: '100'
+                    serialNumber: '12346568'
+                    validity: valid
+                    host-name: vm11
+                    deviceType: vedge
+                    local-system-ip: 172.16.255.21
+                    chasisNumber: 63e8518c-e76f-4d5f-a4c7-28ffb669526b
+                    system-ip: 172.16.255.21
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/vedgeinventory/summary:
+    get:
+      tags:
+      - Monitoring - Device Details
+      description: Get vEdge inventory
+      operationId: getVedgeInventorySummary
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                vEdge inventory:
+                  description: vEdge inventory
+                  value:
+                    header:
+                      generatedOn: 1635390164998
+                      title: WAN Edge Inventory
+                      viewKeys:
+                        uniqueKey: []
+                        preferenceKey: grid-vedgeInventory
+                      columns:
+                      - title: Inventory List
+                        property: list
+                        dataType: string
+                      fields:
+                      - property: list
+                        dataType: string
+                    data:
+                    - name: Total
+                      list: Total
+                      value: 0
+                      detailsURL: /dataservice/device/vedgeinventory/detail
+                    - name: Authorized
+                      list: Authorized
+                      detailsURL: /dataservice/device/vedgeinventory/detail?status=authorized
+                      value: 0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/vmanage:
+    get:
+      tags:
+      - Monitoring - Device Details
+      description: Get vManage system IP
+      operationId: getVManageSystemIP
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      ipAddress:
+                        type: string
+                    $$ref: '#/components/schemas/DeviceVmanageResponseData'
+                  header:
+                    type: object
+                    properties:
+                      generatedOn:
+                        type: integer
+                        format: int64
+                        example: 1635224742597
+                    $$ref: '#/components/schemas/DeviceResponseHeader'
+                $$ref: '#/components/schemas/DeviceVmanageResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /v1/device/analyzeCliConfig:
+    post:
+      tags:
+      - Monitoring - Device Details
+      description: Analyze CLI Config for device
+      operationId: analyzeCliConfig
+      requestBody:
+        description: CLI Configs for device
+        content:
+          application/json:
+            schema:
+              required:
+              - deviceUuid
+              type: object
+              properties:
+                cli:
+                  type: string
+                  description: modeled cli config
+                  example: interface GigabitEthernet3\n no shutdown\n negotiation auto\nexit\n
+                deviceUuid:
+                  type: string
+                  description: device UUID
+                  example: d8ac4576-7085-4d51-a6a1-f09600755677
+                ioscli:
+                  type: string
+                  description: unmodeled cli config
+                  example: vrf definition Mgmt-intf\n address-family ipv4\n  exit-address-family\n !\n!
+              description: 'Payload/body schema for analyze cli config '
+              $$ref: '#/components/schemas/AnalyzeCliConfig'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                CLI Configs example:
+                  description: CLI Configs example
+                  value:
+                    cliOutput: "interface GigabitEthernet3\n no shutdown\n negotiation auto\nexit"
+                    iosCliOutput: "rf definition Mgmt-intf\n address-family ipv4\n  exit-address-family\n !\n!"
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Inventory-read,Device Inventory-write,Template Deploy-read,Template Deploy-write,Device Inventory > Edge-read,Device Inventory > Controller-read,Device Inventory > Edge-write
+  /v1/device/runningIosCliConfig/{deviceUUID}:
+    get:
+      tags:
+      - Monitoring - Device Details
+      description: Get Running iOS CLI Config for device
+      operationId: getRunningIosCliConfig
+      parameters:
+      - name: deviceUUID
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                iOS Running iOs CLI Config example:
+                  description: iOS Running iOs CLI Config example
+                  value:
+                    runningIosCliConfig: "ip host vbond 10.0.12.26 2001:A0:C::1A\npae\nip ssh pubkey-chain\n username admin\n  key-hash ssh-rsa 97DECCBC0021386299C5806E2C18BFFA vtest@sdwan-laas-vt43\nipv6 route ::/0 2001:A0:C::C\nline con 0\n exec-timeout 0 0\nline vty 0 4\n exec-timeout 0 0"
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Inventory-read,Device Inventory-write,Template Deploy-read,Template Deploy-write,Device Inventory > Edge-read,Device Inventory > Controller-read,Device Inventory > Edge-write
+  /v1/device/unsupportedCliConfig/{deviceUUID}:
+    get:
+      tags:
+      - Monitoring - Device Details
+      description: Get Unsupported CLI Config for device
+      operationId: getUnsupportedCliConfig
+      parameters:
+      - name: deviceUUID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: highlightUnsupportedClis
+        in: query
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                Unsupported CLI Config example:
+                  description: Unsupported CLI Config example
+                  value:
+                    unsupportedCliConfig: "ip host vbond 10.0.12.26 2001:A0:C::1A\npae\nip ssh pubkey-chain\n username admin\n  key-hash ssh-rsa 97DECCBC0021386299C5806E2C18BFFA vtest@sdwan-laas-vt43\nipv6 route ::/0 2001:A0:C::C\nline con 0\n exec-timeout 0 0\nline vty 0 4\n exec-timeout 0 0"
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Inventory-read,Device Inventory-write,Template Deploy-read,Template Deploy-write,Device Inventory > Edge-read,Device Inventory > Controller-read,Device Inventory > Edge-write

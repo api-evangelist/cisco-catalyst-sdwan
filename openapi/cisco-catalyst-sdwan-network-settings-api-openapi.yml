@@ -1,0 +1,219 @@
+openapi: 3.2.0
+info:
+  title: Others Network Settings API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Network Settings
+paths:
+  /v1/network-hierarchy/{hierarchyId}/network-settings/cybervisioncenters:
+    get:
+      tags:
+      - Network Settings
+      description: Get Cybervision Centers for Network Hierarchy Node
+      operationId: getCybervisionCentersForNetworkHierarchyNode
+      parameters:
+      - name: hierarchyId
+        in: path
+        description: Network Hierarchy Id
+        required: true
+        schema:
+          pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                CVC Network Hierarchy GET Response Example:
+                  description: CVC Network Hierarchy GET Response Example
+                  value:
+                    data:
+                    - solution: sdwan
+                      id: 362ae435-5c10-4af5-afcf-cf0614e74f0e
+                      type: cvcenters
+                      createdBy: admin
+                      createdOn: 1714074157235
+                      lastUpdatedBy: admin
+                      lastUpdatedOn: 1714149352945
+                      payload:
+                        data:
+                          cvCenterInstances:
+                          - cvId:
+                              value: 756e6c4b-8522-4aeb-9d28-85e44e180ba5
+                            cvName:
+                              value: New CV
+                            cvAddress:
+                              value: 127.0.0.1
+                            cvVPNInterface:
+                              value: 1
+                            cvKey:
+                              value: eyJQU0siOiJ3al9lX0RuRk10b0M5MVNuaFdlbWFzVmV2ZVFUdDNCRSIsIlZlcnNpb24iOiI1LjAuMC0yMDI0MDQxMDA4MzciLCJGaWxlbmFtZSI6ImN2aW94LWFhcmNoNjQudGFyIn0=
+                            deletable:
+                              value: true
+                            remoteServerId:
+                              value: 8125ca2d-95ce-4c3a-96b8-975892ef5f02
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Network Settings > CVC-read
+    post:
+      tags:
+      - Network Settings
+      description: Create Cybervision Center for Network Hierarchy Node
+      operationId: createCybervisionCenterForNetworkHierarchyNode
+      parameters:
+      - name: hierarchyId
+        in: path
+        description: Network Hierarchy ID
+        required: true
+        schema:
+          pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+          type: string
+      requestBody:
+        description: Create cybervision center for network hierarchy node
+        content:
+          application/json:
+            schema:
+              type: string
+            examples:
+              CVC Network Hierarchy POST Request Example:
+                description: CVC Network Hierarchy POST Request Example
+                value:
+                  data:
+                    cvCenterInstances:
+                    - cvName:
+                        value: New CV
+                      cvAddress:
+                        value: 127.0.0.1
+                      cvKey:
+                        value: XXX
+                      cvVPNInterface:
+                        value: 1
+                    - cvId:
+                        value: XXX
+                      cvName:
+                        value: Edited CV
+                      cvAddress:
+                        value: 127.0.0.1
+                      cvKey:
+                        value: XXX
+                      cvVPNInterface:
+                        value: 1
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                CVC Network Hierarchy POST Response Example:
+                  description: CVC Network Hierarchy POST Response Example
+                  value:
+                    id: 64C3EF06-b09a-DeFa-Ab26-a1cc4Ef0D51b
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Network Settings > CVC-write
+  /v1/network-hierarchy/{hierarchyId}/network-settings/cybervisioncenters/id:
+    get:
+      tags:
+      - Network Settings
+      description: Get Network Hierarchy Cybervision Center ID By Name
+      operationId: GetCybervisionCenterIDByName
+      parameters:
+      - name: hierarchyId
+        in: path
+        description: Network Hierarchy Id
+        required: true
+        schema:
+          type: string
+      - name: cvName
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                CVC Network Hierarchy GET CVC Id by Name Response Example:
+                  description: CVC Network Hierarchy GET CVC Id by Name Response Example
+                  value:
+                    id: 64C3EF06-b09a-DeFa-Ab26-a1cc4Ef0D51b
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Network Settings > CVC-read
+  /v1/network-hierarchy/{hierarchyId}/network-settings/cybervisioncenters/{cvId}:
+    delete:
+      tags:
+      - Network Settings
+      description: Delete Cybervision Center for Network Hierarchy Node
+      operationId: deleteCybervisionCenterForNetworkHierarchyNode
+      parameters:
+      - name: hierarchyId
+        in: path
+        description: Network Hierarchy Id
+        required: true
+        schema:
+          pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+          type: string
+      - name: cvId
+        in: path
+        description: Cybervision Center ID
+        required: true
+        schema:
+          pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Network Settings > CVC-write

@@ -1,0 +1,371 @@
+openapi: 3.2.0
+info:
+  title: Others Configuration - App Registry API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Configuration - App Registry
+paths:
+  /app-registry/app:
+    get:
+      tags:
+      - Configuration - App Registry
+      description: Get All the App for the given conditions
+      operationId: getAllAppList
+      parameters:
+      - name: filterAttributeType
+        in: query
+        schema:
+          type: string
+      - name: filterAttributeValue
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                properties:
+                  empty:
+                    type: boolean
+                items:
+                  type: object
+                $$ref: '#/components/schemas/ApplicationsResponseNoUUID'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /app-registry/app/bulk/endpoint:
+    put:
+      tags:
+      - Configuration - App Registry
+      description: Edit App Details for multiple App uuids
+      operationId: editAppInBulkByUuid
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              type: object
+              additionalProperties:
+                type: object
+                properties:
+                  valueType:
+                    type: string
+                    enum:
+                    - ARRAY
+                    - OBJECT
+                    - STRING
+                    - NUMBER
+                    - 'TRUE'
+                    - 'FALSE'
+                    - 'NULL'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                required:
+                - _rid
+                - business_relevance
+                - common_family
+                - common_family_display
+                - common_name
+                - common_name_display
+                - nbar_family
+                - nbar_name
+                - qosmos_family
+                - qosmos_name
+                - traffic_class
+                - uuid
+                type: object
+                properties:
+                  _rid:
+                    type: string
+                    example: 0:PolicyAppListsNode:1675729045113:1700
+                  business_relevance:
+                    type: string
+                    example: business-irrelevant
+                  common_family:
+                    type: string
+                    example: web
+                  common_family_display:
+                    type: string
+                    example: Web
+                  common_name:
+                    type: string
+                    example: zulily
+                  common_name_display:
+                    type: string
+                    example: Zulily
+                  nbar_family:
+                    type: string
+                    example: web
+                  nbar_name:
+                    type: string
+                    example: zulily
+                  qosmos_family:
+                    type: string
+                    example: web
+                  qosmos_name:
+                    type: string
+                    example: zulily
+                  traffic_class:
+                    type: string
+                    example: transactional-data
+                  uuid:
+                    type: string
+                    format: uuid
+                    example: 345fa8c9-6115-434b-b1f7-2c1d97f09f91
+                $$ref: '#/components/schemas/PayloadItems'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /app-registry/app/category:
+    get:
+      tags:
+      - Configuration - App Registry
+      description: Get the stats of all type of apps
+      operationId: getAppListCategory
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                properties:
+                  empty:
+                    type: boolean
+                items:
+                  type: object
+                $$ref: '#/components/schemas/ApplicationsResponseNoUUID'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /app-registry/app/discoveredapps:
+    get:
+      tags:
+      - Configuration - App Registry
+      description: Get All network discovered apps
+      operationId: getNetworkDiscoveredApps
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                properties:
+                  empty:
+                    type: boolean
+                items:
+                  type: object
+                $$ref: '#/components/schemas/ApplicationsResponseNoUUID'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /app-registry/app/filtermap:
+    get:
+      tags:
+      - Configuration - App Registry
+      description: Get all available filters for applist
+      operationId: getAttributeMappingForApps
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Status:
+                  description: Status
+                  value:
+                    data:
+                    - applicationSource:
+                      - hardcoded
+                      applicationFamily:
+                      - instant-messaging
+                      - game
+                      businessRelevance:
+                      - business-irrelevant
+                      - business-relevant
+                      - default
+                      trafficClass:
+                      - multimedia-conferencing
+                      - network-control
+                      applicationList: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /app-registry/application/{app-uuid}:
+    get:
+      tags:
+      - Configuration - App Registry
+      description: Get  app detail for particular App uuid
+      operationId: getAppByUuid
+      parameters:
+      - name: app-uuid
+        in: path
+        description: App uuid
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                properties:
+                  empty:
+                    type: boolean
+                items:
+                  type: object
+                $$ref: '#/components/schemas/ApplicationsResponseNoUUID'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /app-registry/saasfeed:
+    get:
+      tags:
+      - Configuration - App Registry
+      description: Get All Saas feed details
+      operationId: getActiveSaasFeeds
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Status:
+                  description: Status
+                  value:
+                    data:
+                    - appName: AAAA
+                      status: enable
+                      feedCount: 123
+                      feedId: someId
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /app-registry/saasfeed/app/configure:
+    put:
+      tags:
+      - Configuration - App Registry
+      description: Get All the App for the given conditions
+      operationId: disableorEnableSaasFeedForSelectedApp
+      requestBody:
+        description: Onboard
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              onboarding-payload:
+                description: onboarding-payload
+                value:
+                - feedId: someId
+                  enable: true
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy
+  /app-registry/saasfeed/app/{feedId}:
+    get:
+      tags:
+      - Configuration - App Registry
+      description: Get All Saas feed details of a particular application
+      operationId: getAllSaasFeedForSelectedApp
+      parameters:
+      - name: feedId
+        in: path
+        description: Feed ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                properties:
+                  empty:
+                    type: boolean
+                items:
+                  type: object
+                $$ref: '#/components/schemas/ApplicationsResponseNoUUID'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

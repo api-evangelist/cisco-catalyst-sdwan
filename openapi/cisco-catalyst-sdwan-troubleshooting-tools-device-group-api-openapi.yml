@@ -1,0 +1,790 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Troubleshooting Tools - Device Group API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Troubleshooting Tools - Device Group
+paths:
+  /group:
+    get:
+      tags:
+      - Troubleshooting Tools - Device Group
+      description: Retrieve device group list
+      operationId: listDeviceGroupList
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Example:
+                  description: Example
+                  value:
+                    header:
+                      generatedOn: 1717579556360
+                    data:
+                    - groupId: all
+                      groupName: All
+                    - groupId: none
+                      groupName: No groups
+                  $$ref: '#/components/examples/ComViptelaVmanageServerGroupDevicegroupapiResponseExampleGroup200'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /group/device:
+    get:
+      tags:
+      - Troubleshooting Tools - Device Group
+      description: Retrieve device groups
+      operationId: listDeviceGroups
+      parameters:
+      - name: siteId
+        in: query
+        description: siteId
+        schema:
+          type: string
+        example: 400
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Example:
+                  description: Example
+                  value:
+                    header: {}
+                    data:
+                    - name: All
+                      sshuri: dataservice/newssh/devices
+                      uri: dataservice/device
+                      mapuri: dataservice/group/map/devices
+                      linkuri: dataservice/group/map/devices/links
+                    - name: No groups
+                      sshuri: dataservice/group/devices?groupId=none&ssh=true
+                      uri: dataservice/group/devices?groupId=none
+                      mapuri: dataservice/group/map/devices?groupId=none
+                      linkuri: dataservice/group/map/devices/links?groupId=none
+                  $$ref: '#/components/examples/ComViptelaVmanageServerGroupDevicegroupapiResponseExampleGroupdevice200'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                Example:
+                  description: Example
+                  value: 'can''t parse JSON.  Raw result:
+
+
+                    Invalid Query Param siteId'
+                  $$ref: '#/components/examples/ComViptelaVmanageServerGroupDevicegroupapiResponseExampleGroupdevice400'
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /group/devices:
+    get:
+      tags:
+      - Troubleshooting Tools - Device Group
+      description: Retrieve devices in group
+      operationId: listGroupDevices
+      parameters:
+      - name: groupId
+        in: query
+        description: groupId
+        schema:
+          type: string
+        example: none
+      - name: ssh
+        in: query
+        schema:
+          type: boolean
+          default: false
+      - name: vpnId
+        in: query
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              vpn:
+                type: string
+            description: This is the valid list of VPN-IDs
+            $$ref: '#/components/schemas/VPNID'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Example:
+                  description: Example
+                  value:
+                    header:
+                      generatedOn: 1717581207668
+                      viewKeys:
+                        uniqueKey:
+                        - system-ip
+                        preferenceKey: grid-Device
+                      columns:
+                      - title: Hostname
+                        property: host-name
+                        display: iconAndText
+                        iconProperty: device-type
+                        hideable: false
+                        icon:
+                        - key: vmanage
+                          value: images/vmanage_table.png
+                        - key: vedge
+                          value: images/vedge_table.png
+                        - key: vedge-vbond
+                          value: images/vedge-vbond_table.png
+                        - key: vsmart
+                          value: images/vsmart_table.png
+                        - key: vbond
+                          value: images/vbond_table.png
+                        width: 150
+                        dataType: string
+                      - title: Device Model
+                        property: device-model
+                        display: multiColumns
+                        hideable: false
+                        width: 100
+                        dataType: deviceModel
+                      - title: Site ID
+                        property: site-id
+                        hideable: false
+                        width: 70
+                        dataType: numberStr
+                      - title: Site Name
+                        property: site-name
+                        hideable: false
+                        width: 70
+                        dataType: string
+                      - title: System IP
+                        property: system-ip
+                        hideable: false
+                        width: 110
+                        dataType: ipv4
+                      - title: Chassis Number/ID
+                        property: uuid
+                        width: 220
+                        dataType: string
+                      - title: Reachability
+                        property: reachability
+                        display: multiColumns
+                        color:
+                        - key: reachable
+                          value: '616161'
+                          property: reachability
+                        - key: unreachable
+                          value: ef5350
+                          property: reachability
+                        - key: auth-failed
+                          value: ffb300
+                          property: reachability
+                        - key: staging
+                          value: ffb300
+                          property: validity
+                        width: 150
+                        minWidth: 150
+                        dataType: string
+                      - title: State
+                        property: state
+                        display: iconAndToolTip
+                        iconProperty: state
+                        toolTipProperty: state_description
+                        defaultPropertyKey: reachability
+                        defaultPropertyValue: reachable
+                        icon:
+                        - key: green
+                          value: images/device_state_green.png
+                        - key: red
+                          value: images/device_state_red.png
+                        - key: yellow
+                          value: images/device_state_yellow.png
+                        - key: default
+                          value: images/device_state_other.png
+                        width: 20
+                        dataType: string
+                      - title: BFD
+                        property: bfdSessions
+                        width: 75
+                        minWidth: 65
+                        dataType: numberStr
+                      - title: Control
+                        property: controlConnections
+                        width: 75
+                        minWidth: 65
+                        dataType: numberStr
+                      - title: Version
+                        property: version
+                        width: 150
+                        dataType: string
+                      - title: Up Since
+                        property: uptime-date
+                        displayFormat: DD MMM YYYY h:mm:ss A z
+                        inputFormat: unix-time
+                        width: 200
+                        dataType: date
+                      - title: Device Groups
+                        property: device-groups
+                        width: 100
+                        dataType: array
+                      - title: Connected Manager
+                        property: connectedVManages
+                        width: 500
+                        dataType: array
+                      fields:
+                      - property: host-name
+                        dataType: string
+                        display: iconAndText
+                      - property: device-model
+                        dataType: deviceModel
+                        display: multiColumns
+                      - property: site-id
+                        dataType: numberStr
+                      - property: site-name
+                        dataType: string
+                      - property: system-ip
+                        dataType: ipv4
+                      - property: uuid
+                        dataType: string
+                      - property: reachability
+                        dataType: string
+                        display: multiColumns
+                      - property: state
+                        dataType: string
+                        display: iconAndToolTip
+                      - property: bfdSessions
+                        dataType: numberStr
+                      - property: controlConnections
+                        dataType: numberStr
+                      - property: version
+                        dataType: string
+                      - property: uptime-date
+                        dataType: date
+                      - property: device-groups
+                        dataType: array
+                      - property: connectedVManages
+                        dataType: array
+                      - property: number-vsmart-peers
+                        dataType: number
+                      - property: board-serial
+                        dataType: string
+                      - property: lastupdated
+                        dataType: date
+                    data:
+                    - deviceId: 172.16.255.22
+                      system-ip: 172.16.255.22
+                      host-name: vm12
+                      reachability: reachable
+                      status: normal
+                      personality: vmanage
+                      device-type: vmanage
+                      device-groups:
+                      - No groups
+                      lastupdated: 1717579612528
+                      domain-id: '0'
+                      board-serial: '12345982'
+                      certificate-validity: Valid
+                      max-controllers: '0'
+                      uuid: fdf4baa6-af9e-4b5b-b933-b0026b268b62
+                      controlConnections: '8'
+                      device-model: vmanage
+                      version: 20.15.0-81
+                      connectedVManages:
+                      - 172.16.255.22
+                      site-id: '200'
+                      latitude: '37.666684'
+                      longitude: '-122.777023'
+                      isDeviceGeoData: false
+                      platform: x86_64
+                      uptime-date: 1717394160000
+                      statusOrder: 4
+                      device-os: next
+                      validity: valid
+                      state: green
+                      state_description: All daemons up
+                      model_sku: None
+                      local-system-ip: 172.16.255.22
+                      total_cpu_count: '16'
+                      testbed_mode: true
+                      layoutLevel: 1
+                    - deviceId: 172.16.255.20
+                      system-ip: 172.16.255.20
+                      host-name: vm10
+                      reachability: reachable
+                      status: normal
+                      personality: vsmart
+                      device-type: vsmart
+                      device-groups:
+                      - No groups
+                      lastupdated: 1717579421535
+                      domain-id: '1'
+                      board-serial: '12345980'
+                      certificate-validity: Valid
+                      uuid: c37dbf3e-0f9b-4899-9ae1-80e9cfe7e2dc
+                      controlConnections: '9'
+                      device-model: vsmart
+                      version: 20.15.0-81
+                      connectedVManages:
+                      - 172.16.255.22
+                      site-id: '200'
+                      ompPeers: '6'
+                      latitude: '37.666684'
+                      longitude: '-122.777023'
+                      isDeviceGeoData: false
+                      platform: x86_64
+                      uptime-date: 1717393920000
+                      statusOrder: 4
+                      device-os: next
+                      validity: valid
+                      state: green
+                      state_description: All daemons up
+                      model_sku: None
+                      local-system-ip: 172.16.255.20
+                      total_cpu_count: '2'
+                      testbed_mode: true
+                      layoutLevel: 2
+                    - deviceId: 172.16.255.19
+                      system-ip: 172.16.255.19
+                      host-name: vm9
+                      reachability: reachable
+                      status: normal
+                      personality: vsmart
+                      device-type: vsmart
+                      device-groups:
+                      - No groups
+                      lastupdated: 1717579456824
+                      domain-id: '1'
+                      board-serial: '12345992'
+                      certificate-validity: Valid
+                      uuid: ca2481c9-5318-4db4-becb-f24d49102dbd
+                      controlConnections: '9'
+                      device-model: vsmart
+                      version: 20.15.0-81
+                      connectedVManages:
+                      - 172.16.255.22
+                      site-id: '100'
+                      ompPeers: '6'
+                      latitude: '37.666684'
+                      longitude: '-122.777023'
+                      isDeviceGeoData: false
+                      platform: x86_64
+                      uptime-date: 1717393920000
+                      statusOrder: 4
+                      device-os: next
+                      validity: valid
+                      state: green
+                      state_description: All daemons up
+                      model_sku: None
+                      local-system-ip: 172.16.255.19
+                      total_cpu_count: '2'
+                      testbed_mode: true
+                      layoutLevel: 2
+                    - deviceId: 172.16.255.26
+                      system-ip: 172.16.255.26
+                      host-name: vm16
+                      reachability: reachable
+                      status: normal
+                      personality: vbond
+                      device-type: vbond
+                      device-groups:
+                      - No groups
+                      lastupdated: 1717579844688
+                      board-serial: '12345984'
+                      certificate-validity: Valid
+                      uuid: eb6b265f-7505-4fa6-9c15-d228a9ed8c85
+                      controlConnections: '12'
+                      device-model: vedge-cloud
+                      version: 20.15.0-81
+                      connectedVManages:
+                      - 172.16.255.22
+                      latitude: '37.666684'
+                      longitude: '-122.777023'
+                      isDeviceGeoData: false
+                      platform: mips64
+                      uptime-date: 1717393920000
+                      statusOrder: 4
+                      device-os: next
+                      validity: valid
+                      state: green
+                      state_description: All daemons up
+                      model_sku: None
+                      local-system-ip: 172.16.255.26
+                      total_cpu_count: '2'
+                      linux_cpu_count: '1'
+                      testbed_mode: true
+                      layoutLevel: 3
+                    - deviceId: 172.16.255.11
+                      system-ip: 172.16.255.11
+                      host-name: vm1
+                      reachability: reachable
+                      status: normal
+                      personality: vedge
+                      device-type: vedge
+                      timezone: UTC
+                      device-groups:
+                      - No groups
+                      lastupdated: 1717579450372
+                      bfdSessionsUp: 3
+                      domain-id: '1'
+                      board-serial: '12345979'
+                      certificate-validity: Valid
+                      max-controllers: '0'
+                      uuid: 6861dd90-75aa-4fac-af70-734efa6fb98a
+                      bfdSessions: '3'
+                      controlConnections: '3'
+                      device-model: vedge-cloud
+                      version: 20.9.5-801
+                      connectedVManages:
+                      - 172.16.255.22
+                      site-id: '100'
+                      ompPeers: '2'
+                      latitude: '37.666684'
+                      longitude: '-122.777023'
+                      isDeviceGeoData: false
+                      platform: x86_64
+                      uptime-date: 1717393860000
+                      statusOrder: 4
+                      device-os: next
+                      validity: valid
+                      state: green
+                      state_description: All daemons up
+                      model_sku: None
+                      local-system-ip: 172.16.255.11
+                      total_cpu_count: '2'
+                      linux_cpu_count: '1'
+                      testbed_mode: true
+                      layoutLevel: 4
+                    - deviceId: 172.16.255.21
+                      system-ip: 172.16.255.21
+                      host-name: vm11
+                      reachability: reachable
+                      status: normal
+                      personality: vedge
+                      device-type: vedge
+                      timezone: UTC
+                      device-groups:
+                      - No groups
+                      lastupdated: 1717579460776
+                      bfdSessionsUp: 3
+                      domain-id: '1'
+                      board-serial: '12345981'
+                      certificate-validity: Valid
+                      max-controllers: '0'
+                      uuid: e3582c64-2d19-4eb7-aa5f-9733e3f683a1
+                      bfdSessions: '3'
+                      controlConnections: '3'
+                      device-model: vedge-cloud
+                      version: 20.9.5-801
+                      connectedVManages:
+                      - 172.16.255.22
+                      site-id: '100'
+                      ompPeers: '2'
+                      latitude: '37.666684'
+                      longitude: '-122.777023'
+                      isDeviceGeoData: false
+                      platform: x86_64
+                      uptime-date: 1717393860000
+                      statusOrder: 4
+                      device-os: next
+                      validity: valid
+                      state: green
+                      state_description: All daemons up
+                      model_sku: None
+                      local-system-ip: 172.16.255.21
+                      total_cpu_count: '2'
+                      linux_cpu_count: '1'
+                      testbed_mode: true
+                      layoutLevel: 4
+                    - deviceId: 172.16.255.14
+                      system-ip: 172.16.255.14
+                      host-name: vm4
+                      reachability: reachable
+                      status: normal
+                      personality: vedge
+                      device-type: vedge
+                      timezone: UTC
+                      device-groups:
+                      - No groups
+                      lastupdated: 1717579482048
+                      bfdSessionsUp: 4
+                      domain-id: '1'
+                      board-serial: '12345987'
+                      certificate-validity: Valid
+                      max-controllers: '0'
+                      uuid: 11dcf4b2-18b8-44d0-9393-7e840580cac9
+                      bfdSessions: '4'
+                      controlConnections: '3'
+                      device-model: vedge-cloud
+                      version: 20.9.5-801
+                      connectedVManages:
+                      - 172.16.255.22
+                      site-id: '400'
+                      ompPeers: '2'
+                      latitude: '37.666684'
+                      longitude: '-122.777023'
+                      isDeviceGeoData: false
+                      platform: x86_64
+                      uptime-date: 1717393860000
+                      statusOrder: 4
+                      device-os: next
+                      validity: valid
+                      state: green
+                      state_description: All daemons up
+                      model_sku: None
+                      local-system-ip: 172.16.255.14
+                      total_cpu_count: '2'
+                      linux_cpu_count: '1'
+                      testbed_mode: true
+                      layoutLevel: 4
+                    - deviceId: 172.16.255.15
+                      system-ip: 172.16.255.15
+                      host-name: vm5
+                      reachability: reachable
+                      status: normal
+                      personality: vedge
+                      device-type: vedge
+                      timezone: UTC +0000
+                      device-groups:
+                      - No groups
+                      lastupdated: 1717569761962
+                      bfdSessionsUp: 4
+                      domain-id: '1'
+                      board-serial: '12345715'
+                      certificate-validity: Valid
+                      max-controllers: '0'
+                      uuid: C8K-5e87e5c3-0923-4364-a729-d65d40298d76
+                      bfdSessions: '4'
+                      controlConnections: '3'
+                      device-model: vedge-C8000V
+                      version: 17.15.01.0.1097
+                      connectedVManages:
+                      - 172.16.255.22
+                      site-id: '500'
+                      ompPeers: '2'
+                      latitude: '37.666684'
+                      longitude: '-122.777023'
+                      isDeviceGeoData: false
+                      platform: x86_64
+                      uptime-date: 1717394100000
+                      statusOrder: 4
+                      validity: valid
+                      state: green
+                      state_description: All daemons up
+                      model_sku: None
+                      local-system-ip: 172.16.255.15
+                      total_cpu_count: '4'
+                      linux_cpu_count: '1'
+                      testbed_mode: false
+                      layoutLevel: 4
+                    - deviceId: 172.16.255.16
+                      system-ip: 172.16.255.16
+                      host-name: vm6
+                      reachability: reachable
+                      status: normal
+                      personality: vedge
+                      device-type: vedge
+                      timezone: UTC
+                      device-groups:
+                      - No groups
+                      lastupdated: 1717579488170
+                      bfdSessionsUp: 4
+                      domain-id: '1'
+                      board-serial: '12345989'
+                      certificate-validity: Valid
+                      max-controllers: '0'
+                      uuid: 970b3f78-a713-49e4-890d-beffe5db7dd0
+                      bfdSessions: '4'
+                      controlConnections: '3'
+                      device-model: vedge-cloud
+                      version: 20.9.5-801
+                      connectedVManages:
+                      - 172.16.255.22
+                      site-id: '600'
+                      ompPeers: '2'
+                      latitude: '37.666684'
+                      longitude: '-122.777023'
+                      isDeviceGeoData: false
+                      platform: x86_64
+                      uptime-date: 1717393860000
+                      statusOrder: 4
+                      device-os: next
+                      validity: valid
+                      state: green
+                      state_description: All daemons up
+                      model_sku: None
+                      local-system-ip: 172.16.255.16
+                      total_cpu_count: '2'
+                      linux_cpu_count: '1'
+                      testbed_mode: true
+                      layoutLevel: 4
+                  $$ref: '#/components/examples/ComViptelaVmanageServerGroupDevicegroupapiResponseExampleGroupdevices200'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /group/map/devices:
+    get:
+      tags:
+      - Troubleshooting Tools - Device Group
+      description: Retrieve group devices for map
+      operationId: listGroupDevicesForMap
+      parameters:
+      - name: groupId
+        in: query
+        description: groupId
+        schema:
+          type: string
+        example: none
+      - name: vpnId
+        in: query
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              vpn:
+                type: string
+            description: This is the valid list of VPN-IDs
+            $$ref: '#/components/schemas/VPNID'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Map devices example:
+                  description: Map devices example
+                  value:
+                    data:
+                    - deviceId: 172.16.255.22
+                      system-ip: 172.16.255.22
+                      host-name: vm12
+                      reachability: reachable
+                      status: normal
+                      personality: vmanage
+                      device-type: vmanage
+                      timezone: UTC
+                      device-groups:
+                      - No groups
+                      lastupdated: 1654591560526
+                      domain-id: '0'
+                      board-serial: '12345982'
+                      certificate-validity: Valid
+                      max-controllers: '0'
+                      uuid: 3d93d480-a8e6-4e88-bcf4-dfa31a0b4f9a
+                      controlConnections: '8'
+                      device-model: vmanage
+                      version: 20.10.999-1966
+                      connectedVManages:
+                      - 172.16.255.22
+                      site-id: '200'
+                      latitude: '37.666684'
+                      longitude: '-122.777023'
+                      isDeviceGeoData: false
+                      platform: x86_64
+                      uptime-date: 1652859000000
+                      statusOrder: 4
+                      device-os: next
+                      validity: valid
+                      state: green
+                      state_description: All daemons up
+                      model_sku: None
+                      local-system-ip: 172.16.255.22
+                      total_cpu_count: '4'
+                      testbed_mode: true
+                      layoutLevel: 1
+                  $$ref: '#/components/examples/ComViptelaVmanageServerGroupDevicegroupapiResponseExampleMapdevices'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /group/map/devices/links:
+    get:
+      tags:
+      - Troubleshooting Tools - Device Group
+      description: Retrieve devices in group for map
+      operationId: listGroupLinksForMap
+      parameters:
+      - name: groupId
+        in: query
+        description: groupId
+        schema:
+          type: string
+        example: none
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Example:
+                  description: Example
+                  value:
+                    links:
+                    - linkKey: 172.16.255.19:default - 172.16.255.22:default
+                      source: 172.16.255.22
+                      target: 172.16.255.19
+                      linkType: control
+                      group: 1
+                      status: up
+                      linkKeyDisplay: 172.16.255.19 (default) - 172.16.255.22 (default)
+                  $$ref: '#/components/examples/ComViptelaVmanageServerGroupDevicegroupapiResponseExampleMapdeviceslinks'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

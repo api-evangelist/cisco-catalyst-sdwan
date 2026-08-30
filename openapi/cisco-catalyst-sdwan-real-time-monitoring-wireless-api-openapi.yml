@@ -1,0 +1,209 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - Wireless API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - Wireless
+paths:
+  /device/wireless/client:
+    get:
+      tags:
+      - Real-Time Monitoring - Wireless
+      description: Get wireless clients from device
+      operationId: getWirelessClients
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Wireless client:
+                  description: Wireless client
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.15
+                      vdevice-host-name: vm5
+                      wlan-id: '1'
+                      mac-address: 24:77:03:89:9b:f8
+                      ssid: rf4k3ap
+                      band: band-24ghz
+                      status: '0'
+                      ip-address: 192.168.1.1
+                      device-type: Android
+                      vdevice-dataKey: 172.16.255.15
+                      rssi: -51
+                      lastupdated: 1660894960587
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/wireless/radio:
+    get:
+      tags:
+      - Real-Time Monitoring - Wireless
+      description: Get wireless Radios from device
+      operationId: getWirelessRadios
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Wireless Radio:
+                  description: Wireless Radio
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.15
+                      vdevice-host-name: vm5
+                      band: band-24ghz
+                      channel: 11
+                      channel-bandwidth: chan-bw-160mhz
+                      client-count: 110
+                      lastupdated: 1660898493410
+                      vdevice-dataKey: 172.16.255.15
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/wireless/ssid:
+    get:
+      tags:
+      - Real-Time Monitoring - Wireless
+      description: Get wireless SSID from device
+      operationId: getWirelessSsid
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Wireless SSID:
+                  description: Wireless SSID
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.15
+                      vdevice-host-name: vm5
+                      wlan-id: '1'
+                      ssid: rf4k3ap
+                      vlan-id: 1
+                      band: band-24ghz
+                      admin-up: 'true'
+                      oper-up: 'true'
+                      client-count: 110
+                      max-client-count: 200
+                      lastupdated: 1660910032581
+                      vdevice-dataKey: 172.16.255.15
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/wireless/status:
+    get:
+      tags:
+      - Real-Time Monitoring - Wireless
+      description: Get wireless status from device
+      operationId: getWirelessStatus
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Wireless status:
+                  description: Wireless status
+                  value:
+                    data:
+                    - vdevice-name: 172.16.255.15
+                      vdevice-host-name: vm5
+                      wlan-id: '1'
+                      mac-address: 24:77:03:89:9b:f8
+                      ssid: rf4k3ap
+                      band: band-24ghz
+                      status: '0'
+                      ip-address: 192.168.1.1
+                      device-type: Android
+                      vdevice-dataKey: 172.16.255.15
+                      rssi: -51
+                      lastupdated: 1660894960587
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write

@@ -1,0 +1,970 @@
+openapi: 3.2.0
+info:
+  title: Cisco Catalyst Sdwan Configuration - Ise Server API
+  version: 26.1.0+2026-01-06
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  description: 'Operations tagged Configuration - Ise Server across 2 of this provider''s published API definitions: cisco-catalyst-sdwan-partner-integrations-openapi.json, cisco-catalyst-sdwan-ux-1-0-configuration-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /dataservice
+tags:
+- name: Configuration - Ise Server
+paths:
+  /ise/connect:
+    get:
+      tags:
+      - Configuration - Ise Server
+      description: Check if the configured ISE server is reachable
+      operationId: connect_ConfigurationIseServer_1203
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  VersionInfo:
+                    type: object
+                    properties:
+                      currentServerVersion:
+                        type: string
+                        example: '1.2'
+                      link:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: https://172.27.216.141:9060/ers/config/adminuser/versioninfo
+                          rel:
+                            type: string
+                            example: self
+                          type:
+                            type: string
+                            example: application/json
+                        $$ref: '#/components/schemas/LinkObject'
+                      supportedVersions:
+                        type: string
+                        example: 1.0,1.1,1.2
+                    $$ref: '#/components/schemas/VersionInformation'
+                description: Response from ISE ERS version info api
+                $$ref: '#/components/schemas/ConnectResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    servers:
+    - url: /dataservice
+  /ise/credentials:
+    put:
+      tags:
+      - Configuration - Ise Server
+      description: update Ise server credentials
+      operationId: updateIseServerCredentials
+      requestBody:
+        description: Ise Server with possibly new values for properties
+        content:
+          application/json:
+            schema:
+              required:
+              - destinationVpn
+              - iseServerIP
+              - password
+              - sgt
+              - userAndUserGroup
+              - userName
+              - vpn
+              - vpnIpSubnet
+              type: object
+              properties:
+                activeDirectoryDomain:
+                  type: string
+                  example: SDWAN-IDENTITY.CISCO.COM
+                destinationVpn:
+                  type: string
+                  example: '0'
+                iseCertName:
+                  type: string
+                  example: iseCertificate
+                iseRootCert:
+                  type: string
+                iseServerIP:
+                  type: string
+                  example: 172.27.216.141
+                joinPoint:
+                  type: string
+                  example: SDWAN-IDENTITY
+                password:
+                  type: string
+                  example: testPassword
+                pxGridCertName:
+                  type: string
+                  example: pxGridCertificate
+                pxGridRootCert:
+                  type: string
+                sgt:
+                  type: string
+                  example: 'false'
+                userAndUserGroup:
+                  type: string
+                  example: 'true'
+                userName:
+                  type: string
+                  example: admin
+                vpn:
+                  type: string
+                  example: '0'
+                vpnIpSubnet:
+                  type: string
+                  example: 192.168.1.0/24
+              $$ref: '#/components/schemas/IseServer'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: boolean
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+      - Configuration - Ise Server
+      description: Add Ise server credentials
+      operationId: addIseServerCredentials
+      requestBody:
+        description: Ise Server
+        content:
+          application/json:
+            schema:
+              required:
+              - destinationVpn
+              - iseServerIP
+              - password
+              - sgt
+              - userAndUserGroup
+              - userName
+              - vpn
+              - vpnIpSubnet
+              type: object
+              properties:
+                activeDirectoryDomain:
+                  type: string
+                  example: SDWAN-IDENTITY.CISCO.COM
+                destinationVpn:
+                  type: string
+                  example: '0'
+                iseCertName:
+                  type: string
+                  example: iseCertificate
+                iseRootCert:
+                  type: string
+                iseServerIP:
+                  type: string
+                  example: 172.27.216.141
+                joinPoint:
+                  type: string
+                  example: SDWAN-IDENTITY
+                password:
+                  type: string
+                  example: testPassword
+                pxGridCertName:
+                  type: string
+                  example: pxGridCertificate
+                pxGridRootCert:
+                  type: string
+                sgt:
+                  type: string
+                  example: 'false'
+                userAndUserGroup:
+                  type: string
+                  example: 'true'
+                userName:
+                  type: string
+                  example: admin
+                vpn:
+                  type: string
+                  example: '0'
+                vpnIpSubnet:
+                  type: string
+                  example: 192.168.1.0/24
+              $$ref: '#/components/schemas/IseServer'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: boolean
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    get:
+      tags:
+      - Configuration - Ise Server
+      description: Get Ise server credentials
+      operationId: getIseServerCredentials
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                required:
+                - destinationVpn
+                - iseServerIP
+                - password
+                - sgt
+                - userAndUserGroup
+                - userName
+                - vpn
+                - vpnIpSubnet
+                type: object
+                properties:
+                  activeDirectoryDomain:
+                    type: string
+                    example: SDWAN-IDENTITY.CISCO.COM
+                  destinationVpn:
+                    type: string
+                    example: '0'
+                  iseCertName:
+                    type: string
+                    example: iseCertificate
+                  iseRootCert:
+                    type: string
+                  iseServerIP:
+                    type: string
+                    example: 172.27.216.141
+                  joinPoint:
+                    type: string
+                    example: SDWAN-IDENTITY
+                  password:
+                    type: string
+                    example: testPassword
+                  pxGridCertName:
+                    type: string
+                    example: pxGridCertificate
+                  pxGridRootCert:
+                    type: string
+                  sgt:
+                    type: string
+                    example: 'false'
+                  userAndUserGroup:
+                    type: string
+                    example: 'true'
+                  userName:
+                    type: string
+                    example: admin
+                  vpn:
+                    type: string
+                    example: '0'
+                  vpnIpSubnet:
+                    type: string
+                    example: 192.168.1.0/24
+                $$ref: '#/components/schemas/IseServer'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    servers:
+    - url: /dataservice
+  /ise/credentials/iseandpxgrid:
+    delete:
+      tags:
+      - Configuration - Ise Server
+      description: Delete PxGrid and Ise information on vManage. Also Deletes PxGrid Client on ISE
+      operationId: deleteIseAndPxGridAccount
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: boolean
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    servers:
+    - url: /dataservice
+  /ise/credentials/pxgrid:
+    get:
+      tags:
+      - Configuration - Ise Server
+      description: Get PxGrid account
+      operationId: getPxGridAccount
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                required:
+                - pxGridPassword
+                - pxGridServerIp
+                - pxGridUserName
+                - status
+                type: object
+                properties:
+                  AccessSecret:
+                    type: string
+                    example: aB8rj1m1lp
+                  description:
+                    type: string
+                    example: pxgrid infor
+                  deviceType:
+                    type: string
+                    example: vsmart
+                  nodeName:
+                    type: string
+                    example: ~ise-admin-ise-1
+                  pxGridHostName:
+                    type: string
+                    example: ISE-1.rtpaaa.net
+                  pxGridPassword:
+                    type: string
+                    example: NJkl00jklkJk
+                  pxGridServerIp:
+                    type: string
+                    example: 172.27.16.141
+                  pxGridUserName:
+                    type: string
+                    example: testName
+                  restBaseURL:
+                    type: string
+                    example: https://ISE-1.rtpaaa.net:8910/pxgrid/ise/config/trustsec
+                  status:
+                    type: string
+                    example: created
+                description: pxgrid information for making pxgrid api calls
+                $$ref: '#/components/schemas/PxGridInfo'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+      - Configuration - Ise Server
+      description: Delete PxGrid account information
+      operationId: deletePxGrid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: boolean
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    servers:
+    - url: /dataservice
+  /ise/credentials/pxgrid/cert:
+    get:
+      tags:
+      - Configuration - Ise Server
+      description: Retrieves Pxgrid Certificate
+      operationId: getPxgridCert
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                Cert:
+                  description: Cert
+                  value: '-----BEGIN CERTIFICATE-----
+
+                    MIIF7zCCA9egAwIBAgIQZiToABE+v71LjsuIg3EjqTANBgkqhkiG9w0BAQ0FADCB
+
+                    iTELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExETAPBgNVBAcTCFNh
+
+                    biBKb3v/3QMfoLFz004vv7vBf4VcpQQ8Bc
+
+                    TATYW0iy5jt+YNgvZj2HjYiOhwpMalGqlhBJMgljgNmupReAccQyw01hbPIG9vBK
+
+                    xWMSk/AFVb1Ctv7Q3MUV/1mZyTM14TUZbtDd1/lxIHBR7LKhMJqcjOOcNBFlkdXO
+
+                    6BaP2RPL6dw2x92ddnRtzpAPfx2c1R51rELPpenX0SNLoS0=
+
+                    -----END CERTIFICATE-----'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    servers:
+    - url: /dataservice
+  /ise/credentials/vsmart/sync:
+    post:
+      tags:
+      - Configuration - Ise Server
+      description: Send pxGrid and ISE server configuration to vSmarts
+      operationId: syncVsmart
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: push_file_template_configuration-9101ae23-c48b-4c33-af3a-4444e4a63b02
+                description: Response for a vsmart sync with the task id for the push from vManage to vSmarts
+                $$ref: '#/components/schemas/VsmartSyncResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    servers:
+    - url: /dataservice
+  /ise/pxgrid/activate:
+    post:
+      tags:
+      - Configuration - Ise Server
+      description: Activate pxGrid account
+      operationId: accountActivate
+      requestBody:
+        description: description for pxgrid node
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                  example: This is a description
+                pxGridPassword:
+                  type: string
+                  example: vjvR4vnzoLSAFPn9
+                pxGridUserName:
+                  type: string
+                  example: vIPtela_Inc_Regression_testUser123
+              description: Body for PxGrid node activate on ISE
+              $$ref: '#/components/schemas/ActivateBody'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accountState:
+                    type: string
+                    example: PENDING
+                  version:
+                    type: string
+                    example: 2.0.3.24
+                description: Response from PxGrid node activation on ISE, account PENDING on activated ENABLED after approve
+                $$ref: '#/components/schemas/ActivateResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    servers:
+    - url: /dataservice
+  /ise/pxgrid/approve:
+    put:
+      tags:
+      - Configuration - Ise Server
+      description: Approve pxGrid account
+      operationId: approve
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: boolean
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    servers:
+    - url: /dataservice
+  /ise/pxgrid/create:
+    post:
+      tags:
+      - Configuration - Ise Server
+      description: Create pxGrid account
+      operationId: accountCreate
+      requestBody:
+        description: name for pxgrid node
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nodeName:
+                  type: string
+                  example: testUser123
+              description: Body for PxGrid node create on ISE
+              $$ref: '#/components/schemas/CreateBody'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  nodeName:
+                    type: string
+                    example: vIPtela_Inc_Regression_testUser123
+                  password:
+                    type: string
+                    example: vjvR4vnzoLSAFPn9
+                  userName:
+                    type: string
+                    example: vIPtela_Inc_Regression_testUser123
+                description: Response from PxGrid node creation on ISE
+                $$ref: '#/components/schemas/CreateResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    servers:
+    - url: /dataservice
+  /template/policy/ise/identity/deleteAllLists:
+    delete:
+      tags:
+      - Configuration - Ise Server
+      description: Delete all lists of the specified list type
+      operationId: deleteAllLists
+      requestBody:
+        description: type of list
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  example: identity
+              description: Body for deleteAllLists call, generic api for deleting all lists of a specified listType
+              $$ref: '#/components/schemas/DeleteAllListsBody'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: boolean
+              examples:
+                Delete All Lists:
+                  description: Delete All Lists
+                  value: true
+                Delete Some Or No Lists:
+                  description: Delete Some Or No Lists
+                  value: false
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    servers:
+    - url: /dataservice
+  /template/policy/ise/identity/referenced/{listType}:
+    get:
+      tags:
+      - Configuration - Ise Server
+      description: Get all referenced Lists
+      operationId: getListReference
+      parameters:
+      - name: listType
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    description:
+                      type: string
+                      example: test
+                    entries:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          userGroup:
+                            type: string
+                            example: SDWAN-IDENTITY.CISCO.COM/Users/Schema Admins
+                        description: list
+                        $$ref: '#/components/schemas/Entry'
+                    infoTag:
+                      type: string
+                    isActivatedByVsmart:
+                      type: boolean
+                      example: false
+                    lastUpdated:
+                      type: integer
+                      format: int32
+                      example: 1643067620
+                    listId:
+                      type: string
+                      format: uuid
+                      example: 851cb243-d0da-4d7f-bdf9-124d979eadb9
+                    name:
+                      type: string
+                      example: universal
+                    owner:
+                      type: string
+                      example: admin
+                    readOnly:
+                      type: boolean
+                      example: false
+                    referenceCount:
+                      type: integer
+                      format: int32
+                      example: 1
+                    references:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                            example: 0836d356-b89a-4fb9-abbc-1bb14d270ac8
+                          type:
+                            type: string
+                            example: zoneBasedFW
+                        description: single policy where list is referenced
+                        $$ref: '#/components/schemas/Reference'
+                    type:
+                      type: string
+                      example: identity
+                    version:
+                      type: string
+                      example: '0'
+                  description: A single list and where it is referenced
+                  $$ref: '#/components/schemas/ReferencedList'
+              examples:
+                Referenced Lists Example:
+                  description: Referenced Lists Example
+                  value:
+                  - listId: 851cb243-d0da-4d7f-bdf9-124d979eadb9
+                    name: corporate_users
+                    type: identity
+                    description: Corporate user identity list
+                    entries:
+                    - userGroup: CORP.CISCO.COM/Users/Domain Admins
+                    - userGroup: CORP.CISCO.COM/Users/Security Admins
+                    lastUpdated: 1643067620
+                    owner: admin
+                    readOnly: false
+                    version: '1'
+                    infoTag: corporate-identity-v1
+                    referenceCount: 2
+                    references:
+                    - id: 0836d356-b89a-4fb9-abbc-1bb14d270ac8
+                      type: zoneBasedFW
+                    - id: f7a2c4e1-3d5b-4c9a-8e7f-2b1a9c6d4e8f
+                      type: accessPolicy
+                    isActivatedByVsmart: true
+                  - listId: a42f8e91-7c3d-4b2a-9e5f-6d8c1a4b7e9f
+                    name: guest_users
+                    type: identity
+                    description: Guest user identity list
+                    entries:
+                    - userGroup: GUEST.CISCO.COM/Users/Guest Users
+                    lastUpdated: 1643068000
+                    owner: security_admin
+                    readOnly: true
+                    version: '0'
+                    infoTag: guest-identity-default
+                    referenceCount: 1
+                    references:
+                    - id: b8c9d2e3-4f5a-6b7c-8d9e-0f1a2b3c4d5e
+                      type: trafficPolicy
+                    isActivatedByVsmart: false
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    servers:
+    - url: /dataservice
+  /template/policy/ise/identity/sgt:
+    get:
+      tags:
+      - Configuration - Ise Server
+      description: Get trustsec Scalable Group Tags
+      operationId: sgts
+      responses:
+        '200':
+          description: All Scalable Group Tags
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  securityGroups:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        description:
+                          type: string
+                          example: Any Security Group
+                        id:
+                          type: string
+                          example: 92bb1950-8c01-11e6-996c-525400b48521
+                        name:
+                          type: string
+                          example: ANY
+                        tag:
+                          type: integer
+                          format: int32
+                          example: 65535
+                      $$ref: '#/components/schemas/SecurityGroup'
+                description: Security Groups Returned from ISE
+                $$ref: '#/components/schemas/SGTResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    servers:
+    - url: /dataservice
+  /template/policy/ise/identity/usergroups:
+    post:
+      tags:
+      - Configuration - Ise Server
+      description: Get all identity user groups
+      operationId: getIdentityUserGroups
+      requestBody:
+        description: Get Users Groups from ISE associated with Active Directory Domain. Body can be an empty object or null to return all User Groups. For filtering a group must be specified, you cannot use a regex.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filter:
+                  type: string
+                  example: Cert Publishers
+              $$ref: '#/components/schemas/UserGroupsBody'
+            examples:
+              User Group Filter:
+                description: User Group Filter
+                value:
+                  filter: Cert Publishers
+              User Group Filter Empty Braces:
+                description: User Group Filter Empty Braces
+                value: {}
+              User Group Filter No Entry:
+                description: User Group Filter No Entry
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      ERSActiveDirectoryGroups:
+                        type: object
+                        properties:
+                          groups:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                  example: b1.com/Builtin/Administrators
+                                sid:
+                                  type: string
+                                  example: b1.com/S-1-5-32-544
+                                type:
+                                  type: string
+                                  example: BUILTIN, DOMAIN LOCAL
+                              $$ref: '#/components/schemas/UsergroupObject'
+                        $$ref: '#/components/schemas/ERSActiveDirectoryGroups'
+                    description: Data Object for Users Groups call
+                    $$ref: '#/components/schemas/UserGroupsDataObject'
+                  header:
+                    type: object
+                    properties:
+                      columns:
+                        type: object
+                        example: {}
+                      fields:
+                        type: object
+                        example: {}
+                      generatedOn:
+                        type: integer
+                        format: int32
+                        example: 1643067620
+                      viewKeys:
+                        type: object
+                        example: {}
+                    description: Header for Response
+                    $$ref: '#/components/schemas/HeaderObject'
+                description: User Groups Data from ISE active directory domain
+                $$ref: '#/components/schemas/UserGroupsResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    servers:
+    - url: /dataservice
+  /template/policy/ise/identity/users:
+    post:
+      tags:
+      - Configuration - Ise Server
+      description: Get all identity users
+      operationId: getIdentityUsers
+      requestBody:
+        description: Get Users from ISE associated with Active Directory Domain. Body can be empty object or null to return all users. For filtering can be like the example with a regex or a specific user.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filter:
+                  type: string
+              description: Users body with regex filter for which users to retrieve from ISE
+              $$ref: '#/components/schemas/UsersBody'
+            examples:
+              User Filter:
+                description: User Filter
+                value:
+                  filter: admin
+              User Filter Wild Card:
+                description: User Filter Wild Card
+                value:
+                  filter: a*
+              User Filter Empty Braces:
+                description: User Filter Empty Braces
+                value: {}
+              User Filter No Entry:
+                description: User Filter No Entry
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      ERSActiveDirectoryUsers:
+                        type: object
+                        properties:
+                          users:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                adUserSamAccountName:
+                                  type: string
+                                  example: guests
+                              description: Object containing the users name
+                              $$ref: '#/components/schemas/UserObject'
+                        $$ref: '#/components/schemas/ERSActiveDirectoryUsers'
+                    description: Data Object for Users get call
+                    $$ref: '#/components/schemas/UsersDataObject'
+                  header:
+                    type: object
+                    properties:
+                      columns:
+                        type: object
+                        example: {}
+                      fields:
+                        type: object
+                        example: {}
+                      generatedOn:
+                        type: integer
+                        format: int32
+                        example: 1643067620
+                      viewKeys:
+                        type: object
+                        example: {}
+                    description: Header for Response
+                    $$ref: '#/components/schemas/HeaderObject'
+                description: Users returned from ISE active directory domain
+                $$ref: '#/components/schemas/UsersResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    servers:
+    - url: /dataservice
+x-refined-from:
+- cisco-catalyst-sdwan-partner-integrations-openapi.json
+- cisco-catalyst-sdwan-ux-1-0-configuration-openapi.json

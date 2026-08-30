@@ -1,0 +1,166 @@
+openapi: 3.2.0
+info:
+  title: Others SmartLicensing - Templates API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: SmartLicensing - Templates
+paths:
+  /v1/smart-licensing/association:
+    get:
+      tags:
+      - SmartLicensing - Templates
+      description: Get the devices associated with a template
+      operationId: getDevicesForTemplate
+      parameters:
+      - name: templateId
+        in: query
+        description: template Id
+        schema:
+          type: string
+        example: ae7e7b38-d8aa-4c56-a25e-80c73e68ec36
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Example:
+                  description: Example
+                  value:
+                    association:
+                    - template: ae7e7b38-d8aa-4c56-a25e-80c73e68ec36
+                      devices: []
+                  $$ref: '#/components/examples/ComViptelaVmanageServerSmartlicensingSmartlicensingapiResponseExampleAssociationresp'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /v1/smart-licensing/template:
+    post:
+      tags:
+      - SmartLicensing - Templates
+      description: Create and assign license template.
+      operationId: saveTemplate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                licenseTemplate:
+                  type: object
+                  properties:
+                    licenseType:
+                      type: string
+                      example: postpaid
+                    licenses:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          display_name:
+                            type: string
+                            example: 'Routing DNA Premier: Tier 3'
+                          tag:
+                            type: string
+                            example: regid.2020-10.com.cisco.DSTACK_T3_P,1.0_4fbf7891-fdee-4b78-9d70-696b260ef347
+                        $$ref: '#/components/schemas/SaveTemplateRequestLicenseTemplateLicenses'
+                    saAccount:
+                      type: string
+                      example: '316448'
+                    saName:
+                      type: string
+                      example: testaccount1.viptela.com
+                    subscriptionsUsed:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          subscription_id:
+                            type: string
+                            example: 3432DFGDGFD
+                        $$ref: '#/components/schemas/SaveTemplateRequestLicenseTemplateSubscriptionsUsed'
+                    templateName:
+                      type: string
+                      example: TestTemplate
+                    useExistingTemplate:
+                      type: boolean
+                      example: false
+                    uuid:
+                      type: array
+                      items:
+                        type: string
+                    vaAccount:
+                      type: string
+                      example: '702546'
+                    vaName:
+                      type: string
+                      example: vManage_Test_Postpaid
+                  $$ref: '#/components/schemas/SaveTemplateRequestLicenseTemplate'
+              $$ref: '#/components/schemas/SaveTemplateRequest'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true
+  /v1/smart-licensing/template/{templateId}:
+    delete:
+      tags:
+      - SmartLicensing - Templates
+      description: Delete a license template
+      operationId: deleteTemplate
+      parameters:
+      - name: templateId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      deprecated: true

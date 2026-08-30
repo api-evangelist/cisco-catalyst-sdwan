@@ -1,0 +1,217 @@
+openapi: 3.2.0
+info:
+  title: Others Configuration - Feature Certificate API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Configuration - Feature Certificate
+paths:
+  /featurecertificate/certificate:
+    get:
+      tags:
+      - Configuration - Feature Certificate
+      description: 'Get feature cert from cEdge device<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
+      operationId: getDeviceCertificate
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device feature cert:
+                  description: Device feature cert
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Certificates-write
+    put:
+      tags:
+      - Configuration - Feature Certificate
+      description: 'Upload feature cert for cEdge device<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
+      operationId: installFeatureCertificate
+      requestBody:
+        description: Install feature cert request for cEdge
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Feature cert request:
+                description: Feature cert request
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Certificates-write
+  /featurecertificate/devicecsr:
+    put:
+      tags:
+      - Configuration - Feature Certificate
+      description: 'Create CSR for cEdge device<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
+      operationId: genDeviceCsr
+      requestBody:
+        description: CSR request for cEdge
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              CSR request:
+                description: CSR request
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Certificates-write
+    get:
+      tags:
+      - Configuration - Feature Certificate
+      description: 'Get CSR from cEdge device<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
+      operationId: getDeviceCsr
+      parameters:
+      - name: deviceId
+        in: query
+        description: Device Id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device CSR:
+                  description: Device CSR
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Certificates-write
+  /featurecertificate/revoke:
+    put:
+      tags:
+      - Configuration - Feature Certificate
+      description: 'Revoke feature cert from cEdge device<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
+      operationId: revokeFeatureCertificate
+      requestBody:
+        description: Revoking feature cert request for cEdge
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Revoking feature cert request:
+                description: Revoking feature cert request
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Task Id:
+                  description: Task Id
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Certificates-write
+  /featurecertificate/syslogconfig:
+    get:
+      tags:
+      - Configuration - Feature Certificate
+      description: 'Get Feature CA state<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
+      operationId: getFeatureCaState
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Feature CA state:
+                  description: Feature CA state
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Certificates-write

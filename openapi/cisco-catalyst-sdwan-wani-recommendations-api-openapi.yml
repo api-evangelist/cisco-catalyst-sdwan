@@ -1,0 +1,342 @@
+openapi: 3.2.0
+info:
+  title: Others Wani Recommendations API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Wani Recommendations
+paths:
+  /policy/wani/recommendation/process:
+    post:
+      tags:
+      - Wani Recommendations
+      summary: Apply recommendation to a centralized policy
+      description: 'Applies recommendations to a centralized policy '
+      operationId: applyWaniRecommendation
+      parameters:
+      - name: key
+        in: query
+        description: Key from vAnalytics to retrieve recommendation json
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                required:
+                - notValidRecommendationIds
+                - notValidSites
+                - processId
+                - waniPolicyId
+                type: object
+                properties:
+                  notValidRecommendationIds:
+                    type: string
+                    example: abc, xyz
+                  notValidSites:
+                    type: string
+                    example: '200'
+                  processId:
+                    type: string
+                    example: vsmart_policy_config-8978b772-183d-424e-b9ac-e633b8ffe516
+                  waniPolicyId:
+                    type: string
+                    format: uuid
+                    example: 083b83e4-165d-45a8-947e-ba141d9129a2
+                $$ref: '#/components/schemas/ApplyRecommendationRes'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /wani/recommendations:
+    get:
+      tags:
+      - Wani Recommendations
+      summary: Get recommendations from WANI
+      description: API to get the recommendations obtained from WANI for a given tenant. This returns only valid recommendations based on expiry. It filters out recommendations that are inactive.
+      operationId: getWaniRecommendations
+      parameters:
+      - name: siteId
+        in: query
+        description: The specific site id to get recommendations for, if empty get recommendations for all sites
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                required:
+                - recommendations
+                type: object
+                properties:
+                  recommendations:
+                    type: array
+                    example:
+                    - siteName: SITE_400
+                      siteId: '400'
+                      count: 2
+                    - siteName: SITE_500
+                      siteId: '500'
+                      count: 6
+                    items:
+                      type: object
+                      properties:
+                        count:
+                          type: integer
+                          format: int32
+                          example: 6
+                        siteId:
+                          type: string
+                          example: '500'
+                        siteName:
+                          type: string
+                          example: SITE_500
+                      example:
+                      - siteName: SITE_400
+                        siteId: '400'
+                        count: 2
+                      - siteName: SITE_500
+                        siteId: '500'
+                        count: 6
+                      $$ref: '#/components/schemas/RecommendationsResponseRecommendations'
+                  totalRecommendationCount:
+                    type: integer
+                    format: int32
+                    example: 8
+                $$ref: '#/components/schemas/RecommendationsResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /wani/recommendations/applied:
+    get:
+      tags:
+      - Wani Recommendations
+      summary: Get applied vManage recommendations.
+      description: 'Per tenant api to check which Wani recommendations have been applied for a given tenant '
+      operationId: getAppliedWaniRecommendations
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                properties:
+                  empty:
+                    type: boolean
+                items:
+                  required:
+                  - actionId
+                  - appClassName
+                  - last updated
+                  - recommendationDef
+                  - siteId
+                  - state
+                  type: object
+                  properties:
+                    actionId:
+                      type: string
+                      example: MYhj3JBjAr
+                    appClassName:
+                      type: string
+                      example: office365
+                    last updated:
+                      type: string
+                      example: 09 Apr 2023 21:31:51 UTC
+                    recommendationDef:
+                      type: string
+                      example:
+                        tenantId: jSZn6hVkvr
+                        actionId: MYhj3JBjAr
+                        actionType: SR
+                        appClass: office365
+                        windowStart: '2023-03-22T02:00:00+00:00'
+                        windowEnd: '2023-04-09T23:00:00+00:00'
+                        isActive: true
+                        srcEndpointId: SgaEHHOs38
+                        dstEndpointId: null
+                        metadata:
+                          defaultPathType: Tunnel
+                          defaultInterfaceIds:
+                          - public-internet
+                          - mpls
+                          recommendedPathType: Tunnel
+                          recommendedInterfaceIds:
+                          - public-internet
+                        predDefaultProbSlaViolation: 0.24967608
+                        predRecommendedProbSlaViolation: 0.0005022502
+                        predNumSessions: null
+                        modelName: null
+                        version: 0
+                        siteId: '12127'
+                        state: READY
+                        curState: APPLIED
+                        applicationWindow:
+                          end: null
+                          start: null
+                        states:
+                        - APPLIED
+                        - NON_APPLIED
+                        - APPLIED
+                        timestamps:
+                        - '2023-04-03T21:28:49.146624+00:00'
+                        - '2023-04-03T23:24:10.403133+00:00'
+                        - '2023-04-03T23:45:21.623478+00:00'
+                        appClassId: office365
+                        appClassName: Office 365
+                        isAppClassSelected: true
+                    siteId:
+                      type: string
+                      example: '12127'
+                    state:
+                      type: string
+                      example: APPLIED
+                  $$ref: '#/components/schemas/AppliedRecommendationsResEntry'
+                $$ref: '#/components/schemas/AppliedRecommendationsRes'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /wani/{listType}/{listId}/listActivationStatus:
+    get:
+      tags:
+      - Wani Recommendations
+      summary: Check list in activated WANI policy.
+      description: 'Get if specified list is apart of a activated centralized policy, if it is the response also gives the centralized policy id, the users original defined centralized policy id, and if current list is apart of a active wani policy. '
+      operationId: getListActivationStatus
+      parameters:
+      - name: listType
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: listId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                required:
+                - centralizedPolicyActive
+                - isActivatedByVSmarts
+                type: object
+                properties:
+                  activatedCentralizedPolicyId:
+                    type: string
+                    format: uuid
+                    example: efec8edf-04ce-4a99-86d5-441099f52b79
+                  centralizedPolicyActive:
+                    type: boolean
+                    example: true
+                  isActivatedByVSmarts:
+                    type: boolean
+                    example: true
+                  referredInActiveWaniPolicy:
+                    type: boolean
+                    example: true
+                  userDefinedPolicyId:
+                    type: string
+                    format: uuid
+                    example: 5b55dbd3-35db-4358-a1a6-ee59da9b9d2d
+                $$ref: '#/components/schemas/ActivationStatusRes'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /wani/{policyType}/{policyId}/policyActivationStatus:
+    get:
+      tags:
+      - Wani Recommendations
+      summary: Check policy in activated WANI policy.
+      description: 'Get if specified policy is apart of a activated centralized policy, if it is the response also gives the centralized policy id, the users original defined centralized policy id, and if current policy is apart of a active wani policy. '
+      operationId: getPolicyActivationStatus
+      parameters:
+      - name: policyType
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: policyId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                required:
+                - centralizedPolicyActive
+                - isActivatedByVSmarts
+                type: object
+                properties:
+                  activatedCentralizedPolicyId:
+                    type: string
+                    format: uuid
+                    example: efec8edf-04ce-4a99-86d5-441099f52b79
+                  centralizedPolicyActive:
+                    type: boolean
+                    example: true
+                  isActivatedByVSmarts:
+                    type: boolean
+                    example: true
+                  referredInActiveWaniPolicy:
+                    type: boolean
+                    example: true
+                  userDefinedPolicyId:
+                    type: string
+                    format: uuid
+                    example: 5b55dbd3-35db-4358-a1a6-ee59da9b9d2d
+                $$ref: '#/components/schemas/ActivationStatusRes'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

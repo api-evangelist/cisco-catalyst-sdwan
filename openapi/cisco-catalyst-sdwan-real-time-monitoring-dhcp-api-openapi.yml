@@ -1,0 +1,201 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - DHCP API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - DHCP
+paths:
+  /device/dhcp/client:
+    get:
+      tags:
+      - Real-Time Monitoring - DHCP
+      description: Get DHCP client from device (Real Time)
+      operationId: getDHCPClient
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DHCP client:
+                  description: DHCP client
+                  value:
+                    data:
+                    - lease-server-addr: 10.0.1.1
+                      state: dhcp-client-state-bound
+                      if-name: GigabitEthernet1
+                      dns-address-secondary: 0.0.0.0
+                      subnet-mask: 255.255.255.0
+                      client-addr: 10.0.1.5
+                      lease-remaining: '3143'
+                      gateway-addr: 0.0.0.0
+                      dns-address: 10.0.1.1
+                      vdevice-dataKey: 169.254.10.12-Mgmt-intf-GigabitEthernet1
+                      vrf-name: Mgmt-intf
+                      lastupdated: 1643101911868
+                      vdevice-host-name: vm5
+                      vdevice-name: 169.254.10.12
+                      lease-time: '3600'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write
+  /device/dhcp/interface:
+    get:
+      tags:
+      - Real-Time Monitoring - DHCP
+      description: Get DHCP interfaces from device (Real Time)
+      operationId: getDHCPInterface
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DHCP interfaces:
+                  description: DHCP interfaces
+                  value:
+                    data:
+                    - server: 10.0.1.1
+                      vdevice-dataKey: 169.254.10.10-512-eth0
+                      lease-time: 0:01:00:00
+                      vdevice-name: 169.254.10.10
+                      ifname: eth0
+                      acquired-ip: 10.0.1.3/24
+                      dns: 10.0.1.1
+                      lastupdated: 1643013783968
+                      time-remaining: 0:00:31:25
+                      state: bound
+                      vpn-id: '512'
+                      vdevice-host-name: vm3
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write
+  /device/dhcp/server:
+    get:
+      tags:
+      - Real-Time Monitoring - DHCP
+      description: Get DHCP server from device (Real Time)
+      operationId: getDHCPServer
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                DHCP server:
+                  description: DHCP server
+                  value:
+                    data:
+                    - vdevice-dataKey: 169.254.10.9-10-ge0/0-
+                      vdevice-name: 169.254.10.9
+                      ifname: ge0/0
+                      lastupdated: 1655094784187
+                      vpn-id: '10'
+                      vdevice-host-name: vm2
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write
+  /device/dhcpv6/interface:
+    get:
+      tags:
+      - Real-Time Monitoring - DHCP
+      description: Get DHCPv6 interfaces from device
+      operationId: getDHCPv6Interface
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Device DHCP v6 interface:
+                  description: Device DHCP v6 interface
+                  value:
+                    data:
+                    - vdevice-dataKey: 169.254.10.10-512-eth0
+                      vdevice-name: 169.254.10.10
+                      ifname: eth0
+                      lastupdated: 1646099652315
+                      state: init
+                      vpn-id: '512'
+                      vdevice-host-name: vm3
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: System-read,System-write

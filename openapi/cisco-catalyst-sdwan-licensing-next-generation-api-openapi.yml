@@ -1,0 +1,625 @@
+openapi: 3.2.0
+info:
+  title: Others Licensing - Next Generation API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Licensing - Next Generation
+paths:
+  /v1/licensing/assign-licenses:
+    post:
+      tags:
+      - Licensing - Next Generation
+      description: Assign licenses to devices
+      operationId: assignMSLALicenses
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                baseLicenses:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      assignLicenses:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            allocated:
+                              type: integer
+                              format: int32
+                              example: 2
+                            billingType:
+                              type: string
+                              example: Prepaid
+                            displayName:
+                              type: string
+                              example: Advantage Large
+                            saName:
+                              type: string
+                              example: testaccount1.viptela.com
+                            subscriptionId:
+                              type: string
+                              example: sub00235
+                            tag:
+                              type: string
+                              example: regid.2020-10.com.cisco.DSTACK_T0_P
+                            vaName:
+                              type: string
+                              example: vManage_SDWAN_01
+                          $$ref: '#/components/schemas/AssignLicensesRequestAssignLicenses'
+                      uuids:
+                        type: array
+                        description: List of device UUIDs
+                        items:
+                          type: string
+                          description: List of device UUIDs
+                    $$ref: '#/components/schemas/AssignLicensesRequestBaseLicenses'
+                tenantLicenses:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      allocated:
+                        type: integer
+                        format: int32
+                        example: 2
+                      billingType:
+                        type: string
+                        example: Prepaid
+                      displayName:
+                        type: string
+                        example: Advantage Large
+                      saName:
+                        type: string
+                        example: testaccount1.viptela.com
+                      subscriptionId:
+                        type: string
+                        example: sub00235
+                      tag:
+                        type: string
+                        example: regid.2020-10.com.cisco.DSTACK_T0_P
+                      vaName:
+                        type: string
+                        example: vManage_SDWAN_01
+                    $$ref: '#/components/schemas/AssignLicensesRequestAssignLicenses'
+              $$ref: '#/components/schemas/AssignLicensesRequest'
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /v1/licensing/devices:
+    get:
+      tags:
+      - Licensing - Next Generation
+      description: Retrieve list of all devices along with license details if assigned
+      operationId: getMSLADevices_LicensingNextGeneration_2103
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  devices:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        complianceStatus:
+                          type: string
+                          example: Out Of Compliance
+                        configuredSystemIP:
+                          type: string
+                          example: 172.16.254.3
+                        deviceModel:
+                          type: string
+                          example: vedge-C8530-12X4QC
+                        deviceTags:
+                          type: array
+                          items:
+                            type: string
+                        hostName:
+                          type: string
+                          example: pm4
+                        hsecCompatible:
+                          type: string
+                          example: 'Yes'
+                        hsecLicenseStatus:
+                          type: string
+                        hsecStatus:
+                          type: string
+                          example: '-'
+                        inCompliantReason:
+                          type: string
+                          example: Unassigned
+                        licenses:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              billingType:
+                                type: string
+                                example: prepaid
+                              displayName:
+                                type: string
+                                example: Essential Large
+                              endDate:
+                                type: string
+                                example: 2025 Jun 03
+                              licenseCategory:
+                                type: string
+                                example: Base
+                              licenseType:
+                                type: string
+                                example: TERM
+                              no0fAssignedLicenses:
+                                type: integer
+                                format: int32
+                                example: 1
+                              saName:
+                                type: string
+                                example: testaccount1.viptela.com
+                              startDate:
+                                type: string
+                                example: 2023 Jun 03
+                              subscriptionId:
+                                type: string
+                                example: sub00235
+                              tag:
+                                type: string
+                                example: regid.2020-10.com.cisco.DSTACK_T0_P
+                              vaName:
+                                type: string
+                                example: vManage_SDWAN_01
+                            $$ref: '#/components/schemas/DevicesDetailsLicenses'
+                        noOfTenantsOnBoarded:
+                          type: integer
+                          format: int32
+                          example: 5
+                        uuid:
+                          type: string
+                          example: C8530-2f351fae-e60a-4a5d-b5b9-aeb1306289ff
+                      $$ref: '#/components/schemas/DevicesDetailsDevices'
+                $$ref: '#/components/schemas/DevicesDetails'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /v1/licensing/edit-licenses/{uuid}:
+    get:
+      tags:
+      - Licensing - Next Generation
+      description: Edit licenses associated to a device
+      operationId: getLicenseByUuid_LicensingNextGeneration_3403
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  appliedFilters:
+                    type: object
+                    properties:
+                      billingType:
+                        type: string
+                        example: Prepaid
+                      licenseClassification:
+                        type: string
+                        example: Advantage
+                    $$ref: '#/components/schemas/AppliedFilters'
+                  baseLicenses:
+                    type: object
+                    properties:
+                      licenses:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            available:
+                              type: integer
+                              format: int32
+                              example: 20
+                            displayName:
+                              type: string
+                              example: Advantage Large
+                            inUse:
+                              type: integer
+                              format: int32
+                              example: 5
+                            isAssigned:
+                              type: boolean
+                              example: true
+                            tag:
+                              type: string
+                              example: regid.2020-10.com.cisco.DSTACK_T0_P
+                          $$ref: '#/components/schemas/EditLicenseResponseLicenses'
+                      platformClass:
+                        type: string
+                        example: C8530
+                    $$ref: '#/components/schemas/EditLicenseResponseBaseLicenses'
+                  tenantLicenses:
+                    type: object
+                    properties:
+                      licenses:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            available:
+                              type: integer
+                              format: int32
+                              example: 20
+                            displayName:
+                              type: string
+                              example: Advantage Large
+                            inUse:
+                              type: integer
+                              format: int32
+                              example: 5
+                            isAssigned:
+                              type: boolean
+                              example: true
+                            tag:
+                              type: string
+                              example: regid.2020-10.com.cisco.DSTACK_T0_P
+                          $$ref: '#/components/schemas/EditLicenseResponseLicenses'
+                      totalTenantLicRequired:
+                        type: integer
+                        format: int32
+                        example: 10
+                    $$ref: '#/components/schemas/EditLicenseResponseTenantLicenses'
+                $$ref: '#/components/schemas/EditLicenseResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /v1/licensing/licenses:
+    post:
+      tags:
+      - Licensing - Next Generation
+      description: Get applicable licenses based on platform class
+      operationId: getMSLALicenses
+      requestBody:
+        description: List of device UUIDs and filters
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                appliedFilters:
+                  type: object
+                  properties:
+                    billingType:
+                      type: string
+                      example: Prepaid
+                    licenseClassification:
+                      type: string
+                      example: Advantage
+                  $$ref: '#/components/schemas/AppliedFilters'
+                uuids:
+                  type: array
+                  description: List of device UUIDs
+                  items:
+                    type: string
+                    description: List of device UUIDs
+              $$ref: '#/components/schemas/LicensesRequest'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  baseLicenses:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        licenses:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              available:
+                                type: integer
+                                format: int32
+                                example: 20
+                              displayName:
+                                type: string
+                                example: Advantage Large
+                              inUse:
+                                type: integer
+                                format: int32
+                                example: 5
+                              isPreferred:
+                                type: boolean
+                                example: true
+                              tag:
+                                type: string
+                                example: regid.2020-10.com.cisco.DSTACK_T0_P
+                            $$ref: '#/components/schemas/LicensesResponseLicenses'
+                        platformClass:
+                          type: string
+                          example: C8530-12X4QC
+                        uuids:
+                          type: array
+                          description: List of device UUIDs
+                          items:
+                            type: string
+                            description: List of device UUIDs
+                      $$ref: '#/components/schemas/LicensesResponseBaseLicenses'
+                  tenantLicenses:
+                    type: object
+                    properties:
+                      licenses:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            available:
+                              type: integer
+                              format: int32
+                              example: 20
+                            displayName:
+                              type: string
+                              example: Advantage Large
+                            inUse:
+                              type: integer
+                              format: int32
+                              example: 5
+                            isPreferred:
+                              type: boolean
+                              example: true
+                            tag:
+                              type: string
+                              example: regid.2020-10.com.cisco.DSTACK_T0_P
+                          $$ref: '#/components/schemas/LicensesResponseLicenses'
+                      totalTenantLicRequired:
+                        type: integer
+                        format: int32
+                        example: 10
+                    $$ref: '#/components/schemas/LicensesResponseTenantLicenses'
+                $$ref: '#/components/schemas/LicensesResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /v1/licensing/release-licenses:
+    put:
+      tags:
+      - Licensing - Next Generation
+      description: Release licenses assigned to the devices
+      operationId: releaseLicenses_LicensingNextGeneration_3003
+      requestBody:
+        description: List of devices for releasing licenses
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                uuids:
+                  type: array
+                  description: List of device UUIDs
+                  items:
+                    type: string
+                    description: List of device UUIDs
+              $$ref: '#/components/schemas/ReleaseLicenses'
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /v1/licensing/sa-va-distribution:
+    post:
+      tags:
+      - Licensing - Next Generation
+      description: Get Smart account and virtual account distribution of selected licenses
+      operationId: getSAVADistribution
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                appliedFilters:
+                  type: object
+                  properties:
+                    billingType:
+                      type: string
+                      example: Prepaid
+                    licenseClassification:
+                      type: string
+                      example: Advantage
+                  $$ref: '#/components/schemas/AppliedFilters'
+                baseLicenses:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      displayName:
+                        type: string
+                        example: Advantage Large
+                      platformClass:
+                        type: string
+                        example: C8530-12X4QC
+                      tag:
+                        type: string
+                        example: regid.2020-10.com.cisco.DSTACK_T0_P
+                      uuids:
+                        type: array
+                        description: List of device UUIDs
+                        items:
+                          type: string
+                          description: List of device UUIDs
+                    $$ref: '#/components/schemas/SaVaDistributionRequestBaseLicenses'
+                tenantLicenses:
+                  type: object
+                  properties:
+                    displayName:
+                      type: string
+                      example: Advantage Large
+                    tag:
+                      type: string
+                      example: regid.2020-10.com.cisco.DSTACK_T0_P
+                    totalTenantLicRequired:
+                      type: integer
+                      format: int32
+                      example: 10
+                  $$ref: '#/components/schemas/SaVaDistributionRequestTenantLicense'
+              $$ref: '#/components/schemas/SaVaDistributionRequest'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  baseLicenses:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        displayName:
+                          type: string
+                          example: Advantage Large
+                        platformClass:
+                          type: string
+                          example: C8530-12X4QC
+                        savaMap:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              allocated:
+                                type: integer
+                                format: int32
+                                example: 5
+                              available:
+                                type: integer
+                                format: int32
+                                example: 20
+                              inUse:
+                                type: integer
+                                format: int32
+                                example: 5
+                              saName:
+                                type: string
+                                example: testaccount1.viptela.com
+                              subscriptionId:
+                                type: string
+                                example: sub00235
+                              vaName:
+                                type: string
+                                example: vManage_SDWAN_01
+                            $$ref: '#/components/schemas/SaVaDistributionResponseSaVaMap'
+                        tag:
+                          type: string
+                          example: regid.2020-10.com.cisco.DSTACK_T0_P
+                        uuids:
+                          type: array
+                          description: List of device UUIDs
+                          items:
+                            type: string
+                            description: List of device UUIDs
+                      $$ref: '#/components/schemas/SaVaDistributionResponseBaseLicenses'
+                  tenantLicenses:
+                    type: object
+                    properties:
+                      displayName:
+                        type: string
+                        example: Advantage Large
+                      savaMap:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            allocated:
+                              type: integer
+                              format: int32
+                              example: 5
+                            available:
+                              type: integer
+                              format: int32
+                              example: 20
+                            inUse:
+                              type: integer
+                              format: int32
+                              example: 5
+                            saName:
+                              type: string
+                              example: testaccount1.viptela.com
+                            subscriptionId:
+                              type: string
+                              example: sub00235
+                            vaName:
+                              type: string
+                              example: vManage_SDWAN_01
+                          $$ref: '#/components/schemas/SaVaDistributionResponseSaVaMap'
+                      tag:
+                        type: string
+                        example: regid.2020-10.com.cisco.DSTACK_T0_P
+                    $$ref: '#/components/schemas/SaVaDistributionResponseTenantLicenses'
+                $$ref: '#/components/schemas/SaVaDistributionResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

@@ -1,0 +1,186 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Troubleshooting MRE - Workflow API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Troubleshooting MRE - Workflow
+paths:
+  /troubleshooting/mre/workflow/{operation}/{executionId}:
+    get:
+      tags:
+      - Troubleshooting MRE - Workflow
+      summary: disable/status workflow status
+      operationId: getMreWorkflowStatus
+      parameters:
+      - name: operation
+        in: path
+        description: Mre workflowId operation
+        required: true
+        schema:
+          type: string
+          enum:
+          - status
+          - disable
+      - name: executionId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        category:
+                          type: string
+                        commandContext:
+                          type: array
+                          items:
+                            type: string
+                        description:
+                          type: string
+                        dynamicCommandContext:
+                          type: array
+                          items:
+                            type: string
+                        label:
+                          type: string
+                        message:
+                          type: string
+                        ontologyIri:
+                          type: string
+                          example: http://www.cisco.com/CNSR/TunnelTroubleshooting/1.0.0
+                        status:
+                          type: string
+                          example: SUCCESS
+                        suggestedActions:
+                          type: string
+                        targetCommand:
+                          type: string
+                        timestamp:
+                          type: integer
+                          format: int64
+                          example: 1714588524225
+                        title:
+                          type: string
+                        type:
+                          type: string
+                          example: INIT
+                        workflowExecutionId:
+                          type: string
+                          example: 18557693-860c-49bd-aee9-9de4e82d24be
+                      $$ref: '#/components/schemas/MreEvent'
+                  terminate_status:
+                    type: boolean
+                    example: true
+                $$ref: '#/components/schemas/MreEventStatusResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /troubleshooting/mre/workflow/{workflowType}:
+    post:
+      tags:
+      - Troubleshooting MRE - Workflow
+      description: Launch MRE workflow
+      operationId: getMreExecutionId
+      parameters:
+      - name: workflowType
+        in: path
+        description: Mre workflow type
+        required: true
+        schema:
+          type: string
+          enum:
+          - tunnelTroubleshoot
+      - name: isMre
+        in: query
+        schema:
+          type: boolean
+          default: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - deviceUUID
+              - parameters
+              type: object
+              properties:
+                deviceUUID:
+                  type: string
+                  example: C8K-e456a1c9-5000-4d2b-b8b4-52fd41e55a4b
+                parameters:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        example: localDevice
+                      value:
+                        type: string
+                        example: 111.111.111.111
+                    $$ref: '#/components/schemas/LaunchRequestParameter'
+              $$ref: '#/components/schemas/LaunchRequestBody'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: object
+                    properties:
+                      url:
+                        type: string
+                        example: /api/v1/task/018f3570-9e70-7cf1-aaea-e448f9b6ec66
+                      workflowExecutionId:
+                        type: string
+                        example: 018f3570-9e70-7cf1-aaea-e448f9b6ec66
+                    $$ref: '#/components/schemas/LaunchResponseResponse'
+                  version:
+                    type: string
+                    example: '1.0'
+                $$ref: '#/components/schemas/LaunchResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

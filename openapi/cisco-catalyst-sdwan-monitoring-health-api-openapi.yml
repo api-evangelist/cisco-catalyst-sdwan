@@ -1,0 +1,571 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Monitoring - Health API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Monitoring - Health
+paths:
+  /health/devices:
+    get:
+      tags:
+      - Monitoring - Health
+      description: get the devices health properties
+      operationId: getDevicesHealth
+      parameters:
+      - name: page
+        in: query
+        description: Page Number
+        schema:
+          type: integer
+          format: int64
+      - name: pageSize
+        in: query
+        description: Page Size
+        schema:
+          type: integer
+          format: int64
+      - name: sortBy
+        in: query
+        description: Sort By Property
+        schema:
+          type: string
+      - name: sortOrder
+        in: query
+        description: Sort Order
+        schema:
+          type: string
+      - name: startingDeviceId
+        in: query
+        description: Optional device ID to start first page
+        schema:
+          type: string
+      - name: siteId
+        in: query
+        description: Optional site ID to filter devices
+        schema:
+          type: string
+      - name: group_id
+        in: query
+        description: Optional group ID to filter devices
+        schema:
+          type: string
+      - name: groupId
+        in: query
+        description: Optional group ID to filter devices
+        schema:
+          type: string
+      - name: vpnId
+        in: query
+        description: Optional vpn ID to filter devices
+        schema:
+          type: string
+      - name: reachable
+        in: query
+        schema:
+          type: boolean
+      - name: controlStatus
+        in: query
+        schema:
+          type: string
+      - name: personality
+        in: query
+        schema:
+          type: string
+      - name: health
+        in: query
+        schema:
+          type: string
+      - name: site-id
+        in: query
+        description: Optional site ID list to filter devices
+        schema:
+          type: string
+      - name: featureType
+        in: query
+        schema:
+          type: string
+          enum:
+          - cellular
+          - SCC
+      - name: corSaasStatus
+        in: query
+        schema:
+          type: boolean
+      - name: includeTenantvSmart
+        in: query
+        description: Include vSmarts in tenant view
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  devices:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        bfd_sessions:
+                          type: integer
+                          description: bfd sessions total
+                          format: int32
+                          example: 5
+                        bfd_sessions_up:
+                          type: integer
+                          description: bfd sessions up
+                          format: int32
+                          example: 5
+                        board_serial_number:
+                          type: string
+                          description: board serial number
+                          example: '12345708'
+                        cellularBit:
+                          type: string
+                          description: '0:non-cellular device, 1: cellular device'
+                          example: '1'
+                        cellularEcio:
+                          type: array
+                          items:
+                            type: string
+                            description: only for 3G
+                            example: 3G-Slot1:Good
+                        cellularExtra:
+                          type: object
+                          additionalProperties:
+                            type: string
+                            description: 'key-value structure, "iosXEDevice": "true" means if it polaris device'
+                          description: 'key-value structure, "iosXEDevice": "true" means if it polaris device'
+                        cellularFailOverEvents:
+                          type: array
+                          items:
+                            type: string
+                            description: format is Slot{slot}:{event_num}
+                            example: Slot1:1
+                        cellularHealth:
+                          type: array
+                          items:
+                            type: string
+                            description: format is {signal_type}-Slot{slot}:{signal_health}
+                            example: 4G-Slot1:Good
+                        cellularLinkUpTime:
+                          type: array
+                          items:
+                            type: string
+                            description: format is Slot{slot}:{up_time}
+                            example: Slot1:29291
+                        cellularLoss:
+                          type: array
+                          items:
+                            type: string
+                            description: format is Slot{slot}:{loss_num}
+                            example: Slot1:0 packets
+                        cellularRsrp:
+                          type: array
+                          items:
+                            type: string
+                            description: format is {signal_type}-Slot{slot}:{signal_health}
+                            example: 4G-Slot1:Good
+                        cellularRsrq:
+                          type: array
+                          items:
+                            type: string
+                            description: format is {signal_type}-Slot{slot}:{signal_health}
+                            example: 4G-Slot1:Good
+                        cellularRssi:
+                          type: array
+                          items:
+                            type: string
+                            description: format is {signal_type}-Slot{slot}:{signal_health}
+                            example: 4G-Slot1:Good
+                        cellularSinr:
+                          type: array
+                          items:
+                            type: string
+                            example: 4G-Slot1:Excellent
+                        chassis_number:
+                          type: string
+                          description: chassis number
+                          example: 04a116f8-9a16-4bf6-9f1f-f58e2619312d
+                        cloudOnRampSaaSApps:
+                          type: object
+                          additionalProperties:
+                            type: object
+                            additionalProperties:
+                              type: string
+                        cloudOnRampSaaSDeviceRole:
+                          type: string
+                        configGroupId:
+                          type: string
+                          description: config group id
+                          example: 020c51b3-6200-4d40-bf92-4bd2b7aac14e
+                        configGroupName:
+                          type: string
+                          description: config group name
+                          example: global_cg1
+                        configuration_device:
+                          type: boolean
+                        connected_vmanages:
+                          type: array
+                          items:
+                            type: string
+                            description: connected vmanage
+                            example: 169.254.10.3
+                        controlConnectionsToVsmat:
+                          $ref: '#/components/schemas/DeviceHealthDetails'
+                          $$ref: '#/components/schemas/DeviceHealthDetails'
+                        control_connections:
+                          type: integer
+                          format: int32
+                        control_connections_up:
+                          type: integer
+                          format: int32
+                        cpu_load:
+                          type: number
+                          format: double
+                        device_groups:
+                          type: array
+                          items:
+                            type: string
+                        device_model:
+                          type: string
+                          description: device model
+                          example: vEdge Cloud
+                        device_type:
+                          type: string
+                          description: device type
+                          example: vedge
+                        edgeServicesHealth:
+                          type: object
+                          additionalProperties:
+                            type: integer
+                            description: edge services health
+                            format: int32
+                          description: edge services health
+                          example:
+                            GOOD: 1
+                            FAIR: 2
+                            POOR: 3
+                        eoxDetails:
+                          type: object
+                          properties:
+                            deviceScanDetails:
+                              type: object
+                              properties:
+                                lastScanDateTime:
+                                  type: string
+                                scanCriteria:
+                                  type: string
+                                scanStatus:
+                                  type: string
+                              $$ref: '#/components/schemas/CxAdvisoryDeviceScanDetails'
+                            eoxList:
+                              type: array
+                              items:
+                                type: object
+                                $$ref: '#/components/schemas/JsonNode'
+                          $$ref: '#/components/schemas/EoxDetails'
+                        expected_vsmart_connections:
+                          type: integer
+                          format: int32
+                        has_geo_data:
+                          type: boolean
+                        health:
+                          type: string
+                          enum:
+                          - red
+                          - yellow
+                          - green
+                        ikev1Peers:
+                          type: integer
+                          format: int32
+                        ikev1Sa:
+                          type: integer
+                          format: int32
+                        ikev2Peers:
+                          type: integer
+                          format: int32
+                        ikev2Sa:
+                          type: integer
+                          format: int32
+                        latitude:
+                          type: string
+                          description: latitude
+                          example: '37.666684'
+                        local_system_ip:
+                          type: string
+                          description: local system ip
+                          example: 172.16.254.2
+                        location:
+                          type: string
+                          description: location string
+                          example: 'lat: 37.666684, long: -122.777023'
+                        longitude:
+                          type: string
+                          description: longitude
+                          example: '-122.777023'
+                        memory_utilization:
+                          type: number
+                          format: double
+                        name:
+                          type: string
+                          description: device name
+                          example: vm3
+                        omp_peers:
+                          type: integer
+                          description: omp peers
+                          format: int64
+                          example: 2
+                        omp_peers_up:
+                          type: integer
+                          description: omp peers up
+                          format: int64
+                          example: 2
+                        personality:
+                          type: string
+                          description: personality of the device
+                          example: vedge
+                        policyGroupId:
+                          type: string
+                          description: policy group id
+                          example: d56d1c24-24de-4c6e-be0f-0a7de66324be
+                        policyGroupName:
+                          type: string
+                          description: policy group name
+                          example: global_pg1
+                        powerUsage:
+                          type: string
+                        qoe:
+                          type: integer
+                          description: quality of experience score
+                          format: int32
+                          example: 10
+                        reachability:
+                          type: string
+                          description: reachability status
+                          example: reachable
+                          enum:
+                          - reachable
+                          - unreachable
+                        reason:
+                          type: string
+                          description: the reason if device is not healthy
+                          example: Memory usage >= 75%.
+                        region_list:
+                          type: array
+                          items:
+                            type: string
+                        role:
+                          type: integer
+                          description: bitmap for the role
+                          format: int32
+                          example: 1
+                        roleStr:
+                          type: string
+                          description: device role, can be CMAP_STATIC, DMVPN_HUB, DMVPN_SPOKE, FLEXVPN_SERVER, FLEXVPN_CLIENT, DVTI_IKEv1, SVTI_IKEv1, GETVPN_KS, GETVPN_GM, P2P_GRE, SSL_VPN_SERVER, or any combination of them
+                          example: DMVPN_HUB|FLEXVPN_SERVER
+                        sdraSessionCounts:
+                          $ref: '#/components/schemas/DeviceHealthDetails'
+                          $$ref: '#/components/schemas/DeviceHealthDetails'
+                        sdra_ipsec_anyconnect:
+                          type: integer
+                          format: int64
+                        sdra_ipsec_enabled:
+                          type: boolean
+                        sdra_ipsec_soho:
+                          type: integer
+                          format: int64
+                        sdra_ipsec_unknown:
+                          type: integer
+                          format: int64
+                        sdra_sslvpn_anyconnect:
+                          type: integer
+                          format: int64
+                        sdra_sslvpn_enabled:
+                          type: boolean
+                        site_id:
+                          type: string
+                          description: site id
+                          example: '3'
+                        site_name:
+                          type: string
+                          description: site name
+                          example: SITE_500
+                        software_version:
+                          type: string
+                          description: software version
+                          example: 17.18.01
+                        sslVpnSa:
+                          type: integer
+                          format: int32
+                        system_ip:
+                          type: string
+                          description: system ip
+                          example: 169.254.10.10
+                        tags:
+                          type: array
+                          items:
+                            type: object
+                            additionalProperties:
+                              type: object
+                        temperatureStatus:
+                          type: string
+                        totalIpsecSa:
+                          type: integer
+                          format: int32
+                        total_tloc_num:
+                          type: integer
+                          description: total tloc number
+                          format: int64
+                          example: 0
+                        up_tloc_num:
+                          type: integer
+                          description: up tloc number
+                          format: int64
+                          example: 0
+                        uptime_date:
+                          type: integer
+                          format: int64
+                        uuid:
+                          type: string
+                          description: device uuid
+                          example: 04a116f8-9a16-4bf6-9f1f-f58e2619312d
+                        vpn_ids:
+                          type: array
+                          items:
+                            type: string
+                        vsmart_control_connections:
+                          type: integer
+                          format: int32
+                      $$ref: '#/components/schemas/DeviceHealthDetails'
+                  header:
+                    type: object
+                    additionalProperties:
+                      type: object
+                  total_devices:
+                    type: integer
+                    format: int32
+                $$ref: '#/components/schemas/DevicesHealth'
+              examples:
+                devices health properties:
+                  description: devices health properties
+                  value:
+                    total_devices: 3
+                    devices:
+                    - name: vm3
+                      personality: vedge
+                      uuid: 04a116f8-9a16-4bf6-9f1f-f58e2619312d
+                      reachability: reachable
+                      longitude: '-122.777023'
+                      latitude: '37.666684'
+                      health: green
+                      qoe: 10
+                      location: 'lat: 37.666684, long: -122.777023'
+                      site_id: '3'
+                      system_ip: 169.254.10.10
+                      device_type: vedge
+                      local_system_ip: 172.16.254.2
+                      device_model: vEdge Cloud
+                      software_version: 20.6.0-231
+                      cpu_load: 1.32
+                      memory_utilization: 25
+                      control_connections: 3
+                      control_connections_up: 3
+                      sdra_ipsec_anyconnect: 120
+                      sdra_ipsec_soho: 60
+                      sdra_ipsec_unknown: 30
+                      sdra_sslvpn_anyconnect: 0
+                      has_geo_data: true
+                      uptime_date: 1629963840000
+                      device_groups:
+                      - No groups
+                      connected_vmanages:
+                      - 169.254.10.3
+                      bfd_sessions_up: 5
+                      bfd_sessions: 5
+                      omp_peers: 2
+                      omp_peers_up: 2
+                      board_serial_number: '12345708'
+                      chassis_number: 04a116f8-9a16-4bf6-9f1f-f58e2619312d
+                      vpn_ids: null
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,RBAC VPN-read,RBAC VPN-write,System360 Diagnostic-read,System360 Diagnostic-write
+  /health/devices/overview:
+    get:
+      tags:
+      - Monitoring - Health
+      description: gets devices health overview
+      operationId: getDevicesHealthOverview
+      parameters:
+      - name: vpn_id
+        in: query
+        description: Optional vpn ID to filter devices
+        schema:
+          type: string
+      - name: vpnId
+        in: query
+        description: Optional vpn ID to filter devices
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  fair:
+                    type: integer
+                    format: int32
+                  good:
+                    type: integer
+                    format: int32
+                  poor:
+                    type: integer
+                    format: int32
+                $$ref: '#/components/schemas/DevicesHealthOverview'
+              examples:
+                devices health overview:
+                  description: devices health overview
+                  value:
+                    good: 3
+                    fair: 3
+                    poor: 0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read,RBAC VPN-read,RBAC VPN-write,System-read

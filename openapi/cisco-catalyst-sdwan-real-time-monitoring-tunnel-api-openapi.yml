@@ -1,0 +1,727 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - Tunnel API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - Tunnel
+paths:
+  /device/tunnel/bfd_statistics:
+    get:
+      tags:
+      - Real-Time Monitoring - Tunnel
+      description: Get tunnel BFD statistics all devices
+      operationId: createBfdStatisticsList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Tunnel BFD statistics:
+                  description: Tunnel BFD statistics
+                  value:
+                    data:
+                    - dest-ip: 30.30.30.30
+                      source-port: 0
+                      bfd-echo-rx-pkts: 0
+                      vdevice-name: 169.254.10.10
+                      bfd-pmtu-tx-octets: 0
+                      bfd-echo-tx-octets: 0
+                      bfd-pmtu-rx-octets: 0
+                      vdevice-host-name: vm3
+                      tunnel-protocol: gre
+                      bfd-pmtu-tx-pkts: 0
+                      dest-port: 0
+                      vdevice-dataKey: 169.254.10.10-gre-10.0.3.3-30.30.30.30-0-0
+                      lastupdated: 1644817628460
+                      source-ip: 10.0.3.3
+                      bfd-echo-tx-pkts: 0
+                      bfd-pmtu-rx-pkts: 0
+                      bfd-echo-rx-octets: 0
+                    - dest-ip: 10.101.2.2
+                      source-port: 12366
+                      bfd-echo-rx-pkts: 427365
+                      vdevice-name: 169.254.10.10
+                      bfd-pmtu-tx-octets: 307216
+                      bfd-echo-tx-octets: 71583641
+                      bfd-pmtu-rx-octets: 307216
+                      vdevice-host-name: vm3
+                      tunnel-protocol: ipsec
+                      bfd-pmtu-tx-pkts: 376
+                      dest-port: 12346
+                      vdevice-dataKey: 169.254.10.10-ipsec-10.101.3.3-10.101.2.2-12366-12346
+                      lastupdated: 1644817628460
+                      source-ip: 10.101.3.3
+                      bfd-echo-tx-pkts: 427365
+                      bfd-pmtu-rx-pkts: 376
+                      bfd-echo-rx-octets: 71583634
+                    - dest-ip: 10.101.4.4
+                      source-port: 12366
+                      bfd-echo-rx-pkts: 427523
+                      vdevice-name: 169.254.10.10
+                      bfd-pmtu-tx-octets: 307090
+                      bfd-echo-tx-octets: 71610106
+                      bfd-pmtu-rx-octets: 305818
+                      vdevice-host-name: vm3
+                      tunnel-protocol: ipsec
+                      bfd-pmtu-tx-pkts: 375
+                      dest-port: 12366
+                      vdevice-dataKey: 169.254.10.10-ipsec-10.101.3.3-10.101.4.4-12366-12366
+                      lastupdated: 1644817628460
+                      source-ip: 10.101.3.3
+                      bfd-echo-tx-pkts: 427523
+                      bfd-pmtu-rx-pkts: 375
+                      bfd-echo-rx-octets: 71610099
+                    - dest-ip: 10.102.5.5
+                      source-port: 12366
+                      bfd-echo-rx-pkts: 449468
+                      vdevice-name: 169.254.10.10
+                      bfd-pmtu-tx-octets: 531622
+                      bfd-echo-tx-octets: 75208785
+                      bfd-pmtu-rx-octets: 2835599
+                      vdevice-host-name: vm3
+                      tunnel-protocol: ipsec
+                      bfd-pmtu-tx-pkts: 2157
+                      dest-port: 12366
+                      vdevice-dataKey: 169.254.10.10-ipsec-10.101.3.3-10.102.5.5-12366-12366
+                      lastupdated: 1644817628460
+                      source-ip: 10.101.3.3
+                      bfd-echo-tx-pkts: 449468
+                      bfd-pmtu-rx-pkts: 2157
+                      bfd-echo-rx-octets: 75362995
+                    - dest-ip: 10.102.6.6
+                      source-port: 12366
+                      bfd-echo-rx-pkts: 449575
+                      vdevice-name: 169.254.10.10
+                      bfd-pmtu-tx-octets: 531622
+                      bfd-echo-tx-octets: 75226641
+                      bfd-pmtu-rx-octets: 2835599
+                      vdevice-host-name: vm3
+                      tunnel-protocol: ipsec
+                      bfd-pmtu-tx-pkts: 2157
+                      dest-port: 12366
+                      vdevice-dataKey: 169.254.10.10-ipsec-10.101.3.3-10.102.6.6-12366-12366
+                      lastupdated: 1644817628460
+                      source-ip: 10.101.3.3
+                      bfd-echo-tx-pkts: 449575
+                      bfd-pmtu-rx-pkts: 2157
+                      bfd-echo-rx-octets: 75380984
+                    - dest-ip: 10.102.16.16
+                      source-port: 12366
+                      bfd-echo-rx-pkts: 449641
+                      vdevice-name: 169.254.10.10
+                      bfd-pmtu-tx-octets: 531622
+                      bfd-echo-tx-octets: 75237437
+                      bfd-pmtu-rx-octets: 2835599
+                      vdevice-host-name: vm3
+                      tunnel-protocol: ipsec
+                      bfd-pmtu-tx-pkts: 2157
+                      dest-port: 12366
+                      vdevice-dataKey: 169.254.10.10-ipsec-10.101.3.3-10.102.16.16-12366-12366
+                      lastupdated: 1644817628460
+                      source-ip: 10.101.3.3
+                      bfd-echo-tx-pkts: 449641
+                      bfd-pmtu-rx-pkts: 2157
+                      bfd-echo-rx-octets: 75392298
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Security-read,Security-write,System-read,System-write
+  /device/tunnel/fec_statistics:
+    get:
+      tags:
+      - Real-Time Monitoring - Tunnel
+      description: Get tunnel fec statistics
+      operationId: createFecStatistics
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                tunnel fec statistics:
+                  description: tunnel fec statistics
+                  value:
+                    data:
+                    - dest-ip: 30.30.30.30
+                      source-port: 0
+                      vdevice-name: 169.254.10.10
+                      fec-rx-parity-pkts: 0
+                      fec-capable: 'false'
+                      fec-tx-parity-pkts: 0
+                      vdevice-host-name: vm3
+                      tunnel-protocol: gre
+                      fec-tx-data-pkts: 0
+                      dest-port: 0
+                      vdevice-dataKey: 169.254.10.10-gre-10.0.3.3-30.30.30.30-0-0
+                      fec-rx-data-pkts: 0
+                      fec-reconstruct-pkts: 0
+                      lastupdated: 1644821014912
+                      source-ip: 10.0.3.3
+                      fec-dynamic: 'false'
+                    - dest-ip: 10.101.2.2
+                      source-port: 12366
+                      vdevice-name: 169.254.10.10
+                      fec-rx-parity-pkts: 0
+                      fec-capable: 'false'
+                      fec-tx-parity-pkts: 0
+                      vdevice-host-name: vm3
+                      tunnel-protocol: ipsec
+                      fec-tx-data-pkts: 0
+                      dest-port: 12346
+                      vdevice-dataKey: 169.254.10.10-ipsec-10.101.3.3-10.101.2.2-12366-12346
+                      fec-rx-data-pkts: 0
+                      fec-reconstruct-pkts: 0
+                      lastupdated: 1644821014912
+                      source-ip: 10.101.3.3
+                      fec-dynamic: 'false'
+                    - dest-ip: 10.101.4.4
+                      source-port: 12366
+                      vdevice-name: 169.254.10.10
+                      fec-rx-parity-pkts: 0
+                      fec-capable: 'false'
+                      fec-tx-parity-pkts: 0
+                      vdevice-host-name: vm3
+                      tunnel-protocol: ipsec
+                      fec-tx-data-pkts: 0
+                      dest-port: 12366
+                      vdevice-dataKey: 169.254.10.10-ipsec-10.101.3.3-10.101.4.4-12366-12366
+                      fec-rx-data-pkts: 0
+                      fec-reconstruct-pkts: 0
+                      lastupdated: 1644821014912
+                      source-ip: 10.101.3.3
+                      fec-dynamic: 'false'
+                    - dest-ip: 10.102.5.5
+                      source-port: 12366
+                      vdevice-name: 169.254.10.10
+                      fec-rx-parity-pkts: 0
+                      fec-capable: 'false'
+                      fec-tx-parity-pkts: 0
+                      vdevice-host-name: vm3
+                      tunnel-protocol: ipsec
+                      fec-tx-data-pkts: 0
+                      dest-port: 12366
+                      vdevice-dataKey: 169.254.10.10-ipsec-10.101.3.3-10.102.5.5-12366-12366
+                      fec-rx-data-pkts: 0
+                      fec-reconstruct-pkts: 0
+                      lastupdated: 1644821014912
+                      source-ip: 10.101.3.3
+                      fec-dynamic: 'false'
+                    - dest-ip: 10.102.6.6
+                      source-port: 12366
+                      vdevice-name: 169.254.10.10
+                      fec-rx-parity-pkts: 0
+                      fec-capable: 'false'
+                      fec-tx-parity-pkts: 0
+                      vdevice-host-name: vm3
+                      tunnel-protocol: ipsec
+                      fec-tx-data-pkts: 0
+                      dest-port: 12366
+                      vdevice-dataKey: 169.254.10.10-ipsec-10.101.3.3-10.102.6.6-12366-12366
+                      fec-rx-data-pkts: 0
+                      fec-reconstruct-pkts: 0
+                      lastupdated: 1644821014912
+                      source-ip: 10.101.3.3
+                      fec-dynamic: 'false'
+                    - dest-ip: 10.102.16.16
+                      source-port: 12366
+                      vdevice-name: 169.254.10.10
+                      fec-rx-parity-pkts: 0
+                      fec-capable: 'false'
+                      fec-tx-parity-pkts: 0
+                      vdevice-host-name: vm3
+                      tunnel-protocol: ipsec
+                      fec-tx-data-pkts: 0
+                      dest-port: 12366
+                      vdevice-dataKey: 169.254.10.10-ipsec-10.101.3.3-10.102.16.16-12366-12366
+                      fec-rx-data-pkts: 0
+                      fec-reconstruct-pkts: 0
+                      lastupdated: 1644821014912
+                      source-ip: 10.101.3.3
+                      fec-dynamic: 'false'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Security-read,Security-write,System-read,System-write
+  /device/tunnel/gre-keepalives:
+    get:
+      tags:
+      - Real-Time Monitoring - Tunnel
+      description: Get GRE keep alive information
+      operationId: createGreKeepalivesList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                GRE keep alive:
+                  description: GRE keep alive
+                  value:
+                    data:
+                    - dest-ip: 30.30.30.30
+                      vdevice-name: 169.254.10.10
+                      rx-packets: 0
+                      rx-errors: 0
+                      oper-state: down
+                      tx-errors: 0
+                      admin-state: up
+                      vpn-id: '10'
+                      vdevice-host-name: vm3
+                      ka-enabled: 'true'
+                      remote-tx-packets: 0
+                      if-name: gre1
+                      vdevice-dataKey: 169.254.10.10-10-gre1
+                      tx-packets: 81366
+                      remote-rx-packets: 0
+                      lastupdated: 1644817234436
+                      source-ip: 10.0.3.3
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Security-read,Security-write,System-read,System-write
+  /device/tunnel/ipsec_statistics:
+    get:
+      tags:
+      - Real-Time Monitoring - Tunnel
+      description: Get tunnel IPSec statistics all devices
+      operationId: createIpsecStatisticsList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Tunnel IPSec statistics:
+                  description: Tunnel IPSec statistics
+                  value:
+                    data:
+                    - dest-ip: 30.30.30.30
+                      source-port: 0
+                      dest-port: 0
+                      vdevice-dataKey: 169.254.10.10-gre-10.0.3.3-30.30.30.30-0-0
+                      vdevice-name: 169.254.10.10
+                      lastupdated: 1644818093996
+                      source-ip: 10.0.3.3
+                      vdevice-host-name: vm3
+                      tunnel-protocol: gre
+                    - dest-ip: 10.101.2.2
+                      source-port: 12366
+                      vdevice-name: 169.254.10.10
+                      ipsec-rx-failures: 0
+                      ipsec-rx-auth-failures: 0
+                      ipsec-tx-auth-failures: 0
+                      vdevice-host-name: vm3
+                      tunnel-protocol: ipsec
+                      dest-port: 12346
+                      vdevice-dataKey: 169.254.10.10-ipsec-10.101.3.3-10.101.2.2-12366-12346
+                      ipsec-decrypt-inbound: 428675
+                      lastupdated: 1644818093996
+                      source-ip: 10.101.3.3
+                      ipsec-tx-failures: 0
+                      ipsec-encrypt-outbound: 428675
+                    - dest-ip: 10.101.4.4
+                      source-port: 12366
+                      vdevice-name: 169.254.10.10
+                      ipsec-rx-failures: 0
+                      ipsec-rx-auth-failures: 0
+                      ipsec-tx-auth-failures: 0
+                      vdevice-host-name: vm3
+                      tunnel-protocol: ipsec
+                      dest-port: 12366
+                      vdevice-dataKey: 169.254.10.10-ipsec-10.101.3.3-10.101.4.4-12366-12366
+                      ipsec-decrypt-inbound: 428832
+                      lastupdated: 1644818093996
+                      source-ip: 10.101.3.3
+                      ipsec-tx-failures: 0
+                      ipsec-encrypt-outbound: 428832
+                    - dest-ip: 10.102.5.5
+                      source-port: 12366
+                      vdevice-name: 169.254.10.10
+                      ipsec-rx-failures: 0
+                      ipsec-rx-auth-failures: 0
+                      ipsec-tx-auth-failures: 0
+                      vdevice-host-name: vm3
+                      tunnel-protocol: ipsec
+                      dest-port: 12366
+                      vdevice-dataKey: 169.254.10.10-ipsec-10.101.3.3-10.102.5.5-12366-12366
+                      ipsec-decrypt-inbound: 452605
+                      lastupdated: 1644818093996
+                      source-ip: 10.101.3.3
+                      ipsec-tx-failures: 0
+                      ipsec-encrypt-outbound: 452605
+                    - dest-ip: 10.102.6.6
+                      source-port: 12366
+                      vdevice-name: 169.254.10.10
+                      ipsec-rx-failures: 0
+                      ipsec-rx-auth-failures: 0
+                      ipsec-tx-auth-failures: 0
+                      vdevice-host-name: vm3
+                      tunnel-protocol: ipsec
+                      dest-port: 12366
+                      vdevice-dataKey: 169.254.10.10-ipsec-10.101.3.3-10.102.6.6-12366-12366
+                      ipsec-decrypt-inbound: 452712
+                      lastupdated: 1644818093996
+                      source-ip: 10.101.3.3
+                      ipsec-tx-failures: 0
+                      ipsec-encrypt-outbound: 452712
+                    - dest-ip: 10.102.16.16
+                      source-port: 12366
+                      vdevice-name: 169.254.10.10
+                      ipsec-rx-failures: 0
+                      ipsec-rx-auth-failures: 0
+                      ipsec-tx-auth-failures: 0
+                      vdevice-host-name: vm3
+                      tunnel-protocol: ipsec
+                      dest-port: 12366
+                      vdevice-dataKey: 169.254.10.10-ipsec-10.101.3.3-10.102.16.16-12366-12366
+                      ipsec-decrypt-inbound: 452777
+                      lastupdated: 1644818093996
+                      source-ip: 10.101.3.3
+                      ipsec-tx-failures: 0
+                      ipsec-encrypt-outbound: 452777
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Security-read,Security-write,System-read,System-write
+  /device/tunnel/packet-duplicate:
+    get:
+      tags:
+      - Real-Time Monitoring - Tunnel
+      description: Get tunnel statistics packet duplication statistics
+      operationId: createPacketDuplicateStatistics
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                tunnel statistics packet duplication stats:
+                  description: tunnel statistics packet duplication stats
+                  value:
+                    data:
+                    - dest-ip: 30.30.30.30
+                      source-port: 0
+                      pktdup-tx: 0
+                      pktdup-rx-other: 0
+                      vdevice-name: 169.254.10.10
+                      pktdup-rx: 0
+                      pktdup-rx-this: 0
+                      vdevice-host-name: vm3
+                      tunnel-protocol: gre
+                      dest-port: 0
+                      vdevice-dataKey: 169.254.10.10-gre-10.0.3.3-30.30.30.30-0-0
+                      pktdup-capable: 'false'
+                      lastupdated: 1644820446648
+                      source-ip: 10.0.3.3
+                      pktdup-tx-other: 0
+                    - dest-ip: 10.101.2.2
+                      source-port: 12366
+                      pktdup-tx: 0
+                      pktdup-rx-other: 0
+                      vdevice-name: 169.254.10.10
+                      pktdup-rx: 0
+                      pktdup-rx-this: 0
+                      vdevice-host-name: vm3
+                      tunnel-protocol: ipsec
+                      dest-port: 12346
+                      vdevice-dataKey: 169.254.10.10-ipsec-10.101.3.3-10.101.2.2-12366-12346
+                      pktdup-capable: 'false'
+                      lastupdated: 1644820446648
+                      source-ip: 10.101.3.3
+                      pktdup-tx-other: 0
+                    - dest-ip: 10.101.4.4
+                      source-port: 12366
+                      pktdup-tx: 0
+                      pktdup-rx-other: 0
+                      vdevice-name: 169.254.10.10
+                      pktdup-rx: 0
+                      pktdup-rx-this: 0
+                      vdevice-host-name: vm3
+                      tunnel-protocol: ipsec
+                      dest-port: 12366
+                      vdevice-dataKey: 169.254.10.10-ipsec-10.101.3.3-10.101.4.4-12366-12366
+                      pktdup-capable: 'false'
+                      lastupdated: 1644820446648
+                      source-ip: 10.101.3.3
+                      pktdup-tx-other: 0
+                    - dest-ip: 10.102.5.5
+                      source-port: 12366
+                      pktdup-tx: 0
+                      pktdup-rx-other: 0
+                      vdevice-name: 169.254.10.10
+                      pktdup-rx: 0
+                      pktdup-rx-this: 0
+                      vdevice-host-name: vm3
+                      tunnel-protocol: ipsec
+                      dest-port: 12366
+                      vdevice-dataKey: 169.254.10.10-ipsec-10.101.3.3-10.102.5.5-12366-12366
+                      pktdup-capable: 'false'
+                      lastupdated: 1644820446648
+                      source-ip: 10.101.3.3
+                      pktdup-tx-other: 0
+                    - dest-ip: 10.102.6.6
+                      source-port: 12366
+                      pktdup-tx: 0
+                      pktdup-rx-other: 0
+                      vdevice-name: 169.254.10.10
+                      pktdup-rx: 0
+                      pktdup-rx-this: 0
+                      vdevice-host-name: vm3
+                      tunnel-protocol: ipsec
+                      dest-port: 12366
+                      vdevice-dataKey: 169.254.10.10-ipsec-10.101.3.3-10.102.6.6-12366-12366
+                      pktdup-capable: 'false'
+                      lastupdated: 1644820446648
+                      source-ip: 10.101.3.3
+                      pktdup-tx-other: 0
+                    - dest-ip: 10.102.16.16
+                      source-port: 12366
+                      pktdup-tx: 0
+                      pktdup-rx-other: 0
+                      vdevice-name: 169.254.10.10
+                      pktdup-rx: 0
+                      pktdup-rx-this: 0
+                      vdevice-host-name: vm3
+                      tunnel-protocol: ipsec
+                      dest-port: 12366
+                      vdevice-dataKey: 169.254.10.10-ipsec-10.101.3.3-10.102.16.16-12366-12366
+                      pktdup-capable: 'false'
+                      lastupdated: 1644820446648
+                      source-ip: 10.101.3.3
+                      pktdup-tx-other: 0
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Security-read,Security-write,System-read,System-write
+  /device/tunnel/statistics:
+    get:
+      tags:
+      - Real-Time Monitoring - Tunnel
+      description: Get tunnel statistics all devices
+      operationId: createStatisticsList
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Tunnel statistics:
+                  description: Tunnel statistics
+                  value:
+                    data:
+                    - dest-ip: 30.30.30.30
+                      source-port: 0
+                      vdevice-name: 169.254.10.10
+                      rx_pkts: 0
+                      tcp-mss-adjust: 1392
+                      tx_octets: 0
+                      vdevice-host-name: vm3
+                      tunnel-protocol: gre
+                      tx_pkts: 0
+                      dest-port: 0
+                      vdevice-dataKey: 169.254.10.10-gre-10.0.3.3-30.30.30.30-0-0
+                      rx_octets: 0
+                      tunnel-mtu: 1476
+                      lastupdated: 1644819414066
+                      source-ip: 10.0.3.3
+                    - dest-ip: 10.101.2.2
+                      source-port: 12366
+                      vdevice-name: 169.254.10.10
+                      rx_pkts: 431317
+                      system-ip: 172.16.254.1
+                      tcp-mss-adjust: 1361
+                      remote-color: default
+                      tx_octets: 72492445
+                      vdevice-host-name: vm3
+                      tunnel-protocol: ipsec
+                      local-color: default
+                      tx_pkts: 431317
+                      dest-port: 12346
+                      vdevice-dataKey: 169.254.10.10-ipsec-10.101.3.3-10.101.2.2-12366-12346
+                      rx_octets: 72492438
+                      tunnel-mtu: 1441
+                      lastupdated: 1644819414066
+                      source-ip: 10.101.3.3
+                    - dest-ip: 10.101.4.4
+                      source-port: 12366
+                      vdevice-name: 169.254.10.10
+                      rx_pkts: 431474
+                      system-ip: 172.16.254.3
+                      tcp-mss-adjust: 1361
+                      remote-color: default
+                      tx_octets: 72518784
+                      vdevice-host-name: vm3
+                      tunnel-protocol: ipsec
+                      local-color: default
+                      tx_pkts: 431474
+                      dest-port: 12366
+                      vdevice-dataKey: 169.254.10.10-ipsec-10.101.3.3-10.101.4.4-12366-12366
+                      rx_octets: 72517505
+                      tunnel-mtu: 1441
+                      lastupdated: 1644819414066
+                      source-ip: 10.101.3.3
+                    - dest-ip: 10.102.5.5
+                      source-port: 12366
+                      vdevice-name: 169.254.10.10
+                      rx_pkts: 455393
+                      system-ip: 172.16.254.4
+                      tcp-mss-adjust: 1361
+                      remote-color: default
+                      tx_octets: 76373141
+                      vdevice-host-name: vm3
+                      tunnel-protocol: ipsec
+                      local-color: default
+                      tx_pkts: 455393
+                      dest-port: 12366
+                      vdevice-dataKey: 169.254.10.10-ipsec-10.101.3.3-10.102.5.5-12366-12366
+                      rx_octets: 78844158
+                      tunnel-mtu: 1441
+                      lastupdated: 1644819414066
+                      source-ip: 10.101.3.3
+                    - dest-ip: 10.102.6.6
+                      source-port: 12366
+                      vdevice-name: 169.254.10.10
+                      rx_pkts: 455504
+                      system-ip: 172.16.254.5
+                      tcp-mss-adjust: 1361
+                      remote-color: default
+                      tx_octets: 76391653
+                      vdevice-host-name: vm3
+                      tunnel-protocol: ipsec
+                      local-color: default
+                      tx_pkts: 455504
+                      dest-port: 12366
+                      vdevice-dataKey: 169.254.10.10-ipsec-10.101.3.3-10.102.6.6-12366-12366
+                      rx_octets: 78862831
+                      tunnel-mtu: 1441
+                      lastupdated: 1644819414066
+                      source-ip: 10.101.3.3
+                    - dest-ip: 10.102.16.16
+                      source-port: 12366
+                      vdevice-name: 169.254.10.10
+                      rx_pkts: 455567
+                      system-ip: 172.16.254.16
+                      tcp-mss-adjust: 1361
+                      remote-color: default
+                      tx_octets: 76401957
+                      vdevice-host-name: vm3
+                      tunnel-protocol: ipsec
+                      local-color: default
+                      tx_pkts: 455567
+                      dest-port: 12366
+                      vdevice-dataKey: 169.254.10.10-ipsec-10.101.3.3-10.102.16.16-12366-12366
+                      rx_octets: 78873632
+                      tunnel-mtu: 1441
+                      lastupdated: 1644819414066
+                      source-ip: 10.101.3.3
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Security-read,Security-write,System-read,System-write

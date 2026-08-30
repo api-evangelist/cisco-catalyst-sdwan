@@ -1,0 +1,317 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Monitoring - Stats Processing API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Monitoring - Stats Processing
+paths:
+  /statistics:
+    get:
+      tags:
+      - Monitoring - Stats Processing
+      description: Get statistics types
+      operationId: getStatisticType
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Stats type:
+                  description: Stats type
+                  value:
+                  - interfacestatistics
+                  - eioltestatistics
+                  - providerdpistatistics
+                  - sulstatistics
+                  - qosstatistics
+                  - devicesystemstatusstatistics
+                  - bridgemacstatistics
+                  - dpistatistics
+                  - approutestatsstatistics
+                  - provideraggregatedappsdpistatistics
+                  - wlanclientinfostatistics
+                  - flowlogstatistics
+                  - urlf
+                  - fwall
+                  - vnfstatistics
+                  - umbrella
+                  - apphostingstatistics
+                  - utddaqioxstatistics
+                  - ipsalert
+                  - aggregatedappsdpistatistics
+                  - bridgeinterfacestatistics
+                  - artstatistics
+                  - trackerstatistics
+                  - cloudxstatistics
+                  - deviceevents
+                  - sleofflinereport
+                  - alarm
+                  - auditlog
+                  - deviceconfiguration
+                  - nwpi
+                  - nwpiflowraw
+                  - speedtest
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Device Monitoring-read
+  /statistics/collect:
+    get:
+      tags:
+      - Monitoring - Stats Processing
+      description: Start stats collect
+      operationId: startStatsCollection
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Status:
+                  description: Status
+                  value:
+                    ActivateDataCollection: success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /statistics/collect/thread/status:
+    get:
+      tags:
+      - Monitoring - Stats Processing
+      description: Get stats collect thread report
+      operationId: generateStatsCollectThreadReport
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Process thread report:
+                  description: Process thread report
+                  value: {}
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: admin
+  /statistics/collection/reset/{processQueue}:
+    get:
+      tags:
+      - Monitoring - Stats Processing
+      description: Reset stats collect thread report
+      operationId: resetStatsCollection
+      parameters:
+      - name: processQueue
+        in: path
+        description: Process queue
+        required: true
+        schema:
+          maximum: 4
+          minimum: -1
+          type: integer
+          format: int64
+          default: -1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Status:
+                  description: Status
+                  value:
+                    statisticsCollectionReset: success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: admin
+  /statistics/demomode:
+    get:
+      tags:
+      - Monitoring - Stats Processing
+      description: Enable statistic demo mode
+      operationId: enableStatisticsDemoMode
+      parameters:
+      - name: enable
+        in: query
+        description: Demo mode flag
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Demo mode:
+                  description: Demo mode
+                  value:
+                    DemoMode: 'Stats collection interval: 1 minute, Stats Processing interval: 1 min'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: admin
+  /statistics/process:
+    get:
+      tags:
+      - Monitoring - Stats Processing
+      description: Process stats data
+      operationId: processStatisticsData
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Status:
+                  description: Status
+                  value:
+                    ActivateDataProcessing: success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: admin
+  /statistics/process/counters:
+    get:
+      tags:
+      - Monitoring - Stats Processing
+      description: Get statistics processing counters
+      operationId: getStatisticsProcessingCounters
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Statistics processing counters:
+                  description: Statistics processing counters
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: admin
+  /statistics/process/status:
+    get:
+      tags:
+      - Monitoring - Stats Processing
+      description: Get stats process report
+      operationId: generateStatsProcessReport
+      parameters:
+      - name: processQueue
+        in: query
+        description: Process queue
+        schema:
+          maximum: 4
+          minimum: -1
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Process report:
+                  description: Process report
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: admin
+  /statistics/process/thread/status:
+    get:
+      tags:
+      - Monitoring - Stats Processing
+      description: Get stats process thread report
+      operationId: generateStatsProcessThreadReport
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              examples:
+                Process thread report:
+                  description: Process thread report
+                  value: []
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: admin

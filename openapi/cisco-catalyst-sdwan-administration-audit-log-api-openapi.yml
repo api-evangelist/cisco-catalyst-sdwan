@@ -1,0 +1,1605 @@
+openapi: 3.2.0
+info:
+  title: Others Administration - Audit Log API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Administration - Audit Log
+paths:
+  /auditlog:
+    post:
+      tags:
+      - Administration - Audit Log
+      summary: Get vManage Audit Log with post action
+      description: Get raw property data with post action
+      operationId: getRawPropertyData
+      requestBody:
+        description: Stats query string
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Data aggregation query string:
+                description: Data aggregation query string
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - field: entry_time
+                      operator: last_n_hours
+                      type: date
+                      value:
+                      - '3'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                required:
+                - data
+                - header
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      required:
+                      - auditdetails
+                      - entry_time
+                      - logdeviceid
+                      - logfeature
+                      - logid
+                      - logmessage
+                      - logmodule
+                      - loguser
+                      - logusersrcip
+                      - statcycletime
+                      - tenant
+                      type: object
+                      properties:
+                        auditdetails:
+                          type: array
+                          items:
+                            type: string
+                        entry_time:
+                          type: integer
+                          format: int32
+                          example: 1659003590292
+                        id:
+                          type: string
+                          example: iWJRRIIBMbLIyWbe1qH
+                        logdeviceid:
+                          type: string
+                          example: 172.16.255.22
+                        logfeature:
+                          type: string
+                          example: user
+                        logid:
+                          type: string
+                          format: uuid
+                          example: 918c6d64-729c-4304-b2c7-955a7c0e6a61
+                        logmessage:
+                          type: string
+                          example: 'Invalidated session due to server session idle time out for User: viptela-device-901d032c-0721-438e-82ba-1d429598d879'
+                        logmodule:
+                          type: string
+                          example: user
+                        loguser:
+                          type: string
+                          format: uuid
+                        logusersrcip:
+                          type: string
+                          example: 172.16.255.19
+                        statcycletime:
+                          type: integer
+                          format: int32
+                          example: 1659003590292
+                        tenant:
+                          type: string
+                          example: default
+                      $$ref: '#/components/schemas/AuditLogEntry'
+                  header:
+                    type: object
+                    properties:
+                      chart:
+                        type: object
+                        properties:
+                          series:
+                            type: array
+                            items:
+                              type: string
+                          title:
+                            type: string
+                          xAxis:
+                            type: array
+                            items:
+                              type: string
+                          xAxisLabel:
+                            type: string
+                          yAxis:
+                            type: array
+                            items:
+                              type: string
+                          yAxisLabel:
+                            type: string
+                        $$ref: '#/components/schemas/ChartObject'
+                      columns:
+                        required:
+                        - dataType
+                        - property
+                        - title
+                        type: object
+                        properties:
+                          dataType:
+                            type: string
+                            example: date
+                          displayFormat:
+                            type: string
+                            example: DD MMM YYYY h:mm:ss A z
+                          hideable:
+                            type: boolean
+                            example: true
+                          inputFormat:
+                            type: string
+                            example: unix-time
+                          isDisplay:
+                            type: boolean
+                            example: true
+                          minWidth:
+                            type: integer
+                            format: int32
+                            example: 300
+                          property:
+                            type: string
+                            example: entry_time
+                          title:
+                            type: string
+                            example: Timestamp
+                          width:
+                            type: integer
+                            format: int32
+                            example: 220
+                        $$ref: '#/components/schemas/AuditLogHeaderColumns'
+                      fields:
+                        type: object
+                        properties:
+                          dataType:
+                            type: string
+                            example: date
+                          property:
+                            type: string
+                            example: entry_time
+                        $$ref: '#/components/schemas/GetStatDataFields'
+                      generatedOn:
+                        type: integer
+                        format: int32
+                        example: 1655622555494
+                      viewKeys:
+                        type: object
+                        properties:
+                          preferenceKey:
+                            type: string
+                            example: grid-AuditLogView
+                          uniqueKey:
+                            type: array
+                            items:
+                              type: string
+                        $$ref: '#/components/schemas/AuditLogHeaderViewKeys'
+                    $$ref: '#/components/schemas/AuditLogHeader'
+                $$ref: '#/components/schemas/GetAuditLogData'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    get:
+      tags:
+      - Administration - Audit Log
+      summary: Get vManage Audit Log
+      description: Get stat raw data
+      operationId: getStatDataRawAuditLogData
+      parameters:
+      - name: query
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                required:
+                - data
+                - header
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      required:
+                      - auditdetails
+                      - entry_time
+                      - logdeviceid
+                      - logfeature
+                      - logid
+                      - logmessage
+                      - logmodule
+                      - loguser
+                      - logusersrcip
+                      - statcycletime
+                      - tenant
+                      type: object
+                      properties:
+                        auditdetails:
+                          type: array
+                          items:
+                            type: string
+                        entry_time:
+                          type: integer
+                          format: int32
+                          example: 1659003590292
+                        id:
+                          type: string
+                          example: iWJRRIIBMbLIyWbe1qH
+                        logdeviceid:
+                          type: string
+                          example: 172.16.255.22
+                        logfeature:
+                          type: string
+                          example: user
+                        logid:
+                          type: string
+                          format: uuid
+                          example: 918c6d64-729c-4304-b2c7-955a7c0e6a61
+                        logmessage:
+                          type: string
+                          example: 'Invalidated session due to server session idle time out for User: viptela-device-901d032c-0721-438e-82ba-1d429598d879'
+                        logmodule:
+                          type: string
+                          example: user
+                        loguser:
+                          type: string
+                          format: uuid
+                        logusersrcip:
+                          type: string
+                          example: 172.16.255.19
+                        statcycletime:
+                          type: integer
+                          format: int32
+                          example: 1659003590292
+                        tenant:
+                          type: string
+                          example: default
+                      $$ref: '#/components/schemas/AuditLogEntry'
+                  header:
+                    type: object
+                    properties:
+                      chart:
+                        type: object
+                        properties:
+                          series:
+                            type: array
+                            items:
+                              type: string
+                          title:
+                            type: string
+                          xAxis:
+                            type: array
+                            items:
+                              type: string
+                          xAxisLabel:
+                            type: string
+                          yAxis:
+                            type: array
+                            items:
+                              type: string
+                          yAxisLabel:
+                            type: string
+                        $$ref: '#/components/schemas/ChartObject'
+                      columns:
+                        required:
+                        - dataType
+                        - property
+                        - title
+                        type: object
+                        properties:
+                          dataType:
+                            type: string
+                            example: date
+                          displayFormat:
+                            type: string
+                            example: DD MMM YYYY h:mm:ss A z
+                          hideable:
+                            type: boolean
+                            example: true
+                          inputFormat:
+                            type: string
+                            example: unix-time
+                          isDisplay:
+                            type: boolean
+                            example: true
+                          minWidth:
+                            type: integer
+                            format: int32
+                            example: 300
+                          property:
+                            type: string
+                            example: entry_time
+                          title:
+                            type: string
+                            example: Timestamp
+                          width:
+                            type: integer
+                            format: int32
+                            example: 220
+                        $$ref: '#/components/schemas/AuditLogHeaderColumns'
+                      fields:
+                        type: object
+                        properties:
+                          dataType:
+                            type: string
+                            example: date
+                          property:
+                            type: string
+                            example: entry_time
+                        $$ref: '#/components/schemas/GetStatDataFields'
+                      generatedOn:
+                        type: integer
+                        format: int32
+                        example: 1655622555494
+                      viewKeys:
+                        type: object
+                        properties:
+                          preferenceKey:
+                            type: string
+                            example: grid-AuditLogView
+                          uniqueKey:
+                            type: array
+                            items:
+                              type: string
+                        $$ref: '#/components/schemas/AuditLogHeaderViewKeys'
+                    $$ref: '#/components/schemas/AuditLogHeader'
+                $$ref: '#/components/schemas/GetAuditLogData'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /auditlog/aggregation:
+    post:
+      tags:
+      - Administration - Audit Log
+      summary: Get raw property data aggregated
+      description: Get raw property data aggregated with post action
+      operationId: getPostPropertyAggregationData
+      requestBody:
+        description: Stats query string
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Data aggregation query string:
+                description: Data aggregation query string
+                value:
+                  aggregation:
+                    histogram:
+                      interval: 30
+                      order: asc
+                      property: entry_time
+                      type: minute
+                  query:
+                    condition: AND
+                    rules:
+                    - field: entry_time
+                      operator: last_n_hours
+                      type: date
+                      value:
+                      - '3'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                required:
+                - header
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      required:
+                      - auditdetails
+                      - entry_time
+                      - logdeviceid
+                      - logfeature
+                      - logid
+                      - logmessage
+                      - logmodule
+                      - loguser
+                      - logusersrcip
+                      - statcycletime
+                      - tenant
+                      type: object
+                      properties:
+                        auditdetails:
+                          type: array
+                          items:
+                            type: string
+                        entry_time:
+                          type: integer
+                          format: int32
+                          example: 1659003590292
+                        id:
+                          type: string
+                          example: iWJRRIIBMbLIyWbe1qH
+                        logdeviceid:
+                          type: string
+                          example: 172.16.255.22
+                        logfeature:
+                          type: string
+                          example: user
+                        logid:
+                          type: string
+                          format: uuid
+                          example: 918c6d64-729c-4304-b2c7-955a7c0e6a61
+                        logmessage:
+                          type: string
+                          example: 'Invalidated session due to server session idle time out for User: viptela-device-901d032c-0721-438e-82ba-1d429598d879'
+                        logmodule:
+                          type: string
+                          example: user
+                        loguser:
+                          type: string
+                          format: uuid
+                        logusersrcip:
+                          type: string
+                          example: 172.16.255.19
+                        statcycletime:
+                          type: integer
+                          format: int32
+                          example: 1659003590292
+                        tenant:
+                          type: string
+                          example: default
+                      $$ref: '#/components/schemas/AuditLogEntry'
+                  entryTimeList:
+                    type: array
+                    items:
+                      type: string
+                  header:
+                    type: object
+                    properties:
+                      chart:
+                        type: object
+                        properties:
+                          series:
+                            type: array
+                            items:
+                              type: string
+                          title:
+                            type: string
+                          xAxis:
+                            type: array
+                            items:
+                              type: string
+                          xAxisLabel:
+                            type: string
+                          yAxis:
+                            type: array
+                            items:
+                              type: string
+                          yAxisLabel:
+                            type: string
+                        $$ref: '#/components/schemas/ChartObject'
+                      columns:
+                        required:
+                        - dataType
+                        - property
+                        - title
+                        type: object
+                        properties:
+                          dataType:
+                            type: string
+                            example: date
+                          displayFormat:
+                            type: string
+                            example: DD MMM YYYY h:mm:ss A z
+                          hideable:
+                            type: boolean
+                            example: true
+                          inputFormat:
+                            type: string
+                            example: unix-time
+                          isDisplay:
+                            type: boolean
+                            example: true
+                          minWidth:
+                            type: integer
+                            format: int32
+                            example: 300
+                          property:
+                            type: string
+                            example: entry_time
+                          title:
+                            type: string
+                            example: Timestamp
+                          width:
+                            type: integer
+                            format: int32
+                            example: 220
+                        $$ref: '#/components/schemas/AuditLogHeaderColumns'
+                      fields:
+                        type: object
+                        properties:
+                          dataType:
+                            type: string
+                            example: date
+                          property:
+                            type: string
+                            example: entry_time
+                        $$ref: '#/components/schemas/GetStatDataFields'
+                      generatedOn:
+                        type: integer
+                        format: int32
+                        example: 1655622555494
+                      viewKeys:
+                        type: object
+                        properties:
+                          preferenceKey:
+                            type: string
+                            example: grid-AuditLogView
+                          uniqueKey:
+                            type: array
+                            items:
+                              type: string
+                        $$ref: '#/components/schemas/AuditLogHeaderViewKeys'
+                    $$ref: '#/components/schemas/AuditLogHeader'
+                $$ref: '#/components/schemas/GetAuditLogAggregation'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    get:
+      tags:
+      - Administration - Audit Log
+      summary: Get raw property data aggregated
+      description: Get raw property data aggregated
+      operationId: getPropertyAggregationData
+      parameters:
+      - name: query
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                required:
+                - header
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      required:
+                      - auditdetails
+                      - entry_time
+                      - logdeviceid
+                      - logfeature
+                      - logid
+                      - logmessage
+                      - logmodule
+                      - loguser
+                      - logusersrcip
+                      - statcycletime
+                      - tenant
+                      type: object
+                      properties:
+                        auditdetails:
+                          type: array
+                          items:
+                            type: string
+                        entry_time:
+                          type: integer
+                          format: int32
+                          example: 1659003590292
+                        id:
+                          type: string
+                          example: iWJRRIIBMbLIyWbe1qH
+                        logdeviceid:
+                          type: string
+                          example: 172.16.255.22
+                        logfeature:
+                          type: string
+                          example: user
+                        logid:
+                          type: string
+                          format: uuid
+                          example: 918c6d64-729c-4304-b2c7-955a7c0e6a61
+                        logmessage:
+                          type: string
+                          example: 'Invalidated session due to server session idle time out for User: viptela-device-901d032c-0721-438e-82ba-1d429598d879'
+                        logmodule:
+                          type: string
+                          example: user
+                        loguser:
+                          type: string
+                          format: uuid
+                        logusersrcip:
+                          type: string
+                          example: 172.16.255.19
+                        statcycletime:
+                          type: integer
+                          format: int32
+                          example: 1659003590292
+                        tenant:
+                          type: string
+                          example: default
+                      $$ref: '#/components/schemas/AuditLogEntry'
+                  entryTimeList:
+                    type: array
+                    items:
+                      type: string
+                  header:
+                    type: object
+                    properties:
+                      chart:
+                        type: object
+                        properties:
+                          series:
+                            type: array
+                            items:
+                              type: string
+                          title:
+                            type: string
+                          xAxis:
+                            type: array
+                            items:
+                              type: string
+                          xAxisLabel:
+                            type: string
+                          yAxis:
+                            type: array
+                            items:
+                              type: string
+                          yAxisLabel:
+                            type: string
+                        $$ref: '#/components/schemas/ChartObject'
+                      columns:
+                        required:
+                        - dataType
+                        - property
+                        - title
+                        type: object
+                        properties:
+                          dataType:
+                            type: string
+                            example: date
+                          displayFormat:
+                            type: string
+                            example: DD MMM YYYY h:mm:ss A z
+                          hideable:
+                            type: boolean
+                            example: true
+                          inputFormat:
+                            type: string
+                            example: unix-time
+                          isDisplay:
+                            type: boolean
+                            example: true
+                          minWidth:
+                            type: integer
+                            format: int32
+                            example: 300
+                          property:
+                            type: string
+                            example: entry_time
+                          title:
+                            type: string
+                            example: Timestamp
+                          width:
+                            type: integer
+                            format: int32
+                            example: 220
+                        $$ref: '#/components/schemas/AuditLogHeaderColumns'
+                      fields:
+                        type: object
+                        properties:
+                          dataType:
+                            type: string
+                            example: date
+                          property:
+                            type: string
+                            example: entry_time
+                        $$ref: '#/components/schemas/GetStatDataFields'
+                      generatedOn:
+                        type: integer
+                        format: int32
+                        example: 1655622555494
+                      viewKeys:
+                        type: object
+                        properties:
+                          preferenceKey:
+                            type: string
+                            example: grid-AuditLogView
+                          uniqueKey:
+                            type: array
+                            items:
+                              type: string
+                        $$ref: '#/components/schemas/AuditLogHeaderViewKeys'
+                    $$ref: '#/components/schemas/AuditLogHeader'
+                $$ref: '#/components/schemas/GetAuditLogAggregation'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /auditlog/doccount:
+    post:
+      tags:
+      - Administration - Audit Log
+      summary: Get vManage Audit Log Doc count
+      description: Get response count of a query
+      operationId: getCountPost_AdministrationAuditLog_1804
+      requestBody:
+        description: Stats query string
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Data aggregation query string:
+                description: Data aggregation query string
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - field: entry_time
+                      operator: last_n_hours
+                      type: date
+                      value:
+                      - '3'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    format: int32
+                    example: 44
+                $$ref: '#/components/schemas/GetAuditLogDoccount'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    get:
+      tags:
+      - Administration - Audit Log
+      summary: Get vManage Audit Log Doc count
+      description: Get response count of a query
+      operationId: getCount_AdministrationAuditLog_1803
+      parameters:
+      - name: query
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    format: int32
+                    example: 44
+                $$ref: '#/components/schemas/GetAuditLogDoccount'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /auditlog/fields:
+    get:
+      tags:
+      - Administration - Audit Log
+      summary: Get vManage Audit Log fields
+      description: Get fields and type
+      operationId: getStatDataFields_AdministrationAuditLog_1603
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                properties:
+                  empty:
+                    type: boolean
+                items:
+                  type: object
+                  properties:
+                    dataType:
+                      type: string
+                      example: date
+                    property:
+                      type: string
+                      example: entry_time
+                  $$ref: '#/components/schemas/GetStatDataFields'
+                $$ref: '#/components/schemas/GetStatDataFieldArray'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /auditlog/page:
+    get:
+      tags:
+      - Administration - Audit Log
+      summary: Get raw property data in bulk
+      description: Get raw property data in bulk
+      operationId: getStatBulkRawPropertyData
+      parameters:
+      - name: query
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: scrollId
+        in: query
+        schema:
+          type: string
+      - name: count
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                required:
+                - data
+                - header
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      required:
+                      - auditdetails
+                      - entry_time
+                      - logdeviceid
+                      - logfeature
+                      - logid
+                      - logmessage
+                      - logmodule
+                      - loguser
+                      - logusersrcip
+                      - statcycletime
+                      - tenant
+                      type: object
+                      properties:
+                        auditdetails:
+                          type: array
+                          items:
+                            type: string
+                        entry_time:
+                          type: integer
+                          format: int32
+                          example: 1659003590292
+                        id:
+                          type: string
+                          example: iWJRRIIBMbLIyWbe1qH
+                        logdeviceid:
+                          type: string
+                          example: 172.16.255.22
+                        logfeature:
+                          type: string
+                          example: user
+                        logid:
+                          type: string
+                          format: uuid
+                          example: 918c6d64-729c-4304-b2c7-955a7c0e6a61
+                        logmessage:
+                          type: string
+                          example: 'Invalidated session due to server session idle time out for User: viptela-device-901d032c-0721-438e-82ba-1d429598d879'
+                        logmodule:
+                          type: string
+                          example: user
+                        loguser:
+                          type: string
+                          format: uuid
+                        logusersrcip:
+                          type: string
+                          example: 172.16.255.19
+                        statcycletime:
+                          type: integer
+                          format: int32
+                          example: 1659003590292
+                        tenant:
+                          type: string
+                          example: default
+                      $$ref: '#/components/schemas/AuditLogEntry'
+                  header:
+                    type: object
+                    properties:
+                      chart:
+                        type: object
+                        properties:
+                          series:
+                            type: array
+                            items:
+                              type: string
+                          title:
+                            type: string
+                          xAxis:
+                            type: array
+                            items:
+                              type: string
+                          xAxisLabel:
+                            type: string
+                          yAxis:
+                            type: array
+                            items:
+                              type: string
+                          yAxisLabel:
+                            type: string
+                        $$ref: '#/components/schemas/ChartObject'
+                      columns:
+                        required:
+                        - dataType
+                        - property
+                        - title
+                        type: object
+                        properties:
+                          dataType:
+                            type: string
+                            example: date
+                          displayFormat:
+                            type: string
+                            example: DD MMM YYYY h:mm:ss A z
+                          hideable:
+                            type: boolean
+                            example: true
+                          inputFormat:
+                            type: string
+                            example: unix-time
+                          isDisplay:
+                            type: boolean
+                            example: true
+                          minWidth:
+                            type: integer
+                            format: int32
+                            example: 300
+                          property:
+                            type: string
+                            example: entry_time
+                          title:
+                            type: string
+                            example: Timestamp
+                          width:
+                            type: integer
+                            format: int32
+                            example: 220
+                        $$ref: '#/components/schemas/AuditLogHeaderColumns'
+                      fields:
+                        type: object
+                        properties:
+                          dataType:
+                            type: string
+                            example: date
+                          property:
+                            type: string
+                            example: entry_time
+                        $$ref: '#/components/schemas/GetStatDataFields'
+                      generatedOn:
+                        type: integer
+                        format: int32
+                        example: 1655622555494
+                      viewKeys:
+                        type: object
+                        properties:
+                          preferenceKey:
+                            type: string
+                            example: grid-AuditLogView
+                          uniqueKey:
+                            type: array
+                            items:
+                              type: string
+                        $$ref: '#/components/schemas/AuditLogHeaderViewKeys'
+                    $$ref: '#/components/schemas/AuditLogHeader'
+                $$ref: '#/components/schemas/GetAuditLogData'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+      - Administration - Audit Log
+      summary: Get raw property data in bulk
+      description: Get raw property data in bulk with post action
+      operationId: getPostStatBulkRawPropertyData
+      parameters:
+      - name: scrollId
+        in: query
+        schema:
+          type: string
+      - name: count
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: Stats query string
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Data aggregation query string:
+                description: Data aggregation query string
+                value:
+                  query:
+                    condition: AND
+                    rules:
+                    - field: entry_time
+                      operator: last_n_hours
+                      type: date
+                      value:
+                      - '3'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                required:
+                - data
+                - header
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      required:
+                      - auditdetails
+                      - entry_time
+                      - logdeviceid
+                      - logfeature
+                      - logid
+                      - logmessage
+                      - logmodule
+                      - loguser
+                      - logusersrcip
+                      - statcycletime
+                      - tenant
+                      type: object
+                      properties:
+                        auditdetails:
+                          type: array
+                          items:
+                            type: string
+                        entry_time:
+                          type: integer
+                          format: int32
+                          example: 1659003590292
+                        id:
+                          type: string
+                          example: iWJRRIIBMbLIyWbe1qH
+                        logdeviceid:
+                          type: string
+                          example: 172.16.255.22
+                        logfeature:
+                          type: string
+                          example: user
+                        logid:
+                          type: string
+                          format: uuid
+                          example: 918c6d64-729c-4304-b2c7-955a7c0e6a61
+                        logmessage:
+                          type: string
+                          example: 'Invalidated session due to server session idle time out for User: viptela-device-901d032c-0721-438e-82ba-1d429598d879'
+                        logmodule:
+                          type: string
+                          example: user
+                        loguser:
+                          type: string
+                          format: uuid
+                        logusersrcip:
+                          type: string
+                          example: 172.16.255.19
+                        statcycletime:
+                          type: integer
+                          format: int32
+                          example: 1659003590292
+                        tenant:
+                          type: string
+                          example: default
+                      $$ref: '#/components/schemas/AuditLogEntry'
+                  header:
+                    type: object
+                    properties:
+                      chart:
+                        type: object
+                        properties:
+                          series:
+                            type: array
+                            items:
+                              type: string
+                          title:
+                            type: string
+                          xAxis:
+                            type: array
+                            items:
+                              type: string
+                          xAxisLabel:
+                            type: string
+                          yAxis:
+                            type: array
+                            items:
+                              type: string
+                          yAxisLabel:
+                            type: string
+                        $$ref: '#/components/schemas/ChartObject'
+                      columns:
+                        required:
+                        - dataType
+                        - property
+                        - title
+                        type: object
+                        properties:
+                          dataType:
+                            type: string
+                            example: date
+                          displayFormat:
+                            type: string
+                            example: DD MMM YYYY h:mm:ss A z
+                          hideable:
+                            type: boolean
+                            example: true
+                          inputFormat:
+                            type: string
+                            example: unix-time
+                          isDisplay:
+                            type: boolean
+                            example: true
+                          minWidth:
+                            type: integer
+                            format: int32
+                            example: 300
+                          property:
+                            type: string
+                            example: entry_time
+                          title:
+                            type: string
+                            example: Timestamp
+                          width:
+                            type: integer
+                            format: int32
+                            example: 220
+                        $$ref: '#/components/schemas/AuditLogHeaderColumns'
+                      fields:
+                        type: object
+                        properties:
+                          dataType:
+                            type: string
+                            example: date
+                          property:
+                            type: string
+                            example: entry_time
+                        $$ref: '#/components/schemas/GetStatDataFields'
+                      generatedOn:
+                        type: integer
+                        format: int32
+                        example: 1655622555494
+                      viewKeys:
+                        type: object
+                        properties:
+                          preferenceKey:
+                            type: string
+                            example: grid-AuditLogView
+                          uniqueKey:
+                            type: array
+                            items:
+                              type: string
+                        $$ref: '#/components/schemas/AuditLogHeaderViewKeys'
+                    $$ref: '#/components/schemas/AuditLogHeader'
+                $$ref: '#/components/schemas/GetAuditLogData'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /auditlog/query/fields:
+    get:
+      tags:
+      - Administration - Audit Log
+      summary: Get vManage Audit Log query fields
+      description: Get query fields
+      operationId: getStatQueryFields_AdministrationAuditLog_2203
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                properties:
+                  empty:
+                    type: boolean
+                items:
+                  required:
+                  - dataType
+                  - isRequired
+                  - multiSelect
+                  - name
+                  - property
+                  type: object
+                  properties:
+                    dataType:
+                      type: string
+                      example: date
+                    fieldData:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                          example: dateList
+                      $$ref: '#/components/schemas/GetStatQueryFieldsFieldData'
+                    isRequired:
+                      type: boolean
+                      example: true
+                    multiSelect:
+                      type: boolean
+                      example: true
+                    name:
+                      type: string
+                      example: vmanage.server.auditlog.auditLogTime
+                    options:
+                      type: array
+                      items:
+                        required:
+                        - key
+                        - value
+                        type: object
+                        properties:
+                          enableDateFields:
+                            type: boolean
+                            example: true
+                          isSelected:
+                            type: boolean
+                            example: true
+                          key:
+                            type: string
+                            example: last_1_hour
+                          number:
+                            type: string
+                            example: '1'
+                          value:
+                            type: string
+                            example: Last 1 hour
+                        $$ref: '#/components/schemas/GetStatQueryFieldOptions'
+                    property:
+                      type: string
+                      example: entry_time
+                  $$ref: '#/components/schemas/GetStatQueryFields'
+                $$ref: '#/components/schemas/GetStatQueryFieldArray'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /auditlog/severity:
+    get:
+      tags:
+      - Administration - Audit Log
+      summary: Get vManage Audit Log
+      description: Get audit logs for last 3 hours
+      operationId: generateAuditLog
+      parameters:
+      - name: query
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          minimum: 0
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+      - name: sortBy
+        in: query
+        schema:
+          pattern: ^[a-zA-Z-_]+$
+          type: string
+      - name: sortOrder
+        in: query
+        schema:
+          type: string
+          enum:
+          - asc
+          - ASC
+          - Asc
+          - desc
+          - DESC
+          - Desc
+      - name: site-id
+        in: query
+        schema:
+          pattern: ^[0-9]+$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                required:
+                - data
+                - header
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      required:
+                      - auditdetails
+                      - entry_time
+                      - logdeviceid
+                      - logfeature
+                      - logid
+                      - logmessage
+                      - logmodule
+                      - loguser
+                      - logusersrcip
+                      - statcycletime
+                      - tenant
+                      type: object
+                      properties:
+                        auditdetails:
+                          type: array
+                          items:
+                            type: string
+                        entry_time:
+                          type: integer
+                          format: int32
+                          example: 1659003590292
+                        id:
+                          type: string
+                          example: iWJRRIIBMbLIyWbe1qH
+                        logdeviceid:
+                          type: string
+                          example: 172.16.255.22
+                        logfeature:
+                          type: string
+                          example: user
+                        logid:
+                          type: string
+                          format: uuid
+                          example: 918c6d64-729c-4304-b2c7-955a7c0e6a61
+                        logmessage:
+                          type: string
+                          example: 'Invalidated session due to server session idle time out for User: viptela-device-901d032c-0721-438e-82ba-1d429598d879'
+                        logmodule:
+                          type: string
+                          example: user
+                        loguser:
+                          type: string
+                          format: uuid
+                        logusersrcip:
+                          type: string
+                          example: 172.16.255.19
+                        statcycletime:
+                          type: integer
+                          format: int32
+                          example: 1659003590292
+                        tenant:
+                          type: string
+                          example: default
+                      $$ref: '#/components/schemas/AuditLogEntry'
+                  header:
+                    type: object
+                    properties:
+                      chart:
+                        type: object
+                        properties:
+                          series:
+                            type: array
+                            items:
+                              type: string
+                          title:
+                            type: string
+                          xAxis:
+                            type: array
+                            items:
+                              type: string
+                          xAxisLabel:
+                            type: string
+                          yAxis:
+                            type: array
+                            items:
+                              type: string
+                          yAxisLabel:
+                            type: string
+                        $$ref: '#/components/schemas/ChartObject'
+                      columns:
+                        required:
+                        - dataType
+                        - property
+                        - title
+                        type: object
+                        properties:
+                          dataType:
+                            type: string
+                            example: date
+                          displayFormat:
+                            type: string
+                            example: DD MMM YYYY h:mm:ss A z
+                          hideable:
+                            type: boolean
+                            example: true
+                          inputFormat:
+                            type: string
+                            example: unix-time
+                          isDisplay:
+                            type: boolean
+                            example: true
+                          minWidth:
+                            type: integer
+                            format: int32
+                            example: 300
+                          property:
+                            type: string
+                            example: entry_time
+                          title:
+                            type: string
+                            example: Timestamp
+                          width:
+                            type: integer
+                            format: int32
+                            example: 220
+                        $$ref: '#/components/schemas/AuditLogHeaderColumns'
+                      fields:
+                        type: object
+                        properties:
+                          dataType:
+                            type: string
+                            example: date
+                          property:
+                            type: string
+                            example: entry_time
+                        $$ref: '#/components/schemas/GetStatDataFields'
+                      generatedOn:
+                        type: integer
+                        format: int32
+                        example: 1655622555494
+                      viewKeys:
+                        type: object
+                        properties:
+                          preferenceKey:
+                            type: string
+                            example: grid-AuditLogView
+                          uniqueKey:
+                            type: array
+                            items:
+                              type: string
+                        $$ref: '#/components/schemas/AuditLogHeaderViewKeys'
+                    $$ref: '#/components/schemas/AuditLogHeader'
+                  total_records:
+                    type: integer
+                    format: int32
+                    example: 2
+                $$ref: '#/components/schemas/GetAuditLogBySeverity'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /auditlog/severity/summary:
+    get:
+      tags:
+      - Administration - Audit Log
+      summary: Get vManage Audit Log Histogram
+      description: Get audit log severity histogram
+      operationId: getAuditSeverityCustomHistogram
+      parameters:
+      - name: query
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    description: data list
+                    example:
+                    - MEGAPORT
+                    - EQUINIX
+                    - ATT
+                    items:
+                      type: string
+                      description: data
+                      example: MEGAPORT
+                $$ref: '#/components/schemas/InlineResponse200'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

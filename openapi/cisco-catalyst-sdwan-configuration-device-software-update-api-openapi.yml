@@ -1,0 +1,580 @@
+openapi: 3.2.0
+info:
+  title: Others Configuration - Device Software Update API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Configuration - Device Software Update
+paths:
+  /device/action/firmware-upgrade/remote/{versionId}:
+    put:
+      tags:
+      - Configuration - Device Software Update
+      description: Download software package file
+      operationId: editFirmwareUpgardeRemoteImage
+      parameters:
+      - name: versionId
+        in: path
+        required: true
+        schema:
+          type: string
+        example: e683117a-b38f-4980-a411-6c9c6293a9fc
+      requestBody:
+        description: Request body
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Example Value:
+                description: Example Value
+                value:
+                  remoteServers:
+                  - eef0003f-560c-4165-92f3-9590553ce68a
+                  filePath: /firmwareTest123
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionSoftwarepackageFirmwareFirmwareupgradeapiRequestExamplePutfirmwareupgraderemotereq'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/octet-stream:
+              schema:
+                type: object
+                properties:
+                  description:
+                    type: string
+                    example: Firmware Image Path
+                  filePath:
+                    type: string
+                    example: /home/admin/
+                  remoteServerId:
+                    type: string
+                    example: f7ae1f4b-9900-424f-92ca-22d2231f55dc
+                  versionId:
+                    type: string
+                    example: 9917f2ad-c152-406b-87cc-a3b251d0e1a8
+                $$ref: '#/components/schemas/ProcessGetFirmwareRemoteImageReq'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/action/firmware-upgrade/{versionId}:
+    delete:
+      tags:
+      - Configuration - Device Software Update
+      description: Download software package file
+      operationId: deleteFirmwareUpgardeRemoteImage
+      parameters:
+      - name: versionId
+        in: path
+        required: true
+        schema:
+          type: string
+        example: e683117a-b38f-4980-a411-6c9c6293a9fc
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/action/software/package:
+    post:
+      tags:
+      - Configuration - Device Software Update
+      description: Install software package
+      operationId: installPkg
+      requestBody:
+        description: software Package File
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+              $$ref: '#/components/schemas/InstallPkg'
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/action/software/package/imageCount:
+    get:
+      tags:
+      - Configuration - Device Software Update
+      description: Number of software image presented in vManage repository
+      operationId: getUploadImagesCount
+      parameters:
+      - name: imageType
+        in: query
+        description: imageType
+        schema:
+          type: array
+          items:
+            type: string
+            default: software
+        example:
+        - software
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Example:
+                  description: Example
+                  value:
+                    imageCount: 20
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionSoftwarepackageInstallpackagefileapiResponseExampleImagecount'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/action/software/package/signature/{utdsignature}:
+    get:
+      tags:
+      - Configuration - Device Software Update
+      summary: Get list of Utd images
+      description: 'Get list of Utd images '
+      operationId: generateUtdImageData
+      parameters:
+      - name: utdsignature
+        in: path
+        description: utdsignature
+        required: true
+        schema:
+          type: string
+          enum:
+          - utdsignature
+        example: utdsignature
+      - name: type
+        in: query
+        required: true
+        schema:
+          type: string
+        example: all
+      responses:
+        '200':
+          description: Get list of Utd images
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  applicationVendor:
+                    type: string
+                  applicationVendorVendor:
+                    type: string
+                    writeOnly: true
+                  arch:
+                    type: string
+                  controllerVersion:
+                    type: string
+                  cwVersion:
+                    type: string
+                  description:
+                    type: string
+                  displayChecksum:
+                    type: string
+                  displayChecksumType:
+                    type: string
+                  displayChecksumValidity:
+                    type: string
+                  family:
+                    type: array
+                    items:
+                      type: string
+                  fileEntries:
+                    type: object
+                    additionalProperties:
+                      type: string
+                  fileName:
+                    type: string
+                  fileSizeStr:
+                    type: string
+                  fileSizebyte:
+                    type: string
+                  fileSource:
+                    type: string
+                  imagePropertiesJson:
+                    type: string
+                  imageType:
+                    type: string
+                    enum:
+                    - ImageType{type='software'}
+                    - ImageType{type='container'}
+                    - ImageType{type='lxc'}
+                    - ImageType{type='virtualmachine'}
+                    - ImageType{type='virtualmachine-diskimg'}
+                    - ImageType{type='virtualmachine-scaffold'}
+                    - ImageType{type='utdsignature'}
+                    - ImageType{type='utdsignatureips'}
+                    - ImageType{type='utdsignaturecustom'}
+                    - ImageType{type='utdsignatureoverride'}
+                    - ImageType{type='waas'}
+                    - ImageType{type='dockertype'}
+                    - ImageType{type='firmware'}
+                    - ImageType{type='rumreport'}
+                    - ImageType{type='licensefile'}
+                    - ImageType{type='ackfile'}
+                    - ImageType{type='na'}
+                  imageTypeName:
+                    type: string
+                  isSmu:
+                    type: boolean
+                  md5Checksum:
+                    type: string
+                  metadata:
+                    type: object
+                    properties:
+                      allProperties:
+                        type: object
+                        additionalProperties:
+                          type: object
+                    $$ref: '#/components/schemas/ImageMetadata'
+                  networkFunctionType:
+                    type: string
+                  platformFamily:
+                    type: string
+                  remoteServerId:
+                    type: string
+                  remoteServers:
+                    type: string
+                  sha256Checksum:
+                    type: string
+                  sha512Checksum:
+                    type: string
+                  smuCompatibleWith:
+                    type: string
+                  smuDefectId:
+                    type: string
+                  smuDescription:
+                    type: string
+                  smuType:
+                    type: string
+                  storageData:
+                    type: string
+                  systemPropertiesXml:
+                    type: string
+                  tags:
+                    type: array
+                    items:
+                      type: string
+                  tempImagePath:
+                    type: string
+                  updatedFileName:
+                    type: string
+                  version:
+                    type: string
+                  versionTypeName:
+                    type: string
+                  vnfPropertiesJson:
+                    type: string
+                $$ref: '#/components/schemas/ImageData'
+              examples:
+                Example:
+                  description: Example
+                  value:
+                    header:
+                      generatedOn: 1719798772630
+                    data:
+                    - versionType: remote
+                      versionTypeName: pkg
+                      description: UTD Image
+                      networkFunctionType: app-hosting
+                      updatedOn: 1718956223450
+                      versionName: '31670'
+                      versionId: b678683a-9581-4978-ae44-bcb814cb9fba
+                      remoteServers: '[{"remoteServerId":"eef0003f-560c-4165-92f3-9590553ce68a","imageRelativePath":""}]'
+                      fileSizeStr: 'null'
+                      name: UTD-STD-SIGNATURE-31670-28-S.pkg
+                      imageType: utdsignatureips
+                    - versionType: remote
+                      versionTypeName: txt
+                      description: UTD Image
+                      networkFunctionType: app-hosting
+                      updatedOn: 1718956283492
+                      versionName: '-'
+                      versionId: f2e63288-c279-42a0-bc88-0b333b10fd57
+                      remoteServers: '[{"remoteServerId":"eef0003f-560c-4165-92f3-9590553ce68a","imageRelativePath":""}]'
+                      fileSizeStr: 'null'
+                      name: Custom.txt
+                      imageType: utdsignaturecustom
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionSoftwarepackageInstallpackagefileapiResponseExampleUtdimagedata'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/action/software/package/utdsignature/{type}/mode/auto:
+    post:
+      tags:
+      - Configuration - Device Software Update
+      summary: add Utd remote image
+      description: 'add Utd remote image '
+      operationId: addUtdRemoteImage
+      parameters:
+      - name: type
+        in: path
+        required: true
+        schema:
+          type: string
+        example: custom
+      requestBody:
+        description: Request body
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Example Value:
+                description: Example Value
+                value:
+                  enableRemoteServer: true
+                  fileName: custom. txt
+                  remoteServers:
+                  - remoteServerId: 17ecd0f0-40de-4fc2-b76d-99672c570d71
+                    imageRelativePath: dre1. tar.gz
+                  - remoteServerId: 5d7e260e-c14a-4f88-9f6e-efef7a88d6fa
+                    imageRelativePath: dre1. tar.gz
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionSoftwarepackageInstallpackagefileapiRequestExampleUtdsignaturecustomautoreq'
+        required: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/action/software/package/utdsignature/{type}/mode/manual:
+    post:
+      tags:
+      - Configuration - Device Software Update
+      summary: upload Utd image
+      description: upload Utd image
+      operationId: uploadUtdImage
+      parameters:
+      - name: type
+        in: path
+        required: true
+        schema:
+          type: string
+        example: ips
+      requestBody:
+        description: Utd image File
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+              $$ref: '#/components/schemas/InstallPkg'
+        required: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/action/software/package/{fileName}:
+    get:
+      tags:
+      - Configuration - Device Software Update
+      description: Download software package file
+      operationId: downloadPackageFile
+      parameters:
+      - name: fileName
+        in: path
+        description: software package file name
+        required: true
+        schema:
+          type: string
+        example: c8000v-universalk9.17.15.01.0.198014_V17_15_0_1.SSA.bin
+      - name: imageType
+        in: query
+        schema:
+          type: string
+          default: software
+      responses:
+        '200':
+          description: Success
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+              examples:
+                Example:
+                  description: Example
+                  value: FIREWALL_CiscoASAvVirtualFirewallMT_scaffold_9.13.1-MT_csr-scaff.tar.gz
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionSoftwarepackageInstallpackagefileapiResponseExampleFilename'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/action/software/package/{imageType}:
+    post:
+      tags:
+      - Configuration - Device Software Update
+      description: Install software image package
+      operationId: processSoftwareImage
+      parameters:
+      - name: imageType
+        in: path
+        required: true
+        schema:
+          type: string
+        example: software
+      requestBody:
+        description: image File
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+              $$ref: '#/components/schemas/InstallPkg'
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/action/software/package/{versionId}/metadata:
+    get:
+      tags:
+      - Configuration - Device Software Update
+      description: Update Package Metadata
+      operationId: getImageMetadata
+      parameters:
+      - name: versionId
+        in: path
+        description: versionId
+        required: true
+        schema:
+          type: string
+        example: 760c1198-1595-4ad2-b911-cec12e4da7b3
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Example:
+                  description: Example
+                  value:
+                    vendor: cisco
+                    checksumType: SHA-256
+                    checksum: ''
+                    description: description
+                    networkFunctionType: ROUTER
+                    versionName: x.y.z
+                    imageType: virtualmachine-diskimg
+                    tags:
+                    - string
+                  $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionSoftwarepackageInstallpackagefileapiResponseExampleGetversionid'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    put:
+      tags:
+      - Configuration - Device Software Update
+      description: Update Package Metadata
+      operationId: editImageMetadata
+      parameters:
+      - name: versionId
+        in: path
+        description: versionId
+        required: true
+        schema:
+          type: string
+        example: 760c1198-1595-4ad2-b911-cec12e4da7b3
+      requestBody:
+        description: Request body to Update Package Metadata
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Example Value:
+                description: Example Value
+                value:
+                  description: description
+                  networkFunctionType: ROUTER
+                  versionName: x.y.z
+                  vendor: cisco
+                  checksumType: SHA-256
+                  checksum: ''
+                  tags:
+                  - string
+                $$ref: '#/components/examples/ComViptelaVmanageServerDeviceactionSoftwarepackageInstallpackagefileapiRequestExamplePutversionid'
+        required: true
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

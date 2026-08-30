@@ -1,0 +1,162 @@
+openapi: 3.2.0
+info:
+  title: Others System - Cloud Service CDNA API
+  description: 'Other APIs
+
+    Include APIs that do not belong to other categories'
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: System - Cloud Service CDNA
+paths:
+  /cdna/sense/{tag}:
+    get:
+      tags:
+      - System - Cloud Service CDNA
+      description: Get Sense Service
+      operationId: getCdnaSenseService
+      parameters:
+      - name: tag
+        in: path
+        required: true
+        schema:
+          pattern: ^[a-zA-Z0-9-]*$
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  html:
+                    type: string
+                    description: Sense Post Contents
+                    example: Documentation for Monitor Overview...
+                description: Dna Sense Response
+                $$ref: '#/components/schemas/DnaSenseResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /cdna/server:
+    get:
+      tags:
+      - System - Cloud Service CDNA
+      description: Get CDNA Server Details
+      operationId: getCdnaServer
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  authToken:
+                    type: string
+                  cdnaServerIP:
+                    type: string
+                  cline_id:
+                    type: string
+                  enrolled:
+                    type: boolean
+                  lastUpdated:
+                    type: string
+                  member_id:
+                    type: string
+                  token_url:
+                    type: string
+                description: Enroll CDNA Server Response.
+                $$ref: '#/components/schemas/EnrollOTPResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+      - System - Cloud Service CDNA
+      description: Delete CDNA Server Details
+      operationId: deleteCdnaServer
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    put:
+      tags:
+      - System - Cloud Service CDNA
+      description: Enroll CDNA Server with OTP
+      operationId: enrollCdnaServer
+      requestBody:
+        description: CDNA OTP Details
+        content:
+          application/json:
+            schema:
+              required:
+              - token
+              type: object
+              properties:
+                token:
+                  type: string
+              $$ref: '#/components/schemas/EnrollOTPSettings'
+        required: true
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  authToken:
+                    type: string
+                  cdnaServerIP:
+                    type: string
+                  cline_id:
+                    type: string
+                  enrolled:
+                    type: boolean
+                  lastUpdated:
+                    type: string
+                  member_id:
+                    type: string
+                  token_url:
+                    type: string
+                description: Enroll CDNA Server Response.
+                $$ref: '#/components/schemas/EnrollOTPResponse'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error

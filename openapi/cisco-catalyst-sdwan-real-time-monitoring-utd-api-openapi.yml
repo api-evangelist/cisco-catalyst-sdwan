@@ -1,0 +1,864 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - UTD API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - UTD
+paths:
+  /device/utd/dataplane-config:
+    get:
+      tags:
+      - Real-Time Monitoring - UTD
+      description: Get data plane config from Device
+      operationId: getUTDDataplaneConfig
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                UTD data plane config:
+                  description: UTD data plane config
+                  value:
+                    data:
+                    - sn-redirect: fail-open
+                      vdevice-name: 172.16.255.15
+                      context-flag: '8847361'
+                      defense-mode: IPS
+                      context-id: '0'
+                      redirect-type: divert
+                      vdevice-host-name: vm5
+                      vdevice-dataKey: 172.16.255.15-0
+                      threat-inspection: enabled
+                      engine: Standard
+                      domain-filtering: not-enabled
+                      url-filtering: not-enabled
+                      lastupdated: 1659514008513
+                      state: enabled
+                      all-interface: enabled
+                    - sn-redirect: fail-open
+                      vdevice-name: 172.16.255.15
+                      context-flag: '13041665'
+                      defense-mode: IPS
+                      context-id: '3'
+                      redirect-type: divert
+                      vdevice-host-name: vm5
+                      vdevice-dataKey: 172.16.255.15-3
+                      threat-inspection: enabled
+                      engine: Standard
+                      domain-filtering: not-enabled
+                      url-filtering: enabled
+                      lastupdated: 1659514008513
+                      state: enabled
+                      all-interface: enabled
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/utd/dataplane-global:
+    get:
+      tags:
+      - Real-Time Monitoring - UTD
+      description: Get data plane global from Device
+      operationId: getUTDDataplaneGlobal
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                UTD data plane global:
+                  description: UTD data plane global
+                  value:
+                    data:
+                    - utd-appnav-dereg-failed: '0'
+                      utd-appnav-health-down: '0'
+                      vdevice-name: 172.16.255.15
+                      utd-appnav-health-yellow: '0'
+                      init-service-plane-failed: '0'
+                      sn-threads: '12'
+                      cft-utd-fo-id: '4'
+                      cft-feat-id: '4'
+                      sn-health: green
+                      nat64: disabled
+                      utd-appnav-health-green: '1'
+                      multi-tenancy: enabled
+                      max-flows: '165000'
+                      cft-utd-fo-chunk-id: '12'
+                      utd-appnav-health-unknown: '0'
+                      utd-appnav-health-red: '1'
+                      vdevice-host-name: vm5
+                      dp-initialized: 'yes'
+                      vdevice-dataKey: 172.16.255.15
+                      cft-id: '0'
+                      utd-appnav-register: '0'
+                      utd-appnav-deregister: '0'
+                      utd-appnav-reg-failed: '0'
+                      lastupdated: 1659514090144
+                      drop-pkts: disabled
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/utd/dataplane-stats:
+    get:
+      tags:
+      - Real-Time Monitoring - UTD
+      description: Get data plane stats from Device
+      operationId: getUTDDataplaneStats
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                UTD data plane stats:
+                  description: UTD data plane stats
+                  value:
+                    data:
+                    - cft-ager-del-fo: '0'
+                      utd-appnav-decaps-icmp-no-payload-err: '0'
+                      utd-drop-cft-lookup-flow: '0'
+                      utd-pkts-enter-divert: '0'
+                      utd-appnav-encaps-debug-err: '0'
+                      utd-appnav-decaps-ip-unsup-ver: '0'
+                      cft-ager-del-fo-failed: '0'
+                      utd-flow-bypass: '0'
+                      utd-packets-reinjected: '0'
+                      utd-sn-drop: '0'
+                      utd-drop-cft-get-fo: '0'
+                      utd-appnav-decaps-icmp-v6-tcp-err: '0'
+                      utd-df-blacklist-match: '0'
+                      utd-drop-appnav-decaps-class-event-err: '0'
+                      pkt-skip-invalid-iuidb: '0'
+                      pkt-skip-for-us: '0'
+                      utd-appnav-decaps-icmp-no-inner-flow: '0'
+                      utd-appnav-encap-fail: '0'
+                      utd-appnav-encaps-fail: '0'
+                      pkt-skip-unsupport-prot: '0'
+                      utd-appnav-decaps-icmp-udp-err: '0'
+                      utd-drop-msg-logged: '0'
+                      utd-appnav-decaps-no-fo: '0'
+                      utd-drop-bad-ip-ver: '0'
+                      utd-drop-cft-alloc-fo: '0'
+                      utd-drop-nat64-int-lookup-fail: '0'
+                      utd-drop-appnav-encaps-debug: '0'
+                      pkt-no-inspect-divert-intf: '4516'
+                      utd-drop-divert-down: '0'
+                      pkt-policy-inspected: '87657'
+                      min-utd-drop-cause: '0'
+                      pkt-nat-dropped-pkt: '0'
+                      utd-appnav-decaps-icmp-tcp-err: '0'
+                      utd-df-gray-flows: '0'
+                      vdevice-name: 172.16.255.15
+                      utd-drop-ipv6-frag: '0'
+                      init-cft-inst-get-failed: '0'
+                      utd-pm-tcpconns: '0'
+                      utd-pkts-enter-policy: '0'
+                      utd-appnav-decaps-del-term: '0'
+                      pkt-skip-new-pkt: '0'
+                      init-vfr-unreg-failed: '0'
+                      utd-drop-appnav-encaps-vrf: '0'
+                      utd-appnav-decaps-tlv-len-err: '0'
+                      utd-appnav-decaps-icmp-no-inner-fo: '0'
+                      utd-appnav-decaps-icmp-v6-udp-err: '0'
+                      utd-appnav-redirect-fail: '0'
+                      utd-drop-cft-attach-fo: '0'
+                      utd-appnav-decaps-not-icmp-v6: '0'
+                      utd-appnav-decaps-icmp-v6-no-payload-err: '0'
+                      utd-pm-udpconns: '0'
+                      flow-setup-failed: '0'
+                      utd-df-whitelist-match: '0'
+                      utd-drop-appnav-encaps-service-add: '0'
+                      vdevice-host-name: vm5
+                      utd-drop-appnav-encaps-not-enuf: '0'
+                      utd-appnav-decaps-del-unknown: '0'
+                      utd-drop-cft-no-fo: '0'
+                      utd-drop-appnav-encaps-conn-handle-err: '0'
+                      skp-no-divert-needed: '0'
+                      utd-drop-was-vfr: '0'
+                      lastupdated: 1659514165829
+                      utd-df-blacklisted-flows: '0'
+                      utd-appnav-decaps: '0'
+                      utd-appnav-decaps-icmp-unsup-proto: '0'
+                      utd-drop-appnav-encaps-no-fo: '0'
+                      utd-appnav-encaps: '0'
+                      utd-active-conns: '0'
+                      utd-appnav-decaps-no-flow: '0'
+                      utd-bypass-drop: '0'
+                      utd-appnav-decaps-ipv6-parse-err: '0'
+                      init-cft-del-cb-reg-failed: '0'
+                      utd-appnav-encaps-conn-est-err: '0'
+                      utd-drop-appnav-divert: '0'
+                      utd-drop-no-uidb: '0'
+                      pkt-skip-inspected: '4516'
+                      utd-appnav-decaps-unsupported-tlv: '0'
+                      utd-drop-appnav-encaps-no-classified: '0'
+                      pkt-fo-free-err: '0'
+                      utd-drop-appnav-unhealthy: '0'
+                      utd-drop-appnav-encaps-first-pkt-fail: '0'
+                      utd-reinject-no-ctx: '0'
+                      pkt-skip-no-ctx: '0'
+                      pkt-skip-inspected-no-divert: '0'
+                      utd-flow-notify-offload: '0'
+                      utd-appnav-decaps-not-icmp-err: '0'
+                      utd-drop-no-fib: '0'
+                      utd-pkts-dropped: '0'
+                      utd-pkt-entry-sp: '0'
+                      utd-drop-appnav-decaps-no-flow-tuple: '0'
+                      context-id: '0'
+                      utd-df-whitelisted-flows: '0'
+                      utd-drop-no-divert-intf: '0'
+                      utd-appnav-redirect: '0'
+                      pkt-skip-mpls-non-ip: '0'
+                      utd-appnav-decaps-not-icmp-v6-err: '0'
+                      utd-drop-no-oce-chain: '0'
+                      pkt-skip-l2-glean-adj: '0'
+                      utd-appnav-decaps-icmp-v6-unsup-proto: '0'
+                      utd-pm-icmpconns: '0'
+                      utd-appnav-reinject: '0'
+                      cft-flow-responder-seen: '0'
+                      utd-drop-appnav-decaps-conn-est: '0'
+                      utd-drop-no-egress-intf: '0'
+                      utd-appnav-decaps-del-req: '0'
+                      utd-appnav-unhealthy: '0'
+                      utd-drop-appnav-encaps-no-mem: '0'
+                      pkt-fo-alloc: '0'
+                      utd-drop-ips: '0'
+                      pkt-fo-free: '0'
+                      init-vfr-reg-failed: '0'
+                      utd-packets-diverted: '0'
+                      utd-drop-appnav-decaps-delete: '0'
+                      utd-drop-ipv4-frag: '0'
+                      utd-drop-appnav-decaps-pass-err: '0'
+                      utd-drop-sn-request: '0'
+                      utd-appnav-encaps-vrf-err: '0'
+                      utd-drop-reinject: '0'
+                      utd-pkts-skipped: '0'
+                      utd-packets-failed-divert: '0'
+                      utd-appnav-decaps-no-conn-tlv-flow: '0'
+                      vdevice-dataKey: 172.16.255.15-0
+                      pkt-skip-invalid-ouidb: '0'
+                      utd-appnav-decaps-del-resource: '0'
+                      utd-appnav-decaps-del-idle: '0'
+                    - cft-ager-del-fo: '0'
+                      utd-appnav-decaps-icmp-no-payload-err: '0'
+                      utd-drop-cft-lookup-flow: '0'
+                      utd-pkts-enter-divert: '0'
+                      utd-appnav-encaps-debug-err: '0'
+                      utd-appnav-decaps-ip-unsup-ver: '0'
+                      cft-ager-del-fo-failed: '0'
+                      utd-flow-bypass: '0'
+                      utd-packets-reinjected: '0'
+                      utd-sn-drop: '0'
+                      utd-drop-cft-get-fo: '0'
+                      utd-appnav-decaps-icmp-v6-tcp-err: '0'
+                      utd-df-blacklist-match: '0'
+                      utd-drop-appnav-decaps-class-event-err: '0'
+                      pkt-skip-invalid-iuidb: '0'
+                      pkt-skip-for-us: '0'
+                      utd-appnav-decaps-icmp-no-inner-flow: '0'
+                      utd-appnav-encap-fail: '0'
+                      utd-appnav-encaps-fail: '0'
+                      pkt-skip-unsupport-prot: '0'
+                      utd-appnav-decaps-icmp-udp-err: '0'
+                      utd-drop-msg-logged: '0'
+                      utd-appnav-decaps-no-fo: '0'
+                      utd-drop-bad-ip-ver: '0'
+                      utd-drop-cft-alloc-fo: '0'
+                      utd-drop-nat64-int-lookup-fail: '0'
+                      utd-drop-appnav-encaps-debug: '0'
+                      pkt-no-inspect-divert-intf: '0'
+                      utd-drop-divert-down: '0'
+                      pkt-policy-inspected: '0'
+                      min-utd-drop-cause: '0'
+                      pkt-nat-dropped-pkt: '0'
+                      utd-appnav-decaps-icmp-tcp-err: '0'
+                      utd-df-gray-flows: '0'
+                      vdevice-name: 172.16.255.15
+                      utd-drop-ipv6-frag: '0'
+                      init-cft-inst-get-failed: '0'
+                      utd-pm-tcpconns: '0'
+                      utd-pkts-enter-policy: '0'
+                      utd-appnav-decaps-del-term: '0'
+                      pkt-skip-new-pkt: '0'
+                      init-vfr-unreg-failed: '0'
+                      utd-drop-appnav-encaps-vrf: '0'
+                      utd-appnav-decaps-tlv-len-err: '0'
+                      utd-appnav-decaps-icmp-no-inner-fo: '0'
+                      utd-appnav-decaps-icmp-v6-udp-err: '0'
+                      utd-appnav-redirect-fail: '0'
+                      utd-drop-cft-attach-fo: '0'
+                      utd-appnav-decaps-not-icmp-v6: '0'
+                      utd-appnav-decaps-icmp-v6-no-payload-err: '0'
+                      utd-pm-udpconns: '0'
+                      flow-setup-failed: '0'
+                      utd-df-whitelist-match: '0'
+                      utd-drop-appnav-encaps-service-add: '0'
+                      vdevice-host-name: vm5
+                      utd-drop-appnav-encaps-not-enuf: '0'
+                      utd-appnav-decaps-del-unknown: '0'
+                      utd-drop-cft-no-fo: '0'
+                      utd-drop-appnav-encaps-conn-handle-err: '0'
+                      skp-no-divert-needed: '0'
+                      utd-drop-was-vfr: '0'
+                      lastupdated: 1659514165829
+                      utd-df-blacklisted-flows: '0'
+                      utd-appnav-decaps: '0'
+                      utd-appnav-decaps-icmp-unsup-proto: '0'
+                      utd-drop-appnav-encaps-no-fo: '0'
+                      utd-appnav-encaps: '0'
+                      utd-active-conns: '0'
+                      utd-appnav-decaps-no-flow: '0'
+                      utd-bypass-drop: '0'
+                      utd-appnav-decaps-ipv6-parse-err: '0'
+                      init-cft-del-cb-reg-failed: '0'
+                      utd-appnav-encaps-conn-est-err: '0'
+                      utd-drop-appnav-divert: '0'
+                      utd-drop-no-uidb: '0'
+                      pkt-skip-inspected: '0'
+                      utd-appnav-decaps-unsupported-tlv: '0'
+                      utd-drop-appnav-encaps-no-classified: '0'
+                      pkt-fo-free-err: '0'
+                      utd-drop-appnav-unhealthy: '0'
+                      utd-drop-appnav-encaps-first-pkt-fail: '0'
+                      utd-reinject-no-ctx: '0'
+                      pkt-skip-no-ctx: '0'
+                      pkt-skip-inspected-no-divert: '0'
+                      utd-flow-notify-offload: '0'
+                      utd-appnav-decaps-not-icmp-err: '0'
+                      utd-drop-no-fib: '0'
+                      utd-pkts-dropped: '0'
+                      utd-pkt-entry-sp: '0'
+                      utd-drop-appnav-decaps-no-flow-tuple: '0'
+                      context-id: '3'
+                      utd-df-whitelisted-flows: '0'
+                      utd-drop-no-divert-intf: '0'
+                      utd-appnav-redirect: '0'
+                      pkt-skip-mpls-non-ip: '0'
+                      utd-appnav-decaps-not-icmp-v6-err: '0'
+                      utd-drop-no-oce-chain: '0'
+                      pkt-skip-l2-glean-adj: '0'
+                      utd-appnav-decaps-icmp-v6-unsup-proto: '0'
+                      utd-pm-icmpconns: '0'
+                      utd-appnav-reinject: '0'
+                      cft-flow-responder-seen: '0'
+                      utd-drop-appnav-decaps-conn-est: '0'
+                      utd-drop-no-egress-intf: '0'
+                      utd-appnav-decaps-del-req: '0'
+                      utd-appnav-unhealthy: '0'
+                      utd-drop-appnav-encaps-no-mem: '0'
+                      pkt-fo-alloc: '0'
+                      utd-drop-ips: '0'
+                      pkt-fo-free: '0'
+                      init-vfr-reg-failed: '0'
+                      utd-packets-diverted: '0'
+                      utd-drop-appnav-decaps-delete: '0'
+                      utd-drop-ipv4-frag: '0'
+                      utd-drop-appnav-decaps-pass-err: '0'
+                      utd-drop-sn-request: '0'
+                      utd-appnav-encaps-vrf-err: '0'
+                      utd-drop-reinject: '0'
+                      utd-pkts-skipped: '0'
+                      utd-packets-failed-divert: '0'
+                      utd-appnav-decaps-no-conn-tlv-flow: '0'
+                      vdevice-dataKey: 172.16.255.15-3
+                      pkt-skip-invalid-ouidb: '0'
+                      utd-appnav-decaps-del-resource: '0'
+                      utd-appnav-decaps-del-idle: '0'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/utd/dataplane-stats-summary:
+    get:
+      tags:
+      - Real-Time Monitoring - UTD
+      description: Get data plane stats summary
+      operationId: getUTDDataplaneStatsSummary
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                UTD data plane stats summary:
+                  description: UTD data plane stats summary
+                  value:
+                    data:
+                    - utd-active-conns: '0'
+                      vdevice-name: 172.16.255.15
+                      utd-drop-sn-request: '0'
+                      utd-pm-udpconns: '0'
+                      utd-pkts-dropped: '0'
+                      context-id: '0'
+                      utd-pkts-skipped: '0'
+                      vdevice-host-name: vm5
+                      utd-packets-reinjected: '0'
+                      utd-pm-tcpconns: '0'
+                      utd-pkts-enter-policy: '0'
+                      utd-appnav-unhealthy: '0'
+                      vdevice-dataKey: 172.16.255.15-0
+                      utd-pm-icmpconns: '0'
+                      lastupdated: 1659514169760
+                      utd-packets-diverted: '0'
+                      utd-flow-notify-offload: '0'
+                    - utd-active-conns: '0'
+                      vdevice-name: 172.16.255.15
+                      utd-drop-sn-request: '0'
+                      utd-pm-udpconns: '0'
+                      utd-pkts-dropped: '0'
+                      context-id: '3'
+                      utd-pkts-skipped: '0'
+                      vdevice-host-name: vm5
+                      utd-packets-reinjected: '0'
+                      utd-pm-tcpconns: '0'
+                      utd-pkts-enter-policy: '0'
+                      utd-appnav-unhealthy: '0'
+                      vdevice-dataKey: 172.16.255.15-3
+                      utd-pm-icmpconns: '0'
+                      lastupdated: 1659514169760
+                      utd-packets-diverted: '0'
+                      utd-flow-notify-offload: '0'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/utd/engine-instance-status:
+    get:
+      tags:
+      - Real-Time Monitoring - UTD
+      description: Get UTD engine instance status from device (Real Time)
+      operationId: getUTDEngineInstanceStatus
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                UTD engine instance status:
+                  description: UTD engine instance status
+                  value:
+                    data:
+                    - utd-engine-instance-status-running: 'true'
+                      vdevice-dataKey: 172.16.255.15-1
+                      vdevice-name: 172.16.255.15
+                      utd-engine-instance-status-id: '1'
+                      utd-engine-instance-status-status: utd-oper-status-green
+                      lastupdated: 1659499440216
+                      vdevice-host-name: vm5
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/utd/engine-status:
+    get:
+      tags:
+      - Real-Time Monitoring - UTD
+      description: Get UTD engine status from device (Real Time)
+      operationId: getUTDEngineStatus
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                UTD engine status:
+                  description: UTD engine status
+                  value:
+                    data:
+                    - vdevice-dataKey: 172.16.255.15
+                      utd-engine-status-version: 1.0.6_SV2.9.18.1_XE17.9
+                      vdevice-name: 172.16.255.15
+                      utd-engine-status-memory-status: utd-oper-status-green
+                      lastupdated: 1659514314427
+                      utd-engine-status-status: utd-oper-status-green
+                      utd-engine-status-memory-usage: '8.9'
+                      vdevice-host-name: vm5
+                      utd-engine-status-profile: Cloud-Low
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/utd/file-analysis-status:
+    get:
+      tags:
+      - Real-Time Monitoring - UTD
+      description: Get UTD file analysis status from device (Real Time)
+      operationId: getUTDFileAnalysisStatus
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                UTD file analysis status:
+                  description: UTD file analysis status
+                  value:
+                    data:
+                    - utd-file-analysis-status-status: tg-client-stat-unknown
+                      vdevice-dataKey: 169.254.10.12
+                      vdevice-name: 169.254.10.12
+                      lastupdated: 1645768248935
+                      utd-file-analysis-status-backoff-interval: '0'
+                      vdevice-host-name: vm5
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/utd/file-reputation-status:
+    get:
+      tags:
+      - Real-Time Monitoring - UTD
+      description: Get UTD file reputation status from device (Real Time)
+      operationId: getUTDFileReputationStatus
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                UTD file reputation status:
+                  description: UTD file reputation status
+                  value:
+                    data:
+                    - vdevice-dataKey: 169.254.10.12
+                      utd-file-reputation-status-status: utd-file-repu-stat-process-unknown
+                      vdevice-name: 169.254.10.12
+                      lastupdated: 1645773049060
+                      vdevice-host-name: vm5
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/utd/ips-update-status:
+    get:
+      tags:
+      - Real-Time Monitoring - UTD
+      description: Get UTD IPS update status from device (Real Time)
+      operationId: getUTDIpsUpdateStatus
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                UTD IPS update status:
+                  description: UTD IPS update status
+                  value:
+                    data:
+                    - ips-update-status-last-update-time: '1970-01-01T00:00:00+00:00'
+                      vdevice-dataKey: 172.16.255.15
+                      vdevice-name: 172.16.255.15
+                      lastupdated: 1659499361542
+                      ips-update-status-last-update-status: utd-update-status-unknown
+                      vdevice-host-name: vm5
+                      ips-update-status-last-successful-update-time: '1970-01-01T00:00:00+00:00'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/utd/signature/version/details:
+    get:
+      tags:
+      - Real-Time Monitoring - UTD
+      description: Get UTD Signature version information from Device
+      operationId: getSignatureVersionInfo
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                UTD Signature version:
+                  description: UTD Signature version
+                  value:
+                    data:
+                    - last-updated: '-'
+                      ips-version: 29.0.c
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/utd/urlf-con-status:
+    get:
+      tags:
+      - Real-Time Monitoring - UTD
+      description: Get UTD URLF Connection status from device (Real Time)
+      operationId: getUTDUrlfConnectionStatus
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                UTD URLF connection status:
+                  description: UTD URLF connection status
+                  value:
+                    data:
+                    - vdevice-dataKey: 172.16.255.15
+                      vdevice-name: 172.16.255.15
+                      lastupdated: 1659499167268
+                      vdevice-host-name: vm5
+                      last-attempt-time: '1970-01-01T00:00:00+00:00'
+                      status: utd-con-unknown
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  /device/utd/urlf-update-status:
+    get:
+      tags:
+      - Real-Time Monitoring - UTD
+      description: Get UTD URLF update status from device (Real Time)
+      operationId: getUTDUrlfUpdateStatus
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                UTD URLF update status:
+                  description: UTD URLF update status
+                  value:
+                    data:
+                    - urlf-update-status-last-successful-update-time: '1970-01-01T00:00:00+00:00'
+                      vdevice-dataKey: 'null'
+                      urlf-update-status-last-update-status: utd-update-status-unknown
+                      vdevice-name: 172.16.255.15
+                      urlf-update-status-last-update-time: '1970-01-01T00:00:00+00:00'
+                      lastupdated: 1659499288353
+                      vdevice-host-name: vm5
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write
+  /device/utd/version-status:
+    get:
+      tags:
+      - Real-Time Monitoring - UTD
+      description: Get UTD version status from device (Real Time)
+      operationId: getUTDVersionStatus
+      parameters:
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                UTD version status:
+                  description: UTD version status
+                  value:
+                    data:
+                    - utd-version-status-supported: 'false'
+                      vdevice-dataKey: 169.254.10.12
+                      vdevice-name: 169.254.10.12
+                      utd-version-status-recommended-version: 1.11.1_SV2.9.18.1_XEmain
+                      lastupdated: 1645756283937
+                      vdevice-host-name: vm5
+                      utd-version-status-supported-regex: ^1\.11\.([0-9]+)_SV(.*)_XEmain$
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Policy-read,Policy-write,System-read,System-write

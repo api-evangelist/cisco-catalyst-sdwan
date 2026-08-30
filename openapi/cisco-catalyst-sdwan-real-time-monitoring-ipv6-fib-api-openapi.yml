@@ -1,0 +1,133 @@
+openapi: 3.2.0
+info:
+  title: Monitoring and Troubleshooting Real-Time Monitoring - IPv6 FIB API
+  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  contact:
+    email: vmanage@cisco.com
+  license:
+    name: Commercial License
+    url: https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html
+  version: 26.1.0+2026-01-06
+  x-provenance:
+    method: harvested
+    authored_by: Cisco Catalyst SD-WAN
+    harvested_by: API Evangelist
+    harvested_on: '2026-08-19'
+    first_party: true
+    provider_published: true
+    source_host: pubhub.devnetcloud.com
+    note: 4,138 operations across 2,841 paths, published by Cisco as self-contained per-operation OpenAPI 3.1.0 fragments on the DevNet CDN and consolidated here into 13 documents. Ownership verified from info.contact vmanage@cisco.com and the Cisco license URL rather than from the fetch host.
+  x-evidence:
+  - type: source
+    url: https://pubhub.devnetcloud.com/media/cisco-catalyst-sd-wan-26-1-api-guide/docs/
+  - type: source
+    url: https://developer.cisco.com/docs/sdwan/
+servers:
+- url: /dataservice
+tags:
+- name: Real-Time Monitoring - IPv6 FIB
+paths:
+  /device/ip/v6fib:
+    get:
+      tags:
+      - Real-Time Monitoring - IPv6 FIB
+      description: Get IPv6 FIB list from Manager, Controller, Validator and vEdge device (Real Time)
+      operationId: createIPv6FibList
+      parameters:
+      - name: vpn-id
+        in: query
+        description: VPN Id
+        schema:
+          type: string
+          enum:
+          - '0'
+          - '512'
+      - name: prefix
+        in: query
+        description: IP prefix
+        schema:
+          type: string
+      - name: tloc
+        in: query
+        description: tloc IP
+        schema:
+          type: string
+      - name: color
+        in: query
+        description: tloc color
+        schema:
+          type: string
+          enum:
+          - default
+          - mpls
+          - metro-ethernet
+          - biz-internet
+          - public-internet
+          - lte
+          - 3g
+          - red
+          - green
+          - blue
+          - gold
+          - silver
+          - bronze
+          - custom1
+          - custom2
+          - custom3
+          - private1
+          - private2
+          - private3
+          - private4
+          - private5
+          - private6
+      - name: deviceId
+        in: query
+        description: deviceId - Device IP
+        required: true
+        schema:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          type: string
+          example: 169.254.10.10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                FIB list:
+                  description: FIB list
+                  value:
+                    data:
+                    - path-id: 1
+                      vdevice-dataKey: 169.254.10.10-0-fe80::3274:7d86:eb7f:4a3c/128
+                      vdevice-name: 169.254.10.10
+                      prefix: fe80::3274:7d86:eb7f:4a3c/128
+                      lastupdated: 1643096311251
+                      out-ifname: vmanage_system
+                      vpn-id: 0
+                      vdevice-host-name: vm3
+                    - path-id: 1
+                      vdevice-dataKey: 169.254.10.10-0-fe80::40b8:4592:c183:592c/128
+                      vdevice-name: 169.254.10.10
+                      prefix: fe80::40b8:4592:c183:592c/128
+                      lastupdated: 1643096311251
+                      out-ifname: system
+                      vpn-id: 0
+                      vdevice-host-name: vm3
+                    - path-id: 1
+                      vdevice-dataKey: 169.254.10.10-0-fe80::5054:ff:fea1:4f47/128
+                      vdevice-name: 169.254.10.10
+                      prefix: fe80::5054:ff:fea1:4f47/128
+                      lastupdated: 1643096311251
+                      out-ifname: ge0/1
+                      vpn-id: 0
+                      vdevice-host-name: vm3
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      x-roles-required: Routing-read,Routing-write,System-read,System-write
