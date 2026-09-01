@@ -24659,6 +24659,9 @@ apis:
   - type: APIReference
     url: https://developer.cisco.com/docs/sdwan/others/
 common:
+- type: License
+  name: MIT
+  url: https://github.com/CiscoDevNet/sastre/blob/master/LICENSE
 - type: CapabilityMap
   url: capabilities/cisco-catalyst-sdwan-capability-edges.yml
   name: Cisco Catalyst SD-WAN Business Capability Map
