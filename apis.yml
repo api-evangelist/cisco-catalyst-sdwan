@@ -21809,68 +21809,6 @@ apis:
     url: https://developer.cisco.com/docs/sdwan/others/
   - type: APIReference
     url: https://developer.cisco.com/docs/sdwan/others/
-- aid: cisco-catalyst-sdwan:cisco-catalyst-sdwan-resource-pool-api
-  name: Cisco Catalyst SD-WAN Resource - Pool API
-  description: The Resource - Pool API from Cisco Catalyst SD-WAN — 1 operation(s) for resource - pool.
-  humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
-  baseURL: https://{sdwan-manager-host}:8443/dataservice
-  tags:
-  - Resource - Pool
-  properties:
-  - type: OpenAPI
-    url: openapi/cisco-catalyst-sdwan-resource-pool-api-openapi.yml
-  - type: Documentation
-    url: https://developer.cisco.com/docs/sdwan/administration-and-setting/
-  - type: APIReference
-    url: https://developer.cisco.com/docs/sdwan/administration-and-setting/
-  - type: Documentation
-    url: https://developer.cisco.com/docs/sdwan/ux-1-0-configuration/
-  - type: APIReference
-    url: https://developer.cisco.com/docs/sdwan/ux-1-0-configuration/
-  - type: Documentation
-    url: https://developer.cisco.com/docs/sdwan/ux-2-0-configuration/
-  - type: APIReference
-    url: https://developer.cisco.com/docs/sdwan/ux-2-0-configuration/
-  - type: Documentation
-    url: https://developer.cisco.com/docs/sdwan/feature-profiles-sd-wan-system/
-  - type: APIReference
-    url: https://developer.cisco.com/docs/sdwan/feature-profiles-sd-wan-system/
-  - type: Documentation
-    url: https://developer.cisco.com/docs/sdwan/feature-profiles-sd-wan-transport/
-  - type: APIReference
-    url: https://developer.cisco.com/docs/sdwan/feature-profiles-sd-wan-transport/
-  - type: Documentation
-    url: https://developer.cisco.com/docs/sdwan/feature-profiles-sd-wan-service/
-  - type: APIReference
-    url: https://developer.cisco.com/docs/sdwan/feature-profiles-sd-wan-service/
-  - type: Documentation
-    url: https://developer.cisco.com/docs/sdwan/feature-profiles-others/
-  - type: APIReference
-    url: https://developer.cisco.com/docs/sdwan/feature-profiles-others/
-  - type: Documentation
-    url: https://developer.cisco.com/docs/sdwan/feature-profiles-sd-routing/
-  - type: APIReference
-    url: https://developer.cisco.com/docs/sdwan/feature-profiles-sd-routing/
-  - type: Documentation
-    url: https://developer.cisco.com/docs/sdwan/feature-profiles-mobility-and-nfv/
-  - type: APIReference
-    url: https://developer.cisco.com/docs/sdwan/feature-profiles-mobility-and-nfv/
-  - type: Documentation
-    url: https://developer.cisco.com/docs/sdwan/monitoring-and-troubleshooting/
-  - type: APIReference
-    url: https://developer.cisco.com/docs/sdwan/monitoring-and-troubleshooting/
-  - type: Documentation
-    url: https://developer.cisco.com/docs/sdwan/sd-wan-services/
-  - type: APIReference
-    url: https://developer.cisco.com/docs/sdwan/sd-wan-services/
-  - type: Documentation
-    url: https://developer.cisco.com/docs/sdwan/partner-integrations/
-  - type: APIReference
-    url: https://developer.cisco.com/docs/sdwan/partner-integrations/
-  - type: Documentation
-    url: https://developer.cisco.com/docs/sdwan/others/
-  - type: APIReference
-    url: https://developer.cisco.com/docs/sdwan/others/
 - aid: cisco-catalyst-sdwan:cisco-catalyst-sdwan-rules-api
   name: Cisco Catalyst SD-WAN Rules API
   description: The Rules API from Cisco Catalyst SD-WAN — 1 operation(s) for rules.
@@ -24621,6 +24559,68 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/cisco-catalyst-sdwan-workflows-controllers-upgrade-api-openapi.yml
+  - type: Documentation
+    url: https://developer.cisco.com/docs/sdwan/administration-and-setting/
+  - type: APIReference
+    url: https://developer.cisco.com/docs/sdwan/administration-and-setting/
+  - type: Documentation
+    url: https://developer.cisco.com/docs/sdwan/ux-1-0-configuration/
+  - type: APIReference
+    url: https://developer.cisco.com/docs/sdwan/ux-1-0-configuration/
+  - type: Documentation
+    url: https://developer.cisco.com/docs/sdwan/ux-2-0-configuration/
+  - type: APIReference
+    url: https://developer.cisco.com/docs/sdwan/ux-2-0-configuration/
+  - type: Documentation
+    url: https://developer.cisco.com/docs/sdwan/feature-profiles-sd-wan-system/
+  - type: APIReference
+    url: https://developer.cisco.com/docs/sdwan/feature-profiles-sd-wan-system/
+  - type: Documentation
+    url: https://developer.cisco.com/docs/sdwan/feature-profiles-sd-wan-transport/
+  - type: APIReference
+    url: https://developer.cisco.com/docs/sdwan/feature-profiles-sd-wan-transport/
+  - type: Documentation
+    url: https://developer.cisco.com/docs/sdwan/feature-profiles-sd-wan-service/
+  - type: APIReference
+    url: https://developer.cisco.com/docs/sdwan/feature-profiles-sd-wan-service/
+  - type: Documentation
+    url: https://developer.cisco.com/docs/sdwan/feature-profiles-others/
+  - type: APIReference
+    url: https://developer.cisco.com/docs/sdwan/feature-profiles-others/
+  - type: Documentation
+    url: https://developer.cisco.com/docs/sdwan/feature-profiles-sd-routing/
+  - type: APIReference
+    url: https://developer.cisco.com/docs/sdwan/feature-profiles-sd-routing/
+  - type: Documentation
+    url: https://developer.cisco.com/docs/sdwan/feature-profiles-mobility-and-nfv/
+  - type: APIReference
+    url: https://developer.cisco.com/docs/sdwan/feature-profiles-mobility-and-nfv/
+  - type: Documentation
+    url: https://developer.cisco.com/docs/sdwan/monitoring-and-troubleshooting/
+  - type: APIReference
+    url: https://developer.cisco.com/docs/sdwan/monitoring-and-troubleshooting/
+  - type: Documentation
+    url: https://developer.cisco.com/docs/sdwan/sd-wan-services/
+  - type: APIReference
+    url: https://developer.cisco.com/docs/sdwan/sd-wan-services/
+  - type: Documentation
+    url: https://developer.cisco.com/docs/sdwan/partner-integrations/
+  - type: APIReference
+    url: https://developer.cisco.com/docs/sdwan/partner-integrations/
+  - type: Documentation
+    url: https://developer.cisco.com/docs/sdwan/others/
+  - type: APIReference
+    url: https://developer.cisco.com/docs/sdwan/others/
+- aid: cisco-catalyst-sdwan:cisco-catalyst-sdwan-resourcepool-api
+  name: Cisco Catalyst SD-WAN Resourcepool API
+  description: The Resourcepool API from Cisco Catalyst SD-WAN — 1 operation(s) for resourcepool.
+  humanURL: https://developer.cisco.com/docs/sdwan/administration-and-setting/
+  baseURL: https://{sdwan-manager-host}:8443/dataservice
+  tags:
+  - Resourcepool
+  properties:
+  - type: OpenAPI
+    url: openapi/cisco-catalyst-sdwan-resourcepool-api-openapi.yml
   - type: Documentation
     url: https://developer.cisco.com/docs/sdwan/administration-and-setting/
   - type: APIReference
