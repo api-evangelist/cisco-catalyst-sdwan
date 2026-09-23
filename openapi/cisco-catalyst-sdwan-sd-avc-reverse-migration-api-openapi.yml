@@ -69,6 +69,8 @@ paths:
                       code: PP0015
                       details: <Detailed Message>
                   $$ref: '#/components/examples/ComViptelaVmanageServerSdavcReverseMigrationResponseExamples500'
+      summary: Replay custom applications
+      x-summary-source: derived
   /sdavc/reverse-migration/custom-application/replay/status/{task-id}:
     get:
       tags:
@@ -175,6 +177,8 @@ paths:
                       code: PP0015
                       details: <Detailed Message>
                   $$ref: '#/components/examples/ComViptelaVmanageServerSdavcReverseMigrationResponseExamples500'
+      summary: Replay custom applications status
+      x-summary-source: derived
   /sdavc/reverse-migration/protocol-pack/replay:
     post:
       tags:
@@ -215,6 +219,8 @@ paths:
                       code: PP0015
                       details: <Detailed Message>
                   $$ref: '#/components/examples/ComViptelaVmanageServerSdavcReverseMigrationResponseExamples500'
+      summary: Replay protocol packs
+      x-summary-source: derived
   /sdavc/reverse-migration/protocol-pack/replay/status/{task-id}:
     get:
       tags:
@@ -317,6 +323,8 @@ paths:
                       code: PP0015
                       details: <Detailed Message>
                   $$ref: '#/components/examples/ComViptelaVmanageServerSdavcReverseMigrationResponseExamples500'
+      summary: Replay protocol packs status
+      x-summary-source: derived
   /sdavc/reverse-migration/validate:
     get:
       tags:
@@ -368,3 +376,5 @@ paths:
                       code: PP0015
                       details: <Detailed Message>
                   $$ref: '#/components/examples/ComViptelaVmanageServerSdavcReverseMigrationResponseExamples500'
+      summary: Validate
+      x-summary-source: derived

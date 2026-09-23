@@ -1,7 +1,13 @@
 openapi: 3.2.0
 info:
-  title: UX 1.0 Configuration Configuration - vSmart Template Policy API
-  description: "Configuration of UX 1.0 device and policy.\nIncludes API operations for the following:\n  Managing original SD-WAN device configurations and policy configurations\n  Device templates and feature templates"
+  title: UX 1.0 Configuration Configuration - vSmart Template Policy…
+  description: 'Configuration of UX 1.0 device and policy.
+
+    Includes API operations for the following:
+
+    Managing original SD-WAN device configurations and policy configurations
+
+    Device templates and feature templates'
   contact:
     email: vmanage@cisco.com
   license:
@@ -254,6 +260,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Generate VSmart policy template list
+      x-summary-source: derived
     post:
       tags:
       - Configuration - vSmart Template Policy
@@ -296,6 +304,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Create VSmart template
+      x-summary-source: derived
   /template/policy/vsmart/activate/central/{policyId}:
     post:
       tags:
@@ -336,6 +346,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Activate policy for cloud services
+      x-summary-source: derived
   /template/policy/vsmart/activate/{policyId}:
     post:
       tags:
@@ -382,6 +394,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Activate policy
+      x-summary-source: derived
   /template/policy/vsmart/central/{policyId}:
     put:
       tags:
@@ -424,6 +438,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Edit template without lock checks
+      x-summary-source: derived
   /template/policy/vsmart/connectivity/status:
     get:
       tags:
@@ -447,6 +463,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Check VSmart connectivity status
+      x-summary-source: derived
   /template/policy/vsmart/deactivate/{policyId}:
     post:
       tags:
@@ -478,6 +496,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: De activate policy
+      x-summary-source: derived
   /template/policy/vsmart/definition/{policyId}:
     get:
       tags:
@@ -509,6 +529,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get template by policy id
+      x-summary-source: derived
   /template/policy/vsmart/qosmos_nbar_migration_warning:
     get:
       tags:
@@ -532,6 +554,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Qosmos nbar migration warning
+      x-summary-source: derived
   /template/policy/vsmart/{policyId}:
     put:
       tags:
@@ -589,6 +613,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Edit VSmart template
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - vSmart Template Policy
@@ -610,3 +636,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Delete VSmart template
+      x-summary-source: derived

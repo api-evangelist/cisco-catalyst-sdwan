@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Monitoring - Network Availability API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Monitoring - Network…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -124,6 +132,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get aggregation data by query monitoring network availability 1504
+      x-summary-source: derived
   /statistics/nwa/aggregation:
     post:
       tags:
@@ -312,6 +322,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,Device Monitoring-write
+      summary: Get post aggregation data by query monitoring network availability 2704
+      x-summary-source: derived
   /statistics/nwa/details:
     post:
       tags:
@@ -506,3 +518,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,Device Monitoring-write
+      summary: Get detail aggregation data by query
+      x-summary-source: derived

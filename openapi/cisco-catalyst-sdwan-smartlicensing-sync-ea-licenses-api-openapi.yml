@@ -56,6 +56,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Fetch ea virtual accounts
+      x-summary-source: derived
   /v1/smart-licensing/ea/fetch-sync-status:
     get:
       tags:
@@ -75,6 +77,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Fetch EA sync status
+      x-summary-source: derived
   /v1/smart-licensing/ea/generate:
     post:
       tags:
@@ -126,6 +130,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Generate EA licenses
+      x-summary-source: derived
   /v1/smart-licensing/ea/sync:
     post:
       tags:
@@ -164,3 +170,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Sync with EA
+      x-summary-source: derived

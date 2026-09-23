@@ -1,7 +1,13 @@
 openapi: 3.2.0
 info:
-  title: UX 1.0 Configuration Configuration - Policy Custom Application Builder API
-  description: "Configuration of UX 1.0 device and policy.\nIncludes API operations for the following:\n  Managing original SD-WAN device configurations and policy configurations\n  Device templates and feature templates"
+  title: UX 1.0 Configuration Configuration - Policy Custom…
+  description: 'Configuration of UX 1.0 device and policy.
+
+    Includes API operations for the following:
+
+    Managing original SD-WAN device configurations and policy configurations
+
+    Device templates and feature templates'
   contact:
     email: vmanage@cisco.com
   license:
@@ -62,6 +68,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Map traffic profiles
+      x-summary-source: derived
   /template/policy/customapp:
     get:
       tags:
@@ -92,6 +100,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get custom apps
+      x-summary-source: derived
     post:
       tags:
       - Configuration - Policy Custom Application Builder
@@ -139,6 +149,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Create custom application
+      x-summary-source: derived
   /template/policy/customapp/{id}:
     get:
       tags:
@@ -170,6 +182,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get custom app by id
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Policy Custom Application Builder
@@ -200,6 +214,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Delete custom app
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Policy Custom Application Builder
@@ -254,3 +270,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Update custom application
+      x-summary-source: derived

@@ -34,7 +34,6 @@ paths:
       tags:
       - CCI Authorization Service - CCI Token
       summary: Get CCI token after Complete CCI Login
-      description: 'Get CCI token after Complete CCI Login '
       operationId: cciToken
       parameters:
       - name: device_code

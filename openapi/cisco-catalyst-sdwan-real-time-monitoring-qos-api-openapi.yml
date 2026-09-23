@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Real-Time Monitoring - QoS API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Real-Time Monitoring - QoS…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -132,6 +140,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get per tunnel qos detailed info
+      x-summary-source: derived
   /device/qos/session/summary:
     get:
       tags:
@@ -199,6 +209,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get per tunnel qos summary
+      x-summary-source: derived
     post:
       tags:
       - Real-Time Monitoring - QoS
@@ -281,3 +293,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,RBAC VPN-read,RBAC VPN-write
+      summary: Get per tunnel qos summary post
+      x-summary-source: derived

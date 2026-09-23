@@ -1,7 +1,13 @@
 openapi: 3.2.0
 info:
   title: UX 1.0 Configuration Configuration - Cloud On Ramp API
-  description: "Configuration of UX 1.0 device and policy.\nIncludes API operations for the following:\n  Managing original SD-WAN device configurations and policy configurations\n  Device templates and feature templates"
+  description: 'Configuration of UX 1.0 device and policy.
+
+    Includes API operations for the following:
+
+    Managing original SD-WAN device configurations and policy configurations
+
+    Device templates and feature templates'
   contact:
     email: vmanage@cisco.com
   license:
@@ -62,6 +68,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Cloud OnRamp-write
+      summary: Create and map
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Cloud On Ramp
@@ -102,6 +110,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Cloud OnRamp-read
+      summary: Get COR status
+      x-summary-source: derived
   /template/cor/accountid/{accountid}:
     delete:
       tags:
@@ -152,6 +162,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Cloud OnRamp-write
+      summary: Remove transit VPC
+      x-summary-source: derived
   /template/cor/acquireResourcePool:
     post:
       tags:
@@ -179,6 +191,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Cloud OnRamp-write
+      summary: Acquire resource pool
+      x-summary-source: derived
   /template/cor/ami:
     get:
       tags:
@@ -225,11 +239,12 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Cloud OnRamp-read
+      summary: Get ami list
+      x-summary-source: derived
   /template/cor/cloud:
     get:
       tags:
       - Configuration - Cloud On Ramp
-      description: Get cloud list
       operationId: getCloudList
       responses:
         '200':
@@ -252,11 +267,12 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Cloud OnRamp-read
+      summary: Get cloud list
+      x-summary-source: derived
   /template/cor/cloud/account:
     get:
       tags:
       - Configuration - Cloud On Ramp
-      description: Get cloud accounts
       operationId: getCloudAccounts
       parameters:
       - name: cloudtype
@@ -290,6 +306,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Cloud OnRamp-read
+      summary: Get cloud accounts
+      x-summary-source: derived
   /template/cor/cloud/authenticate:
     put:
       tags:
@@ -330,6 +348,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Cloud OnRamp-write
+      summary: Authenticate cred and update
+      x-summary-source: derived
     post:
       tags:
       - Configuration - Cloud On Ramp
@@ -369,6 +389,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Cloud OnRamp-write
+      summary: Authenticate cloud on ramp cred and add
+      x-summary-source: derived
   /template/cor/cloud/host/accountdetails:
     get:
       tags:
@@ -394,6 +416,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Cloud OnRamp-read
+      summary: Get cloud host vpc account details
+      x-summary-source: derived
   /template/cor/cloud/mappedhostaccounts:
     get:
       tags:
@@ -432,6 +456,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Cloud OnRamp-read
+      summary: Get cloud mapped host accounts
+      x-summary-source: derived
   /template/cor/createResourcePool:
     post:
       tags:
@@ -459,6 +485,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Cloud OnRamp-write
+      summary: Create resource pool
+      x-summary-source: derived
   /template/cor/deleteDevicepair:
     delete:
       tags:
@@ -521,6 +549,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Cloud OnRamp-write
+      summary: Remove device id
+      x-summary-source: derived
   /template/cor/device:
     get:
       tags:
@@ -548,11 +578,12 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Cloud OnRamp-read
+      summary: Get cloud on ramp devices
+      x-summary-source: derived
   /template/cor/devicepair:
     post:
       tags:
       - Configuration - Cloud On Ramp
-      description: Add device pair
       operationId: addDevicePair
       requestBody:
         description: Add device pair request
@@ -583,6 +614,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Cloud OnRamp-write
+      summary: Add device pair
+      x-summary-source: derived
   /template/cor/devicepair/hostvpc:
     get:
       tags:
@@ -621,6 +654,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Cloud OnRamp-read
+      summary: Get host VPCs
+      x-summary-source: derived
   /template/cor/externalId:
     get:
       tags:
@@ -648,6 +683,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Cloud OnRamp-read
+      summary: Get external id
+      x-summary-source: derived
   /template/cor/getTransitDevicePairAndHostList:
     get:
       tags:
@@ -686,6 +723,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Cloud OnRamp-read
+      summary: Get transit device pair and host list
+      x-summary-source: derived
   /template/cor/getTransitVpnList:
     get:
       tags:
@@ -720,6 +759,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Cloud OnRamp-read
+      summary: Get transit vpc vpn list
+      x-summary-source: derived
   /template/cor/hostvpc:
     get:
       tags:
@@ -766,6 +807,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Cloud OnRamp-read
+      summary: Get cloud host VPCs
+      x-summary-source: derived
   /template/cor/map:
     post:
       tags:
@@ -801,6 +844,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Cloud OnRamp-write
+      summary: Map VPCs
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Cloud On Ramp
@@ -834,6 +879,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Cloud OnRamp-write
+      summary: Unmap VPCs
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Cloud On Ramp
@@ -871,6 +918,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Cloud OnRamp-read
+      summary: Get mapped VPCs
+      x-summary-source: derived
   /template/cor/pem:
     get:
       tags:
@@ -917,6 +966,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Cloud OnRamp-read
+      summary: Get pem key list
+      x-summary-source: derived
   /template/cor/scale/down:
     post:
       tags:
@@ -944,6 +995,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: viptela-reserved-cloud
+      summary: Scale down
+      x-summary-source: derived
   /template/cor/scale/up:
     post:
       tags:
@@ -971,6 +1024,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: viptela-reserved-cloud
+      summary: Scale up
+      x-summary-source: derived
   /template/cor/transitvpc:
     get:
       tags:
@@ -1017,6 +1072,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Cloud OnRamp-read
+      summary: Get transit VPCs
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Cloud On Ramp
@@ -1054,6 +1111,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Cloud OnRamp-write
+      summary: Update transit VPC
+      x-summary-source: derived
     post:
       tags:
       - Configuration - Cloud On Ramp
@@ -1107,6 +1166,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Cloud OnRamp-write
+      summary: Add transit VPC
+      x-summary-source: derived
   /template/cor/transitvpc/autoscale-properties:
     put:
       tags:
@@ -1150,11 +1211,12 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Cloud OnRamp-write
+      summary: Update transit vpc autoscale properties
+      x-summary-source: derived
   /template/cor/transitvpc/size:
     get:
       tags:
       - Configuration - Cloud On Ramp
-      description: Get transit VPC supported size
       operationId: getTransitVPCSupportedSize
       parameters:
       - name: cloudtype
@@ -1190,3 +1252,5 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Cloud OnRamp-read
+      summary: Get transit VPC supported size
+      x-summary-source: derived

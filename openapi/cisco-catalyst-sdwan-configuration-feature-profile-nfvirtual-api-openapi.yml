@@ -1,7 +1,13 @@
 openapi: 3.2.0
 info:
-  title: Feature Profiles - Mobility and NFV Configuration - Feature Profile (NFVirtual) API
-  description: "Feature profiles associated with UX 2.0 configuration\nIncludes API operations for the following:\n  Feature Profiles in Mobility and NFV Solutions\n  Supporting mobility features and Network Function Virtualization (NFV) configurations."
+  title: Feature Profiles - Mobility and NFV Configuration - Feature…
+  description: 'Feature profiles associated with UX 2.0 configuration
+
+    Includes API operations for the following:
+
+    Feature Profiles in Mobility and NFV Solutions
+
+    Supporting mobility features and Network Function Virtualization (NFV) configurations.'
   contact:
     email: vmanage@cisco.com
   license:
@@ -107,6 +113,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual CLI Add On-write
+      summary: Create nfvirtual CLI feature profile
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Feature Profile (NFVirtual)
@@ -195,6 +203,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual CLI Add On-read
+      summary: Get all nfvirtual CLI feature profiles
+      x-summary-source: derived
   /v1/feature-profile/nfvirtual/cli/{cliId}:
     get:
       tags:
@@ -298,6 +308,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual CLI Add On-read
+      summary: Get nfvirtual CLI feature profile byid
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Feature Profile (NFVirtual)
@@ -320,6 +332,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual CLI Add On-write
+      summary: Delete nfvirtual CLI feature profile
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Feature Profile (NFVirtual)
@@ -387,6 +401,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual CLI Add On-write
+      summary: Edit nfvirtual CLI feature profile
+      x-summary-source: derived
   /v1/feature-profile/nfvirtual/cli/{cliId}/config:
     post:
       tags:
@@ -468,6 +484,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual CLI Add On > Cli-write
+      summary: Create nfvirtual CLI parcel
+      x-summary-source: derived
   /v1/feature-profile/nfvirtual/cli/{cliId}/config/{configId}:
     get:
       tags:
@@ -568,6 +586,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual CLI Add On > Cli-read
+      summary: Get nfvirtual CLI parcel
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Feature Profile (NFVirtual)
@@ -655,6 +675,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual CLI Add On > Cli-write
+      summary: Edit nfvirtual CLI parcel
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Feature Profile (NFVirtual)
@@ -685,6 +707,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual CLI Add On > Cli-write
+      summary: Delete nfvirtual CLI parcel
+      x-summary-source: derived
   /v1/feature-profile/nfvirtual/networks:
     get:
       tags:
@@ -777,6 +801,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual System-read
+      summary: Get all nfvirtual networks feature profiles
+      x-summary-source: derived
     post:
       tags:
       - Configuration - Feature Profile (NFVirtual)
@@ -856,6 +882,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual System-write
+      summary: Create nfvirtual networks feature profile
+      x-summary-source: derived
   /v1/feature-profile/nfvirtual/networks/ovsnetwork/{networkId}:
     get:
       tags:
@@ -1479,6 +1507,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual System-read
+      summary: Get all nfvirtual ovs networks feature profile by profile id
+      x-summary-source: derived
   /v1/feature-profile/nfvirtual/networks/{networkId}:
     put:
       tags:
@@ -1547,6 +1577,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual System-write
+      summary: Edit nfvirtual networks feature profile
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Feature Profile (NFVirtual)
@@ -1569,6 +1601,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual System-write
+      summary: Delete nfvirtual networks feature profile
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Feature Profile (NFVirtual)
@@ -1678,6 +1712,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual System-read
+      summary: Get nfvirtual networks feature profile by profile id
+      x-summary-source: derived
   /v1/feature-profile/nfvirtual/networks/{networksId}/lan:
     post:
       tags:
@@ -2191,6 +2227,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual Networks > Lan-write
+      summary: Create nfvirtual LAN parcel
+      x-summary-source: derived
   /v1/feature-profile/nfvirtual/networks/{networksId}/lan/{lanId}:
     get:
       tags:
@@ -2729,10 +2767,12 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual Networks > Lan-read
+      summary: Get nfvirtual LAN parcel
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Feature Profile (NFVirtual)
-      description: Edit a  LAN Profile Parcel for networks feature profile
+      description: Edit a LAN Profile Parcel for networks feature profile
       operationId: EditNfvirtualLANParcel
       parameters:
       - name: networksId
@@ -3254,6 +3294,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual Networks > Lan-write
+      summary: Edit nfvirtual LAN parcel
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Feature Profile (NFVirtual)
@@ -3284,6 +3326,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual Networks > Lan-write
+      summary: Delete nfvirtual LAN parcel
+      x-summary-source: derived
   /v1/feature-profile/nfvirtual/networks/{networksId}/ovsnetwork:
     post:
       tags:
@@ -3888,6 +3932,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual Networks > Ovsnetwork-write
+      summary: Create nfvirtual OVS network parcel
+      x-summary-source: derived
   /v1/feature-profile/nfvirtual/networks/{networksId}/ovsnetwork/{ovsNetworkId}:
     put:
       tags:
@@ -4499,6 +4545,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual Networks > Ovsnetwork-write
+      summary: Edit nfvirtual OVS network parcel
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Feature Profile (NFVirtual)
@@ -5121,6 +5169,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual Networks > Ovsnetwork-read
+      summary: Get nfvirtual OVS network parcel
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Feature Profile (NFVirtual)
@@ -5151,6 +5201,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual Networks > Ovsnetwork-write
+      summary: Delete nfvirtual OVS network parcel
+      x-summary-source: derived
   /v1/feature-profile/nfvirtual/networks/{networksId}/routes:
     post:
       tags:
@@ -5344,6 +5396,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual Networks > Routes-write
+      summary: Create nfvirtual routes parcel
+      x-summary-source: derived
   /v1/feature-profile/nfvirtual/networks/{networksId}/routes/{routesId}:
     delete:
       tags:
@@ -5375,6 +5429,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual Networks > Routes-write
+      summary: Delete nfvirtual routes parcel
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Feature Profile (NFVirtual)
@@ -5574,6 +5630,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual Networks > Routes-write
+      summary: Edit nfvirtual routes parcel
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Feature Profile (NFVirtual)
@@ -5785,6 +5843,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual Networks > Routes-read
+      summary: Get nfvirtual routes parcel
+      x-summary-source: derived
   /v1/feature-profile/nfvirtual/networks/{networksId}/switch:
     post:
       tags:
@@ -6031,6 +6091,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual Networks > Switch-write
+      summary: Create nfvirtual switch parcel
+      x-summary-source: derived
   /v1/feature-profile/nfvirtual/networks/{networksId}/switch/{switchId}:
     get:
       tags:
@@ -6292,6 +6354,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual Networks > Switch-read
+      summary: Get nfvirtual switch parcel
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Feature Profile (NFVirtual)
@@ -6544,6 +6608,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual Networks > Switch-write
+      summary: Edit nfvirtual switch parcel
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Feature Profile (NFVirtual)
@@ -6574,6 +6640,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual Networks > Switch-write
+      summary: Delete nfvirtual switch parcel
+      x-summary-source: derived
   /v1/feature-profile/nfvirtual/networks/{networksId}/vnf-attributes:
     post:
       tags:
@@ -6999,6 +7067,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual Networks > Vnf attributes-write
+      summary: Create nfvirtual VNF attributes parcel
+      x-summary-source: derived
   /v1/feature-profile/nfvirtual/networks/{networksId}/vnf-attributes/{vnfAttributesId}:
     put:
       tags:
@@ -7431,6 +7501,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual Networks > Vnf attributes-write
+      summary: Edit nfvirtual VNF attributes parcel
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Feature Profile (NFVirtual)
@@ -7461,6 +7533,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual Networks > Vnf attributes-write
+      summary: Delete nfvirtual VNF attributes parcel
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Feature Profile (NFVirtual)
@@ -7904,6 +7978,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual Networks > Vnf attributes-read
+      summary: Get nfvirtual VNF attributes parcel
+      x-summary-source: derived
   /v1/feature-profile/nfvirtual/networks/{networksId}/vnf-attributes/{vnfAttributesId}/vnf:
     post:
       tags:
@@ -8749,6 +8825,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual Networks > Vnf attributes > Vnf-write
+      summary: Create nfvirtual VNF parcel
+      x-summary-source: derived
   /v1/feature-profile/nfvirtual/networks/{networksId}/vnf-attributes/{vnfAttributesId}/vnf/{vnfId}:
     delete:
       tags:
@@ -8787,6 +8865,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual Networks > Vnf attributes > Vnf-write
+      summary: Delete nfvirtual VNF parcel
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Feature Profile (NFVirtual)
@@ -9650,6 +9730,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual Networks > Vnf attributes > Vnf-read
+      summary: Get nfvirtual VNF parcel
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Feature Profile (NFVirtual)
@@ -10501,6 +10583,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual Networks > Vnf attributes > Vnf-write
+      summary: Edit nfvirtual VNF parcel
+      x-summary-source: derived
   /v1/feature-profile/nfvirtual/networks/{networksId}/wan:
     post:
       tags:
@@ -11241,6 +11325,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual Networks > Wan-write
+      summary: Create nfvirtual wan parcel
+      x-summary-source: derived
   /v1/feature-profile/nfvirtual/networks/{networksId}/wan/{wanId}:
     get:
       tags:
@@ -12000,6 +12086,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual Networks > Wan-read
+      summary: Get nfvirtual WAN parcel
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Feature Profile (NFVirtual)
@@ -12030,6 +12118,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual Networks > Wan-write
+      summary: Delete nfvirtual WAN parcel
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Feature Profile (NFVirtual)
@@ -12776,6 +12866,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual Networks > Wan-write
+      summary: Edit nfvirtual WAN parcel
+      x-summary-source: derived
   /v1/feature-profile/nfvirtual/system:
     get:
       tags:
@@ -12865,6 +12957,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual System-read
+      summary: Get all nfvirtual system feature profiles
+      x-summary-source: derived
     post:
       tags:
       - Configuration - Feature Profile (NFVirtual)
@@ -12944,6 +13038,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual System-write
+      summary: Create nfvirtual system feature profile
+      x-summary-source: derived
   /v1/feature-profile/nfvirtual/system/{systemId}:
     delete:
       tags:
@@ -12968,6 +13064,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual System-write
+      summary: Delete nfvirtual system feature profile
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Feature Profile (NFVirtual)
@@ -13035,6 +13133,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual System-write
+      summary: Edit nfvirtual system feature profile
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Feature Profile (NFVirtual)
@@ -13137,6 +13237,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual System-read
+      summary: Get nfvirtual system feature profile by profile id
+      x-summary-source: derived
   /v1/feature-profile/nfvirtual/system/{systemId}/aaa:
     post:
       tags:
@@ -14064,6 +14166,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual System > Aaa-write
+      summary: Create nfvirtual AAA parcel
+      x-summary-source: derived
   /v1/feature-profile/nfvirtual/system/{systemId}/aaa/{aaaId}:
     get:
       tags:
@@ -15010,10 +15114,12 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual System > Aaa-read
+      summary: Get nfvirtual AAA parcel
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Feature Profile (NFVirtual)
-      description: Edit a  AAA Profile Parcel for System feature profile
+      description: Edit a AAA Profile Parcel for System feature profile
       operationId: EditNfvirtualAAAParcel
       parameters:
       - name: systemId
@@ -15943,6 +16049,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual System > Aaa-write
+      summary: Edit nfvirtual AAA parcel
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Feature Profile (NFVirtual)
@@ -15973,6 +16081,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual System > Aaa-write
+      summary: Delete nfvirtual AAA parcel
+      x-summary-source: derived
   /v1/feature-profile/nfvirtual/system/{systemId}/banner:
     post:
       tags:
@@ -16169,6 +16279,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual System > Banner-write
+      summary: Create nfvirtual banner parcel
+      x-summary-source: derived
   /v1/feature-profile/nfvirtual/system/{systemId}/banner/{bannerId}:
     get:
       tags:
@@ -16384,6 +16496,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual System > Banner-read
+      summary: Get nfvirtual banner parcel
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Feature Profile (NFVirtual)
@@ -16414,10 +16528,12 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual System > Banner-write
+      summary: Delete nfvirtual banner parcel
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Feature Profile (NFVirtual)
-      description: Edit a  Banner Profile Parcel for System feature profile
+      description: Edit a Banner Profile Parcel for System feature profile
       operationId: EditNfvirtualBannerParcel
       parameters:
       - name: systemId
@@ -16616,6 +16732,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual System > Banner-write
+      summary: Edit nfvirtual banner parcel
+      x-summary-source: derived
   /v1/feature-profile/nfvirtual/system/{systemId}/logging:
     post:
       tags:
@@ -16828,6 +16946,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual System > Logging-write
+      summary: Create nfvirtual logging parcel
+      x-summary-source: derived
   /v1/feature-profile/nfvirtual/system/{systemId}/logging/{loggingId}:
     get:
       tags:
@@ -17056,10 +17176,12 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual System > Logging-read
+      summary: Get nfvirtual logging parcel
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Feature Profile (NFVirtual)
-      description: Edit a  Logging Profile Parcel for System feature profile
+      description: Edit a Logging Profile Parcel for System feature profile
       operationId: EditNfvirtualLoggingParcel
       parameters:
       - name: systemId
@@ -17271,6 +17393,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual System > Logging-write
+      summary: Edit nfvirtual logging parcel
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Feature Profile (NFVirtual)
@@ -17301,6 +17425,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual System > Logging-write
+      summary: Delete nfvirtual logging parcel
+      x-summary-source: derived
   /v1/feature-profile/nfvirtual/system/{systemId}/ntp:
     post:
       tags:
@@ -17484,6 +17610,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual System > Ntp-write
+      summary: Create nfvirtual NTP parcel
+      x-summary-source: derived
   /v1/feature-profile/nfvirtual/system/{systemId}/ntp/{ntpId}:
     get:
       tags:
@@ -17686,10 +17814,12 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual System > Ntp-read
+      summary: Get nfvirtual NTP parcel
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Feature Profile (NFVirtual)
-      description: Edit a  NTP Profile Parcel for System feature profile
+      description: Edit a NTP Profile Parcel for System feature profile
       operationId: EditNfvirtualNTPParcel
       parameters:
       - name: systemId
@@ -17875,6 +18005,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual System > Ntp-write
+      summary: Edit nfvirtual NTP parcel
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Feature Profile (NFVirtual)
@@ -17905,6 +18037,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual System > Ntp-write
+      summary: Delete nfvirtual NTP parcel
+      x-summary-source: derived
   /v1/feature-profile/nfvirtual/system/{systemId}/snmp:
     post:
       tags:
@@ -18910,6 +19044,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual System > Snmp-write
+      summary: Create nfvirtual SNMP parcel
+      x-summary-source: derived
   /v1/feature-profile/nfvirtual/system/{systemId}/snmp/{snmpId}:
     get:
       tags:
@@ -19934,6 +20070,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual System > Snmp-read
+      summary: Get nfvirtual SNMP parcel
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Feature Profile (NFVirtual)
@@ -19964,10 +20102,12 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual System > Snmp-write
+      summary: Delete nfvirtual SNMP parcel
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Feature Profile (NFVirtual)
-      description: Edit a  SNMP Profile Parcel for System feature profile
+      description: Edit a SNMP Profile Parcel for System feature profile
       operationId: EditNfvirtualSNMPParcel
       parameters:
       - name: systemId
@@ -20975,11 +21115,13 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual System > Snmp-write
+      summary: Edit nfvirtual SNMP parcel
+      x-summary-source: derived
   /v1/feature-profile/nfvirtual/system/{systemId}/system-settings:
     post:
       tags:
       - Configuration - Feature Profile (NFVirtual)
-      description: Create System settings  Profile Parcel for System feature profile
+      description: Create System settings Profile Parcel for System feature profile
       operationId: CreateNfvirtualSystemSettingsParcel
       parameters:
       - name: systemId
@@ -21146,6 +21288,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual System > System Settings-write
+      summary: Create nfvirtual system settings parcel
+      x-summary-source: derived
   /v1/feature-profile/nfvirtual/system/{systemId}/system-settings/{systemSettingsId}:
     put:
       tags:
@@ -21324,6 +21468,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual System > System Settings-write
+      summary: Edit nfvirtual system settings parcel
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Feature Profile (NFVirtual)
@@ -21354,6 +21500,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual System > System Settings-write
+      summary: Delete nfvirtual system settings parcel
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Feature Profile (NFVirtual)
@@ -21543,3 +21691,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Feature Profile > Nfvirtual System > System Settings-read
+      summary: Get nfvirtual system settings parcel
+      x-summary-source: derived

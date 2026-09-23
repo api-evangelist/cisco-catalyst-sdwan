@@ -61,6 +61,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Configuration-write,Template Deploy-write,Cloud OnRamp-write
+      summary: Enable webex configuration cloudexpress 2403
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - CloudExpress
@@ -93,6 +95,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Configuration-write,Template Deploy-write,Cloud OnRamp-write
+      summary: Delete webex prefix lists
+      x-summary-source: derived
     post:
       tags:
       - Configuration - CloudExpress
@@ -126,6 +130,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Configuration-write,Template Deploy-write,Cloud OnRamp-write
+      summary: Enable webex configuration cloudexpress 2404
+      x-summary-source: derived
     servers:
     - url: /dataservice
   /template/cloudx:
@@ -161,6 +167,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Inventory-read,Cloud OnRamp-read,Cloud OnRamp-write
+      summary: Get cloud XStatus
+      x-summary-source: derived
     servers:
     - url: /dataservice
   /template/cloudx/addcloudx/{type}:
@@ -197,6 +205,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Template Configuration-write,Template Deploy-write,Cloud OnRamp-write
+      summary: Add cloudx type
+      x-summary-source: derived
     servers:
     - url: /dataservice
   /template/cloudx/attachedclient:
@@ -225,6 +235,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Configuration-read,Template Deploy-read,Template Deploy-write,Cloud OnRamp-read,Cloud OnRamp-write
+      summary: Get attached client list
+      x-summary-source: derived
     servers:
     - url: /dataservice
   /template/cloudx/attacheddia:
@@ -253,13 +265,14 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Configuration-read,Template Deploy-read,Template Deploy-write,Cloud OnRamp-read,Cloud OnRamp-write
+      summary: Get attached dia list
+      x-summary-source: derived
     servers:
     - url: /dataservice
   /template/cloudx/attachedgateway:
     get:
       tags:
       - Configuration - CloudExpress
-      description: Get attached gateway list
       operationId: getAttachedGatewayList
       responses:
         '200':
@@ -281,6 +294,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Configuration-read,Template Deploy-read,Template Deploy-write,Cloud OnRamp-read,Cloud OnRamp-write
+      summary: Get attached gateway list
+      x-summary-source: derived
     servers:
     - url: /dataservice
   /template/cloudx/availableapps:
@@ -309,13 +324,14 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Inventory-read,Cloud OnRamp-read,Cloud OnRamp-write
+      summary: Get cloud XAvailable apps
+      x-summary-source: derived
     servers:
     - url: /dataservice
   /template/cloudx/clientlist:
     get:
       tags:
       - Configuration - CloudExpress
-      description: Get site list
       operationId: getSiteList
       responses:
         '200':
@@ -337,6 +353,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Configuration-read,Template Deploy-read,Template Deploy-write,Cloud OnRamp-read,Cloud OnRamp-write
+      summary: Get site list
+      x-summary-source: derived
     servers:
     - url: /dataservice
   /template/cloudx/dialist:
@@ -365,13 +383,14 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Configuration-read,Template Deploy-read,Template Deploy-write,Cloud OnRamp-read,Cloud OnRamp-write
+      summary: Get dia list
+      x-summary-source: derived
     servers:
     - url: /dataservice
   /template/cloudx/gatewaylist:
     get:
       tags:
       - Configuration - CloudExpress
-      description: Get gateway list
       operationId: getGatewayList
       responses:
         '200':
@@ -393,6 +412,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Configuration-read,Template Deploy-read,Template Deploy-write,Cloud OnRamp-read,Cloud OnRamp-write
+      summary: Get gateway list
+      x-summary-source: derived
     servers:
     - url: /dataservice
   /template/cloudx/interfaces:
@@ -421,6 +442,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Configuration-write,Template Deploy-write,Cloud OnRamp-write
+      summary: Add cloudx interfaces
+      x-summary-source: derived
     servers:
     - url: /dataservice
   /template/cloudx/manage/apps:
@@ -449,6 +472,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Configuration-read,Template Deploy-read,Template Deploy-write,Cloud OnRamp-read,Cloud OnRamp-write
+      summary: Get apps
+      x-summary-source: derived
     put:
       tags:
       - Configuration - CloudExpress
@@ -487,6 +512,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Configuration-write,Template Deploy-write,Cloud OnRamp-write
+      summary: Edit apps
+      x-summary-source: derived
     post:
       tags:
       - Configuration - CloudExpress
@@ -528,6 +555,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Configuration-write,Template Deploy-write,Cloud OnRamp-write
+      summary: Add apps
+      x-summary-source: derived
     servers:
     - url: /dataservice
   /template/cloudx/status:
@@ -569,6 +598,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Inventory-read,Cloud OnRamp-read,Cloud OnRamp-write
+      summary: Site per app
+      x-summary-source: derived
     servers:
     - url: /dataservice
 x-refined-from:

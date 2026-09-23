@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Monitoring - Tunnel Health API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Monitoring - Tunnel Health…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -157,6 +165,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stats raw data monitoring tunnel health 1104
+      x-summary-source: derived
   /statistics/aggregation:
     get:
       tags:
@@ -187,6 +197,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get aggregation data by query monitoring tunnel health 2303
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Tunnel Health
@@ -217,6 +229,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default,dca
+      summary: Get post aggregation data by query monitoring tunnel health 2304
+      x-summary-source: derived
   /statistics/csv:
     get:
       tags:
@@ -256,6 +270,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stat data raw data as CSV monitoring tunnel health 1503
+      x-summary-source: derived
   /statistics/doccount:
     get:
       tags:
@@ -296,6 +312,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get count monitoring tunnel health 2003
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Tunnel Health
@@ -338,6 +356,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get count post monitoring tunnel health 2004
+      x-summary-source: derived
   /statistics/fields:
     get:
       tags:
@@ -390,6 +410,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat data fields monitoring tunnel health 1803
+      x-summary-source: derived
   /statistics/page:
     get:
       tags:
@@ -514,6 +536,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get stats pagination raw data monitoring tunnel health 1603
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Tunnel Health
@@ -642,6 +666,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get post stats pagination raw data monitoring tunnel health 1604
+      x-summary-source: derived
   /statistics/query/fields:
     get:
       tags:
@@ -706,12 +732,14 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat query fields monitoring tunnel health 2403
+      x-summary-source: derived
   /statistics/tunnelhealth/history:
     get:
       tags:
       - Monitoring - Tunnel Health
       summary: Tunnel health history data
-      description: 'Get all tunnel health history '
+      description: Get all tunnel health history
       operationId: statisticsApprouteTunnelhealthHistoryGet
       parameters:
       - name: last_n_hours
@@ -865,7 +893,7 @@ paths:
       tags:
       - Monitoring - Tunnel Health
       summary: Tunnel health overview data
-      description: 'Get all tunnel health overview '
+      description: Get all tunnel health overview
       operationId: statisticsApprouteTunnelhealthOverviewTypeGet
       parameters:
       - name: type

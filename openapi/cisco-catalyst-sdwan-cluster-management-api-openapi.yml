@@ -33,7 +33,10 @@ paths:
     get:
       tags:
       - Cluster Management
-      description: 'Check whether cluster is locked<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Check whether cluster is locked
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: checkIfClusterLocked
       responses:
         '200':
@@ -52,11 +55,16 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Check if cluster locked
+      x-summary-source: derived
   /clusterManagement/clusterworkflow/version:
     get:
       tags:
       - Cluster Management
-      description: 'List vManages in the cluster<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'List vManages in the cluster
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: getClusterWorkflowVersion
       responses:
         '200':
@@ -77,11 +85,16 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get cluster workflow version
+      x-summary-source: derived
   /clusterManagement/configure:
     post:
       tags:
       - Cluster Management
-      description: 'Configure vManage<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Configure vManage
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: configureVmanage
       requestBody:
         description: vManage server config
@@ -103,11 +116,16 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Configure vmanage
+      x-summary-source: derived
   /clusterManagement/connectedDevices/{vmanageIP}:
     get:
       tags:
       - Cluster Management
-      description: 'Get connected device for vManage<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Get connected device for vManage
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: getConnectedDevices
       parameters:
       - name: vmanageIP
@@ -135,11 +153,16 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get connected devices
+      x-summary-source: derived
   /clusterManagement/health/details:
     get:
       tags:
       - Cluster Management
-      description: 'Get cluster health check details<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Get cluster health check details
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: healthDetails
       responses:
         '200':
@@ -156,11 +179,16 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Health details
+      x-summary-source: derived
   /clusterManagement/health/status:
     get:
       tags:
       - Cluster Management
-      description: 'Get cluster health check details<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Get cluster health check details
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: healthStatusInfo
       responses:
         '200':
@@ -177,11 +205,16 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Health status info
+      x-summary-source: derived
   /clusterManagement/health/summary:
     get:
       tags:
       - Cluster Management
-      description: 'Get cluster health check summary<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Get cluster health check summary
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: healthSummary
       parameters:
       - name: isCached
@@ -212,11 +245,16 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Health summary
+      x-summary-source: derived
   /clusterManagement/host/health/status:
     get:
       tags:
       - Cluster Management
-      description: 'Get vManage cluster health check details<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Get vManage cluster health check details
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: hostHealthStatus
       responses:
         '200':
@@ -233,11 +271,16 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Host health status
+      x-summary-source: derived
   /clusterManagement/iplist/{vmanageID}:
     get:
       tags:
       - Cluster Management
-      description: 'Get configured IP addresses<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Get configured IP addresses
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: getConfiguredIPList
       parameters:
       - name: vmanageID
@@ -265,11 +308,16 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get configured IP list
+      x-summary-source: derived
   /clusterManagement/isready:
     get:
       tags:
       - Cluster Management
-      description: 'Is cluster ready<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Is cluster ready
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: isClusterReady
       responses:
         '200':
@@ -289,11 +337,16 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Is cluster ready
+      x-summary-source: derived
   /clusterManagement/list:
     get:
       tags:
       - Cluster Management
-      description: 'List vManages in the cluster<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'List vManages in the cluster
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: listVmanages
       responses:
         '200':
@@ -314,11 +367,16 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: List vmanages
+      x-summary-source: derived
   /clusterManagement/nodeProperties:
     get:
       tags:
       - Cluster Management
-      description: 'Get properties of vManage being added to  cluster<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Get properties of vManage being added to cluster
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: nodeProperties
       responses:
         '200':
@@ -337,11 +395,16 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Node properties
+      x-summary-source: derived
   /clusterManagement/remove:
     post:
       tags:
       - Cluster Management
-      description: 'Remove vManage from cluster<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Remove vManage from cluster
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: removeVmanage
       requestBody:
         description: vManage server info
@@ -363,11 +426,16 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Remove vmanage
+      x-summary-source: derived
   /clusterManagement/replicateAndRebalance:
     put:
       tags:
       - Cluster Management
-      description: 'Initiate replication and rebalance of kafka topics<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Initiate replication and rebalance of kafka topics
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: performReplicationAndRebalanceOfKafkaPartitions
       responses:
         '200':
@@ -386,11 +454,16 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Perform replication and rebalance of kafka partitions
+      x-summary-source: derived
   /clusterManagement/setup:
     put:
       tags:
       - Cluster Management
-      description: 'Update vManage cluster info<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Update vManage cluster info
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: editVmanage
       requestBody:
         description: vManage cluster config
@@ -412,6 +485,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Edit vmanage
+      x-summary-source: derived
     post:
       tags:
       - Cluster Management
@@ -445,11 +520,16 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Add vmanage
+      x-summary-source: derived
   /clusterManagement/tenancy/mode:
     get:
       tags:
       - Cluster Management
-      description: 'Get vManage tenancy mode<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Get vManage tenancy mode
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: getTenancyMode
       responses:
         '200':
@@ -468,6 +548,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get tenancy mode
+      x-summary-source: derived
     post:
       tags:
       - Cluster Management
@@ -493,11 +575,16 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Set tenancy mode
+      x-summary-source: derived
   /clusterManagement/tenantList:
     get:
       tags:
       - Cluster Management
-      description: 'Get tenant list<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Get tenant list
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: getTenantsList
       responses:
         '200':
@@ -518,11 +605,16 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get tenants list
+      x-summary-source: derived
   /clusterManagement/userCreds:
     post:
       tags:
       - Cluster Management
-      description: 'Add or update user credentials for cluster operations<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Add or update user credentials for cluster operations
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: addOrUpdateUserCredentials
       requestBody:
         description: User credential
@@ -544,11 +636,16 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Add or update user credentials
+      x-summary-source: derived
   /clusterManagement/vManage/details/{vmanageIP}:
     get:
       tags:
       - Cluster Management
-      description: 'Get vManage detail<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Get vManage detail
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: getVManageDetails
       parameters:
       - name: vmanageIP
@@ -574,11 +671,16 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get VManage details
+      x-summary-source: derived
   /clusterManagement/{tenantId}/connectedDevices/{vmanageIP}:
     get:
       tags:
       - Cluster Management
-      description: 'Get connected device for vManage for a tenant<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Get connected device for vManage for a tenant
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: getConnectedDevicesPerTenant
       parameters:
       - name: tenantId
@@ -612,3 +714,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get connected devices per tenant
+      x-summary-source: derived

@@ -27,12 +27,12 @@ info:
 servers:
 - url: /dataservice
 tags:
-- name: Resource - Pool
+- name: Resourcepool
 paths:
   /resourcepool/resource/vpn:
     get:
       tags:
-      - Resource - Pool
+      - Resourcepool
       description: Get tenant device vpn resource
       operationId: getResources
       parameters:
@@ -70,9 +70,11 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get resources
+      x-summary-source: derived
     delete:
       tags:
-      - Resource - Pool
+      - Resourcepool
       description: Delete tenant device vpn and release the resource
       operationId: deleteResources
       parameters:
@@ -98,9 +100,11 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Delete resources
+      x-summary-source: derived
     put:
       tags:
-      - Resource - Pool
+      - Resourcepool
       description: Create Vpn resource pool and return tenant device vpn
       operationId: createResources
       requestBody:
@@ -135,3 +139,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Create resources
+      x-summary-source: derived

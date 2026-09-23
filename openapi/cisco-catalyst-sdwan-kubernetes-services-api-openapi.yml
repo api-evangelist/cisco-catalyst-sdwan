@@ -96,6 +96,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get kubernetes services
+      x-summary-source: derived
   /app-registry/clusters:
     post:
       tags:
@@ -111,6 +113,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Post cluster
+      x-summary-source: derived
     get:
       tags:
       - Kubernetes Services
@@ -171,6 +175,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get kubernetes cluster
+      x-summary-source: derived
   /app-registry/clusters/{id}:
     put:
       tags:
@@ -204,6 +210,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Edit kubernetes cluster
+      x-summary-source: derived
     delete:
       tags:
       - Kubernetes Services
@@ -224,3 +232,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Delete kubernetes cluster
+      x-summary-source: derived

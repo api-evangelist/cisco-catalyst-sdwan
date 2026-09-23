@@ -109,6 +109,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get app list
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Policy App Registry
@@ -152,6 +154,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Edit app details
+      x-summary-source: derived
   /app-registry/applications/{appId}:
     put:
       tags:
@@ -267,3 +271,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Edit app details with UUID
+      x-summary-source: derived

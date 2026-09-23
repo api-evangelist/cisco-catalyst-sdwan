@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Real-Time Monitoring - Tunnel API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Real-Time Monitoring…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -163,6 +171,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Security-read,Security-write,System-read,System-write
+      summary: Create bfd statistics list
+      x-summary-source: derived
   /device/tunnel/fec_statistics:
     get:
       tags:
@@ -293,6 +303,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Security-read,Security-write,System-read,System-write
+      summary: Create fec statistics
+      x-summary-source: derived
   /device/tunnel/gre-keepalives:
     get:
       tags:
@@ -344,6 +356,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Security-read,Security-write,System-read,System-write
+      summary: Create gre keepalives list
+      x-summary-source: derived
   /device/tunnel/ipsec_statistics:
     get:
       tags:
@@ -462,6 +476,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Security-read,Security-write,System-read,System-write
+      summary: Create ipsec statistics list
+      x-summary-source: derived
   /device/tunnel/packet-duplicate:
     get:
       tags:
@@ -586,6 +602,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Security-read,Security-write,System-read,System-write
+      summary: Create packet duplicate statistics
+      x-summary-source: derived
   /device/tunnel/statistics:
     get:
       tags:
@@ -725,3 +743,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Security-read,Security-write,System-read,System-write
+      summary: Create statistics list
+      x-summary-source: derived

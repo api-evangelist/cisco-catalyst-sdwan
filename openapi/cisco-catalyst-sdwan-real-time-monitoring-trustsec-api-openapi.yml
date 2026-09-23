@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Real-Time Monitoring - Trustsec API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Real-Time Monitoring…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -70,6 +78,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,Device Monitoring-write
+      summary: Get cts pac
+      x-summary-source: derived
   /device/environmentData:
     get:
       tags:
@@ -113,6 +123,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,Device Monitoring-write
+      summary: Get environment data
+      x-summary-source: derived
   /device/environmentData/radiusServer:
     get:
       tags:
@@ -157,6 +169,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,Device Monitoring-write
+      summary: Get radius server
+      x-summary-source: derived
   /device/roleBasedCounters:
     get:
       tags:
@@ -204,6 +218,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,Device Monitoring-write
+      summary: Get role based counters
+      x-summary-source: derived
   /device/roleBasedIpv6Counters:
     get:
       tags:
@@ -250,6 +266,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get role based ipv6 counters
+      x-summary-source: derived
   /device/roleBasedIpv6Permissions:
     get:
       tags:
@@ -293,6 +311,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get role based ipv6 permissions
+      x-summary-source: derived
   /device/roleBasedPermissions:
     get:
       tags:
@@ -337,6 +357,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,Device Monitoring-write
+      summary: Get role based permissions
+      x-summary-source: derived
   /device/roleBasedSgtMap:
     get:
       tags:
@@ -410,6 +432,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,Device Monitoring-write
+      summary: Get role based sgt map
+      x-summary-source: derived
   /device/sxpConnections:
     get:
       tags:
@@ -455,3 +479,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,Device Monitoring-write
+      summary: Get sxp connections
+      x-summary-source: derived

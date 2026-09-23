@@ -34,7 +34,7 @@ paths:
       tags:
       - Wani Recommendations
       summary: Apply recommendation to a centralized policy
-      description: 'Applies recommendations to a centralized policy '
+      description: Applies recommendations to a centralized policy
       operationId: applyWaniRecommendation
       parameters:
       - name: key
@@ -144,8 +144,8 @@ paths:
     get:
       tags:
       - Wani Recommendations
-      summary: Get applied vManage recommendations.
-      description: 'Per tenant api to check which Wani recommendations have been applied for a given tenant '
+      summary: Get applied vManage recommendations
+      description: Per tenant api to check which Wani recommendations have been applied for a given tenant
       operationId: getAppliedWaniRecommendations
       responses:
         '200':
@@ -236,8 +236,8 @@ paths:
     get:
       tags:
       - Wani Recommendations
-      summary: Check list in activated WANI policy.
-      description: 'Get if specified list is apart of a activated centralized policy, if it is the response also gives the centralized policy id, the users original defined centralized policy id, and if current list is apart of a active wani policy. '
+      summary: Check list in activated WANI policy
+      description: Get if specified list is apart of a activated centralized policy, if it is the response also gives the centralized policy id, the users original defined centralized policy id, and if current list is apart of a active wani policy.
       operationId: getListActivationStatus
       parameters:
       - name: listType
@@ -290,8 +290,8 @@ paths:
     get:
       tags:
       - Wani Recommendations
-      summary: Check policy in activated WANI policy.
-      description: 'Get if specified policy is apart of a activated centralized policy, if it is the response also gives the centralized policy id, the users original defined centralized policy id, and if current policy is apart of a active wani policy. '
+      summary: Check policy in activated WANI policy
+      description: Get if specified policy is apart of a activated centralized policy, if it is the response also gives the centralized policy id, the users original defined centralized policy id, and if current policy is apart of a active wani policy.
       operationId: getPolicyActivationStatus
       parameters:
       - name: policyType

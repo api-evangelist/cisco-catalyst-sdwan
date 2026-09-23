@@ -31,7 +31,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - Gateways
-      summary: Get all Interconnect Gateways.
+      summary: Get all Interconnect Gateways
       description: API to retrieve all Interconnect Gateways from vManage.
       operationId: getInterconnectGateways
       parameters:
@@ -262,7 +262,7 @@ paths:
     post:
       tags:
       - Multicloud Interconnect - Gateways
-      summary: Create Interconnect gateway.
+      summary: Create Interconnect gateway
       description: API to create an Intercoonect gateway in an Interconnect provider.
       operationId: createInterconnectGateway
       requestBody:
@@ -475,7 +475,7 @@ paths:
     post:
       tags:
       - Multicloud Interconnect - Gateways
-      summary: Create Interconnect gateway config group.
+      summary: Create Interconnect gateway config group
       description: API to initiate a config group creation for an Interconnect gateway.
       operationId: createInterconnectGatewayConfigGroup
       parameters:
@@ -525,7 +525,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - Gateways
-      summary: Get Interconnect gateway software versions.
+      summary: Get Interconnect gateway software versions
       description: API to retrieve Interconnect Gateway software image versions supported by an Interconnect Provider.
       operationId: getInterconnectGatewayImageNames
       parameters:
@@ -567,8 +567,8 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - Gateways
-      summary: Get Interconnect gateway instance sizes.
-      description: API to retrieve Interconnect Gateway instance sizes supported by an  Interconnect provider.
+      summary: Get Interconnect gateway instance sizes
+      description: API to retrieve Interconnect Gateway instance sizes supported by an Interconnect provider.
       operationId: getInterconnectGatewayInstanceSizes
       parameters:
       - name: interconnect-type
@@ -620,7 +620,7 @@ paths:
     post:
       tags:
       - Multicloud Interconnect - Gateways
-      summary: Push Interconnect gateway configuration.
+      summary: Push Interconnect gateway configuration
       description: API to initiate a configuration push for an Interconnect gateway.
       operationId: pushInterconnectGatewayConfig
       requestBody:
@@ -672,7 +672,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - Gateways
-      summary: Get supported Interconnect Gateway solution types.
+      summary: Get supported Interconnect Gateway solution types
       description: API to retrieve the supported Interconnect Gateway solution types.
       operationId: getInterconnetGatewayTypes
       parameters:
@@ -704,7 +704,7 @@ paths:
     put:
       tags:
       - Multicloud Interconnect - Gateways
-      summary: Edit Interconnect Gateway Information.
+      summary: Edit Interconnect Gateway Information
       description: API to update the Interconnect Gateway Information in vManage.
       operationId: updateInterconnectGateway_MulticloudInterconnectGateways_6103
       parameters:
@@ -1076,7 +1076,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - Gateways
-      summary: Get Interconnect Gateway Information.
+      summary: Get Interconnect Gateway Information
       description: API to retrieve the Interconnect Gateway Information from vManage.
       operationId: getInterconnectGateway
       parameters:
@@ -1261,7 +1261,7 @@ paths:
     delete:
       tags:
       - Multicloud Interconnect - Gateways
-      summary: Delete an Interconnect gateway.
+      summary: Delete an Interconnect gateway
       description: API to delete an Interconnect Gateway from an Interconnect provider.
       operationId: deleteInterconnectGateway
       parameters:
@@ -1294,7 +1294,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - Gateways
-      summary: Get Interconnect gateway custom settings.
+      summary: Get Interconnect gateway custom settings
       description: API to retrieve the custom settings specified for an Interconnect Gateway
       operationId: getInterconnectGatewayCustomSettings
       parameters:
@@ -1359,7 +1359,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - Gateways
-      summary: Get Interconnect gateway devices by config ID.
+      summary: Get Interconnect gateway devices by config ID
       description: API to retrieve available devices or devices associated to a config group.
       operationId: getAvailableDevicesOrByCGId_MulticloudInterconnectGateways_7603
       parameters:
@@ -1414,7 +1414,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - Gateways
-      summary: Get available Interconnect Gateway devices.
+      summary: Get available Interconnect Gateway devices
       description: API to retrieve available Interconnect Gateway devices.
       operationId: getInterconnectGatewayDevices
       parameters:
@@ -1459,7 +1459,7 @@ paths:
     put:
       tags:
       - Multicloud Interconnect - Gateways
-      summary: Edit Interconnect Gateway Information.
+      summary: Edit Interconnect Gateway Information
       description: Asynchronous API to update the Interconnect Gateway Information in vManage.
       operationId: updateInterconnectGateway_MulticloudInterconnectGateways_6403
       parameters:

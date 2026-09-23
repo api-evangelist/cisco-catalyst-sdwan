@@ -33,7 +33,10 @@ paths:
     post:
       tags:
       - Tenant Management
-      description: 'Create a new tenant in Multi-Tenant vManage<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Create a new tenant in Multi-Tenant vManage
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: createTenant
       requestBody:
         description: Tenant model
@@ -75,10 +78,15 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Tenant Management-write
+      summary: Create tenant
+      x-summary-source: derived
     put:
       tags:
       - Tenant Management
-      description: 'Update tenants in Multi-Tenant vManage<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Update tenants in Multi-Tenant vManage
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: updateTenantBulk
       requestBody:
         description: Tenant model
@@ -109,10 +117,15 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tenant Management-write
+      summary: Update tenant bulk
+      x-summary-source: derived
     get:
       tags:
       - Tenant Management
-      description: 'Lists all the tenants on the vManage<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Lists all the tenants on the vManage
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: getAllTenants
       parameters:
       - name: deviceId
@@ -141,11 +154,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tenant Management-read,dca,Manage LI-read
+      summary: Get all tenants
+      x-summary-source: derived
   /tenant/async:
     post:
       tags:
       - Tenant Management
-      description: 'Create a new tenant in Multi-Tenant vManage asynchronously<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Create a new tenant in Multi-Tenant vManage asynchronously
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: createTenantAsync
       requestBody:
         description: Tenant model
@@ -177,11 +195,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tenant Management-write
+      summary: Create tenant async
+      x-summary-source: derived
   /tenant/bulk/async:
     post:
       tags:
       - Tenant Management
-      description: 'Create multiple tenants on vManage asynchronously<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Create multiple tenants on vManage asynchronously
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: createTenantAsyncBulk
       requestBody:
         description: Tenant model
@@ -226,10 +249,15 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tenant Management-write
+      summary: Create tenant async bulk
+      x-summary-source: derived
     delete:
       tags:
       - Tenant Management
-      description: 'Delete multiple tenants on vManage asynchronously<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Delete multiple tenants on vManage asynchronously
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: deleteTenantAsyncBulk
       requestBody:
         description: Tenant model
@@ -264,11 +292,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tenant Management-write
+      summary: Delete tenant async bulk
+      x-summary-source: derived
   /tenant/capacity:
     get:
       tags:
       - Tenant Management
-      description: 'List tenant hosting capacity of vManage and all the vSmarts<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'List tenant hosting capacity of vManage and all the vSmarts
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: getTenantHostingCapacity
       responses:
         '200':
@@ -309,11 +342,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tenant Management-read,dca
+      summary: Get tenant hosting capacity
+      x-summary-source: derived
   /tenant/vsmart:
     put:
       tags:
       - Tenant Management
-      description: 'Update placement of all tenants from source vSmart to destination vSmart<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Update placement of all tenants from source vSmart to destination vSmart
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: relocateAllTenantsFromVsmart
       requestBody:
         description: Tenant model
@@ -349,10 +387,15 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tenant Management-write
+      summary: Relocate all tenants from vsmart
+      x-summary-source: derived
     get:
       tags:
       - Tenant Management
-      description: 'Retrieve mapping of tenants to vSmarts<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Retrieve mapping of tenants to vSmarts
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: getvSmartTenantMapping
       responses:
         '200':
@@ -374,11 +417,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tenant Management-read,dca
+      summary: Getv smart tenant mapping
+      x-summary-source: derived
   /tenant/vsmart/capacity:
     get:
       tags:
       - Tenant Management
-      description: 'Lists all the vsmarts on the vManage and its tenant hosting capacity<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Lists all the vsmarts on the vManage and its tenant hosting capacity
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: getvSmartTenantHostingCapacity
       responses:
         '200':
@@ -411,11 +459,16 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Tenant Management-read,dca
+      summary: Getv smart tenant hosting capacity
+      x-summary-source: derived
   /tenant/{tenantId}:
     get:
       tags:
       - Tenant Management
-      description: 'Get a tenant by Id<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Get a tenant by Id
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: getTenant
       parameters:
       - name: tenantId
@@ -442,10 +495,15 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tenant Management-read
+      summary: Get tenant
+      x-summary-source: derived
     delete:
       tags:
       - Tenant Management
-      description: 'Delete tenant on vManage asynchronously<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Delete tenant on vManage asynchronously
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: deleteTenantAsync
       parameters:
       - name: tenantId
@@ -473,10 +531,15 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tenant Management-write
+      summary: Delete tenant async
+      x-summary-source: derived
     put:
       tags:
       - Tenant Management
-      description: 'Update a tenant in Multi-Tenant vManage<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Update a tenant in Multi-Tenant vManage
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: updateTenant
       parameters:
       - name: tenantId
@@ -522,11 +585,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tenant Management-write
+      summary: Update tenant
+      x-summary-source: derived
   /tenant/{tenantId}/delete:
     post:
       tags:
       - Tenant Management
-      description: 'Delete a tenant by Id<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Delete a tenant by Id
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: deleteTenant
       parameters:
       - name: tenantId
@@ -558,11 +626,16 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Tenant Management-write
+      summary: Delete tenant
+      x-summary-source: derived
   /tenant/{tenantId}/switch:
     post:
       tags:
       - Tenant Management
-      description: 'Switch to a specific tenant<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Switch to a specific tenant
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: switchTenant
       parameters:
       - name: tenantId
@@ -589,11 +662,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tenant Management-read
+      summary: Switch tenant
+      x-summary-source: derived
   /tenant/{tenantId}/vsessionid:
     post:
       tags:
       - Tenant Management
-      description: 'Get VSessionId for a specific tenant<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Get VSessionId for a specific tenant
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: vSessionId
       parameters:
       - name: tenantId
@@ -620,11 +698,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tenant Management-read,dca
+      summary: V session id
+      x-summary-source: derived
   /tenant/{tenantId}/vsmart:
     put:
       tags:
       - Tenant Management
-      description: 'Update placement of the Tenant from source vSmart to destination vSmart<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Update placement of the Tenant from source vSmart to destination vSmart
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: updateTenantvSmartPlacement
       parameters:
       - name: tenantId
@@ -668,11 +751,16 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Tenant Management-write
+      summary: Update tenantv smart placement
+      x-summary-source: derived
   /tenant/{tenantId}/vsmarts:
     put:
       tags:
       - Tenant Management
-      description: 'Update placement of the tenant on vSmarts<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Update placement of the tenant on vSmarts
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: updateTenantvSmartsPlacement
       parameters:
       - name: tenantId
@@ -719,11 +807,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tenant Management-write
+      summary: Update tenantv smarts placement
+      x-summary-source: derived
   /tenantstatus:
     get:
       tags:
       - Tenant Management
-      description: 'List all tenant status<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'List all tenant status
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: getAllTenantStatuses
       responses:
         '200':
@@ -745,11 +838,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tenant Management-read
+      summary: Get all tenant statuses
+      x-summary-source: derived
   /tenantstatus/force:
     post:
       tags:
       - Tenant Management
-      description: 'Force tenant status collection<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Force tenant status collection
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: forceStatusCollection
       responses:
         '200':
@@ -761,3 +859,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tenant Management-write
+      summary: Force status collection
+      x-summary-source: derived

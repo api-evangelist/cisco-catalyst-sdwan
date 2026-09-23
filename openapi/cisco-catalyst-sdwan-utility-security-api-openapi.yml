@@ -65,3 +65,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Check given ip list
+      x-summary-source: derived

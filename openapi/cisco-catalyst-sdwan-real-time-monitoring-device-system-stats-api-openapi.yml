@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Real-Time Monitoring - Device System Stats API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Real-Time Monitoring…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -157,6 +165,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stats raw data real time monitoring device system stats 1804
+      x-summary-source: derived
     get:
       tags:
       - Real-Time Monitoring - Device System Stats
@@ -261,6 +271,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stat data raw data real time monitoring device system stats 1803
+      x-summary-source: derived
   /statistics/system/aggregation:
     get:
       tags:
@@ -291,6 +303,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get aggregation data by query real time monitoring device system stats 3003
+      x-summary-source: derived
     post:
       tags:
       - Real-Time Monitoring - Device System Stats
@@ -321,6 +335,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default,dca
+      summary: Get post aggregation data by query real time monitoring device system stats 3004
+      x-summary-source: derived
   /statistics/system/cpu:
     get:
       tags:
@@ -490,6 +506,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Create device system CPU stat
+      x-summary-source: derived
   /statistics/system/csv:
     get:
       tags:
@@ -529,6 +547,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stat data raw data as CSV real time monitoring device system stats 2203
+      x-summary-source: derived
   /statistics/system/doccount:
     post:
       tags:
@@ -572,6 +592,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get count post real time monitoring device system stats 2704
+      x-summary-source: derived
     get:
       tags:
       - Real-Time Monitoring - Device System Stats
@@ -611,6 +633,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get count real time monitoring device system stats 2703
+      x-summary-source: derived
   /statistics/system/fields:
     get:
       tags:
@@ -663,6 +687,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat data fields real time monitoring device system stats 2503
+      x-summary-source: derived
   /statistics/system/memory:
     get:
       tags:
@@ -832,6 +858,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Create device system memory stat
+      x-summary-source: derived
   /statistics/system/page:
     get:
       tags:
@@ -956,6 +984,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get stats pagination raw data real time monitoring device system stats 2303
+      x-summary-source: derived
     post:
       tags:
       - Real-Time Monitoring - Device System Stats
@@ -1084,6 +1114,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get post stats pagination raw data real time monitoring device system stats 2304
+      x-summary-source: derived
   /statistics/system/query/fields:
     get:
       tags:
@@ -1148,3 +1180,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat query fields real time monitoring device system stats 3103
+      x-summary-source: derived

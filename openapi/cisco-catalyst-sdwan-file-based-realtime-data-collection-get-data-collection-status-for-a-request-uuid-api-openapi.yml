@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Others File based RealTime Data Collection - Get Data Collection status for a Request UUID API
+  title: Others File based RealTime Data Collection - Get Data…
   description: 'Other APIs
 
     Include APIs that do not belong to other categories'
@@ -135,3 +135,5 @@ paths:
                     errorMessage: Data Collection state is in-progress, Cannot download file at this moment
                   $$ref: '#/components/examples/ComViptelaVmanageServerFilebasedRealtimeDatacollectionDatacollectionapiResponseExampleStatus500'
       x-roles-required: System-read,System-write
+      summary: Get data collection status for UUID
+      x-summary-source: derived

@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Monitoring - Qfp Drop Statistics API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Monitoring - Qfp Drop…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -132,6 +140,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stat data raw data monitoring qfp drop statistics 1903
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Qfp Drop Statistics
@@ -261,6 +271,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stats raw data monitoring qfp drop statistics 1904
+      x-summary-source: derived
   /statistics/qfpdrop/aggregation:
     get:
       tags:
@@ -362,6 +374,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get aggregation data by query monitoring qfp drop statistics 3103
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Qfp Drop Statistics
@@ -441,6 +455,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,System-read
+      summary: Get post aggregation data by query monitoring qfp drop statistics 3104
+      x-summary-source: derived
   /statistics/qfpdrop/csv:
     get:
       tags:
@@ -480,6 +496,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stat data raw data as CSV monitoring qfp drop statistics 2303
+      x-summary-source: derived
   /statistics/qfpdrop/doccount:
     get:
       tags:
@@ -520,6 +538,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get count monitoring qfp drop statistics 2803
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Qfp Drop Statistics
@@ -562,6 +582,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get count post monitoring qfp drop statistics 2804
+      x-summary-source: derived
   /statistics/qfpdrop/fields:
     get:
       tags:
@@ -614,6 +636,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat data fields monitoring qfp drop statistics 2603
+      x-summary-source: derived
   /statistics/qfpdrop/overview/droptype/{typename}:
     get:
       tags:
@@ -697,6 +721,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get qfp drop overview by drop type
+      x-summary-source: derived
   /statistics/qfpdrop/overview/{type}:
     get:
       tags:
@@ -936,6 +962,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get qfp drop overview
+      x-summary-source: derived
   /statistics/qfpdrop/page:
     get:
       tags:
@@ -1060,6 +1088,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get stats pagination raw data monitoring qfp drop statistics 2403
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Qfp Drop Statistics
@@ -1188,6 +1218,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get post stats pagination raw data monitoring qfp drop statistics 2404
+      x-summary-source: derived
   /statistics/qfpdrop/query/fields:
     get:
       tags:
@@ -1252,3 +1284,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat query fields monitoring qfp drop statistics 3203
+      x-summary-source: derived

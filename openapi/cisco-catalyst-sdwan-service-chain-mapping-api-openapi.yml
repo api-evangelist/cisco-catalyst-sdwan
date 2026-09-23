@@ -56,3 +56,5 @@ paths:
           description: Method not Supported
         '500':
           description: Internal Server Error
+      summary: Service chain mapping
+      x-summary-source: derived

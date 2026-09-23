@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
   title: Monitoring and Troubleshooting Monitoring - Health API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -520,6 +528,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,RBAC VPN-read,RBAC VPN-write,System360 Diagnostic-read,System360 Diagnostic-write
+      summary: Get devices health
+      x-summary-source: derived
   /health/devices/overview:
     get:
       tags:
@@ -569,3 +579,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,RBAC VPN-read,RBAC VPN-write,System-read
+      summary: Get devices health overview
+      x-summary-source: derived

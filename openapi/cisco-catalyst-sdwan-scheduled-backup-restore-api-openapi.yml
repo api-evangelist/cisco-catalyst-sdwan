@@ -627,6 +627,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Import scheduled backup
+      x-summary-source: derived
   /restore/remoteimport:
     post:
       tags:
@@ -667,11 +669,13 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Remote import backup
+      x-summary-source: derived
   /schedule/create:
     post:
       tags:
       - Scheduled Backup Restore
-      description: create  backup scheduler config-db and statstics database with startDateTime and persist to config-db
+      description: create backup scheduler config-db and statstics database with startDateTime and persist to config-db
       operationId: scheduleBackup
       requestBody:
         description: schedule request information
@@ -716,6 +720,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Schedule backup
+      x-summary-source: derived
   /schedule/list:
     get:
       tags:
@@ -748,6 +754,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: List schedules
+      x-summary-source: derived
   /schedule/{schedulerId}:
     get:
       tags:
@@ -778,6 +786,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get schedule record for backup
+      x-summary-source: derived
     delete:
       tags:
       - Scheduled Backup Restore
@@ -808,3 +818,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Delete schedule
+      x-summary-source: derived

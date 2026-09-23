@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Real-Time Monitoring - QFP API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Real-Time Monitoring - QFP…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -106,6 +114,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write,Security-read,Security-write
+      summary: Cpustat
+      x-summary-source: derived
   /device/qfp/memstat:
     get:
       tags:
@@ -217,6 +227,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write
+      summary: Memstat
+      x-summary-source: derived
   /device/qfp/qfpdrop:
     get:
       tags:
@@ -3440,3 +3452,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get qfp drop
+      x-summary-source: derived

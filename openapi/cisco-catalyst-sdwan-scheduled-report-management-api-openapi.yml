@@ -620,7 +620,6 @@ paths:
       tags:
       - Scheduled Report Management
       summary: Download a report preview file
-      description: Download a report preview file
       operationId: downloadReportPreviewFile
       parameters:
       - name: templateType
@@ -659,7 +658,7 @@ paths:
     get:
       tags:
       - Scheduled Report Management
-      summary: Get report template by ID.
+      summary: Get report template by ID
       description: Get the report template information by report ID
       operationId: getReportTemplateById
       parameters:
@@ -1387,7 +1386,7 @@ paths:
     get:
       tags:
       - Scheduled Report Management
-      summary: Get report tasks by ID.
+      summary: Get report tasks by ID
       description: Get all report task detail information by report ID
       operationId: getAllReportTasksByReportId
       parameters:
@@ -1586,7 +1585,7 @@ paths:
     delete:
       tags:
       - Scheduled Report Management
-      summary: Delete report task file by ID.
+      summary: Delete report task file by ID
       description: Delete the report task file by task ID
       operationId: deleteReportTaskByTaskId
       parameters:
@@ -1677,7 +1676,6 @@ paths:
       tags:
       - Scheduled Report Management
       summary: Download a report file
-      description: Download a report file
       operationId: downloadReportDataFile
       parameters:
       - name: reportId

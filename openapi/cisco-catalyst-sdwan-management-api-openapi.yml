@@ -50,6 +50,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get category
+      x-summary-source: derived
   /management/vManageResourceUtilization:
     get:
       tags:
@@ -71,3 +73,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Getv manage resource utilization
+      x-summary-source: derived

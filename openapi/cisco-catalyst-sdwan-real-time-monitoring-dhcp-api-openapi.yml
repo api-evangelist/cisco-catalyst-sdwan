@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Real-Time Monitoring - DHCP API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Real-Time Monitoring - DHCP…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -75,6 +83,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write
+      summary: Get DHCP client
+      x-summary-source: derived
   /device/dhcp/interface:
     get:
       tags:
@@ -120,6 +130,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write
+      summary: Get DHCP interface
+      x-summary-source: derived
   /device/dhcp/server:
     get:
       tags:
@@ -159,6 +171,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write
+      summary: Get DHCP server
+      x-summary-source: derived
   /device/dhcpv6/interface:
     get:
       tags:
@@ -199,3 +213,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write
+      summary: Get DHCPv6 interface
+      x-summary-source: derived

@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Real-Time Monitoring - PPPoE API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Real-Time Monitoring - PPPoE…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -76,6 +84,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Interface-read,Interface-write
+      summary: Create PPPo EInterface list
+      x-summary-source: derived
   /device/pppoe/statistic:
     get:
       tags:
@@ -130,3 +140,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Interface-read,Interface-write
+      summary: Create PPPo ENeighbor list
+      x-summary-source: derived

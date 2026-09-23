@@ -156,6 +156,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get cgw attached sites
+      x-summary-source: derived
     delete:
       tags:
       - MultiCloud - BranchConnect
@@ -224,6 +226,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Detach sites multicloud branchconnect 4806
+      x-summary-source: derived
     post:
       tags:
       - MultiCloud - BranchConnect
@@ -309,6 +313,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Attach sites
+      x-summary-source: derived
     put:
       tags:
       - MultiCloud - BranchConnect
@@ -416,6 +422,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Tunnel scaling
+      x-summary-source: derived
   /multicloud/interfacecolor:
     get:
       tags:
@@ -450,6 +458,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get wan interface colors
+      x-summary-source: derived
   /multicloud/site:
     get:
       tags:
@@ -558,3 +568,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get sites
+      x-summary-source: derived

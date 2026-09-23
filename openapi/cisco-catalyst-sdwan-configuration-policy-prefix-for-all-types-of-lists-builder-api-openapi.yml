@@ -1,7 +1,13 @@
 openapi: 3.2.0
 info:
-  title: UX 1.0 Configuration Configuration - Policy Prefix for All Types of Lists Builder API
-  description: "Configuration of UX 1.0 device and policy.\nIncludes API operations for the following:\n  Managing original SD-WAN device configurations and policy configurations\n  Device templates and feature templates"
+  title: UX 1.0 Configuration Configuration - Policy Prefix for All…
+  description: 'Configuration of UX 1.0 device and policy.
+
+    Includes API operations for the following:
+
+    Managing original SD-WAN device configurations and policy configurations
+
+    Device templates and feature templates'
   contact:
     email: vmanage@cisco.com
   license:
@@ -31,7 +37,6 @@ paths:
     get:
       tags:
       - Configuration - Policy Prefix for All Types of Lists Builder
-      description: Get lists for all prefixes
       operationId: getListsForAllPrefixes
       responses:
         '200':
@@ -53,6 +58,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+      summary: Get lists for all prefixes
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Policy Prefix for All Types of Lists Builder
@@ -83,6 +90,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Delete policy lists with info tag configuration policy prefix for all types of…
+      x-summary-source: derived
     post:
       tags:
       - Configuration - Policy Prefix for All Types of Lists Builder
@@ -339,6 +348,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write
+      summary: Create policy list configuration policy prefix for all types of lists builder…
+      x-summary-source: derived
   /template/policy/list/ipprefixall/filtered:
     get:
       tags:
@@ -370,6 +381,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get policy lists with info tag configuration policy prefix for all types of…
+      x-summary-source: derived
   /template/policy/list/ipprefixall/preview:
     post:
       tags:
@@ -404,6 +417,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+      summary: Preview policy list configuration policy prefix for all types of lists builder…
+      x-summary-source: derived
   /template/policy/list/ipprefixall/preview/{id}:
     get:
       tags:
@@ -436,6 +451,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+      summary: Preview policy list by id configuration policy prefix for all types of lists…
+      x-summary-source: derived
   /template/policy/list/ipprefixall/{id}:
     get:
       tags:
@@ -482,6 +499,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+      summary: Get lists by id configuration policy prefix for all types of lists builder 3803
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Policy Prefix for All Types of Lists Builder
@@ -530,6 +549,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write
+      summary: Edit policy list configuration policy prefix for all types of lists builder 3803
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Policy Prefix for All Types of Lists Builder
@@ -552,3 +573,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write
+      summary: Delete policy list configuration policy prefix for all types of lists builder…
+      x-summary-source: derived

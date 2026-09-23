@@ -70,6 +70,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Tools-write
+      summary: Oauth access
+      x-summary-source: derived
   /opentaccase/getClientID:
     get:
       tags:
@@ -96,3 +98,5 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Tools-write
+      summary: Get client ID
+      x-summary-source: derived

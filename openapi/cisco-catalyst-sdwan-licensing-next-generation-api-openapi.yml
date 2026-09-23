@@ -120,6 +120,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Assign MSLA licenses
+      x-summary-source: derived
   /v1/licensing/devices:
     get:
       tags:
@@ -221,6 +223,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get MSLA devices licensing next generation 2103
+      x-summary-source: derived
   /v1/licensing/edit-licenses/{uuid}:
     get:
       tags:
@@ -319,6 +323,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get license by uuid licensing next generation 3403
+      x-summary-source: derived
   /v1/licensing/licenses:
     post:
       tags:
@@ -434,6 +440,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get MSLA licenses
+      x-summary-source: derived
   /v1/licensing/release-licenses:
     put:
       tags:
@@ -464,6 +472,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Release licenses licensing next generation 3003
+      x-summary-source: derived
   /v1/licensing/sa-va-distribution:
     post:
       tags:
@@ -623,3 +633,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get SAVA distribution
+      x-summary-source: derived

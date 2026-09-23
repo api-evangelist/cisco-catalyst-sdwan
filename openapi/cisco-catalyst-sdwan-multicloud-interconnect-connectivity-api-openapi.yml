@@ -31,7 +31,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - Connectivity
-      summary: Retrieve an Interconnect OnRamp gateway connection.
+      summary: Retrieve an Interconnect OnRamp gateway connection
       description: API to retrieve all Interconnect OnRamp gateway connection.
       operationId: getInterconnectOnRampGatewayConnections
       parameters:
@@ -77,7 +77,7 @@ paths:
     post:
       tags:
       - Multicloud Interconnect - Connectivity
-      summary: Create an Interconnect OnRamp gateway connection.
+      summary: Create an Interconnect OnRamp gateway connection
       description: API to create an Interconnect OnRamp gateway connection.
       operationId: createInterconnectOnRampGatewayConnection
       requestBody:
@@ -432,7 +432,7 @@ paths:
     delete:
       tags:
       - Multicloud Interconnect - Connectivity
-      summary: Delete an Interconnect OnRamp gateway connection.
+      summary: Delete an Interconnect OnRamp gateway connection
       description: API to delete an Interconnect OnRamp gateway connection.
       operationId: deleteInterconnectOnRampGatewayConnection
       parameters:
@@ -472,7 +472,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - Connectivity
-      summary: Get OnRamp gateway connection by name.
+      summary: Get OnRamp gateway connection by name
       description: API to retrieve a specific Interconnect OnRamp gateway connection.
       operationId: getInterconnectOnRampGatewayConnection
       parameters:
@@ -812,7 +812,7 @@ paths:
     put:
       tags:
       - Multicloud Interconnect - Connectivity
-      summary: Update an Interconnect OnRamp Gateway Connection.
+      summary: Update an Interconnect OnRamp Gateway Connection
       description: API to update an Interconnect OnRamp gateway connection.
       operationId: updateInterconnectOnRampGatewayConnection
       parameters:
@@ -866,7 +866,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - Connectivity
-      summary: Get OnRamp gateway connection resources.
+      summary: Get OnRamp gateway connection resources
       description: API to retrieve all resources used by a specific Interconnect OnRamp gateway connection.
       operationId: getInterconnectOnRampGatewayConnectionResources
       parameters:
@@ -901,7 +901,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - Connectivity
-      summary: Get configured Interconnect host VPC/VNET mapping tags.
+      summary: Get configured Interconnect host VPC/VNET mapping tags
       description: API to retrieve configured Interconnect host VPC/VNET mapping tags.
       operationId: getInterconnectMappingTags
       parameters:
@@ -969,7 +969,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - Connectivity
-      summary: Get Interconnect provider Device-Link.
+      summary: Get Interconnect provider Device-Link
       description: API to retrieve Interconnect provider Device-Link.
       operationId: getInterconnectDeviceLinks
       parameters:
@@ -1101,7 +1101,7 @@ paths:
     post:
       tags:
       - Multicloud Interconnect - Connectivity
-      summary: Add an Interconnect Device-Link to vManage.
+      summary: Add an Interconnect Device-Link to vManage
       description: API to create a Device-Link in vManage.
       operationId: addInterconnectDeviceLink
       requestBody:
@@ -1238,7 +1238,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - Connectivity
-      summary: Get Interconnect provider Device-Link.
+      summary: Get Interconnect provider Device-Link
       description: API to retrieve Interconnect provider Device-Link.
       operationId: getInterconnectDeviceLink
       parameters:
@@ -1356,7 +1356,7 @@ paths:
     put:
       tags:
       - Multicloud Interconnect - Connectivity
-      summary: Update an Interconnect Device-Link to vManage.
+      summary: Update an Interconnect Device-Link to vManage
       description: API to update a Device-Link in vManage.
       operationId: updateInterconnectDeviceLink
       parameters:
@@ -1500,7 +1500,7 @@ paths:
     delete:
       tags:
       - Multicloud Interconnect - Connectivity
-      summary: Delete Interconnect provider Device-Link.
+      summary: Delete Interconnect provider Device-Link
       description: API to Delete Interconnect provider Device-Link.
       operationId: deleteInterconnectDeviceLink
       parameters:
@@ -1524,7 +1524,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - Connectivity
-      summary: Retrieve all Interconnect virtual cross connections.
+      summary: Retrieve all Interconnect virtual cross connections
       description: API to retrieve all exisiting Interconnect virtual cross connections.
       operationId: getInterconnectCrossConnections
       parameters:
@@ -1581,7 +1581,7 @@ paths:
     post:
       tags:
       - Multicloud Interconnect - Connectivity
-      summary: Create private Interconnect cross connection.
+      summary: Create private Interconnect cross connection
       description: API to create an Interconnect virtual cross connection on an Interconnect Gateway at an Interconnect Provider.
       operationId: createInterconnectCrossConnection
       requestBody:
@@ -2378,7 +2378,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - Connectivity
-      summary: Retrieve an Interconnect virtual cross connection.
+      summary: Retrieve an Interconnect virtual cross connection
       description: API to retrieve an exisiting Interconnect virtual cross connection.
       operationId: getInterconnectCrossConnection
       parameters:
@@ -2406,7 +2406,7 @@ paths:
     put:
       tags:
       - Multicloud Interconnect - Connectivity
-      summary: Update private Interconnect cross connection.
+      summary: Update private Interconnect cross connection
       description: API to update a virtual cross connection connection on an Interconnect Gateway at an Interconnect Provider.
       operationId: updateInterconnectCrossConnection
       parameters:
@@ -3209,7 +3209,7 @@ paths:
     delete:
       tags:
       - Multicloud Interconnect - Connectivity
-      summary: Delete an Interconnect virtual cross connection.
+      summary: Delete an Interconnect virtual cross connection
       description: API to delete an Interconnect virtual cross connection at an Interconnect provider.
       operationId: deleteInterconnectCrossConnection
       parameters:
@@ -3244,7 +3244,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - Connectivity
-      summary: Retrieve all Interconnect virtual network connections.
+      summary: Retrieve all Interconnect virtual network connections
       description: API to retrieve all exisiting Interconnect virtual network connections.
       operationId: getInterconnectVirtualNetworkConnections
       parameters:
@@ -3290,7 +3290,7 @@ paths:
     post:
       tags:
       - Multicloud Interconnect - Connectivity
-      summary: Create an Interconnect virtual network connection.
+      summary: Create an Interconnect virtual network connection
       description: API to create a Interconnect virtual network connection between virtual network Tags and OnRamp gateway connection.
       operationId: createInterconenctVirtualNetworkConnection
       requestBody:
@@ -3428,7 +3428,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - Connectivity
-      summary: Retrieve an Interconnect virtual network connection.
+      summary: Retrieve an Interconnect virtual network connection
       description: API to retrieve an exisiting Interconnect Interconnect virtual network connection.
       operationId: getInterconnectVirtualNetworkConnection
       parameters:
@@ -3558,7 +3558,7 @@ paths:
     delete:
       tags:
       - Multicloud Interconnect - Connectivity
-      summary: Delete an Interconnect virtual network connection.
+      summary: Delete an Interconnect virtual network connection
       description: API to delete an Interconnect virtual network connection.
       operationId: deleteInterconnectVirtualNetworkConnection
       parameters:
@@ -3591,7 +3591,7 @@ paths:
     put:
       tags:
       - Multicloud Interconnect - Connectivity
-      summary: Update a private Interconnect virtual network connection.
+      summary: Update a private Interconnect virtual network connection
       description: API to update a virtual network connection between virtual network Tags and onRamp gateway connection.
       operationId: updateInterconnectVirtualNetworkConnection
       parameters:
@@ -3735,7 +3735,7 @@ paths:
   : get:
       tags:
       - Multicloud Interconnect - Connectivity
-      summary: Get Interconnect provider partner regions.
+      summary: Get Interconnect provider partner regions
       description: API to retrieve supported partner regions for an Interconnect provider.
       operationId: getInterconnectPartnerPorts
       parameters:
@@ -3929,7 +3929,7 @@ paths:
   : get:
       tags:
       - Multicloud Interconnect - Connectivity
-      summary: Get Interconnect port speeds.
+      summary: Get Interconnect port speeds
       description: API to retrieve supported port speeds for an Interconnect connectivity.
       operationId: getInterconnectPortSpeeds
       parameters:
@@ -4030,7 +4030,7 @@ paths:
     post:
       tags:
       - Multicloud Interconnect - Connectivity
-      summary: Get Device-Link metro speed.
+      summary: Get Device-Link metro speed
       description: API to get metro speed for Device-Link by Device-Link Configuration.
       operationId: getInterconnectDeviceLinkMetroSpeed
       parameters:
@@ -4178,7 +4178,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - Connectivity
-      summary: Get Device-Link port speeds.
+      summary: Get Device-Link port speeds
       description: API to get supported port speeds for Device-Link by Interconnect provider.
       operationId: getInterconnectDeviceLinkPortSpeeds
       parameters:

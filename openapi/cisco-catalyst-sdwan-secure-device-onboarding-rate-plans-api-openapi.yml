@@ -112,3 +112,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Secure Device Onboarding-read
+      summary: Get rate plans by acct id
+      x-summary-source: derived

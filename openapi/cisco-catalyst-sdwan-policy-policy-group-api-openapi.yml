@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
   title: UX 2.0 Configuration Policy - Policy Group API
-  description: "Configuration of UX 2.0 device, policy, and topology\nIncludes API operations for the following\n  Configuration Groups (SD-WAN and SD-Routing)\n  Policy Groups\n  Topology Groups"
+  description: 'Configuration of UX 2.0 device, policy, and topology
+
+    Includes API operations for the following
+
+    Configuration Groups (SD-WAN and SD-Routing)
+
+    Policy Groups
+
+    Topology Groups'
   contact:
     email: vmanage@cisco.com
   license:
@@ -159,6 +167,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Group-write
+      summary: Create policy group
+      x-summary-source: derived
     get:
       tags:
       - Policy - Policy Group
@@ -348,6 +358,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Group-read
+      summary: Get policy group by solution
+      x-summary-source: derived
   /v1/policy-group/{policyGroupId}:
     get:
       tags:
@@ -538,6 +550,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Group-read
+      summary: Get policy group
+      x-summary-source: derived
     put:
       tags:
       - Policy - Policy Group
@@ -655,6 +669,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Group-write
+      summary: Edit policy group
+      x-summary-source: derived
     delete:
       tags:
       - Policy - Policy Group
@@ -681,6 +697,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Group-write
+      summary: Delete policy group
+      x-summary-source: derived
   /v1/policy-group/{policyGroupId}/device/associate:
     get:
       tags:
@@ -707,6 +725,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Group > Device-read
+      summary: Get policy group association
+      x-summary-source: derived
     put:
       tags:
       - Policy - Policy Group
@@ -767,6 +787,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Group > Device-write
+      summary: Update policy group association
+      x-summary-source: derived
     delete:
       tags:
       - Policy - Policy Group
@@ -827,6 +849,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Group > Device-write
+      summary: Delete policy group association
+      x-summary-source: derived
     post:
       tags:
       - Policy - Policy Group
@@ -888,6 +912,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Group > Device-write
+      summary: Create policy group association
+      x-summary-source: derived
   /v1/policy-group/{policyGroupId}/device/deploy:
     post:
       tags:
@@ -969,6 +995,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Group > Device > Deploy-write
+      summary: Deploy policy group
+      x-summary-source: derived
   /v1/policy-group/{policyGroupId}/device/variables:
     post:
       tags:
@@ -1037,6 +1065,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Group-read
+      summary: Fetch policy group device variables
+      x-summary-source: derived
     get:
       tags:
       - Policy - Policy Group
@@ -1085,6 +1115,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Group-read
+      summary: Get policy group device variables
+      x-summary-source: derived
     put:
       tags:
       - Policy - Policy Group
@@ -1186,6 +1218,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Group-write
+      summary: Create policy group device variables
+      x-summary-source: derived
   /v1/policy-group/{policyGroupId}/device/variables/schema:
     get:
       tags:
@@ -1264,6 +1298,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Group-read
+      summary: Get policy group device variables schema
+      x-summary-source: derived
   /v1/policy-group/{policyGroupId}/device/{deviceId}/preview:
     post:
       tags:
@@ -1338,6 +1374,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Group > Device > Deploy-read
+      summary: Get policy group device configuration preview
+      x-summary-source: derived
   /v1/policy-group/{policyGroupId}/rules:
     get:
       tags:
@@ -1380,3 +1418,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get rule association by policy group id
+      x-summary-source: derived

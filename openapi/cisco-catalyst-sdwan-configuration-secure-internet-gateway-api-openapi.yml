@@ -76,6 +76,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get sig dynamic data center list
+      x-summary-source: derived
   /sig/datacenters/{type}/{tunneltype}/{devicetype}:
     get:
       tags:
@@ -119,11 +121,12 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Deploy-read,Template Deploy-write,Policy Configuration-read,Policy Configuration-write,Policy Deploy-read,Policy Deploy-write
+      summary: Get sig data center list
+      x-summary-source: derived
   /sig/sigGlobalCredentials/{featureTemplateType}:
     get:
       tags:
       - Configuration - Secure Internet Gateway
-      description: Get sig global credentials
       operationId: getSigGlobalCredentials
       parameters:
       - name: featureTemplateType
@@ -243,11 +246,13 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get sig global credentials
+      x-summary-source: derived
   /sig/umbrella/childOrg/{type}:
     get:
       tags:
       - Configuration - Secure Internet Gateway
-      description: 'Get the list of child org IDs given the type management or device '
+      description: Get the list of child org IDs given the type management or device
       operationId: getChildOrgs
       parameters:
       - name: type
@@ -264,3 +269,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get child orgs
+      x-summary-source: derived

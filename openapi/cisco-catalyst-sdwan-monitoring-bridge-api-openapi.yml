@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
   title: Monitoring and Troubleshooting Monitoring - Bridge API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -132,6 +140,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stat data raw data monitoring bridge 2703
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Bridge
@@ -261,6 +271,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stats raw data monitoring bridge 2704
+      x-summary-source: derived
   /statistics/bridgeinterface/aggregation:
     get:
       tags:
@@ -291,6 +303,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get aggregation data by query monitoring bridge 3903
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Bridge
@@ -321,6 +335,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default,dca
+      summary: Get post aggregation data by query monitoring bridge 3904
+      x-summary-source: derived
   /statistics/bridgeinterface/csv:
     get:
       tags:
@@ -360,6 +376,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stat data raw data as CSV monitoring bridge 3103
+      x-summary-source: derived
   /statistics/bridgeinterface/doccount:
     post:
       tags:
@@ -403,6 +421,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get count post monitoring bridge 3604
+      x-summary-source: derived
     get:
       tags:
       - Monitoring - Bridge
@@ -442,6 +462,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get count monitoring bridge 3603
+      x-summary-source: derived
   /statistics/bridgeinterface/fields:
     get:
       tags:
@@ -494,6 +516,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat data fields monitoring bridge 3403
+      x-summary-source: derived
   /statistics/bridgeinterface/page:
     post:
       tags:
@@ -623,6 +647,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get post stats pagination raw data monitoring bridge 3204
+      x-summary-source: derived
     get:
       tags:
       - Monitoring - Bridge
@@ -746,6 +772,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get stats pagination raw data monitoring bridge 3203
+      x-summary-source: derived
   /statistics/bridgeinterface/query/fields:
     get:
       tags:
@@ -810,6 +838,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat query fields monitoring bridge 4003
+      x-summary-source: derived
   /statistics/bridgemac:
     post:
       tags:
@@ -940,6 +970,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stats raw data monitoring bridge 2104
+      x-summary-source: derived
     get:
       tags:
       - Monitoring - Bridge
@@ -1044,6 +1076,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stat data raw data monitoring bridge 2103
+      x-summary-source: derived
   /statistics/bridgemac/aggregation:
     get:
       tags:
@@ -1074,6 +1108,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get aggregation data by query monitoring bridge 3303
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Bridge
@@ -1104,6 +1140,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default,dca
+      summary: Get post aggregation data by query monitoring bridge 3304
+      x-summary-source: derived
   /statistics/bridgemac/csv:
     get:
       tags:
@@ -1143,6 +1181,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stat data raw data as CSV monitoring bridge 2503
+      x-summary-source: derived
   /statistics/bridgemac/doccount:
     get:
       tags:
@@ -1183,6 +1223,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get count monitoring bridge 3003
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Bridge
@@ -1225,6 +1267,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get count post monitoring bridge 3004
+      x-summary-source: derived
   /statistics/bridgemac/fields:
     get:
       tags:
@@ -1277,6 +1321,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat data fields monitoring bridge 2803
+      x-summary-source: derived
   /statistics/bridgemac/page:
     post:
       tags:
@@ -1406,6 +1452,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get post stats pagination raw data monitoring bridge 2604
+      x-summary-source: derived
     get:
       tags:
       - Monitoring - Bridge
@@ -1529,6 +1577,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get stats pagination raw data monitoring bridge 2603
+      x-summary-source: derived
   /statistics/bridgemac/query/fields:
     get:
       tags:
@@ -1593,3 +1643,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat query fields monitoring bridge 3403
+      x-summary-source: derived

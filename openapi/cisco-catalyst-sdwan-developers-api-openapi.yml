@@ -27,14 +27,13 @@ info:
 servers:
 - url: /dataservice
 tags:
-- name: developers
+- name: Developers
 paths:
   /device/autonomousversion:
     get:
       tags:
-      - developers
+      - Developers
       summary: Get Software version from device
-      description: Get Software version from device
       operationId: getAutonomousSoftwareVersion
       parameters:
       - name: deviceId

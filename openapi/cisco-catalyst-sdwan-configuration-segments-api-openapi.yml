@@ -75,6 +75,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get segments
+      x-summary-source: derived
     post:
       tags:
       - Configuration - Segments
@@ -112,6 +114,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Create segment
+      x-summary-source: derived
   /segment/{id}:
     delete:
       tags:
@@ -135,6 +139,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Delete segment
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Segments
@@ -167,6 +173,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get segment
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Segments
@@ -200,3 +208,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Edit segment
+      x-summary-source: derived

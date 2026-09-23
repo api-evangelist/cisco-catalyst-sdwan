@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: SD-WAN Services Multicloud Interconnect - Global Settings API
+  title: SD-WAN Services Multicloud Interconnect - Global Settings…
   description: Includes API operations for managing SD-WAN services such as Cloud OnRamp for SaaS and MultiCloud
   contact:
     email: vmanage@cisco.com
@@ -31,7 +31,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - Global Settings
-      summary: Get supported Colors for Interconnect tunnel type.
+      summary: Get supported Colors for Interconnect tunnel type
       description: API to retrieve supported Colors for Interconnect tunnel type.
       operationId: getInterconnectColors
       parameters:
@@ -87,7 +87,7 @@ paths:
     post:
       tags:
       - Multicloud Interconnect - Global Settings
-      summary: Add global settings for an Interconnect provider.
+      summary: Add global settings for an Interconnect provider
       description: API to add global settings for an Interconnect provider.
       operationId: addInterconnectGlobalSettings
       requestBody:
@@ -166,7 +166,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - Global Settings
-      summary: Get Interconnect provider global settings.
+      summary: Get Interconnect provider global settings
       description: API to retrieve global settings for an Interconnect provider type.
       operationId: getInterconnectGlobalSettings
       parameters:
@@ -240,7 +240,7 @@ paths:
     put:
       tags:
       - Multicloud Interconnect - Global Settings
-      summary: Edit global settings for an Interconnect provider.
+      summary: Edit global settings for an Interconnect provider
       description: API to update global settings for an Interconnect provider.
       operationId: updateInterconnectGlobalSettings
       requestBody:

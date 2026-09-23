@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Monitoring - Stats Processing API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Monitoring - Stats…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -85,6 +93,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get statistic type
+      x-summary-source: derived
   /statistics/collect:
     get:
       tags:
@@ -109,6 +119,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Start stats collection
+      x-summary-source: derived
   /statistics/collect/thread/status:
     get:
       tags:
@@ -135,6 +147,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: admin
+      summary: Generate stats collect thread report
+      x-summary-source: derived
   /statistics/collection/reset/{processQueue}:
     get:
       tags:
@@ -171,6 +185,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: admin
+      summary: Reset stats collection
+      x-summary-source: derived
   /statistics/demomode:
     get:
       tags:
@@ -203,6 +219,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: admin
+      summary: Enable statistics demo mode
+      x-summary-source: derived
   /statistics/process:
     get:
       tags:
@@ -228,11 +246,12 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: admin
+      summary: Process statistics data
+      x-summary-source: derived
   /statistics/process/counters:
     get:
       tags:
       - Monitoring - Stats Processing
-      description: Get statistics processing counters
       operationId: getStatisticsProcessingCounters
       responses:
         '200':
@@ -254,6 +273,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: admin
+      summary: Get statistics processing counters
+      x-summary-source: derived
   /statistics/process/status:
     get:
       tags:
@@ -289,6 +310,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: admin
+      summary: Generate stats process report
+      x-summary-source: derived
   /statistics/process/thread/status:
     get:
       tags:
@@ -315,3 +338,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: admin
+      summary: Generate stats process thread report
+      x-summary-source: derived

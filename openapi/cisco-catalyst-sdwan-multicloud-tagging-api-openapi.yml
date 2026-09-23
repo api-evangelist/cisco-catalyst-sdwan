@@ -149,6 +149,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get host vpcs
+      x-summary-source: derived
   /multicloud/hostvpc/tags:
     get:
       tags:
@@ -271,6 +273,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get vpc tags
+      x-summary-source: derived
     put:
       tags:
       - MultiCloud - Tagging
@@ -525,6 +529,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Edit tag
+      x-summary-source: derived
     post:
       tags:
       - MultiCloud - Tagging
@@ -728,6 +734,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Host vpc tagging
+      x-summary-source: derived
   /multicloud/hostvpc/tags/rebalanceVnets:
     post:
       tags:
@@ -776,6 +784,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Rebalance vnets
+      x-summary-source: derived
   /multicloud/hostvpc/tags/{tagName}:
     delete:
       tags:
@@ -807,3 +817,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Un tag
+      x-summary-source: derived

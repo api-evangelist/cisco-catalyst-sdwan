@@ -179,7 +179,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - Monitoring
-      summary: Get Interconnect devices for monitoring.
+      summary: Get Interconnect devices for monitoring
       description: API to retrieve Interconnect devices by Interconnect type for monitoring.
       operationId: getMonitoringInterconnectConnectedSites
       parameters:
@@ -247,7 +247,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - Monitoring
-      summary: Retrieve Interconnect devices for monitoring.
+      summary: Retrieve Interconnect devices for monitoring
       description: API to retrieve Interconnect devices by Interconnect type for monitoring.
       operationId: getMonitoringInterconnectDevices
       parameters:
@@ -313,7 +313,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - Monitoring
-      summary: Get Interconnect gateways for monitoring.
+      summary: Get Interconnect gateways for monitoring
       description: API to retrieve Interconnect gateways by Interconnect type for monitoring.
       operationId: getMonitoringInterconnectGateways
       parameters:
@@ -389,7 +389,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - Monitoring
-      summary: Get an Interconnect widget for Interconnect type.
+      summary: Get an Interconnect widget for Interconnect type
       description: API to retrieve an Interconnect widget for an Interconnect type.
       operationId: getInterconnectWidget
       parameters:

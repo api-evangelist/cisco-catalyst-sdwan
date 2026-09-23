@@ -84,6 +84,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Edit firmware upgarde remote image
+      x-summary-source: derived
   /device/action/firmware-upgrade/{versionId}:
     delete:
       tags:
@@ -106,6 +108,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Delete firmware upgarde remote image
+      x-summary-source: derived
   /device/action/software/package:
     post:
       tags:
@@ -133,6 +137,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Install pkg
+      x-summary-source: derived
   /device/action/software/package/imageCount:
     get:
       tags:
@@ -169,12 +175,13 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get upload images count
+      x-summary-source: derived
   /device/action/software/package/signature/{utdsignature}:
     get:
       tags:
       - Configuration - Device Software Update
       summary: Get list of Utd images
-      description: 'Get list of Utd images '
       operationId: generateUtdImageData
       parameters:
       - name: utdsignature
@@ -351,7 +358,6 @@ paths:
       tags:
       - Configuration - Device Software Update
       summary: add Utd remote image
-      description: 'add Utd remote image '
       operationId: addUtdRemoteImage
       parameters:
       - name: type
@@ -393,7 +399,6 @@ paths:
       tags:
       - Configuration - Device Software Update
       summary: upload Utd image
-      description: upload Utd image
       operationId: uploadUtdImage
       parameters:
       - name: type
@@ -461,6 +466,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Download package file
+      x-summary-source: derived
   /device/action/software/package/{imageType}:
     post:
       tags:
@@ -495,6 +502,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Process software image
+      x-summary-source: derived
   /device/action/software/package/{versionId}/metadata:
     get:
       tags:
@@ -536,6 +545,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get image metadata
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Device Software Update
@@ -578,3 +589,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Edit image metadata
+      x-summary-source: derived

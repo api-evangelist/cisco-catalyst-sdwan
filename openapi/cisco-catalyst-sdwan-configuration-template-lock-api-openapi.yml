@@ -1,7 +1,13 @@
 openapi: 3.2.0
 info:
   title: UX 1.0 Configuration Configuration - Template Lock API
-  description: "Configuration of UX 1.0 device and policy.\nIncludes API operations for the following:\n  Managing original SD-WAN device configurations and policy configurations\n  Device templates and feature templates"
+  description: 'Configuration of UX 1.0 device and policy.
+
+    Includes API operations for the following:
+
+    Managing original SD-WAN device configurations and policy configurations
+
+    Device templates and feature templates'
   contact:
     email: vmanage@cisco.com
   license:
@@ -31,7 +37,6 @@ paths:
     delete:
       tags:
       - Configuration - Template Lock
-      description: Remove lock
       operationId: removeLock
       parameters:
       - name: processId
@@ -51,6 +56,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Configuration-write,Template Deploy-write,Policy Configuration-write
+      summary: Remove lock
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Template Lock
@@ -74,3 +81,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Configuration-write,Template Deploy-write,Policy Configuration-write
+      summary: Update lease time
+      x-summary-source: derived

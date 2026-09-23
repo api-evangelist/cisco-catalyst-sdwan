@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Real-Time Monitoring - Hardware API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Real-Time Monitoring…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -111,6 +119,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write
+      summary: Create alarm list
+      x-summary-source: derived
   /device/hardware/environment:
     get:
       tags:
@@ -154,6 +164,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write
+      summary: Create environment list
+      x-summary-source: derived
   /device/hardware/errors:
     get:
       tags:
@@ -189,6 +201,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write
+      summary: Create error alarm list
+      x-summary-source: derived
   /device/hardware/inventory:
     get:
       tags:
@@ -243,6 +257,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write
+      summary: Create inventory list
+      x-summary-source: derived
   /device/hardware/status/summary:
     get:
       tags:
@@ -342,6 +358,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write
+      summary: Create status summary
+      x-summary-source: derived
   /device/hardware/synced/alarms:
     get:
       tags:
@@ -441,6 +459,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write
+      summary: Create synced alarm list
+      x-summary-source: derived
   /device/hardware/synced/environment:
     get:
       tags:
@@ -487,6 +507,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write
+      summary: Create synced environment list
+      x-summary-source: derived
   /device/hardware/synced/inventory:
     get:
       tags:
@@ -547,6 +569,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write
+      summary: Create synced inventory list
+      x-summary-source: derived
   /device/hardware/system:
     get:
       tags:
@@ -593,6 +617,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write
+      summary: Create system list
+      x-summary-source: derived
   /device/hardware/threshold:
     get:
       tags:
@@ -649,3 +675,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write
+      summary: Create temp threshold list
+      x-summary-source: derived

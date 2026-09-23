@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Real-Time Monitoring - AAA API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Real-Time Monitoring - AAA…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -88,6 +96,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write,System-read,System-write
+      summary: Get AA aservers
+      x-summary-source: derived
   /device/aaa/users:
     get:
       tags:
@@ -131,6 +141,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write,System-read,System-write
+      summary: Get AAA users
+      x-summary-source: derived
   /device/acl/matchcounter:
     get:
       tags:
@@ -206,6 +218,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write,System-read,System-write
+      summary: Get ACL match counter users
+      x-summary-source: derived
   /device/logging:
     get:
       tags:
@@ -254,6 +268,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Interface-read,Interface-write
+      summary: Get logging from device
+      x-summary-source: derived
   /device/unclaimed/vedges:
     get:
       tags:
@@ -292,6 +308,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write,System-read,System-write
+      summary: Get unclaimed vedges
+      x-summary-source: derived
   /device/users:
     get:
       tags:
@@ -338,6 +356,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write
+      summary: Get users from device
+      x-summary-source: derived
   /device/users/list:
     get:
       tags:
@@ -375,3 +395,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write,Tools-read,Tools-write
+      summary: Get all device users
+      x-summary-source: derived

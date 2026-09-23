@@ -59,6 +59,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Release licenses msla 1303
+      x-summary-source: derived
     get:
       tags:
       - MSLA
@@ -145,6 +147,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get MSLA devices msla 1303
+      x-summary-source: derived
   /msla/licenses/compliance:
     get:
       tags:
@@ -177,6 +181,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get licenses compliance
+      x-summary-source: derived
   /msla/licenses/sync:
     post:
       tags:
@@ -213,6 +219,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: License Management-write
+      summary: Sync licenses msla 1904
+      x-summary-source: derived
   /msla/template:
     get:
       tags:
@@ -238,6 +246,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: License Management-read
+      summary: Get all template
+      x-summary-source: derived
   /msla/template/licenses:
     post:
       tags:
@@ -282,6 +292,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: License Management-write
+      summary: Get subscriptions msla 2304
+      x-summary-source: derived
   /msla/va/License:
     get:
       tags:
@@ -318,3 +330,5 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: License Management-read
+      summary: Get subscriptions msla 1603
+      x-summary-source: derived

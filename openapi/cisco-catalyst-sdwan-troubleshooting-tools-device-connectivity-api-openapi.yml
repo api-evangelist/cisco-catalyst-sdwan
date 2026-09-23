@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Troubleshooting Tools - Device Connectivity API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Troubleshooting Tools…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -90,6 +98,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tools-write,dca
+      summary: Create admin tech
+      x-summary-source: derived
   /device/tools/admintech/copy:
     post:
       tags:
@@ -127,6 +137,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tools-write,dca
+      summary: Copy admin tech on device
+      x-summary-source: derived
   /device/tools/admintech/delete:
     delete:
       tags:
@@ -163,6 +175,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tools-write,dca
+      summary: Delete admin tech on device
+      x-summary-source: derived
   /device/tools/admintech/download/{filename}:
     get:
       tags:
@@ -187,12 +201,13 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tools-write,dca
+      summary: Download admin tech file
+      x-summary-source: derived
   /device/tools/admintech/supportedfeatures/{deviceModel}/{deviceIP}/{personality}:
     get:
       tags:
       - Troubleshooting Tools - Device Connectivity
       summary: Get supported admin tech features
-      description: Get supported admin tech features
       operationId: getSupportedAdminTechFeatures
       parameters:
       - name: deviceModel
@@ -255,6 +270,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tools-write
+      summary: Delete admin tech file
+      x-summary-source: derived
   /device/tools/admintechlist:
     post:
       tags:
@@ -313,6 +330,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tools-write,dca
+      summary: List admin techs on device
+      x-summary-source: derived
   /device/tools/admintechs:
     get:
       tags:
@@ -375,6 +394,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tools-write,dca
+      summary: List admin techs
+      x-summary-source: derived
   /device/tools/admintechs/inprogress:
     get:
       tags:
@@ -408,6 +429,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tools-write,dca
+      summary: Get in progress count
+      x-summary-source: derived
   /device/tools/admintechs/upload:
     post:
       tags:
@@ -453,6 +476,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tools-write,dca
+      summary: Upload admin tech
+      x-summary-source: derived
   /device/tools/factoryreset:
     post:
       tags:
@@ -481,6 +506,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Factory reset
+      x-summary-source: derived
   /device/tools/nping/{deviceIP}:
     post:
       tags:
@@ -592,11 +619,12 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tools-read
+      summary: Nping device
+      x-summary-source: derived
   /device/tools/ping/{deviceIP}:
     post:
       tags:
       - Troubleshooting Tools - Device Connectivity
-      description: Ping device
       operationId: pingDevice
       parameters:
       - name: deviceIP
@@ -677,6 +705,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tools-read
+      summary: Ping device
+      x-summary-source: derived
   /device/tools/porthopcolor/{deviceIP}:
     post:
       tags:
@@ -711,6 +741,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Process port hop color
+      x-summary-source: derived
   /device/tools/reset/interface/{deviceIP}:
     post:
       tags:
@@ -755,12 +787,13 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tools-write
+      summary: Process interface reset
+      x-summary-source: derived
   /device/tools/reset/profile:
     post:
       tags:
       - Troubleshooting Tools - Device Connectivity
       summary: Reset Cellular Profile
-      description: Reset Cellular Profile
       operationId: processCellularProfileReset
       requestBody:
         description: Reset Cellular Profile
@@ -824,11 +857,12 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Process reset user
+      x-summary-source: derived
   /device/tools/servicepath/{deviceIP}:
     post:
       tags:
       - Troubleshooting Tools - Device Connectivity
-      description: Service path
       operationId: servicePath
       parameters:
       - name: deviceIP
@@ -857,6 +891,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Service path
+      x-summary-source: derived
   /device/tools/traceroute/{deviceIP}:
     post:
       tags:
@@ -946,6 +982,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tools-read
+      summary: Traceroute device
+      x-summary-source: derived
   /device/tools/tunnelpath/{deviceIP}:
     post:
       tags:
@@ -979,6 +1017,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Tunnel path
+      x-summary-source: derived
   /troubleshooting/control/{uuid}:
     get:
       tags:
@@ -1103,6 +1143,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tools-read
+      summary: Get control connections
+      x-summary-source: derived
   /troubleshooting/devicebringup:
     get:
       tags:
@@ -1165,3 +1207,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tools-read
+      summary: Get device configuration
+      x-summary-source: derived

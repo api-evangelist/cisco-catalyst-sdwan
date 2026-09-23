@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Real-Time Monitoring - System API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Real-Time Monitoring…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -70,6 +78,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Create device system setting native info
+      x-summary-source: derived
   /device/csp/system/processlist:
     get:
       tags:
@@ -115,6 +125,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Create device system process list
+      x-summary-source: derived
   /device/csp/system/settings:
     get:
       tags:
@@ -164,6 +176,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Create device system setting
+      x-summary-source: derived
   /device/csp/system/status:
     get:
       tags:
@@ -204,11 +218,12 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Create device system status
+      x-summary-source: derived
   /device/system/clock:
     get:
       tags:
       - Real-Time Monitoring - System
-      description: Get device system clock
       operationId: getDeviceSystemClock
       parameters:
       - name: deviceId
@@ -239,6 +254,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get device system clock
+      x-summary-source: derived
   /device/system/info:
     get:
       tags:
@@ -376,6 +393,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write
+      summary: Create device info list
+      x-summary-source: derived
   /device/system/statistics:
     get:
       tags:
@@ -615,6 +634,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Create device system stats list
+      x-summary-source: derived
   /device/system/status:
     get:
       tags:
@@ -692,6 +713,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,dca
+      summary: Create device system status list
+      x-summary-source: derived
   /device/system/synced/status:
     get:
       tags:
@@ -752,3 +775,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Create synced device system status list
+      x-summary-source: derived

@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
   title: Monitoring and Troubleshooting Monitoring - QoS API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -224,6 +232,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat data raw data monitoring qos 1503
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - QoS
@@ -426,6 +436,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stats raw data12
+      x-summary-source: derived
   /statistics/qos/aggregation:
     post:
       tags:
@@ -521,6 +533,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get post aggregation data by query monitoring qos 2704
+      x-summary-source: derived
     get:
       tags:
       - Monitoring - QoS
@@ -625,6 +639,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get aggregation data by query monitoring qos 2703
+      x-summary-source: derived
   /statistics/qos/app-agg/aggregation:
     post:
       tags:
@@ -734,6 +750,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get post aggregation app data by query monitoring qos 3504
+      x-summary-source: derived
   /statistics/qos/csv:
     get:
       tags:
@@ -778,6 +796,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat data raw data as CSV12
+      x-summary-source: derived
   /statistics/qos/doccount:
     get:
       tags:
@@ -824,6 +844,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get count13
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - QoS
@@ -873,6 +895,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get count post13
+      x-summary-source: derived
   /statistics/qos/fields:
     get:
       tags:
@@ -925,6 +949,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat data fields13
+      x-summary-source: derived
   /statistics/qos/page:
     get:
       tags:
@@ -1104,6 +1130,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat bulk raw data monitoring qos 2003
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - QoS
@@ -1288,6 +1316,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get post stat bulk raw data12
+      x-summary-source: derived
   /statistics/qos/query/fields:
     get:
       tags:
@@ -1384,6 +1414,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat query fields monitoring qos 2803
+      x-summary-source: derived
   /statistics/qos/session/summary:
     get:
       tags:
@@ -1470,3 +1502,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get session qos summary stat
+      x-summary-source: derived

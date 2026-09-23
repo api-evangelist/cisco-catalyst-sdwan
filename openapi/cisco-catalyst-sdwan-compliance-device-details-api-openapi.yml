@@ -48,6 +48,8 @@ paths:
           content:
             application/json: {}
       x-roles-required: Device Monitoring-read
+      summary: Get tenants devices and sites
+      x-summary-source: derived
   /device/compliance:
     get:
       tags:
@@ -213,6 +215,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get compliance details
+      x-summary-source: derived
   /device/compliance/summary:
     get:
       tags:
@@ -260,3 +264,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get compliance summary
+      x-summary-source: derived

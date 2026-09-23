@@ -33,7 +33,6 @@ paths:
     get:
       tags:
       - Configuration - Network Design Templates
-      description: Get global template
       operationId: getGlobalTemplate
       parameters:
       - name: templateId
@@ -62,10 +61,11 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Template Configuration-read,Template Deploy-read,Policy Configuration-read
+      summary: Get global template
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Network Design Templates
-      description: Edit global template
       operationId: editGlobalTemplate
       parameters:
       - name: templateId
@@ -95,6 +95,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Template Configuration-write,Template Deploy-write,Policy Configuration-write
+      summary: Edit global template
+      x-summary-source: derived
   /networkdesign/profile/feature:
     get:
       tags:
@@ -122,11 +124,12 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Template Configuration-read,Template Deploy-read,Policy Configuration-read
+      summary: Get device profile feature template list
+      x-summary-source: derived
   /networkdesign/profile/template:
     get:
       tags:
       - Configuration - Network Design Templates
-      description: Generate profile template list
       operationId: generateProfileTemplateList
       responses:
         '200':
@@ -149,11 +152,12 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Template Configuration-read,Template Deploy-read,Template Deploy-write
+      summary: Generate profile template list
+      x-summary-source: derived
   /networkdesign/profile/template/{templateId}:
     put:
       tags:
       - Configuration - Network Design Templates
-      description: Edit device profile template
       operationId: editDeviceProfileTemplate
       parameters:
       - name: templateId
@@ -183,10 +187,11 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Template Configuration-write,Template Deploy-write,Policy Configuration-write
+      summary: Edit device profile template
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Network Design Templates
-      description: Get device profile template
       operationId: getDeviceProfileTemplate
       parameters:
       - name: templateId
@@ -215,3 +220,5 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Template Configuration-read,Template Deploy-read,Policy Configuration-read
+      summary: Get device profile template
+      x-summary-source: derived

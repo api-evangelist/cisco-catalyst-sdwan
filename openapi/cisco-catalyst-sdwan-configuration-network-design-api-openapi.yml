@@ -54,6 +54,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Template Configuration-read,Template Configuration-write,Template Deploy-read,Template Deploy-write
+      summary: Get network design
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Network Design
@@ -96,10 +98,11 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Template Configuration-write,Device Inventory > Edge-write
+      summary: Edit network design
+      x-summary-source: derived
     post:
       tags:
       - Configuration - Network Design
-      description: Create network design
       operationId: createNetworkDesign
       requestBody:
         description: Network design payload
@@ -191,6 +194,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Template Configuration-write
+      summary: Create network design
+      x-summary-source: derived
   /networkdesign/attachment:
     post:
       tags:
@@ -227,6 +232,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Template Deploy-write
+      summary: Push network design
+      x-summary-source: derived
   /networkdesign/global/parameters:
     get:
       tags:
@@ -252,11 +259,12 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Template Configuration-read,Template Configuration-write,Template Deploy-read,Template Deploy-write
+      summary: Get global parameters
+      x-summary-source: derived
   /networkdesign/lock/edit:
     post:
       tags:
       - Configuration - Network Design
-      description: Acquire edit lock
       operationId: acquireEditLock
       responses:
         '200':
@@ -278,6 +286,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Template Configuration-write
+      summary: Acquire edit lock
+      x-summary-source: derived
   /networkdesign/mytest/{name}:
     get:
       tags:
@@ -310,6 +320,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Template Configuration-read,Template Configuration-write,Template Deploy-read,Template Deploy-write
+      summary: Run my test
+      x-summary-source: derived
   /networkdesign/profile/attachment/{profileId}:
     post:
       tags:
@@ -354,6 +366,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Template Deploy-write
+      summary: Push device profile template
+      x-summary-source: derived
   /networkdesign/profile/lock/{profileId}:
     post:
       tags:
@@ -386,6 +400,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Template Deploy-write
+      summary: Acquire attach lock
+      x-summary-source: derived
   /networkdesign/profile/status:
     get:
       tags:
@@ -411,6 +427,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Template Configuration-read,Template Configuration-write,Template Deploy-read,Template Deploy-write
+      summary: Get device profile config status
+      x-summary-source: derived
   /networkdesign/profile/status/{profileId}:
     get:
       tags:
@@ -444,6 +462,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Template Configuration-read,Template Configuration-write,Template Deploy-read,Template Deploy-write
+      summary: Get device profile config status by profile id
+      x-summary-source: derived
   /networkdesign/profile/task/count:
     get:
       tags:
@@ -469,6 +489,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Template Configuration-read,Template Configuration-write,Template Deploy-read,Template Deploy-write
+      summary: Get device profile task count
+      x-summary-source: derived
   /networkdesign/profile/task/status:
     get:
       tags:
@@ -494,6 +516,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Template Configuration-read,Template Configuration-write,Template Deploy-read,Template Deploy-write
+      summary: Get device profile task status
+      x-summary-source: derived
   /networkdesign/profile/task/status/{profileId}:
     get:
       tags:
@@ -527,6 +551,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Template Configuration-read,Template Configuration-write,Template Deploy-read,Template Deploy-write
+      summary: Get device profile task status by profile id
+      x-summary-source: derived
   /networkdesign/serviceProfileConfig/{profileId}:
     get:
       tags:
@@ -565,3 +591,5 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Template Configuration-read,Template Configuration-write,Template Deploy-read,Template Deploy-write
+      summary: Get service profile config
+      x-summary-source: derived

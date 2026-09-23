@@ -34,7 +34,6 @@ paths:
       tags:
       - Certificate Management - vManage
       summary: Generate CSR of EST proxy client
-      description: Generate CSR of EST proxy client
       operationId: enterpriseESTClientGenCSR
       requestBody:
         description: Payload
@@ -116,7 +115,6 @@ paths:
       tags:
       - Certificate Management - vManage
       summary: Get generated CSR for EST proxy client
-      description: Get generated CSR for EST proxy client
       operationId: enterpriseESTClientGetCSR
       responses:
         '200':
@@ -180,7 +178,6 @@ paths:
       tags:
       - Certificate Management - vManage
       summary: Install signed EST proxy client certificate
-      description: Install signed EST proxy client certificate
       operationId: enterpriseESTClientInstallCertificate
       requestBody:
         description: Certificate
@@ -222,7 +219,6 @@ paths:
       tags:
       - Certificate Management - vManage
       summary: Get ORG Name from ConfD
-      description: Get ORG Name from ConfD
       operationId: getOrgNameFromConfig
       responses:
         '200':
@@ -249,7 +245,6 @@ paths:
       tags:
       - Certificate Management - vManage
       summary: Retrieves Signed Certificate Details
-      description: Retrieves Signed Certificate Details
       operationId: showInfo
       responses:
         '200':
@@ -284,7 +279,6 @@ paths:
       tags:
       - Certificate Management - vManage
       summary: Import a signed web server certificate
-      description: Import a signed web server certificate
       operationId: importCertificate
       requestBody:
         description: Web Server Certificate configuration
@@ -363,7 +357,6 @@ paths:
       tags:
       - Certificate Management - vManage
       summary: Generate Certificate Signing Request
-      description: Generate Certificate Signing Request
       operationId: getCSR_CertificateManagementVmanage_4404
       requestBody:
         description: Web Server Certificate configuration
@@ -560,7 +553,6 @@ paths:
       tags:
       - Certificate Management - vManage
       summary: Generate Certificate Signing Request Async
-      description: Generate Certificate Signing Request Async
       operationId: generateCSRASync
       requestBody:
         description: Generate CSR with provided CSR parameters
@@ -712,7 +704,6 @@ paths:
       tags:
       - Certificate Management - vManage
       summary: Get certificate for alias server
-      description: Get certificate for alias server
       operationId: getCertificate
       parameters:
       - name: format

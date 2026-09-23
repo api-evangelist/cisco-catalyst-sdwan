@@ -51,6 +51,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Webex access code
+      x-summary-source: derived
   /webex/datacenter:
     post:
       tags:
@@ -152,6 +154,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get webex data centers
+      x-summary-source: derived
     delete:
       tags:
       - System - Cloud Service Webex
@@ -170,6 +174,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Delete webex data centers
+      x-summary-source: derived
   /webex/datacenter/sync:
     post:
       tags:
@@ -189,6 +195,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Update webex data centers
+      x-summary-source: derived
   /webex/datacenter/syncstatus:
     get:
       tags:
@@ -216,10 +224,12 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get webex data centers sync status
+      x-summary-source: derived
     put:
       tags:
       - System - Cloud Service Webex
-      description: Set webex data center sync needed            to false
+      description: Set webex data center sync needed to false
       operationId: setWebexDataCentersSyncStatus
       responses:
         '200':
@@ -234,6 +244,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Set webex data centers sync status
+      x-summary-source: derived
   /webex/redirect:
     get:
       tags:
@@ -268,3 +280,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Redirect webex data centers
+      x-summary-source: derived

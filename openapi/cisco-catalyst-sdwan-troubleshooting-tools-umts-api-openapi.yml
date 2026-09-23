@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Troubleshooting Tools - UMTS API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Troubleshooting Tools - UMTS…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -32,7 +40,7 @@ paths:
       tags:
       - Troubleshooting Tools - UMTS
       summary: Assign sessionId to client
-      description: 'assign sessionId to client if there is no conflict ongoing sessions '
+      description: assign sessionId to client if there is no conflict ongoing sessions
       operationId: enableSession
       requestBody:
         description: Input query
@@ -197,7 +205,7 @@ paths:
       tags:
       - Troubleshooting Tools - UMTS
       summary: save UMTS result
-      description: 'Save UMTS Data, this api is called by device side '
+      description: Save UMTS Data, this api is called by device side
       operationId: saveUMTSData
       parameters:
       - name: deviceUUID
@@ -272,7 +280,7 @@ paths:
       tags:
       - Troubleshooting Tools - UMTS
       summary: start/stop/disable/status/download session
-      description: 'start, stop,status,download or disable session '
+      description: start, stop,status,download or disable session
       operationId: updateUmtsSessionStatus
       parameters:
       - name: operation

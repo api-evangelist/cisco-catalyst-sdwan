@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
   title: Monitoring and Troubleshooting Monitoring - Events API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -231,6 +239,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Post events
+      x-summary-source: derived
     get:
       tags:
       - Monitoring - Events
@@ -435,6 +445,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Events-read
+      summary: Get events monitoring events 603
+      x-summary-source: derived
   /event/aggregation:
     get:
       tags:
@@ -564,6 +576,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Events-read
+      summary: Get aggregation data monitoring events 1803
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Events
@@ -693,6 +707,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Events-read
+      summary: Post aggregation data monitoring events 1804
+      x-summary-source: derived
   /event/byuuids:
     post:
       tags:
@@ -757,6 +773,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Alarms-read
+      summary: Get by uuids
+      x-summary-source: derived
   /event/component/keyvalue:
     get:
       tags:
@@ -831,6 +849,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get components as key value
+      x-summary-source: derived
   /event/doccount:
     get:
       tags:
@@ -970,6 +990,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get doc count monitoring events 1503
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Events
@@ -1109,6 +1131,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Post doc count monitoring events 1504
+      x-summary-source: derived
   /event/enable/fileprocess:
     get:
       tags:
@@ -1141,6 +1165,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Events-read
+      summary: Enable events from file
+      x-summary-source: derived
   /event/getEventsByComponent:
     get:
       tags:
@@ -1704,6 +1730,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get event names by component
+      x-summary-source: derived
   /event/listeners:
     get:
       tags:
@@ -1765,6 +1793,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get listeners info
+      x-summary-source: derived
   /event/page:
     get:
       tags:
@@ -2109,6 +2139,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Events-read
+      summary: Get page monitoring events 1103
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Events
@@ -2454,11 +2486,12 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Alarms-read
+      summary: Post page monitoring events 1104
+      x-summary-source: derived
   /event/query/fields:
     get:
       tags:
       - Monitoring - Events
-      description: Get query fields
       operationId: getQueryFields
       responses:
         '200':
@@ -2594,6 +2627,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Events-read
+      summary: Get query fields
+      x-summary-source: derived
   /event/query/input:
     get:
       tags:
@@ -2706,6 +2741,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Events-read
+      summary: Create events query config
+      x-summary-source: derived
   /event/severity:
     get:
       tags:
@@ -3048,6 +3085,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Events-read
+      summary: Get by severities
+      x-summary-source: derived
   /event/severity/summary:
     get:
       tags:
@@ -3247,6 +3286,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get severity histogram
+      x-summary-source: derived
   /event/types/keyvalue:
     get:
       tags:
@@ -3741,3 +3782,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get event types as key value
+      x-summary-source: derived

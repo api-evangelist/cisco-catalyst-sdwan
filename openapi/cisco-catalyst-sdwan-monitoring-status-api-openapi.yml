@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
   title: Monitoring and Troubleshooting Monitoring - Status API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -60,6 +68,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Settings-read
+      summary: Get disabled device list
+      x-summary-source: derived
     put:
       tags:
       - Monitoring - Status
@@ -104,11 +114,12 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Settings-write
+      summary: Update statistics device list
+      x-summary-source: derived
   /statistics/settings/status:
     put:
       tags:
       - Monitoring - Status
-      description: Update statistics settings
       operationId: updateStatisticsSettings
       requestBody:
         description: Stats setting
@@ -133,10 +144,11 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Settings-write,dca
+      summary: Update statistics settings
+      x-summary-source: derived
     get:
       tags:
       - Monitoring - Status
-      description: Get statistics settings
       operationId: getStatisticsSettings
       responses:
         '200':
@@ -165,6 +177,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Settings-read,dca
+      summary: Get statistics settings
+      x-summary-source: derived
   /statistics/settings/status/device:
     get:
       tags:
@@ -219,3 +233,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Settings-read
+      summary: Get enabled index for device
+      x-summary-source: derived

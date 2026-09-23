@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Others CCI Authorization Service  - CCI Registration API
+  title: Others CCI Authorization Service - CCI Registration API
   description: 'Other APIs
 
     Include APIs that do not belong to other categories'
@@ -34,7 +34,6 @@ paths:
       tags:
       - CCI Authorization Service  - CCI Registration
       summary: Login into CCI
-      description: 'Login into CCI '
       operationId: cciAuthorize
       responses:
         '200':

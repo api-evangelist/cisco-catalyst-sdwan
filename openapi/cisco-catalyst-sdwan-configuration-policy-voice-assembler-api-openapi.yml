@@ -1,7 +1,13 @@
 openapi: 3.2.0
 info:
-  title: UX 1.0 Configuration Configuration - Policy Voice Assembler API
-  description: "Configuration of UX 1.0 device and policy.\nIncludes API operations for the following:\n  Managing original SD-WAN device configurations and policy configurations\n  Device templates and feature templates"
+  title: UX 1.0 Configuration Configuration - Policy Voice Assembler…
+  description: 'Configuration of UX 1.0 device and policy.
+
+    Includes API operations for the following:
+
+    Managing original SD-WAN device configurations and policy configurations
+
+    Device templates and feature templates'
   contact:
     email: vmanage@cisco.com
   license:
@@ -72,6 +78,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write,Security Policy Configuration-read,Security Policy Configuration-write
+      summary: Preview configuration policy voice assembler 3104
+      x-summary-source: derived
   /template/policy/assembly/voice/{id}:
     get:
       tags:
@@ -104,3 +112,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write,Security Policy Configuration-read,Security Policy Configuration-write
+      summary: Preview by id configuration policy voice assembler 3603
+      x-summary-source: derived

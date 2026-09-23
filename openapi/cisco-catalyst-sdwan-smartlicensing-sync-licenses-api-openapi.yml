@@ -116,6 +116,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: License
+      x-summary-source: derived
   /v1/smart-licensing/sync:
     post:
       tags:
@@ -153,6 +155,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Sync licenses smartlicensing sync licenses 2404
+      x-summary-source: derived
   /v1/smart-licensing/user-settings:
     get:
       tags:
@@ -188,3 +192,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get user settings
+      x-summary-source: derived

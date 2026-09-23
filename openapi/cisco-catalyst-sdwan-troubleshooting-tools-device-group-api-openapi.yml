@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Troubleshooting Tools - Device Group API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Troubleshooting Tools…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -60,6 +68,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: List device group list
+      x-summary-source: derived
   /group/device:
     get:
       tags:
@@ -117,6 +127,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: List device groups
+      x-summary-source: derived
   /group/devices:
     get:
       tags:
@@ -667,6 +679,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: List group devices
+      x-summary-source: derived
   /group/map/devices:
     get:
       tags:
@@ -747,6 +761,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: List group devices for map
+      x-summary-source: derived
   /group/map/devices/links:
     get:
       tags:
@@ -788,3 +804,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: List group links for map
+      x-summary-source: derived

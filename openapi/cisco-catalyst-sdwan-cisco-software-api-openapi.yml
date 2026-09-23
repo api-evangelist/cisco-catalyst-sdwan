@@ -54,6 +54,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Fetch eula status
+      x-summary-source: derived
   /v1/cisco-software/imagemetadata:
     post:
       tags:
@@ -75,6 +77,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get image metadata from CCO
+      x-summary-source: derived
   /v1/cisco-software/user:
     get:
       tags:
@@ -99,6 +103,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get cisco software user
+      x-summary-source: derived
   /v1/device-authorize/authentication:
     get:
       tags:
@@ -126,6 +132,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get auth url
+      x-summary-source: derived
   /v1/device-authorize/token/{deviceCode}:
     post:
       tags:
@@ -147,6 +155,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get auth token
+      x-summary-source: derived
   /v1/device-authorize/validtoken:
     get:
       tags:
@@ -171,3 +181,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get token validity
+      x-summary-source: derived

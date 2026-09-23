@@ -43,6 +43,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Cloud OnRamp-read
+      summary: Get cloud on ramp saas status
+      x-summary-source: derived
   /v1/cloudonramp/saas/appSettingsStatus:
     get:
       tags:
@@ -59,6 +61,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Cloud OnRamp-read
+      summary: Get cor saas app settings status
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Cloud On Ramp SaaS
@@ -93,6 +97,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Cloud OnRamp-read
+      summary: Put cor saas app settings status
+      x-summary-source: derived
   /v1/cloudonramp/saas/cloud_tunnels:
     get:
       tags:
@@ -116,6 +122,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Cloud OnRamp-read
+      summary: Get cloud tunnel list
+      x-summary-source: derived
   /v1/cloudonramp/saas/configuration:
     get:
       tags:
@@ -132,6 +140,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Cloud OnRamp-read
+      summary: Get policy groups with cor saas apps
+      x-summary-source: derived
   /v1/cloudonramp/saas/devices:
     get:
       tags:
@@ -148,6 +158,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Cloud OnRamp-read
+      summary: Get cor sites per device
+      x-summary-source: derived
   /v1/cloudonramp/saas/inactivesites:
     get:
       tags:
@@ -164,6 +176,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Cloud OnRamp-read
+      summary: Get inactive cor saas sites
+      x-summary-source: derived
   /v1/cloudonramp/saas/legacydevicelist:
     get:
       tags:
@@ -180,6 +194,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Cloud OnRamp-read
+      summary: Get legacy device list
+      x-summary-source: derived
   /v1/cloudonramp/saas/status:
     get:
       tags:
@@ -203,6 +219,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Cloud OnRamp-read
+      summary: Get cor saas status per device
+      x-summary-source: derived
   /v1/cloudonramp/saas/webexsyncstatus:
     get:
       tags:
@@ -219,3 +237,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Cloud OnRamp-read
+      summary: Get webex sync status
+      x-summary-source: derived

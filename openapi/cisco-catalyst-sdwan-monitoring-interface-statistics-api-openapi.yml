@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Monitoring - Interface Statistics API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Monitoring - Interface…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -162,6 +170,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat data raw data monitoring interface statistics 2103
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Interface Statistics
@@ -392,6 +402,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stats raw data monitoring interface statistics 2104
+      x-summary-source: derived
   /statistics/interface/aggregation:
     get:
       tags:
@@ -583,6 +595,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get aggregation data by query monitoring interface statistics 3303
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Interface Statistics
@@ -754,6 +768,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get post aggregation data by query monitoring interface statistics 3304
+      x-summary-source: derived
   /statistics/interface/app-agg/aggregation:
     post:
       tags:
@@ -842,11 +858,12 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get post aggregation app data by query monitoring interface statistics 4104
+      x-summary-source: derived
   /statistics/interface/ccapacity/distribution:
     get:
       tags:
       - Monitoring - Interface Statistics
-      description: Get bandwidth distribution
       operationId: getBandwidthDistribution
       parameters:
       - name: site-id
@@ -950,6 +967,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get bandwidth distribution
+      x-summary-source: derived
   /statistics/interface/csv:
     get:
       tags:
@@ -990,6 +1009,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat data raw data as CSV monitoring interface statistics 2503
+      x-summary-source: derived
   /statistics/interface/doccount:
     get:
       tags:
@@ -1031,6 +1052,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get count10
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Interface Statistics
@@ -1075,6 +1098,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get count post monitoring interface statistics 3004
+      x-summary-source: derived
   /statistics/interface/fields:
     get:
       tags:
@@ -1121,6 +1146,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat data fields monitoring interface statistics 2803
+      x-summary-source: derived
   /statistics/interface/page:
     get:
       tags:
@@ -1210,6 +1237,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat bulk raw data monitoring interface statistics 2603
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Interface Statistics
@@ -1300,6 +1329,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get post stat bulk raw data monitoring interface statistics 2604
+      x-summary-source: derived
   /statistics/interface/query/fields:
     get:
       tags:
@@ -1358,11 +1389,12 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat query fields monitoring interface statistics 3403
+      x-summary-source: derived
   /statistics/interface/type:
     get:
       tags:
       - Monitoring - Interface Statistics
-      description: Get statistics per interface
       operationId: getStatisticsPerInterface
       parameters:
       - name: query
@@ -1482,3 +1514,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get statistics per interface
+      x-summary-source: derived

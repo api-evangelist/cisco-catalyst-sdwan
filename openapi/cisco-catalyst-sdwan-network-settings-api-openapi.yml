@@ -86,6 +86,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Network Settings > CVC-read
+      summary: Get cybervision centers for network hierarchy node
+      x-summary-source: derived
     post:
       tags:
       - Network Settings
@@ -149,6 +151,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Network Settings > CVC-write
+      summary: Create cybervision center for network hierarchy node
+      x-summary-source: derived
   /v1/network-hierarchy/{hierarchyId}/network-settings/cybervisioncenters/id:
     get:
       tags:
@@ -186,6 +190,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Network Settings > CVC-read
+      summary: Get cybervision center IDBy name
+      x-summary-source: derived
   /v1/network-hierarchy/{hierarchyId}/network-settings/cybervisioncenters/{cvId}:
     delete:
       tags:
@@ -217,3 +223,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Network Settings > CVC-write
+      summary: Delete cybervision center for network hierarchy node
+      x-summary-source: derived

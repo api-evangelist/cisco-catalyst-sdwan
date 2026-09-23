@@ -58,6 +58,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Settings-read,FedRamp-read
+      summary: Reques DNS sec actions
+      x-summary-source: derived
   /fedramp/dnssec/config:
     post:
       tags:
@@ -85,6 +87,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Settings-write,FedRamp-write
+      summary: Configure DNS sec
+      x-summary-source: derived
   /fedramp/dnssec/status:
     get:
       tags:
@@ -109,6 +113,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Settings-read,FedRamp-read
+      summary: Get DNS sec status
+      x-summary-source: derived
   /fedramp/status:
     post:
       tags:
@@ -149,6 +155,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Settings-write,FedRamp-write
+      summary: Config fedramp mode
+      x-summary-source: derived
   /fedramp/wazuh/actions:
     get:
       tags:
@@ -181,6 +189,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Settings-read,FedRamp-read
+      summary: Request wazuh actions
+      x-summary-source: derived
   /fedramp/wazuh/config:
     post:
       tags:
@@ -208,6 +218,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Settings-write,FedRamp-write
+      summary: Configure wazuh client
+      x-summary-source: derived
   /fedramp/wazuh/status:
     get:
       tags:
@@ -234,3 +246,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Settings-read,FedRamp-read
+      summary: Get wazuh agent status
+      x-summary-source: derived

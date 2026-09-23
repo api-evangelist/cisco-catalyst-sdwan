@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Real-Time Monitoring - SFP API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Real-Time Monitoring - SFP…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -124,6 +132,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get detail
+      x-summary-source: derived
   /device/sfp/diagnostic:
     get:
       tags:
@@ -221,6 +231,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get diagnostic
+      x-summary-source: derived
   /device/sfp/diagnosticMeasurementAlarm:
     get:
       tags:
@@ -280,6 +292,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get diagnostic measurement alarm
+      x-summary-source: derived
   /device/sfp/diagnosticMeasurementValue:
     get:
       tags:
@@ -341,3 +355,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get diagnostic measurement value
+      x-summary-source: derived

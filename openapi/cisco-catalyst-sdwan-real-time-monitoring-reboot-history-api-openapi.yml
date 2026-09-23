@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Real-Time Monitoring - Reboot History API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Real-Time Monitoring…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -67,6 +75,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write,Device Monitoring-read,Device Monitoring-write,Software Upgrade-read,Software Upgrade-write,Device Reboot-read,Device Reboot-write,dca,Software Upgrade > Edge-write,Software Upgrade > Edge-read,Software Upgrade > Controller-write,Software Upgrade > Controller-read
+      summary: Create reboot history list
+      x-summary-source: derived
   /device/reboothistory/details:
     get:
       tags:
@@ -116,6 +126,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write,Device Monitoring-read,Device Monitoring-write,Software Upgrade-read,Software Upgrade-write,Device Reboot-read,Device Reboot-write,Software Upgrade > Edge-write,Software Upgrade > Edge-read,Software Upgrade > Controller-write,Software Upgrade > Controller-read
+      summary: Get reboot history details
+      x-summary-source: derived
   /device/reboothistory/synced:
     get:
       tags:
@@ -199,3 +211,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write,Device Monitoring-read,Device Monitoring-write,Software Upgrade-read,Software Upgrade-write,Device Reboot-read,Device Reboot-write,Software Upgrade > Edge-write,Software Upgrade > Edge-read,Software Upgrade > Controller-write,Software Upgrade > Controller-read
+      summary: Create synced reboot history list
+      x-summary-source: derived

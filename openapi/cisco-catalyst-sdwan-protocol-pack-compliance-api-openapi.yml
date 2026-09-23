@@ -67,6 +67,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get all SDAVC device
+      x-summary-source: derived
   /sdavc/protocol-pack/compliance/application:
     get:
       tags:
@@ -127,6 +129,8 @@ paths:
                       message: <Short Message>
                       code: PP0016
                       details: <Detailed Message>
+      summary: Get default application compliance details
+      x-summary-source: derived
   /sdavc/protocol-pack/compliance/application/initiate-compliance:
     post:
       tags:
@@ -189,6 +193,8 @@ paths:
                       message: <Short Message>
                       code: PP0017
                       details: <Detailed Message>
+      summary: Initiate application compliance check
+      x-summary-source: derived
   /sdavc/protocol-pack/compliance/application/is-compliance-detected:
     get:
       tags:
@@ -229,6 +235,8 @@ paths:
                       message: <Short Message>
                       code: PP0016
                       details: <Detailed Message>
+      summary: Is application compliance detected
+      x-summary-source: derived
   /sdavc/protocol-pack/compliance/application/status/{uuid}:
     get:
       tags:
@@ -297,6 +305,8 @@ paths:
                       message: <Short Message>
                       code: PP0016
                       details: <Detailed Message>
+      summary: Get application compliance status
+      x-summary-source: derived
   /sdavc/protocol-pack/compliance/application/{uuid}:
     get:
       tags:
@@ -363,6 +373,8 @@ paths:
                       message: <Short Message>
                       code: PP0016
                       details: <Detailed Message>
+      summary: Get application compliance details
+      x-summary-source: derived
   /sdavc/protocol-pack/compliance/custom-application:
     get:
       tags:
@@ -408,6 +420,8 @@ paths:
                       message: <Short Message>
                       code: PP0014
                       details: <Detailed Message>
+      summary: Get custom application list
+      x-summary-source: derived
   /sdavc/protocol-pack/compliance/device/noncompliant:
     post:
       tags:
@@ -498,6 +512,8 @@ paths:
                       message: <Short Message>
                       code: PP0015
                       details: <Detailed Message>
+      summary: Get non compliant devices for protocol pack protocol pack compliance 5104
+      x-summary-source: derived
   /sdavc/protocol-pack/compliance/device/noncompliant/{protocolPackName}:
     get:
       tags:
@@ -554,6 +570,8 @@ paths:
                       message: <Short Message>
                       code: PP0015
                       details: <Detailed Message>
+      summary: Get non compliant devices for protocol pack protocol pack compliance 7003
+      x-summary-source: derived
   /sdavc/protocol-pack/compliance/device/status/{uuid}:
     get:
       tags:
@@ -622,6 +640,8 @@ paths:
                       message: <Short Message>
                       code: PP0010
                       details: <Detailed Message>
+      summary: Get device compliance status protocol pack compliance 5203
+      x-summary-source: derived
   /sdavc/protocol-pack/compliance/initiate-device-compliance:
     post:
       tags:
@@ -663,6 +683,8 @@ paths:
                       message: <Short Message>
                       code: PP0012
                       details: <Detailed Message>
+      summary: Initiate device compliance
+      x-summary-source: derived
   /sdavc/protocol-pack/compliance/initiate-policy-compliance:
     post:
       tags:
@@ -706,6 +728,8 @@ paths:
                       message: <Short Message>
                       code: PP0011
                       details: <Detailed Message>
+      summary: Initiate policy compliance
+      x-summary-source: derived
   /sdavc/protocol-pack/compliance/new-application/{deviceUUID}:
     get:
       tags:
@@ -778,6 +802,8 @@ paths:
                       message: <Short Message>
                       code: PP0014
                       details: <Detailed Message>
+      summary: Get new application list
+      x-summary-source: derived
   /sdavc/protocol-pack/compliance/policy:
     get:
       tags:
@@ -869,11 +895,12 @@ paths:
                       message: <Short Message>
                       code: PP0013
                       details: <Detailed Message>
+      summary: Get compliance policy
+      x-summary-source: derived
   /sdavc/protocol-pack/compliance/policy/status/{uuid}:
     get:
       tags:
       - Protocol Pack Compliance
-      description: Get policy compliance status
       operationId: getPolicyComplianceStatus
       parameters:
       - name: uuid
@@ -937,3 +964,5 @@ paths:
                       message: <Short Message>
                       code: PP0009
                       details: <Detailed Message>
+      summary: Get policy compliance status
+      x-summary-source: derived

@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Troubleshooting Tools - Network Wide Path Insight API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Troubleshooting Tools…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -86,6 +94,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,Device Monitoring-write
+      summary: Export trace
+      x-summary-source: derived
   /stream/device/nwpi/importTrace:
     post:
       tags:
@@ -149,6 +159,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Import trace
+      x-summary-source: derived
   /stream/device/nwpi/tasks/create:
     post:
       tags:
@@ -403,6 +415,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-write
+      summary: Task create
+      x-summary-source: derived
   /stream/device/nwpi/tasks/delete/{taskId}:
     delete:
       tags:
@@ -480,6 +494,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-write
+      summary: Task delete
+      x-summary-source: derived
   /stream/device/nwpi/tasks/stop/{taskId}:
     post:
       tags:
@@ -534,6 +550,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-write
+      summary: Task stop
+      x-summary-source: derived
   /stream/device/nwpi/tasks/taskHistory:
     get:
       tags:
@@ -724,6 +742,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,Device Monitoring-write
+      summary: Get task history
+      x-summary-source: derived
   /stream/device/nwpi/tasks/{taskId}/traces:
     get:
       tags:
@@ -1587,6 +1607,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,Device Monitoring-write
+      summary: Get task trace
+      x-summary-source: derived
   /stream/device/nwpi/trace/delete:
     delete:
       tags:
@@ -1639,6 +1661,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-write
+      summary: Trace delete
+      x-summary-source: derived
   /stream/device/nwpi/trace/start:
     post:
       tags:
@@ -1867,6 +1891,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-write
+      summary: Trace start
+      x-summary-source: derived
   /stream/device/nwpi/trace/stop/{traceId}:
     post:
       tags:
@@ -1958,6 +1984,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-write
+      summary: Trace stop
+      x-summary-source: derived
   /stream/device/nwpi/traceHistory:
     get:
       tags:
@@ -2315,3 +2343,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,Device Monitoring-write
+      summary: Get trace history
+      x-summary-source: derived

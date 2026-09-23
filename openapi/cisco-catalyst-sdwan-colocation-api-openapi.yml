@@ -57,6 +57,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Getvnf by device id
+      x-summary-source: derived
   /colocation/monitor/vnf/action:
     post:
       tags:
@@ -94,6 +96,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Vnf actions
+      x-summary-source: derived
   /colocation/monitor/vnf/alarms:
     get:
       tags:
@@ -116,6 +120,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get VNF events count detail
+      x-summary-source: derived
   /colocation/monitor/vnf/alarms/count:
     get:
       tags:
@@ -138,6 +144,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get VNF alarm count
+      x-summary-source: derived
   /colocation/monitor/vnf/events:
     get:
       tags:
@@ -160,6 +168,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get VNF events detail
+      x-summary-source: derived
   /colocation/monitor/vnf/interface:
     get:
       tags:
@@ -195,3 +205,5 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get VNF interface detail
+      x-summary-source: derived

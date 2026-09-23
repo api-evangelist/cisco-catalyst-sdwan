@@ -66,6 +66,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Secure Device Onboarding-write
+      summary: Fetch sdo token
+      x-summary-source: derived
   /v1/securedeviceonboarding/getUrlForSdoIdentityService:
     get:
       tags:
@@ -91,3 +93,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Secure Device Onboarding-read
+      summary: Get url for sdo identity service
+      x-summary-source: derived

@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Real-Time Monitoring - UTD API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Real-Time Monitoring - UTD…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -91,6 +99,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write
+      summary: Get UTD dataplane config
+      x-summary-source: derived
   /device/utd/dataplane-global:
     get:
       tags:
@@ -150,6 +160,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write
+      summary: Get UTD dataplane global
+      x-summary-source: derived
   /device/utd/dataplane-stats:
     get:
       tags:
@@ -434,6 +446,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write
+      summary: Get UTD dataplane stats
+      x-summary-source: derived
   /device/utd/dataplane-stats-summary:
     get:
       tags:
@@ -501,6 +515,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write
+      summary: Get UTD dataplane stats summary
+      x-summary-source: derived
   /device/utd/engine-instance-status:
     get:
       tags:
@@ -542,6 +558,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write
+      summary: Get UTD engine instance status
+      x-summary-source: derived
   /device/utd/engine-status:
     get:
       tags:
@@ -585,6 +603,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write
+      summary: Get UTD engine status
+      x-summary-source: derived
   /device/utd/file-analysis-status:
     get:
       tags:
@@ -625,6 +645,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write
+      summary: Get UTD file analysis status
+      x-summary-source: derived
   /device/utd/file-reputation-status:
     get:
       tags:
@@ -664,6 +686,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write
+      summary: Get UTD file reputation status
+      x-summary-source: derived
   /device/utd/ips-update-status:
     get:
       tags:
@@ -705,6 +729,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write
+      summary: Get UTD ips update status
+      x-summary-source: derived
   /device/utd/signature/version/details:
     get:
       tags:
@@ -741,6 +767,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write
+      summary: Get signature version info
+      x-summary-source: derived
   /device/utd/urlf-con-status:
     get:
       tags:
@@ -780,6 +808,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get UTD urlf connection status
+      x-summary-source: derived
   /device/utd/urlf-update-status:
     get:
       tags:
@@ -821,6 +851,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write
+      summary: Get UTD urlf update status
+      x-summary-source: derived
   /device/utd/version-status:
     get:
       tags:
@@ -862,3 +894,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write
+      summary: Get UTD version status
+      x-summary-source: derived

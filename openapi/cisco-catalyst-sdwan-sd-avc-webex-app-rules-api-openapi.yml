@@ -126,3 +126,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get webex app data
+      x-summary-source: derived

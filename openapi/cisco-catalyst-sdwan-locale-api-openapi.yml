@@ -55,3 +55,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: admin
+      summary: Get supported locales
+      x-summary-source: derived

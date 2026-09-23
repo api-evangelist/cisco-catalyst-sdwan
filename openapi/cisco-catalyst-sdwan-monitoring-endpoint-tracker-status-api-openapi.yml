@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Monitoring - Endpoint Tracker Status API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Monitoring - Endpoint…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -157,6 +165,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stats raw data monitoring endpoint tracker status 2704
+      x-summary-source: derived
     get:
       tags:
       - Monitoring - Endpoint Tracker Status
@@ -241,6 +251,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,dca
+      summary: Get stat data raw data monitoring endpoint tracker status 2703
+      x-summary-source: derived
   /statistics/endpointTracker/aggregation:
     get:
       tags:
@@ -271,6 +283,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get aggregation data by query monitoring endpoint tracker status 3903
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Endpoint Tracker Status
@@ -301,6 +315,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default,dca
+      summary: Get post aggregation data by query monitoring endpoint tracker status 3904
+      x-summary-source: derived
   /statistics/endpointTracker/csv:
     get:
       tags:
@@ -340,6 +356,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stat data raw data as CSV monitoring endpoint tracker status 3103
+      x-summary-source: derived
   /statistics/endpointTracker/doccount:
     get:
       tags:
@@ -380,6 +398,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get count monitoring endpoint tracker status 3603
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Endpoint Tracker Status
@@ -422,6 +442,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get count post monitoring endpoint tracker status 3604
+      x-summary-source: derived
   /statistics/endpointTracker/fields:
     get:
       tags:
@@ -474,6 +496,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat data fields monitoring endpoint tracker status 3403
+      x-summary-source: derived
   /statistics/endpointTracker/page:
     get:
       tags:
@@ -598,6 +622,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get stats pagination raw data monitoring endpoint tracker status 3203
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Endpoint Tracker Status
@@ -726,6 +752,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get post stats pagination raw data monitoring endpoint tracker status 3204
+      x-summary-source: derived
   /statistics/endpointTracker/query/fields:
     get:
       tags:
@@ -790,3 +818,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat query fields monitoring endpoint tracker status 4003
+      x-summary-source: derived

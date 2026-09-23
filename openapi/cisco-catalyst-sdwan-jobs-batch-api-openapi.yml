@@ -104,3 +104,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Batch execute
+      x-summary-source: derived

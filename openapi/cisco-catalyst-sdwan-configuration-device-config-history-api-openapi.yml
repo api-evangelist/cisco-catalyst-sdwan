@@ -134,6 +134,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stat data raw data configuration device config history 1503
+      x-summary-source: derived
     post:
       tags:
       - Configuration - Device Config History
@@ -263,6 +265,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stats raw data configuration device config history 1504
+      x-summary-source: derived
   /device/history/aggregation:
     post:
       tags:
@@ -294,6 +298,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default,dca
+      summary: Get post aggregation data by query configuration device config history 2704
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Device Config History
@@ -323,6 +329,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get aggregation data by query configuration device config history 2703
+      x-summary-source: derived
   /device/history/config:
     get:
       tags:
@@ -360,6 +368,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Configuration-read,Config Group-read,Policy Group-read
+      summary: Get last thousand config list
+      x-summary-source: derived
   /device/history/config/diff/list:
     get:
       tags:
@@ -397,11 +407,12 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Configuration-read,Config Group-read,Policy Group-read
+      summary: Get config diff
+      x-summary-source: derived
   /device/history/config/{config_id}:
     get:
       tags:
       - Configuration - Device Config History
-      description: Get device config
       operationId: getDeviceConfig
       parameters:
       - name: config_id
@@ -428,6 +439,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Configuration-read,Config Group-read,Policy Group-read
+      summary: Get device config
+      x-summary-source: derived
   /device/history/csv:
     get:
       tags:
@@ -467,6 +480,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stat data raw data as CSV configuration device config history 1903
+      x-summary-source: derived
   /device/history/doccount:
     get:
       tags:
@@ -507,6 +522,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get count configuration device config history 2403
+      x-summary-source: derived
     post:
       tags:
       - Configuration - Device Config History
@@ -549,6 +566,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get count post configuration device config history 2404
+      x-summary-source: derived
   /device/history/fields:
     get:
       tags:
@@ -601,6 +620,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat data fields configuration device config history 2203
+      x-summary-source: derived
   /device/history/page:
     get:
       tags:
@@ -725,6 +746,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get stats pagination raw data configuration device config history 2003
+      x-summary-source: derived
     post:
       tags:
       - Configuration - Device Config History
@@ -853,6 +876,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get post stats pagination raw data configuration device config history 2004
+      x-summary-source: derived
   /device/history/query/fields:
     get:
       tags:
@@ -917,3 +942,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat query fields configuration device config history 2803
+      x-summary-source: derived

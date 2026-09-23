@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Monitoring - Device Health API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Monitoring - Device Health…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -32,7 +40,7 @@ paths:
       tags:
       - Monitoring - Device Health
       summary: Device health history data
-      description: 'Get all device health history '
+      description: Get all device health history
       operationId: getDeviceHealthHistory
       parameters:
       - name: last_n_hours
@@ -155,7 +163,7 @@ paths:
       tags:
       - Monitoring - Device Health
       summary: Device health overview data
-      description: 'Get all device health overview '
+      description: Get all device health overview
       operationId: getDeviceHealthOverview
       parameters:
       - name: type

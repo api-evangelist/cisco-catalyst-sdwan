@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Real-Time Monitoring - Policy API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Real-Time Monitoring…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -66,6 +74,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write
+      summary: Create policy access list associations
+      x-summary-source: derived
   /device/policy/accesslistcounters:
     get:
       tags:
@@ -108,6 +118,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write
+      summary: Create policy access list counters
+      x-summary-source: derived
   /device/policy/accesslistnames:
     get:
       tags:
@@ -147,6 +159,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write
+      summary: Create policy access list names
+      x-summary-source: derived
   /device/policy/accesslistpolicers:
     get:
       tags:
@@ -186,6 +200,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write
+      summary: Create policy access list policers
+      x-summary-source: derived
   /device/policy/approutepolicyfilter:
     get:
       tags:
@@ -247,6 +263,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write
+      summary: Create policy app route policy filter
+      x-summary-source: derived
   /device/policy/datapolicyfilter:
     get:
       tags:
@@ -335,6 +353,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write
+      summary: Create polic data policy filter
+      x-summary-source: derived
   /device/policy/filtermemoryusage:
     get:
       tags:
@@ -377,6 +397,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write
+      summary: Create policy filter memory usage
+      x-summary-source: derived
   /device/policy/iptosgtbindings:
     get:
       tags:
@@ -408,6 +430,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write
+      summary: Show vsmart ipto sgt binding
+      x-summary-source: derived
   /device/policy/iptouserbindings:
     get:
       tags:
@@ -439,6 +463,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write
+      summary: Show vsmart ipto user binding
+      x-summary-source: derived
   /device/policy/ipv6/accesslistassociations:
     get:
       tags:
@@ -478,6 +504,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write
+      summary: Create policy access list associations ipv6
+      x-summary-source: derived
   /device/policy/ipv6/accesslistcounters:
     get:
       tags:
@@ -520,6 +548,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write
+      summary: Create policy access list counters ipv6
+      x-summary-source: derived
   /device/policy/ipv6/accesslistnames:
     get:
       tags:
@@ -559,6 +589,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write
+      summary: Create policy access list names ipv6
+      x-summary-source: derived
   /device/policy/ipv6/accesslistpolicers:
     get:
       tags:
@@ -598,6 +630,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write
+      summary: Create policy access list policers ipv6
+      x-summary-source: derived
   /device/policy/pxgridstatus:
     get:
       tags:
@@ -629,6 +663,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write
+      summary: Show vsmart px grid status
+      x-summary-source: derived
   /device/policy/pxgridusersessions:
     get:
       tags:
@@ -660,6 +696,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write
+      summary: Show vsmart px grid user sessions
+      x-summary-source: derived
   /device/policy/qosmapinfo:
     get:
       tags:
@@ -699,6 +737,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write
+      summary: Create polic qos map info
+      x-summary-source: derived
   /device/policy/qosschedulerinfo:
     get:
       tags:
@@ -741,6 +781,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write
+      summary: Create polic qos scheduler info
+      x-summary-source: derived
   /device/policy/rewriteassociations:
     get:
       tags:
@@ -780,6 +822,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write
+      summary: Create policy rewrite associations info
+      x-summary-source: derived
   /device/policy/userusergroupbindings:
     get:
       tags:
@@ -839,6 +883,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write
+      summary: Show vsmart user usergroup bindings
+      x-summary-source: derived
   /device/policy/vsmart:
     get:
       tags:
@@ -880,6 +926,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write
+      summary: Show sdwan policy from vsmart
+      x-summary-source: derived
   /device/policy/zbfwdropstatistics:
     get:
       tags:
@@ -996,6 +1044,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write
+      summary: Get zone drop statistics
+      x-summary-source: derived
   /device/policy/zbfwstatistics:
     get:
       tags:
@@ -1071,6 +1121,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write
+      summary: Get zbfw statistics
+      x-summary-source: derived
   /device/policy/zonepairsessions:
     get:
       tags:
@@ -1181,6 +1233,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write
+      summary: Get zone pair sessions
+      x-summary-source: derived
   /device/policy/zonepairstatistics:
     get:
       tags:
@@ -1258,6 +1312,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write
+      summary: Get zone pairs
+      x-summary-source: derived
   /device/policy/zonepolicyfilter:
     get:
       tags:
@@ -1300,3 +1356,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write
+      summary: Get zone policy filters
+      x-summary-source: derived

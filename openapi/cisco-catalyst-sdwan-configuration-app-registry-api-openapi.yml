@@ -63,6 +63,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get all app list
+      x-summary-source: derived
   /app-registry/app/bulk/endpoint:
     put:
       tags:
@@ -153,6 +155,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Edit app in bulk by uuid
+      x-summary-source: derived
   /app-registry/app/category:
     get:
       tags:
@@ -178,6 +182,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get app list category
+      x-summary-source: derived
   /app-registry/app/discoveredapps:
     get:
       tags:
@@ -203,6 +209,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get network discovered apps
+      x-summary-source: derived
   /app-registry/app/filtermap:
     get:
       tags:
@@ -242,11 +250,13 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get attribute mapping for apps
+      x-summary-source: derived
   /app-registry/application/{app-uuid}:
     get:
       tags:
       - Configuration - App Registry
-      description: Get  app detail for particular App uuid
+      description: Get app detail for particular App uuid
       operationId: getAppByUuid
       parameters:
       - name: app-uuid
@@ -274,6 +284,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get app by uuid
+      x-summary-source: derived
   /app-registry/saasfeed:
     get:
       tags:
@@ -304,6 +316,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get active saas feeds
+      x-summary-source: derived
   /app-registry/saasfeed/app/configure:
     put:
       tags:
@@ -337,6 +351,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy
+      summary: Disableor enable saas feed for selected app
+      x-summary-source: derived
   /app-registry/saasfeed/app/{feedId}:
     get:
       tags:
@@ -369,3 +385,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get all saas feed for selected app
+      x-summary-source: derived

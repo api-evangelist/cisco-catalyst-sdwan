@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Real-Time Monitoring - IPsec API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Real-Time Monitoring - IPsec…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -138,6 +146,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Security-read,Security-write
+      summary: Create crypto ipsec identity
+      x-summary-source: derived
   /device/ipsec/ike/inbound:
     get:
       tags:
@@ -188,6 +198,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Security-read,Security-write
+      summary: Create ike inbound list
+      x-summary-source: derived
   /device/ipsec/ike/outbound:
     get:
       tags:
@@ -237,6 +249,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Security-read,Security-write
+      summary: Create ike outbound list
+      x-summary-source: derived
   /device/ipsec/ike/sessions:
     get:
       tags:
@@ -322,6 +336,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Security-read,Security-write
+      summary: Create ike sessions
+      x-summary-source: derived
   /device/ipsec/ikev1:
     get:
       tags:
@@ -429,6 +445,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Security-read,Security-write
+      summary: Create cryptov1 local SA list
+      x-summary-source: derived
   /device/ipsec/ikev2:
     get:
       tags:
@@ -483,6 +501,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Security-read,Security-write
+      summary: Create cryptov2 local SA list
+      x-summary-source: derived
   /device/ipsec/inbound:
     get:
       tags:
@@ -645,6 +665,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Security-read,Security-write
+      summary: Create in bound list
+      x-summary-source: derived
   /device/ipsec/localsa:
     get:
       tags:
@@ -693,6 +715,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Security-read,Security-write
+      summary: Create local SA list
+      x-summary-source: derived
   /device/ipsec/outbound:
     get:
       tags:
@@ -792,6 +816,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Security-read,Security-write
+      summary: Create out bound list
+      x-summary-source: derived
   /device/ipsec/pwk/inbound:
     get:
       tags:
@@ -975,6 +1001,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Security-read,Security-write
+      summary: Create IPsec PWK inbound connections
+      x-summary-source: derived
   /device/ipsec/pwk/localsa:
     get:
       tags:
@@ -1126,6 +1154,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Security-read,Security-write
+      summary: Create IPsec PWK local SA
+      x-summary-source: derived
   /device/ipsec/pwk/outbound:
     get:
       tags:
@@ -1317,3 +1347,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Security-read,Security-write
+      summary: Create IPsec PWK outbound connections
+      x-summary-source: derived

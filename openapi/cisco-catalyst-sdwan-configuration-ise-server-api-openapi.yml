@@ -72,6 +72,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Connect configuration ise server 1203
+      x-summary-source: derived
     servers:
     - url: /dataservice
   /ise/credentials:
@@ -151,6 +153,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Update ise server credentials
+      x-summary-source: derived
     post:
       tags:
       - Configuration - Ise Server
@@ -227,6 +231,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Add ise server credentials
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Ise Server
@@ -296,6 +302,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get ise server credentials
+      x-summary-source: derived
     servers:
     - url: /dataservice
   /ise/credentials/iseandpxgrid:
@@ -317,6 +325,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Delete ise and px grid account
+      x-summary-source: derived
     servers:
     - url: /dataservice
   /ise/credentials/pxgrid:
@@ -376,6 +386,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get px grid account
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Ise Server
@@ -394,6 +406,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Delete px grid
+      x-summary-source: derived
     servers:
     - url: /dataservice
   /ise/credentials/pxgrid/cert:
@@ -433,6 +447,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get pxgrid cert
+      x-summary-source: derived
     servers:
     - url: /dataservice
   /ise/credentials/vsmart/sync:
@@ -460,6 +476,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Sync vsmart
+      x-summary-source: derived
     servers:
     - url: /dataservice
   /ise/pxgrid/activate:
@@ -509,6 +527,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Account activate
+      x-summary-source: derived
     servers:
     - url: /dataservice
   /ise/pxgrid/approve:
@@ -530,6 +550,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Approve
+      x-summary-source: derived
     servers:
     - url: /dataservice
   /ise/pxgrid/create:
@@ -576,6 +598,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Account create
+      x-summary-source: derived
     servers:
     - url: /dataservice
   /template/policy/ise/identity/deleteAllLists:
@@ -616,6 +640,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Delete all lists
+      x-summary-source: derived
     servers:
     - url: /dataservice
   /template/policy/ise/identity/referenced/{listType}:
@@ -745,6 +771,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get list reference
+      x-summary-source: derived
     servers:
     - url: /dataservice
   /template/policy/ise/identity/sgt:
@@ -788,6 +816,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Sgts
+      x-summary-source: derived
     servers:
     - url: /dataservice
   /template/policy/ise/identity/usergroups:
@@ -876,6 +906,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get identity user groups
+      x-summary-source: derived
     servers:
     - url: /dataservice
   /template/policy/ise/identity/users:
@@ -963,6 +995,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get identity users
+      x-summary-source: derived
     servers:
     - url: /dataservice
 x-refined-from:

@@ -33,7 +33,6 @@ paths:
     get:
       tags:
       - Overview - Cellular
-      description: Cellular count dashlet
       operationId: cellularCountDashlet
       parameters:
       - name: type
@@ -116,6 +115,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,Device Monitoring-write
+      summary: Cellular count dashlet
+      x-summary-source: derived
   /device/cellular/dataUsage:
     get:
       tags:
@@ -664,11 +665,12 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,Device Monitoring-write
+      summary: Data usage
+      x-summary-source: derived
   /device/cellular/details:
     get:
       tags:
       - Overview - Cellular
-      description: Cellular count dashlet details
       operationId: cellularCountDashletDetails
       parameters:
       - name: lastNHours
@@ -788,6 +790,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,Device Monitoring-write
+      summary: Cellular count dashlet details
+      x-summary-source: derived
   /device/cellular/health:
     get:
       tags:
@@ -878,3 +882,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,Device Monitoring-write
+      summary: Cellular health dashlet
+      x-summary-source: derived

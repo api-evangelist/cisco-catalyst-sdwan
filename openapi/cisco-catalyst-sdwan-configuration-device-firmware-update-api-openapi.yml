@@ -46,6 +46,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: admin,Software Upgrade-write,Software Upgrade > Controller-write,Software Upgrade > Edge-write
+      summary: Process firmware image
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Device Firmware Update
@@ -62,6 +64,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Software Upgrade-read,Software Upgrade > Edge-read,Software Upgrade > Controller-read
+      summary: Get firmware images
+      x-summary-source: derived
   /device/action/firmware-upgrade:
     post:
       tags:
@@ -183,6 +187,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Remote firmware image upgrade
+      x-summary-source: derived
   /device/action/firmware-upgrade/devices:
     get:
       tags:
@@ -221,6 +227,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get firmware devices
+      x-summary-source: derived
   /device/action/firmware-upgrade/remote:
     get:
       tags:
@@ -254,6 +262,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get firmware remote image
+      x-summary-source: derived
     post:
       tags:
       - Configuration - Device Firmware Update
@@ -296,6 +306,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Process firmware remote image
+      x-summary-source: derived
   /device/action/firmware/activate:
     post:
       tags:
@@ -319,6 +331,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: admin,Software Upgrade-write,Software Upgrade > Controller-write,Software Upgrade > Edge-write
+      summary: Activate firmware image
+      x-summary-source: derived
   /device/action/firmware/devices:
     get:
       tags:
@@ -336,6 +350,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Software Upgrade-read,Software Upgrade > Edge-read,Software Upgrade > Controller-read
+      summary: Get devices FW upgrade
+      x-summary-source: derived
   /device/action/firmware/install:
     post:
       tags:
@@ -359,6 +375,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: admin,Software Upgrade-write,Software Upgrade > Controller-write,Software Upgrade > Edge-write
+      summary: Install firmware image
+      x-summary-source: derived
   /device/action/firmware/remove:
     post:
       tags:
@@ -382,6 +400,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: admin,Software Upgrade-write,Software Upgrade > Controller-write,Software Upgrade > Edge-write
+      summary: Remove firmware image
+      x-summary-source: derived
   /device/action/firmware/{versionId}:
     get:
       tags:
@@ -406,6 +426,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Software Upgrade-read,Software Upgrade > Edge-read,Software Upgrade > Controller-read
+      summary: Get firmware image details
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Device Firmware Update
@@ -429,3 +451,5 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: admin,Software Upgrade-write,Software Upgrade > Controller-write,Software Upgrade > Edge-write
+      summary: Delete firmware image
+      x-summary-source: derived

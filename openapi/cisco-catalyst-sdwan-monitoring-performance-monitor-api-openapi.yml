@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Monitoring - Performance Monitor API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Monitoring - Performance…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -32,7 +40,7 @@ paths:
       tags:
       - Monitoring - Performance Monitor
       summary: one site one application line chart data
-      description: 'Get one application one site line chart data '
+      description: Get one application one site line chart data
       operationId: getPostAggregationDataByQuery_MonitoringPerformanceMonitor_3104
       requestBody:
         description: Stats query string
@@ -103,7 +111,7 @@ paths:
       tags:
       - Monitoring - Performance Monitor
       summary: single application site health detail within time-range
-      description: 'Get single applicaiton site health detail in a time range '
+      description: Get single applicaiton site health detail in a time range
       operationId: getApplicationHeatMapDetail
       parameters:
       - name: application
@@ -176,7 +184,7 @@ paths:
       tags:
       - Monitoring - Performance Monitor
       summary: one site one application health data
-      description: 'Get one application health for one site '
+      description: Get one application health for one site
       operationId: getApplicationSiteHealth
       parameters:
       - name: health
@@ -280,7 +288,7 @@ paths:
       tags:
       - Monitoring - Performance Monitor
       summary: all sites one application health data
-      description: 'Get one application health for all sites '
+      description: Get one application health for all sites
       operationId: getApplicationSitesHealth
       parameters:
       - name: application
@@ -355,7 +363,7 @@ paths:
       tags:
       - Monitoring - Performance Monitor
       summary: one site all applications health data
-      description: 'Get all applications health for one site '
+      description: Get all applications health for one site
       operationId: getApplicationsSiteHealth
       parameters:
       - name: siteid
@@ -439,7 +447,7 @@ paths:
       tags:
       - Monitoring - Performance Monitor
       summary: all sites all applications health data
-      description: 'Get applications health for all sites '
+      description: Get applications health for all sites
       operationId: getApplicationsSitesHealth
       parameters:
       - name: isHeatMap

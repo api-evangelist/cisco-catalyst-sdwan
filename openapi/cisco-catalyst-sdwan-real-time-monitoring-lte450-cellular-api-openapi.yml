@@ -85,6 +85,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Interface-read,Interface-write
+      summary: Create hardware list real time monitoring lte450 cellular 3103
+      x-summary-source: derived
   /device/lte450Cellular/network:
     get:
       tags:
@@ -143,6 +145,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Interface-read,Interface-write
+      summary: Create network list real time monitoring lte450 cellular 3003
+      x-summary-source: derived
   /device/lte450Cellular/radio:
     get:
       tags:
@@ -190,3 +194,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Interface-read,Interface-write
+      summary: Create radio list real time monitoring lte450 cellular 2803
+      x-summary-source: derived

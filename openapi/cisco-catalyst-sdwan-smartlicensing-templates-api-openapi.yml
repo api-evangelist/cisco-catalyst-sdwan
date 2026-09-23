@@ -64,6 +64,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get devices for template
+      x-summary-source: derived
   /v1/smart-licensing/template:
     post:
       tags:
@@ -142,6 +144,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Save template
+      x-summary-source: derived
   /v1/smart-licensing/template/{templateId}:
     delete:
       tags:
@@ -164,3 +168,5 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Delete template
+      x-summary-source: derived

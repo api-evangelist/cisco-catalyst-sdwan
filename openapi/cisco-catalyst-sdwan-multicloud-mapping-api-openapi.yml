@@ -236,6 +236,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Process mapping
+      x-summary-source: derived
     get:
       tags:
       - MultiCloud - Mapping
@@ -296,11 +298,12 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get mapping matrix
+      x-summary-source: derived
   /multicloud/map/defaults:
     get:
       tags:
       - MultiCloud - Mapping
-      description: Get default mapping values
       operationId: getDefaultMappingValues
       parameters:
       - name: cloudType
@@ -346,11 +349,12 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get default mapping values
+      x-summary-source: derived
   /multicloud/map/status:
     get:
       tags:
       - MultiCloud - Mapping
-      description: Get mapping status
       operationId: getMappingStatus
       parameters:
       - name: cloudType
@@ -461,11 +465,12 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get mapping status
+      x-summary-source: derived
   /multicloud/map/summary:
     get:
       tags:
       - MultiCloud - Mapping
-      description: Get mapping summary
       operationId: getMappingSummary
       parameters:
       - name: cloudType
@@ -752,6 +757,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get mapping summary
+      x-summary-source: derived
   /multicloud/map/tags:
     get:
       tags:
@@ -787,6 +794,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get mapping tags
+      x-summary-source: derived
   /multicloud/map/vpns:
     get:
       tags:
@@ -825,6 +834,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get mapping vpns
+      x-summary-source: derived
   /multicloud/mapping/{cloudType}:
     get:
       tags:
@@ -884,3 +895,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get cgw associated mappings
+      x-summary-source: derived

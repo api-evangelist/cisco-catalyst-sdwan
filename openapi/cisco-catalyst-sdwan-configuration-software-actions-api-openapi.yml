@@ -48,6 +48,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get remote server list
+      x-summary-source: derived
     post:
       tags:
       - Configuration - Software Actions
@@ -82,6 +84,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Add remote server
+      x-summary-source: derived
   /device/action/remote-server/{id}:
     get:
       tags:
@@ -107,6 +111,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get remote server by id
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Software Actions
@@ -140,6 +146,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Delete remote server
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Software Actions
@@ -170,6 +178,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Update remote server
+      x-summary-source: derived
   /device/action/software:
     get:
       tags:
@@ -219,6 +229,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Find software images
+      x-summary-source: derived
     post:
       tags:
       - Configuration - Software Actions
@@ -273,6 +285,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Create image URL
+      x-summary-source: derived
   /device/action/software/imageProperties/{versionId}:
     get:
       tags:
@@ -355,6 +369,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get image properties
+      x-summary-source: derived
   /device/action/software/images:
     get:
       tags:
@@ -421,6 +437,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Find software images with filters
+      x-summary-source: derived
   /device/action/software/platformfamily:
     get:
       tags:
@@ -473,6 +491,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Find supported platform family
+      x-summary-source: derived
   /device/action/software/remoteserver/{versionId}:
     get:
       tags:
@@ -509,6 +529,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Software Upgrade-read,Software Upgrade-write,Software Upgrade > Edge-write,Software Upgrade > Edge-read,Software Upgrade > Controller-write,Software Upgrade > Controller-read
+      summary: Get image remote server
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Software Actions
@@ -547,6 +569,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: admin,Software Upgrade-write,Software Upgrade > Edge-write,Software Upgrade > Controller-write
+      summary: Edit image remote server
+      x-summary-source: derived
   /device/action/software/vedge/version:
     get:
       tags:
@@ -588,6 +612,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Find VEdge software version
+      x-summary-source: derived
   /device/action/software/version:
     get:
       tags:
@@ -625,6 +651,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Find software version
+      x-summary-source: derived
   /device/action/software/vnfproperties/{versionId}:
     get:
       tags:
@@ -707,6 +735,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get vnf properties
+      x-summary-source: derived
   /device/action/software/ztp/version:
     get:
       tags:
@@ -801,6 +831,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Find ztp software version
+      x-summary-source: derived
   /device/action/software/{versionId}:
     delete:
       tags:
@@ -824,6 +856,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Delete image URL
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Software Actions
@@ -858,3 +892,5 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: admin,Software Upgrade-write,Software Upgrade > Edge-write,Software Upgrade > Controller-write
+      summary: Update image URL
+      x-summary-source: derived

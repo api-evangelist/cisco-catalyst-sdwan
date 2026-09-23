@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Real-Time Monitoring - Crash Log API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Real-Time Monitoring - Crash…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -101,6 +109,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write,Device Monitoring-read,Device Monitoring-write,Device Reboot-read,Device Reboot-write,Software Upgrade > Edge-write,Software Upgrade > Edge-read,Software Upgrade > Controller-write,Software Upgrade > Controller-read,Software Upgrade-read,Software Upgrade-write,dca
+      summary: Get device crash logs
+      x-summary-source: derived
   /device/crashlog/details:
     get:
       tags:
@@ -140,6 +150,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write,Device Monitoring-read,Device Monitoring-write,Device Reboot-read,Device Reboot-write,Software Upgrade > Edge-write,Software Upgrade > Edge-read,Software Upgrade > Controller-write,Software Upgrade > Controller-read,Software Upgrade-read,Software Upgrade-write
+      summary: Get all device crash logs
+      x-summary-source: derived
   /device/crashlog/log:
     get:
       tags:
@@ -712,6 +724,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write
+      summary: Get device crash information
+      x-summary-source: derived
   /device/crashlog/synced:
     get:
       tags:
@@ -801,3 +815,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write,Device Monitoring-read,Device Monitoring-write,Device Reboot-read,Device Reboot-write,Software Upgrade > Edge-write,Software Upgrade > Edge-read,Software Upgrade > Controller-write,Software Upgrade > Controller-read,Software Upgrade-read,Software Upgrade-write
+      summary: Get device crash logs synced
+      x-summary-source: derived

@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
   title: Monitoring and Troubleshooting Monitoring - Cflowd API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -101,6 +109,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write
+      summary: Get cflowd DPI device field JSON
+      x-summary-source: derived
   /device/cflowd/collector:
     get:
       tags:
@@ -135,6 +145,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write
+      summary: Create cflowd collector list
+      x-summary-source: derived
   /device/cflowd/device/fields:
     get:
       tags:
@@ -213,6 +225,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get cflowd DPI field JSON
+      x-summary-source: derived
   /device/cflowd/flows:
     get:
       tags:
@@ -265,6 +279,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write
+      summary: Create cflow collector list
+      x-summary-source: derived
   /device/cflowd/flows-count:
     get:
       tags:
@@ -315,6 +331,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write
+      summary: Create cflowd flows count list
+      x-summary-source: derived
   /device/cflowd/fnf/cache-stats:
     get:
       tags:
@@ -347,6 +365,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write
+      summary: Get fn FCache stats
+      x-summary-source: derived
   /device/cflowd/fnf/export-client-stats:
     get:
       tags:
@@ -379,6 +399,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write
+      summary: Get fn FExport client stats
+      x-summary-source: derived
   /device/cflowd/fnf/export-stats:
     get:
       tags:
@@ -411,6 +433,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write
+      summary: Get fn FExport stats
+      x-summary-source: derived
   /device/cflowd/fnf/flow-monitor:
     get:
       tags:
@@ -443,6 +467,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write
+      summary: Get fnf
+      x-summary-source: derived
   /device/cflowd/fnf/monitor-stats:
     get:
       tags:
@@ -475,6 +501,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write
+      summary: Get fn FMonitor stats
+      x-summary-source: derived
   /device/cflowd/statistics:
     get:
       tags:
@@ -544,6 +572,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write
+      summary: Create cflowd statistics
+      x-summary-source: derived
   /device/cflowd/template:
     get:
       tags:
@@ -576,6 +606,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write
+      summary: Create cflowd template
+      x-summary-source: derived
   /statistics/cflowd:
     post:
       tags:
@@ -707,6 +739,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: default
+      summary: Get stats raw data monitoring cflowd 1804
+      x-summary-source: derived
     get:
       tags:
       - Monitoring - Cflowd
@@ -812,6 +846,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: default
+      summary: Get stat data raw data monitoring cflowd 1803
+      x-summary-source: derived
   /statistics/cflowd/aggregation:
     post:
       tags:
@@ -844,6 +880,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: default,dca
+      summary: Get post aggregation data by query monitoring cflowd 3004
+      x-summary-source: derived
     get:
       tags:
       - Monitoring - Cflowd
@@ -874,6 +912,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: default
+      summary: Get aggregation data by query monitoring cflowd 3003
+      x-summary-source: derived
   /statistics/cflowd/csv:
     get:
       tags:
@@ -914,6 +954,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: default
+      summary: Get stat data raw data as CSV monitoring cflowd 2203
+      x-summary-source: derived
   /statistics/cflowd/doccount:
     post:
       tags:
@@ -958,6 +1000,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get count post monitoring cflowd 2704
+      x-summary-source: derived
     get:
       tags:
       - Monitoring - Cflowd
@@ -998,6 +1042,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get count monitoring cflowd 2703
+      x-summary-source: derived
   /statistics/cflowd/fields:
     get:
       tags:
@@ -1051,6 +1097,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get stat data fields monitoring cflowd 2503
+      x-summary-source: derived
   /statistics/cflowd/page:
     get:
       tags:
@@ -1176,6 +1224,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Device Monitoring-read
+      summary: Get stats pagination raw data monitoring cflowd 2303
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Cflowd
@@ -1305,6 +1355,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Device Monitoring-read
+      summary: Get post stats pagination raw data monitoring cflowd 2304
+      x-summary-source: derived
   /statistics/cflowd/query/fields:
     get:
       tags:
@@ -1370,3 +1422,5 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get stat query fields monitoring cflowd 3103
+      x-summary-source: derived

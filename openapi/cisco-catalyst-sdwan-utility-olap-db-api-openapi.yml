@@ -65,6 +65,8 @@ paths:
           description: Not Found
         '500':
           description: Internal Server Error
+      summary: Post stats migration action
+      x-summary-source: derived
   /util/olapdb/migration/rangefrom:
     post:
       tags:
@@ -127,6 +129,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Post stats migration range config
+      x-summary-source: derived
     get:
       tags:
       - Utility - OLAP DB
@@ -181,6 +185,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get stats migration range config
+      x-summary-source: derived
   /util/olapdb/migration/settings:
     post:
       tags:
@@ -216,6 +222,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Post stats migration settings
+      x-summary-source: derived
     get:
       tags:
       - Utility - OLAP DB
@@ -243,6 +251,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get stats migration settings
+      x-summary-source: derived
   /util/olapdb/migration/statsdbinfo:
     get:
       tags:
@@ -263,6 +273,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get stats migration stats db info
+      x-summary-source: derived
   /util/olapdb/migration/status:
     get:
       tags:
@@ -301,3 +313,5 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get stats migration status
+      x-summary-source: derived

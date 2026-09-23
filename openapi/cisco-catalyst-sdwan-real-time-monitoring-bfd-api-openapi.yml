@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Real-Time Monitoring - BFD API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Real-Time Monitoring - BFD…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -209,6 +217,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write,System-read,System-write
+      summary: Create BFD history list
+      x-summary-source: derived
   /device/bfd/links:
     get:
       tags:
@@ -307,6 +317,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Create BFD link list
+      x-summary-source: derived
   /device/bfd/sessions:
     get:
       tags:
@@ -506,6 +518,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write,System-read,System-write
+      summary: Create BFD sessions
+      x-summary-source: derived
   /device/bfd/sites/detail:
     get:
       tags:
@@ -621,6 +635,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: RBAC VPN-read,RBAC VPN-write
+      summary: Get BFD site state detail
+      x-summary-source: derived
   /device/bfd/sites/summary:
     get:
       tags:
@@ -685,11 +701,12 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,RBAC VPN-read,System-read,System-write
+      summary: Get BFD sites summary
+      x-summary-source: derived
   /device/bfd/state/device:
     get:
       tags:
       - Real-Time Monitoring - BFD
-      description: Get device BFD state summary
       operationId: getDeviceBFDStateSummary
       parameters:
       - name: deviceId
@@ -790,6 +807,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,RBAC VPN-read,RBAC VPN-write
+      summary: Get device BFD state summary
+      x-summary-source: derived
   /device/bfd/state/device/tloc:
     get:
       tags:
@@ -829,6 +848,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,RBAC VPN-read,RBAC VPN-write
+      summary: Get device BFD state summary tloc
+      x-summary-source: derived
   /device/bfd/state/device/tlocInterfaceMap:
     get:
       tags:
@@ -864,11 +885,12 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,RBAC VPN-read,RBAC VPN-write
+      summary: Get device tloc to intf list
+      x-summary-source: derived
   /device/bfd/status:
     get:
       tags:
       - Real-Time Monitoring - BFD
-      description: Get device BFD status
       operationId: getDeviceBFDStatus
       responses:
         '200':
@@ -910,6 +932,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get device BFD status
+      x-summary-source: derived
   /device/bfd/summary:
     get:
       tags:
@@ -952,11 +976,12 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write,System-read,System-write
+      summary: Create BFD summary
+      x-summary-source: derived
   /device/bfd/summary/device:
     get:
       tags:
       - Real-Time Monitoring - BFD
-      description: Get device BFD status summary
       operationId: getDeviceBFDStatusSummary
       parameters:
       - name: deviceId
@@ -997,6 +1022,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get device BFD status summary
+      x-summary-source: derived
   /device/bfd/synced/sessions:
     get:
       tags:
@@ -1156,6 +1183,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write,System-read,System-write
+      summary: Create synced BFD session
+      x-summary-source: derived
   /device/bfd/tloc:
     get:
       tags:
@@ -1198,6 +1227,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write,System-read,System-write
+      summary: Create TLOC summary
+      x-summary-source: derived
   /device/bfd/tloc/detail:
     get:
       tags:
@@ -1238,3 +1269,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,Device Monitoring-write
+      summary: Get BFD tloc state detail
+      x-summary-source: derived

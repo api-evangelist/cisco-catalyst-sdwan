@@ -33,7 +33,7 @@ paths:
     post:
       tags:
       - Workflows - Controllers Upgrade
-      summary: Trigger controllers upgrade.
+      summary: Trigger controllers upgrade
       description: Trigger controllers upgrade.
       operationId: triggerControllersUpgrade
       requestBody:
@@ -187,7 +187,7 @@ paths:
     get:
       tags:
       - Workflows - Controllers Upgrade
-      summary: Retrieve available versions for Controllers upgrade.
+      summary: Retrieve available versions for Controllers upgrade
       description: Returns a list of available versions for controller upgrades based on the specified image type.
       operationId: getAvailableVersions
       parameters:
@@ -285,7 +285,7 @@ paths:
     put:
       tags:
       - Workflows - Controllers Upgrade
-      summary: Cancel controllers upgrade process.
+      summary: Cancel controllers upgrade process
       description: Cancel the upgrade process for controllers, managers, and validators.
       operationId: cancelUpgrade
       requestBody:
@@ -342,7 +342,7 @@ paths:
     put:
       tags:
       - Workflows - Controllers Upgrade
-      summary: Reschedule controllers upgrade process.
+      summary: Reschedule controllers upgrade process
       description: Reschedule the upgrade process for managers, validators, and controllers by providing new execution timestamps.
       operationId: rescheduleUpgrade
       requestBody:
@@ -453,7 +453,7 @@ paths:
     get:
       tags:
       - Workflows - Controllers Upgrade
-      summary: Retrieve detailed controllers upgrade status.
+      summary: Retrieve detailed controllers upgrade status
       description: Retrieve detailed upgrade status of controllers by providing process Id.
       operationId: getUpgradeStatus
       parameters:
@@ -567,7 +567,7 @@ paths:
     get:
       tags:
       - Workflows - Controllers Upgrade
-      summary: Get version compliance across tenants.
+      summary: Get version compliance across tenants
       description: Returns compliance information for the specified version of Controllers upgrade across all tenants.
       operationId: getVersionComplianceInfo
       parameters:

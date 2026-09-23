@@ -51,6 +51,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Cancel pending tasks
+      x-summary-source: derived
   /device/action/status/clean:
     get:
       tags:
@@ -72,6 +74,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Clean status
+      x-summary-source: derived
   /device/action/status/clear:
     delete:
       tags:
@@ -93,11 +97,12 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Delete status
+      x-summary-source: derived
   /device/action/status/tasks:
     get:
       tags:
       - Configuration - Dashboard Status
-      description: Find running tasks
       operationId: findRunningTasks
       responses:
         '200':
@@ -125,11 +130,12 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Find running tasks
+      x-summary-source: derived
   /device/action/status/tasks/activeCount:
     get:
       tags:
       - Configuration - Dashboard Status
-      description: Get active task count
       operationId: getActiveTaskCount
       responses:
         '200':
@@ -150,6 +156,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get active task count
+      x-summary-source: derived
   /device/action/status/tasks/clean:
     get:
       tags:
@@ -182,6 +190,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get clean status
+      x-summary-source: derived
   /device/action/status/{processId}:
     get:
       tags:
@@ -214,3 +224,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Find status
+      x-summary-source: derived

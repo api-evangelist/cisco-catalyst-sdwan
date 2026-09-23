@@ -1,7 +1,13 @@
 openapi: 3.2.0
 info:
   title: UX 1.0 Configuration Configuration - Quick Connect API
-  description: "Configuration of UX 1.0 device and policy.\nIncludes API operations for the following:\n  Managing original SD-WAN device configurations and policy configurations\n  Device templates and feature templates"
+  description: 'Configuration of UX 1.0 device and policy.
+
+    Includes API operations for the following:
+
+    Managing original SD-WAN device configurations and policy configurations
+
+    Device templates and feature templates'
   contact:
     email: vmanage@cisco.com
   license:
@@ -72,3 +78,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Inventory-read,Device Inventory-write,Template Deploy-read,Template Deploy-write
+      summary: Submit day0 config
+      x-summary-source: derived

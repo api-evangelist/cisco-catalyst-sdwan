@@ -34,7 +34,6 @@ paths:
       tags:
       - Client - Security
       summary: Get CSRF token
-      description: Get CSRF token
       operationId: getCsrfToken
       parameters:
       - name: json

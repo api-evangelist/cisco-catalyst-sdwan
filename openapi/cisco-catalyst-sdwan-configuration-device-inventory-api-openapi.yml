@@ -33,7 +33,10 @@ paths:
     post:
       tags:
       - Configuration - Device Inventory
-      description: 'Create new device<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view 123.'
+      description: 'Create new device
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view 123.'
       operationId: createDevice
       requestBody:
         description: Create device request
@@ -77,6 +80,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Create device
+      x-summary-source: derived
   /system/device/bootstrap/device/{uuid}:
     get:
       tags:
@@ -139,6 +144,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Generate bootstrap config for vedge
+      x-summary-source: derived
   /system/device/bootstrap/devices:
     post:
       tags:
@@ -190,6 +197,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Generate bootstrap config for vedges
+      x-summary-source: derived
   /system/device/bootstrap/download/{id}:
     get:
       tags:
@@ -228,6 +237,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get bootstrap config zip
+      x-summary-source: derived
   /system/device/bootstrap/generic/devices:
     get:
       tags:
@@ -270,6 +281,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Generate generic bootstrap config for vedges
+      x-summary-source: derived
   /system/device/claimDevices:
     post:
       tags:
@@ -441,6 +454,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Claim devices
+      x-summary-source: derived
   /system/device/controllers/vedge/status:
     get:
       tags:
@@ -477,6 +492,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get controller VEdge sync status configuration device inventory 3903
+      x-summary-source: derived
   /system/device/decommission/{uuid}:
     put:
       tags:
@@ -515,6 +532,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Decommission vedge cloud
+      x-summary-source: derived
   /system/device/devicesWithoutSubjectSudi:
     get:
       tags:
@@ -540,6 +559,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Devices without subject sudi
+      x-summary-source: derived
   /system/device/fileupload:
     post:
       tags:
@@ -598,6 +619,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Form post
+      x-summary-source: derived
   /system/device/generate-payg:
     post:
       tags:
@@ -642,6 +665,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Inventory-write,Device Inventory > Edge-write
+      summary: Validate user
+      x-summary-source: derived
   /system/device/lifecycle/management/{uuid}:
     post:
       tags:
@@ -684,6 +709,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Set life cycle
+      x-summary-source: derived
   /system/device/management/systemip:
     get:
       tags:
@@ -714,6 +741,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get management system IP info configuration device inventory 3403
+      x-summary-source: derived
   /system/device/migrateDevice/{uuid}:
     put:
       tags:
@@ -746,6 +775,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Migrate device
+      x-summary-source: derived
   /system/device/quickconnect/smartaccount/sync:
     post:
       tags:
@@ -792,6 +823,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get smart account devices
+      x-summary-source: derived
   /system/device/reset/{uuid}:
     put:
       tags:
@@ -830,6 +863,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Reset vedge cloud
+      x-summary-source: derived
   /system/device/rma/candidates/{deviceType}:
     get:
       tags:
@@ -890,6 +925,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get RMA candidates
+      x-summary-source: derived
   /system/device/rootcertchain/status:
     get:
       tags:
@@ -943,6 +980,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get root cert status all
+      x-summary-source: derived
   /system/device/selfsignedcert/iscreated:
     get:
       tags:
@@ -972,6 +1011,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: admin
+      summary: Check self signed cert configuration device inventory 3903
+      x-summary-source: derived
   /system/device/smartaccount/authenticate:
     post:
       tags:
@@ -1019,6 +1060,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Smart account authenticate
+      x-summary-source: derived
   /system/device/smartaccount/sync:
     post:
       tags:
@@ -1064,6 +1107,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Sync devices
+      x-summary-source: derived
   /system/device/sync/rootcertchain:
     get:
       tags:
@@ -1094,11 +1139,16 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Sync root cert chain
+      x-summary-source: derived
   /system/device/tenant/management/systemip:
     get:
       tags:
       - Configuration - Device Inventory
-      description: 'Get management system IP<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Get management system IP
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: getTenantManagementSystemIPs
       responses:
         '200':
@@ -1142,6 +1192,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get tenant management system IPs
+      x-summary-source: derived
   /system/device/type/{deviceCategory}:
     get:
       tags:
@@ -1179,6 +1231,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Device Monitoring-read,dca
+      summary: Get cloud dock data based on device type
+      x-summary-source: derived
   /system/device/type/{deviceCategory}/defaultConfig:
     get:
       tags:
@@ -1216,6 +1270,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Device Monitoring-read,dca
+      summary: Get cloud dock default config based on device type
+      x-summary-source: derived
   /system/device/unclaimedDevices:
     get:
       tags:
@@ -1289,6 +1345,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get all unclaimed devices
+      x-summary-source: derived
   /system/device/updateDeviceSubjectSUDI/{uuid}:
     put:
       tags:
@@ -1311,6 +1369,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Update device subject SUDI
+      x-summary-source: derived
   /system/device/vedgedetection:
     get:
       tags:
@@ -1466,6 +1526,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Checkv edge device presence
+      x-summary-source: derived
   /system/device/vmanagerootca/{uuid}:
     delete:
       tags:
@@ -1504,6 +1566,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Invalidate vmanage root CA
+      x-summary-source: derived
   /system/device/{deviceCategory}:
     get:
       tags:
@@ -2123,11 +2187,12 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default,dca,Device Inventory > Edge-read,Device Inventory > Controller-read
+      summary: Get devices details
+      x-summary-source: derived
   /system/device/{uuid}:
     put:
       tags:
       - Configuration - Device Inventory
-      description: Edit device
       operationId: editDevice
       parameters:
       - name: uuid
@@ -2163,6 +2228,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Edit device
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Device Inventory
@@ -2201,11 +2268,12 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Inventory-write,Device Inventory > Edge-write
+      summary: Delete device configuration device inventory 2106
+      x-summary-source: derived
   /system/device/{uuid}/unlock:
     post:
       tags:
       - Configuration - Device Inventory
-      description: Unlock device
       operationId: unlockDevice
       parameters:
       - name: uuid
@@ -2234,3 +2302,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Inventory-write
+      summary: Unlock device
+      x-summary-source: derived

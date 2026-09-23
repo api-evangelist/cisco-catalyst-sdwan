@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
   title: UX 2.0 Configuration Topology - Topology Group API
-  description: "Configuration of UX 2.0 device, policy, and topology\nIncludes API operations for the following\n  Configuration Groups (SD-WAN and SD-Routing)\n  Policy Groups\n  Topology Groups"
+  description: 'Configuration of UX 2.0 device, policy, and topology
+
+    Includes API operations for the following
+
+    Configuration Groups (SD-WAN and SD-Routing)
+
+    Policy Groups
+
+    Topology Groups'
   contact:
     email: vmanage@cisco.com
   license:
@@ -121,6 +129,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Topology Group-write
+      summary: Create topology group
+      x-summary-source: derived
     get:
       tags:
       - Topology - Topology Group
@@ -312,6 +322,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Topology Group-read
+      summary: Get topology group by solution
+      x-summary-source: derived
   /v1/topology-group/{topologyGroupId}:
     get:
       tags:
@@ -504,6 +516,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Topology Group-read
+      summary: Get topology group
+      x-summary-source: derived
     put:
       tags:
       - Topology - Topology Group
@@ -585,6 +599,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Topology Group-write
+      summary: Edit topology group
+      x-summary-source: derived
     delete:
       tags:
       - Topology - Topology Group
@@ -606,6 +622,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Topology Group-write
+      summary: Delete topology group
+      x-summary-source: derived
   /v1/topology-group/{topologyGroupId}/device/deploy:
     post:
       tags:
@@ -662,6 +680,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Topology Group > Device > Activate-write
+      summary: Deploy topology group
+      x-summary-source: derived
   /v1/topology-group/{topologyGroupId}/device/{deviceId}/preview:
     post:
       tags:
@@ -734,3 +754,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Topology Group > Device > Activate-read
+      summary: Get topology group device configuration preview
+      x-summary-source: derived

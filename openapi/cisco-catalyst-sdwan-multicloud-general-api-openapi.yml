@@ -90,6 +90,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Audit
+      x-summary-source: derived
     get:
       tags:
       - MultiCloud - General
@@ -176,6 +178,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Audit dry run
+      x-summary-source: derived
   /multicloud/connected-sites/{cloudType}:
     get:
       tags:
@@ -299,6 +303,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get cloud connected sites multicloud general 3903
+      x-summary-source: derived
   /multicloud/corenetworkpolicy:
     get:
       tags:
@@ -345,6 +351,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get cwan core network policy
+      x-summary-source: derived
   /multicloud/device:
     get:
       tags:
@@ -395,6 +403,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get wan devices
+      x-summary-source: derived
   /multicloud/devices/{cloudType}:
     get:
       tags:
@@ -497,6 +507,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get cloud devices multicloud general 3103
+      x-summary-source: derived
   /multicloud/regions:
     get:
       tags:
@@ -705,6 +717,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get cloud regions
+      x-summary-source: derived
   /multicloud/sshkeys:
     get:
       tags:
@@ -755,6 +769,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get ssh key list
+      x-summary-source: derived
   /multicloud/statistics/interface/aggregation:
     post:
       tags:
@@ -820,6 +836,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get post aggregation data by query multicloud general 4404
+      x-summary-source: derived
   /multicloud/telemetry:
     post:
       tags:
@@ -866,6 +884,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Telemetry
+      x-summary-source: derived
   /multicloud/types:
     get:
       tags:
@@ -894,6 +914,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get cloud types
+      x-summary-source: derived
   /multicloud/widget:
     get:
       tags:
@@ -1064,6 +1086,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get all cloud widgets
+      x-summary-source: derived
   /multicloud/widget/{cloudType}:
     get:
       tags:
@@ -1235,11 +1259,13 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get cloud widget
+      x-summary-source: derived
   /multicloud/{cloudType}/config-group/{config-group-id}/topology:
     get:
       tags:
       - MultiCloud - General
-      summary: Get Multicloud topology.
+      summary: Get Multicloud topology
       description: API to retrieve current Multicloud MultiCloud topology for the Config Group.
       operationId: getMultiCloudConfigGroupTopology
       parameters:
@@ -1284,7 +1310,7 @@ paths:
     put:
       tags:
       - MultiCloud - General
-      summary: Update Multicloud topology for the Config Group.
+      summary: Update Multicloud topology for the Config Group
       description: API to update current MultiCloud topology for the Config Group.
       operationId: updateMultiCloudConfigGroupTopology
       parameters:

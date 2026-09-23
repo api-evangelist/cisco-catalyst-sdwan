@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Real-Time Monitoring - DPI API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Real-Time Monitoring - DPI…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -99,6 +107,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get supported application list
+      x-summary-source: derived
   /device/dpi/application/fields:
     get:
       tags:
@@ -176,6 +186,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get DPI device field JSON
+      x-summary-source: derived
   /device/dpi/applications:
     get:
       tags:
@@ -280,6 +292,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write
+      summary: Create DPI collector list
+      x-summary-source: derived
   /device/dpi/common/applications:
     get:
       tags:
@@ -387,6 +401,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get common application list
+      x-summary-source: derived
   /device/dpi/device/fields:
     get:
       tags:
@@ -448,6 +464,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get DPI field JSON
+      x-summary-source: derived
   /device/dpi/devicedetails/fields:
     get:
       tags:
@@ -514,6 +532,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get DPI device details field JSON
+      x-summary-source: derived
   /device/dpi/flows:
     get:
       tags:
@@ -638,6 +658,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write
+      summary: Create DPI flows list
+      x-summary-source: derived
   /device/dpi/qosmos-static/applications:
     get:
       tags:
@@ -715,6 +737,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get qosmos static application list
+      x-summary-source: derived
   /device/dpi/qosmos/applications:
     get:
       tags:
@@ -793,6 +817,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Device Monitoring-read
+      summary: Get qosmos application list
+      x-summary-source: derived
   /device/dpi/summary:
     get:
       tags:
@@ -838,6 +864,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write
+      summary: Create DPI summary real time
+      x-summary-source: derived
   /device/dpi/supported-applications:
     get:
       tags:
@@ -964,3 +992,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write
+      summary: Create DPI statistics
+      x-summary-source: derived

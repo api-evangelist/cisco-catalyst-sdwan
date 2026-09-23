@@ -1,7 +1,13 @@
 openapi: 3.2.0
 info:
-  title: UX 1.0 Configuration Configuration - Voice Template Policy API
-  description: "Configuration of UX 1.0 device and policy.\nIncludes API operations for the following:\n  Managing original SD-WAN device configurations and policy configurations\n  Device templates and feature templates"
+  title: UX 1.0 Configuration Configuration - Voice Template Policy…
+  description: 'Configuration of UX 1.0 device and policy.
+
+    Includes API operations for the following:
+
+    Managing original SD-WAN device configurations and policy configurations
+
+    Device templates and feature templates'
   contact:
     email: vmanage@cisco.com
   license:
@@ -69,6 +75,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Create voice template
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Voice Template Policy
@@ -130,6 +138,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Generate voice template list
+      x-summary-source: derived
   /template/policy/voice/definition/{policyId}:
     get:
       tags:
@@ -161,6 +171,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get template by id
+      x-summary-source: derived
   /template/policy/voice/devices:
     get:
       tags:
@@ -186,6 +198,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get voice policy device list
+      x-summary-source: derived
   /template/policy/voice/devices/{policyId}:
     get:
       tags:
@@ -219,6 +233,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get device list by policy id
+      x-summary-source: derived
   /template/policy/voice/summary:
     get:
       tags:
@@ -244,6 +260,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Generate voice policy summary
+      x-summary-source: derived
   /template/policy/voice/{deviceModel}:
     get:
       tags:
@@ -281,6 +299,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get voice templates for device
+      x-summary-source: derived
   /template/policy/voice/{policyId}:
     put:
       tags:
@@ -331,6 +351,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Edit voice template
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Voice Template Policy
@@ -353,3 +375,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Delete voice template
+      x-summary-source: derived

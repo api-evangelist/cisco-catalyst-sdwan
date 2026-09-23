@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Monitoring - Device Statistics API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Monitoring - Device…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -133,6 +141,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: default
+      summary: Get stat data raw data monitoring device statistics 1803
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Device Statistics
@@ -263,6 +273,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: default
+      summary: Get stats raw data monitoring device statistics 1804
+      x-summary-source: derived
   /statistics/device/aggregation:
     post:
       tags:
@@ -295,6 +307,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: default,dca
+      summary: Get post aggregation data by query monitoring device statistics 3004
+      x-summary-source: derived
     get:
       tags:
       - Monitoring - Device Statistics
@@ -325,6 +339,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: default
+      summary: Get aggregation data by query monitoring device statistics 3003
+      x-summary-source: derived
   /statistics/device/csv:
     get:
       tags:
@@ -365,6 +381,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: default
+      summary: Get stat data raw data as CSV monitoring device statistics 2203
+      x-summary-source: derived
   /statistics/device/doccount:
     post:
       tags:
@@ -409,6 +427,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get count post monitoring device statistics 2704
+      x-summary-source: derived
     get:
       tags:
       - Monitoring - Device Statistics
@@ -449,6 +469,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get count monitoring device statistics 2703
+      x-summary-source: derived
   /statistics/device/fields:
     get:
       tags:
@@ -502,6 +524,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get stat data fields monitoring device statistics 2503
+      x-summary-source: derived
   /statistics/device/page:
     get:
       tags:
@@ -627,6 +651,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Device Monitoring-read
+      summary: Get stats pagination raw data monitoring device statistics 2303
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Device Statistics
@@ -756,6 +782,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Device Monitoring-read
+      summary: Get post stats pagination raw data monitoring device statistics 2304
+      x-summary-source: derived
   /statistics/device/query/fields:
     get:
       tags:
@@ -821,3 +849,5 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get stat query fields monitoring device statistics 3103
+      x-summary-source: derived

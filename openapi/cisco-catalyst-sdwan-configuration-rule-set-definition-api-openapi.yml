@@ -1,7 +1,13 @@
 openapi: 3.2.0
 info:
   title: UX 1.0 Configuration Configuration - Rule Set Definition API
-  description: "Configuration of UX 1.0 device and policy.\nIncludes API operations for the following:\n  Managing original SD-WAN device configurations and policy configurations\n  Device templates and feature templates"
+  description: 'Configuration of UX 1.0 device and policy.
+
+    Includes API operations for the following:
+
+    Managing original SD-WAN device configurations and policy configurations
+
+    Device templates and feature templates'
   contact:
     email: vmanage@cisco.com
   license:
@@ -51,6 +57,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+      summary: Get definitions configuration rule set definition 3503
+      x-summary-source: derived
     post:
       tags:
       - Configuration - Rule Set Definition
@@ -650,6 +658,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write
+      summary: Create policy definition configuration rule set definition 3504
+      x-summary-source: derived
   /template/policy/definition/ruleset/bulk:
     put:
       tags:
@@ -684,6 +694,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write
+      summary: Save policy definition in bulk configuration rule set definition 4003
+      x-summary-source: derived
   /template/policy/definition/ruleset/multiple/{id}:
     put:
       tags:
@@ -725,6 +737,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write
+      summary: Edit multiple policy definition configuration rule set definition 4903
+      x-summary-source: derived
   /template/policy/definition/ruleset/preview:
     post:
       tags:
@@ -759,6 +773,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+      summary: Preview policy definition configuration rule set definition 4304
+      x-summary-source: derived
   /template/policy/definition/ruleset/preview/{id}:
     get:
       tags:
@@ -791,6 +807,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+      summary: Preview policy definition by id configuration rule set definition 4803
+      x-summary-source: derived
   /template/policy/definition/ruleset/{id}:
     delete:
       tags:
@@ -814,6 +832,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write
+      summary: Delete policy definition configuration rule set definition 4006
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Rule Set Definition
@@ -845,6 +865,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+      summary: Get policy definition configuration rule set definition 4003
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Rule Set Definition
@@ -1013,3 +1035,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write
+      summary: Edit policy definition configuration rule set definition 4003
+      x-summary-source: derived

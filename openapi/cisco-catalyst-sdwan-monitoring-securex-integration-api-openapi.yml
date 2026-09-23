@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Monitoring - SecureX Integration API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Monitoring - SecureX…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -58,6 +66,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get secure XAccess token
+      x-summary-source: derived
   /device_authorization/{regionBaseUri}/{clientId}:
     post:
       tags:
@@ -106,6 +116,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Device authorization
+      x-summary-source: derived
   /refreshtoken/{regionBaseUri}/{clientId}:
     get:
       tags:
@@ -137,6 +149,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get secure XRefresh token
+      x-summary-source: derived
   /token/{regionBaseUri}/{clientId}:
     post:
       tags:
@@ -182,3 +196,5 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Token
+      x-summary-source: derived

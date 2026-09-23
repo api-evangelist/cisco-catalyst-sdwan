@@ -27,12 +27,12 @@ info:
 servers:
 - url: /dataservice
 tags:
-- name: Device - Network
+- name: Device Network
 paths:
   /network/connectionssummary:
     get:
       tags:
-      - Device - Network
+      - Device Network
       description: Retrieve vManage control status
       operationId: getVmanageControlStatus
       parameters:
@@ -108,10 +108,12 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default,RBAC VPN-read
+      summary: Get vmanage control status
+      x-summary-source: derived
   /network/issues/rebootcount:
     get:
       tags:
-      - Device - Network
+      - Device Network
       description: Retrieve reboot count
       operationId: getRebootCount
       parameters:
@@ -148,10 +150,12 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get reboot count
+      x-summary-source: derived
   /network/issues/summary:
     get:
       tags:
-      - Device - Network
+      - Device Network
       description: Retrieve network issues summary
       operationId: getNetworkIssuesSummary
       responses:
@@ -200,10 +204,12 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,System-read
+      summary: Get network issues summary
+      x-summary-source: derived
   /network/status:
     get:
       tags:
-      - Device - Network
+      - Device Network
       description: Retrieve network status summary
       operationId: getNetworkStatusSummary
       responses:
@@ -264,3 +270,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,System-read
+      summary: Get network status summary
+      x-summary-source: derived

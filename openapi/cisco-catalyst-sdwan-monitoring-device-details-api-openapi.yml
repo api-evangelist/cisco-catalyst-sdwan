@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Monitoring - Device Details API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Monitoring - Device Details…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -178,6 +186,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Generate device state data
+      x-summary-source: derived
   /data/device/state/{state_data_type}/fields:
     get:
       tags:
@@ -217,6 +227,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Generate device state data fields
+      x-summary-source: derived
   /data/device/state/{state_data_type}/query:
     get:
       tags:
@@ -358,11 +370,12 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Generate device state data with query string
+      x-summary-source: derived
   /device:
     get:
       tags:
       - Monitoring - Device Details
-      description: List all devices
       operationId: listAllDevices
       parameters:
       - name: site-id
@@ -538,6 +551,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: List all devices
+      x-summary-source: derived
   /device/blockSync:
     post:
       tags:
@@ -564,6 +579,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Set block sync
+      x-summary-source: derived
   /device/config:
     get:
       tags:
@@ -601,6 +618,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get device running config
+      x-summary-source: derived
   /device/config/html:
     get:
       tags:
@@ -633,11 +652,12 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get device running config HTML
+      x-summary-source: derived
   /device/counters:
     get:
       tags:
       - Monitoring - Device Details
-      description: Get device counters
       operationId: getDeviceCounters
       responses:
         '200':
@@ -686,6 +706,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get device counters
+      x-summary-source: derived
   /device/devicestatus:
     get:
       tags:
@@ -748,6 +770,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get device only status
+      x-summary-source: derived
   /device/enableSDAVC/{deviceIP}/{enable}:
     post:
       tags:
@@ -776,6 +800,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Enable SDAVCOn device
+      x-summary-source: derived
   /device/featuresupport:
     get:
       tags:
@@ -803,6 +829,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get device feature support
+      x-summary-source: derived
   /device/hardwarehealth/detail:
     get:
       tags:
@@ -921,6 +949,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get hardware health details
+      x-summary-source: derived
   /device/hardwarehealth/summary:
     get:
       tags:
@@ -980,6 +1010,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get hardware health summary
+      x-summary-source: derived
   /device/keyvalue:
     get:
       tags:
@@ -1020,6 +1052,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get device list as key value
+      x-summary-source: derived
   /device/models:
     get:
       tags:
@@ -1135,6 +1169,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: List all device models
+      x-summary-source: derived
   /device/models/{uuid}:
     get:
       tags:
@@ -1175,6 +1211,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get device models
+      x-summary-source: derived
   /device/monitor:
     get:
       tags:
@@ -1240,6 +1278,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: List all monitor details devices
+      x-summary-source: derived
   /device/queues:
     get:
       tags:
@@ -1266,6 +1306,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get sync queues
+      x-summary-source: derived
   /device/reachable:
     get:
       tags:
@@ -1526,6 +1568,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: List reachable devices
+      x-summary-source: derived
   /device/stats:
     get:
       tags:
@@ -1553,6 +1597,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stats queues
+      x-summary-source: derived
   /device/status:
     get:
       tags:
@@ -1616,6 +1662,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get all device status
+      x-summary-source: derived
   /device/sync_status:
     get:
       tags:
@@ -1678,6 +1726,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: List currently syncing devices
+      x-summary-source: derived
   /device/syncall/memorydb:
     post:
       tags:
@@ -1693,6 +1743,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Sync all devices mem DB
+      x-summary-source: derived
   /device/tier:
     post:
       tags:
@@ -1722,6 +1774,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Inventory-write
+      summary: Add tier
+      x-summary-source: derived
     get:
       tags:
       - Monitoring - Device Details
@@ -1736,6 +1790,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get tiers
+      x-summary-source: derived
   /device/tier/{tierName}:
     delete:
       tags:
@@ -1758,6 +1814,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Delete tier
+      x-summary-source: derived
   /device/tloc:
     get:
       tags:
@@ -1906,6 +1964,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get device tloc status
+      x-summary-source: derived
   /device/tlocutil:
     get:
       tags:
@@ -1962,6 +2022,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get device tloc util
+      x-summary-source: derived
   /device/tlocutil/detail:
     get:
       tags:
@@ -2012,6 +2074,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get device tloc util details
+      x-summary-source: derived
   /device/unconfigured:
     get:
       tags:
@@ -2147,6 +2211,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get unconfigured
+      x-summary-source: derived
   /device/unreachable:
     get:
       tags:
@@ -2223,6 +2289,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: List unreachable devices
+      x-summary-source: derived
   /device/unreachable/{deviceIP}:
     delete:
       tags:
@@ -2245,6 +2313,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Remove unreachable device
+      x-summary-source: derived
   /device/vedgeinventory/detail:
     get:
       tags:
@@ -2312,6 +2382,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get vedge inventory
+      x-summary-source: derived
   /device/vedgeinventory/summary:
     get:
       tags:
@@ -2357,6 +2429,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get vedge inventory summary
+      x-summary-source: derived
   /device/vmanage:
     get:
       tags:
@@ -2392,6 +2466,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get VManage system IP
+      x-summary-source: derived
   /v1/device/analyzeCliConfig:
     post:
       tags:
@@ -2442,6 +2518,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Inventory-read,Device Inventory-write,Template Deploy-read,Template Deploy-write,Device Inventory > Edge-read,Device Inventory > Controller-read,Device Inventory > Edge-write
+      summary: Analyze cli config
+      x-summary-source: derived
   /v1/device/runningIosCliConfig/{deviceUUID}:
     get:
       tags:
@@ -2473,6 +2551,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Inventory-read,Device Inventory-write,Template Deploy-read,Template Deploy-write,Device Inventory > Edge-read,Device Inventory > Controller-read,Device Inventory > Edge-write
+      summary: Get running ios cli config
+      x-summary-source: derived
   /v1/device/unsupportedCliConfig/{deviceUUID}:
     get:
       tags:
@@ -2509,3 +2589,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Inventory-read,Device Inventory-write,Template Deploy-read,Template Deploy-write,Device Inventory > Edge-read,Device Inventory > Controller-read,Device Inventory > Edge-write
+      summary: Get unsupported cli config
+      x-summary-source: derived

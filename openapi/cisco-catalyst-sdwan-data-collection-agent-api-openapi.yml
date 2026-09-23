@@ -68,6 +68,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Create stats
+      x-summary-source: derived
   /dca/analytics/all:
     post:
       tags:
@@ -123,6 +125,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get all stats data DCA
+      x-summary-source: derived
   /dca/cloudservices/accesstoken:
     get:
       tags:
@@ -157,6 +161,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get access token
+      x-summary-source: derived
     post:
       tags:
       - Data Collection Agent
@@ -193,6 +199,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Store access token
+      x-summary-source: derived
   /dca/cloudservices/alarm:
     post:
       tags:
@@ -221,6 +229,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Generate alarm
+      x-summary-source: derived
   /dca/cloudservices/idtoken:
     get:
       tags:
@@ -255,6 +265,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get id token
+      x-summary-source: derived
     post:
       tags:
       - Data Collection Agent
@@ -291,6 +303,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Store id token
+      x-summary-source: derived
   /dca/cloudservices/telemetry:
     get:
       tags:
@@ -321,6 +335,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get telemetry settings
+      x-summary-source: derived
   /dca/data/device/state/{state_data_type}:
     post:
       tags:
@@ -622,6 +638,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Generate DCA device state data
+      x-summary-source: derived
   /dca/data/device/statistics/{stats_data_type}:
     post:
       tags:
@@ -703,11 +721,12 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Generate DCA device statistics data
+      x-summary-source: derived
   /dca/dcatenantowners:
     get:
       tags:
       - Data Collection Agent
-      description: Get DCA tenant owners
       operationId: getDCATenantOwners
       responses:
         '200':
@@ -737,6 +756,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get DCA tenant owners
+      x-summary-source: derived
   /dca/device:
     post:
       tags:
@@ -867,6 +888,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: List all devices DCA
+      x-summary-source: derived
   /dca/device/crashlog/details:
     post:
       tags:
@@ -966,6 +989,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get crash logs
+      x-summary-source: derived
   /dca/device/crashlog/synced:
     get:
       tags:
@@ -1070,6 +1095,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get crash logs synced
+      x-summary-source: derived
   /dca/settings/configuration/cloudservices/dca:
     get:
       tags:
@@ -1122,6 +1149,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get cloud services configuration DCA
+      x-summary-source: derived
   /dca/settings/configuration/{type}/dca:
     post:
       tags:
@@ -1175,6 +1204,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Create DCA analytics data file
+      x-summary-source: derived
   /dca/statistics/settings/status:
     post:
       tags:
@@ -1245,6 +1276,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stats DB index status
+      x-summary-source: derived
   /dca/system/device:
     post:
       tags:
@@ -1348,6 +1381,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get devices details DCA
+      x-summary-source: derived
   /dca/template/device/config/attachedconfig:
     post:
       tags:
@@ -1393,6 +1428,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get DCA attached config to device
+      x-summary-source: derived
   /dca/template/policy/definition/approute:
     post:
       tags:
@@ -1546,6 +1583,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get template policy definitions DCA
+      x-summary-source: derived
   /dca/template/policy/list/vpn:
     post:
       tags:
@@ -1649,6 +1688,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get VPN lists DCA
+      x-summary-source: derived
   /dca/template/policy/vedge:
     post:
       tags:
@@ -1760,6 +1801,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get vedge template list DCA
+      x-summary-source: derived
   /dca/template/policy/vsmart:
     post:
       tags:
@@ -1880,3 +1923,5 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get vsmart template list DCA
+      x-summary-source: derived

@@ -1,7 +1,13 @@
 openapi: 3.2.0
 info:
   title: UX 1.0 Configuration Configuration - Device Template API
-  description: "Configuration of UX 1.0 device and policy.\nIncludes API operations for the following:\n  Managing original SD-WAN device configurations and policy configurations\n  Device templates and feature templates"
+  description: 'Configuration of UX 1.0 device and policy.
+
+    Includes API operations for the following:
+
+    Managing original SD-WAN device configurations and policy configurations
+
+    Device templates and feature templates'
   contact:
     email: vmanage@cisco.com
   license:
@@ -31,7 +37,10 @@ paths:
     post:
       tags:
       - Configuration - Device Template
-      description: 'Attach feature device template<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Attach feature device template
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: pushMasterTemplate_ConfigurationDeviceTemplate_3904
       requestBody:
         description: Device template
@@ -77,11 +86,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Deploy-write
+      summary: Push master template configuration device template 3904
+      x-summary-source: derived
   /template/device/config/attachcli:
     post:
       tags:
       - Configuration - Device Template
-      description: 'Attach CLI device template<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Attach CLI device template
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: pushCLITemplate
       requestBody:
         description: Device template
@@ -113,11 +127,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Deploy-write
+      summary: Push CLI template
+      x-summary-source: derived
   /template/device/config/attachcloudx:
     put:
       tags:
       - Configuration - Device Template
-      description: 'Edit already enabled gateways, clients, dias<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Edit already enabled gateways, clients, dias
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: editCloudxConfig
       requestBody:
         description: CloudX config
@@ -154,6 +173,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Deploy-write
+      summary: Edit cloudx config
+      x-summary-source: derived
     post:
       tags:
       - Configuration - Device Template
@@ -193,11 +214,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Deploy-write
+      summary: Push cloudx config
+      x-summary-source: derived
   /template/device/config/attached/{masterTemplateId}:
     get:
       tags:
       - Configuration - Device Template
-      description: 'Get attached device list by master template Id<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Get attached device list by master template Id
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: getAttachedDeviceList
       parameters:
       - name: masterTemplateId
@@ -226,11 +252,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Deploy-read,Template Configuration-read
+      summary: Get attached device list
+      x-summary-source: derived
   /template/device/config/attachedconfig:
     get:
       tags:
       - Configuration - Device Template
-      description: 'Get attached config to device<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Get attached config to device
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: getAttachedConfigToDevice
       parameters:
       - name: deviceId
@@ -261,11 +292,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Deploy-read,Device Inventory-read
+      summary: Get attached config to device
+      x-summary-source: derived
   /template/device/config/attachfeature:
     post:
       tags:
       - Configuration - Device Template
-      description: 'Attach feature device template<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Attach feature device template
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: pushMasterTemplate_ConfigurationDeviceTemplate_3704
       requestBody:
         description: Device template
@@ -312,11 +348,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Deploy-write
+      summary: Push master template configuration device template 3704
+      x-summary-source: derived
   /template/device/config/attachment:
     post:
       tags:
       - Configuration - Device Template
-      description: 'Attach device template<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Attach device template
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: attachDeviceTemplate
       requestBody:
         description: Device template
@@ -363,11 +404,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Deploy-write
+      summary: Attach device template
+      x-summary-source: derived
   /template/device/config/available/{masterTemplateId}:
     get:
       tags:
       - Configuration - Device Template
-      description: 'Get possible device list by master template Id<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Get possible device list by master template Id
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: getDeviceListByMasterTemplateId
       parameters:
       - name: masterTemplateId
@@ -404,11 +450,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Deploy-read
+      summary: Get device list by master template id
+      x-summary-source: derived
   /template/device/config/config:
     post:
       tags:
       - Configuration - Device Template
-      description: 'Get device configuration<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Get device configuration
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: getDeviceConfigurationPreview
       requestBody:
         description: Device template
@@ -448,11 +499,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Deploy-read,Template Deploy-write
+      summary: Get device configuration preview
+      x-summary-source: derived
   /template/device/config/detach:
     post:
       tags:
       - Configuration - Device Template
-      description: 'Detach device template<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Detach device template
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: detachDeviceTemplate
       requestBody:
         description: Device template
@@ -476,11 +532,16 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Template Deploy-write
+      summary: Detach device template
+      x-summary-source: derived
   /template/device/config/detachcloudx:
     post:
       tags:
       - Configuration - Device Template
-      description: 'Disable enabled gateways, clients, dias<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Disable enabled gateways, clients, dias
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: detachSites_ConfigurationDeviceTemplate_3604
       requestBody:
         description: CloudX config
@@ -515,11 +576,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Deploy-write
+      summary: Detach sites configuration device template 3604
+      x-summary-source: derived
   /template/device/config/duplicateip:
     post:
       tags:
       - Configuration - Device Template
-      description: 'Detects duplicate system IP from a list of devices<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Detects duplicate system IP from a list of devices
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: getDevicesWithDuplicateIP
       requestBody:
         description: Device list
@@ -556,11 +622,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Configuration-read,Template Deploy-read,Template Deploy-write
+      summary: Get devices with duplicate IP
+      x-summary-source: derived
   /template/device/config/duplicatelocationname:
     post:
       tags:
       - Configuration - Device Template
-      description: 'Detects duplicate system IP from a list of devices<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Detects duplicate system IP from a list of devices
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: getDevicesWithDuplicateLocationName
       requestBody:
         description: Device list
@@ -596,11 +667,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Configuration-read,Template Deploy-read,Template Deploy-write
+      summary: Get devices with duplicate location name
+      x-summary-source: derived
   /template/device/config/exportcsv:
     post:
       tags:
       - Configuration - Device Template
-      description: 'Export the device template to CSV format for given template id<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Export the device template to CSV format for given template id
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: createInputWithoutDevice
       requestBody:
         description: Device template
@@ -634,11 +710,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Deploy-write
+      summary: Create input without device
+      x-summary-source: derived
   /template/device/config/input:
     post:
       tags:
       - Configuration - Device Template
-      description: 'Create device input<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Create device input
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: createDeviceInput
       requestBody:
         description: Template device input
@@ -682,11 +763,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Deploy-write
+      summary: Create device input
+      x-summary-source: derived
   /template/device/config/process/input/file:
     post:
       tags:
       - Configuration - Device Template
-      description: 'Process input comma separated file<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Process input comma separated file
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: processInputCommaSepFile
       requestBody:
         description: Device template
@@ -716,6 +802,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Deploy-write
+      summary: Process input comma sep file
+      x-summary-source: derived
   /template/device/config/quickconnectvariable:
     post:
       tags:
@@ -751,11 +839,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Deploy-write
+      summary: Get quick connect variables
+      x-summary-source: derived
   /template/device/config/vbond:
     get:
       tags:
       - Configuration - Device Template
-      description: 'Check if vBond is configured<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Check if vBond is configured
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: checkVbond
       responses:
         '200':
@@ -775,13 +868,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Deploy-read,Template Configuration-read
+      summary: Check vbond
+      x-summary-source: derived
   /template/device/config/verify:
     post:
       tags:
       - Configuration - Device Template
       description: 'Validate full template"
 
-        <br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: validateTemplate
       requestBody:
         content:
@@ -809,3 +905,5 @@ paths:
             application/json: {}
       deprecated: true
       x-roles-required: Template Deploy-write
+      summary: Validate template
+      x-summary-source: derived

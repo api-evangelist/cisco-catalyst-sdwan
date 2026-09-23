@@ -1,7 +1,13 @@
 openapi: 3.2.0
 info:
   title: UX 1.0 Configuration Configuration - General Template API
-  description: "Configuration of UX 1.0 device and policy.\nIncludes API operations for the following:\n  Managing original SD-WAN device configurations and policy configurations\n  Device templates and feature templates"
+  description: 'Configuration of UX 1.0 device and policy.
+
+    Includes API operations for the following:
+
+    Managing original SD-WAN device configurations and policy configurations
+
+    Device templates and feature templates'
   contact:
     email: vmanage@cisco.com
   license:
@@ -31,7 +37,10 @@ paths:
     get:
       tags:
       - Configuration - General Template
-      description: 'Get feature template list<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Get feature template list
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: generateFeatureTemplateList
       parameters:
       - name: summary
@@ -97,10 +106,11 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Configuration-read,Template Deploy-read,Policy Configuration-read
+      summary: Generate feature template list
+      x-summary-source: derived
     post:
       tags:
       - Configuration - General Template
-      description: Create feature template
       operationId: createFeatureTemplate
       requestBody:
         description: Feature template
@@ -15729,11 +15739,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Configuration-write,Template Deploy-write,Policy Configuration-write
+      summary: Create feature template
+      x-summary-source: derived
   /template/feature/clone:
     post:
       tags:
       - Configuration - General Template
-      description: 'Clone a feature template<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Clone a feature template
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: cloneTemplate
       parameters:
       - name: id
@@ -15775,11 +15790,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Configuration-write,Template Deploy-write,Policy Configuration-write
+      summary: Clone template
+      x-summary-source: derived
   /template/feature/default/networkinterface:
     get:
       tags:
       - Configuration - General Template
-      description: 'Get default network interface<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Get default network interface
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: getNetworkInterface
       parameters:
       - name: deviceModel
@@ -15815,11 +15835,16 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get network interface
+      x-summary-source: derived
   /template/feature/default/networks:
     get:
       tags:
       - Configuration - General Template
-      description: 'Get default networks<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Get default networks
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: getDefaultNetworks
       parameters:
       - name: deviceModel
@@ -15887,11 +15912,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Configuration-read,Template Deploy-read,Template Deploy-write
+      summary: Get default networks
+      x-summary-source: derived
   /template/feature/definition/{templateId}:
     get:
       tags:
       - Configuration - General Template
-      description: 'Get the configured template definition for given template Id<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Get the configured template definition for given template Id
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: getTemplateDefinition
       parameters:
       - name: templateId
@@ -16003,11 +16033,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Configuration-read,Template Deploy-read,Policy Configuration-read
+      summary: Get template definition
+      x-summary-source: derived
   /template/feature/devicetemplates/{templateId}:
     get:
       tags:
       - Configuration - General Template
-      description: 'Get all device templates for this feature template<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Get all device templates for this feature template
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: getDeviceTemplatesAttachedToFeature
       parameters:
       - name: templateId
@@ -16059,11 +16094,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Configuration-read,Template Configuration-write,Template Deploy-read,Template Deploy-write
+      summary: Get device templates attached to feature
+      x-summary-source: derived
   /template/feature/li:
     post:
       tags:
       - Configuration - General Template
-      description: 'Create LI feature template<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Create LI feature template
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: createLITemplate
       requestBody:
         description: LI template
@@ -16094,6 +16134,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Lawful Interception-write
+      summary: Create LI template
+      x-summary-source: derived
     get:
       tags:
       - Configuration - General Template
@@ -16119,11 +16161,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Lawful Interception-read
+      summary: List LI template
+      x-summary-source: derived
   /template/feature/li/{templateId}:
     put:
       tags:
       - Configuration - General Template
-      description: 'Update LI feature template<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Update LI feature template
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: editLITemplate
       parameters:
       - name: templateId
@@ -16161,11 +16208,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Lawful Interception-write
+      summary: Edit LI template
+      x-summary-source: derived
   /template/feature/master/{type_name}:
     get:
       tags:
       - Configuration - General Template
-      description: 'Generate template type definition by device type<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Generate template type definition by device type
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: generateMasterTemplateDefinition
       parameters:
       - name: type_name
@@ -16251,11 +16303,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Configuration-read,Template Configuration-write,Template Deploy-read,Template Deploy-write
+      summary: Generate master template definition
+      x-summary-source: derived
   /template/feature/migration:
     get:
       tags:
       - Configuration - General Template
-      description: 'Generate a list of templates which require migration<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Generate a list of templates which require migration
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: getTemplateForMigration
       responses:
         '200':
@@ -16289,11 +16346,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Configuration-read,Template Deploy-read,Policy Configuration-read,Lawful Interception-read
+      summary: Get template for migration
+      x-summary-source: derived
   /template/feature/object/{templateId}:
     get:
       tags:
       - Configuration - General Template
-      description: 'Get template object definition for given template Id<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Get template object definition for given template Id
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: getGeneralTemplate
       parameters:
       - name: templateId
@@ -16812,6 +16874,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Configuration-read,Template Deploy-read,Policy Configuration-read
+      summary: Get general template
+      x-summary-source: derived
   /template/feature/resource-group/{resourceGroupName}/{templateId}:
     post:
       tags:
@@ -16841,11 +16905,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Configuration-write,Template Deploy-write
+      summary: Change template resource group configuration general template 6504
+      x-summary-source: derived
   /template/feature/types:
     get:
       tags:
       - Configuration - General Template
-      description: 'Generate template types<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Generate template types
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: generateTemplateTypes
       parameters:
       - name: type
@@ -16906,11 +16975,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Configuration-read,Template Configuration-write,Template Deploy-read,Template Deploy-write
+      summary: Generate template types
+      x-summary-source: derived
   /template/feature/types/definition/{type_name}/{version}:
     get:
       tags:
       - Configuration - General Template
-      description: 'Generate template type definition<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Generate template type definition
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: generateTemplateTypeDefinition
       parameters:
       - name: type_name
@@ -16981,11 +17055,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Configuration-read,Template Configuration-write,Template Deploy-read,Template Deploy-write
+      summary: Generate template type definition
+      x-summary-source: derived
   /template/feature/{deviceType}:
     get:
       tags:
       - Configuration - General Template
-      description: 'Generate template based on device<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Generate template based on device
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: generateTemplateByDeviceType
       parameters:
       - name: deviceType
@@ -17085,6 +17164,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Configuration-read,Template Deploy-read,Template Deploy-write
+      summary: Generate template by device type
+      x-summary-source: derived
   /template/feature/{templateId}:
     delete:
       tags:
@@ -17108,10 +17189,15 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Configuration-write
+      summary: Delete general template
+      x-summary-source: derived
     put:
       tags:
       - Configuration - General Template
-      description: 'Update feature template<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Update feature template
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: editFeatureTemplate
       parameters:
       - name: templateId
@@ -32747,6 +32833,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Configuration-write,Template Deploy-write,Policy Configuration-write
+      summary: Edit feature template
+      x-summary-source: derived
   /template/security/encryptText/encrypt:
     post:
       tags:
@@ -32783,3 +32871,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Configuration-read,Template Deploy-read,Template Deploy-write
+      summary: Get encrypted string
+      x-summary-source: derived

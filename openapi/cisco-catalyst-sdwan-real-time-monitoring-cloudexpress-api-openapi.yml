@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Real-Time Monitoring - CloudExpress API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Real-Time Monitoring…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -85,6 +93,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write
+      summary: Create applications detail list
+      x-summary-source: derived
   /device/cloudx/applications:
     get:
       tags:
@@ -141,6 +151,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write
+      summary: Create applications list
+      x-summary-source: derived
   /device/cloudx/gatewayexits:
     get:
       tags:
@@ -198,6 +210,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write
+      summary: Create gateway exits list
+      x-summary-source: derived
   /device/cloudx/loadbalance:
     get:
       tags:
@@ -254,6 +268,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write
+      summary: Create lb applications list
+      x-summary-source: derived
   /device/cloudx/localexits:
     get:
       tags:
@@ -309,3 +325,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write
+      summary: Create local exits list
+      x-summary-source: derived

@@ -53,6 +53,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Validate edge account add
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Multi Cloud
@@ -83,6 +85,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get edge accounts
+      x-summary-source: derived
   /multicloud/accounts/edge/{accountId}:
     get:
       tags:
@@ -113,6 +117,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get edge account details
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Multi Cloud
@@ -145,10 +151,11 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Update edge account
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Multi Cloud
-      description: Delete edge account
       operationId: deleteEdgeAccount
       parameters:
       - name: accountId
@@ -167,6 +174,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Delete edge account
+      x-summary-source: derived
   /multicloud/accounts/edge/{accountId}/credentials:
     put:
       tags:
@@ -200,6 +209,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Validate edge account update credentials
+      x-summary-source: derived
   /multicloud/billingaccounts/edge/{edgeType}/{edgeAccountId}:
     get:
       tags:
@@ -244,6 +255,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get edge billing accounts
+      x-summary-source: derived
   /multicloud/cloudRoutersAndAttachments:
     get:
       tags:
@@ -304,6 +317,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get cloud routers and attachments
+      x-summary-source: derived
   /multicloud/connected-sites/edge/{edgeType}:
     get:
       tags:
@@ -341,6 +356,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Cloud OnRamp-read
+      summary: Get cloud connected sites configuration multi cloud 4303
+      x-summary-source: derived
   /multicloud/connectivity/edge:
     get:
       tags:
@@ -389,6 +406,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get edge connectivity details
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Multi Cloud
@@ -422,6 +441,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Update edge connectivity
+      x-summary-source: derived
     post:
       tags:
       - Configuration - Multi Cloud
@@ -455,6 +476,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Create edge connectivity
+      x-summary-source: derived
   /multicloud/connectivity/edge/{connectionName}:
     delete:
       tags:
@@ -491,6 +514,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Delete edge connectivity
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Multi Cloud
@@ -522,6 +547,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get edge connectivity detail by name
+      x-summary-source: derived
   /multicloud/connectivitygateway:
     post:
       tags:
@@ -556,6 +583,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Create connectivity gateway
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Multi Cloud
@@ -628,6 +657,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get connectivity gateways
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Multi Cloud
@@ -657,6 +688,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Clean up all connectivity gateways in local DB
+      x-summary-source: derived
   /multicloud/connectivitygateway/{cloudProvider}/{connectivityGatewayName}:
     delete:
       tags:
@@ -699,11 +732,12 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Delete connectivity gateway
+      x-summary-source: derived
   /multicloud/connectivitygatewaycreationoptions:
     get:
       tags:
       - Configuration - Multi Cloud
-      description: Get connectivity gateway creation options
       operationId: getConnectivityGatewayCreationOptions
       parameters:
       - name: accountId
@@ -744,6 +778,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get connectivity gateway creation options
+      x-summary-source: derived
   /multicloud/dashboard/edge:
     get:
       tags:
@@ -767,6 +803,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get dashboard edge info
+      x-summary-source: derived
   /multicloud/devicelink/edge:
     put:
       tags:
@@ -801,6 +839,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Update device link
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Multi Cloud
@@ -838,6 +878,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get device links
+      x-summary-source: derived
     post:
       tags:
       - Configuration - Multi Cloud
@@ -871,6 +913,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Create device link
+      x-summary-source: derived
   /multicloud/devicelink/edge/portspeed/{edgeType}:
     get:
       tags:
@@ -905,6 +949,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get dl port speed
+      x-summary-source: derived
   /multicloud/devicelink/edge/{deviceLinkName}:
     delete:
       tags:
@@ -936,6 +982,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Delete device link
+      x-summary-source: derived
   /multicloud/devicelink/metroSpeed/edge:
     post:
       tags:
@@ -978,6 +1026,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get device link metro speed
+      x-summary-source: derived
   /multicloud/devices/edge/{edgeType}:
     get:
       tags:
@@ -1015,6 +1065,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Cloud OnRamp-read
+      summary: Get cloud devices configuration multi cloud 3503
+      x-summary-source: derived
   /multicloud/edge/{edgeType}/device:
     get:
       tags:
@@ -1050,6 +1102,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Cloud OnRamp-read
+      summary: Get edge wan devices
+      x-summary-source: derived
   /multicloud/gateway/edge:
     get:
       tags:
@@ -1113,6 +1167,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get icgws
+      x-summary-source: derived
     post:
       tags:
       - Configuration - Multi Cloud
@@ -1146,6 +1202,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Create icgw
+      x-summary-source: derived
   /multicloud/gateway/edge/setting/{edgeGatewayName}:
     get:
       tags:
@@ -1177,6 +1235,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get icgw custom setting details
+      x-summary-source: derived
   /multicloud/gateway/edge/types:
     get:
       tags:
@@ -1210,6 +1270,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get icgw types
+      x-summary-source: derived
   /multicloud/gateway/edge/{edgeGatewayName}:
     get:
       tags:
@@ -1241,6 +1303,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get icgw details
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Multi Cloud
@@ -1290,6 +1354,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Update icgw
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Multi Cloud
@@ -1320,6 +1386,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Delete icgw
+      x-summary-source: derived
   /multicloud/gateways/edge/{edgeType}:
     get:
       tags:
@@ -1352,6 +1420,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Cloud OnRamp-read
+      summary: Get edge gateways
+      x-summary-source: derived
   /multicloud/imagename/edge:
     get:
       tags:
@@ -1385,6 +1455,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get supported edge image names
+      x-summary-source: derived
   /multicloud/instancesize/edge:
     get:
       tags:
@@ -1418,6 +1490,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get supported edge instance size
+      x-summary-source: derived
   /multicloud/license/edge:
     get:
       tags:
@@ -1469,6 +1543,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get licenses
+      x-summary-source: derived
   /multicloud/locations/edge/{edgeType}:
     delete:
       tags:
@@ -1496,6 +1572,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Delete all edge location info
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Multi Cloud
@@ -1539,6 +1617,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get edge locations info
+      x-summary-source: derived
   /multicloud/locations/edge/{edgeType}/accountId/{accountId}:
     put:
       tags:
@@ -1579,6 +1659,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Update edge locations info
+      x-summary-source: derived
   /multicloud/loopbackCGWColor/edge:
     get:
       tags:
@@ -1602,6 +1684,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get supported loopback cgw colors
+      x-summary-source: derived
   /multicloud/loopbacktransportcolor/edge:
     get:
       tags:
@@ -1648,6 +1732,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get supported loopback transport colors
+      x-summary-source: derived
   /multicloud/map/tags/edge:
     get:
       tags:
@@ -1694,11 +1780,12 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Cloud OnRamp-read
+      summary: Get edge mapping tags
+      x-summary-source: derived
   /multicloud/partnerports/edge:
     get:
       tags:
       - Configuration - Multi Cloud
-      description: Get partner ports
       operationId: getPartnerPorts
       parameters:
       - name: edgeType
@@ -1757,6 +1844,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get partner ports
+      x-summary-source: derived
   /multicloud/portSpeed/edge/{edgeType}/{edgeAccountId}/{connectivityType}:
     get:
       tags:
@@ -1842,6 +1931,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get port speed
+      x-summary-source: derived
   /multicloud/settings/edge/global:
     post:
       tags:
@@ -1868,10 +1959,11 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Add edge global settings
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Multi Cloud
-      description: Get edge global settings
       operationId: getEdgeGlobalSettings
       parameters:
       - name: edgeType
@@ -1900,6 +1992,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get edge global settings
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Multi Cloud
@@ -1925,11 +2019,12 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Update edge global settings
+      x-summary-source: derived
   /multicloud/types/edge:
     get:
       tags:
       - Configuration - Multi Cloud
-      description: Get edge types
       operationId: getEdgeTypes
       responses:
         '200':
@@ -1948,6 +2043,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get edge types
+      x-summary-source: derived
   /multicloud/vhubs:
     get:
       tags:
@@ -1998,6 +2095,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get VHubs
+      x-summary-source: derived
   /multicloud/vwan:
     post:
       tags:
@@ -2032,6 +2131,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Create virtual wan
+      x-summary-source: derived
   /multicloud/vwan/{cloudProvider}/{vWanName}:
     delete:
       tags:
@@ -2079,6 +2180,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Delete virtual wan
+      x-summary-source: derived
   /multicloud/vwans:
     get:
       tags:
@@ -2124,11 +2227,13 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get VWans
+      x-summary-source: derived
   /multicloud/widget/edge:
     get:
       tags:
       - Configuration - Multi Cloud
-      description: 'Get All Interconnect Edge widgets '
+      description: Get All Interconnect Edge widgets
       operationId: getAllEdgeWidgets
       responses:
         '200':
@@ -2149,6 +2254,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Cloud OnRamp-read
+      summary: Get all edge widgets
+      x-summary-source: derived
   /multicloud/widget/edge/{edgeType}:
     get:
       tags:
@@ -2181,3 +2288,5 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Cloud OnRamp-read
+      summary: Get edge widget
+      x-summary-source: derived

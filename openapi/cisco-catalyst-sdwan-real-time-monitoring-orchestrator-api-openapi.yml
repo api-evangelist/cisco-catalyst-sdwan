@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Real-Time Monitoring - Orchestrator API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Real-Time Monitoring…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -144,6 +152,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write,Security-read,Security-write
+      summary: Create connection list from device
+      x-summary-source: derived
   /device/orchestrator/connectionshistory:
     get:
       tags:
@@ -282,6 +292,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write,Security-read,Security-write
+      summary: Create connection history list
+      x-summary-source: derived
   /device/orchestrator/localproperties:
     get:
       tags:
@@ -334,6 +346,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write,Security-read,Security-write
+      summary: Create local properties list list
+      x-summary-source: derived
   /device/orchestrator/proxymapping:
     get:
       tags:
@@ -376,6 +390,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write,Security-read,Security-write,Device Monitoring-read,Device Monitoring-write
+      summary: Create reverse proxy mapping list
+      x-summary-source: derived
   /device/orchestrator/statistics:
     get:
       tags:
@@ -443,6 +459,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write,Security-read,Security-write
+      summary: Get statistics
+      x-summary-source: derived
   /device/orchestrator/summary:
     get:
       tags:
@@ -488,6 +506,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write,Security-read,Security-write
+      summary: Create connection summary
+      x-summary-source: derived
   /device/orchestrator/validvedges:
     get:
       tags:
@@ -556,6 +576,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write,Security-read,Security-write
+      summary: Create valid devices list
+      x-summary-source: derived
   /device/orchestrator/validvmanageid:
     get:
       tags:
@@ -594,6 +616,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write,Security-read,Security-write
+      summary: Get valid VManage id
+      x-summary-source: derived
   /device/orchestrator/validvsmarts:
     get:
       tags:
@@ -642,3 +666,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write,Security-read,Security-write
+      summary: Create valid VSmarts list
+      x-summary-source: derived

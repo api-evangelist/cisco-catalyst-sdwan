@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: SD-WAN Services Multicloud Interconnect - Service Sw package types API
+  title: SD-WAN Services Multicloud Interconnect - Service Sw…
   description: Includes API operations for managing SD-WAN services such as Cloud OnRamp for SaaS and MultiCloud
   contact:
     email: vmanage@cisco.com
@@ -31,7 +31,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - Service Sw package types
-      summary: Get Interconnect Services software package Types Information.
+      summary: Get Interconnect Services software package Types Information
       description: API to retrieve the Interconnect Services Sw Package Types Information from vManage.
       operationId: getInterconnectServiceSwPkg
       parameters:

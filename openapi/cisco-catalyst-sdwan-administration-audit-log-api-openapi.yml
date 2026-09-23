@@ -598,7 +598,6 @@ paths:
       tags:
       - Administration - Audit Log
       summary: Get raw property data aggregated
-      description: Get raw property data aggregated
       operationId: getPropertyAggregationData
       parameters:
       - name: query
@@ -888,7 +887,6 @@ paths:
       tags:
       - Administration - Audit Log
       summary: Get raw property data in bulk
-      description: Get raw property data in bulk
       operationId: getStatBulkRawPropertyData
       parameters:
       - name: query

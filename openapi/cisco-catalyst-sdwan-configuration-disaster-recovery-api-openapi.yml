@@ -52,6 +52,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Activate
+      x-summary-source: derived
   /disasterrecovery/clusterInfo:
     get:
       tags:
@@ -76,6 +78,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Disaster Recovery-read,Disaster Recovery-write
+      summary: Get cluster info
+      x-summary-source: derived
   /disasterrecovery/dbrestorestatus:
     get:
       tags:
@@ -102,6 +106,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get config DB restore status
+      x-summary-source: derived
   /disasterrecovery/deleteLocalDataCenter:
     post:
       tags:
@@ -126,6 +132,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Disaster Recovery-write
+      summary: Delete local DC
+      x-summary-source: derived
   /disasterrecovery/deleteRemoteDataCenter:
     post:
       tags:
@@ -149,6 +157,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Delete DC
+      x-summary-source: derived
   /disasterrecovery/deleteRemoteDrDetails:
     post:
       tags:
@@ -172,6 +182,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Delete dr
+      x-summary-source: derived
   /disasterrecovery/deregister:
     post:
       tags:
@@ -196,6 +208,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Disaster Recovery-write
+      summary: Delete
+      x-summary-source: derived
   /disasterrecovery/details:
     get:
       tags:
@@ -220,6 +234,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Disaster Recovery-read,Disaster Recovery-write
+      summary: Get details
+      x-summary-source: derived
   /disasterrecovery/drstatus:
     get:
       tags:
@@ -245,6 +261,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get disaster recovery status
+      x-summary-source: derived
   /disasterrecovery/history:
     get:
       tags:
@@ -269,6 +287,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Disaster Recovery-read,Disaster Recovery-write
+      summary: Get history
+      x-summary-source: derived
   /disasterrecovery/localLatestHistory:
     get:
       tags:
@@ -293,6 +313,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Disaster Recovery-read,Disaster Recovery-write
+      summary: Get local history
+      x-summary-source: derived
   /disasterrecovery/localdc:
     get:
       tags:
@@ -329,6 +351,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Disaster Recovery-read,Disaster Recovery-write
+      summary: Get local data center state
+      x-summary-source: derived
   /disasterrecovery/password:
     post:
       tags:
@@ -365,11 +389,12 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Disaster Recovery-write
+      summary: Update configuration disaster recovery 2604
+      x-summary-source: derived
   /disasterrecovery/pause:
     post:
       tags:
       - Configuration - Disaster Recovery
-      description: Pause DR
       operationId: pauseDR
       responses:
         '200':
@@ -389,6 +414,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Disaster Recovery-write
+      summary: Pause DR
+      x-summary-source: derived
   /disasterrecovery/pauseLocalArbitrator:
     post:
       tags:
@@ -413,6 +440,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Disaster Recovery-write
+      summary: Pause local arbitrator
+      x-summary-source: derived
   /disasterrecovery/pauseLocalDC:
     post:
       tags:
@@ -437,6 +466,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Disaster Recovery-write
+      summary: Pause local DC for DR
+      x-summary-source: derived
   /disasterrecovery/pauseLocalReplication:
     post:
       tags:
@@ -461,6 +492,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: admin
+      summary: Pause local DC replication
+      x-summary-source: derived
   /disasterrecovery/pausereplication:
     post:
       tags:
@@ -486,6 +519,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Disaster Recovery-write
+      summary: Disaster recovery pause replication
+      x-summary-source: derived
   /disasterrecovery/register:
     put:
       tags:
@@ -522,6 +557,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Disaster Recovery-write
+      summary: Update configuration disaster recovery 2603
+      x-summary-source: derived
     post:
       tags:
       - Configuration - Disaster Recovery
@@ -556,6 +593,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Disaster Recovery-write
+      summary: Register
+      x-summary-source: derived
   /disasterrecovery/remoteDcState:
     get:
       tags:
@@ -582,11 +621,12 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Disaster Recovery-read,Disaster Recovery-write
+      summary: Get remote DC members state
+      x-summary-source: derived
   /disasterrecovery/schedule:
     get:
       tags:
       - Configuration - Disaster Recovery
-      description: Get disaster recovery local replication schedule
       operationId: getDisasterRecoveryLocalReplicationSchedule
       responses:
         '200':
@@ -606,6 +646,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Disaster Recovery-read,Disaster Recovery-write
+      summary: Get disaster recovery local replication schedule
+      x-summary-source: derived
   /disasterrecovery/status:
     get:
       tags:
@@ -630,11 +672,12 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Disaster Recovery-read,Disaster Recovery-write,Template Deploy-read,Template Deploy-write
+      summary: Getdr status
+      x-summary-source: derived
   /disasterrecovery/unpause:
     post:
       tags:
       - Configuration - Disaster Recovery
-      description: Unpause DR
       operationId: unpauseDR
       responses:
         '200':
@@ -654,6 +697,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Disaster Recovery-write
+      summary: Unpause DR
+      x-summary-source: derived
   /disasterrecovery/unpauseLocalArbitrator:
     post:
       tags:
@@ -678,6 +723,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Disaster Recovery-write
+      summary: Unpause local arbitrator
+      x-summary-source: derived
   /disasterrecovery/unpauseLocalDC:
     post:
       tags:
@@ -702,6 +749,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Disaster Recovery-write
+      summary: Unpause local DC for DR
+      x-summary-source: derived
   /disasterrecovery/unpauseLocalReplication:
     post:
       tags:
@@ -726,6 +775,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: admin
+      summary: Unpause local DC replication
+      x-summary-source: derived
   /disasterrecovery/unpausereplication:
     post:
       tags:
@@ -751,6 +802,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Disaster Recovery-write
+      summary: Disaster recovery un pause replication
+      x-summary-source: derived
   /disasterrecovery/updateDRConfigOnArbitrator:
     post:
       tags:
@@ -774,6 +827,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Update dr state
+      x-summary-source: derived
   /disasterrecovery/updateReplicationCheckEnabled:
     put:
       tags:
@@ -809,6 +864,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Disaster Recovery-write
+      summary: Update replication check enabled
+      x-summary-source: derived
   /disasterrecovery/usernames:
     get:
       tags:
@@ -843,3 +900,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Disaster Recovery-write
+      summary: Get
+      x-summary-source: derived

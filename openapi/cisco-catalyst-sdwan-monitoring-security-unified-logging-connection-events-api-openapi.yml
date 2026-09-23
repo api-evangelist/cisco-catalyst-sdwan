@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Monitoring - Security Unified Logging Connection Events API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Monitoring - Security…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -129,6 +137,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get sul stat data raw data
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Security Unified Logging Connection Events
@@ -235,6 +245,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get stats raw data monitoring security unified logging connection events 2704
+      x-summary-source: derived
   /statistics/sul/connections/aggregation:
     get:
       tags:
@@ -281,6 +293,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get aggregation data by query monitoring security unified logging connection…
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Security Unified Logging Connection Events
@@ -365,6 +379,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,dca
+      summary: Get post aggregation data by query monitoring security unified logging…
+      x-summary-source: derived
   /statistics/sul/connections/app-agg/aggregation:
     post:
       tags:
@@ -414,6 +430,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,dca
+      summary: Get post aggregation app data by query monitoring security unified logging…
+      x-summary-source: derived
   /statistics/sul/connections/csv:
     get:
       tags:
@@ -468,6 +486,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get stat data raw data as CSV monitoring security unified logging connection…
+      x-summary-source: derived
   /statistics/sul/connections/doccount:
     get:
       tags:
@@ -513,6 +533,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get count monitoring security unified logging connection events 3603
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Security Unified Logging Connection Events
@@ -560,6 +582,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get count post monitoring security unified logging connection events 3604
+      x-summary-source: derived
   /statistics/sul/connections/fields:
     get:
       tags:
@@ -612,6 +636,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat data fields monitoring security unified logging connection events 3403
+      x-summary-source: derived
   /statistics/sul/connections/filter/policy_name/{policyType}:
     get:
       tags:
@@ -667,6 +693,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get filter policy name list
+      x-summary-source: derived
   /statistics/sul/connections/page:
     get:
       tags:
@@ -791,6 +819,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get stats pagination raw data monitoring security unified logging connection…
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Security Unified Logging Connection Events
@@ -919,6 +949,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get post stats pagination raw data monitoring security unified logging…
+      x-summary-source: derived
   /statistics/sul/connections/query/fields:
     get:
       tags:
@@ -983,3 +1015,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat query fields monitoring security unified logging connection events 4003
+      x-summary-source: derived

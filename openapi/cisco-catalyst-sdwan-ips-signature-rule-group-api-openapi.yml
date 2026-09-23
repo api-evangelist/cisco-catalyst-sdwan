@@ -114,7 +114,7 @@ paths:
     put:
       tags:
       - IPS Signature - Rule Group
-      summary: Edit rule group security level.
+      summary: Edit rule group security level
       operationId: editRuleGroupSeclevel
       parameters:
       - name: signatureSetId
@@ -165,7 +165,7 @@ paths:
     get:
       tags:
       - IPS Signature - Rule Group
-      summary: Fetch IPS profile rule group data.
+      summary: Fetch IPS profile rule group data
       description: fetch rule group data for a ips profile
       operationId: getRuleGroup
       parameters:

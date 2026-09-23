@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Real-Time Monitoring - Appqoe API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Real-Time Monitoring…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -65,6 +73,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write
+      summary: Create appqoe active flow id details
+      x-summary-source: derived
   /device/appqoe/appqoe-hput-stats:
     get:
       tags:
@@ -174,6 +184,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write
+      summary: Get appqoe hput stats
+      x-summary-source: derived
   /device/appqoe/appqoe-nat-stats:
     get:
       tags:
@@ -217,6 +229,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write
+      summary: Get appqoe nat stats
+      x-summary-source: derived
   /device/appqoe/appqoe-rm-resource:
     get:
       tags:
@@ -273,6 +287,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write
+      summary: Get appqoe rm resources
+      x-summary-source: derived
   /device/appqoe/appqoe-rm-stats:
     get:
       tags:
@@ -316,6 +332,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write
+      summary: Get appqoe RM stats
+      x-summary-source: derived
   /device/appqoe/appqoe-services-status:
     get:
       tags:
@@ -369,6 +387,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write
+      summary: Get appqoe services status
+      x-summary-source: derived
   /device/appqoe/appqoe-sppi-pipe-resource:
     get:
       tags:
@@ -424,6 +444,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write
+      summary: Get appqoe sppi pipe stats
+      x-summary-source: derived
   /device/appqoe/appqoe-sppi-queue-resource:
     get:
       tags:
@@ -481,6 +503,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write
+      summary: Get appqoe sppi queue stats
+      x-summary-source: derived
   /device/appqoe/cluster-summary:
     get:
       tags:
@@ -555,6 +579,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write
+      summary: Get appqoe cluster summary
+      x-summary-source: derived
   /device/appqoe/error-recent:
     get:
       tags:
@@ -668,6 +694,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write
+      summary: Get appqoe error recent
+      x-summary-source: derived
   /device/appqoe/expired-flow-id:
     get:
       tags:
@@ -706,6 +734,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write
+      summary: Create appqoe flow id expired details
+      x-summary-source: derived
   /device/appqoe/flow-closed-error:
     get:
       tags:
@@ -799,6 +829,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write
+      summary: Get appqoe flow closed error
+      x-summary-source: derived
   /device/appqoe/flow-expired:
     get:
       tags:
@@ -831,6 +863,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write
+      summary: Get appqoe expired
+      x-summary-source: derived
   /device/appqoe/service-controllers:
     get:
       tags:
@@ -872,6 +906,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write
+      summary: Get appqoe service controllers
+      x-summary-source: derived
   /device/appqoe/status:
     get:
       tags:
@@ -937,6 +973,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write
+      summary: Get appqoe status
+      x-summary-source: derived
   /device/appqoe/vpn-id:
     get:
       tags:
@@ -990,3 +1028,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write
+      summary: Create appqoe vpn id list
+      x-summary-source: derived

@@ -1,7 +1,13 @@
 openapi: 3.2.0
 info:
-  title: UX 1.0 Configuration Configuration - Policy IPv6 Device Access Definition Builder API
-  description: "Configuration of UX 1.0 device and policy.\nIncludes API operations for the following:\n  Managing original SD-WAN device configurations and policy configurations\n  Device templates and feature templates"
+  title: UX 1.0 Configuration Configuration - Policy IPv6 Device…
+  description: 'Configuration of UX 1.0 device and policy.
+
+    Includes API operations for the following:
+
+    Managing original SD-WAN device configurations and policy configurations
+
+    Device templates and feature templates'
   contact:
     email: vmanage@cisco.com
   license:
@@ -51,6 +57,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write,Device Access Policy-readDevice Access Policy-write
+      summary: Get definitions configuration policy ipv6 device access definition builder 4803
+      x-summary-source: derived
     post:
       tags:
       - Configuration - Policy IPv6 Device Access Definition Builder
@@ -77,6 +85,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write,Device Access Policy-write
+      summary: Create policy definition configuration policy ipv6 device access definition…
+      x-summary-source: derived
   /template/policy/definition/deviceaccesspolicyv6/bulk:
     put:
       tags:
@@ -111,6 +121,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write
+      summary: Save policy definition in bulk configuration policy ipv6 device access…
+      x-summary-source: derived
   /template/policy/definition/deviceaccesspolicyv6/multiple/{id}:
     put:
       tags:
@@ -152,6 +164,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write
+      summary: Edit multiple policy definition configuration policy ipv6 device access…
+      x-summary-source: derived
   /template/policy/definition/deviceaccesspolicyv6/preview:
     post:
       tags:
@@ -186,6 +200,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+      summary: Preview policy definition configuration policy ipv6 device access definition…
+      x-summary-source: derived
   /template/policy/definition/deviceaccesspolicyv6/preview/{id}:
     get:
       tags:
@@ -218,6 +234,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+      summary: Preview policy definition by id configuration policy ipv6 device access…
+      x-summary-source: derived
   /template/policy/definition/deviceaccesspolicyv6/{id}:
     get:
       tags:
@@ -250,6 +268,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write,Device Access Policy-readDevice Access Policy-write
+      summary: Get policy definition configuration policy ipv6 device access definition…
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Policy IPv6 Device Access Definition Builder
@@ -283,6 +303,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write,Device Access Policy-write
+      summary: Edit policy definition configuration policy ipv6 device access definition…
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Policy IPv6 Device Access Definition Builder
@@ -305,3 +327,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write,Device Access Policy-write
+      summary: Delete policy definition configuration policy ipv6 device access definition…
+      x-summary-source: derived

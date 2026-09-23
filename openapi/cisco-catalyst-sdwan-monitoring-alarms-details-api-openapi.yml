@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Monitoring - Alarms Details API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Monitoring - Alarms Details…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -493,6 +501,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Alarms-read
+      summary: Post raw alarm data
+      x-summary-source: derived
     get:
       tags:
       - Monitoring - Alarms Details
@@ -934,6 +944,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Alarms-read
+      summary: Get raw alarm data
+      x-summary-source: derived
   /alarms/aggregation:
     get:
       tags:
@@ -1267,6 +1279,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Alarms-read
+      summary: Get aggregation data monitoring alarms details 1903
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Alarms Details
@@ -1600,6 +1614,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Alarms-read
+      summary: Post aggregation data monitoring alarms details 1904
+      x-summary-source: derived
   /alarms/clear:
     post:
       tags:
@@ -1639,6 +1655,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Alarms-write
+      summary: Clear stale alarm
+      x-summary-source: derived
   /alarms/count:
     post:
       tags:
@@ -1816,6 +1834,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Alarms-read
+      summary: Post count
+      x-summary-source: derived
     get:
       tags:
       - Monitoring - Alarms Details
@@ -1851,6 +1871,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Alarms-read
+      summary: Get non viewed active alarms count
+      x-summary-source: derived
   /alarms/disabled:
     post:
       tags:
@@ -1901,6 +1923,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Alarms-read
+      summary: Disable enable alarm
+      x-summary-source: derived
     get:
       tags:
       - Monitoring - Alarms Details
@@ -1933,6 +1957,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Alarms-read
+      summary: List disabled alarm
+      x-summary-source: derived
   /alarms/doccount:
     get:
       tags:
@@ -2089,6 +2115,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get doc count monitoring alarms details 1603
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Alarms Details
@@ -2245,6 +2273,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Post doc count monitoring alarms details 1604
+      x-summary-source: derived
   /alarms/dump:
     post:
       tags:
@@ -2270,6 +2300,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Alarms-read
+      summary: Dump correlation engine data
+      x-summary-source: derived
   /alarms/fields:
     get:
       tags:
@@ -2333,6 +2365,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get alarm data fields
+      x-summary-source: derived
   /alarms/link-state-alarm:
     get:
       tags:
@@ -2358,6 +2392,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Alarms-read
+      summary: Get link state alarm config
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Alarms Details
@@ -2394,6 +2430,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Alarms-read
+      summary: Enable disable link state alarm
+      x-summary-source: derived
   /alarms/markallasviewed:
     post:
       tags:
@@ -2561,6 +2599,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Alarms-read
+      summary: Mark all alarms as viewed
+      x-summary-source: derived
   /alarms/markviewed:
     post:
       tags:
@@ -2618,6 +2658,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Alarms-read
+      summary: Mark alarms as viewed
+      x-summary-source: derived
   /alarms/master:
     get:
       tags:
@@ -2645,6 +2687,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Alarms-read
+      summary: Get leader manager state
+      x-summary-source: derived
   /alarms/notviewed:
     get:
       tags:
@@ -2949,6 +2993,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Alarms-read
+      summary: Get non viewed alarms
+      x-summary-source: derived
   /alarms/page:
     get:
       tags:
@@ -3396,6 +3442,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Alarms-read
+      summary: Get page monitoring alarms details 1203
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Alarms Details
@@ -3844,6 +3892,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Alarms-read
+      summary: Post page monitoring alarms details 1204
+      x-summary-source: derived
   /alarms/purgefrequency:
     get:
       tags:
@@ -3885,6 +3935,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Alarms-read
+      summary: Set periodic purge timer
+      x-summary-source: derived
   /alarms/query/fields:
     get:
       tags:
@@ -3950,6 +4002,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get alarm query fields
+      x-summary-source: derived
   /alarms/query/input:
     get:
       tags:
@@ -4064,6 +4118,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Alarms-read
+      summary: Get field details
+      x-summary-source: derived
   /alarms/reset:
     get:
       tags:
@@ -4095,6 +4151,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: admin
+      summary: Reset
+      x-summary-source: derived
   /alarms/restart:
     get:
       tags:
@@ -4126,6 +4184,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: admin
+      summary: Restart correlation engine
+      x-summary-source: derived
   /alarms/rulenamedisplay/keyvalue:
     get:
       tags:
@@ -4442,6 +4502,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Alarms-read
+      summary: Get alarm types as key value
+      x-summary-source: derived
   /alarms/severity:
     get:
       tags:
@@ -4909,6 +4971,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Alarms-read
+      summary: Get by severity
+      x-summary-source: derived
   /alarms/severity/summary:
     get:
       tags:
@@ -5167,6 +5231,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Alarms-read
+      summary: Get alarm severity custom histogram
+      x-summary-source: derived
   /alarms/severitymappings:
     get:
       tags:
@@ -6058,6 +6124,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Alarms-read
+      summary: Get alarm severity mappings
+      x-summary-source: derived
   /alarms/starttracking/{testName}:
     post:
       tags:
@@ -6097,6 +6165,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Alarms-read
+      summary: Start tracking
+      x-summary-source: derived
   /alarms/stats:
     get:
       tags:
@@ -6149,6 +6219,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Alarms-read
+      summary: Get stats
+      x-summary-source: derived
   /alarms/stoptracking/{testName}:
     post:
       tags:
@@ -6188,6 +6260,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Alarms-read
+      summary: Stop tracking
+      x-summary-source: derived
   /alarms/topic:
     get:
       tags:
@@ -6226,6 +6300,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Alarms-read
+      summary: Get device topic
+      x-summary-source: derived
   /alarms/topn:
     post:
       tags:
@@ -6510,6 +6586,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get top N
+      x-summary-source: derived
   /alarms/uuid/{alarm_uuid}:
     get:
       tags:
@@ -6731,3 +6809,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Alarms-read
+      summary: Get alarm details
+      x-summary-source: derived

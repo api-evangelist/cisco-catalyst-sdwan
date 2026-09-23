@@ -34,7 +34,6 @@ paths:
       tags:
       - Client - UI
       summary: Get vManage server information
-      description: Get vManage server information
       operationId: createServerInfo_ClientUi_1403
       responses:
         '200':

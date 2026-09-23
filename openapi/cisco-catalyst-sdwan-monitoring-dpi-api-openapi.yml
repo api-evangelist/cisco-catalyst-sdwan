@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
   title: Monitoring and Troubleshooting Monitoring - DPI API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -31,7 +39,6 @@ paths:
     get:
       tags:
       - Monitoring - DPI
-      description: Get DPI stats raw data
       operationId: getDPIStatsRawData
       parameters:
       - name: query
@@ -172,6 +179,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get DPI stats raw data
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - DPI
@@ -322,6 +331,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get DPI stats raw data post
+      x-summary-source: derived
   /statistics/dpi/agg-app/aggregation:
     post:
       tags:
@@ -437,6 +448,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,RBAC VPN-read,RBAC VPN-write
+      summary: Get agg app data post
+      x-summary-source: derived
   /statistics/dpi/aggregation:
     get:
       tags:
@@ -536,6 +549,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get DPI stats aggregation data
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - DPI
@@ -644,6 +659,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,RBAC VPN-read,RBAC VPN-write
+      summary: Get DPI stats aggregation data post
+      x-summary-source: derived
   /statistics/dpi/applications:
     get:
       tags:
@@ -770,6 +787,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,RBAC VPN-read
+      summary: Get agg app flows
+      x-summary-source: derived
   /statistics/dpi/applications/summary:
     get:
       tags:
@@ -901,6 +920,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get agg app flows summary
+      x-summary-source: derived
   /statistics/dpi/csv:
     get:
       tags:
@@ -935,6 +956,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get DPI stats raw data as CSV
+      x-summary-source: derived
   /statistics/dpi/device/application/flowcount:
     get:
       tags:
@@ -981,6 +1004,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get DPI device app unique flow count
+      x-summary-source: derived
   /statistics/dpi/device/applications:
     get:
       tags:
@@ -1105,6 +1130,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,RBAC VPN-read
+      summary: Get DPI device app aggregation data
+      x-summary-source: derived
   /statistics/dpi/device/details/applications:
     get:
       tags:
@@ -1285,6 +1312,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get DPI device app details
+      x-summary-source: derived
   /statistics/dpi/doccount:
     get:
       tags:
@@ -1325,6 +1354,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get DPI stats count
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - DPI
@@ -1369,6 +1400,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get DPI stats count post
+      x-summary-source: derived
   /statistics/dpi/fields:
     get:
       tags:
@@ -1393,6 +1426,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get DPI fields
+      x-summary-source: derived
   /statistics/dpi/page:
     post:
       tags:
@@ -1535,10 +1570,11 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,RBAC VPN-read,RBAC VPN-write
+      summary: Get DPI stats pagination raw data post
+      x-summary-source: derived
     get:
       tags:
       - Monitoring - DPI
-      description: Get DPI stats pagination raw data
       operationId: getDPIStatsPaginationRawData
       parameters:
       - name: query
@@ -1670,6 +1706,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get DPI stats pagination raw data
+      x-summary-source: derived
   /statistics/dpi/pktdup/aggregation:
     post:
       tags:
@@ -1730,6 +1768,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get DPI stats aggregation data for packet dup
+      x-summary-source: derived
   /statistics/dpi/query/fields:
     get:
       tags:
@@ -1754,6 +1794,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get DPI query fields
+      x-summary-source: derived
   /statistics/dpi/recovery/aggregation:
     post:
       tags:
@@ -1814,3 +1856,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,RBAC VPN-read,RBAC VPN-write
+      summary: Get DPI stats aggregation data for fec
+      x-summary-source: derived

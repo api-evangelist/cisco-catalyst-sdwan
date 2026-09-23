@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Troubleshooting Tools - Diagnostics API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Troubleshooting Tools…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -132,6 +140,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stat data raw data troubleshooting tools diagnostics 2103
+      x-summary-source: derived
     post:
       tags:
       - Troubleshooting Tools - Diagnostics
@@ -298,6 +308,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stats raw data troubleshooting tools diagnostics 2104
+      x-summary-source: derived
   /statistics/speedtest/aggregation:
     post:
       tags:
@@ -329,6 +341,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default,dca
+      summary: Get post aggregation data by query troubleshooting tools diagnostics 3304
+      x-summary-source: derived
     get:
       tags:
       - Troubleshooting Tools - Diagnostics
@@ -358,6 +372,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get aggregation data by query troubleshooting tools diagnostics 3303
+      x-summary-source: derived
   /statistics/speedtest/csv:
     get:
       tags:
@@ -397,6 +413,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stat data raw data as CSV troubleshooting tools diagnostics 2503
+      x-summary-source: derived
   /statistics/speedtest/doccount:
     get:
       tags:
@@ -437,6 +455,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get count troubleshooting tools diagnostics 3003
+      x-summary-source: derived
     post:
       tags:
       - Troubleshooting Tools - Diagnostics
@@ -479,6 +499,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get count post troubleshooting tools diagnostics 3004
+      x-summary-source: derived
   /statistics/speedtest/fields:
     get:
       tags:
@@ -531,6 +553,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat data fields troubleshooting tools diagnostics 2803
+      x-summary-source: derived
   /statistics/speedtest/page:
     post:
       tags:
@@ -660,6 +684,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get post stats pagination raw data troubleshooting tools diagnostics 2604
+      x-summary-source: derived
     get:
       tags:
       - Troubleshooting Tools - Diagnostics
@@ -783,6 +809,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get stats pagination raw data troubleshooting tools diagnostics 2603
+      x-summary-source: derived
   /statistics/speedtest/query/fields:
     get:
       tags:
@@ -847,6 +875,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat query fields troubleshooting tools diagnostics 3403
+      x-summary-source: derived
   /stream/device/capture:
     post:
       tags:
@@ -967,11 +997,12 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tools-read
+      summary: Get session info capture
+      x-summary-source: derived
   /stream/device/capture/disable/{sessionId}:
     get:
       tags:
       - Troubleshooting Tools - Diagnostics
-      description: Disable packet capture session
       operationId: disablePacketCaptureSession
       parameters:
       - name: sessionId
@@ -999,6 +1030,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tools-read
+      summary: Disable packet capture session
+      x-summary-source: derived
   /stream/device/capture/download/{sessionId}:
     get:
       tags:
@@ -1027,6 +1060,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tools-read
+      summary: Download file
+      x-summary-source: derived
   /stream/device/capture/forcedisbale/{sessionId}:
     get:
       tags:
@@ -1059,6 +1094,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tools-read
+      summary: Force stop pcap session
+      x-summary-source: derived
   /stream/device/capture/start/{sessionId}:
     get:
       tags:
@@ -1141,6 +1178,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tools-read
+      summary: Start pcap session
+      x-summary-source: derived
   /stream/device/capture/status/{sessionId}:
     get:
       tags:
@@ -1186,6 +1225,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tools-read
+      summary: Get file download status
+      x-summary-source: derived
   /stream/device/capture/stop/{sessionId}:
     get:
       tags:
@@ -1268,6 +1309,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tools-read
+      summary: Stop pcap session
+      x-summary-source: derived
   /stream/device/capture/vnicsInfo/{vnfId}:
     get:
       tags:
@@ -1310,11 +1353,12 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tools-read
+      summary: Get vnic info by vnf id
+      x-summary-source: derived
   /stream/device/capture/{deviceUUID}/{sessionId}:
     post:
       tags:
       - Troubleshooting Tools - Diagnostics
-      description: Form post packet capture
       operationId: formPostPacketCapture
       parameters:
       - name: deviceUUID
@@ -1347,6 +1391,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: vmanage-http-stream
+      summary: Form post packet capture
+      x-summary-source: derived
   /stream/device/log:
     post:
       tags:
@@ -1364,6 +1410,8 @@ paths:
           content:
             application/json: {}
       x-roles-required: Tools-write
+      summary: Get session info log
+      x-summary-source: derived
   /stream/device/log/disable/{sessionId}:
     get:
       tags:
@@ -1386,6 +1434,8 @@ paths:
           content:
             application/json: {}
       x-roles-required: Tools-write
+      summary: Disable device log
+      x-summary-source: derived
   /stream/device/log/download/{sessionId}:
     get:
       tags:
@@ -1404,6 +1454,8 @@ paths:
           content:
             application/octet-stream: {}
       x-roles-required: Tools-read
+      summary: Download debug log
+      x-summary-source: derived
   /stream/device/log/renew/{sessionId}:
     get:
       tags:
@@ -1426,6 +1478,8 @@ paths:
           content:
             application/json: {}
       x-roles-required: Tools-write
+      summary: Renew session info
+      x-summary-source: derived
   /stream/device/log/search/{sessionId}:
     post:
       tags:
@@ -1450,6 +1504,8 @@ paths:
           content:
             application/json: {}
       x-roles-required: Tools-read
+      summary: Search device log
+      x-summary-source: derived
   /stream/device/log/sessions:
     get:
       tags:
@@ -1461,6 +1517,8 @@ paths:
           content:
             application/json: {}
       x-roles-required: Tools-read
+      summary: Get sessions
+      x-summary-source: derived
   /stream/device/log/sessions/clear/{sessionId}:
     get:
       tags:
@@ -1479,6 +1537,8 @@ paths:
           content:
             application/json: {}
       x-roles-required: Tools-write
+      summary: Clear session
+      x-summary-source: derived
   /stream/device/log/type:
     get:
       tags:
@@ -1497,6 +1557,8 @@ paths:
           content:
             application/json: {}
       x-roles-required: Tools-read
+      summary: Get log type
+      x-summary-source: derived
   /stream/device/log/{logType}/{deviceUUID}/{sessionId}:
     post:
       tags:
@@ -1533,6 +1595,8 @@ paths:
           content:
             application/json: {}
       x-roles-required: vmanage-http-stream
+      summary: Stream log
+      x-summary-source: derived
   /stream/device/log/{sessionId}:
     get:
       tags:
@@ -1561,6 +1625,8 @@ paths:
           content:
             application/json: {}
       x-roles-required: Tools-read
+      summary: Get device log
+      x-summary-source: derived
   /stream/device/speed:
     post:
       tags:
@@ -1657,6 +1723,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tools-read
+      summary: Get session
+      x-summary-source: derived
   /stream/device/speed/disable/{sessionId}:
     get:
       tags:
@@ -1698,6 +1766,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tools-read
+      summary: Disable speed test session
+      x-summary-source: derived
   /stream/device/speed/interface/bandwidth:
     get:
       tags:
@@ -1746,6 +1816,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get interface bandwidth
+      x-summary-source: derived
   /stream/device/speed/start/{sessionId}:
     get:
       tags:
@@ -1787,6 +1859,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tools-read
+      summary: Start speed test
+      x-summary-source: derived
   /stream/device/speed/status/{sessionId}:
     get:
       tags:
@@ -1828,6 +1902,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tools-read
+      summary: Get speed test status
+      x-summary-source: derived
   /stream/device/speed/stop/{sessionId}:
     get:
       tags:
@@ -1869,6 +1945,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tools-read
+      summary: Stop speed test
+      x-summary-source: derived
   /stream/device/speed/{deviceUUID}/{sessionId}:
     post:
       tags:
@@ -1945,6 +2023,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: vmanage-http-stream
+      summary: Save speed test results
+      x-summary-source: derived
   /stream/device/speed/{sessionId}:
     get:
       tags:
@@ -2052,6 +2132,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tools-read
+      summary: Get speed test
+      x-summary-source: derived
   /stream/device/status/{deviceUUID}:
     post:
       tags:
@@ -2077,6 +2159,8 @@ paths:
           content:
             '*/*': {}
       x-roles-required: vmanage-http-stream
+      summary: Process device status
+      x-summary-source: derived
   /stream/dmlog:
     post:
       tags:
@@ -2181,6 +2265,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Enable DM log
+      x-summary-source: derived
   /stream/dmlog/client/uploadFF/{sessionId}:
     post:
       tags:
@@ -2213,6 +2299,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tools-read
+      summary: Client upload filter file
+      x-summary-source: derived
   /stream/dmlog/disable/{sessionId}:
     get:
       tags:
@@ -2244,6 +2332,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Disable DM log session
+      x-summary-source: derived
   /stream/dmlog/download/{sessionId}:
     get:
       tags:
@@ -2271,6 +2361,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Download DM log
+      x-summary-source: derived
   /stream/dmlog/start/{sessionId}:
     get:
       tags:
@@ -2352,6 +2444,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Start DM log session
+      x-summary-source: derived
   /stream/dmlog/status/{sessionId}:
     get:
       tags:
@@ -2396,6 +2490,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get DM log status
+      x-summary-source: derived
   /stream/dmlog/stop/{sessionId}:
     get:
       tags:
@@ -2477,3 +2573,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Stop DM log session
+      x-summary-source: derived

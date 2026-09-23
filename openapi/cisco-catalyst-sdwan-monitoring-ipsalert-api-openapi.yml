@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
   title: Monitoring and Troubleshooting Monitoring - IPsAlert API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -132,6 +140,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stat data raw data monitoring ipsalert 2003
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - IPsAlert
@@ -261,6 +271,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stats raw data monitoring ipsalert 2004
+      x-summary-source: derived
   /statistics/ipsalert/aggregation:
     get:
       tags:
@@ -326,6 +338,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get aggregation data by query monitoring ipsalert 3203
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - IPsAlert
@@ -391,6 +405,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default,dca
+      summary: Get post aggregation data by query monitoring ipsalert 3204
+      x-summary-source: derived
   /statistics/ipsalert/csv:
     get:
       tags:
@@ -430,6 +446,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stat data raw data as CSV monitoring ipsalert 2403
+      x-summary-source: derived
   /statistics/ipsalert/doccount:
     get:
       tags:
@@ -470,6 +488,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get count monitoring ipsalert 2903
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - IPsAlert
@@ -512,6 +532,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get count post monitoring ipsalert 2904
+      x-summary-source: derived
   /statistics/ipsalert/fields:
     get:
       tags:
@@ -564,6 +586,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat data fields monitoring ipsalert 2703
+      x-summary-source: derived
   /statistics/ipsalert/page:
     post:
       tags:
@@ -693,6 +717,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get post stats pagination raw data monitoring ipsalert 2504
+      x-summary-source: derived
     get:
       tags:
       - Monitoring - IPsAlert
@@ -816,6 +842,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get stats pagination raw data monitoring ipsalert 2503
+      x-summary-source: derived
   /statistics/ipsalert/query/fields:
     get:
       tags:
@@ -880,3 +908,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat query fields monitoring ipsalert 3303
+      x-summary-source: derived

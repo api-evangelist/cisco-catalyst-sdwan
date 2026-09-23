@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
   title: Monitoring and Troubleshooting Monitoring - App Hosting API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -132,6 +140,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stat data raw data monitoring app hosting 2203
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - App Hosting
@@ -261,6 +271,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stats raw data monitoring app hosting 2204
+      x-summary-source: derived
   /statistics/apphosting/aggregation:
     post:
       tags:
@@ -292,6 +304,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default,dca
+      summary: Get post aggregation data by query monitoring app hosting 3404
+      x-summary-source: derived
     get:
       tags:
       - Monitoring - App Hosting
@@ -321,6 +335,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get aggregation data by query monitoring app hosting 3403
+      x-summary-source: derived
   /statistics/apphosting/csv:
     get:
       tags:
@@ -360,6 +376,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stat data raw data as CSV monitoring app hosting 2603
+      x-summary-source: derived
   /statistics/apphosting/doccount:
     get:
       tags:
@@ -400,6 +418,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get count monitoring app hosting 3103
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - App Hosting
@@ -442,6 +462,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get count post monitoring app hosting 3104
+      x-summary-source: derived
   /statistics/apphosting/fields:
     get:
       tags:
@@ -494,6 +516,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat data fields monitoring app hosting 2903
+      x-summary-source: derived
   /statistics/apphosting/page:
     post:
       tags:
@@ -623,6 +647,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get post stats pagination raw data monitoring app hosting 2704
+      x-summary-source: derived
     get:
       tags:
       - Monitoring - App Hosting
@@ -746,6 +772,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get stats pagination raw data monitoring app hosting 2703
+      x-summary-source: derived
   /statistics/apphosting/query/fields:
     get:
       tags:
@@ -810,6 +838,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat query fields monitoring app hosting 3503
+      x-summary-source: derived
   /statistics/apphostinginterface:
     post:
       tags:
@@ -940,6 +970,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stats raw data monitoring app hosting 3104
+      x-summary-source: derived
     get:
       tags:
       - Monitoring - App Hosting
@@ -1044,6 +1076,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stat data raw data monitoring app hosting 3103
+      x-summary-source: derived
   /statistics/apphostinginterface/aggregation:
     post:
       tags:
@@ -1075,6 +1109,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default,dca
+      summary: Get post aggregation data by query monitoring app hosting 4304
+      x-summary-source: derived
     get:
       tags:
       - Monitoring - App Hosting
@@ -1104,6 +1140,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get aggregation data by query monitoring app hosting 4303
+      x-summary-source: derived
   /statistics/apphostinginterface/csv:
     get:
       tags:
@@ -1143,6 +1181,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stat data raw data as CSV monitoring app hosting 3503
+      x-summary-source: derived
   /statistics/apphostinginterface/doccount:
     post:
       tags:
@@ -1186,6 +1226,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get count post monitoring app hosting 4004
+      x-summary-source: derived
     get:
       tags:
       - Monitoring - App Hosting
@@ -1225,6 +1267,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get count monitoring app hosting 4003
+      x-summary-source: derived
   /statistics/apphostinginterface/fields:
     get:
       tags:
@@ -1277,6 +1321,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat data fields monitoring app hosting 3803
+      x-summary-source: derived
   /statistics/apphostinginterface/page:
     post:
       tags:
@@ -1406,6 +1452,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get post stats pagination raw data monitoring app hosting 3604
+      x-summary-source: derived
     get:
       tags:
       - Monitoring - App Hosting
@@ -1529,6 +1577,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get stats pagination raw data monitoring app hosting 3603
+      x-summary-source: derived
   /statistics/apphostinginterface/query/fields:
     get:
       tags:
@@ -1593,3 +1643,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat query fields monitoring app hosting 4403
+      x-summary-source: derived

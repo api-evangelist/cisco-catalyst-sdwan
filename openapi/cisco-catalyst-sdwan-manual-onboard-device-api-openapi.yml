@@ -34,7 +34,6 @@ paths:
       tags:
       - Manual Onboard Device
       summary: Delete Manual Onboard Device details
-      description: Delete Manual Onboard Device details
       operationId: deleteDevices
       requestBody:
         content:
@@ -80,7 +79,6 @@ paths:
       tags:
       - Manual Onboard Device
       summary: Add Manual Onboard Device details
-      description: Add Manual Onboard Device details
       operationId: addDevices
       requestBody:
         description: On board Device details
@@ -160,7 +158,6 @@ paths:
       tags:
       - Manual Onboard Device
       summary: GET Manual Onboard Device details
-      description: GET Manual Onboard Device details
       operationId: getDevices_ManualOnboardDevice_1603
       parameters:
       - name: status
@@ -250,7 +247,6 @@ paths:
       tags:
       - Manual Onboard Device
       summary: Manual Onboard added Device details
-      description: Manual Onboard added Device details
       operationId: manualOnboardDevices
       requestBody:
         description: On board Devices

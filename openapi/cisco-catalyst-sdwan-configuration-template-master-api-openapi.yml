@@ -1,7 +1,13 @@
 openapi: 3.2.0
 info:
   title: UX 1.0 Configuration Configuration - Template Master API
-  description: "Configuration of UX 1.0 device and policy.\nIncludes API operations for the following:\n  Managing original SD-WAN device configurations and policy configurations\n  Device templates and feature templates"
+  description: 'Configuration of UX 1.0 device and policy.
+
+    Includes API operations for the following:
+
+    Managing original SD-WAN device configurations and policy configurations
+
+    Device templates and feature templates'
   contact:
     email: vmanage@cisco.com
   license:
@@ -31,7 +37,10 @@ paths:
     get:
       tags:
       - Configuration - Template Master
-      description: 'Generate template list<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Generate template list
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: generateMasterTemplateList
       parameters:
       - name: feature
@@ -90,11 +99,16 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Generate master template list
+      x-summary-source: derived
   /template/device/cli:
     post:
       tags:
       - Configuration - Template Master
-      description: 'Create CLI template<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Create CLI template
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: createCLITemplate
       requestBody:
         description: Create template request
@@ -131,11 +145,16 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Create CLI template
+      x-summary-source: derived
   /template/device/feature:
     post:
       tags:
       - Configuration - Template Master
-      description: 'Create a device template from feature templates and sub templates<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Create a device template from feature templates and sub templates
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: createMasterTemplate
       requestBody:
         description: Create template request
@@ -196,11 +215,16 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Create master template
+      x-summary-source: derived
   /template/device/migration:
     get:
       tags:
       - Configuration - Template Master
-      description: 'Generate a list of templates which require migration<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Generate a list of templates which require migration
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: generateTemplateForMigration
       parameters:
       - name: hasAAA
@@ -239,6 +263,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Generate template for migration
+      x-summary-source: derived
     post:
       tags:
       - Configuration - Template Master
@@ -284,11 +310,16 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Migrate templates
+      x-summary-source: derived
   /template/device/migration_info:
     get:
       tags:
       - Configuration - Template Master
-      description: 'Returns the mapping between old and migrated templates<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Returns the mapping between old and migrated templates
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: migrationInfo
       responses:
         '200':
@@ -307,11 +338,16 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Migration info
+      x-summary-source: derived
   /template/device/object/{templateId}:
     get:
       tags:
       - Configuration - Template Master
-      description: 'Generate template by Id<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Generate template by Id
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: getMasterTemplateDefinition
       parameters:
       - name: templateId
@@ -376,6 +412,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get master template definition
+      x-summary-source: derived
   /template/device/resource-group/{resourceGroupName}/{templateId}:
     post:
       tags:
@@ -404,11 +442,16 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Change template resource group configuration template master 6404
+      x-summary-source: derived
   /template/device/syncstatus:
     get:
       tags:
       - Configuration - Template Master
-      description: 'Get template sync status<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Get template sync status
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: getOutOfSyncTemplates
       responses:
         '200':
@@ -429,11 +472,16 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get out of sync templates
+      x-summary-source: derived
   /template/device/syncstatus/{templateId}:
     get:
       tags:
       - Configuration - Template Master
-      description: 'Get out of sync devices<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Get out of sync devices
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: getOutOfSyncDevices
       parameters:
       - name: templateId
@@ -461,11 +509,16 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get out of sync devices
+      x-summary-source: derived
   /template/device/{templateId}:
     delete:
       tags:
       - Configuration - Template Master
-      description: 'Delete template<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Delete template
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: deleteMasterTemplate
       parameters:
       - name: templateId
@@ -483,10 +536,15 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Delete master template
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Template Master
-      description: 'Edit template<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Edit template
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: editMasterTemplate
       parameters:
       - name: templateId
@@ -557,6 +615,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Edit master template
+      x-summary-source: derived
   /template/device/{templateId}/featuretemplates:
     get:
       tags:
@@ -579,3 +639,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get associated feature templates details
+      x-summary-source: derived

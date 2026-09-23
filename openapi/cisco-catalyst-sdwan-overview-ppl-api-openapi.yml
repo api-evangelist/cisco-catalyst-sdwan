@@ -172,6 +172,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,Device Monitoring-write
+      summary: Ppl dashlet
+      x-summary-source: derived
   /device/ppl/detailList:
     get:
       tags:
@@ -232,6 +234,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,Device Monitoring-write
+      summary: Detail list
+      x-summary-source: derived
   /device/ppl/segmentDetail:
     get:
       tags:
@@ -302,3 +306,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,Device Monitoring-write
+      summary: Segment detail
+      x-summary-source: derived

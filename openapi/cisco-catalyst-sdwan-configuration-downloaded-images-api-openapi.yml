@@ -69,3 +69,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write
+      summary: Create software list
+      x-summary-source: derived

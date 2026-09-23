@@ -1,7 +1,13 @@
 openapi: 3.2.0
 info:
-  title: UX 1.0 Configuration Configuration - Policy TranslationRules List Builder API
-  description: "Configuration of UX 1.0 device and policy.\nIncludes API operations for the following:\n  Managing original SD-WAN device configurations and policy configurations\n  Device templates and feature templates"
+  title: UX 1.0 Configuration Configuration - Policy…
+  description: 'Configuration of UX 1.0 device and policy.
+
+    Includes API operations for the following:
+
+    Managing original SD-WAN device configurations and policy configurations
+
+    Device templates and feature templates'
   contact:
     email: vmanage@cisco.com
   license:
@@ -284,6 +290,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write
+      summary: Create policy list configuration policy translationrules list builder 3804
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Policy TranslationRules List Builder
@@ -327,6 +335,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+      summary: Get policy lists configuration policy translationrules list builder 3803
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Policy TranslationRules List Builder
@@ -357,6 +367,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Delete policy lists with info tag configuration policy translationrules list…
+      x-summary-source: derived
   /template/policy/list/translationrules/filtered:
     get:
       tags:
@@ -388,6 +400,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get policy lists with info tag configuration policy translationrules list…
+      x-summary-source: derived
   /template/policy/list/translationrules/preview:
     post:
       tags:
@@ -422,6 +436,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+      summary: Preview policy list configuration policy translationrules list builder 4604
+      x-summary-source: derived
   /template/policy/list/translationrules/preview/{id}:
     get:
       tags:
@@ -454,6 +470,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+      summary: Preview policy list by id configuration policy translationrules list builder…
+      x-summary-source: derived
   /template/policy/list/translationrules/{id}:
     delete:
       tags:
@@ -477,6 +495,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write
+      summary: Delete policy list configuration policy translationrules list builder 4306
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Policy TranslationRules List Builder
@@ -525,6 +545,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write
+      summary: Edit policy list configuration policy translationrules list builder 4303
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Policy TranslationRules List Builder
@@ -570,3 +592,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+      summary: Get lists by id configuration policy translationrules list builder 4303
+      x-summary-source: derived

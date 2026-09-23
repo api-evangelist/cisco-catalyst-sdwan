@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Real-Time Monitoring - Interface API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Real-Time Monitoring…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -265,6 +273,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get device interface
+      x-summary-source: derived
   /device/interface/arp_stats:
     get:
       tags:
@@ -427,6 +437,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get device interface ARP stats
+      x-summary-source: derived
   /device/interface/error_stats:
     get:
       tags:
@@ -634,6 +646,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get device interface error stats
+      x-summary-source: derived
   /device/interface/ipv6Stats:
     get:
       tags:
@@ -781,6 +795,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get device interface ipv6 stats
+      x-summary-source: derived
   /device/interface/pkt_size:
     get:
       tags:
@@ -893,6 +909,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get device interface pkt sizes
+      x-summary-source: derived
   /device/interface/port_stats:
     get:
       tags:
@@ -991,6 +1009,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get device interface port stats
+      x-summary-source: derived
   /device/interface/qosStats:
     get:
       tags:
@@ -1085,6 +1105,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get device interface qos stats
+      x-summary-source: derived
   /device/interface/queue_stats:
     get:
       tags:
@@ -1252,6 +1274,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get device interface queue stats
+      x-summary-source: derived
   /device/interface/serial:
     get:
       tags:
@@ -1324,6 +1348,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get device serial interface
+      x-summary-source: derived
   /device/interface/stats:
     get:
       tags:
@@ -1478,6 +1504,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get device interface stats
+      x-summary-source: derived
   /device/interface/synced:
     get:
       tags:
@@ -1666,6 +1694,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get synced device interface
+      x-summary-source: derived
   /device/interface/trustsec:
     get:
       tags:
@@ -1708,6 +1738,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,Device Monitoring-write
+      summary: Trustsec
+      x-summary-source: derived
   /device/interface/vpn:
     get:
       tags:
@@ -1780,3 +1812,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Generate device interface VPN
+      x-summary-source: derived

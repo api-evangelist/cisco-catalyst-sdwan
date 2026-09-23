@@ -88,3 +88,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write,Integration Management-write
+      summary: Push netconf configs
+      x-summary-source: derived

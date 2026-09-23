@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Real-Time Monitoring - OSPF API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Real-Time Monitoring - OSPF…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -138,6 +146,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write
+      summary: Create OSPF database list
+      x-summary-source: derived
   /device/ospf/databaseexternal:
     get:
       tags:
@@ -231,6 +241,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write
+      summary: Create OSPF database external
+      x-summary-source: derived
   /device/ospf/databasesummary:
     get:
       tags:
@@ -279,6 +291,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write
+      summary: Create OSPF database summary list
+      x-summary-source: derived
   /device/ospf/interface:
     get:
       tags:
@@ -321,6 +335,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write
+      summary: Create OSPF interface
+      x-summary-source: derived
   /device/ospf/neighbor:
     get:
       tags:
@@ -363,6 +379,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write
+      summary: Create OSPF neighbors
+      x-summary-source: derived
   /device/ospf/process:
     get:
       tags:
@@ -442,6 +460,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write
+      summary: Create OSPF process
+      x-summary-source: derived
   /device/ospf/routes:
     get:
       tags:
@@ -553,6 +573,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write
+      summary: Create OSPF routes list
+      x-summary-source: derived
   /device/ospf/v3interface:
     get:
       tags:
@@ -607,6 +629,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write
+      summary: Create OSPFv3 interface
+      x-summary-source: derived
   /device/ospf/v3neighbor:
     get:
       tags:
@@ -661,3 +685,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write
+      summary: Create OSPFv3 neighbors
+      x-summary-source: derived

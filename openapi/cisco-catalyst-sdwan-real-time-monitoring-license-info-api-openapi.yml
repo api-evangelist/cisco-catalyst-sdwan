@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Real-Time Monitoring - License Info API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Real-Time Monitoring…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -67,6 +75,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write
+      summary: Get license eval info
+      x-summary-source: derived
   /device/license/pak:
     get:
       tags:
@@ -112,6 +122,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write
+      summary: Get license PAK info
+      x-summary-source: derived
   /device/license/privacy:
     get:
       tags:
@@ -152,6 +164,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write
+      summary: Get license privacy info
+      x-summary-source: derived
   /device/license/registration:
     get:
       tags:
@@ -191,6 +205,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write
+      summary: Get license reg info
+      x-summary-source: derived
   /device/license/udi:
     get:
       tags:
@@ -231,6 +247,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write
+      summary: Get license UDI info
+      x-summary-source: derived
   /device/license/usage:
     get:
       tags:
@@ -276,3 +294,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write
+      summary: Get license usage info
+      x-summary-source: derived

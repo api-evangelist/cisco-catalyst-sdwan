@@ -78,11 +78,12 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get supported instance size
+      x-summary-source: derived
   /multicloud/settings/global:
     get:
       tags:
       - MultiCloud - Global Settings
-      description: Get global settings
       operationId: getGlobalSettings
       parameters:
       - name: cloudType
@@ -309,10 +310,11 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get global settings
+      x-summary-source: derived
     put:
       tags:
       - MultiCloud - Global Settings
-      description: Update global settings
       operationId: updateGlobalSettings
       requestBody:
         description: Payload for updating Global Settings based on CloudType
@@ -530,10 +532,11 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Update global settings
+      x-summary-source: derived
     post:
       tags:
       - MultiCloud - Global Settings
-      description: Add global settings
       operationId: addGlobalSettings
       requestBody:
         description: Responses for get Global Settings based CloudType
@@ -761,6 +764,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Add global settings
+      x-summary-source: derived
   /multicloud/swimages:
     get:
       tags:
@@ -819,3 +824,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get supported software image list
+      x-summary-source: derived

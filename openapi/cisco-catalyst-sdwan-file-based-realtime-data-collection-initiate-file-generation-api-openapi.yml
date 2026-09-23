@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Others File based RealTime Data Collection - Initiate File Generation API
+  title: Others File based RealTime Data Collection - Initiate File…
   description: 'Other APIs
 
     Include APIs that do not belong to other categories'
@@ -139,3 +139,5 @@ paths:
                     errorMessage: Data Collection state is in-progress, Cannot download file at this momemnt
                   $$ref: '#/components/examples/ComViptelaVmanageServerFilebasedRealtimeDatacollectionDatacollectionapiResponseExampleInitiatefilegeneration500'
       x-roles-required: System-read,System-write
+      summary: Initiate file generation request to device
+      x-summary-source: derived

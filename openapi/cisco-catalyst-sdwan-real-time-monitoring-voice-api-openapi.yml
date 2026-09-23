@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Real-Time Monitoring - Voice API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Real-Time Monitoring - Voice…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -69,6 +77,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,Device Monitoring-write
+      summary: Get dsp active
+      x-summary-source: derived
   /device/voice/phoneInfo:
     get:
       tags:
@@ -111,6 +121,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,Device Monitoring-write
+      summary: Get phone info
+      x-summary-source: derived
   /device/voice/profiles:
     get:
       tags:
@@ -200,6 +212,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,Device Monitoring-write
+      summary: Get DSP farm profiles
+      x-summary-source: derived
   /device/voice/sccpCcmGroups:
     get:
       tags:
@@ -244,6 +258,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,Device Monitoring-write
+      summary: Get sccp ccm groups
+      x-summary-source: derived
   /device/voice/sccpConnections:
     get:
       tags:
@@ -289,6 +305,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,Device Monitoring-write
+      summary: Get sccp connections
+      x-summary-source: derived
   /device/voice/voiceCalls:
     get:
       tags:
@@ -335,6 +353,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,Device Monitoring-write
+      summary: Get voice calls
+      x-summary-source: derived
   /device/voice/voipCalls:
     get:
       tags:
@@ -380,6 +400,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,Device Monitoring-write
+      summary: Get voip calls
+      x-summary-source: derived
   /device/voiceisdninfo/isdnstatus:
     get:
       tags:
@@ -422,6 +444,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,Device Monitoring-write
+      summary: Get t1e1 isdn status
+      x-summary-source: derived
   /device/voicet1e1controllerinfo/current15minstats:
     get:
       tags:
@@ -475,6 +499,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,Device Monitoring-write
+      summary: Get controller t1e1 info current15 min stats
+      x-summary-source: derived
   /device/voicet1e1controllerinfo/totalstats:
     get:
       tags:
@@ -528,3 +554,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,Device Monitoring-write
+      summary: Get controller t1e1 info total stats
+      x-summary-source: derived

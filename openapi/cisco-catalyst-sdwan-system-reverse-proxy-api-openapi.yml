@@ -59,6 +59,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get reverse proxy mappings
+      x-summary-source: derived
     post:
       tags:
       - System - Reverse Proxy
@@ -91,3 +93,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Create reverse proxy mappings
+      x-summary-source: derived

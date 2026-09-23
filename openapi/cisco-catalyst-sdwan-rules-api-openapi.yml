@@ -58,3 +58,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get preview of bulk rule association
+      x-summary-source: derived

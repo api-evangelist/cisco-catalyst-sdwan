@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
   title: Monitoring and Troubleshooting Real-Time Monitoring - IP API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -181,6 +189,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write,System-read,System-write
+      summary: Create fib list
+      x-summary-source: derived
   /device/ip/ipRoutes:
     get:
       tags:
@@ -303,6 +313,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write,System-read,System-write
+      summary: Create ietf routing list
+      x-summary-source: derived
   /device/ip/mfiboil:
     get:
       tags:
@@ -351,6 +363,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write,System-read,System-write
+      summary: Create IP mfib oil list
+      x-summary-source: derived
   /device/ip/mfibstats:
     get:
       tags:
@@ -427,6 +441,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write,System-read,System-write
+      summary: Create IP mfib stats list
+      x-summary-source: derived
   /device/ip/mfibsummary:
     get:
       tags:
@@ -483,6 +499,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write,System-read,System-write
+      summary: Create IP mfib summary list
+      x-summary-source: derived
   /device/ip/nat/filter:
     get:
       tags:
@@ -563,6 +581,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write,System-read,System-write
+      summary: Create nat filter list
+      x-summary-source: derived
   /device/ip/nat/interface:
     get:
       tags:
@@ -607,6 +627,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write,System-read,System-write
+      summary: Create nat interface list
+      x-summary-source: derived
   /device/ip/nat/interfacestatistics:
     get:
       tags:
@@ -664,6 +686,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write,System-read,System-write
+      summary: Create nat interface statistics list
+      x-summary-source: derived
   /device/ip/nat/translation:
     get:
       tags:
@@ -746,6 +770,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write,System-read,System-write
+      summary: Create nat translation list
+      x-summary-source: derived
   /device/ip/nat64/translation:
     get:
       tags:
@@ -793,6 +819,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write,System-read,System-write
+      summary: Create nat64 translation list
+      x-summary-source: derived
   /device/ip/routetable:
     get:
       tags:
@@ -912,3 +940,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Routing-read,Routing-write,System-read,System-write
+      summary: Create route table list
+      x-summary-source: derived

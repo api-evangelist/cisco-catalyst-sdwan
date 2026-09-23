@@ -1,7 +1,13 @@
 openapi: 3.2.0
 info:
   title: UX 1.0 Configuration Configuration - Policy List Builder API
-  description: "Configuration of UX 1.0 device and policy.\nIncludes API operations for the following:\n  Managing original SD-WAN device configurations and policy configurations\n  Device templates and feature templates"
+  description: 'Configuration of UX 1.0 device and policy.
+
+    Includes API operations for the following:
+
+    Managing original SD-WAN device configurations and policy configurations
+
+    Device templates and feature templates'
   contact:
     email: vmanage@cisco.com
   license:
@@ -31,7 +37,6 @@ paths:
     get:
       tags:
       - Configuration - Policy List Builder
-      description: Get all policy lists
       operationId: getAllPolicyLists
       responses:
         '200':
@@ -52,6 +57,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get all policy lists
+      x-summary-source: derived
   /template/policy/list/webex:
     post:
       tags:
@@ -78,6 +85,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Create webex prefix lists configuration policy list builder 2704
+      x-summary-source: derived
   /template/policy/list/webex/update:
     post:
       tags:
@@ -104,3 +113,5 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Create webex prefix lists configuration policy list builder 3404
+      x-summary-source: derived

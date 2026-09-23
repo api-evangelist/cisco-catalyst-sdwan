@@ -1,7 +1,13 @@
 openapi: 3.2.0
 info:
-  title: UX 1.0 Configuration Configuration - Policy VPN Membership Group Definition Builder API
-  description: "Configuration of UX 1.0 device and policy.\nIncludes API operations for the following:\n  Managing original SD-WAN device configurations and policy configurations\n  Device templates and feature templates"
+  title: UX 1.0 Configuration Configuration - Policy VPN Membership…
+  description: 'Configuration of UX 1.0 device and policy.
+
+    Includes API operations for the following:
+
+    Managing original SD-WAN device configurations and policy configurations
+
+    Device templates and feature templates'
   contact:
     email: vmanage@cisco.com
   license:
@@ -54,6 +60,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Topology Policy-write,VPN Membership Policy-write
+      summary: Create policy definition configuration policy vpn membership group definition…
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Policy VPN Membership Group Definition Builder
@@ -77,6 +85,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write,VPN Membership Policy-read,VPN Membership Policy-write
+      summary: Get definitions configuration policy vpn membership group definition builder…
+      x-summary-source: derived
   /template/policy/definition/vpnmembershipgroup/bulk:
     put:
       tags:
@@ -111,6 +121,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write
+      summary: Save policy definition in bulk configuration policy vpn membership group…
+      x-summary-source: derived
   /template/policy/definition/vpnmembershipgroup/multiple/{id}:
     put:
       tags:
@@ -152,6 +164,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write
+      summary: Edit multiple policy definition configuration policy vpn membership group…
+      x-summary-source: derived
   /template/policy/definition/vpnmembershipgroup/preview:
     post:
       tags:
@@ -186,6 +200,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+      summary: Preview policy definition configuration policy vpn membership group definition…
+      x-summary-source: derived
   /template/policy/definition/vpnmembershipgroup/preview/{id}:
     get:
       tags:
@@ -218,6 +234,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+      summary: Preview policy definition by id configuration policy vpn membership group…
+      x-summary-source: derived
   /template/policy/definition/vpnmembershipgroup/{id}:
     delete:
       tags:
@@ -241,6 +259,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Topology Policy-write,VPN Membership Policy-write
+      summary: Delete policy definition configuration policy vpn membership group definition…
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Policy VPN Membership Group Definition Builder
@@ -272,6 +292,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write,VPN Membership Policy-read,VPN Membership Policy-write
+      summary: Get policy definition configuration policy vpn membership group definition…
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Policy VPN Membership Group Definition Builder
@@ -305,3 +327,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Topology Policy-write,VPN Membership Policy-write
+      summary: Edit policy definition configuration policy vpn membership group definition…
+      x-summary-source: derived

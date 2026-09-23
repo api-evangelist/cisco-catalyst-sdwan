@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
   title: Monitoring and Troubleshooting Monitoring - PPL API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -157,6 +165,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stats raw data monitoring ppl 1904
+      x-summary-source: derived
     get:
       tags:
       - Monitoring - PPL
@@ -261,6 +271,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stat data raw data monitoring ppl 1903
+      x-summary-source: derived
   /statistics/ppl/ctg/aggregation:
     post:
       tags:
@@ -292,6 +304,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default,dca
+      summary: Get post aggregation data by query monitoring ppl 3104
+      x-summary-source: derived
     get:
       tags:
       - Monitoring - PPL
@@ -321,6 +335,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get aggregation data by query monitoring ppl 3103
+      x-summary-source: derived
   /statistics/ppl/ctg/csv:
     get:
       tags:
@@ -360,6 +376,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stat data raw data as CSV monitoring ppl 2303
+      x-summary-source: derived
   /statistics/ppl/ctg/doccount:
     post:
       tags:
@@ -403,6 +421,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get count post monitoring ppl 2804
+      x-summary-source: derived
     get:
       tags:
       - Monitoring - PPL
@@ -442,6 +462,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get count monitoring ppl 2803
+      x-summary-source: derived
   /statistics/ppl/ctg/fields:
     get:
       tags:
@@ -494,6 +516,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat data fields monitoring ppl 2603
+      x-summary-source: derived
   /statistics/ppl/ctg/page:
     get:
       tags:
@@ -618,6 +642,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get stats pagination raw data monitoring ppl 2403
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - PPL
@@ -746,6 +772,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get post stats pagination raw data monitoring ppl 2404
+      x-summary-source: derived
   /statistics/ppl/ctg/query/fields:
     get:
       tags:
@@ -810,6 +838,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat query fields monitoring ppl 3203
+      x-summary-source: derived
   /statistics/ppl/reordering:
     post:
       tags:
@@ -940,6 +970,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stats raw data monitoring ppl 2604
+      x-summary-source: derived
     get:
       tags:
       - Monitoring - PPL
@@ -1044,6 +1076,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stat data raw data monitoring ppl 2603
+      x-summary-source: derived
   /statistics/ppl/reordering/aggregation:
     get:
       tags:
@@ -1074,6 +1108,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get aggregation data by query monitoring ppl 3803
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - PPL
@@ -1104,6 +1140,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default,dca
+      summary: Get post aggregation data by query monitoring ppl 3804
+      x-summary-source: derived
   /statistics/ppl/reordering/csv:
     get:
       tags:
@@ -1143,6 +1181,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stat data raw data as CSV monitoring ppl 3003
+      x-summary-source: derived
   /statistics/ppl/reordering/doccount:
     post:
       tags:
@@ -1186,6 +1226,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get count post monitoring ppl 3504
+      x-summary-source: derived
     get:
       tags:
       - Monitoring - PPL
@@ -1225,6 +1267,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get count monitoring ppl 3503
+      x-summary-source: derived
   /statistics/ppl/reordering/fields:
     get:
       tags:
@@ -1277,6 +1321,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat data fields monitoring ppl 3303
+      x-summary-source: derived
   /statistics/ppl/reordering/page:
     get:
       tags:
@@ -1401,6 +1447,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get stats pagination raw data monitoring ppl 3103
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - PPL
@@ -1529,6 +1577,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get post stats pagination raw data monitoring ppl 3104
+      x-summary-source: derived
   /statistics/ppl/reordering/query/fields:
     get:
       tags:
@@ -1593,3 +1643,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat query fields monitoring ppl 3903
+      x-summary-source: derived

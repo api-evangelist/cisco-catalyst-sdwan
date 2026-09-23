@@ -31,7 +31,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - Accounts
-      summary: Get Interconnect provider accounts.
+      summary: Get Interconnect provider accounts
       description: API to retrieve Interconnect provider accounts.
       operationId: getInterconnectAccounts
       parameters:
@@ -159,7 +159,7 @@ paths:
     post:
       tags:
       - Multicloud Interconnect - Accounts
-      summary: Add an Interconnect provider account to vManage.
+      summary: Add an Interconnect provider account to vManage
       description: API to associate an Interconnect provider account to vManage.
       operationId: addInterconnectAccount
       requestBody:
@@ -419,7 +419,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - Accounts
-      summary: Get associated Interconnect provider account by id.
+      summary: Get associated Interconnect provider account by id
       description: API to retrieve associated Interconnect provider account details by id.
       operationId: getInterconnectAccount
       parameters:
@@ -546,7 +546,7 @@ paths:
     delete:
       tags:
       - Multicloud Interconnect - Accounts
-      summary: Delete Interconnect provider account from vManage.
+      summary: Delete Interconnect provider account from vManage
       description: API to disassociate Interconnect provider account from vManage.
       operationId: deleteInterconnectAccount
       parameters:
@@ -568,7 +568,7 @@ paths:
     put:
       tags:
       - Multicloud Interconnect - Accounts
-      summary: Edit Interconnect provider account details.
+      summary: Edit Interconnect provider account details
       description: API to edit associated Interconnect provider account name and description.
       operationId: updateInterconnectAccount
       parameters:
@@ -730,7 +730,7 @@ paths:
     put:
       tags:
       - Multicloud Interconnect - Accounts
-      summary: Edit associated Interconnect provider account credentials.
+      summary: Edit associated Interconnect provider account credentials
       description: API to edit associated Interconnect provider account credentials.
       operationId: updateInterconnectAccountCredentials
       parameters:
@@ -997,7 +997,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - Accounts
-      summary: Get Interconnect provider billing accounts.
+      summary: Get Interconnect provider billing accounts
       description: API to retrieve billing accounts for an Interconnect provider type and account.
       operationId: getInterconnectBillingAccounts
       parameters:
@@ -1051,7 +1051,7 @@ paths:
     put:
       tags:
       - Multicloud Interconnect - Accounts
-      summary: Update Interconnect provider available regions.
+      summary: Update Interconnect provider available regions
       description: API to retrieve and update the available regions for an Interconnect provider and account.
       operationId: updateInterconnectLocationInfo
       parameters:
@@ -1253,7 +1253,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - Accounts
-      summary: Get Interconnect provider available regions.
+      summary: Get Interconnect provider available regions
       description: API to retrieve list of available regions for an Interconnect provider and account.
       operationId: getInterconnectLocationInfo
       parameters:
@@ -1460,7 +1460,7 @@ paths:
     delete:
       tags:
       - Multicloud Interconnect - Accounts
-      summary: Delete Interconnect provider stored regions.
+      summary: Delete Interconnect provider stored regions
       description: API to delete the stored regions for an Interconnect provider and account from vManage.
       operationId: deleteInterconnectLocationInfo
       parameters:
@@ -1489,7 +1489,7 @@ paths:
     delete:
       tags:
       - Multicloud Interconnect - Accounts
-      summary: Delete Interconnect provider type regions.
+      summary: Delete Interconnect provider type regions
       description: API to delete the stored regions for an Interconnect provider type from vManage.
       operationId: deleteAllInterconnectLocationInfo
       parameters:

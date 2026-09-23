@@ -31,7 +31,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - Resource Audit
-      summary: Get audit report for resources.
+      summary: Get audit report for resources
       description: API to generate audit report for resources.
       operationId: getAuditReport
       parameters:

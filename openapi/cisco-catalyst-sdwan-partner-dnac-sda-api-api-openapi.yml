@@ -92,11 +92,12 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write,Integration Management-write
+      summary: Create SDA config
+      x-summary-source: derived
   /partner/dnac/sda/device/{partnerId}:
     get:
       tags:
       - Partner - DNAC SDA API
-      description: Get SDA enabled devices
       operationId: getSDAEnabledDevices
       parameters:
       - name: partnerId
@@ -269,6 +270,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Deploy-read,Template Deploy-write,Policy Configuration-read,Policy Configuration-write,Policy Deploy-read,Policy Deploy-write,Integration Management-read,Integration Management-write
+      summary: Get SDA enabled devices
+      x-summary-source: derived
   /partner/dnac/sda/device/{partnerId}/{uuid}:
     get:
       tags:
@@ -451,6 +454,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Deploy-read,Template Deploy-write,Policy Configuration-read,Policy Configuration-write,Policy Deploy-read,Policy Deploy-write,Integration Management-read,Integration Management-write
+      summary: Get device details
+      x-summary-source: derived
   /partner/dnac/sda/netconfconfig/{partnerId}:
     post:
       tags:
@@ -516,6 +521,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write,Integration Management-write
+      summary: Create SDA config from netconf
+      x-summary-source: derived
   /partner/dnac/sda/site/{partnerId}:
     get:
       tags:
@@ -575,6 +582,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Deploy-read,Template Deploy-write,Policy Configuration-read,Policy Configuration-write,Policy Deploy-read,Policy Deploy-write,Integration Management-read,Integration Management-write
+      summary: Get sites for partner
+      x-summary-source: derived
   /partner/dnac/sda/vpn:
     get:
       tags:
@@ -634,3 +643,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: DNAC SDA-read,DNAC SDA-write,Integration Management-read,Integration Management-write
+      summary: Get overlay VPN list
+      x-summary-source: derived

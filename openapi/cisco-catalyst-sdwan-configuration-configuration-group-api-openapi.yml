@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
   title: UX 2.0 Configuration Configuration - Configuration Group API
-  description: "Configuration of UX 2.0 device, policy, and topology\nIncludes API operations for the following\n  Configuration Groups (SD-WAN and SD-Routing)\n  Policy Groups\n  Topology Groups"
+  description: 'Configuration of UX 2.0 device, policy, and topology
+
+    Includes API operations for the following
+
+    Configuration Groups (SD-WAN and SD-Routing)
+
+    Policy Groups
+
+    Topology Groups'
   contact:
     email: vmanage@cisco.com
   license:
@@ -295,6 +303,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Config Group-read
+      summary: Get config group by solution
+      x-summary-source: derived
     post:
       tags:
       - Configuration - Configuration Group
@@ -570,6 +580,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Config Group-write
+      summary: Create config group
+      x-summary-source: derived
   /v1/config-group/{configGroupId}:
     put:
       tags:
@@ -816,6 +828,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Config Group-write
+      summary: Edit config group
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Configuration Group
@@ -1084,6 +1098,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Config Group-read
+      summary: Get config group
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Configuration Group
@@ -1109,6 +1125,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Config Group-write
+      summary: Delete config group
+      x-summary-source: derived
   /v1/config-group/{configGroupId}/device/associate:
     get:
       tags:
@@ -1241,6 +1259,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Config Group > Device-read
+      summary: Get config group association
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Configuration Group
@@ -1311,6 +1331,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Config Group > Device-write
+      summary: Update config group association
+      x-summary-source: derived
     post:
       tags:
       - Configuration - Configuration Group
@@ -1382,6 +1404,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Config Group > Device-write
+      summary: Create config group association
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Configuration Group
@@ -1442,11 +1466,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Config Group > Device-write
+      summary: Delete config group association
+      x-summary-source: derived
   /v1/config-group/{configGroupId}/device/deploy:
     post:
       tags:
       - Configuration - Configuration Group
-      description: 'deploy config group to devices<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'deploy config group to devices
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: deployConfigGroup
       parameters:
       - name: configGroupId
@@ -1523,6 +1552,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Config Group > Device > Deploy-write
+      summary: Deploy config group
+      x-summary-source: derived
   /v1/config-group/{configGroupId}/device/variables:
     get:
       tags:
@@ -1628,6 +1659,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Config Group-read
+      summary: Get config group device variables
+      x-summary-source: derived
     post:
       tags:
       - Configuration - Configuration Group
@@ -1683,6 +1716,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Config Group-read
+      summary: Fetch config group device variables
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Configuration Group
@@ -1829,6 +1864,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Config Group-write
+      summary: Create config group device variables
+      x-summary-source: derived
   /v1/config-group/{configGroupId}/device/variables/schema:
     get:
       tags:
@@ -1866,6 +1903,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Config Group-read
+      summary: Get config group device variables schema
+      x-summary-source: derived
   /v1/config-group/{configGroupId}/device/{deviceId}/preview:
     post:
       tags:
@@ -1941,6 +1980,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Config Group > Device > Deploy-read
+      summary: Get config group device configuration preview
+      x-summary-source: derived
   /v1/config-group/{configGroupId}/rules:
     get:
       tags:
@@ -1982,3 +2023,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get rule association by config group id
+      x-summary-source: derived

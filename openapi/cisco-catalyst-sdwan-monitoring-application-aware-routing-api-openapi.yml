@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Monitoring - Application Aware Routing API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Monitoring - Application…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -136,6 +144,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat data raw data monitoring application aware routing 2003
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Application Aware Routing
@@ -345,6 +355,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stats raw data monitoring application aware routing 2004
+      x-summary-source: derived
   /statistics/approute/aggregation:
     get:
       tags:
@@ -422,6 +434,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get aggregation data by query monitoring application aware routing 3203
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Application Aware Routing
@@ -503,6 +517,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get post aggregation data by query monitoring application aware routing 3204
+      x-summary-source: derived
   /statistics/approute/app-agg/aggregation:
     post:
       tags:
@@ -562,6 +578,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get post aggregation app data by query9
+      x-summary-source: derived
   /statistics/approute/csv:
     get:
       tags:
@@ -610,6 +628,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat data raw data as CSV monitoring application aware routing 2403
+      x-summary-source: derived
   /statistics/approute/device/tunnel/summary:
     get:
       tags:
@@ -722,6 +742,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stats app route device tunnel summary
+      x-summary-source: derived
   /statistics/approute/device/tunnels:
     get:
       tags:
@@ -999,6 +1021,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stats app route device tunnels
+      x-summary-source: derived
   /statistics/approute/doccount:
     get:
       tags:
@@ -1049,6 +1073,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get doc count monitoring application aware routing 2903
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Application Aware Routing
@@ -1102,6 +1128,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get doc count post
+      x-summary-source: derived
   /statistics/approute/fec/aggregation:
     post:
       tags:
@@ -1208,6 +1236,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get app route fec agg
+      x-summary-source: derived
   /statistics/approute/fields:
     get:
       tags:
@@ -1288,6 +1318,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat data fields monitoring application aware routing 2703
+      x-summary-source: derived
   /statistics/approute/page:
     get:
       tags:
@@ -1507,6 +1539,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat bulk raw data monitoring application aware routing 2503
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Application Aware Routing
@@ -1646,6 +1680,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get post stat bulk raw data monitoring application aware routing 2504
+      x-summary-source: derived
   /statistics/approute/query/fields:
     get:
       tags:
@@ -1709,6 +1745,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat query fields monitoring application aware routing 3303
+      x-summary-source: derived
   /statistics/approute/tloc:
     post:
       tags:
@@ -1787,6 +1825,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get approute tloc
+      x-summary-source: derived
   /statistics/approute/transport/summary/{type}:
     get:
       tags:
@@ -1889,6 +1929,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get app route transport summary type
+      x-summary-source: derived
   /statistics/approute/transport/{type}:
     get:
       tags:
@@ -1968,6 +2010,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get app route transport type
+      x-summary-source: derived
   /statistics/approute/tunnel/{type}/summary:
     get:
       tags:
@@ -2178,6 +2222,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get app route tunnel summary type
+      x-summary-source: derived
   /statistics/approute/tunnels/health/{type}:
     get:
       tags:
@@ -2302,6 +2348,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get app route tunnel health
+      x-summary-source: derived
   /statistics/approute/tunnels/summary/{type}:
     get:
       tags:
@@ -2400,6 +2448,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get app route tunnels summary type
+      x-summary-source: derived
   /statistics/approute/tunnels/{type}:
     get:
       tags:
@@ -2614,3 +2664,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get app route tunnel type
+      x-summary-source: derived

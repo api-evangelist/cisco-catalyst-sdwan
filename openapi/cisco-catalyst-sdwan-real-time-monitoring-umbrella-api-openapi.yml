@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Real-Time Monitoring - Umbrella API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Real-Time Monitoring…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -77,6 +85,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write
+      summary: Get umbrella dev reg
+      x-summary-source: derived
   /device/umbrella/dnscrypt:
     get:
       tags:
@@ -140,6 +150,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write
+      summary: Get umbrella DNS crypt
+      x-summary-source: derived
   /device/umbrella/dp-stats:
     get:
       tags:
@@ -184,6 +196,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write
+      summary: Get umbrella dp stats
+      x-summary-source: derived
   /device/umbrella/overview:
     get:
       tags:
@@ -225,6 +239,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write
+      summary: Get umbrella overview
+      x-summary-source: derived
   /device/umbrella/umbrella-config:
     get:
       tags:
@@ -266,3 +282,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write
+      summary: Get umbrella config
+      x-summary-source: derived

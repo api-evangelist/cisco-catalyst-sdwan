@@ -1,7 +1,13 @@
 openapi: 3.2.0
 info:
-  title: UX 1.0 Configuration Configuration - Policy Supervisory Disc List Builder API
-  description: "Configuration of UX 1.0 device and policy.\nIncludes API operations for the following:\n  Managing original SD-WAN device configurations and policy configurations\n  Device templates and feature templates"
+  title: UX 1.0 Configuration Configuration - Policy Supervisory…
+  description: 'Configuration of UX 1.0 device and policy.
+
+    Includes API operations for the following:
+
+    Managing original SD-WAN device configurations and policy configurations
+
+    Device templates and feature templates'
   contact:
     email: vmanage@cisco.com
   license:
@@ -71,6 +77,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+      summary: Get policy lists configuration policy supervisory disc list builder 3703
+      x-summary-source: derived
     post:
       tags:
       - Configuration - Policy Supervisory Disc List Builder
@@ -327,6 +335,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write
+      summary: Create policy list configuration policy supervisory disc list builder 3704
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Policy Supervisory Disc List Builder
@@ -357,6 +367,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Delete policy lists with info tag configuration policy supervisory disc list…
+      x-summary-source: derived
   /template/policy/list/supervisorydisc/filtered:
     get:
       tags:
@@ -388,6 +400,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get policy lists with info tag configuration policy supervisory disc list…
+      x-summary-source: derived
   /template/policy/list/supervisorydisc/preview:
     post:
       tags:
@@ -422,6 +436,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+      summary: Preview policy list configuration policy supervisory disc list builder 4504
+      x-summary-source: derived
   /template/policy/list/supervisorydisc/preview/{id}:
     get:
       tags:
@@ -454,6 +470,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+      summary: Preview policy list by id configuration policy supervisory disc list builder…
+      x-summary-source: derived
   /template/policy/list/supervisorydisc/{id}:
     put:
       tags:
@@ -503,6 +521,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write
+      summary: Edit policy list configuration policy supervisory disc list builder 4203
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Policy Supervisory Disc List Builder
@@ -548,6 +568,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+      summary: Get lists by id configuration policy supervisory disc list builder 4203
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Policy Supervisory Disc List Builder
@@ -570,3 +592,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write
+      summary: Delete policy list configuration policy supervisory disc list builder 4206
+      x-summary-source: derived

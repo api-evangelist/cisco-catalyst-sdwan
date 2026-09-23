@@ -54,6 +54,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: admin
+      summary: Get dynamic collection
+      x-summary-source: derived
     post:
       tags:
       - Setting - Dynamic Scheduler
@@ -75,3 +77,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: admin
+      summary: Set dynamic collection
+      x-summary-source: derived

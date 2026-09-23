@@ -37,6 +37,8 @@ paths:
           description: default response
           content:
             application/json: {}
+      summary: Get access tokenfor device
+      x-summary-source: derived
   /cloudservices/authtoken:
     post:
       tags:
@@ -67,6 +69,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: CXP-read,CXP-write,Cloud OnRamp-read,Cloud OnRamp-write
+      summary: Get azure token
+      x-summary-source: derived
   /cloudservices/connect:
     get:
       tags:
@@ -91,6 +95,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: CXP-read,CXP-write,Cloud OnRamp-read,Cloud OnRamp-write
+      summary: Connect system cloud service 2203
+      x-summary-source: derived
   /cloudservices/credentials:
     get:
       tags:
@@ -116,6 +122,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: CXP-read,CXP-write,Cloud OnRamp-read,Cloud OnRamp-write
+      summary: Get cloud credentials
+      x-summary-source: derived
     post:
       tags:
       - System - Cloud Service
@@ -145,6 +153,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: dca,CXP-write,Cloud OnRamp-write
+      summary: Add cloud credentials
+      x-summary-source: derived
   /cloudservices/devicecode:
     post:
       tags:
@@ -169,6 +179,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: CXP-read,CXP-write,Cloud OnRamp-read,Cloud OnRamp-write
+      summary: Get device code
+      x-summary-source: derived
   /cloudservices/m365/preferredpath:
     post:
       tags:
@@ -199,6 +211,8 @@ paths:
           description: default response
           content:
             application/json: {}
+      summary: Get O365 preferred path from VAnalytics
+      x-summary-source: derived
   /cloudservices/staging:
     get:
       tags:
@@ -223,6 +237,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: CXP-read,CXP-write,Cloud OnRamp-read,Cloud OnRamp-write
+      summary: Is staging
+      x-summary-source: derived
   /cloudservices/telemetry:
     get:
       tags:
@@ -254,6 +270,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: CXP-read,CXP-write,Settings-read,Settings-write,Cloud OnRamp-read,Cloud OnRamp-write
+      summary: Get telemetry state
+      x-summary-source: derived
   /cloudservices/telemetry/optin:
     put:
       tags:
@@ -284,6 +302,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: CXP-read,CXP-write,Cloud OnRamp-read,Cloud OnRamp-write
+      summary: Opt in
+      x-summary-source: derived
   /cloudservices/telemetry/optout:
     delete:
       tags:
@@ -313,6 +333,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Configuration-write,Template Deploy-write,CXP-read,CXP-write,Cloud OnRamp-read,Cloud OnRamp-write
+      summary: Opt out
+      x-summary-source: derived
   /cloudservices/vanalytics/dashboardlist:
     get:
       tags:
@@ -354,6 +376,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: vAnalytics-readvAnalytics-write
+      summary: Getv analytics dashboard list
+      x-summary-source: derived
   /dca/cloudservices:
     get:
       tags:
@@ -378,6 +402,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: dca
+      summary: Get cloud settings
+      x-summary-source: derived
   /dca/cloudservices/otp:
     get:
       tags:
@@ -402,6 +428,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: dca
+      summary: Get OTP
+      x-summary-source: derived
     put:
       tags:
       - System - Cloud Service
@@ -428,6 +456,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: dca
+      summary: Updatet OTP
+      x-summary-source: derived
   /dca/cloudservices/vanalytics:
     post:
       tags:
@@ -458,12 +488,13 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: vAnalytics-readvAnalytics-writedca
+      summary: Getv analytics
+      x-summary-source: derived
   /entityownership/list:
     get:
       tags:
       - System - Cloud Service
       summary: List all entity ownership info
-      description: List all entity ownership info
       operationId: listEntityOwnershipInfo
       responses:
         '200':
@@ -529,3 +560,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Entity ownership info
+      x-summary-source: derived

@@ -33,7 +33,6 @@ paths:
     post:
       tags:
       - SmartLicensing - Licenses
-      description: Assign msla licenses to devices
       operationId: assignMslaLicensesToDevices
       requestBody:
         description: List of devices for assigning licenses
@@ -107,6 +106,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Assign msla licenses to devices
+      x-summary-source: derived
   /msla/devices/{uuid}:
     get:
       tags:
@@ -176,6 +177,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get license by uuid smartlicensing licenses 2003
+      x-summary-source: derived
   /msla/licenses:
     get:
       tags:
@@ -238,6 +241,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get msla licenses
+      x-summary-source: derived
   /msla/monitoring/licensedDeviceCount:
     get:
       tags:
@@ -257,6 +262,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get device details for dashboard
+      x-summary-source: derived
   /msla/monitoring/licensedDistributionDetails:
     get:
       tags:
@@ -299,6 +306,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get license distribution details
+      x-summary-source: derived
   /msla/monitoring/packagingDistributionDetails:
     get:
       tags:
@@ -338,3 +347,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get packaging distribution details
+      x-summary-source: derived

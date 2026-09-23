@@ -69,6 +69,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Template Deploy-read,Template Deploy-write,Policy Configuration-read,Policy Configuration-write,Policy Deploy-read,Policy Deploy-write
+      summary: Disable cloud connector
+      x-summary-source: derived
     get:
       tags:
       - SD AVC Cloud Connector
@@ -89,6 +91,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Template Deploy-read,Template Deploy-write,Policy Configuration-read,Policy Configuration-write,Policy Deploy-read,Policy Deploy-write
+      summary: Get cloud connector
+      x-summary-source: derived
     post:
       tags:
       - SD AVC Cloud Connector
@@ -128,6 +132,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Template Deploy-read,Template Deploy-write,Policy Configuration-read,Policy Configuration-write,Policy Deploy-read,Policy Deploy-write
+      summary: Enable cloud connector
+      x-summary-source: derived
   /sdavc/cloudconnector/status:
     get:
       tags:
@@ -149,3 +155,5 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Template Deploy-read,Template Deploy-write,Policy Configuration-read,Policy Configuration-write,Policy Deploy-read,Policy Deploy-write
+      summary: Get cloud connector status
+      x-summary-source: derived

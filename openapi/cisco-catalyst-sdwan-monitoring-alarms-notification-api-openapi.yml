@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Monitoring - Alarms Notification API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Monitoring - Alarms…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -31,7 +39,6 @@ paths:
     put:
       tags:
       - Monitoring - Alarms Notification
-      description: Update notification rule
       operationId: updateNotificationRule
       parameters:
       - name: ruleId
@@ -62,6 +69,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Settings-write
+      summary: Update notification rule
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Alarms Notification
@@ -112,11 +121,13 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Settings-write
+      summary: Create notification rule
+      x-summary-source: derived
   /notifications/rules:
     get:
       tags:
       - Monitoring - Alarms Notification
-      description: 'Get all rules or specific notification rule by its Id  '
+      description: Get all rules or specific notification rule by its Id
       operationId: getNotificationRule
       parameters:
       - name: ruleId
@@ -193,10 +204,11 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Alarms-read
+      summary: Get notification rule
+      x-summary-source: derived
     delete:
       tags:
       - Monitoring - Alarms Notification
-      description: Delete notification rule
       operationId: deleteNotificationRule
       parameters:
       - name: ruleId
@@ -216,3 +228,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Settings-write
+      summary: Delete notification rule
+      x-summary-source: derived

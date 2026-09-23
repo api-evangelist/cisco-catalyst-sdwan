@@ -31,7 +31,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - General
-      summary: Get Multicloud Interconnect dashboard view.
+      summary: Get Multicloud Interconnect dashboard view
       description: API to retrieve Multicloud Interconnect dashboard view.
       operationId: getInterconnectDashboard
       responses:
@@ -98,8 +98,8 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - General
-      summary: Get Interconnect IP transit support.
-      description: API to retrieve Interconnect ip transit in MB supported by an  Interconnect provider.
+      summary: Get Interconnect IP transit support
+      description: API to retrieve Interconnect ip transit in MB supported by an Interconnect provider.
       operationId: getInterconnectIpTransit
       parameters:
       - name: interconnect-service-type
@@ -151,7 +151,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - General
-      summary: Get ssh keys for Interconnect provider.
+      summary: Get ssh keys for Interconnect provider
       description: Get ssh keys for Interconnect provider.
       operationId: getInterconnectSshKeys
       parameters:
@@ -211,7 +211,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - General
-      summary: Get supported Multicloud Interconnect providers.
+      summary: Get supported Multicloud Interconnect providers
       description: API to retrieve list of supported Interconnect provider Types.
       operationId: getInterconnectTypes
       responses:
@@ -244,7 +244,7 @@ paths:
     put:
       tags:
       - Multicloud Interconnect - General
-      summary: Update Multicloud Interconnect topology.
+      summary: Update Multicloud Interconnect topology
       description: API to update current Multicloud Interconnect topology for the Config Group.
       operationId: updateInterconnectConfigGroupTopology
       parameters:
@@ -312,7 +312,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - General
-      summary: Get Multicloud Interconnect topology.
+      summary: Get Multicloud Interconnect topology
       description: API to retrieve current Multicloud Interconnect topology for the Config Group.
       operationId: getInterconnectConfigGroupTopology
       parameters:

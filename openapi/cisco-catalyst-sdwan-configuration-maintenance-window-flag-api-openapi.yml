@@ -53,10 +53,11 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get maintenance window flag
+      x-summary-source: derived
     post:
       tags:
       - Configuration - Maintenance window flag
-      description: Update maintenance window flag
       operationId: updateMaintenanceWindowFlag
       requestBody:
         description: Update maintenance window flag
@@ -79,3 +80,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Update maintenance window flag
+      x-summary-source: derived

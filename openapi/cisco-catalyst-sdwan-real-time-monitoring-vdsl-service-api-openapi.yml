@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Real-Time Monitoring - VDSL Service API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Real-Time Monitoring - VDSL…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -110,6 +118,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write
+      summary: Get co line specific stats
+      x-summary-source: derived
   /device/vdslService/coStats:
     get:
       tags:
@@ -162,6 +172,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write
+      summary: Get co stats
+      x-summary-source: derived
   /device/vdslService/cpeLineSpecificStats:
     get:
       tags:
@@ -245,6 +257,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write
+      summary: Get cpe line specific stats
+      x-summary-source: derived
   /device/vdslService/cpeStats:
     get:
       tags:
@@ -297,6 +311,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write
+      summary: Get cpe stats
+      x-summary-source: derived
   /device/vdslService/lineBondingStats:
     get:
       tags:
@@ -340,6 +356,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write
+      summary: Get line bonding stats
+      x-summary-source: derived
   /device/vdslService/lineSpecificStats:
     get:
       tags:
@@ -382,6 +400,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write
+      summary: Get line specific stats
+      x-summary-source: derived
   /device/vdslService/vdslInfo:
     get:
       tags:
@@ -436,3 +456,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write
+      summary: Get vdsl info
+      x-summary-source: derived

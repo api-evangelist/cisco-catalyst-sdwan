@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Monitoring - Security Policy API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Monitoring - Security Policy…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -32,7 +40,7 @@ paths:
       tags:
       - Monitoring - Security Policy
       summary: security device health
-      description: 'Get security device health '
+      description: Get security device health
       operationId: getSecurityDeviceHealth
       parameters:
       - name: deviceIp
@@ -98,7 +106,7 @@ paths:
       tags:
       - Monitoring - Security Policy
       summary: security policy device list
-      description: 'Get security policy device list '
+      description: Get security policy device list
       operationId: getSecurityPolicyDeviceList_MonitoringSecurityPolicy_2703
       responses:
         '200':
@@ -215,7 +223,7 @@ paths:
       tags:
       - Monitoring - Security Policy
       summary: firewall devices list
-      description: 'Get firewall devices list '
+      description: Get firewall devices list
       operationId: getPostFwallByQuery
       requestBody:
         description: Stats query string
@@ -301,7 +309,7 @@ paths:
       tags:
       - Monitoring - Security Policy
       summary: ips alert devices list
-      description: 'Get ips alert devices list '
+      description: Get ips alert devices list
       operationId: getPostIPSAlertByQuery
       requestBody:
         description: Stats query string
@@ -386,7 +394,7 @@ paths:
       tags:
       - Monitoring - Security Policy
       summary: url filtering devices list
-      description: 'Get url filtering devices list '
+      description: Get url filtering devices list
       operationId: getPostUrlFilteringByQuery
       requestBody:
         description: Stats query string

@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Others Configuration - Device SSL Proxy Certificate Management API
+  title: Others Configuration - Device SSL Proxy Certificate…
   description: 'Other APIs
 
     Include APIs that do not belong to other categories'
@@ -62,6 +62,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Certificates-read,Certificates-write
+      summary: Get proxy cert of edge
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Device SSL Proxy Certificate Management
@@ -102,6 +104,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Certificates-write
+      summary: Update certificate
+      x-summary-source: derived
   /sslproxy/certificate/wanedge/{deviceId}:
     post:
       tags:
@@ -136,6 +140,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Certificates-write
+      summary: Add WAN edge
+      x-summary-source: derived
   /sslproxy/certificates:
     post:
       tags:
@@ -164,6 +170,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Certificates-write
+      summary: Upload certificiates
+      x-summary-source: derived
   /sslproxy/csr:
     get:
       tags:
@@ -211,6 +219,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Certificates-read,Certificates-write
+      summary: Get ssl proxy CSR
+      x-summary-source: derived
   /sslproxy/devicecertificates:
     post:
       tags:
@@ -247,6 +257,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Certificates-read,Certificates-write
+      summary: Get all device certificates
+      x-summary-source: derived
   /sslproxy/devicecsr:
     post:
       tags:
@@ -292,6 +304,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Certificates-read,Certificates-write
+      summary: Get all device CSR
+      x-summary-source: derived
   /sslproxy/generate/csr/sslproxy:
     post:
       tags:
@@ -319,6 +333,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Certificates-write
+      summary: Generate ssl proxy CSR
+      x-summary-source: derived
   /sslproxy/generate/vmanage/csr:
     post:
       tags:
@@ -363,6 +379,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Certificates-write
+      summary: Generate SSL proxy CSR
+      x-summary-source: derived
   /sslproxy/list:
     get:
       tags:
@@ -416,6 +434,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Certificates-read,Certificates-write
+      summary: Get ssl proxy list
+      x-summary-source: derived
   /sslproxy/renew:
     post:
       tags:
@@ -453,6 +473,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Certificates-write
+      summary: Renew certificate
+      x-summary-source: derived
   /sslproxy/revoke:
     post:
       tags:
@@ -491,6 +513,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Certificates-write
+      summary: Revoke certificate
+      x-summary-source: derived
   /sslproxy/revokerenew:
     post:
       tags:
@@ -529,11 +553,12 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Certificates-write
+      summary: Revoke renew certificate
+      x-summary-source: derived
   /sslproxy/settings/certificate:
     get:
       tags:
       - Configuration - Device SSL Proxy Certificate Management
-      description: Get certificate state
       operationId: getCertificateState
       responses:
         '200':
@@ -555,6 +580,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Certificates-read,Certificates-write
+      summary: Get certificate state
+      x-summary-source: derived
   /sslproxy/settings/enterprise/certificate:
     post:
       tags:
@@ -605,10 +632,11 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Certificates-write
+      summary: Set enterprise cert
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Device SSL Proxy Certificate Management
-      description: Get enterprise certificate
       operationId: getEnterpriseCertificate
       responses:
         '200':
@@ -637,6 +665,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Certificates-read,Certificates-write
+      summary: Get enterprise certificate
+      x-summary-source: derived
   /sslproxy/settings/enterprise/rootca:
     post:
       tags:
@@ -685,6 +715,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Certificates-write
+      summary: Set enterprise root ca cert
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Device SSL Proxy Certificate Management
@@ -715,6 +747,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Certificates-read,Certificates-write
+      summary: Get VManage enterprise root certificate
+      x-summary-source: derived
   /sslproxy/settings/vmanage/certificate:
     get:
       tags:
@@ -752,6 +786,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Certificates-read,Certificates-write
+      summary: Getv manage certificate
+      x-summary-source: derived
     post:
       tags:
       - Configuration - Device SSL Proxy Certificate Management
@@ -807,6 +843,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Certificates-write
+      summary: Setv manageintermediate cert
+      x-summary-source: derived
   /sslproxy/settings/vmanage/csr:
     get:
       tags:
@@ -846,6 +884,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Certificates-read,Certificates-write
+      summary: Getv manage CSR
+      x-summary-source: derived
   /sslproxy/settings/vmanage/rootca:
     post:
       tags:
@@ -890,6 +930,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Certificates-write
+      summary: Setv manage root CA
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Device SSL Proxy Certificate Management
@@ -939,3 +981,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Certificates-read,Certificates-write
+      summary: Getv manage root CA
+      x-summary-source: derived

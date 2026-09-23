@@ -53,6 +53,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: List log file details
+      x-summary-source: derived
   /util/logfile/appserver/lastnlines:
     get:
       tags:
@@ -84,6 +86,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: List VManage server log last NLines
+      x-summary-source: derived
   /util/logging/configurations:
     get:
       tags:
@@ -111,6 +115,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: List configurations
+      x-summary-source: derived
   /util/logging/debuglog:
     post:
       tags:
@@ -138,6 +144,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Debug log
+      x-summary-source: derived
   /util/logging/level:
     post:
       tags:
@@ -164,11 +172,12 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Set log level
+      x-summary-source: derived
   /util/logging/loggers:
     get:
       tags:
       - Utility - Logging
-      description: List loggers
       operationId: listLoggers
       responses:
         '200':
@@ -192,6 +201,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: List loggers
+      x-summary-source: derived
   /util/logging/updateConfiguration:
     post:
       tags:
@@ -236,3 +247,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Update logger configuration
+      x-summary-source: derived

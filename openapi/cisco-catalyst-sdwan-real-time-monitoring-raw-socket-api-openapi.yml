@@ -34,7 +34,6 @@ paths:
       tags:
       - Real Time Monitoring - Raw Socket
       summary: Get TCP session
-      description: Get TCP session
       operationId: getTcpSession
       parameters:
       - name: deviceId
@@ -82,7 +81,6 @@ paths:
       tags:
       - Real Time Monitoring - Raw Socket
       summary: Get TCP session local
-      description: Get TCP session local
       operationId: getTcpSessionLocal
       parameters:
       - name: deviceId
@@ -125,7 +123,6 @@ paths:
       tags:
       - Real Time Monitoring - Raw Socket
       summary: Get TCP statistics
-      description: Get TCP statistics
       operationId: getTcpStatistics
       parameters:
       - name: deviceId
@@ -169,7 +166,6 @@ paths:
       tags:
       - Real Time Monitoring - Raw Socket
       summary: Get UDP session
-      description: Get UDP session
       operationId: getUdpSession
       parameters:
       - name: deviceId
@@ -217,7 +213,6 @@ paths:
       tags:
       - Real Time Monitoring - Raw Socket
       summary: Get UDP session local
-      description: Get UDP session local
       operationId: getUdpSessionLocal
       parameters:
       - name: deviceId
@@ -260,7 +255,6 @@ paths:
       tags:
       - Real Time Monitoring - Raw Socket
       summary: Get UDP statistics
-      description: Get UDP statistics
       operationId: getUdpStatistics
       parameters:
       - name: deviceId

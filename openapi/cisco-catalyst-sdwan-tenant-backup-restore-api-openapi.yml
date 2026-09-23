@@ -33,7 +33,10 @@ paths:
     delete:
       tags:
       - Tenant Backup Restore
-      description: 'Delete all or a specific backup file stored in vManage<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Delete all or a specific backup file stored in vManage
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: deleteTenantBackup
       parameters:
       - name: VSessionId
@@ -65,6 +68,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tenant Management-write,Tenant Status-write
+      summary: Delete tenant backup
+      x-summary-source: derived
   /tenantbackup/download/{path}:
     get:
       tags:
@@ -101,6 +106,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tenant Management-read,Tenant Management-write,Tenant Status-read,Tenant Status-write
+      summary: Download existing backup file
+      x-summary-source: derived
   /tenantbackup/export:
     get:
       tags:
@@ -131,11 +138,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tenant Management-read,Tenant Management-write,Tenant Status-read,Tenant Status-write
+      summary: Export tenant backup
+      x-summary-source: derived
   /tenantbackup/import:
     post:
       tags:
       - Tenant Backup Restore
-      description: 'Submit a previously backed up file and import the data and apply it to the configuraion database<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider view.'
+      description: 'Submit a previously backed up file and import the data and apply it to the configuraion database
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider view.'
       operationId: importTenantBackup
       parameters:
       - name: VSessionId
@@ -173,6 +185,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tenant Management-write,Tenant Status-write
+      summary: Import tenant backup
+      x-summary-source: derived
   /tenantbackup/list:
     get:
       tags:
@@ -203,3 +217,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tenant Management-read,Tenant Management-write,Tenant Status-read,Tenant Status-write
+      summary: List tenant backup
+      x-summary-source: derived

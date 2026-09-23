@@ -31,7 +31,6 @@ paths:
     get:
       tags:
       - Partner - ACI Policy Builder
-      description: Get ACI definitions
       operationId: getACIDefinitions
       responses:
         '200':
@@ -51,6 +50,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Deploy-read,Template Deploy-write,Policy Configuration-read,Policy Configuration-write,Policy Deploy-read,Policy Deploy-write,AppRoute Policy-read,AppRoute Policy-write,Traffic Data Policy-read,Traffic Data Policy-write
+      summary: Get ACI definitions
+      x-summary-source: derived
   /partner/aci/policy/dscpmapping/{partnerId}:
     post:
       tags:
@@ -93,6 +94,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write,AppRoute Policy-write,Traffic Data Policy-write
+      summary: Create dscp mappings
+      x-summary-source: derived
     delete:
       tags:
       - Partner - ACI Policy Builder
@@ -123,6 +126,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write,AppRoute Policy-write,Traffic Data Policy-write
+      summary: Delete dscp mappings
+      x-summary-source: derived
     get:
       tags:
       - Partner - ACI Policy Builder
@@ -153,6 +158,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Deploy-read,Template Deploy-write,Policy Configuration-read,Policy Configuration-write,Policy Deploy-read,Policy Deploy-writeAppRoute Policy-read,AppRoute Policy-write,Traffic Data Policy-read,Traffic Data Policy-write
+      summary: Get dscp mappings
+      x-summary-source: derived
   /partner/aci/policy/events/{partnerId}:
     get:
       tags:
@@ -198,6 +205,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,AppRoute Policy-read,AppRoute Policy-write,Traffic Data Policy-read,Traffic Data Policy-write
+      summary: Get events partner aci policy builder 3803
+      x-summary-source: derived
   /partner/aci/policy/prefixmapping/{partnerId}:
     get:
       tags:
@@ -229,6 +238,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Deploy-read,Template Deploy-write,Policy Configuration-read,Policy Configuration-write,Policy Deploy-read,Policy Deploy-writeAppRoute Policy-read,AppRoute Policy-write,Traffic Data Policy-read,Traffic Data Policy-write
+      summary: Get data prefix mappings
+      x-summary-source: derived
     post:
       tags:
       - Partner - ACI Policy Builder
@@ -270,6 +281,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write,AppRoute Policy-write,Traffic Data Policy-write
+      summary: Set data prefix mappings
+      x-summary-source: derived
   /partner/aci/policy/sequences:
     get:
       tags:
@@ -296,3 +309,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,AppRoute Policy-read,AppRoute Policy-write,Traffic Data Policy-read,Traffic Data Policy-write
+      summary: Get data prefix sequences
+      x-summary-source: derived

@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Monitoring - System Status Stats API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Monitoring - System Status…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -133,6 +141,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: default
+      summary: Get stat data raw data monitoring system status stats 2403
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - System Status Stats
@@ -263,6 +273,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: default
+      summary: Get stats raw data monitoring system status stats 2404
+      x-summary-source: derived
   /statistics/system/stats/aggregation:
     post:
       tags:
@@ -295,6 +307,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: default,dca
+      summary: Get post aggregation data by query monitoring system status stats 3604
+      x-summary-source: derived
     get:
       tags:
       - Monitoring - System Status Stats
@@ -325,6 +339,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: default
+      summary: Get aggregation data by query monitoring system status stats 3603
+      x-summary-source: derived
   /statistics/system/stats/csv:
     get:
       tags:
@@ -365,6 +381,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: default
+      summary: Get stat data raw data as CSV monitoring system status stats 2803
+      x-summary-source: derived
   /statistics/system/stats/doccount:
     get:
       tags:
@@ -406,6 +424,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get count monitoring system status stats 3303
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - System Status Stats
@@ -449,6 +469,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get count post monitoring system status stats 3304
+      x-summary-source: derived
   /statistics/system/stats/fields:
     get:
       tags:
@@ -502,6 +524,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get stat data fields monitoring system status stats 3103
+      x-summary-source: derived
   /statistics/system/stats/page:
     get:
       tags:
@@ -627,6 +651,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Device Monitoring-read
+      summary: Get stats pagination raw data monitoring system status stats 2903
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - System Status Stats
@@ -756,6 +782,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Device Monitoring-read
+      summary: Get post stats pagination raw data monitoring system status stats 2904
+      x-summary-source: derived
   /statistics/system/stats/query/fields:
     get:
       tags:
@@ -821,3 +849,5 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get stat query fields monitoring system status stats 3703
+      x-summary-source: derived

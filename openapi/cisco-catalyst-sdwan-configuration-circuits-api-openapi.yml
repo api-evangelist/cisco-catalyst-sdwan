@@ -53,6 +53,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Get circuits
+      x-summary-source: derived
     post:
       tags:
       - Configuration - Circuits
@@ -89,6 +91,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Create circuit
+      x-summary-source: derived
   /networkdesign/circuit/{id}:
     delete:
       tags:
@@ -113,3 +117,5 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Delete circuit
+      x-summary-source: derived

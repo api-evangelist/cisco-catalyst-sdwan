@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Monitoring - Cellular-EIOLTE API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Monitoring - Cellular-EIOLTE…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -132,6 +140,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stat data raw data monitoring cellular eiolte 1803
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Cellular-EIOLTE
@@ -261,6 +271,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stats raw data monitoring cellular eiolte 1804
+      x-summary-source: derived
   /statistics/eiolte/aggregation:
     get:
       tags:
@@ -291,6 +303,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get aggregation data by query monitoring cellular eiolte 3003
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Cellular-EIOLTE
@@ -321,6 +335,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default,dca
+      summary: Get post aggregation data by query monitoring cellular eiolte 3004
+      x-summary-source: derived
   /statistics/eiolte/cellularAggregation:
     post:
       tags:
@@ -634,6 +650,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default,dca
+      summary: Cellular aggregation
+      x-summary-source: derived
   /statistics/eiolte/csv:
     get:
       tags:
@@ -673,6 +691,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stat data raw data as CSV monitoring cellular eiolte 2203
+      x-summary-source: derived
   /statistics/eiolte/doccount:
     get:
       tags:
@@ -713,6 +733,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get count monitoring cellular eiolte 2703
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Cellular-EIOLTE
@@ -755,6 +777,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get count post monitoring cellular eiolte 2704
+      x-summary-source: derived
   /statistics/eiolte/fields:
     get:
       tags:
@@ -807,6 +831,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat data fields monitoring cellular eiolte 2503
+      x-summary-source: derived
   /statistics/eiolte/page:
     get:
       tags:
@@ -931,6 +957,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get stats pagination raw data monitoring cellular eiolte 2303
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - Cellular-EIOLTE
@@ -1059,6 +1087,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get post stats pagination raw data monitoring cellular eiolte 2304
+      x-summary-source: derived
   /statistics/eiolte/query/fields:
     get:
       tags:
@@ -1123,6 +1153,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat query fields monitoring cellular eiolte 3103
+      x-summary-source: derived
   /statistics/eiolte/uniqueAggregation:
     post:
       tags:
@@ -2422,3 +2454,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default,dca
+      summary: Unique aggregation
+      x-summary-source: derived

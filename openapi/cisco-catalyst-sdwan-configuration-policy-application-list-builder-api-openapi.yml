@@ -1,7 +1,13 @@
 openapi: 3.2.0
 info:
-  title: UX 1.0 Configuration Configuration - Policy Application List Builder API
-  description: "Configuration of UX 1.0 device and policy.\nIncludes API operations for the following:\n  Managing original SD-WAN device configurations and policy configurations\n  Device templates and feature templates"
+  title: UX 1.0 Configuration Configuration - Policy Application…
+  description: 'Configuration of UX 1.0 device and policy.
+
+    Includes API operations for the following:
+
+    Managing original SD-WAN device configurations and policy configurations
+
+    Device templates and feature templates'
   contact:
     email: vmanage@cisco.com
   license:
@@ -71,6 +77,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+      summary: Get policy lists configuration policy application list builder 2503
+      x-summary-source: derived
     post:
       tags:
       - Configuration - Policy Application List Builder
@@ -327,6 +335,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write
+      summary: Create policy list configuration policy application list builder 2504
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Policy Application List Builder
@@ -357,6 +367,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Delete policy lists with info tag configuration policy application list builder…
+      x-summary-source: derived
   /template/policy/list/app/filtered:
     get:
       tags:
@@ -388,6 +400,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get policy lists with info tag configuration policy application list builder…
+      x-summary-source: derived
   /template/policy/list/app/preview:
     post:
       tags:
@@ -422,6 +436,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+      summary: Preview policy list configuration policy application list builder 3304
+      x-summary-source: derived
   /template/policy/list/app/preview/{id}:
     get:
       tags:
@@ -454,6 +470,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+      summary: Preview policy list by id configuration policy application list builder 3803
+      x-summary-source: derived
   /template/policy/list/app/{id}:
     get:
       tags:
@@ -500,6 +518,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+      summary: Get lists by id configuration policy application list builder 3003
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Policy Application List Builder
@@ -522,6 +542,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write
+      summary: Delete policy list configuration policy application list builder 3006
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Policy Application List Builder
@@ -570,6 +592,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write
+      summary: Edit policy list configuration policy application list builder 3003
+      x-summary-source: derived
   /template/policy/list/localapp:
     post:
       tags:
@@ -827,6 +851,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write
+      summary: Create policy list configuration policy application list builder 3004
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Policy Application List Builder
@@ -870,6 +896,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+      summary: Get policy lists configuration policy application list builder 3003
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Policy Application List Builder
@@ -900,6 +928,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Delete policy lists with info tag configuration policy application list builder…
+      x-summary-source: derived
   /template/policy/list/localapp/filtered:
     get:
       tags:
@@ -931,6 +961,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get policy lists with info tag configuration policy application list builder…
+      x-summary-source: derived
   /template/policy/list/localapp/preview:
     post:
       tags:
@@ -965,6 +997,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+      summary: Preview policy list configuration policy application list builder 3804
+      x-summary-source: derived
   /template/policy/list/localapp/preview/{id}:
     get:
       tags:
@@ -997,6 +1031,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+      summary: Preview policy list by id configuration policy application list builder 4303
+      x-summary-source: derived
   /template/policy/list/localapp/{id}:
     delete:
       tags:
@@ -1020,6 +1056,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write
+      summary: Delete policy list configuration policy application list builder 3506
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Policy Application List Builder
@@ -1068,6 +1106,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write
+      summary: Edit policy list configuration policy application list builder 3503
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Policy Application List Builder
@@ -1113,3 +1153,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+      summary: Get lists by id configuration policy application list builder 3503
+      x-summary-source: derived

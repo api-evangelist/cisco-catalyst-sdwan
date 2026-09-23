@@ -33,7 +33,10 @@ paths:
     get:
       tags:
       - Configuration - Feature Certificate
-      description: 'Get feature cert from cEdge device<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
+      description: 'Get feature cert from cEdge device
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
       operationId: getDeviceCertificate
       parameters:
       - name: deviceId
@@ -60,10 +63,15 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Certificates-write
+      summary: Get device certificate
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Feature Certificate
-      description: 'Upload feature cert for cEdge device<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
+      description: 'Upload feature cert for cEdge device
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
       operationId: installFeatureCertificate
       requestBody:
         description: Install feature cert request for cEdge
@@ -93,11 +101,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Certificates-write
+      summary: Install feature certificate
+      x-summary-source: derived
   /featurecertificate/devicecsr:
     put:
       tags:
       - Configuration - Feature Certificate
-      description: 'Create CSR for cEdge device<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
+      description: 'Create CSR for cEdge device
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
       operationId: genDeviceCsr
       requestBody:
         description: CSR request for cEdge
@@ -127,10 +140,15 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Certificates-write
+      summary: Gen device csr
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Feature Certificate
-      description: 'Get CSR from cEdge device<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
+      description: 'Get CSR from cEdge device
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
       operationId: getDeviceCsr
       parameters:
       - name: deviceId
@@ -157,11 +175,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Certificates-write
+      summary: Get device csr
+      x-summary-source: derived
   /featurecertificate/revoke:
     put:
       tags:
       - Configuration - Feature Certificate
-      description: 'Revoke feature cert from cEdge device<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
+      description: 'Revoke feature cert from cEdge device
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
       operationId: revokeFeatureCertificate
       requestBody:
         description: Revoking feature cert request for cEdge
@@ -191,11 +214,16 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Certificates-write
+      summary: Revoke feature certificate
+      x-summary-source: derived
   /featurecertificate/syslogconfig:
     get:
       tags:
       - Configuration - Feature Certificate
-      description: 'Get Feature CA state<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
+      description: 'Get Feature CA state
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
       operationId: getFeatureCaState
       responses:
         '200':
@@ -215,3 +243,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Certificates-write
+      summary: Get feature ca state
+      x-summary-source: derived

@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Monitoring - SiteHealth Monitor API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Monitoring - SiteHealth…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -132,6 +140,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stat data raw data monitoring sitehealth monitor 2203
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - SiteHealth Monitor
@@ -261,6 +271,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stats raw data monitoring sitehealth monitor 2204
+      x-summary-source: derived
   /statistics/sitehealth/aggregation:
     get:
       tags:
@@ -291,6 +303,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get aggregation data by query monitoring sitehealth monitor 3403
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - SiteHealth Monitor
@@ -321,12 +335,14 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default,dca
+      summary: Get post aggregation data by query monitoring sitehealth monitor 3404
+      x-summary-source: derived
   /statistics/sitehealth/common:
     get:
       tags:
       - Monitoring - SiteHealth Monitor
       summary: sitehealth data
-      description: 'Get all site health  '
+      description: Get all site health
       operationId: getSiteHealth
       parameters:
       - name: isHeatMap
@@ -490,6 +506,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stat data raw data as CSV monitoring sitehealth monitor 2603
+      x-summary-source: derived
   /statistics/sitehealth/doccount:
     get:
       tags:
@@ -530,6 +548,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get count monitoring sitehealth monitor 3103
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - SiteHealth Monitor
@@ -572,6 +592,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get count post monitoring sitehealth monitor 3104
+      x-summary-source: derived
   /statistics/sitehealth/fields:
     get:
       tags:
@@ -624,6 +646,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat data fields monitoring sitehealth monitor 2903
+      x-summary-source: derived
   /statistics/sitehealth/page:
     get:
       tags:
@@ -748,6 +772,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get stats pagination raw data monitoring sitehealth monitor 2703
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - SiteHealth Monitor
@@ -876,6 +902,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get post stats pagination raw data monitoring sitehealth monitor 2704
+      x-summary-source: derived
   /statistics/sitehealth/query/fields:
     get:
       tags:
@@ -940,12 +968,14 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat query fields monitoring sitehealth monitor 3503
+      x-summary-source: derived
   /statistics/sitehealth/topology:
     get:
       tags:
       - Monitoring - SiteHealth Monitor
       summary: sitehealth data
-      description: 'Get all site health topology '
+      description: Get all site health topology
       operationId: getSiteHealthTopology
       parameters:
       - name: last_n_hours

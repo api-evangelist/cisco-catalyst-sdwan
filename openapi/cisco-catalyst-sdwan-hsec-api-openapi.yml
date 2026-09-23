@@ -80,6 +80,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Fetch device details
+      x-summary-source: derived
   /hsec/devices/install:
     get:
       tags:
@@ -131,6 +133,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Install device details
+      x-summary-source: derived
   /hsec/download:
     post:
       tags:
@@ -166,6 +170,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: admin,Software Upgrade-write
+      summary: Download slac request file
+      x-summary-source: derived
   /hsec/fetchaccounts:
     get:
       tags:
@@ -222,6 +228,8 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: true
+      summary: Fetch SAVA accounts
+      x-summary-source: derived
     post:
       tags:
       - HSEC
@@ -283,6 +291,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Fetch accounts hsec 1904
+      x-summary-source: derived
   /hsec/testbedMode:
     get:
       tags:
@@ -307,3 +317,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Testbed mode
+      x-summary-source: derived

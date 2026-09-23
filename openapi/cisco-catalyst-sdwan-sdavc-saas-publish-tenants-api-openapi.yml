@@ -65,3 +65,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Publish tenants
+      x-summary-source: derived

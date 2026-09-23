@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: SD-WAN Services Multicloud Interconnect - Cloud Resource Management API
+  title: SD-WAN Services Multicloud Interconnect - Cloud Resource…
   description: Includes API operations for managing SD-WAN services such as Cloud OnRamp for SaaS and MultiCloud
   contact:
     email: vmanage@cisco.com
@@ -31,7 +31,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - Cloud Resource Management
-      summary: Get Google Cloud Router and Attachments.
+      summary: Get Google Cloud Router and Attachments
       description: API to get Google Cloud Router and Attachments.
       operationId: getGoogleCloudRouterAndAttachments
       parameters:
@@ -149,7 +149,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - Cloud Resource Management
-      summary: Get AWS Transit Gateways.
+      summary: Get AWS Transit Gateways
       description: API to retrieve AWS Transit Gateways.
       operationId: getAwsTransitGateways
       parameters:
@@ -959,7 +959,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - Cloud Resource Management
-      summary: Get Azure Virtual Hubs.
+      summary: Get Azure Virtual Hubs
       description: API to retrieve Azure Virtual Hubs.
       operationId: getAzVirtualHubs
       parameters:
@@ -1014,7 +1014,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - Cloud Resource Management
-      summary: Get Azure Virtual Wans.
+      summary: Get Azure Virtual Wans
       description: API to retrieve Azure Virtual Wans.
       operationId: getAzVirtualWans
       parameters:
@@ -1133,7 +1133,7 @@ paths:
     post:
       tags:
       - Multicloud Interconnect - Cloud Resource Management
-      summary: Create an Azure Virtual Wan.
+      summary: Create an Azure Virtual Wan
       description: API to create an Azure Virtual Wan..
       operationId: createAzVirtualWan
       parameters:
@@ -1316,7 +1316,7 @@ paths:
     delete:
       tags:
       - Multicloud Interconnect - Cloud Resource Management
-      summary: Delete an Azure Virtual Wan.
+      summary: Delete an Azure Virtual Wan
       description: API to delete an Azure Virtual Wan.
       operationId: deleteAzVirtualWan
       parameters:
@@ -1364,7 +1364,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - Cloud Resource Management
-      summary: Get all Cloud Connectivity Gateways.
+      summary: Get all Cloud Connectivity Gateways
       description: API to retrieve all Cloud Connectivity Gateways.
       operationId: getCloudConnectivityGateways
       parameters:
@@ -2198,7 +2198,7 @@ paths:
     post:
       tags:
       - Multicloud Interconnect - Cloud Resource Management
-      summary: Create a Cloud Connectivity Gateway.
+      summary: Create a Cloud Connectivity Gateway
       description: API to create a Cloud Connectivity Gateway such as Direct Connect Gateway, Express Route Circuit or Google Cloud routers.
       operationId: addCloudConnectivityGateway
       parameters:
@@ -3077,7 +3077,7 @@ paths:
     delete:
       tags:
       - Multicloud Interconnect - Cloud Resource Management
-      summary: Delete Cloud Connectivity Gateways by type.
+      summary: Delete Cloud Connectivity Gateways by type
       description: API to delete Cloud Connectivity Gateways by type.
       operationId: deleteCloudConnectivityGateways
       parameters:
@@ -3120,7 +3120,7 @@ paths:
     get:
       tags:
       - Multicloud Interconnect - Cloud Resource Management
-      summary: Get Cloud Connectivity Gateway create Options.
+      summary: Get Cloud Connectivity Gateway create Options
       description: API to retrieve Cloud Connectivity Gateway create options.
       operationId: getCloudConnectivityGatewayCreateOptions
       parameters:
@@ -3223,7 +3223,7 @@ paths:
     delete:
       tags:
       - Multicloud Interconnect - Cloud Resource Management
-      summary: Delete a Cloud Connectivity Gateway.
+      summary: Delete a Cloud Connectivity Gateway
       description: API to delete a Cloud Connectivity Gateway.
       operationId: deleteCloudConnectivityGateway
       parameters:

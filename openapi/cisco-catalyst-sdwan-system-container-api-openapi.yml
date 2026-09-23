@@ -55,6 +55,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Deploy-read,Template Deploy-write,Policy Configuration-read,Policy Configuration-write,Policy Deploy-read,Policy Deploy-write
+      summary: Get custom app
+      x-summary-source: derived
   /sdavc/test:
     post:
       tags:
@@ -72,3 +74,5 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Template Deploy-read,Template Deploy-write,Policy Configuration-read,Policy Configuration-write,Policy Deploy-read,Policy Deploy-write
+      summary: Test load balancer
+      x-summary-source: derived

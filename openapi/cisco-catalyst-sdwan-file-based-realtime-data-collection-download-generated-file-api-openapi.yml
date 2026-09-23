@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Others File based RealTime Data Collection - Download Generated File API
+  title: Others File based RealTime Data Collection - Download…
   description: 'Other APIs
 
     Include APIs that do not belong to other categories'
@@ -33,7 +33,6 @@ paths:
     get:
       tags:
       - File based RealTime Data Collection - Download Generated File
-      description: Download generated file
       operationId: downloadGeneratedFile
       parameters:
       - name: requestUUID
@@ -99,3 +98,5 @@ paths:
                     errorMessage: Data Collection state is in-progress, Cannot download file at this moment
                   $$ref: '#/components/examples/ComViptelaVmanageServerFilebasedRealtimeDatacollectionDatacollectionapiResponseExampleDownload500'
       x-roles-required: System-read,System-write
+      summary: Download generated file
+      x-summary-source: derived

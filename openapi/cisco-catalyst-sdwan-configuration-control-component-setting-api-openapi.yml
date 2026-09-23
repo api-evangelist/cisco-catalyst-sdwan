@@ -131,6 +131,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Control Component Settings-write
+      summary: Deploy control component settings to device
+      x-summary-source: derived
   /v1/control-component/devices/{deviceId}/settings:
     post:
       tags:
@@ -6695,6 +6697,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Control Component Settings-write
+      summary: Create control component device specific settings
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Control Component Setting
@@ -10146,6 +10150,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Control Component Settings-read
+      summary: Get control component device specific settings
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Control Component Setting
@@ -10213,6 +10219,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Control Component Settings-write
+      summary: Delete control component device specific settings
+      x-summary-source: derived
   /v1/control-component/devices/{deviceId}/settings/config-to-settings:
     post:
       tags:
@@ -13619,6 +13627,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Control Component Settings-write
+      summary: Control component running config to device specific settings
+      x-summary-source: derived
   /v1/control-component/devices/{deviceId}/settings/preview:
     get:
       tags:
@@ -13750,6 +13760,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Control Component Settings-read
+      summary: Get preview cli for control component
+      x-summary-source: derived
   /v1/control-component/network-settings:
     get:
       tags:
@@ -15179,6 +15191,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Control Component Settings-read
+      summary: Get control component common settings
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Control Component Setting
@@ -15238,6 +15252,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Control Component Settings-write
+      summary: Delete control component common settings
+      x-summary-source: derived
     post:
       tags:
       - Configuration - Control Component Setting
@@ -17985,3 +18001,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Control Component Settings-write
+      summary: Create control component common settings
+      x-summary-source: derived

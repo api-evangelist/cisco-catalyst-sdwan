@@ -178,6 +178,8 @@ paths:
                 $$ref: '#/components/schemas/GetExtendedApplicationResponse'
         '403':
           description: Forbidden
+      summary: Get extended applications
+      x-summary-source: derived
     post:
       tags:
       - Cloud Sourced Application Maintenance
@@ -224,6 +226,8 @@ paths:
           description: Bad Request
         '403':
           description: Forbidden
+      summary: Save extended applications
+      x-summary-source: derived
   /sdavc/cloud-sourced/apply/status/{uuid}:
     get:
       tags:
@@ -292,6 +296,8 @@ paths:
                       message: <Short Message>
                       code: PP0018
                       details: <Detailed Message>
+      summary: Get device compliance status cloud sourced application maintenance 4003
+      x-summary-source: derived
   /sdavc/cloud-sourced/approve:
     post:
       tags:
@@ -336,3 +342,5 @@ paths:
           description: Bad Request
         '403':
           description: Forbidden
+      summary: Approve extended applications
+      x-summary-source: derived

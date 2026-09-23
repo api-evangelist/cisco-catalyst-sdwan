@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Monitoring - Power Consumption Statistics API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Monitoring - Power…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -228,6 +236,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Energy Management-read
+      summary: Get stats raw data monitoring power consumption statistics 2804
+      x-summary-source: derived
   /statistics/powerconsumption/aggregation:
     post:
       tags:
@@ -413,6 +423,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Energy Management-read
+      summary: Get post aggregation data by query monitoring power consumption statistics 4004
+      x-summary-source: derived
   /statistics/powerconsumption/device:
     post:
       tags:
@@ -548,6 +560,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Energy Management-read
+      summary: Get power consumption device
+      x-summary-source: derived
   /statistics/powerconsumption/energymix:
     post:
       tags:
@@ -622,6 +636,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Energy Management-read
+      summary: Get power consumption energy mix
+      x-summary-source: derived
   /statistics/powerconsumption/supportdevicelist:
     get:
       tags:
@@ -708,6 +724,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Energy Management-read
+      summary: Get supported device list
+      x-summary-source: derived
   /statistics/powerconsumption/total:
     post:
       tags:
@@ -783,3 +801,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Energy Management-read
+      summary: Get power consumption total
+      x-summary-source: derived

@@ -34,7 +34,6 @@ paths:
       tags:
       - IDP Certificate Management
       summary: Retrieves IDP Certificate Details
-      description: Retrieves IDP Certificate Details
       operationId: getCertificateDetails
       parameters:
       - name: download
@@ -114,7 +113,6 @@ paths:
       tags:
       - IDP Certificate Management
       summary: Generate Certificate Signing Request for IDP Certificate
-      description: Generate Certificate Signing Request for IDP Certificate
       operationId: renewCSR
       requestBody:
         description: IDP Certificate configuration
@@ -162,7 +160,6 @@ paths:
       tags:
       - IDP Certificate Management
       summary: Generate Certificate Signing Request for IDP Certificate
-      description: Generate Certificate Signing Request for IDP Certificate
       operationId: genCSR
       requestBody:
         description: IDP Certificate configuration

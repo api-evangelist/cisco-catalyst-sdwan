@@ -94,6 +94,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Integration Management-read,Integration Management-write
+      summary: Get partners
+      x-summary-source: derived
   /partner/vpn:
     get:
       tags:
@@ -145,6 +147,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Integration Management-read,Integration Management-write
+      summary: Get VPN list
+      x-summary-source: derived
   /partner/{partnerType}:
     post:
       tags:
@@ -199,6 +203,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Integration Management-write
+      summary: Register partner
+      x-summary-source: derived
     get:
       tags:
       - Partner - Registration
@@ -275,6 +281,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Integration Management-read,Integration Management-write
+      summary: Get partners by partner type
+      x-summary-source: derived
   /partner/{partnerType}/map/{nmsId}:
     post:
       tags:
@@ -332,6 +340,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Integration Management-write
+      summary: Map devices
+      x-summary-source: derived
     get:
       tags:
       - Partner - Registration
@@ -504,6 +514,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Integration Management-read,Integration Management-write,Policy Configuration-write
+      summary: Get partner devices
+      x-summary-source: derived
     delete:
       tags:
       - Partner - Registration
@@ -545,6 +557,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Integration Management-write
+      summary: Unmap devices
+      x-summary-source: derived
   /partner/{partnerType}/unmap/{nmsId}:
     post:
       tags:
@@ -602,6 +616,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Integration Management-write
+      summary: Delete device mapping
+      x-summary-source: derived
   /partner/{partnerType}/{nmsId}:
     delete:
       tags:
@@ -644,6 +660,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Integration Management-write
+      summary: Delete partner
+      x-summary-source: derived
     get:
       tags:
       - Partner - Registration
@@ -720,6 +738,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Integration Management-read,Integration Management-write
+      summary: Get partner
+      x-summary-source: derived
     put:
       tags:
       - Partner - Registration
@@ -762,6 +782,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Integration Management-write
+      summary: Update partner
+      x-summary-source: derived
   /serverlongpoll/event/poll/{partnerId}:
     get:
       tags:
@@ -809,3 +831,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get data change info
+      x-summary-source: derived

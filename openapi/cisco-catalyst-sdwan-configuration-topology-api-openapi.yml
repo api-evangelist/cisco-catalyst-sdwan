@@ -31,7 +31,6 @@ paths:
     get:
       tags:
       - Configuration - Topology
-      description: Create full topology
       operationId: createFullTopology
       responses:
         '200':
@@ -53,13 +52,14 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Create full topology
+      x-summary-source: derived
     servers:
     - url: /dataservice
   /topology/device:
     get:
       tags:
       - Configuration - Topology
-      description: Create device topology
       operationId: createDeviceTopology
       parameters:
       - name: deviceId
@@ -93,6 +93,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Create device topology
+      x-summary-source: derived
     servers:
     - url: /dataservice
   /topology/device/site/{siteId}:
@@ -122,6 +124,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Template Deploy-read,Template Deploy-write,System-read
+      summary: Get site topology
+      x-summary-source: derived
     servers:
     - url: /dataservice
   /topology/monitor/site/{siteId}:
@@ -172,6 +176,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read,Device Monitoring-write
+      summary: Get site topology monitor data
+      x-summary-source: derived
     servers:
     - url: /dataservice
   /topology/physical:
@@ -212,6 +218,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Create physical topology
+      x-summary-source: derived
     servers:
     - url: /dataservice
 x-refined-from:

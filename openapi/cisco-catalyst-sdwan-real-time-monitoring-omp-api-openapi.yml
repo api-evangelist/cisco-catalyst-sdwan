@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Real-Time Monitoring - OMP API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Real-Time Monitoring - OMP…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -75,6 +83,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write,Routing-read,Routing-write,Policy-read,Policy-write
+      summary: Create OMP cloud XRecv
+      x-summary-source: derived
   /device/omp/links:
     get:
       tags:
@@ -172,6 +182,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Create OMP link list
+      x-summary-source: derived
   /device/omp/mcastautodiscoveradvt:
     get:
       tags:
@@ -223,6 +235,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write,Routing-read,Routing-write,Policy-read,Policy-write
+      summary: Create OMP mcast auto discover advt
+      x-summary-source: derived
   /device/omp/mcastautodiscoverrecv:
     get:
       tags:
@@ -285,6 +299,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write,Routing-read,Routing-write,Policy-read,Policy-write
+      summary: Create OMP mcast auto discover recv
+      x-summary-source: derived
   /device/omp/mcastroutesadvt:
     get:
       tags:
@@ -332,6 +348,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write,Routing-read,Routing-write,Policy-read,Policy-write
+      summary: Create OMP mcast routes advt
+      x-summary-source: derived
   /device/omp/mcastroutesrecv:
     get:
       tags:
@@ -379,6 +397,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write,Routing-read,Routing-write,Policy-read,Policy-write
+      summary: Create OMP mcast routes recv
+      x-summary-source: derived
   /device/omp/peers:
     get:
       tags:
@@ -440,6 +460,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write,Routing-read,Routing-write,Policy-read,Policy-write
+      summary: Create OMP session list
+      x-summary-source: derived
   /device/omp/routes/advertised:
     get:
       tags:
@@ -509,6 +531,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write,Routing-read,Routing-write,Policy-read,Policy-write
+      summary: Create advertised routes list
+      x-summary-source: derived
   /device/omp/routes/advertised/ompIpv6:
     get:
       tags:
@@ -579,6 +603,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Create advertised routes list ipv6
+      x-summary-source: derived
   /device/omp/routes/received:
     get:
       tags:
@@ -747,6 +773,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write,Routing-read,Routing-write,Policy-read,Policy-write
+      summary: Create received routes list
+      x-summary-source: derived
   /device/omp/routes/received/ompIpv6:
     get:
       tags:
@@ -814,6 +842,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Create received routes list ipv6
+      x-summary-source: derived
   /device/omp/services:
     get:
       tags:
@@ -879,11 +909,12 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write,Routing-read,Routing-write,Policy-read,Policy-write
+      summary: Create OMP services
+      x-summary-source: derived
   /device/omp/status:
     get:
       tags:
       - Real-Time Monitoring - OMP
-      description: Get device OMP status
       operationId: getDeviceOMPStatus
       responses:
         '200':
@@ -925,6 +956,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get device OMP status
+      x-summary-source: derived
   /device/omp/summary:
     get:
       tags:
@@ -993,6 +1026,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write,Routing-read,Routing-write,Policy-read,Policy-write
+      summary: Create OMP summary
+      x-summary-source: derived
   /device/omp/synced/peers:
     get:
       tags:
@@ -1058,6 +1093,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write,Routing-read,Routing-write,Policy-read,Policy-write
+      summary: Create synced OMP session list
+      x-summary-source: derived
   /device/omp/tlocs/advertised:
     get:
       tags:
@@ -1135,6 +1172,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write,Routing-read,Routing-write,Policy-read,Policy-write
+      summary: Create advertised tlocs list
+      x-summary-source: derived
   /device/omp/tlocs/received:
     get:
       tags:
@@ -1302,3 +1341,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write,Routing-read,Routing-write,Policy-read,Policy-write
+      summary: Create received tlocs list
+      x-summary-source: derived

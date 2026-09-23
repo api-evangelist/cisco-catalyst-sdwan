@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Real-Time Monitoring - SIG API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Real-Time Monitoring - SIG…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -72,6 +80,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write,Security-read,Security-write
+      summary: Get sig tunnel list real time monitoring sig 2803
+      x-summary-source: derived
   /device/sig/getSigTunnelTotal:
     get:
       tags:
@@ -97,6 +107,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write,Security-read,Security-write
+      summary: Get sig tunnel total
+      x-summary-source: derived
   /device/sig/tunnelDashboard:
     get:
       tags:
@@ -121,6 +133,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write,Security-read,Security-write
+      summary: Tunnel dashboard
+      x-summary-source: derived
   /device/sig/umbrella/tunnels:
     get:
       tags:
@@ -164,6 +178,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write,Security-read,Security-write
+      summary: Get sig umbrella tunnels
+      x-summary-source: derived
   /device/sig/zscaler/tunnels:
     get:
       tags:
@@ -209,3 +225,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy-read,Policy-write,System-read,System-write,Security-read,Security-write
+      summary: Get sig zscaler tunnels
+      x-summary-source: derived

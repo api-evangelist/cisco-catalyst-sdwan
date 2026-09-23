@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Real-Time Monitoring - NTP API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Real-Time Monitoring - NTP…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -76,6 +84,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write
+      summary: Create associations list
+      x-summary-source: derived
   /device/ntp/peer:
     get:
       tags:
@@ -127,6 +137,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write
+      summary: Create peer list
+      x-summary-source: derived
   /device/ntp/status:
     get:
       tags:
@@ -174,6 +186,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write
+      summary: Create NTP status list
+      x-summary-source: derived
   /device/virtualApplication/te:
     get:
       tags:
@@ -214,6 +228,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write
+      summary: Create te list
+      x-summary-source: derived
   /device/virtualApplication/utd:
     get:
       tags:
@@ -254,6 +270,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write
+      summary: Create utd list
+      x-summary-source: derived
   /device/virtualApplication/waas:
     get:
       tags:
@@ -294,3 +312,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write
+      summary: Create waas list
+      x-summary-source: derived

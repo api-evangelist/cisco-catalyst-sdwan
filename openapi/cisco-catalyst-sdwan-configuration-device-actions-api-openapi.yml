@@ -62,6 +62,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Process cancel task
+      x-summary-source: derived
   /device/action/changepartition:
     get:
       tags:
@@ -116,6 +118,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Generate change partition info
+      x-summary-source: derived
     post:
       tags:
       - Configuration - Device Actions
@@ -158,6 +162,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Process change partition
+      x-summary-source: derived
   /device/action/deactivate:
     get:
       tags:
@@ -259,6 +265,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Software Upgrade-read,Software Upgrade-write,Software Upgrade > Edge-write,Software Upgrade > Edge-read,Software Upgrade > Controller-write,Software Upgrade > Controller-read
+      summary: Generate deactivate info
+      x-summary-source: derived
     post:
       tags:
       - Configuration - Device Actions
@@ -305,6 +313,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Software Upgrade-write,Software Upgrade > Edge-write,Software Upgrade > Controller-write
+      summary: Process deactivate smu
+      x-summary-source: derived
   /device/action/defaultpartition:
     post:
       tags:
@@ -348,6 +358,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Process default partition
+      x-summary-source: derived
   /device/action/filter/vpn:
     get:
       tags:
@@ -402,6 +414,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Software Upgrade-read,RBAC VPN-read,Software Upgrade > Edge-read,Software Upgrade > Controller-read
+      summary: Create filter VPN list
+      x-summary-source: derived
   /device/action/image-download:
     post:
       tags:
@@ -457,6 +471,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Initiate image download
+      x-summary-source: derived
   /device/action/image-remove:
     post:
       tags:
@@ -501,6 +517,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Process remove software image
+      x-summary-source: derived
   /device/action/install:
     post:
       tags:
@@ -654,10 +672,11 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Process install
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Device Actions
-      description: Generate install info
       operationId: generateInstallInfo
       parameters:
       - name: deviceId
@@ -718,6 +737,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Generate install info
+      x-summary-source: derived
   /device/action/install/devices/{deviceType}:
     get:
       tags:
@@ -872,6 +893,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Software Upgrade-read,Software Upgrade-write,Settings-read,vmanage-http-stream,Software Upgrade > Edge-write,Software Upgrade > Edge-read,Software Upgrade > Controller-write,Software Upgrade > Controller-read
+      summary: Generate device list
+      x-summary-source: derived
   /device/action/list:
     get:
       tags:
@@ -923,6 +946,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Software Upgrade-read,Software Upgrade-write,Software Upgrade > Edge-write,Software Upgrade > Edge-read,Software Upgrade > Controller-write,Software Upgrade > Controller-read
+      summary: Generate device action list
+      x-summary-source: derived
   /device/action/lxcactivate:
     post:
       tags:
@@ -975,6 +1000,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Software Upgrade-write,Software Upgrade > Edge-write,Software Upgrade > Controller-write
+      summary: Process lxc activate
+      x-summary-source: derived
   /device/action/lxcdelete:
     post:
       tags:
@@ -1022,6 +1049,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Software Upgrade-write,Software Upgrade > Edge-write,Software Upgrade > Controller-write
+      summary: Process lxc delete
+      x-summary-source: derived
   /device/action/lxcinstall:
     post:
       tags:
@@ -1057,6 +1086,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Software Upgrade-write,Software Upgrade > Edge-write,Software Upgrade > Controller-write
+      summary: Process lxc install
+      x-summary-source: derived
   /device/action/lxcreload:
     post:
       tags:
@@ -1092,6 +1123,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Software Upgrade-write,Software Upgrade > Edge-write,Software Upgrade > Controller-write
+      summary: Process lxc reload
+      x-summary-source: derived
   /device/action/lxcreset:
     post:
       tags:
@@ -1127,6 +1160,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Software Upgrade-write,Software Upgrade > Edge-write,Software Upgrade > Controller-write
+      summary: Process lxc reset
+      x-summary-source: derived
   /device/action/lxcupgrade:
     post:
       tags:
@@ -1178,6 +1213,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Software Upgrade-write,Software Upgrade > Edge-write,Software Upgrade > Controller-write
+      summary: Process lxc upgrade
+      x-summary-source: derived
   /device/action/reboot:
     post:
       tags:
@@ -1226,6 +1263,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Reboot-write,Device Reboot > Edge-write,Device Reboot > Controller-write
+      summary: Process reboot
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Device Actions
@@ -1374,6 +1413,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Reboot-read,Device Reboot-write,Device Reboot > Edge-read,Device Reboot > Edge-write,Device Reboot > Controller-read
+      summary: Generate reboot info
+      x-summary-source: derived
   /device/action/reboot/devices/{deviceType}:
     get:
       tags:
@@ -1488,6 +1529,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Reboot-read,Device Reboot-write,Device Reboot > Edge-read,Device Reboot > Edge-write,Device Reboot > Controller-read
+      summary: Generate reboot device list
+      x-summary-source: derived
   /device/action/rediscover:
     get:
       tags:
@@ -1670,6 +1713,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Tools-read,Tools-write
+      summary: Generate rediscover info
+      x-summary-source: derived
     post:
       tags:
       - Configuration - Device Actions
@@ -1701,6 +1746,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-write,Tools-write
+      summary: Re discover devices
+      x-summary-source: derived
   /device/action/rediscoverall:
     post:
       tags:
@@ -1717,6 +1764,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-write,Tools-write
+      summary: Re discover all device
+      x-summary-source: derived
   /device/action/removepartition:
     get:
       tags:
@@ -1818,6 +1867,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Software Upgrade-read,Software Upgrade-write,Software Upgrade > Edge-write,Software Upgrade > Edge-read,Software Upgrade > Controller-write,Software Upgrade > Controller-read
+      summary: Generate remove partition info
+      x-summary-source: derived
     post:
       tags:
       - Configuration - Device Actions
@@ -1867,6 +1918,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Software Upgrade-write,Software Upgrade > Edge-write,Software Upgrade > Controller-write
+      summary: Process remove partition
+      x-summary-source: derived
   /device/action/security/amp/apikey/{uuid}:
     delete:
       tags:
@@ -1899,6 +1952,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Software Upgrade-write,Software Upgrade > Edge-write,Software Upgrade > Controller-write
+      summary: Process delete amp api key
+      x-summary-source: derived
   /device/action/security/amp/rekey:
     post:
       tags:
@@ -1934,6 +1989,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Software Upgrade-write,Software Upgrade > Edge-write,Software Upgrade > Controller-write
+      summary: Process amp api re key
+      x-summary-source: derived
   /device/action/security/apikey/{uuid}:
     get:
       tags:
@@ -1965,6 +2022,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Software Upgrade-read,Software Upgrade-write,Settings-read,Software Upgrade > Edge-write,Software Upgrade > Edge-read,Software Upgrade > Controller-write,Software Upgrade > Controller-read
+      summary: Test api key
+      x-summary-source: derived
   /device/action/security/devices/{policyType}:
     get:
       tags:
@@ -2017,6 +2076,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Software Upgrade-read,Software Upgrade-write,Settings-read,Security-read,Security-read,Security-write,Software Upgrade > Edge-write,Software Upgrade > Edge-read,Software Upgrade > Controller-write,Software Upgrade > Controller-read
+      summary: Generate security devices list
+      x-summary-source: derived
   /device/action/startmonitor:
     get:
       tags:
@@ -2033,6 +2094,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Software Upgrade-read,Software Upgrade-write,Software Upgrade > Edge-write,Software Upgrade > Edge-read,Software Upgrade > Controller-write,Software Upgrade > Controller-read
+      summary: Trigger pending tasks monitoring
+      x-summary-source: derived
   /device/action/test/ioxconfig/{deviceIP}:
     get:
       tags:
@@ -2062,11 +2125,12 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Software Upgrade-read,Software Upgrade-write,Software Upgrade > Edge-write,Software Upgrade > Edge-read,Software Upgrade > Controller-write,Software Upgrade > Controller-read
+      summary: Test iox config
+      x-summary-source: derived
   /device/action/uniquevpnlist:
     post:
       tags:
       - Configuration - Device Actions
-      description: Create unique VPN list
       operationId: createUniqueVPNList
       requestBody:
         description: Device IPs
@@ -2109,6 +2173,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Software Upgrade-read,Software Upgrade > Edge-read,Software Upgrade > Controller-read
+      summary: Create unique VPN list
+      x-summary-source: derived
   /device/action/vnfinstall:
     post:
       tags:
@@ -2145,11 +2211,12 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Software Upgrade-write,Software Upgrade > Edge-write,Software Upgrade > Controller-write
+      summary: Process vnf install
+      x-summary-source: derived
   /device/action/vpn:
     get:
       tags:
       - Configuration - Device Actions
-      description: Create VPN list
       operationId: createVPNList
       responses:
         '200':
@@ -2189,6 +2256,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Create VPN list
+      x-summary-source: derived
   /device/action/ztp/upgrade:
     get:
       tags:
@@ -2218,6 +2287,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get ZTP upgrade config
+      x-summary-source: derived
     post:
       tags:
       - Configuration - Device Actions
@@ -2259,6 +2330,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Postprocess ZTP upgrade config setting
+      x-summary-source: derived
   /device/action/ztp/upgrade/setting:
     post:
       tags:
@@ -2301,6 +2374,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Process ZTP upgrade config setting
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Device Actions
@@ -2329,3 +2404,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get ZTP upgrade config setting
+      x-summary-source: derived

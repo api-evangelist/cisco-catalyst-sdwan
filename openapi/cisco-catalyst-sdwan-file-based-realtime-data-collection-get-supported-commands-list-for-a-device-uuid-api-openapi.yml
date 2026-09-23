@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Others File based RealTime Data Collection - Get Supported Commands List for a Device UUID API
+  title: Others File based RealTime Data Collection - Get Supported…
   description: 'Other APIs
 
     Include APIs that do not belong to other categories'
@@ -119,3 +119,5 @@ paths:
                     errorMessage: Data Collection state is in-progress, Cannot download file at this moment
                   $$ref: '#/components/examples/ComViptelaVmanageServerFilebasedRealtimeDatacollectionDatacollectionapiResponseExampleSupportedCommands500'
       x-roles-required: System-read,System-write
+      summary: Get supported commands list
+      x-summary-source: derived

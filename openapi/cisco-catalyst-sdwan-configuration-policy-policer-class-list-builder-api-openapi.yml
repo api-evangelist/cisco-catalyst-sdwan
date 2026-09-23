@@ -1,7 +1,13 @@
 openapi: 3.2.0
 info:
-  title: UX 1.0 Configuration Configuration - Policy Policer Class List Builder API
-  description: "Configuration of UX 1.0 device and policy.\nIncludes API operations for the following:\n  Managing original SD-WAN device configurations and policy configurations\n  Device templates and feature templates"
+  title: UX 1.0 Configuration Configuration - Policy Policer Class…
+  description: 'Configuration of UX 1.0 device and policy.
+
+    Includes API operations for the following:
+
+    Managing original SD-WAN device configurations and policy configurations
+
+    Device templates and feature templates'
   contact:
     email: vmanage@cisco.com
   license:
@@ -71,6 +77,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+      summary: Get policy lists configuration policy policer class list builder 2903
+      x-summary-source: derived
     post:
       tags:
       - Configuration - Policy Policer Class List Builder
@@ -327,6 +335,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write
+      summary: Create policy list configuration policy policer class list builder 2904
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Policy Policer Class List Builder
@@ -357,6 +367,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Delete policy lists with info tag configuration policy policer class list…
+      x-summary-source: derived
   /template/policy/list/policer/filtered:
     get:
       tags:
@@ -388,6 +400,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get policy lists with info tag configuration policy policer class list builder…
+      x-summary-source: derived
   /template/policy/list/policer/preview:
     post:
       tags:
@@ -422,6 +436,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+      summary: Preview policy list configuration policy policer class list builder 3704
+      x-summary-source: derived
   /template/policy/list/policer/preview/{id}:
     get:
       tags:
@@ -454,6 +470,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+      summary: Preview policy list by id configuration policy policer class list builder 4203
+      x-summary-source: derived
   /template/policy/list/policer/{id}:
     get:
       tags:
@@ -500,6 +518,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+      summary: Get lists by id configuration policy policer class list builder 3403
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Policy Policer Class List Builder
@@ -548,6 +568,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write
+      summary: Edit policy list configuration policy policer class list builder 3403
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Policy Policer Class List Builder
@@ -570,3 +592,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write
+      summary: Delete policy list configuration policy policer class list builder 3406
+      x-summary-source: derived

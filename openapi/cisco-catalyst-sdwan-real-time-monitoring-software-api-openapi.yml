@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Real-Time Monitoring - Software API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Real-Time Monitoring…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -69,6 +77,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Create smu list
+      x-summary-source: derived
   /device/smu/synced:
     get:
       tags:
@@ -111,6 +121,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Create synced smu list
+      x-summary-source: derived
   /device/software:
     get:
       tags:
@@ -154,6 +166,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write
+      summary: Get AAA ucreate software listsers
+      x-summary-source: derived
   /device/software/synced:
     get:
       tags:
@@ -200,3 +214,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write
+      summary: Create synced software list
+      x-summary-source: derived

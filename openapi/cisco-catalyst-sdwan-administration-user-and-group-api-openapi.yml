@@ -1,7 +1,17 @@
 openapi: 3.2.0
 info:
-  title: Administration and Settings Administration - User and Group API
-  description: "Includes API operations for the following:\n  Global parameters for SD-WAN Manager\n  User, group and tenant management\n  Software maintenance\n  Backup and restore\n  Container management"
+  title: Administration and Settings Administration - User and Group…
+  description: 'Includes API operations for the following:
+
+    Global parameters for SD-WAN Manager
+
+    User, group and tenant management
+
+    Software maintenance
+
+    Backup and restore
+
+    Container management'
   contact:
     email: vmanage@cisco.com
   license:
@@ -31,7 +41,10 @@ paths:
     get:
       tags:
       - Administration - User and Group
-      description: 'Get aaa configuration<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
+      description: 'Get aaa configuration
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
       operationId: getAaaConfig
       responses:
         '200':
@@ -84,10 +97,15 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get aaa config
+      x-summary-source: derived
     post:
       tags:
       - Administration - User and Group
-      description: 'Create aaa configuration<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
+      description: 'Create aaa configuration
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
       operationId: createAaaConfig
       requestBody:
         description: aaa
@@ -144,10 +162,15 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Create aaa config
+      x-summary-source: derived
     put:
       tags:
       - Administration - User and Group
-      description: 'Update aaa configuration<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
+      description: 'Update aaa configuration
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
       operationId: updateAaaConfig
       requestBody:
         description: aaa
@@ -204,10 +227,15 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Update aaa config
+      x-summary-source: derived
     delete:
       tags:
       - Administration - User and Group
-      description: 'Delete aaa configuration<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
+      description: 'Delete aaa configuration
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
       operationId: deleteAaaConfig
       responses:
         '200':
@@ -233,6 +261,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Delete aaa config
+      x-summary-source: derived
   /admin/events/{sseSessionId}:
     get:
       tags:
@@ -250,11 +280,16 @@ paths:
           description: default response
           content:
             text/event-stream: {}
+      summary: Listen auth events
+      x-summary-source: derived
   /admin/radius:
     delete:
       tags:
       - Administration - User and Group
-      description: 'Delete radius configuration<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
+      description: 'Delete radius configuration
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
       operationId: deleteRadiusConfig
       responses:
         '200':
@@ -367,10 +402,15 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Delete radius config
+      x-summary-source: derived
     post:
       tags:
       - Administration - User and Group
-      description: 'Create radius configuration<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
+      description: 'Create radius configuration
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
       operationId: createRadiusConfig
       requestBody:
         description: radius
@@ -495,10 +535,15 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Create radius config
+      x-summary-source: derived
     put:
       tags:
       - Administration - User and Group
-      description: 'Update radius configuration<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
+      description: 'Update radius configuration
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
       operationId: updateRadiusConfig
       requestBody:
         description: radius
@@ -623,10 +668,15 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Update radius config
+      x-summary-source: derived
     get:
       tags:
       - Administration - User and Group
-      description: 'Get radius configuration<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
+      description: 'Get radius configuration
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
       operationId: getRadiusConfig
       responses:
         '200':
@@ -739,11 +789,16 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get radius config
+      x-summary-source: derived
   /admin/tacacs:
     delete:
       tags:
       - Administration - User and Group
-      description: 'Delete tacacs configuration<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
+      description: 'Delete tacacs configuration
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
       operationId: deleteTacacsConfig
       responses:
         '200':
@@ -843,10 +898,15 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Delete tacacs config
+      x-summary-source: derived
     get:
       tags:
       - Administration - User and Group
-      description: 'Get tacacs configuration<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
+      description: 'Get tacacs configuration
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
       operationId: getTacacsConfig
       responses:
         '200':
@@ -946,10 +1006,15 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get tacacs config
+      x-summary-source: derived
     put:
       tags:
       - Administration - User and Group
-      description: 'Update tacacs configuration<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
+      description: 'Update tacacs configuration
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
       operationId: updateTacacsConfig
       requestBody:
         description: tacacs
@@ -1052,10 +1117,15 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Update tacacs config
+      x-summary-source: derived
     post:
       tags:
       - Administration - User and Group
-      description: 'Create tacacs configuration<br><br><br>Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
+      description: 'Create tacacs configuration
+
+
+        Note: In a multitenant vManage system, this API is only available in the Provider and Provider-As-Tenant view.'
       operationId: createTacacsConfig
       requestBody:
         description: tacacs
@@ -1158,6 +1228,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Create tacacs config
+      x-summary-source: derived
   /admin/user:
     get:
       tags:
@@ -1182,6 +1254,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Manage Users-read,Manage Users-write
+      summary: Find users administration user group 1103
+      x-summary-source: derived
     post:
       tags:
       - Administration - User and Group
@@ -1215,6 +1289,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Manage Users-write
+      summary: Create user administration user group 1104
+      x-summary-source: derived
   /admin/user/activeSessions:
     get:
       tags:
@@ -1239,6 +1315,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Manage Users-read
+      summary: Get active sessions administration user group 2603
+      x-summary-source: derived
   /admin/user/admin/password:
     post:
       tags:
@@ -1265,6 +1343,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Update admin password administration user group 2604
+      x-summary-source: derived
   /admin/user/lockUser/{userName}:
     put:
       tags:
@@ -1300,6 +1380,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Manage Users-write
+      summary: Lock user
+      x-summary-source: derived
   /admin/user/password/validate:
     post:
       tags:
@@ -1328,6 +1410,8 @@ paths:
           description: Internal Server Error
       deprecated: true
       x-roles-required: Manage Users-read
+      summary: Validate password administration user group 2904
+      x-summary-source: derived
   /admin/user/password/{userName}:
     put:
       tags:
@@ -1362,6 +1446,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Manage Users-write
+      summary: Update password administration user group 3103
+      x-summary-source: derived
   /admin/user/profile/locale:
     put:
       tags:
@@ -1389,6 +1475,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Update profile locale administration user group 2603
+      x-summary-source: derived
   /admin/user/profile/password:
     put:
       tags:
@@ -1416,6 +1504,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Update profile password administration user group 2803
+      x-summary-source: derived
   /admin/user/removeSessions:
     delete:
       tags:
@@ -1448,6 +1538,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Manage Users-write
+      summary: Remove sessions administration user group 2606
+      x-summary-source: derived
   /admin/user/reset:
     post:
       tags:
@@ -1475,6 +1567,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Manage Users-write
+      summary: Reset user administration user group 1704
+      x-summary-source: derived
   /admin/user/role:
     get:
       tags:
@@ -1500,6 +1594,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Manage Users-read,Manage Users-write,Device Monitoring-read,Device Monitoring-write,System-read,System-write
+      summary: Find user role administration user group 1603
+      x-summary-source: derived
   /admin/user/userAuthType:
     get:
       tags:
@@ -1523,6 +1619,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Find user auth type administration user group 2403
+      x-summary-source: derived
   /admin/user/{userName}:
     put:
       tags:
@@ -1559,6 +1657,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Manage Users-write
+      summary: Update user administration user group 2203
+      x-summary-source: derived
     delete:
       tags:
       - Administration - User and Group
@@ -1581,6 +1681,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Manage Users-write
+      summary: Delete user administration user group 2206
+      x-summary-source: derived
   /admin/usergroup:
     get:
       tags:
@@ -1605,10 +1707,11 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Manage Users-read,Manage Users-write
+      summary: Find user groups
+      x-summary-source: derived
     post:
       tags:
       - Administration - User and Group
-      description: Create user group
       operationId: createUserGroup
       requestBody:
         description: User group
@@ -1738,6 +1841,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Manage Users-write
+      summary: Create user group
+      x-summary-source: derived
   /admin/usergroup/definition:
     get:
       tags:
@@ -1760,6 +1865,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Manage Users-read,Manage Users-write
+      summary: Create group grid columns
+      x-summary-source: derived
   /admin/usergroup/keyvalue:
     get:
       tags:
@@ -1784,11 +1891,12 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Manage Users-read,Manage Users-write
+      summary: Find user groups as key value
+      x-summary-source: derived
   /admin/usergroup/{userGroupId}:
     delete:
       tags:
       - Administration - User and Group
-      description: Delete user group
       operationId: deleteUserGroup
       parameters:
       - name: userGroupId
@@ -1807,10 +1915,11 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Manage Users-write
+      summary: Delete user group
+      x-summary-source: derived
     put:
       tags:
       - Administration - User and Group
-      description: Update user group
       operationId: updateUserGroup
       parameters:
       - name: userGroupId
@@ -1947,6 +2056,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Manage Users-write
+      summary: Update user group
+      x-summary-source: derived
   /admin/vpngroup:
     post:
       tags:
@@ -1980,6 +2091,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: RBAC VPN-write
+      summary: Create vpn group
+      x-summary-source: derived
     get:
       tags:
       - Administration - User and Group
@@ -2014,6 +2127,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: RBAC VPN-read,RBAC VPN-write
+      summary: Get vpn groups
+      x-summary-source: derived
   /admin/vpngroup/{id}:
     put:
       tags:
@@ -2056,6 +2171,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: RBAC VPN-write
+      summary: Edit vpn group
+      x-summary-source: derived
     delete:
       tags:
       - Administration - User and Group
@@ -2078,3 +2195,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: RBAC VPN-write
+      summary: Delete vpn group
+      x-summary-source: derived

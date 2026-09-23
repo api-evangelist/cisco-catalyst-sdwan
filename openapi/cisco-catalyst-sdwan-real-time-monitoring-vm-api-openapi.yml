@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
   title: Monitoring and Troubleshooting Real-Time Monitoring - VM API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -68,6 +76,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write,Routing-read,Routing-write
+      summary: Get vbranch VM lifecycle nics
+      x-summary-source: derived
   /device/vm/notifications:
     get:
       tags:
@@ -115,6 +125,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write,Routing-read,Routing-write
+      summary: Get cloud dock VM lifecycle nics
+      x-summary-source: derived
   /device/vm/oper/state:
     get:
       tags:
@@ -159,6 +171,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write,Routing-read,Routing-write
+      summary: Get vbranch VM lifecycle
+      x-summary-source: derived
   /device/vm/state:
     get:
       tags:
@@ -199,3 +213,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: System-read,System-write,Routing-read,Routing-write
+      summary: Get VM life cycle state
+      x-summary-source: derived

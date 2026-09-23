@@ -1,7 +1,13 @@
 openapi: 3.2.0
 info:
-  title: UX 1.0 Configuration Configuration - Policy PRI ISDN Port Definition Builder API
-  description: "Configuration of UX 1.0 device and policy.\nIncludes API operations for the following:\n  Managing original SD-WAN device configurations and policy configurations\n  Device templates and feature templates"
+  title: UX 1.0 Configuration Configuration - Policy PRI ISDN Port…
+  description: 'Configuration of UX 1.0 device and policy.
+
+    Includes API operations for the following:
+
+    Managing original SD-WAN device configurations and policy configurations
+
+    Device templates and feature templates'
   contact:
     email: vmanage@cisco.com
   license:
@@ -627,6 +633,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write
+      summary: Create policy definition configuration policy pri isdn port definition builder…
+      x-summary-source: derived
     get:
       tags:
       - Configuration - Policy PRI ISDN Port Definition Builder
@@ -650,6 +658,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+      summary: Get definitions configuration policy pri isdn port definition builder 3903
+      x-summary-source: derived
   /template/policy/definition/priisdnport/bulk:
     put:
       tags:
@@ -684,6 +694,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write
+      summary: Save policy definition in bulk configuration policy pri isdn port definition…
+      x-summary-source: derived
   /template/policy/definition/priisdnport/multiple/{id}:
     put:
       tags:
@@ -725,6 +737,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write
+      summary: Edit multiple policy definition configuration policy pri isdn port definition…
+      x-summary-source: derived
   /template/policy/definition/priisdnport/preview:
     post:
       tags:
@@ -759,6 +773,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+      summary: Preview policy definition configuration policy pri isdn port definition builder…
+      x-summary-source: derived
   /template/policy/definition/priisdnport/preview/{id}:
     get:
       tags:
@@ -791,6 +807,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+      summary: Preview policy definition by id configuration policy pri isdn port definition…
+      x-summary-source: derived
   /template/policy/definition/priisdnport/{id}:
     get:
       tags:
@@ -823,6 +841,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-read,Policy Configuration-write,Template Deploy-read,Template Deploy-write,Policy Deploy-read,Policy Deploy-write
+      summary: Get policy definition configuration policy pri isdn port definition builder 4403
+      x-summary-source: derived
     put:
       tags:
       - Configuration - Policy PRI ISDN Port Definition Builder
@@ -991,6 +1011,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write
+      summary: Edit policy definition configuration policy pri isdn port definition builder…
+      x-summary-source: derived
     delete:
       tags:
       - Configuration - Policy PRI ISDN Port Definition Builder
@@ -1013,3 +1035,5 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Policy Configuration-write
+      summary: Delete policy definition configuration policy pri isdn port definition builder…
+      x-summary-source: derived

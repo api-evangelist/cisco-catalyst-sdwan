@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Monitoring and Troubleshooting Monitoring - URL Filtering API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  title: Monitoring and Troubleshooting Monitoring - URL Filtering…
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -157,6 +165,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stats raw data monitoring url filtering 1604
+      x-summary-source: derived
     get:
       tags:
       - Monitoring - URL Filtering
@@ -261,6 +271,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stat data raw data monitoring url filtering 1603
+      x-summary-source: derived
   /statistics/urlf/aggregation:
     get:
       tags:
@@ -324,6 +336,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get aggregation data by query monitoring url filtering 2803
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - URL Filtering
@@ -387,6 +401,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default,dca
+      summary: Get post aggregation data by query monitoring url filtering 2804
+      x-summary-source: derived
   /statistics/urlf/csv:
     get:
       tags:
@@ -426,6 +442,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: default
+      summary: Get stat data raw data as CSV monitoring url filtering 2003
+      x-summary-source: derived
   /statistics/urlf/doccount:
     get:
       tags:
@@ -466,6 +484,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get count monitoring url filtering 2503
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - URL Filtering
@@ -508,6 +528,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get count post monitoring url filtering 2504
+      x-summary-source: derived
   /statistics/urlf/fields:
     get:
       tags:
@@ -560,6 +582,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat data fields monitoring url filtering 2303
+      x-summary-source: derived
   /statistics/urlf/page:
     get:
       tags:
@@ -684,6 +708,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get stats pagination raw data monitoring url filtering 2103
+      x-summary-source: derived
     post:
       tags:
       - Monitoring - URL Filtering
@@ -812,6 +838,8 @@ paths:
         '500':
           description: Internal Server Error
       x-roles-required: Device Monitoring-read
+      summary: Get post stats pagination raw data monitoring url filtering 2104
+      x-summary-source: derived
   /statistics/urlf/query/fields:
     get:
       tags:
@@ -876,3 +904,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get stat query fields monitoring url filtering 2903
+      x-summary-source: derived

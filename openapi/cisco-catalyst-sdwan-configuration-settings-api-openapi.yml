@@ -1,7 +1,17 @@
 openapi: 3.2.0
 info:
   title: Administration and Settings Configuration - Settings API
-  description: "Includes API operations for the following:\n  Global parameters for SD-WAN Manager\n  User, group and tenant management\n  Software maintenance\n  Backup and restore\n  Container management"
+  description: 'Includes API operations for the following:
+
+    Global parameters for SD-WAN Manager
+
+    User, group and tenant management
+
+    Software maintenance
+
+    Backup and restore
+
+    Container management'
   contact:
     email: vmanage@cisco.com
   license:
@@ -32,7 +42,6 @@ paths:
       tags:
       - Configuration - Settings
       summary: Retrieve banner
-      description: Retrieve banner
       operationId: getBanner
       responses:
         '200':
@@ -52,7 +61,6 @@ paths:
       tags:
       - Configuration - Settings
       summary: Get client session timeout
-      description: Get client session timeout
       operationId: getSessionTimout
       responses:
         '200':
@@ -79,7 +87,6 @@ paths:
       tags:
       - Configuration - Settings
       summary: Create analytics data file
-      description: Create analytics data file
       operationId: createAnalyticsDataFile
       responses:
         '200':
@@ -678,7 +685,6 @@ paths:
       tags:
       - Configuration - Settings
       summary: Update certificate configuration
-      description: Update certificate configuration
       operationId: editCertConfiguration
       parameters:
       - name: type
@@ -1662,7 +1668,6 @@ paths:
       tags:
       - Configuration - Settings
       summary: Add new certificate configuration
-      description: Add new certificate configuration
       operationId: newCertConfiguration
       parameters:
       - name: type
@@ -2182,7 +2187,6 @@ paths:
       tags:
       - Configuration - Settings
       summary: Retrieve cloudx configuration value
-      description: Retrieve cloudx configuration value
       operationId: getCloudxConfiguration
       responses:
         '200':
@@ -2208,7 +2212,6 @@ paths:
       tags:
       - Configuration - Settings
       summary: Update cloudx configuration setting
-      description: Update cloudx configuration setting
       operationId: editCloudxConfiguration
       requestBody:
         description: CloudX configuration setting
@@ -2250,7 +2253,6 @@ paths:
       tags:
       - Configuration - Settings
       summary: Add new cloudx configuration
-      description: Add new cloudx configuration
       operationId: newCloudxConfiguration
       requestBody:
         description: CloudX configuration setting
@@ -2293,7 +2295,6 @@ paths:
       tags:
       - Configuration - Settings
       summary: Retrieve Google map key
-      description: Retrieve Google map key
       operationId: getGoogleMapKey
       responses:
         '200':
@@ -2319,7 +2320,6 @@ paths:
       tags:
       - Configuration - Settings
       summary: Retrieve maintenance window
-      description: Retrieve maintenance window
       operationId: getMaintenanceWindow
       responses:
         '200':
@@ -2348,7 +2348,6 @@ paths:
       tags:
       - Configuration - Settings
       summary: Add new Microsoft telemetry configuration
-      description: Add new Microsoft telemetry configuration
       operationId: newMicrosoftTelemetryConfiguration
       requestBody:
         description: Microsoft Telemetry configuration setting
@@ -2388,7 +2387,6 @@ paths:
       tags:
       - Configuration - Settings
       summary: Retrieve Microsoft telemetry configuration value
-      description: Retrieve Microsoft telemetry configuration value
       operationId: getMicrosoftTelemetryConfiguration
       responses:
         '200':
@@ -2408,7 +2406,6 @@ paths:
       tags:
       - Configuration - Settings
       summary: Update Microsoft telemetry configuration setting
-      description: Update Microsoft telemetry configuration setting
       operationId: editMicrosoftTelemetryConfiguration
       requestBody:
         description: Microsoft Telemetry configuration setting
@@ -2442,7 +2439,6 @@ paths:
       tags:
       - Configuration - Settings
       summary: Add new wani configuration
-      description: Add new wani configuration
       operationId: newWaniConfiguration
       requestBody:
         description: WANI configuration setting
@@ -2480,7 +2476,6 @@ paths:
       tags:
       - Configuration - Settings
       summary: Retrieve wani configuration value
-      description: Retrieve wani configuration value
       operationId: getWaniConfiguration
       responses:
         '200':
@@ -2500,7 +2495,6 @@ paths:
       tags:
       - Configuration - Settings
       summary: Update wani configuration setting
-      description: Update wani configuration setting
       operationId: editWaniConfiguration
       requestBody:
         description: WANI configuration setting
@@ -2533,7 +2527,6 @@ paths:
       tags:
       - Configuration - Settings
       summary: Retrieve configuration value by type
-      description: Retrieve configuration value by type
       operationId: getConfigurationBySettingType
       parameters:
       - name: type
@@ -3106,7 +3099,6 @@ paths:
       tags:
       - Configuration - Settings
       summary: Update configuration setting
-      description: Update configuration setting
       operationId: editConfiguration
       parameters:
       - name: type
@@ -4090,7 +4082,6 @@ paths:
       tags:
       - Configuration - Settings
       summary: Add new certificate configuration
-      description: Add new certificate configuration
       operationId: newConfiguration
       parameters:
       - name: type
@@ -5075,7 +5066,6 @@ paths:
       tags:
       - Configuration - Settings
       summary: Retrieve password policy from global settings
-      description: Retrieve password policy from global settings
       operationId: getPasswordPolicy
       responses:
         '200':

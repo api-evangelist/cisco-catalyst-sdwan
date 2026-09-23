@@ -1,7 +1,15 @@
 openapi: 3.2.0
 info:
   title: Monitoring and Troubleshooting Monitoring - Cedge Cflowd API
-  description: "Includes API operations for the following:\n  Real-time monitoring\n  Accessing statistics APIs and statistics bulk APIs\n  Retrieving device state\n  Managing alarms and events"
+  description: 'Includes API operations for the following:
+
+    Real-time monitoring
+
+    Accessing statistics APIs and statistics bulk APIs
+
+    Retrieving device state
+
+    Managing alarms and events'
   contact:
     email: vmanage@cisco.com
   license:
@@ -72,6 +80,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Create app fwd cflowd flows list
+      x-summary-source: derived
   /device/cedgecflowd/app-fwd-cflowd-v6-flows:
     get:
       tags:
@@ -117,6 +127,8 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Create app fwd cflowd V6 flows list
+      x-summary-source: derived
   /device/redundancy-group/app-group:
     get:
       tags:
@@ -151,3 +163,5 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
+      summary: Get redundancy group app group
+      x-summary-source: derived
