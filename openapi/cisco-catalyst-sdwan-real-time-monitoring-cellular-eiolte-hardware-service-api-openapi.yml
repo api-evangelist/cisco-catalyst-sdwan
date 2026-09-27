@@ -33,12 +33,12 @@ info:
 servers:
 - url: /dataservice
 tags:
-- name: 'Real-Time Monitoring - Cellular EIOLTE Hardware Service '
+- name: Real-Time Monitoring - Cellular EIOLTE Hardware Service
 paths:
   /device/cellularEiolte/hardware:
     get:
       tags:
-      - 'Real-Time Monitoring - Cellular EIOLTE Hardware Service '
+      - Real-Time Monitoring - Cellular EIOLTE Hardware Service
       description: Get cellular hardware info from device
       operationId: getEiolteHardwareInfo
       parameters:

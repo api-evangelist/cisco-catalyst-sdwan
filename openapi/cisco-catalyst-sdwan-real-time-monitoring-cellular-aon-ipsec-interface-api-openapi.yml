@@ -33,12 +33,12 @@ info:
 servers:
 - url: /dataservice
 tags:
-- name: 'Real-Time Monitoring - Cellular AON Ipsec Interface '
+- name: Real-Time Monitoring - Cellular AON Ipsec Interface
 paths:
   /device/cellularEiolte/ipsec/interface/counters:
     get:
       tags:
-      - 'Real-Time Monitoring - Cellular AON Ipsec Interface '
+      - Real-Time Monitoring - Cellular AON Ipsec Interface
       description: Get cellular ipsec interface info from device
       operationId: getAONIpsecInterfaceCountersInfo
       parameters:
@@ -71,7 +71,7 @@ paths:
   /device/cellularEiolte/ipsec/interface/session:
     get:
       tags:
-      - 'Real-Time Monitoring - Cellular AON Ipsec Interface '
+      - Real-Time Monitoring - Cellular AON Ipsec Interface
       description: Get cellular ipsec interface info from device
       operationId: getAONIpsecInterfaceSessionnfo
       parameters:

@@ -423,6 +423,8 @@
     "cisco-catalyst-sdwan-feature-profiles-sd-wan-system-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "cisco-catalyst-sdwan-feature-profiles-sd-wan-transport-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json: declared missing tag: Real-Time Monitoring - Cellular AON Ipsec Interface",
+    "cisco-catalyst-sdwan-monitoring-and-troubleshooting-openapi.json: declared missing tag: Real-Time Monitoring - Cellular EIOLTE Hardware Service",
     "cisco-catalyst-sdwan-others-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "cisco-catalyst-sdwan-partner-integrations-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "cisco-catalyst-sdwan-sd-wan-services-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
