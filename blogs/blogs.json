@@ -2,6 +2,13 @@
   "repo": "cisco-catalyst-sdwan",
   "feeds": [
     {
+      "source": "https://blogs.cisco.com/tag/sd-wan",
+      "feed_url": "https://blogs.cisco.com/feed",
+      "title": "",
+      "saved": 9,
+      "method": "discovered"
+    },
+    {
       "source": "https://developer.cisco.com/docs/sdwan/developer-support/",
       "feed_url": "https://developer.cisco.com/docs/sdwan/developer-support/",
       "title": "",
@@ -9,6 +16,6 @@
       "method": "none"
     }
   ],
-  "post_count": 0,
-  "fetched": "2026-10-03T12:30:02Z"
+  "post_count": 9,
+  "fetched": "2026-10-10T13:15:00Z"
 }
