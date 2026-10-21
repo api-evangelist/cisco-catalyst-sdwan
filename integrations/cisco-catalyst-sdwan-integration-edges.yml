@@ -1,0 +1,199 @@
+edges:
+- partner_name: LogicMonitor
+  app: LogicMonitor | LM Envision
+  partner: logicmonitor
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/420402
+  category: AIOps, Monitoring & Performance
+  partner_domain: logicmonitor.com
+  detected_by: sweep-cisco-devnet-ecosystem.py
+  detected: '2026-10-21'
+- partner_name: Tufin
+  app: Tufin Orchestration Suite
+  partner: tufin
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/426593
+  category: AIOps, Automation & Orchestration
+  partner_domain: tufin.com
+  detected_by: sweep-cisco-devnet-ecosystem.py
+  detected: '2026-10-21'
+- partner_name: NetOp AI
+  app: 'NetOp AI for Meraki: AI-Native Network Observability & Operational Intelligence Platform'
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/391155
+  category: Agentic AI, Monitoring & Performance
+  partner_domain: netop.cloud
+  detected_by: sweep-cisco-devnet-ecosystem.py
+  detected: '2026-10-21'
+- partner_name: Highlight Service Observability Platform
+  app: Monitoring and Observability for SD-WAN/Firewalls
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/381711
+  category: AIOps, Monitoring & Performance, Observability
+  partner_domain: highlight.net
+  detected_by: sweep-cisco-devnet-ecosystem.py
+  detected: '2026-10-21'
+- partner_name: Megaport
+  app: Megaport for Cisco Catalyst SD-WAN
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/539747
+  category: Automation & Orchestration
+  partner_domain: megaport.com
+  badges:
+  - available-through-cisco
+  detected_by: sweep-cisco-devnet-ecosystem.py
+  detected: '2026-10-21'
+- partner_name: BackBox
+  app: BackBox Cyber Resilience Platform
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/537008
+  category: Automation & Orchestration, Backup & Recovery, Observability
+  partner_domain: backbox.com
+  detected_by: sweep-cisco-devnet-ecosystem.py
+  detected: '2026-10-21'
+- partner_name: Quantum XChange
+  app: Phio TX-EM (container)
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/872594
+  category: Cisco App Marketplace app
+  partner_domain: quantumxc.com
+  detected_by: sweep-cisco-devnet-ecosystem.py
+  detected: '2026-10-21'
+- partner_name: IBM
+  app: IBM SevOne
+  partner: ibm
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/819266
+  category: Monitoring & Performance
+  partner_domain: ibm.com
+  detected_by: sweep-cisco-devnet-ecosystem.py
+  detected: '2026-10-21'
+- partner_name: Lightstorm
+  app: Polarin Network Edge - Software defined cloud interconnect
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/610658
+  category: Automation & Orchestration
+  partner_domain: lightstorm.in
+  detected_by: sweep-cisco-devnet-ecosystem.py
+  detected: '2026-10-21'
+- partner_name: Purple
+  app: Purple Staff WiFi
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/435746
+  category: BYOD Onboarding & Security
+  partner_domain: purple.ai
+  detected_by: sweep-cisco-devnet-ecosystem.py
+  detected: '2026-10-21'
+- partner_name: Highlight Service Observability Platform
+  app: Monitoring and Observability for WiFi and Switches
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/417351
+  category: AIOps, Documentation & Reporting, Monitoring & Performance
+  partner_domain: highlight.net
+  detected_by: sweep-cisco-devnet-ecosystem.py
+  detected: '2026-10-21'
+- partner_name: Highlight Service Observability Platform
+  app: Monitoring and Observability for Managed Services
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/417346
+  category: AIOps, Documentation & Reporting, IT Asset Management
+  partner_domain: highlight.net
+  detected_by: sweep-cisco-devnet-ecosystem.py
+  detected: '2026-10-21'
+- partner_name: Zoho Corporation Private Limited
+  app: ManageEngine OpManager Plus
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://marketplace.cisco.com/en-US/apps/478098
+  category: Monitoring & Performance
+  partner_domain: zohocorp.com
+  detected_by: sweep-cisco-devnet-ecosystem.py
+  detected: '2026-10-21'
+generated: '2026-10-21'
+method: searched
+source:
+- https://marketplace.cisco.com/api/marketplace/v1/listing?count=1000
+- https://marketplace.cisco.com/api/marketplace/v1/products/
+- https://developer.cisco.com/ecosystem/
+- https://developer.cisco.com/ecosystem/spp/
+- https://www.cisco.com/c/en/us/products/wireless/compatible-extensions.html
+checked:
+- https://developer.cisco.com/ecosystem/
+- https://developer.cisco.com/ecosystem/spp/
+- https://marketplace.cisco.com/api/marketplace/v1/listing?count=1000
+- https://marketplace.cisco.com/api/marketplace/v1/products/
+- https://www.cisco.com/c/en/us/products/wireless/compatible-extensions.html
