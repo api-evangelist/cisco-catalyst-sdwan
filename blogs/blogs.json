@@ -5,8 +5,15 @@
       "source": "https://blogs.cisco.com/tag/sd-wan",
       "feed_url": "https://blogs.cisco.com/feed",
       "title": "",
-      "saved": 9,
+      "saved": 0,
       "method": "discovered"
+    },
+    {
+      "source": "https://blogs.cisco.com/feed",
+      "feed_url": "https://blogs.cisco.com/feed",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
     },
     {
       "source": "https://developer.cisco.com/docs/sdwan/developer-support/",
@@ -16,6 +23,6 @@
       "method": "none"
     }
   ],
-  "post_count": 9,
-  "fetched": "2026-10-10T13:15:00Z"
+  "post_count": 18,
+  "fetched": "2026-10-17T14:53:57Z"
 }
